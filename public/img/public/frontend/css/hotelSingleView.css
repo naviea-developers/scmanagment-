@@ -1,0 +1,175 @@
+section {
+    padding: 10px;
+}
+
+.mainGallary {
+    padding: 20px;
+}
+
+#showImg {
+    float: left;
+}
+
+#showImg img{
+    width: 304px;
+    height: 304px;
+    object-fit: cover;
+    float: right;
+}
+
+.mainGallary img {
+    float: left;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 2px;
+    cursor: pointer;
+}
+
+
+.hotelinfo {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.top_Tags {
+    width: 100%;
+    margin: 10px !important;
+}
+.top_Tags button {
+    width: 100%;
+    border: none;
+    background: #00AEEF;
+    padding: 10px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+
+.gallary .col-md-6 iframe {
+    height: 300px;
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+
+.bodyContaint {
+    padding: 50px 10px;
+}
+
+.listbar {
+    height: 50px;
+    font-weight: bold;
+}
+
+.facilities {
+    padding: 40px 10px;
+}
+
+.facilities ul li {
+    float: left;
+    margin-left: 50px;
+    font-size: 16px;
+}
+
+
+.rules {
+    padding: 30px 10px;
+}
+
+
+@media only screen and (max-width: 800px) {
+
+    .top_Tags .col-md-3 {
+        width: 25% !important;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+    .listbar ul li {
+        width: 40%;
+        float: left;
+    }
+
+    .facilities .col-md-6 {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .facilities ul li {
+        width: 100%;
+    }
+
+    .rules .col-2 {
+        width: 300px;
+    }
+    .rules .col-10 {
+        width: calc(100% - 300px);
+    }
+
+}
+
+
+
+@media only screen and (max-width: 550px) {
+
+    #showImg {
+        width: 100%;
+    }
+
+    #showImg img {
+        width: 100%;
+    }
+
+    .mainGallary img {
+        width: 88px;
+        height: 88px;
+    }
+
+    .rules .col-2 {
+        width: 100% !important;
+    }
+    .rules .col-10 {
+        width: 100% !important;
+    }
+
+    .top_Tags .col-md-3 button {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+
+}
+
+
+
+
+@media only screen and (max-width: 550px) {
+
+    .top_Tags .col-md-3 {
+        width: 50% !important;
+    }
+
+    .top_Tags .col-md-3 button {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .facilities .col-6 {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .searchbox .col-md-4:last-child {
+        right: -80px !important;
+    }
+
+}

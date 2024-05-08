@@ -1,0 +1,111 @@
+
+.classbox {
+    height: 200px;
+    width: 200px;
+    background: #fff;
+    box-shadow: 0px 0px 4px -1px #8d8787e8;
+    border-radius: 5px;
+    transition: 0.3s linear;
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -ms-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+}
+
+.classbox:hover {
+    box-shadow: 0px 0px 10px -2px #00000059;
+    transition: .3s linear;
+    -webkit-transition: .3s linear;
+    -moz-transition: .3s linear;
+    -ms-transition: .3s linear;
+    -o-transition: .3s linear;
+}
+
+
+.classbox .databox {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+
+
+.classbox .databox h4 {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+
+
+.classbox .databox .showday {
+    width: 80%;
+    margin: 0 auto;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+
+
+.dayinput {
+    width: 14.25%;
+    float: left;
+}
+
+
+.dayinput label {
+    margin: 0px 5px;
+    font-size: 17px;
+}
+
+
+.createClass {
+    width: 30%;
+    margin: 0 auto;
+    display: block !important;
+    margin-top: 15px;
+}
+
+
+
+/* classDetails */
+
+
+.classDetails .className {
+    font-size: 30px !important;
+    font-weight: bold;
+    color: #746868;
+    width: 100% !important;
+    display: block;
+}
+
+.classDetails .editBtn {
+    float: right;
+    margin: 5px;
+    margin-top: -15px;
+}
+
+.classDetails .routineTable {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.classDetails .routineTable .table {
+    border-collapse: none !important;
+}
+
+
+.classDetails .classWeek {
+    font-size: 15px;
+    margin-top: 15px;
+}

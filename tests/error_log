@@ -1,0 +1,16 @@
+[24-Jul-2023 15:54:13 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Testing\TestCase" not found in /home/techknowsity/public_html/tests/TestCase.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/tests/TestCase.php on line 7
+[24-Jul-2023 15:54:14 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Testing\TestCase" not found in /home/techknowsity/public_html/tests/TestCase.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/tests/TestCase.php on line 7
+[24-Jul-2023 15:54:42 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Testing\TestCase" not found in /home/techknowsity/public_html/tests/TestCase.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/tests/TestCase.php on line 7
+[24-Jul-2023 15:54:44 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Testing\TestCase" not found in /home/techknowsity/public_html/tests/TestCase.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/tests/TestCase.php on line 7

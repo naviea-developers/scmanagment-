@@ -1,0 +1,250 @@
+img {
+    vertical-align: middle;
+  }
+  
+  /* Position the image container (needed to position the left and right arrows) */
+  .container {
+    position: relative;
+  }
+  
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+  }
+  
+  /* Add a pointer when hovering over the thumbnail images */
+  .cursor {
+    cursor: pointer;
+  }
+  
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  /* Container for image text */
+  .caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Six columns side by side */
+  .column {
+    float: left;
+    width: 16.66%;
+  }
+  
+  /* Add a transparency effect for thumnbail images */
+  .demo {
+    opacity: 0.6;
+  }
+  
+  .active,
+  .demo:hover {
+    opacity: 1;
+  }
+
+.slider {
+	margin: 120px 0;
+}
+
+.topSection .details {
+    padding: 30px 0px;
+    margin-top: 100px;
+}
+
+.topSection .details h4 {
+    font-weight: bold;
+    color: #6A6A6A;
+}
+
+.topSection .details ul {
+    padding: 0px;
+}
+
+.topSection .details ul li{
+    float: left;
+    list-style: none;
+}
+
+.topSection .details ul li i {
+	border: 1px solid #8e7171;
+	margin: 2px;
+	padding: 3px 2px;
+	border-radius: 50%;
+}
+
+.topSection .details ul li span{
+    font-size: 12px;
+    color: #0166B3;
+}
+
+.topSection .details p{
+    font-size: 14px;
+    color: #6A6A6A;
+}
+
+.topSection .cartSection {
+	margin-top: -30px;
+}
+
+.topSection .cartSection s {
+    font-size: 12px;
+}
+
+
+.topSection .delivery {
+  box-shadow: 0px 0px 1px #000;
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+
+.topSection .delivery .row {
+	border-bottom: 1px solid #F2DFDF;
+	margin: 10px 0px;
+}
+
+
+.topSection .delivery i {
+  float: right;
+}
+
+.deliverLocIcon {
+	font-size: 20px;
+}
+
+.detailSection {
+  margin-bottom: 50px;
+}
+
+.detailSection .card{
+  padding: 10px;
+  border-radius: 5px I !important;
+  -webkit-border-radius: 5px I !important;
+  -moz-border-radius: 5px I !important;
+  -ms-border-radius: 5px I !important;
+  -o-border-radius: 5px I !important;
+}
+
+.detailSection .card ul li{
+  list-style: none;
+}
+
+.moreProducts img {
+  width: 100%;
+}
+
+.moreProducts .col-3 {
+  width: calc(25% - 20px);
+  border: 1px solid #e1cccc;
+  margin: 10px;
+  padding: 0px !important;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.moreProducts .col-3 span {
+  display: block;
+}
+
+.moreProducts .col-3 .cartBtns {
+  padding: 10px;
+}
+
+.moreProducts .col-3 .cartBtns button:last-child{
+  float: right;
+}
+
+
+
+@media only screen and (max-width: 1001px) {
+  
+  .topSection .col-md-4:first-child {
+    width: 50%;
+    float: left;
+  }
+
+  .topSection .col-md-4:nth-child(2) {
+    width: 50%;
+    float: left;
+  }
+
+  .topSection .col-md-4:nth-child(3) {
+    width: 100%;
+    float: left;
+  }
+
+  .topSection .delivery {
+    margin-bottom: 30px;
+  }
+  .slider , .topSection .details{
+    margin: 10px 0;
+  }
+}
+
+
+@media only screen and (max-width: 830px) {
+
+  .topSection .col-md-4 {
+    width: 100% !important;
+  }
+
+  .topSection .col-md-4 .col-md-6{
+    width: 50% !important;
+  }
+  
+
+  .moreProducts .col-3{
+    width: calc(50% - 20px);
+  }
+}

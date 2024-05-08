@@ -1,0 +1,142 @@
+.bg-green{
+    background-color: #014647 !important;
+}
+.white{
+    color: #fff;
+}
+.dropdown-item:hover, .dropdown-item:focus{
+    color: #1e2125 !important;
+}
+.custom-box{
+    position: relative;
+    top: 10px;
+    height: 165px;
+    width: 220px;
+}
+.custom-box-inner{
+    height: 163px;
+}
+.custom-box1{
+    width: 245px;
+}
+.custom-radius{
+    border-radius: 10px;
+}
+.color-red{
+    color:  red;
+}
+.color-gold{
+    color: #e68a00;
+}
+.color-paste{
+    color: #0cc !important;
+}
+.fs-19{
+    font-size: 19px;
+}
+.mt-4-5{
+    margin-top: 4.5rem;
+}
+.color-blue{
+    color: #006699;
+}
+.mx-7{
+    margin-right: 7rem !important;
+    margin-left: 7rem !important;
+}
+
+.cardOne{
+    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0% 100%);
+    background-color: #f2f2f2;
+}
+.cardTow{
+    clip-path: polygon(0 12%, 100% 0, 100% 100%, 0% 100%);
+    background-color: #f2f2f2;
+}
+.cardThree{
+    clip-path: polygon(0 0, 100% 0%, 100% 88%, 0% 100%);
+    background-color: #f2f2f2;
+}
+.cardFour{
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 88%);
+    background-color: #f2f2f2;
+}
+.custom25{
+    width: 15% !important;
+}
+.bg-purple{
+    background-color: #ff99cc;
+}
+.radius-15{
+    border-radius: 15px;
+}
+.fs-11{
+    font-size: 13px;
+}
+.h-230{
+    height: 230px;
+}
+.color-purple{
+    color: #ff66b3;
+}
+
+.owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    margin-left: -30px !important;
+    display: block !important;
+    border:0px solid black;
+}
+
+.owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    right: 30px;
+    display: block !important;
+    border:0px solid black;
+}
+.owl-prev i, .owl-next i {transform : scale(1,2); color: #000;}
+.mt-7{
+    margin-top: 7rem;
+}
+.inner-image{
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+}
+.outer-image{
+    top: 12px;
+    width: 62%;
+    left: 50px;
+}
+.border-paste{
+    border: 1px solid #00cccc;
+}
+.w-30{
+    width: 30px;
+}
+/** {*/
+/*    background: #000 !important;*/
+/*    color: #0f0 !important;*/
+/*    outline: solid #f00 1px !important;*/
+/*}*/
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .mx-7{
+        margin-left: 0.5rem !important;
+        margin-right: 0.5rem !important;
+    }
+    /*.cardOne{*/
+    /*    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);*/
+    /*}*/
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1150px) {
+    .blog-video{
+        height: 120px !important;
+    }
+}

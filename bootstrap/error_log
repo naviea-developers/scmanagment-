@@ -1,0 +1,48 @@
+[15-Apr-2023 02:41:07 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[15-Apr-2023 02:41:13 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[15-Apr-2023 02:41:15 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[15-Apr-2023 02:41:18 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[24-Jul-2023 15:39:38 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[24-Jul-2023 15:39:39 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[24-Jul-2023 15:39:53 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[24-Jul-2023 15:40:02 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[14-Aug-2023 16:26:30 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[14-Aug-2023 16:26:31 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[14-Aug-2023 16:26:34 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14
+[14-Aug-2023 16:26:34 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/techknowsity/public_html/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/bootstrap/app.php on line 14

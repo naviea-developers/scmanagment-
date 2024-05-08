@@ -1,0 +1,8 @@
+[24-Jul-2023 15:46:38 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Mail\Mailable" not found in /home/techknowsity/public_html/app/Mail/SendMail.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/app/Mail/SendMail.php on line 12
+[24-Jul-2023 15:46:38 America/New_York] PHP Fatal error:  Uncaught Error: Class "Illuminate\Mail\Mailable" not found in /home/techknowsity/public_html/app/Mail/SendMail.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/techknowsity/public_html/app/Mail/SendMail.php on line 12
