@@ -9,18 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('class_id')->default(0);
-            $table->string('name')->nullable();
-            $table->unsignedBigInteger('group_id')->default(0);
-            $table->string('image')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('subjects', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('class_id')->default(0);
+    //         $table->string('name')->nullable();
+    //         $table->unsignedBigInteger('group_id')->default(0);
+    //         $table->string('image')->nullable();
+    //         $table->tinyInteger('status')->default(1);
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
