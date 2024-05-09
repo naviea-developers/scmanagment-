@@ -1,0 +1,183 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: scroll;
+    background: #5f617d !important;
+}
+
+.user-box {
+    height: 550px;
+    width: 900px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+}
+
+
+.col-md-6 {
+    float: left;
+}
+
+.col-md-6:nth-child(1){
+    background-image: url('/img/student.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 600px;
+    padding: 0;
+}
+
+.overlay{
+    background: black;
+    opacity: 0.5;
+    text-align: center;
+    color: #fff;
+    height: 600px;
+}
+.text-content{
+    padding: 200px 20px;
+
+}
+.text-content p{
+    font-size: 12px;
+}
+.col-md-6:nth-child(2){
+    background-color: rgb(2, 2, 53);
+    padding: 10px 20px;
+    overflow: hidden;
+}
+.col-md-6:nth-child(2) img{
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.form-group label{
+    margin-top: 10px;
+    color: #fff;
+}
+
+.form-group input{
+    border: none;
+    outline: none;
+    background: none;
+    border-radius: 0;
+    color: #fff;
+    border-bottom: 1px solid #feffff;
+}
+.form-group input:focus{
+    border: none !important;
+    outline: none !important;
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #fff;
+    border-bottom: 1px solid #fff !important;
+}
+
+.col-md-6:nth-child(2) p{
+    font-size: 13px;
+    margin-top: 10px;
+    color: white;
+    float: right;
+}
+
+.btn{
+    margin-top: 30px;
+    background: #fff;
+    padding: 8px 0;
+    width: 100%;
+}
+
+.btn:hover{
+    color: black;
+    background: #fff !important;
+    padding: 8px 0;
+    width: 100%;
+
+}
+
+center {
+    margin-top: 50px;
+    color: #fff;
+    font-size: 13px;
+}
+
+center a{
+    text-decoration: none;
+}
+
+
+.socialLoginBtn {
+	margin-top: 15px;
+	float: left;
+	width: 100%;
+}
+
+
+.socialLoginBtn h5 {
+	font-size: 20px;
+	color: #d7c4c4;
+}
+
+.socialLoginBtn a {
+    font-size: 30px;
+}
+
+.socialLoginBtn .g{
+    background: -webkit-linear-gradient(#de3f32, #edb205 , #319f4f , #407ee9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.socialLoginBtn .f{
+    color: #1877f2 !important;
+}
+.socialLoginBtn .l{
+    color: #0a66c2 !important;
+}
+
+@media only screen and (max-width: 950px) {
+    .user-box {
+      width: calc(100% - 20px);
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .col-md-6{
+        padding: 0px !important;
+    }
+
+    .user-box {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .col-md-6:nth-child(1){
+        display: none;
+    }
+
+    .Formoverlay {
+        background: #000000b5;
+        padding: 0 25px;
+        height: 100%;
+    }
+
+    .col-md-6:nth-child(2){
+        background-image: url('/img/student.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    input{
+        padding: 5px 25px !important;
+    }
+
+}

@@ -110,15 +110,7 @@ Route::prefix('admin')->middleware(['auth:admin', 'adminCheck:0'])->group(functi
              Route::get('/home-servicetab-status-toggle/{id}', [ServiceTabController::class, 'status_toggle'])->name('home-servicetab.status_toggle');
             //end  client
 
-             //Country Start
-             Route::get('index/country', [CountryController::class,"index"])->name('admin.country.index');
-             Route::get('create/country', [CountryController::class,"create"])->name('admin.country.create');
-             Route::post('store/country', [CountryController::class,"store"])->name('admin.country.store');
-             Route::get('edit/country/{id}', [CountryController::class,"edit"])->name('admin.country.edit');
-             Route::post('update/country/{id}', [CountryController::class,"update"])->name('admin.country.update');
-             Route::post('delete/country', [CountryController::class,"destroy"])->name('admin.country.delete');
-            //Country End
-
+          
             //Country Start
             Route::get('index/country', [CountryController::class,"index"])->name('admin.country.index');
             Route::get('create/country', [CountryController::class,"create"])->name('admin.country.create');

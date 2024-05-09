@@ -42,6 +42,11 @@ class StudentController extends Controller
             $user = New User;
             // $user->course_id = $request->course_id;
             $user->name = $request->name;
+            $user->father_name = $request->father_name;
+            $user->mother_name = $request->mother_name;
+            $user->father_mother_nid = $request->father_mother_nid;
+            $user->previous_school = $request->previous_school;
+            $user->per_address = $request->per_address;
             $user->mobile = $request->mobile;
             $user->email = $request->email;
             $user->nid = $request->nid;
@@ -131,6 +136,11 @@ class StudentController extends Controller
         DB::beginTransaction();
         $user = User::find($id);
         $user->name = $request->name;
+        $user->father_name = $request->father_name;
+        $user->mother_name = $request->mother_name;
+        $user->father_mother_nid = $request->father_mother_nid;
+        $user->previous_school = $request->previous_school;
+        $user->per_address = $request->per_address;
         $user->mobile = $request->mobile;
         $user->email = $request->email;
         $user->nid = $request->nid;

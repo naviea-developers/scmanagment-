@@ -56410,3 +56410,29 @@ a.hover-white-8:focus {
 .mx-wd-1350 {
     max-width: 1350px;
 }
+
+
+
+
+
+.br-pagetitle i {
+    font-size: 40px !important;
+}
+.fa-duotone, .fad {
+    position: relative;
+    font-weight: 900;
+    letter-spacing: normal;
+}
+.fa-classic.fa-duotone, .fa-duotone, .fad {
+    font-family: "Font Awesome 6 Duotone";
+}
+
+.br-pagetitle {
+    margin: 0 auto !important;
+    display: block !important;
+    width: 50%;
+    text-align: center;
+    margin-top: -60px !important;
+    margin-bottom: 25px !important;
+}
+
