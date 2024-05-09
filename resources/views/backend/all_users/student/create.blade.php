@@ -679,7 +679,7 @@
                               <div class="mg-t-10 mg-sm-t-0">
                                   <input value="{{ old('per_address') }}" type="text" name="address" class="form-control" placeholder="Enter permanent address">
                               </div>
-                          </div>
+                           </div>
 
                         </div>
 
