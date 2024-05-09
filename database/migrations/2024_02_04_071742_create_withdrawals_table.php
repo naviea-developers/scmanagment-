@@ -9,19 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('withdrawals', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('amount');
-            $table->string('fee');
-            $table->string('payment_method');
-            $table->string('note')->nullable();
-            $table->tinyInteger('status')->default(0);
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('withdrawals', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('user_id');
+    //         $table->string('amount');
+    //         $table->string('fee');
+    //         $table->string('payment_method');
+    //         $table->string('note')->nullable();
+    //         $table->tinyInteger('status')->default(0);
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.

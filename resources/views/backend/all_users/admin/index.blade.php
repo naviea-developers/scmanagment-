@@ -1,5 +1,5 @@
 @section('title')
-Admin - all admins
+Admin - All Classes
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -11,7 +11,7 @@ Admin - all admins
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center">All Admins</h6>
+            <h6 class="br-section-label text-center">All Classes</h6>
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
@@ -31,11 +31,7 @@ Admin - all admins
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Name</th>
-                    <th class="wd-15p">Image</th>
-                    <th class="wd-15p">mobile</th>
-                    <th class="wd-15p">email</th>
-                    <th class="wd-10p">Action</th>
+                    <th class="wd-15p">Class Name</th>
                   </tr>
                 </thead>
                 <tbody>

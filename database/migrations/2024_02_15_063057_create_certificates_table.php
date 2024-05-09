@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('certificates', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('certificates_name')->nullable();
-            $table->text('certificates_file')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('certificates', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('user_id')->nullable();
+    //         $table->string('certificates_name')->nullable();
+    //         $table->text('certificates_file')->nullable();
+    //         $table->tinyInteger('status')->default(1);
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
