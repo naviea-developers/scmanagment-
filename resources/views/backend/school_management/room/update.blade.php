@@ -45,8 +45,8 @@
 
                       </div> --}}
 
-                      <div class="row mt-4">
-                        <div class="col-sm-12 mt-3">
+                      <div class="row">
+                        <div class="col-sm-12">
                           <label class="form-control-label">Bulding Name: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
                             <select name="bulding_id" class="form-control">
@@ -80,17 +80,17 @@
                            
                        
 
-                        <div class="col-sm-12 mt-3">
+                        {{-- <div class="col-sm-12 mt-3">
                           <label class="form-control-label">Group Name: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
-                            <select name="group_id" class="form-control">
+                            <select name="floor_id" class="form-control">
                               <option value=""> Select Group</option>
-                              @foreach ($groups as $group)
-                              <option @if ($group->id == $subject->group_id) Selected @endif value="{{ $group->id }}">{{ $group->name }}</option>
+                              @foreach ($floors as $floor)
+                              <option @if ($floor->id == $room->floor_id) Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
                               @endforeach
                             </select>
                           </div>
-                        </div>
+                        </div> --}}
 
                       </div>
 

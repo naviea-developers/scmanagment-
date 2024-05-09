@@ -32,8 +32,8 @@
 
                     <form action="{{ route('admin.session.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="row mt-4">
-                            <div class="col-sm-12 mt-3">
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input type="date" name="start_date" class="form-control" placeholder="Enter Group Name" value="{{ old('start_date') }}" required>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-4">
+                        <div class="row">
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">End Date: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">

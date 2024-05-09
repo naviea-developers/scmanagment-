@@ -368,17 +368,19 @@
             || Route::is('admin.bulding.create') ||  Route::is('admin.bulding.index') || Route::is('admin.bulding.edit')
             || Route::is('admin.floor.create') ||  Route::is('admin.floor.index') || Route::is('admin.floor.edit')
             || Route::is('admin.room.create') ||  Route::is('admin.room.index') || Route::is('admin.room.edit')
+            || Route::is('admin.school_section.create') ||  Route::is('admin.school_section.index') || Route::is('admin.school_section.edit')
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.academic_year.index') }}" class="sub-link {{(Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit') || Route::is('admin.academic_year.create')) ?'active':''}}">Manage Academic Years</a></li>
-                <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
-                <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Classes</a></li>
-                <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
-                <li class="sub-item"><a href="{{ route('admin.session.index') }}" class="sub-link {{(Route::is('admin.session.index') || Route::is('admin.session.edit') || Route::is('admin.session.create')) ?'active':''}}">Manage Session</a></li>
                 <li class="sub-item"><a href="{{ route('admin.bulding.index') }}" class="sub-link {{(Route::is('admin.bulding.index') || Route::is('admin.bulding.edit') || Route::is('admin.bulding.create')) ?'active':''}}">Manage Buldings</a></li>
                 <li class="sub-item"><a href="{{ route('admin.floor.index') }}" class="sub-link {{(Route::is('admin.floor.index') || Route::is('admin.floor.edit') || Route::is('admin.floor.create')) ?'active':''}}">Manage Floors</a></li>
                 <li class="sub-item"><a href="{{ route('admin.room.index') }}" class="sub-link {{(Route::is('admin.room.index') || Route::is('admin.room.edit') || Route::is('admin.room.create')) ?'active':''}}">Manage Rooms</a></li>
+                <li class="sub-item"><a href="{{ route('admin.academic_year.index') }}" class="sub-link {{(Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit') || Route::is('admin.academic_year.create')) ?'active':''}}">Manage Academic Years</a></li>
+                <li class="sub-item"><a href="{{ route('admin.session.index') }}" class="sub-link {{(Route::is('admin.session.index') || Route::is('admin.session.edit') || Route::is('admin.session.create')) ?'active':''}}">Manage Session</a></li>
+                <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Classes</a></li>
+                <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
+                <li class="sub-item"><a href="{{ route('admin.school_section.index') }}" class="sub-link {{(Route::is('admin.school_section.index') || Route::is('admin.school_section.edit') || Route::is('admin.school_section.create')) ?'active':''}}">Manage Section</a></li>
+                <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
                
             </ul>
         </li><!-- br-Speakers-item -->

@@ -14,7 +14,7 @@ Admin - All Groups
             <h6 class="br-section-label text-center">All Groups</h6>
 
             <a style="margin-bottom: 20px" href="{{ route('admin.group.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Class
+              <i class="fa fa-plus"></i> Add Group
             </a>
 
                {{-- success message start --}}
