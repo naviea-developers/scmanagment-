@@ -27,12 +27,12 @@
                     @foreach ($classes as $cl)
 
                         <div class="col-12">
-
-                            <a href="/editClassDetailse/{{ $cl->batch_id }}"
+                            <a href="{{ route('editClassDetailse',$cl->batch_id) }}"
                             class="btn btn-primary btn-sm editBtn">
                                 <i class="fa-duotone fa-pen-to-square"></i> Edit Batch Data
                             </a>
-                            <a href="/deleteClassDetailse/{{ $cl->batch_id }}"
+
+                            <a href="{{ route('deleteClassDetailse',$cl->batch_id) }}"
                                 class="btn btn-danger btn-sm editBtn">
                                 <i class="fa-duotone fa-trash"></i> Delete Batch
                             </a>

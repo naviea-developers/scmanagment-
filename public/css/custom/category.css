@@ -1,0 +1,18 @@
+thead{
+    background: #19a8ac;
+}
+
+thead tr th {
+    color: #fff !important;
+}
+
+
+
+#dataTable tr td img {
+    height: 30px;
+    width: 30px;
+    object-fit: fill;
+}
+
+
+

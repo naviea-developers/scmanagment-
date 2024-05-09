@@ -9,12 +9,14 @@ use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use App\Models\Classe;
 
 class classController extends Controller
 {
     public function addNewBatch(){
     //    dd('hi');
         $classList = DB::table('classlist')->get();
+        // $classList = Classe::order('id','deac')->get();
         return view('Backend.classes.add', compact('classList'));
 
     }
@@ -277,7 +279,6 @@ class classController extends Controller
 
     public function addNewStudentByAdmin(Request $req){
 
-
         $file= $req->file('profilePicture');
         $filename = date('YmdHi').$file->getClientOriginalName();
         $destinationPath = '/backend/profile_picture';
@@ -311,9 +312,7 @@ class classController extends Controller
         }
 
 
-        return Redirect::back()
-        ->with('msg', 'Student Add Successfully');
-
+        return redirect()->back()->with('msg', 'Student Add Successfully');
 
     }
 
