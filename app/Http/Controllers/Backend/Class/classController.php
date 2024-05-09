@@ -9,12 +9,14 @@ use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use App\Models\Classe;
 
 class classController extends Controller
 {
     public function addNewBatch(){
     //    dd('hi');
         $classList = DB::table('classlist')->get();
+        // $classList = Classe::order('id','deac')->get();
         return view('Backend.classes.add', compact('classList'));
 
     }
