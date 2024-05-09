@@ -9,16 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('revenues', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->float('seller_amount')->default(0);
-            $table->float('admin_amount')->default(0);
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('revenues', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('user_id');
+    //         $table->float('seller_amount')->default(0);
+    //         $table->float('admin_amount')->default(0);
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
