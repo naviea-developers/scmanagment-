@@ -245,6 +245,94 @@
             </ul>
         </li><!-- home-menu-item -->
 
+         {{-- Class Section Sidebar --}}
+         {{-- <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub
+          @if (Request::segment(1) == 'viewAllClass' or Request::segment(1) == 'addNewClass') show-sub @endif">
+
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Class</span>
+            </a><!-- br-menu-link -->
+            <ul class="br-menu-sub" style="display:  @if (Request::segment(1) == 'viewAllClass' or
+                    Request::segment(1) == 'addNewBatch' or
+                    Request::segment(1) == 'addRoutine' or
+                    Request::segment(1) == 'getHomework' or
+                    Request::segment(1) == 'addHomework') block @endif">
+
+                @if (Session::get('userRole') == 'admin')
+                    <li class="sub-item"><a href="{{ url('viewAllClass') }}"
+                            class="sub-link
+                {{ Request::segment(1) === 'viewAllClass' ? 'active_sidebar' : null }}">
+                            View All Batch</a>
+                    </li>
+                    <li class="sub-item"><a href="{{ url('addNewBatch') }}"
+                            class="sub-link
+                {{ Request::segment(1) === 'addNewBatch' ? 'active_sidebar' : null }}">
+                            Add new Batch</a>
+                    </li>
+
+                    <li class="sub-item">
+                        <a href="{{ url('addRoutine') }}"
+                            class="sub-link
+                {{ Request::segment(1) === 'addRoutine' ? 'active_sidebar' : null }}">
+                            Add class routine
+                        </a>
+                    </li>
+                @endif
+
+
+                @if (Session::get('userRole') == 'admin')
+                    <li class="sub-item"><a href="{{ route('getHomework') }}"
+                            class="sub-link
+                {{ Request::segment(1) === 'getHomework' ? 'active_sidebar' : null }}">Homework
+                        </a>
+                    </li>
+                @endif
+
+
+                @if (Session::get('userRole') == 'teacher')
+                    <li class="sub-item"><a href="{{ route('addHomework') }}"
+                            class="sub-link
+                {{ Request::segment(1) === 'addHomework' ? 'active_sidebar' : null }}">Add
+                            Homework
+                        </a>
+                    </li>
+                    <li class="sub-item"><a href="{{ route('addResult') }}"
+                        class="sub-link
+            {{ Request::segment(1) === 'addResult' ? 'active_sidebar' : null }}">
+                        Add Score</a></li>
+                <li class="sub-item"><a href="{{ route('addClassTest') }}" class="sub-link">Class Test</a></li>
+                @endif
+            </ul>
+        </li> --}}
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Class</span>
+            </a>
+            @php
+            $r_check = ( Route::is('viewAllClass') ||  Route::is('addNewBatch') ||  Route::is('addRoutine') || Route::is('getHomework') || Route::is('addHomework') || Route::is('addResult') || Route::is('addClassTest'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('viewAllClass') }}" class="sub-link {{( Route::is('viewAllClass') ) ?'active':''}}">View All Batch</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addNewBatch') }}" class="sub-link {{(Route::is('addNewBatch')) ?'active':''}}">Add new Batch</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addRoutine') }}" class="sub-link {{(Route::is('addRoutine') ) ?'active':''}}">Add class routine</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('getHomework') }}" class="sub-link {{(Route::is('getHomework')) ?'active':''}}">Homework</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addHomework') }}" class="sub-link {{(Route::is('addHomework')) ?'active':''}}">Add Homework</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addResult') }}" class="sub-link {{(Route::is('addResult')) ?'active':''}}">Add Score</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addClassTest') }}" class="sub-link {{(Route::is('addClassTest')) ?'active':''}}">Class Test</a>
+                </li>
+            </ul>
+        </li>
+
+
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'courses')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
