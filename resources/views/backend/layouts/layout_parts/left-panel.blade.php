@@ -353,6 +353,28 @@
             </ul>
         </li><!-- br-Speakers-item -->
 
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">School Management</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('admin.class.create') ||  Route::is('admin.class.index') || Route::is('admin.class.edit')
+            || Route::is('admin.subject.create') ||  Route::is('admin.subject.index') || Route::is('admin.subject.edit')
+            || Route::is('admin.group.create') ||  Route::is('admin.group.index') || Route::is('admin.group.edit')
+            || Route::is('admin.academic_year.create') ||  Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit')
+            );
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.academic_year.index') }}" class="sub-link {{(Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit') || Route::is('admin.academic_year.create')) ?'active':''}}">Manage Academic Years</a></li>
+                <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
+                <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Classes</a></li>
+                <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
+               
+            </ul>
+        </li><!-- br-Speakers-item -->
+
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebook')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
