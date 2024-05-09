@@ -279,7 +279,6 @@ class classController extends Controller
 
     public function addNewStudentByAdmin(Request $req){
 
-
         $file= $req->file('profilePicture');
         $filename = date('YmdHi').$file->getClientOriginalName();
         $destinationPath = '/backend/profile_picture';
@@ -313,9 +312,7 @@ class classController extends Controller
         }
 
 
-        return Redirect::back()
-        ->with('msg', 'Student Add Successfully');
-
+        return redirect()->back()->with('msg', 'Student Add Successfully');
 
     }
 
