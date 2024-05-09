@@ -180,7 +180,7 @@ class classController extends Controller
 
     public function addHomework(){
 
-        if(session()->get('userRole') == 'teacher') {
+        // if(session()->get('userRole') == 'teacher') {
             $classList = DB::table('classlist')->get();
             $subject = DB::table('teacher_info')
             ->join('user','user.id','=','teacher_info.userid')
@@ -188,10 +188,10 @@ class classController extends Controller
             ->first(['sub']);
 
             return view('Backend.classes.addHomework', compact('classList','subject'));
-        }else{
+        // }else{
 
-            return Redirect::back()->with('msg', 'Only Teacher Can Add Homework');
-        }
+        //     return Redirect::back()->with('msg', 'Only Teacher Can Add Homework');
+        // }
 
     }
 

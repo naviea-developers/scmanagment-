@@ -55,16 +55,38 @@
                             <div class="col-sm-4">
                                 <label class="form-control-label">Student Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                <input type="text" name="name" class="form-control" placeholder="Enter Student Name" value="{{ old('name') }}" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter Student Name" value="{{ old('name') }}" required>
+                                </div>
                             </div>
-                            </div>
+
                             <div class="col-sm-4">
+                              <label class="form-control-label">Father Name: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="text" name="father_name" class="form-control" placeholder="Enter Foather Name" value="{{ old('father_name') }}" required>
+                              </div>
+                           </div>
+
+                           <div class="col-sm-4">
+                              <label class="form-control-label">Mother Name: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="text" name="mother_name" class="form-control" placeholder="Enter Mother Name" value="{{ old('mother_name') }}" required>
+                              </div>
+                           </div>
+
+                           <div class="col-sm-4 mt-4">
+                              <label class="form-control-label">Father/Mother NID: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="text" name="father_mother_nid" class="form-control" placeholder="Enter Fother/Mother NID" value="{{ old('father_mother_nid') }}" required>
+                              </div>
+                           </div>
+
+                            <div class="col-sm-4 mt-4">
                                 <label class="form-control-label">Mobile Number: <span class="tx-danger">*</span></label>
                                 <div class="cmg-t-10 mg-sm-t-0">
                                 <input value="{{ old('mobile') }}" type="text" name="mobile" class="form-control" placeholder="Enter Mobile Number" required>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-4">
                                 <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('email') }}" type="email" name="email" class="form-control" placeholder="Enter Email" required>
@@ -98,6 +120,13 @@
                         </div>
 
                         <div class="row mt-4">
+                           <div class="col-sm-4">
+                              <label class=" form-control-label">Previous School:</label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input value="{{ old('previous_school') }}" type="text" name="previous_school" class="form-control" placeholder="Enter previous school">
+                              </div>
+                          </div>
+
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Qualification:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
@@ -112,23 +141,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
-                                <label class=" form-control-label">Language:</label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select class="form-select form-control" name="language">
-                                        <option value="">select one language</option>
-                                        <option value="1">Bangla</option>
-                                        <option value="2" >English</option>
-                                        <option value="3">Hindi</option>
-                                        <option value="4" >Arabic</option>
-                                    </select>
-                                    {{-- <input value="{{ old('language') }}" type="text" name="language" class="form-control" placeholder="Enter language"> --}}
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="row mt-4">
+
+                           <div class="col-sm-4">
+                              <label class=" form-control-label">Language:</label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <select class="form-select form-control" name="language">
+                                      <option value="">select one language</option>
+                                      <option value="1">Bangla</option>
+                                      <option value="2" >English</option>
+                                      <option value="3">Hindi</option>
+                                      <option value="4" >Arabic</option>
+                                  </select>
+                                  {{-- <input value="{{ old('language') }}" type="text" name="language" class="form-control" placeholder="Enter language"> --}}
+                              </div>
+                          </div>
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Country:</label>
@@ -639,11 +668,18 @@
 
 
                             <div class="col-sm-4">
-                                <label class=" form-control-label">Address:</label>
+                                <label class=" form-control-label">Present Address:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input value="{{ old('address') }}" type="text" name="address" class="form-control" placeholder="Enter address">
+                                    <input value="{{ old('address') }}" type="text" name="address" class="form-control" placeholder="Enter Present address">
                                 </div>
                             </div>
+
+                            <div class="col-sm-4 mt-4">
+                              <label class=" form-control-label">permanent address:</label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input value="{{ old('per_address') }}" type="text" name="address" class="form-control" placeholder="Enter permanent address">
+                              </div>
+                          </div>
 
                         </div>
 

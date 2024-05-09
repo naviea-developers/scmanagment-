@@ -323,12 +323,14 @@
                 </li>
                 <li class="sub-item"><a href="{{ route('getHomework') }}" class="sub-link {{(Route::is('getHomework')) ?'active':''}}">Homework</a>
                 </li>
+                @if (auth()->user()->type == 2 )
                 <li class="sub-item"><a href="{{ route('addHomework') }}" class="sub-link {{(Route::is('addHomework')) ?'active':''}}">Add Homework</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('addResult') }}" class="sub-link {{(Route::is('addResult')) ?'active':''}}">Add Score</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('addClassTest') }}" class="sub-link {{(Route::is('addClassTest')) ?'active':''}}">Class Test</a>
                 </li>
+                @endif
             </ul>
         </li>
 
