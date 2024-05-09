@@ -364,6 +364,7 @@
             || Route::is('admin.subject.create') ||  Route::is('admin.subject.index') || Route::is('admin.subject.edit')
             || Route::is('admin.group.create') ||  Route::is('admin.group.index') || Route::is('admin.group.edit')
             || Route::is('admin.academic_year.create') ||  Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit')
+            || Route::is('admin.session.create') ||  Route::is('admin.session.index') || Route::is('admin.session.edit')
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
@@ -371,7 +372,7 @@
                 <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
                 <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Classes</a></li>
                 <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
-               
+                <li class="sub-item"><a href="{{ route('admin.session.index') }}" class="sub-link {{(Route::is('admin.session.index') || Route::is('admin.session.edit') || Route::is('admin.session.create')) ?'active':''}}">Manage Session</a></li>
             </ul>
         </li><!-- br-Speakers-item -->
 
