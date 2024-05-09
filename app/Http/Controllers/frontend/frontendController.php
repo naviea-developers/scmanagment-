@@ -1,451 +1,1150 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AboutPageSetup;
+use App\Models\Blog;
+use App\Models\BusinessPackages;
+use App\Models\Client;
+use App\Models\Faq;
+use App\Models\HomeContentSetup;
+use App\Models\Partner;
+use App\Models\Course;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\HomeContentItem;
+use App\Models\Review;
+use App\Models\UserContact;
+use App\Models\SiteSetting;
+use App\Models\learnerPageSetup;
+use App\Models\InstructorPageSetup;
+use App\Models\Library;
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Banner;
+use App\Models\Continent;
+use App\Models\MaestroClassSetup;
+use App\Models\Page;
+use App\Models\Testimonial;
+use App\Models\CourseSave;
+use App\Models\Currency;
+use App\Models\Ebook;
+use App\Models\EbookAudioContent;
+use App\Models\EbookVideoContent;
+use App\Models\EventCart;
+use App\Models\Useraccess;
+use App\Models\FounderCoFundere;
+use App\Models\Topic;
+use App\Models\Tp_option;
+use App\Models\VisitorModel;
+use App\Models\CourseResourceFile;
+use App\Models\CourseLessonFile;
+use App\Models\CourseQuizFile;
+use App\Models\CoursezprojectFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Mpdf\Mpdf;
+use ZipArchive;
+
+use App\Models\HomeContentLocation;
+use App\Models\University;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
+use App\Models\CourseLanguage;
+use App\Models\Department;
+use App\Models\Degree;
+use App\Models\Section;
+use App\Mail\ContactMailCoustomer;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
-use Session;
-use Redirect;
 
 
-
-class frontendController extends Controller
+class FrontendController extends Controller
 {
-    public function indexPage(){
-        $banner = DB::table('banner')->limit(2)->get();
+    function changeCurrency($name){
+        $currency = Currency::where('currency_name', $name)->first();
+        //session().put('currency', $currency->currency_name);
+        if($currency){
 
-        $brand = DB::table('brand')->get();
+            setApplicationCurrency($currency);
 
-        $blog = DB::table('blog')->get();
+        }
+        return back();
+    }
+    public function index(Request $request)
+    {
+        $data['home_content'] = HomeContentSetup::first();
+        $data['partners'] = Partner::all();
+        $data['buttons']= Faq::where('type','homepage')->get();
+        $data['learn_texts']=  HomeContentItem::where('type',"homepage")->get();
+        $data['clients'] = Client::all();
 
-        $allcourse = DB::table('course')
-        ->leftJoin('category','category.catid','=','course.catId')
-        ->get();
+        $data['homecontentlocations']= HomeContentLocation::orderBy('id','desc')->get();
+        $data['universities'] = University::where('status',1)->inRandomOrder()->take(12)->get();
 
-        $courses = DB::table('course')->selectRaw('count(*) as total')->first();
+        $data['search']=$name = $request->input('search');
+        if(isset(request()->search)){
+            $data["courses"] = Course::where('type','course')->where('status',1)->where('is_master','0')->where('name','like','%'.request()->search.'%')->get();
+        }else{
+            $data['courses'] = Course::where('type','course')->where('status',1)->where('is_master','0')->where('coursetype','1')->orderBy('id','desc')->get();
+        }
 
-        $students = DB::table('student_infos')->selectRaw('count(*) as total')->first();
+        $data["categories"] = Category::where('parent_id',0)->where('type','home')->get();
+        $data["sub_categorys"] = Category::where('type',"home")->where('parent_id', '!=' ,'')->where('is_sub',0)->get();
+        $data["testimonials"] = Testimonial::where('status',1)->get();
+        // $data['packages'] = BusinessPackages::where('package_status',1)->where('package_type',1)->latest()->get();
 
-        $teachers = DB::table('teacher_info')->selectRaw('count(*) as total')->first();
+        ///visitor count with ip address
+        $UserIP=$_SERVER['REMOTE_ADDR'];
 
-        $users = DB::table('user')->selectRaw('count(*) as total')->first();
-
-        $singleBanner  = DB::table('banner')->where('id','=','4')->first();
-
-        $coverBanner  = DB::table('banner')->where('title','=','Cover Page')->first();
-
-        $academicProgram = DB::table('sub_category')->where('category_id','=',8)->get();
-
-        $admission = DB::table('course')->where('catId','=',12)->get();
-
-        $class1_10 = DB::table('course')->where('subcatId','=','Class 1-10')->limit(4)->get();
-
-        $get_12th_Science = DB::table('course')
-        // ->where('subcatId','=','12th class- Science')
-        ->limit(5)
-        ->first();
-
-        $science_12th = DB::table('course')
-        // ->where('subcatId','=','12th class- Science')
-        ->limit(5)
-        ->get();
-
-        $dmcourse = DB::table('sub_category')->where('category_id' , '9')->limit(4)->get();
-
-
-        $academicProgramforBody = DB::table('course')->where('catId','=',8)->limit(8)->orderby('id' , 'desc')->get();
+        //date_default_timezone_set("Asia/Dhaka");
+        $timeDate= date("Y-m-d h:i:sa");
+        VisitorModel::insert(['ip_address'=>$UserIP,'visit_time'=>$timeDate,'created_at'=>Carbon::now(),'updated_at'=> now()]);
 
 
-        $accProgCard = DB::table('course')->where('catId' , '8')
-        ->distinct()
-        ->limit(5)->get();
+        return view('Frontend.index', $data);
+    }
+
+    public function typeaHeadSearch(Request $request)
+    {
+        $search = $request->input('search');
+        $data['courses'] = Course::where('type','course')->where('status',1)->where('is_master', 0)->where('name', 'like', '%' . $search . '%')->get();
+        return view('Frontend.typeahead_search', $data);
+    }
+
+    public function allCourseShow(Request $request)
+    {
+        $data['name']=$name = $request->input('name');
+        if(isset(request()->name)){
+            $data['top_category'] = null;
+            $data['banner']= Banner::where('type','course')->where('status',1)->orderBy('id','desc')->first();
+            $data["courses"] = Course::where('type','course')->where('status',1)->where('is_master','0')->where('name','like','%'.request()->name.'%')->paginate(9);
+        }else{
+            $data['top_category'] = null;
+            $data['banner']= Banner::where('type','course')->where('status',1)->orderBy('id','desc')->first();
+            $data['courses'] = Course::where('type','course')->where('status',1)->where('is_master','0')->orderBy('id','desc')->paginate(9);
+        }
+
+        return view('Frontend.course.allcourse',$data);
+    }
+
+    //home cat show
+    public function catCourseAll(Request $request, $cat_id)
+    {
+        $data['name']=$name = $request->input('name');
+        $data['top_category']=$category = Category::find($cat_id);
+       // dd($category);
+        $data['courses'] = Course::where('type','course')->where('status',1)->where('category_id',$cat_id)->orderBy('id','desc')->paginate(9);
+        return view('Frontend.course.allcourse',$data);
+    }
+    //home sub cat show
+    public function subcatCourseAll(Request $request, $subcat_id)
+    {
+         $data['name']=$name = $request->input('name');
+        $data['top_category']=$category = Category::find($subcat_id);
+       // dd($category);
+        $data['courses'] = Course::where('type','course')->where('status',1)->where('sub_category_id',$subcat_id)->orderBy('id','desc')->paginate(3);
+        return view('Frontend.course.allcourse',$data);
+    }
+
+    //ajax get Course
+    public function getCourse(){
+        $data['courses'] = Course::where('type','course')->where('status',1)->where('is_master','0')->orderBy('id','desc')->paginate(4);
+        return view('Frontend.course.ajaxseecourse',$data);
+    }
+
+    //course By CatAjax
+    public function courseByCatAjax(Request $request,$id){
+        $data['name']=$name = $request->input('name');
+        $data['top_category']=$category = Category::find($id);
+        $data['courses'] = Course::where('type','course')->where('status',1)->where('category_id',$id)->orderBy('id','desc')->get();
+        return view('Frontend.course.catajax',$data);
+    }
+    //Master course By CatAjax
+    public function masterCourseByCatAjax(Request $request,$id){
+        $data['master_courses'] = Course::where('type','course')->where('status',1)->where('category_id',$id)->where('is_master', 1)->orderBy('id','desc')->get();
+        return view('Frontend.pages.master_course_ajax',$data);
+    }
 
 
-        return view('frontend.pages.home.home',compact('banner','brand','blog','allcourse',
-            'students','teachers','users','courses','singleBanner','coverBanner','academicProgram'
-            ,'class1_10','science_12th','get_12th_Science','admission' , 'academicProgramforBody' , 'dmcourse' , 'accProgCard'));
+
+    //course By Sub CatAjax
+    public function courseBySubCatAjax(Request $request,$id){
+        $data['name']=$name = $request->input('name');
+        $data['top_category']=$category = Category::find($id);
+        $data['courses']  = Course::where('type','course')->where('status',1)->where('sub_category_id',$id)->orderBy('id','desc')->get();
+        return view('Frontend.course.subcatajax',$data);
+    }
 
 
+    //get Course Type By Cat
+    // public function getCourseTypeByCat($cat){
+    //     $data['courses'] = Course::where('type_id',$cat)->paginate(4);
+    //     return view('Frontend.course.coursetypeajax',$data);
+    // }
 
+    public function getCourseTypeByCat($id){
+
+        if($id == ""){
+            $data['courses'] = Course::where('type','course')->where('status',1)->get();
+        }else{
+            $data['courses'] = Course::where('type','course')->where('status',1)->where('coursetype',$id)->get();
+           // $data['events'] = Event::where('category_id',$id)->get();
+        }
+        return view('Frontend.course.coursetypeajax',$data);
+    }
+
+//getCoursePublished
+    public function getCoursePublished($id){
+        if($id=='1'){
+            $data['courses'] = Course::where('type','course')->where('status',1)->whereBetween('created_at',[(new Carbon)->subDays(7)->startOfDay(),(new Carbon)->now()->endOfDay()] )->get();
+        }else if ($id=='2'){
+            $data['courses'] = Course::where('type','course')->where('status',1)->whereBetween('created_at',[(new Carbon)->subDays(30)->startOfDay(),(new Carbon)->now()->endOfDay()] )->get();
+        }
+        return view('Frontend.course.publishedajaxcourse',$data);
+    }
+
+
+    function addToSave(Request $request,$id){
+        try{
+            if(auth()->check()){
+
+                $save = CourseSave::where('course_id',$id)->where('user_id',auth()->user()->id)->first();
+                if($save == null){
+                    $save = New CourseSave;
+                    $save->course_id = $id;
+                    $save->user_id = auth()->user()->id;
+                    $save->save();
+                    return "ok";
+                }else{
+                    $save->delete();
+                     return "del";
+                }
+
+
+            }else{
+                return "no";
+            }
+        }catch(\Exception $e){
+             return "no";
+        }
 
     }
 
-    public function getTitlewiseCourse($id){
-        $academicData = DB::table('course')->where('catId',$id)->get();
-        // echo $academicData;
-        return view('frontend.pages.course.getTitlewiseCourse',compact('academicData'));
+    //home course By Sub CatAjax
+    public function homecourseBySubCatAjax($id){
+        if($id == "popular"){
+            $data['courses']  = Course::where('type','course')->where('status',1)->where('is_master','0')->where('coursetype','1')->orderBy('id','desc')->get();
+        }else if($id == "newest"){
+            $data['courses']  = Course::where('type','course')->where('status',1)->where('is_master','0')->orderBy('id','desc')->get();
+        }else{
+            $data['courses']  = Course::where('type','course')->where('status',1)->where('sub_category_id',$id)->get();
+        }
 
-    }
-
-    public function coursePage(){
-        return view('frontend.pages.course.course');
-    }
-
-    public function aboutPage(){
-
-        return view('frontend.pages.about.about');
+        return view('Frontend.course.homesubcatajx',$data);
     }
 
     public function courseDetails($id){
-        $courseDetails = DB::table('course')
-        ->join('category','category.catid','=','course.catId')
-        ->where('course.id',$id)->get();
-        return view('frontend.pages.details.details',compact('courseDetails'));
+       // dd('hi');
+        $data['course'] =$course= Course::find($id);
+        // dd($course->relatedcourses[0]->course->name);
+        return view('Frontend.course.coursedetails',$data);
+    }
+    public function signin()
+    {
+        session()->put('login_pre_url',url()->previous());
+        return view('Frontend.auth.login');
     }
 
-
-    public function cartView(){
-        $getData = DB::table('cart')
-        ->where('status' , '0')
-        ->where('userId',session()->get('userId'))->get();
-        return view('frontend.cart.cart',compact('getData'));
-
+    public function register()
+    {
+        $data['continents'] = Continent::where('status', 1)->get();
+        return view('Frontend.auth.register', $data);
     }
-    
-    
-    public function usecoupon (Request $req) {
-        
-            
-            $coupon = DB::table('coupon')
-            ->where('code',$req->coupon)->first();
-        
-        
-            if($coupon->status = '1') {
-
-                 $getData = DB::table('cart')->where('userId',session()->get('userId'))->get();
-                 
-                return view('frontend.cart.cart',compact('getData' , 'coupon'));
-                
-            }else {
-                
-                return Redirect::back()
-                ->with('msg', 'Coupon Expired');
-            }
-
-        
+    // public function instructorRegister()
+    // {
+    //     return view('Frontend.auth.register_instructor');
+    // }
+    // public function instructorSignin()
+    // {
+    //     return view('Frontend.auth.login_instructor');
+    // }
+    public function sellerRegister()
+    {
+        return view('Frontend.auth.register_seller');
     }
-    
+    public function sellerSignin()
+    {
+        return view('Frontend.auth.login_seller');
+    }
+    public function teacherSignin()
+    {
+        return view('Frontend.auth.login_teacher');
+    }
+    public function teacherRegister()
+    {
+        return view('Frontend.auth.register_teacher');
+    }
+    public function affiliateSignin()
+    {
+        return view('Frontend.auth.login_affiliate');
+    }
+    public function affiliateRegister()
+    {
+        return view('Frontend.auth.register_affiliate');
+    }
+    public function consultantSignin()
+    {
+        return view('Frontend.auth.login_consultant');
+    }
+    public function consultantRegister()
+    {
+        $data['continents'] = Continent::where('status', 1)->get();
+        return view('Frontend.auth.register_consultant', $data);
+    }
 
-    public function bookNow($id){
-        
-        if(session()->get('userId')) {
-            
-            $course = DB::table('course')->where('id',$id)->first();
-            $exist = DB::table('cart')
-            ->where('userId', session()->get('userId'))
-            ->where('courseId', $course->id)
+    //pages
+    public function about()
+    {
+        $data['about_content'] = AboutPageSetup::first();
+        $data['home_content'] = HomeContentSetup::first();
+        $data['faqs'] = Faq::where('type', 'aboutpage')->get();
+        $data['partners'] = Partner::all();
+        $data['founders'] = FounderCoFundere::where('status', '1')->get();
+        return view('Frontend.pages.about', $data);
+    }
+    public function learner()
+    {
+        $data['home_content'] = HomeContentSetup::first();
+        $data['learner'] = learnerPageSetup::first();
+        $data['clients'] = Client::all();
+        $data['partners'] = Partner::all();
+        return view('Frontend.pages.learner', $data);
+    }
+    public function instructor()
+    {
+        $data['teachers'] = User::where('type','3')->orderBy('id', 'desc')->get();
+        $data['instructor'] = InstructorPageSetup::first();
+        return view('Frontend.pages.instructor',$data);
+    }
+    public function contact()
+    {
+        // $data['site_setting'] = SiteSetting::first();
+        $data['banner']= Banner::where('type','contact')->where('status',1)->orderBy('id','desc')->first();
+        $data['contact_info'] = Tp_option::where('option_name', 'theme_option_footer')->first();
+        return view('Frontend.pages.contact',$data); // enterprise
+    }
+
+    public function userContactStore(Request $request)
+    {
+         //dd('hi');
+        // $request->validate([
+
+        //     'name' => 'required',
+        //     'mobile' => 'required',
+        //     'email' => 'required',
+        // ]);
+
+        $contact = new UserContact();
+        $contact->name = $request->name;
+        $contact->mobile = $request->mobile;
+        $contact->email = $request->email;
+        $contact->type = $request->type;
+        $contact->contact_type = 'contact';
+        $contact->organization = $request->organization;
+        $contact->date = $request->date;
+        $contact->details = $request->details;
+        $contact->save();
+        // return redirect()->back(); // contactStore
+
+        return redirect()->route('frontend.contact')->with('success','Your Contact Add Successfully');
+    }
+
+    public function library()
+    {
+        $data['library'] = Library::first();
+        return view('Frontend.pages.library', $data);
+    }
+    public function eventList(Request $request)
+    {
+        $data['name']=$name = $request->input('name');
+        if(isset(request()->name)){
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','event')->get();
+            $data['banner']= Banner::where('type','event')->where('status',1)->orderBy('id','desc')->first();
+            $data["events"] = Event::where('status',1)->where('name','like','%'.request()->name.'%')->paginate(9);
+        }else{
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','event')->get();
+            $data['banner']= Banner::where('type','event')->where('status',1)->orderBy('id','desc')->first();
+            $data['events'] = Event::where('status',1)->orderBy('id','desc')->paginate(9);
+        }
+
+        return view('Frontend.pages.eventlist',$data);
+    }
+
+    public function eventDetails($id)
+    {
+        $data['event'] = Event::find($id);
+
+        return view('Frontend.pages.eventdetails',$data);
+    }
+
+    //ajax get Event
+    public function getEvents(){
+        $data['events'] = Event::where('status',1)->orderBy('id','desc')->paginate(3);
+        return view('Frontend.pages.eventajaxsee',$data);
+    }
+
+    public function eventMassage(Request $request)
+    {
+        //dd($request->all());
+        $contact = new UserContact();
+        $contact->user_id=auth()->user()->id;
+        $contact->event_id= $request->event_id;
+        $contact->details=$request->details;
+        $contact->contact_type = 'event';
+        $contact->save();
+        return redirect()->back()->with('success','Massage Add Successfully');;
+    }
+   //Event Cat Show
+    public function getEventByCat(Request $request, $id){
+        $data['name']=$name = $request->input('name');
+        if($id == 0){
+            $data['events'] = Event::where('status',1)->get();
+        }else{
+            $data['events'] = Event::where('status',1)->where('category_id',$id)->get();
+        }
+
+        return view('Frontend.pages.eventcatajax',$data);
+    }
+   //Event Relese Show
+    public function getEventRelese(Request $request, $id){
+        $data['name']=$name = $request->input('name');
+        $event = Event::query();
+        if($id != 'allevent'){
+            $event =$event->where('release_id',$id);
+        }
+        if($request->cat_id != 0){
+            $event =$event->where('category_id',$id);
+        }
+        if($request->search != ""){
+            $event =$event->where('name','like','%'.request()->search.'%');
+        }
+        $data['events']=$event->get();
+        return view('Frontend.pages.eventreleaseajax',$data);
+    }
+
+    public function blog(Request $request)
+    {
+
+        $category ="";
+
+        $data['search']=$search = $request->input('search');
+        if(isset(request()->search)){
+            $data["blogs"] = Blog::where('title','like','%'.request()->search.'%')
+            ->orWhere('author','like','%'.$request->search.'%')
             ->get();
-            
-            
-            if(count($exist) > 0) {
-                
-                return Redirect::back()
-                ->with('msg', 'Already Added');
-                
-            }else{
-                
-                $course = DB::table('course')->where('id',$id)->first();
-                $data = DB::table('cart')->insert([
-                    'userId' => session()->get('userId'),
-                    'courseId'=>$course->id,
-                    'name'=>$course->name,
-                    'file'=>$course->image,
-                    'total_price'=>$course->price,
-                    'quantity'=>1
-                ]);
-                
-            }
-            
-            return redirect('/cartView');
-            
+            $data["categories"] = Category::where('parent_id', '=' ,0)->where('type', 'blog')->get();
+             $data['banner']= Banner::where('type','blog')->where('status',1)->orderBy('id','desc')->first();
         }
+        // else if(isset($request->category)){
+        //     $data['blogs'] = Blog::leftJoin('categories','categories.id','blogs.category_id')
+        //     ->where('blogs.category_id','like','%'.$request->category.'%')
+        //     ->get();
+        //     $data["categories"] = Category::where('parent_id', '=' ,0)->where('type', 'blog')->get();
+
+        // }
         else{
-            
-            return Redirect::back()
-            ->with('msg', 'You are not Logged');
-            
+            $data['blogs'] = Blog::where('status', 1)->get();
+            $data["categories"] = Category::where('parent_id', '=' ,0)->where('type', 'blog')->get();
+            $data['banner']= Banner::where('type','blog')->where('status',1)->orderBy('id','desc')->first();
         }
 
+        $data['category'] = $category;
+        $data['topics'] = Topic::where('type', 'blog')->where('status', 1)->get();
+         $data['banner']= Banner::where('type','blog')->where('status',1)->orderBy('id','desc')->first();
+        return view('Frontend.pages.blog', $data);
+    }
+    public function blogDetails($id)
+    {
+        $blog = Blog::find($id);
+        $blog->views = $blog->views + 1;
+        $blog->save();
+        $data['blog'] =$blog;
+        $data['blogs'] = Blog::where('status', 1)->get();
+        return view('Frontend.pages.blog_details', $data);
     }
 
-    public function deleteCartProduct($id){
-        $courseDelete  = DB::table('cart')->where('id',$id)->delete();
-
-        return redirect('/cartView');
-    }
-
-
-
-
-
-    public function getallBlog() {
-
-        $blog  = DB::table('blog')->get();
-
-        return view('frontend.blog.blog',compact('blog'));
-    }
-
-
-    public function singleBlog($id) {
-
-        $blog  = DB::table('blog')->where('bid' , $id)->get();
-
-        return view('frontend.blog.singleblog',compact('blog'));
-    }
-
-
-    public function courseView($id) {
-
-        $course  = DB::table('course')->where('id' , $id)->get();
-        return view('frontend.pages.course.courseView',compact('course'));
-
-    }
-
-
-    public function academicPrograms($id) {
-        $course  = DB::table('course')->where('subcatId' , str_replace("_"," ",$id))->get();
-
-        return view('frontend.pages.academicProgram.academicPrograms',compact('course'));
-    }
-
-    public function academicProgramView($id) {
-
-        $course  = DB::table('course')->where('id' , $id)->get();
-
-        $class_routine  = DB::table('class_routine')->where('class_id' , $id)->get();
-
-
-        return view('frontend.pages.academicProgram.academicProgramView',compact('course'));
-
-    }
-
-    public function termsView() {
-
-        $terms  = DB::table('terms')->first();
-        return view('frontend.pages.home.terms',compact('terms'));
-
-    }
-
-    public function policyView() {
-
-        $terms  = DB::table('policy')->first();
-        return view('frontend.pages.home.policy',compact('terms'));
-
-    }
-
-    public function contactus() {
-
-        return view('frontend.pages.home.contactus');
-
-    }
-
-    public function carrier() {
-
-        return view('frontend.pages.home.carrier');
-
-    }
-
-
-    public function SendCarrierData(Request $req) {
-
-        if(!empty($req->cv)){
-            $file = $req->file('cv');
-            $fileName = date('YmdHi') . $file->getClientOriginalName();
-            $destinationPath = '/backend/cv';
-            $file->move(public_path($destinationPath), $fileName);
-        }
-
-        $data = DB::table('carrier')->insert([
-            'name'=>$req->name,
-            'email'=>$req->mail,
-            'phone'=>$req->phone,
-            'edu'=>$req->edu,
-            'cv'=>$fileName,
-            'skill'=>$req->skill,
-        ]);
-
-        return back();
-
-    }
-
-
-
-    public function SendContactData(Request $req) {
-
-        $data = DB::table('contact')->insert([
-            'name'=>$req->name,
-            'mail'=>$req->mail,
-            'phone'=>$req->phone,
-            'message'=>$req->message,
-        ]);
-
-        return back();
-
-    }
-
-
-    public function allAdmission () {
-
-        $allAdmission  = DB::table('sub_category')->where('category_id' , '9')->get();
-        return view('frontend.pages.admission.allAdmission',compact('allAdmission'));
-
-    }
-
-
-    public function admissionView($id) {
-
-        $course  = DB::table('course')->where('subcatId' , str_replace("-"," ",$id))->get();
-        return view('frontend.pages.admission.AdmissionCourse',compact('course'));
-
-    }
-
-
-    public function courseCategory($id) {
-
-        $category  = DB::table('category')->where('catId' , $id)->first();
-
-        $allAdmission  = DB::table('course')->where('catId' , $id)->get();
-
-        return view('frontend.pages.course.courseSubmenu',compact('allAdmission' , 'category'));
-
-    }
-
-
-    public function forgotpassword() {
-
-        return view('frontend.pages.auth.forgot');
-
-    }
-
-
-    public function forgotPasswordAction(Request $req) {
-
-            $checkUser  = DB::table('user')->where('email' , $req->mail)->first();
-
-            if ($checkUser) {
-
-                $otp = rand(000000,999999);
-
-                session(['otp' => $otp]);
-
-                session(['OTPuserid' => $checkUser->id]);
-
-                Mail::to($req->mail)->send(new SendMail($otp));
-
-                return redirect('/setNewPassword');
-
+///Blog search by category
+    public function getBlogByCat(Request $request, $id){
+        if($id == 0){
+            $data['blogs'] = Blog::get();
+        }else{
+            $category=Category::find($id);
+
+
+            if($category->sub->count() > 0){
+                $cat_ids[]=$id;
+                foreach($category->sub as $sub_cate){
+                    $cat_ids[]=$sub_cate->id;
+                }
+                $data['blogs'] = Blog::whereIn('category_id',$cat_ids)->get();
+            }else{
+                $data['blogs'] = Blog::where('category_id',$id)->get();
             }
-            else {
+
+        }
+        return view('Frontend.pages.blogcatajax',$data);
+    }
+///Blog search by sort by
+    public function getBlogSortBy(Request $request, $id){
+        if($id == 'like'){
+            $data['blogs'] = Blog::withCount('likes')->orderByDesc('likes_count', 'id')->get();
+        }else{
+            $data['blogs'] = Blog::latest()->get();
+        }
+        return view('Frontend.pages.blog_sort_by_ajax',$data);
+    }
+
+
+
+
+    public function privacyPolicy()
+    {
+        $data['content'] = Page::where('template', 'privacy-policy')->first();
+        return view('Frontend.pages.privacy_policy', $data);
+    }
+    public function refundPolicy()
+    {
+        $data['content'] = Page::where('template', 'refund-policy')->first();
+        return view('Frontend.pages.refund_policy', $data);
+    }
+    public function termsConditions()
+    {
+        $data['content'] = Page::where('template', 'terms-conditions')->first();
+        return view('Frontend.pages.terms_conditions', $data);
+    }
+    public function maestroClass()
+    {
+        $data['content'] = MaestroClassSetup::first();
+        $data['categories']= Category::where('parent_id', '=' ,0)->where('type','master_course')->get();
+        $data['master_courses'] = Course::where('type','course')->where('status', 1)->where('is_master', 1)->get();
+        return view('Frontend.pages.maestro_class', $data);
+    }
+    public function maestroClassDetails($id)
+    {
+        $data['master_course'] = Course::find($id);
+        $data['master_courses'] = Course::where('type','course')->where('status', 1)->where('is_master', 1)->get();
+        return view('Frontend.pages.maestro_class_details', $data);
+    }
+    public function faq()
+    {
+        $data['faq_content'] = Faq::where('type', 'faq_content')->first();
+        $data['faqs']=  Faq::where('type',"faq")->get();
+        return view('Frontend.pages.faq', $data);
+    }
+
+    public function subscribeDetails()
+    {
+        //dd('hi');
+       // $data['course'] = Course::find($id);
+        $data['home_content'] = HomeContentSetup::first();
+        return view('Frontend.pages.subscribe_details', $data);
+    }
+
+
+    // -------------------------------==============
+    public function eBook(Request $request)
+    {
+
+        $data['title']=$title = $request->input('title');
+        if(isset(request()->title)){
+            // $data['banner']= Banner::where('type','ebook')->where('status',1)->orderBy('id','desc')->first();
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+            $data["ebooks"] = Ebook::where('type','ebook')->where('status',1)->where('title','like','%'.request()->title.'%')->get();
+            $data['banner']= Banner::where('type','ebook')->where('status',1)->orderBy('id','desc')->first();
+        }else{
+            // $data['banner']= Banner::where('type','ebook')->where('status',1)->orderBy('id','desc')->first();
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+            $data['ebooks'] = Ebook::where('type','ebook')->where('status', 1)->get();
+            $data['banner']= Banner::where('type','ebook')->where('status',1)->orderBy('id','desc')->first();
+        }
+        return view('Frontend.ebook.ebook_list', $data);
+    }
+
+    public function eBookDetails($id)
+    {
+        $data['ebook'] = Ebook::find($id);
+        return view('Frontend.ebook.ebook_details', $data);
+    }
+
+    public function getEbookByCat(Request $request, $id)
+    {
+        $data['title']=$name = $request->input('title');
+        if($id == 0){
+            $data['ebooks'] = Ebook::where('status',1)->get();
+        }else{
+            $data['ebooks'] = Ebook::where('status',1)->where('category_id',$id)->get();
+        }
+
+        return view('Frontend.ebook.ebookcatajax',$data);
+    }
+
+    public function eBookDownload($id)
+    {
+        $data['ebook'] = Ebook::find($id);
+        // return view('Frontend.ebook.ebook_pdf_download', $data);
+        $html = view('Frontend.ebook.ebook_pdf_download', $data);
+        $mpdf = new Mpdf([
+            'mode' => 'UTF-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+        ]);
+
+        //For Multilanguage Start
+        $mpdf->autoScriptToLang = true;
+        $mpdf->baseScript = 1;
+        $mpdf->autoLangToFont = true;
+        $mpdf->autoVietnamese = true;
+        $mpdf->autoArabic = true;
+
+        //For Multilanguage End
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->writeHTML($html);
+        $name = 'Purchase E-Book_ ' . date('Y-m-d i:h:s');
+        $mpdf->Output($name.'.pdf', 'D');
+    }
+
+
+    public function eBookVideoDownload($id)
+    {
+
+        $ebook = Ebook::findOrFail($id);
+        $files = EbookVideoContent::where('ebook_id', $ebook->id)->get();
+
+        $zipFileName = $ebook->title . '_eBook_videos.zip';
+        $zip = new ZipArchive();
+
+        $zip->open(public_path('upload/ebook/video/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $videoPath = public_path('upload/ebook/video/' . $file->video_file);
+            // dd($videoPath);
+            if(File::exists($videoPath)){
+                $zip->addFile($videoPath, $file->video_file);
+            }else{
                 return redirect()->back();
             }
 
+        }
 
+        $zip->close();
+
+        return response()->download(public_path('upload/ebook/video/' . $zipFileName))->deleteFileAfterSend(true);
 
     }
+    public function eBookAudioDownload($id)
+    {
 
+        $ebook = Ebook::findOrFail($id);
+        $files = EbookAudioContent::where('ebook_id', $ebook->id)->get();
 
-    public function setNewPasswordAction (Request $req) {
+        $zipFileName = $ebook->title . '_eBook_audio.zip';
+        $zip = new ZipArchive();
 
-        if(Session::get('otp') == $req->otp) {
+        $zip->open(public_path('upload/ebook/audio/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-            $data = DB::table('user')
-            ->where('id' , Session::get('OTPuserid'))
-            ->update([
-                'pass'=> md5($req->newpass),
-            ]);
-
-            return redirect('/');
+        foreach ($files as $file) {
+            $audioPath = public_path('upload/ebook/audio/' . $file->audio_file);
+            // dd($audioPath);
+            if(File::exists($audioPath)){
+                $zip->addFile($audioPath, $file->audio_file);
+            }else{
+                return redirect()->back();
+            }
 
         }
 
-    }
+        $zip->close();
 
-
-
-    public function bcs($id) {
-        
-        $course  = DB::table('course')->where('subcatId' , str_replace("-"," ",$id))->get();
-
-        return view('frontend.pages.academicProgram.bcs',compact('course'));
-    }
-
-    public function bcsView($id) {
-
-        $course  = DB::table('course')->where('id' , $id)->get();
-
-        $class_routine  = DB::table('class_routine')->where('class_id' , $id)->get();
-
-
-        return view('frontend.pages.academicProgram.bcsView',compact('course'));
+        return response()->download(public_path('upload/ebook/audio/' . $zipFileName))->deleteFileAfterSend(true);
 
     }
 
 
-    public function it($id) {
-        
-        $course  = DB::table('course')->where('subcatId' , str_replace("-"," ",$id))->get();
+    //ebook audio start
+    public function eBookAudio(Request $request)
+    {
 
-        return view('frontend.pages.academicProgram.it',compact('course'));
+        $data['title']=$title = $request->input('title');
+        if(isset(request()->title)){
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+            $data["ebooks"] = Ebook::where('type','ebookaudio')->where('status',1)->where('title','like','%'.request()->title.'%')->paginate(9);
+            $data['banner']= Banner::where('type','e-audio')->where('status',1)->orderBy('id','desc')->first();
+        }else{
+            $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+            $data['ebooks'] = Ebook::where('type','ebookaudio')->where('status', 1)->paginate(9);
+            $data['banner']= Banner::where('type','e-audio')->where('status',1)->orderBy('id','desc')->first();
+        }
+        return view('Frontend.ebookaudio.ebook_audio_list', $data);
     }
 
-    public function itView($id) {
-
-        $course  = DB::table('course')->where('id' , $id)->get();
-
-        $class_routine  = DB::table('class_routine')->where('class_id' , $id)->get();
-
-
-        return view('frontend.pages.academicProgram.itView',compact('course'));
-
-    }
-    
-    
-    public function professional($id) {
-        
-        $course  = DB::table('course')->where('subcatId' , str_replace("-"," ",$id))->get();
-
-        return view('frontend.pages.academicProgram.professional',compact('course'));
+    public function eBookAudioDetails($id)
+    {
+        //dd('hi');
+        $data['ebook'] = Ebook::find($id);
+        return view('Frontend.ebookaudio.ebook_audio_details', $data);
     }
 
-    public function professionalView($id) {
+    public function getEbookAudioByCat(Request $request, $id)
+    {
+        $data['title']=$name = $request->input('title');
+        if($id == 0){
+            $data['ebooks'] = Ebook::where('type','ebookaudio')->where('status',1)->get();
+        }else{
+            $data['ebooks'] = Ebook::where('type','ebookaudio')->where('status',1)->where('category_id',$id)->get();
+        }
 
-        $course  = DB::table('course')->where('id' , $id)->get();
+        return view('Frontend.ebookaudio.ebookaudiocatajax',$data);
+    }
 
-        $class_routine  = DB::table('class_routine')->where('class_id' , $id)->get();
+    public function eAudioDownload($id)
+    {
 
+        $ebook = Ebook::findOrFail($id);
+        $files = EbookAudioContent::where('ebook_id', $ebook->id)->get();
 
-        return view('frontend.pages.academicProgram.professionalView',compact('course'));
+        $zipFileName = $ebook->title . '_eBook_audio.zip';
+        $zip = new ZipArchive();
+
+        $zip->open(public_path('upload/ebook/audio/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $audioPath = public_path('upload/ebook/audio/' . $file->audio_file);
+            // dd($audioPath);
+            if(File::exists($audioPath)){
+                $zip->addFile($audioPath, $file->audio_file);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
+        $zip->close();
+
+        return response()->download(public_path('upload/ebook/audio/' . $zipFileName))->deleteFileAfterSend(true);
 
     }
-    
-    
-    public function checkuot () {
-        
-         $data = DB::table('cart')
-            ->where('userId',session()->get('userId'))
-            ->update([
-                'status'=> 1,
-            ]);
-            
-        return redirect('/orders');
-        
-         
+    //ebook audio end
+
+
+     //ebook Video start
+     public function eBookVideo(Request $request)
+     {
+
+         $data['title']=$title = $request->input('title');
+         if(isset(request()->title)){
+             $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+             $data["ebooks"] = Ebook::where('type','ebookvideo')->where('status',1)->where('title','like','%'.request()->title.'%')->paginate(9);
+             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+         }else{
+             $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
+             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status', 1)->paginate(9);
+             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+         }
+         return view('Frontend.ebookvideo.ebook_video_list', $data);
+     }
+
+     public function eBookVideoDetails($id)
+     {
+         //dd('hi');
+         $data['ebook'] = Ebook::find($id);
+         return view('Frontend.ebookvideo.ebook_video_details', $data);
+     }
+
+     public function getEbookVideoByCat(Request $request, $id)
+     {
+         $data['title']=$name = $request->input('title');
+         if($id == 0){
+             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status',1)->get();
+         }else{
+             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status',1)->where('category_id',$id)->get();
+         }
+
+         return view('Frontend.ebookvideo.ebook_video_catajax',$data);
+     }
+
+     public function eVideoDownload($id)
+     {
+
+         $ebook = Ebook::findOrFail($id);
+         $files = EbookAudioContent::where('ebook_id', $ebook->id)->get();
+
+         $zipFileName = $ebook->title . '_eBook_audio.zip';
+         $zip = new ZipArchive();
+
+         $zip->open(public_path('upload/ebook/audio/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+         foreach ($files as $file) {
+             $audioPath = public_path('upload/ebook/audio/' . $file->audio_file);
+             // dd($audioPath);
+             if(File::exists($audioPath)){
+                 $zip->addFile($audioPath, $file->audio_file);
+             }else{
+                 return redirect()->back();
+             }
+
+         }
+
+         $zip->close();
+
+         return response()->download(public_path('upload/ebook/audio/' . $zipFileName))->deleteFileAfterSend(true);
+
+     }
+     //ebook audio end
+
+
+     public function courseResourceFilesDownload($id)
+    {
+
+        $course = Course::findOrFail($id);
+        $files = CourseResourceFile::where('course_id', $course->id)->get();
+
+        $zipFileName = $course->name .'_CourseResourceFile.zip';
+        $zip = new ZipArchive();
+        $zip->open(public_path('upload/course/file/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $filepath = public_path('upload/course/file/' . $file->name);
+            // dd($videoPath);
+            if(File::exists($filepath)){
+                $zip->addFile($filepath, $file->name);
+            }else{
+                return redirect()->back();
+            }
+        }
+
+        $zip->close();
+
+        return response()->download(public_path('upload/course/file/' . $zipFileName))->deleteFileAfterSend(true);
+
     }
-    
-    
-    public function orders () {
-        
-        $getData  = DB::table('cart')->where('status' , 1)
-        ->orwhere('status' , 2)->get();
-        
-        return view('frontend.cart.checkout',compact('getData'));
-        
+
+
+    public function courseLessonFilesDownload($id)
+    {
+
+        $course = Course::findOrFail($id);
+        $files = CourseLessonFile::where('course_id', $course->id)->get();
+
+        $zipFileName = $course->name .'_CourseLessonFile.zip';
+        $zip = new ZipArchive();
+
+        $zip->open(public_path('upload/course/file/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $filepath = public_path('upload/course/file/' . $file->name);
+            // dd($videoPath);
+            if(File::exists($filepath)){
+                $zip->addFile($filepath, $file->name);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
+        $zip->close();
+
+        return response()->download(public_path('upload/course/file/' . $zipFileName))->deleteFileAfterSend(true);
+
     }
-    
-    
+
+
+    public function courseQuizFilesDownload($id)
+    {
+
+        $course = Course::findOrFail($id);
+        $files = CourseQuizFile::where('course_id', $course->id)->get();
+
+        $zipFileName = $course->name .'_CourseQuizFile.zip';
+        $zip = new ZipArchive();
+
+        $zip->open(public_path('upload/course/file/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $filepath = public_path('upload/course/file/' . $file->name);
+            // dd($videoPath);
+            if(File::exists($filepath)){
+                $zip->addFile($filepath, $file->name);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
+        $zip->close();
+
+        return response()->download(public_path('upload/course/file/' . $zipFileName))->deleteFileAfterSend(true);
+
+    }
+
+
+    public function courseProjectFilesDownload($id)
+    {
+
+        $course = Course::findOrFail($id);
+        $files = CoursezprojectFile::where('course_id', $course->id)->get();
+
+        $zipFileName = $course->name .'_CoursezprojectFile.zip';
+        $zip = new ZipArchive();
+
+        $zip->open(public_path('upload/course/file/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+        foreach ($files as $file) {
+            $filepath = public_path('upload/course/file/' . $file->name);
+            // dd($videoPath);
+            if(File::exists($filepath)){
+                $zip->addFile($filepath, $file->name);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
+        $zip->close();
+
+        return response()->download(public_path('upload/course/file/' . $zipFileName))->deleteFileAfterSend(true);
+
+    }
+
+    public function universityCourseList(Request $request)
+    {
+        $courses =  Course::query();
+        $data['univerties']=$univerties= University::withCount('courses')->get();
+        // $data['continents']=$continents= Continent::withCount('universities')->get();
+        $data['countries']=$countries= Country::withCount('universities')->get();
+        $data['states']=$states= State::withCount('universities')->get();
+        $data['cities']=$cities= City::withCount('universities')->get();
+        $data['degrees']=$degrees= Degree::withCount('courses')->get();
+        $data['languages']=$language= CourseLanguage::withCount('courses')->where('type','university')->get();
+        $data['departments']=$departments= Department::withCount('courses')->get();
+        $data['sections'] =$sections= Section::withCount('courses')->orderBy('id', 'desc')->get();
+        $data['continents']=$continents= Continent::withCount('universities')->get();
+
+
+        if($request->university){
+            $courses= $courses->where('university_id',$request->university);
+        }
+
+        if($request->sortBy){
+            if($request->sortBy == 'top_pick'){
+                $courses=$courses->orderBy('views','desc');
+            }
+            // elseif($request->sortBy == 'most_popular'){
+            //    $courses=$courses->orderBy('views','desc');
+            // }elseif($request->sortBy == 'fastest_admission'){
+            //     $courses=$courses->orderBy('views','desc');
+            //  }elseif($request->sortBy == 'highest_rating'){
+            //     $courses=$courses->orderBy('views','desc');
+            //  }elseif($request->sortBy == 'top_ranked'){
+            //     $courses=$courses->orderBy('views','desc');
+            //  }
+
+        }else{
+            $courses=$courses->orderBy('views','desc');
+        }
+
+        $data['courses']=$courses=$courses->where('type','university')->paginate(10);
+
+        return view('Frontend.university.university_course_list',$data);
+    }
+
+    public function ajaxFilterCourse(Request $request)
+    {
+        //return $request->all();
+        $courses =  Course::query();
+         //op st
+        $data['univerties']=$univerties= University::get();
+        //op end
+
+        $data['degrees']=$degrees= Degree::get();
+        $data['languages']=$language= CourseLanguage::where('type','university')->get();
+        $data['departments']=$departments= Department::get();
+        $data['sections'] =$sections= Section::orderBy('id', 'desc')->get();
+
+
+
+        $data['continents']=$continents = Continent::withCount('universities')->where('status', 1)->get();
+        $univerties= University::where('status', 1);
+
+        if(request()->input('continent')){
+            $univerties= $univerties->where('continent_id',request()->input('continent'));
+            $select_continent= request()->input('continent');
+        }else{
+            $select_continent=  0;
+        }
+
+
+        if(request()->input('country')){
+            $univerties= $univerties->where('country_id',request()->input('country'));
+            $select_country= Country::find(request()->input('country'));
+            if($select_continent == 0){
+                $select_continent = $select_country->continent->id;
+                $select_country =  $select_country->id;
+            }else{
+                $select_country =  $select_country->id;
+            }
+        }else{
+            $select_country=  0;
+        }
+        $data['countries']=$countries = Country::withCount('university')->where('continent_id',$select_continent)->where('status', 1)->get();
+
+
+        if(request()->input('state')){
+            $univerties= $univerties->where('state_id',request()->input('state'));
+
+            $select_state= State::find(request()->input('state'));
+            if($select_country == 0){
+                $select_country = $select_state->country->id;
+                $select_state =  $select_state->id;
+            }else{
+                $select_state =  $select_state->id;
+            }
+        }else{
+            $select_state=  0;
+        }
+        $data['states']=$states = State::withCount('universities')->where('country_id',$select_country)->where('status', 1)->get();
+
+
+        if(request()->input('city')){
+            $univerties= $univerties->where('city_id',request()->input('city'));
+
+            $select_city= City::find(request()->input('city'));
+            if($select_state == 0){
+                $select_state = $select_city->state->id;
+                $select_city =  $select_city->id;
+            }else{
+                $select_city =  $select_city->id;
+            }
+        }else{
+            $select_city=  0;
+        }
+
+        $data['cities']=$cities = City::withCount('universities')->where('state_id',$select_state)->where('status', 1)->get();
+
+
+        $data['select_continent'] = $select_continent;
+        $data['select_country'] = $select_country;
+        $data['select_state'] = $select_state;
+        $data['select_city'] = $select_city;
+        $data['universities'] = $univerties->get();
+
+        $selected_university=0;
+        $selected_degree=0;
+        $selected_language=0;
+        $selected_section=0;
+        $selected_subject=0;
+        // op st
+        // $selected_univerties=0;
+        //op end
+        if($request->university){
+            $courses = $courses->where('university_id',$request->university);
+
+        }else{
+            $courses = $courses->whereIn('university_id',$univerties->pluck('id'));
+
+        }
+
+        // op st
+        if($request->university){
+            $courses= $courses->where('university_id',$request->university);
+            $selected_university=$request->university;
+        }
+        //op end
+
+        if($request->degree){
+            $courses= $courses->where('degree_id',$request->degree);
+            $selected_degree=$request->degree;
+        }
+
+        if($request->language){
+            $courses= $courses->where('language_id',$request->language);
+            $selected_language=$request->language;
+        }
+        if($request->section){
+            $courses= $courses->where('section_id',$request->section);
+            $selected_section=$request->section;
+        }
+        if($request->subject){
+            $courses= $courses->where('department_id',$request->subject);
+            $selected_subject=$request->subject;
+        }
+
+        if($request->sortBy){
+            if($request->sortBy == 'top_pick'){
+                $courses=$courses->orderBy('views','desc');
+            }
+
+        }else{
+            $courses=$courses->orderBy('views','desc');
+        }
+        // op st
+        // $data['selected_univerties']=$selected_univerties;
+       //op end
+        $data['selected_degree'] =$selected_degree;
+        $data['selected_language'] =$selected_language;
+        $data['selected_section'] =$selected_section;
+        $data['selected_subject'] =$selected_subject;
+        $data['selected_university'] =$selected_university;
+        $data['courses']=$courses=$courses->where('type','university')->paginate(10);
+        //return $data;
+        return view('Frontend.university.ajax-course-filter',$data);
+    }
+
+    //ajax get Sort Category Course
+    public function getAjaxCourseList($cat){
+    $data['courses'] = Course::where('coursetype',$cat)->orderBy('id', 'desc')->where('type','university')->get();
+    return view('Frontend.university.course_list_ajax',$data);
+    }
+
+
+ // university end
+
+
+ public function apply()
+ {
+    //dd('hi');
+     return view('Frontend.university.apply');
+ }
+
+
+
+ public function programDetails($id){
+    // dd('hi');
+    $data['course'] =$course= Course::find($id);
+    $course->views = $course->views + 1;
+    $course->save();
+    $continent = $course->university->continent_id;
+ //    dd($continent);
+
+    $data['consultant'] = User::where('continent_id', $continent)
+                     ->where('type', 7)->where('status', 1)
+                     ->first();
+// dd($data);
+
+     return view('Frontend.university.programs_details',$data);
+ }
+
+
+
 
 
 }

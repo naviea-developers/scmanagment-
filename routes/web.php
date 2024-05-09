@@ -1,6 +1,19 @@
 <?php
 
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Auth\SocialLoginController;
+use App\Http\Controllers\Backend\subscriber\SubscriberController;
+use App\Http\Controllers\Frontend\CommentController;
+use App\Http\Controllers\Frontend\LikeController;
+use App\Http\Controllers\Frontend\UserLoginController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\EventCartController;
+use App\Http\Controllers\Frontend\CourseUserSubscriptionsController;
+use App\Http\Controllers\Frontend\EbookCartController;
+use App\Http\Controllers\Frontend\StudentApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -8,623 +21,300 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-// clear all cache :
-// Clear application cache:
-
-Route::get('/reboot', function() {
+Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
-    Artisan::call('route:cache');
-    Artisan::call('config:cache');
+    Artisan::call('config:clear');
     Artisan::call('view:clear');
-   return redirect()->back();
-});
-// clear all cache
-
-Route::get('/signup', function () {
-    return view('backend.signup');
+     Artisan::call('route:clear');
+    return redirect()->back();
 });
 
-////----------------------Auth Route---------------///
-
-Route::get('/register', 'App\Http\Controllers\Student\StudentController@register')->name('register');
-
-Route::post('/studentSignUp', 'App\Http\Controllers\Student\StudentController@studentSignUp')->name('studentSignUp');
-
-Route::get('/StudentLogin', 'App\Http\Controllers\Student\StudentController@StudentLogin')->name('StudentLogin');
-
-Route::post('/loginStd', 'App\Http\Controllers\Student\StudentController@loginStd')->name('loginStd');
-
-Route::get('/teacherSignUp', 'App\Http\Controllers\teacherController@teacherSignUp')->name('teacherSignUp');
-
-Route::post('/addTeacher', 'App\Http\Controllers\teacherController@addTeacher')->name('addTeacher');
-
-Route::get('/signin', 'App\Http\Controllers\teacherController@signin')->name('signin');
-
-Route::post('/teacherLogin', 'App\Http\Controllers\teacherController@teacherLogin')->name('teacherLogin');
-
-Route::get('/teacherlogout', 'App\Http\Controllers\teacherController@teacherlogout')->name('teacherlogout');
-
-Route::get('/stdLogout', 'App\Http\Controllers\Student\StudentController@stdLogout')->name('stdLogout');
-
-Route::get('/showTitlewiseCourse/{title}', 'App\Http\Controllers\Student\StudentController@showTitlewiseCourse')->name('showTitlewiseCourse');
-
-
-
-
-
-
-
-// edit profile
-Route::get('/editprofile/{id}', 'App\Http\Controllers\index@editprofile')->name('editprofile');
-
-Route::post('/UpdateAdminPage', 'App\Http\Controllers\index@UpdateAdminPage')->name('UpdateAdminPage');
-
-
-
-Route::get('/admin', 'App\Http\Controllers\index@authCheck')->name('admin');
-
-// Route::get('/signup', 'App\Http\Controllers\index@authCheck')->name('signup');
-
-Route::post('/reg', 'App\Http\Controllers\index@reg')->name('reg');
-
-Route::post('/login', 'App\Http\Controllers\index@login')->name('login');
-
-Route::get('/logout', 'App\Http\Controllers\index@logout')->name('logout');
-
-
-
-
-Route::get('/deshboard', 'App\Http\Controllers\index@deshboard')->name('deshboard');
-
-
-
-
-// class route
-
-Route::get('/viewAllClass', 'App\Http\Controllers\classController@viewAllClass')->name('viewAllClass');
-
-Route::get('/addNewBatch', 'App\Http\Controllers\classController@addNewBatch')->name('addNewBatch');
-
-Route::post('/uploadnewClass', 'App\Http\Controllers\classController@uploadnewClass')->name('uploadnewClass');
-
-Route::get('/addRoutine', 'App\Http\Controllers\classController@addRoutine')->name('addRoutine');
-
-Route::post('/uploadRoutine', 'App\Http\Controllers\classController@uploadRoutine')->name('uploadRoutine');
-
-Route::get('/classDetails/{id}', 'App\Http\Controllers\classController@classDetails')->name('classDetails');
-
-Route::get('/editClassDetailse/{id}', 'App\Http\Controllers\classController@editClassDetailse')->name('editClassDetailse');
-
-Route::post('/updateClassDetailes', 'App\Http\Controllers\classController@updateClassDetailes')->name('updateClassDetailes');
-
-Route::get('/deleteClassDetailse/{id}', 'App\Http\Controllers\classController@deleteClassDetailse')->name('deleteClassDetailse');
-
-
-Route::get('/getHomework', 'App\Http\Controllers\classController@getHomework')->name('getHomework');
-
-Route::get('/addHomework', 'App\Http\Controllers\classController@addHomework')->name('addHomework');
-
-Route::post('/storeHomework', 'App\Http\Controllers\classController@storeHomework')->name('storeHomework');
-
-Route::get('/viewHomework', 'App\Http\Controllers\classController@viewHomework')->name('viewHomework');
-
-Route::get('/addNewStudent', 'App\Http\Controllers\classController@addNewStudent')->name('addNewStudent');
-
-Route::get('/addClassTest', 'App\Http\Controllers\classController@addClassTest')->name('addClassTest');
-
-Route::post('/storeClassTest', 'App\Http\Controllers\classController@storeClassTest')->name('storeClassTest');
-
-Route::get('/viewClassTest', 'App\Http\Controllers\classController@viewClassTest')->name('viewClassTest');
-
-Route::get('/paymentDetails', 'App\Http\Controllers\Student\StudentController@paymentDetails')->name('paymentDetails');
-
-Route::post('/addPayment', 'App\Http\Controllers\Student\StudentController@addPayment')->name('addPayment');
-
-
-// Education Structure route
-
-
-Route::get('/manageClasses', 'App\Http\Controllers\edicationStructure@manageClasses')->name('manageClasses');
-
-Route::get('/addClass', function () {
-    return view('backend.eduStructure.add');
+Route::get('/migrate-db', function() {
+	Artisan::call('migrate', [
+	    '--force' => true,
+	]);
+	Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    return redirect()->back();
 });
 
-Route::post('/addAClass', 'App\Http\Controllers\edicationStructure@addAClass')->name('addAClass');
+Route::middleware(['accessLogin'])->group(function () {
 
-Route::get('/deleteClass/{id}', 'App\Http\Controllers\edicationStructure@deleteClass')->name('deleteClass');
 
-Route::get('/manageSubject', 'App\Http\Controllers\edicationStructure@manageSubject')->name('manageSubject');
 
-Route::get('/addSubject', 'App\Http\Controllers\edicationStructure@addSubject')->name('addSubject');
+Route::get('change-currency/{name}', [FrontendController::class, 'changeCurrency'])->name('frontend.change_currency');
+//Home Route
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/typeahead-search', [FrontendController::class, 'typeaHeadSearch'])->name('home.head_search');
 
-Route::post('/addASubj', 'App\Http\Controllers\edicationStructure@addASubj')->name('addASubj');
 
-Route::get('/editSubject/{id}', 'App\Http\Controllers\edicationStructure@editSubject')->name('editSubject');
 
-Route::post('/updateSubj/{id}', 'App\Http\Controllers\edicationStructure@updateSubj')->name('updateSubj');
 
-Route::get('/deleteSubj/{id}', 'App\Http\Controllers\edicationStructure@deleteSubj')->name('deleteSubj');
 
-//------------------------------Notice---------------------------------//
 
-Route::get('/viewNotice', 'App\Http\Controllers\edicationStructure@viewNotice')->name('viewNotice');
+Route::group(['middleware' => 'redirectIfAuthenticated'], function () {
+    //Sign in Route
+    Route::get('/sign-in', [FrontendController::class, 'signin'])->name('frontend.signin');
+    Route::get('/teacher-sign-in', [FrontendController::class, 'teacherSignin'])->name('frontend.teacher_signin');
+    // Route::get('/instructor-sign-in', [FrontendController::class, 'instructorSignin'])->name('frontend.instructor_signin');
+    Route::get('/seller-sign-in', [FrontendController::class, 'sellerSignin'])->name('frontend.seller_signin');
+    Route::get('/affiliate-sign-in', [FrontendController::class, 'affiliateSignin'])->name('frontend.affiliate_signin');
+    Route::get('/consultant-sign-in', [FrontendController::class, 'consultantSignin'])->name('frontend.consultant_signin');
 
-Route::get('/addNotice', 'App\Http\Controllers\edicationStructure@addNotice')->name('addNotice');
+    //Register Route
+    Route::get('/register', [FrontendController::class, 'register'])->name('frontend.register');
+    Route::get('/teacher-register', [FrontendController::class, 'teacherRegister'])->name('frontend.teacher_register');
+    // Route::get('/instructor-register', [FrontendController::class, 'instructorRegister'])->name('frontend.instructor_register');
+    Route::get('/seller-register', [FrontendController::class, 'sellerRegister'])->name('frontend.seller_register');
+    Route::get('/affiliate-register', [FrontendController::class, 'affiliateRegister'])->name('frontend.affiliate_register');
+    Route::get('/consultant-register', [FrontendController::class, 'consultantRegister'])->name('frontend.consultant_register');
 
-Route::post('/storeNotice', 'App\Http\Controllers\edicationStructure@storeNotice')->name('storeNotice');
+});
 
-Route::get('/showNotice', 'App\Http\Controllers\edicationStructure@showNotice')->name('showNotice');
+Route::post('/sign-in', [UserLoginController::class, 'userSignin'])->name('frontend.sign_in');
+Route::post('/register',[UserLoginController::class,'userRegister'])->name('frontend.set_register');
 
-Route::get('/editNotice/{id}', 'App\Http\Controllers\edicationStructure@editNotice')->name('editNotice');
 
-Route::post('/updateNotice/{id}', 'App\Http\Controllers\edicationStructure@updateNotice')->name('updateNotice');
 
+//Sign in Route
+// Route::get('/sign-in', [FrontendController::class, 'signin'])->name('frontend.signin');
+// Route::get('/teacher-sign-in', [FrontendController::class, 'teacherSignin'])->name('frontend.teacher_signin');
+// // Route::get('/instructor-sign-in', [FrontendController::class, 'instructorSignin'])->name('frontend.instructor_signin');
+// Route::get('/seller-sign-in', [FrontendController::class, 'sellerSignin'])->name('frontend.seller_signin');
+// Route::get('/affiliate-sign-in', [FrontendController::class, 'affiliateSignin'])->name('frontend.affiliate_signin');
+// Route::post('/sign-in', [UserLoginController::class, 'userSignin'])->name('frontend.sign_in');
 
 
 
+//Subscription Route
+Route::post('/subscription', [SubscriberController::class, 'add_subscription'])->name('frontend.subscription');
 
-// teacherController
-Route::get('/viewAllTeacher', 'App\Http\Controllers\teacherController@viewAllTeacher')->name('viewAllTeacher');
+//Page Route
+//About Page Route
+Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
+//Learner Page Route
+Route::get('/learner', [FrontendController::class, 'learner'])->name('frontend.learner');
+//Instructor Page Route
+Route::get('/instructor', [FrontendController::class, 'instructor'])->name('frontend.instructor');
 
-Route::get('/teacherInfo/{id}', 'App\Http\Controllers\teacherController@teacherInfo')->name('teacherInfo');
+//Enterprise or Contact Page Route
+Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
+Route::middleware(['userCheck:1'])->group(function () {
+Route::post('/frontend/user/contact/store', [FrontendController::class, 'userContactStore'])->name('frontend.user.contact.store');
+});
+//admin Contact Show
+Route::post('/user/contact/index', [FrontendController::class, 'contactIndex'])->name('user.contact.index.post');
+//Library Page Route
+Route::get('/library', [FrontendController::class, 'library'])->name('frontend.library');
 
-Route::get('/addTeacherForClass', 'App\Http\Controllers\teacherController@addTeacherForClass')->name('addTeacherForClass');
+//Event List Page Route
+Route::get('/event-list', [FrontendController::class, 'eventList'])->name('frontend.event_list');
+Route::get('/event-details/{id}', [FrontendController::class, 'eventDetails'])->name('frontend.event.details');
 
-// AjaxRoute
-Route::get('/getClassWiseSub', 'App\Http\Controllers\teacherController@getClassWiseSub')->name('getClassWiseSub');
+Route::middleware(['userCheck'])->group(function () {
+Route::post('/event-massage', [FrontendController::class, 'eventMassage'])->name('event.details.massage');
+});
+//ajax event lode
+Route::get('/get-events-all',[FrontendController::class,'getEvents']);
 
-Route::get('/getSubwiseTeach', 'App\Http\Controllers\teacherController@getSubwiseTeach')->name('getSubwiseTeach');
-// AjaxRoute
+//subscribe_details
+Route::get('/subscribe-details', [FrontendController::class, 'subscribeDetails'])->name('frontend.subscribe_details');
 
+//Event Ajax
+Route::get('/event-category-show-ajax/{id}',[FrontendController::class,"getEventByCat"]);
+Route::get('/event-relese-show-ajax/{id}',[FrontendController::class,"getEventRelese"]);
 
-Route::post('/uploadTeacherForClass', 'App\Http\Controllers\teacherController@uploadTeacherForClass')->name('uploadTeacherForClass');
+//blog Ajax
+Route::get('/blog-category-show-ajax/{id}',[FrontendController::class,"getBlogByCat"]);
+Route::get('/blog-sort-by-show-ajax/{id}',[FrontendController::class,"getBlogSortBy"]);
 
 
-Route::get('/viewClassWiseTeacher', 'App\Http\Controllers\teacherController@viewClassWiseTeacher')->name('viewClassWiseTeacher');
+//Privacy Policy Page Route
+Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('frontend.privacy_policy');
+Route::get('/refund-policy', [FrontendController::class, 'refundPolicy'])->name('frontend.refund_policy');
+Route::get('/terms-conditions', [FrontendController::class, 'termsConditions'])->name('frontend.terms_conditions');
+Route::get('/maestro-class', [FrontendController::class, 'maestroClass'])->name('frontend.maestro_class');
+Route::get('/maestro-class-details/{id}', [FrontendController::class, 'maestroClassDetails'])->name('frontend.maestro_class_details');
+Route::get('/faqs', [FrontendController::class, 'faq'])->name('frontend.faq');
 
-Route::get('/getClassWiseTeacherInfo', 'App\Http\Controllers\teacherController@getClassWiseTeacherInfo')->name('getClassWiseTeacherInfo');
 
+//Blog Page Route
+Route::get('/blogs', [FrontendController::class, 'blog'])->name('frontend.blog');
+Route::get('/blog_details/{id}', [FrontendController::class, 'blogDetails'])->name('frontend.blog_details');
 
+Route::middleware(['userCheck'])->group(function () {
+Route::post('/blog_like/{id}/toggle-like', [LikeController::class, 'toggleLike'])->name('frontend.blog_like');
+Route::post('/blog_commet', [CommentController::class, 'blogComment'])->name('frontend.blog_comment');
+});
 
 
-// studentController
+//Forget password and reset password route start
+Route::get('forgot-password', [UserLoginController::class, 'forgotPassword'])->name('forget.password');
+Route::post('forgot-password', [UserLoginController::class, 'sentMailforgotPassword'])->name('forget.send_mail_f_password');
 
-Route::get('/getTotalStudent', 'App\Http\Controllers\studentController@getTotalStudent')->name('getTotalStudent');
+Route::get('forgot-password/{id}', [UserLoginController::class, 'emailForgotPassword']);
+Route::post('forgot-password/{id}', [UserLoginController::class, 'resetForgotPassword'])->name('reset.forgot_password');
+//Forget password and reset password route end
 
-Route::get('/studentInfo/{id}', 'App\Http\Controllers\studentController@studentInfo')->name('studentInfo');
+//Admin password and reset password route start
+Route::get('admin-forgot-password', [UserLoginController::class, 'adminForgotPassword'])->name('admin.forget.password');
+Route::get('admin-forgot-password/{id}', [UserLoginController::class, 'emailAdminForgotPassword']);
+Route::post('admin-forgot-password/{id}', [UserLoginController::class, 'resetAdminForgotPassword'])->name('admin-reset.forgot_password');
+//Admin password and reset password route end
 
-// Route::get('/classWiseStudent', 'App\Http\Controllers\StudentController@classWiseStudent')->name('classWiseStudent');
+//Social Login Start Here
+Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/google/callback',[SocialLoginController::class, 'handleGoogleCallback']);
+//facebook
+Route::get('auth/facebook', [SocialLoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('/facebook/callback',[SocialLoginController::class, 'handleFacebookCallback']);
 
+//Social Login End Here
+Route::get('/master-course-category-show-ajax/{id}', [FrontendController::class, 'masterCourseByCatAjax']);
 
-Route::post('/addNewStudentByAdmin', 'App\Http\Controllers\StudentController@addNewStudentByAdmin')->name('addNewStudentByAdmin');
+//Course cart routes hetre-----------
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
 
-//Ajax Route
-Route::get('/viewClassWiseStudent', 'App\Http\Controllers\studentController@viewClassWiseStudent')->name('viewClassWiseStudent');
+// Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+ Route::get('/remove-from-cart/{id}',[CartController::class,'remove'])->name('remove.from.cart');
 
-Route::get('/getClassWiseStudent', 'App\Http\Controllers\studentController@getClassWiseStudent')->name('getClassWiseStudent');
 
+//  Route::get('ebookcart', [EbookCartController::class, 'cartEbook'])->name('cart');
+ Route::get('add-to-ebook-cart/{id}', [EbookCartController::class, 'addToEbookCart'])->name('add.to.ebook.cart');
 
 
 
-//StudentController-fontend
 
-Route::get('/student_profile', 'App\Http\Controllers\Student\StudentController@student_profile')->name('student_profile');
 
-Route::get('/teacher_profile', 'App\Http\Controllers\Student\StudentController@teacher_profile')->name('teacher_profile');
 
-Route::get('/teacherEditProfile/{id}', 'App\Http\Controllers\Student\StudentController@teacherEditProfile')->name('teacherEditProfile');
+ Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
+ Route::post('/order',[OrderController::class,'store'])->name('order');
 
-Route::POST('/updateProfileForTeacher', 'App\Http\Controllers\Student\StudentController@updateProfileForTeacher')->name('updateProfileForTeacher');
+//PayPal
+Route::get('/checkout-payment', [OrderController::class, 'checkoutPayment'])->name('frontend.checkout_payment');
+Route::get('/cancel-payment', [OrderController::class, 'paymentCancel'])->name('cancel.payment');
+Route::get('/payment-success', [OrderController::class, 'paymentSuccess'])->name('success.payment');
+Route::get('/stripe-cancel-payment', [OrderController::class, 'stripePaymentCancel'])->name('stripe.cancel.payment');
+Route::get('/stripe-payment-success', [OrderController::class, 'stripePaymentSuccess'])->name('stripe.success.payment');
+Route::post('/get_coupon_amount_by_code/{code}',[OrderController::class,'getCouponByCode']);
 
-Route::get('/classesForThisTeacher', 'App\Http\Controllers\Student\StudentController@classesForThisTeacher')->name('classesForThisTeacher');
+Route::middleware('auth')->group(function () {
+    Route::get('/order-payment',[OrderController::class,'orderPayment'])->name('order.payment');
+    Route::get('/package-payment/{type}/{id}',[OrderController::class,'orderPackagePayment'])->name('package.payment');
+    Route::post('/order-payment-confirm',[OrderController::class,'orderPaymentConfirm'])->name('order.payment.confirm');
+    Route::get('/order-success/{order_number}',[OrderController::class,'orderComplete'])->name('order.success');
+});
+//Course cart routes End-----------
 
-Route::get('/addHomeworkByTeacher', 'App\Http\Controllers\Student\StudentController@addHomeworkByTeacher')->name('addHomeworkByTeacher');
+//Course subscriptions cart routes hetre-----------
 
-Route::post('/uploadHW', 'App\Http\Controllers\Student\StudentController@uploadHW')->name('uploadHW');
+Route::get('course/use/subscriptions/{id}', [CourseUserSubscriptionsController::class,'CourseUseSubscriptions'])->name('course.use.subscriptions');
+Route::get('course/use/subscriptions_checkout', [CourseUserSubscriptionsController::class,'CourseUseSubscriptionsCheck'])->name('user.subscriptions_checkout');
+Route::get('/remove-from-cart-subscriptions/{id}',[CourseUserSubscriptionsController::class,'subscriptionsCartRemove'])->name('remove-from-cart-subscriptions');
 
+Route::middleware(['userCheck:1'])->group(function () {
+    Route::post('/package/subscription/order',[CourseUserSubscriptionsController::class,'packageSubscriptionOrder'])->name('package.subscription.order');
+ });
+//Course subscriptions cart routes End-----------
 
+//event cart routes hetre-----------
+Route::get('/eventcart/{id}',[EventCartController::class,'eventCart'])->name('eventcart');
+Route::get('/event-chack-out',[EventCartController::class,'eventCheckOut'])->name('eventchackout');
+Route::get('/remove-from-cart-event/{id}',[EventCartController::class,'eventcartremove'])->name('remove-from-cart-event');
 
+Route::middleware(['userCheck:1'])->group(function () {
+    Route::post('/order-event',[EventCartController::class,'eventCartStore'])->name('eventorder');
+ });
 
-Route::get('/setting', 'App\Http\Controllers\Student\StudentController@setting')->name('setting');
+//event cart routes End-----------
 
-Route::POST('/changeStudentPassword', 'App\Http\Controllers\Student\StudentController@changeStudentPassword')->name('changeStudentPassword');
+// E-book
+Route::get('/e-book-list', [FrontendController::class, 'eBook'])->name('frontend.ebook_list');
+Route::get('/e-book-details/{id}', [FrontendController::class, 'eBookDetails'])->name('frontend.ebook_details');
+Route::get('/e-book/download/{id}', [FrontendController::class, 'eBookDownload'])->name('frontend.ebook_download');
 
-Route::get('/classVideo', 'App\Http\Controllers\Student\StudentController@classVideo')->name('classVideo');
+Route::get('/e-book/video/download/{id}', [FrontendController::class, 'eBookVideoDownload'])->name('frontend.ebook_video_download');
+Route::get('/e-book/audio/download/{id}', [FrontendController::class, 'eBookAudioDownload'])->name('frontend.ebook_audio_download');
 
-Route::get('/classSchedule', 'App\Http\Controllers\Student\StudentController@classSchedule')->name('classSchedule');
+Route::get('/ebook-category-show-ajax/{id}',[FrontendController::class,"getEbookByCat"]);
 
-Route::get('/editProfile/{id}', 'App\Http\Controllers\Student\StudentController@editProfile')->name('editProfile');
 
-Route::post('/updateProfile', 'App\Http\Controllers\Student\StudentController@updateProfile')->name('updateProfile');
+// E-book-audio
+Route::get('/e-book-audio-list', [FrontendController::class, 'eBookAudio'])->name('frontend.ebook_audio_list');
+Route::get('/e-book-details-audio/{id}', [FrontendController::class, 'eBookAudioDetails'])->name('frontend.ebook_audio_details');
+//Route::get('/e-book/download/{id}', [FrontendController::class, 'eBookDownload'])->name('frontend.ebook_download');
+Route::get('/e-/e-audio/download/{id}', [FrontendController::class, 'eAudioDownload'])->name('frontend.e_audio_download');
 
-Route::get('/view/{id}', 'App\Http\Controllers\Student\StudentController@view')->name('view');
+Route::get('/ebook-category-audio-show-ajax/{id}',[FrontendController::class,"getEbookAudioByCat"]);
 
-Route::get('/exam/{id}', 'App\Http\Controllers\Student\StudentController@exam')->name('exam');
 
-Route::get('/showNoticeStudent/{title}', 'App\Http\Controllers\Student\StudentController@showNoticeStudent')->name('showNoticeStudent');
+// E-book-video
+Route::get('/e-book-video-list', [FrontendController::class, 'eBookVideo'])->name('frontend.ebook_video_list');
+Route::get('/e-book-details-video/{id}', [FrontendController::class, 'eBookVideoDetails'])->name('frontend.ebook_video_details');
+Route::get('/e-book/e-video/download/{id}', [FrontendController::class, 'eVideoDownload'])->name('frontend.e_video_download');
 
-Route::get('/viewSubject', 'App\Http\Controllers\Student\StudentController@viewSubject')->name('viewSubject');
+Route::get('/ebook-category-video-show-ajax/{id}',[FrontendController::class,"getEbookVideoByCat"]);
 
-Route::get('/showStudentResult/{title}', 'App\Http\Controllers\Student\StudentController@showStudentResult')->name('showStudentResult');
 
 
+//university
 
+Route::get('continent/university/course_list/{id}', [FrontendController::class, 'continentUniversityCourseList'])->name('frontend.continent.university_course_list');
+Route::get('/get-course-degree/{id}',[FrontendController::class,"getCourseDegree"]);
 
+Route::get('country/university/course_list/{id}', [FrontendController::class, 'countryUniversityCourseList'])->name('frontend.country.university_course_list');
 
-//-----------------------------Course Route------------------------//
+Route::get('state/university/course_list/{id}', [FrontendController::class, 'stateUniversityCourseList'])->name('frontend.state.university_course_list');
 
-Route::get('/viewCourse', 'App\Http\Controllers\Student\courseController@viewCourse')->name('viewCourse');
+Route::get('city/university/course_list/{id}', [FrontendController::class, 'cityUniversityCourseList'])->name('frontend.city.university_course_list');
 
-Route::get('/addCourse', 'App\Http\Controllers\Student\courseController@addCourse')->name('addCourse');
+Route::get('applications', [StudentApplicationController::class, 'applications'])->name('frontend.applications')->middleware(['userCheck']);
 
-Route::post('/manageCourse', 'App\Http\Controllers\Student\courseController@manageCourse')->name('manageCourse');
+//get ajax get-sort-category-course
+Route::get('/apply-cart/{id}',[StudentApplicationController::class,"applyCart"])->name('apply_cart')->middleware(['userCheck']);
 
-Route::get('/getSubcategory', 'App\Http\Controllers\Student\courseController@getSubcategory')->name('getSubcategory');
+Route::get('/apply-admission/{id}',[StudentApplicationController::class,"applyAdmission"])->name('apply_admission')->middleware(['userCheck']);
+Route::get('/application/detail/{id}',[StudentApplicationController::class,"applicationDetails"])->name('application.details')->middleware(['userCheck']);
+Route::post('/application/program/delete/{id}',[StudentApplicationController::class,"applyCartDelete"])->name('application.program.delete')->middleware(['userCheck']);
 
-Route::get('/totalCourse', 'App\Http\Controllers\Student\courseController@totalCourse')->name('totalCourse');
+Route::post('application/personal/{id}',[StudentApplicationController::class,'applicationPersonalInfo'])->name('application.personal');
+Route::post('application/home_address/{id}',[StudentApplicationController::class,'applicationHomeAddress'])->name('application.home_address');
+Route::post('application/post_address/{id}',[StudentApplicationController::class,'applicationPostAddress'])->name('application.post_address');
+Route::post('application/education/{id}',[StudentApplicationController::class,'applicationEducation'])->name('application.education');
+Route::post('application/work_experience/{id}',[StudentApplicationController::class,'applicationWorkExperience'])->name('application.work_experience');
+Route::post('application/family_finance/{id}',[StudentApplicationController::class,'applicationFamilyFinance'])->name('application.family_finance');
+Route::post('application/optional_service/{id}',[StudentApplicationController::class,'applicationOptionalService'])->name('application.optional_service');
+Route::post('add-attachment/upload/{id}',[StudentApplicationController::class,'applicationAttachmentUpload'])->name('application.add-attachment.upload');
+Route::get('get-attachments/{id}',[StudentApplicationController::class,'applicationGetAttachments'])->name('application.get-attachments');
+Route::post('attachment/download/{id}',[StudentApplicationController::class,'attachmentDownload'])->name('application.attachments.download');
+Route::post('attachment/delete/{id}',[StudentApplicationController::class,'attachmentDelete'])->name('application.attachment.delete');
+Route::post('application/submit/{id}',[StudentApplicationController::class,'submitAppliction'])->name('application.submit_appliction');
 
-Route::get('/studentViewDetails/{id}', 'App\Http\Controllers\Student\courseController@studentViewDetails')->name('studentViewDetails');
 
-Route::get('/editCourse/{id}', 'App\Http\Controllers\Student\courseController@editCourse')->name('editCourse');
+//Route::get('/get-document_on_change/{id}',[FrontendController::class,"getContinentCourse"]);
+Route::get('/get-document_on_change/{id}',[FrontendController::class,"getContinentCourse"]);
 
-Route::post('/updateCourse/{id}', 'App\Http\Controllers\Student\courseController@updateCourse')->name('updateCourse');
 
-Route::get('/deleteCourse/{id}', 'App\Http\Controllers\Student\courseController@deleteCourse')->name('deleteCourse');
+//university  Course list
+Route::get('course_list', [FrontendController::class, 'universityCourseList'])->name('frontend.university_course_list');
+Route::get('/get-sort-course-list/{cat}',[FrontendController::class,"getAjaxCourseList"]);
+Route::get('ajax-course-filter', [FrontendController::class,"ajaxFilterCourse"])->name('frontend.ajax_course_filter');
+Route::get('university-program-details/{id}', [FrontendController::class,"programDetails"])->name('frontend.university_program_details');
 
 
-//-----------------------------Blog Route------------------------//
 
-Route::get('/allBlog', 'App\Http\Controllers\BlogController@allBlog')->name('allBlog');
 
-Route::get('/addBlog', 'App\Http\Controllers\BlogController@addBlog')->name('addBlog');
-
-Route::post('/storeBlog', 'App\Http\Controllers\BlogController@storeBlog')->name('storeBlog');
-
-Route::get('/totalBlog', 'App\Http\Controllers\BlogController@totalBlog')->name('totalBlog');
-
-Route::get('/editBlog/{id}', 'App\Http\Controllers\BlogController@editBlog')->name('editBlog');
-
-Route::post('/updateBlog/{id}', 'App\Http\Controllers\BlogController@updateBlog')->name('updateBlog');
-
-Route::get('/deleteBlog/{id}', 'App\Http\Controllers\BlogController@deleteBlog')->name('deleteBlog');
-
-
-//-----------------------------Banner Route------------------------//
-
-Route::get('/viewBanner', 'App\Http\Controllers\BannerController@viewBanner')->name('viewBanner');
-
-Route::get('/addBanner', 'App\Http\Controllers\BannerController@addBanner')->name('addBanner');
-
-Route::post('/storeBanner', 'App\Http\Controllers\BannerController@storeBanner')->name('storeBanner');
-
-// Route::get('/totalBlog', 'App\Http\Controllers\BannerController@totalBlog')->name('totalBlog');
-
-Route::get('/editBanner/{id}', 'App\Http\Controllers\BannerController@editBanner')->name('editBanner');
-
-Route::post('/updateBanner/{id}', 'App\Http\Controllers\BannerController@updateBanner')->name('updateBanner');
-
-Route::get('/deleteBanner/{id}', 'App\Http\Controllers\BannerController@deleteBanner')->name('deleteBanner');
-
-//-----------------------------Gallery Route----------------------//
-Route::get('/galleryIndex','App\Http\Controllers\galleryController@galleryIndex')->name('galleryIndex');
-
-Route::post('/storeImages','App\Http\Controllers\galleryController@storeImages')->name('storeImages');
-
-Route::get('/showImages','App\Http\Controllers\galleryController@showImages')->name('showImages');
-
-//-----------------------------Exam Route---------------------------//
-
-Route::get('/allExam', 'App\Http\Controllers\edicationStructure@allExam')->name('allExam');
-
-Route::post('/examDetails', 'App\Http\Controllers\edicationStructure@examDetails')->name('examDetails');
-
-Route::get('/addExam', 'App\Http\Controllers\edicationStructure@addExam')->name('addExam');
-
-Route::post('/storeExam', 'App\Http\Controllers\edicationStructure@storeExam')->name('storeExam');
-
-Route::get('/show', 'App\Http\Controllers\edicationStructure@show')->name('show');
-
-Route::get('/edit/{id}', 'App\Http\Controllers\edicationStructure@edit')->name('edit');
-
-Route::post('/update/{id}', 'App\Http\Controllers\edicationStructure@update')->name('update');
-
-
-
-//-----------------------------Result Route---------------------------//
-
- Route::get('/viewResult', 'App\Http\Controllers\resultController@viewResult')->name('viewResult');
-
- Route::get('/addResult', 'App\Http\Controllers\resultController@addResult')->name('addResult');
-
- Route::post('/storeResult', 'App\Http\Controllers\resultController@storeResult')->name('storeResult');
-
- Route::get('/resultInfo', 'App\Http\Controllers\resultController@resultInfo')->name('resultInfo');
-
- Route::get('/showResult', 'App\Http\Controllers\resultController@showResult')->name('showResult');
-
- Route::get('/deleteResult/{id}', 'App\Http\Controllers\resultController@deleteResult')->name('deleteResult');
-
- Route::get('/getStudent', 'App\Http\Controllers\resultController@getStudent')->name('getStudent');
-
-
-//-----------------------------Coupon Route---------------------------//
-
- Route::get('/totalCoupon', 'App\Http\Controllers\CouponController@totalCoupon')->name('totalCoupon');
-
- Route::get('/addCoupon', 'App\Http\Controllers\CouponController@addCoupon')->name('addCoupon');
-
- Route::post('/storeCoupon', 'App\Http\Controllers\CouponController@storeCoupon')->name('storeCoupon');
-
- Route::get('/editCoupon/{id}', 'App\Http\Controllers\CouponController@editCoupon')->name('editCoupon');
-
- Route::post('/updateCoupon/{id}', 'App\Http\Controllers\CouponController@updateCoupon')->name('updateCoupon');
-
- Route::get('/deleteCoupon/{id}', 'App\Http\Controllers\CouponController@deleteCoupon')->name('deleteCoupon');
-
-//-----------------------------Cart Route---------------------------//
-
- Route::get('/viewCart', 'App\Http\Controllers\CartController@viewCart')->name('viewCart');
-
- Route::get('/addCart', 'App\Http\Controllers\CartController@addCart')->name('addCart');
-
- Route::post('/storeCart/{id}', 'App\Http\Controllers\CartController@storeCart')->name('storeCart');
-
- Route::get('/editCart/{id}', 'App\Http\Controllers\CartController@editCart')->name('editCart');
-
- Route::post('/updateCart/{id}', 'App\Http\Controllers\CartController@updateCart')->name('updateCart');
-
- Route::get('/deleteCart/{id}', 'App\Http\Controllers\CartController@deleteCart')->name('deleteCart');
-
- //----------------Home Contyroller Ropute----------------//
-
-
-Route::get('/viewCategory', 'App\Http\Controllers\homeController@viewCategory')->name('viewCategory');
-
-
-Route::get('/addCategory', function () {
-    return view('backend.setting.addCategory');
-})->name('addCategory');
-
-Route::post('/insertCategory', 'App\Http\Controllers\homeController@insertCategory')->name('insertCategory');
-
-Route::get('/editCategory/{id}', 'App\Http\Controllers\homeController@editCategory')->name('editCategory');
-
-Route::post('/updateCategory/{id}', 'App\Http\Controllers\homeController@updateCategory')->name('updateCategory');
-
-Route::get('/deleteCat/{id}', 'App\Http\Controllers\homeController@deleteCat')->name('deleteCat');
-
-Route::get('/viewSubCategory', 'App\Http\Controllers\homeController@viewSubCategory')->name('viewSubCategory');
-
-Route::get('/addSubCategory', 'App\Http\Controllers\homeController@addSubCategory')->name('addSubCategory');
-
-Route::get('/editsubCategory/{id}', 'App\Http\Controllers\homeController@editsubCategory')->name('editsubCategory');
-
-Route::post('/updatesubCategory/{id}', 'App\Http\Controllers\homeController@updatesubCategory')->name('updatesubCategory');
-
-Route::post('/insertSubCategory', 'App\Http\Controllers\homeController@insertSubCategory')->name('insertSubCategory');
-
-Route::get('/deleteSubCat/{id}', 'App\Http\Controllers\homeController@deleteSubCat')->name('deleteSubCat');
-
-Route::get('/viewBrand', 'App\Http\Controllers\homeController@viewBrand')->name('viewBrand');
-
-
-Route::get('/addBrand', function () {
-    return view('backend.setting.addBrand');
-})->name('addBrand');
-
-
-Route::post('/insertBrand', 'App\Http\Controllers\homeController@insertBrand')->name('insertBrand');
-
-Route::get('/getBrandsubCategory', 'App\Http\Controllers\homeController@getBrandsubCategory')->name('getBrandsubCategory');
-
-Route::get('/editBrand/{id}', 'App\Http\Controllers\homeController@editBrand')->name('editBrand');
-
-Route::post('/updateBrand/{id}', 'App\Http\Controllers\homeController@updateBrand')->name('updateBrand');
-
-
-Route::get('/deletebrand/{id}', 'App\Http\Controllers\homeController@deletebrand')->name('deletebrand');
-
-//-----------------Settings Route-------------------//
-Route::get('/viewAbout', 'App\Http\Controllers\settingController@viewAbout')->name('viewAbout');
-
-Route::get('/editAbout', 'App\Http\Controllers\settingController@editAbout')->name('editAbout');
-
-Route::post('/insertAbout', 'App\Http\Controllers\settingController@insertAbout')->name('insertAbout');
-
-Route::get('/viewPolicy', 'App\Http\Controllers\settingController@viewPolicy')->name('viewPolicy');
-
-Route::get('/editPolicy', 'App\Http\Controllers\settingController@editPolicy')->name('editPolicy');
-
-Route::post('/insertPolicy', 'App\Http\Controllers\settingController@insertPolicy')->name('insertPolicy');
-
-Route::get('/terms', 'App\Http\Controllers\settingController@terms')->name('terms');
-
-Route::get('/editTerms', 'App\Http\Controllers\settingController@editTerms')->name('editTerms');
-
-Route::post('/insertTrams', 'App\Http\Controllers\settingController@insertTrams')->name('insertTrams');
-
-Route::get('/address', 'App\Http\Controllers\settingController@address')->name('address');
-
-Route::get('/addAddress', 'App\Http\Controllers\settingController@addAddress')->name('addAddress');
-
-Route::post('/uploadAddress', 'App\Http\Controllers\settingController@uploadAddress')->name('uploadAddress');
-
-Route::get('/editAddress/{id}', 'App\Http\Controllers\settingController@editAddress')->name('editAddress');
-
-Route::get('/deleteAddress/{id}', 'App\Http\Controllers\settingController@deleteAddress')->name('deleteAddress');
-
-Route::post('/updateAddress', 'App\Http\Controllers\settingController@updateAddress')->name('updateAddress');
-
-
-Route::get('/paymentAccept', 'App\Http\Controllers\settingController@paymentAccept')->name('paymentAccept');
-
-Route::get('/addPaymentMethod', 'App\Http\Controllers\settingController@addPaymentMethod')->name('addPaymentMethod');
-
-Route::get('/deletePaymentMethod/{id}', 'App\Http\Controllers\settingController@deletePaymentMethod')->name('deletePaymentMethod');
-
-Route::post('/uploadPaymentMethod', 'App\Http\Controllers\settingController@uploadPaymentMethod')->name('uploadPaymentMethod');
-
-
-
-
-// Report
-
-Route::get('/viewReport', 'App\Http\Controllers\ReportController@viewReport')->name('viewReport');
-Route::get('/allStudentReport', 'App\Http\Controllers\ReportController@viewAllStudent')->name('allStudentReport');
-Route::get('/cartReport', 'App\Http\Controllers\ReportController@cartReport')->name('cartReport');
-Route::get('/teacherReport', 'App\Http\Controllers\ReportController@teachersReport')->name('teacherReport');
-Route::get('/classReport', 'App\Http\Controllers\ReportController@classReport')->name('classReport');
-
-
-
-
-
-
-
-// user role
-
-Route::get('/addNewUser', function () {
-    return view('backend.user.addNewUser');
-})->name('addNewUser');
-
-Route::post('/insertUser', 'App\Http\Controllers\user@insertUser')->name('insertUser');
-
-Route::get('/manageUser', 'App\Http\Controllers\user@manageUser')->name('manageUser');
-
-Route::get('/deleteUser/{id}', 'App\Http\Controllers\user@deleteUser')->name('deleteUser');
-
-Route::get('/editUser/{id}', 'App\Http\Controllers\user@editUser')->name('editUser');
-
-Route::post('/updateUserInfo', 'App\Http\Controllers\user@updateUserInfo')->name('updateUserInfo');
-
-// Frontend route
-
-Route::get('/', 'App\Http\Controllers\frontend\frontendController@indexPage')->name('indexPage');
-
-Route::get('/aboutPage', 'App\Http\Controllers\frontend\frontendController@aboutPage')->name('aboutPage');
-
-Route::get('/coursePage', 'App\Http\Controllers\frontend\frontendController@coursePage')->name('coursePage');
-
-Route::get('/getTitlewiseCourse/{id}', 'App\Http\Controllers\frontend\frontendController@getTitlewiseCourse')->name('getTitlewiseCourse');
-
-
-Route::get('/courseDetails/{id}', 'App\Http\Controllers\frontend\frontendController@courseDetails')->name('courseDetails');
-
-
-Route::get('/cartView', 'App\Http\Controllers\frontend\frontendController@cartView')->name('cartView');
-
-Route::post('/usecoupon', 'App\Http\Controllers\frontend\frontendController@usecoupon')->name('usecoupon');
-
-
-Route::get('/checkuot', 'App\Http\Controllers\frontend\frontendController@checkuot')->name('checkuot');
-
-
-Route::get('/orders', 'App\Http\Controllers\frontend\frontendController@orders')->name('orders');
-
-
-
-Route::get('/bookNow/{id}', 'App\Http\Controllers\frontend\frontendController@bookNow')->name('bookNow');
-
-Route::get('/deleteCartProduct/{id}', 'App\Http\Controllers\frontend\frontendController@deleteCartProduct');
-
-
-
-Route::get('/getallBlog', 'App\Http\Controllers\frontend\frontendController@getallBlog')->name('getallBlog');
-
-Route::get('/singleBlog/{id}', 'App\Http\Controllers\frontend\frontendController@singleBlog')->name('singleBlog');
-
-
-
-
-
-// MTH ROutes
-
-
-Route::get('/courseView/{id}', 'App\Http\Controllers\frontend\frontendController@courseView')->name('courseView');
-
-Route::get('/courseCategory/{id}', 'App\Http\Controllers\frontend\frontendController@courseCategory')->name('courseCategory');
-
-
-Route::get('/academicPrograms/{id}', 'App\Http\Controllers\frontend\frontendController@academicPrograms')->name('academicPrograms');
-
-Route::get('/academicProgramView/{id}', 'App\Http\Controllers\frontend\frontendController@academicProgramView')->name('academicProgramView');
-
-
-
-Route::get('/bcs/{id}', 'App\Http\Controllers\frontend\frontendController@bcs')->name('bcs');
-
-Route::get('/bcsView/{id}', 'App\Http\Controllers\frontend\frontendController@bcsView')->name('bcsView');
-
-
-
-Route::get('/it/{id}', 'App\Http\Controllers\frontend\frontendController@it')->name('it');
-
-Route::get('/itView/{id}', 'App\Http\Controllers\frontend\frontendController@itView')->name('itView');
-
-
-
-Route::get('/professional/{id}', 'App\Http\Controllers\frontend\frontendController@professional')->name('professional');
-
-Route::get('/professionalView/{id}', 'App\Http\Controllers\frontend\frontendController@professionalView')->name('professionalView');
-
-
-
-
-
-
-Route::get('/termsView', 'App\Http\Controllers\frontend\frontendController@termsView')->name('termsView');
-
-Route::get('/policyView', 'App\Http\Controllers\frontend\frontendController@policyView')->name('policyView');
-
-Route::get('/contactus', 'App\Http\Controllers\frontend\frontendController@contactus')->name('contactus');
-
-Route::get('/carrier', 'App\Http\Controllers\frontend\frontendController@carrier')->name('carrier');
-
-Route::post('/SendCarrierData', 'App\Http\Controllers\frontend\frontendController@SendCarrierData')->name('SendCarrierData');
-
-Route::post('/SendContactData', 'App\Http\Controllers\frontend\frontendController@SendContactData')->name('SendContactData');
-
-
-
-Route::get('/allAdmission', 'App\Http\Controllers\frontend\frontendController@allAdmission')->name('allAdmission');
-
-Route::get('/admissionView/{id}', 'App\Http\Controllers\frontend\frontendController@admissionView')->name('admissionView');
-
-
-
-
-
-
-
-
-
-
-
-
-
-//forgot password
-
-Route::get('/forgotpassword', 'App\Http\Controllers\frontend\frontendController@forgotpassword')->name('forgotpassword');
-
-Route::post('/forgotPasswordAction', 'App\Http\Controllers\frontend\frontendController@forgotPasswordAction')->name('forgotPasswordAction');
-
-Route::get('/setNewPassword', function () {
-    return view('newPassword');
-})->name('setNewPassword');
-
-Route::post('/setNewPasswordAction', 'App\Http\Controllers\frontend\frontendController@setNewPasswordAction')->name('setNewPasswordAction');
-
-
-
-
-Route::get('/socialLogin', 'App\Http\Controllers\social_login@socialLogin')->name('socialLogin');
-
-Route::get('/authRedirect', 'App\Http\Controllers\social_login@authRedirect')->name('authRedirect');
+});

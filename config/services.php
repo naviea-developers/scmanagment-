@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -13,12 +14,6 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-
-    'google' => [
-        'client_id' => '742035225221-krjpl8ecnah232chki47ji1qi62doivf.apps.googleusercontent.com',
-        'client_secret' => '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',
-       'redirect' => 'http://www.techknowsity.com/authRedirect',
-    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -36,5 +31,16 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    // 'google' => [
+    //     'client_id' => env('GOOGLE_CLIENT_ID'),
+    //     'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    //     'redirect' => env('GOOGLE_REDIRECT_URI'),
+    // ],
+    // 'facebook' => [
+    //     'client_id' => env('FACEBOOK_CLIENT_ID'),
+    //     'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+    //     'redirect' => env('FACEBOOK_REDIRECT_URI'),
+    // ],
+
 
 ];

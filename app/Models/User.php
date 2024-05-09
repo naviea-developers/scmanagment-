@@ -40,5 +40,20 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
+
+    public function getImageShowAttribute(){
+        return $this->image != "" ? asset("public/upload/users/".$this->image) : asset("public/frontend/images/no-profile.jpg");
+    }
+    public function likedBlogs()
+    {
+        return $this->belongsToMany(Blog::class, 'likes', 'user_id', 'blog_id');
+    }
+    public function certificate(){
+        return $this->hasMany(Certificate::class,"user_id",'id');
+    }
+    public function continents(){
+        return $this->belongsTo(Continent::class,"continent_id",'id');
+    }
 }

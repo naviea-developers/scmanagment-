@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to the "home" route for your application.
+     * The path to your application's "home" route.
      *
      * Typically, users are redirected here after authentication.
      *
@@ -21,12 +21,12 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->configureRateLimiting();
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
 
         $this->routes(function () {
             Route::middleware('api')
@@ -35,24 +35,31 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-        });
-    }
+            Route::middleware('web')
+                ->group(base_path('routes/admin.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/review.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/hr_payroll.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/courses.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/user.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/teacher.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/contact.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/event.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/master_courses.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/ebook.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/location.php'));
+            Route::middleware('web')
+            ->group(base_path('routes/university.php'));
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
-    }
-
-    protected function frontendConfigure()
-    {
-        Route::middleware('frontend')
-             ->group(base_path('routes/frontend.php'));
     }
 }
