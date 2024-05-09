@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\School_management\Bulding\BuldingController;
 use App\Http\Controllers\Backend\School_management\Class\ClassController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
+use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
 use App\Http\Controllers\Frontend\ReviewController;
 
@@ -74,5 +75,15 @@ Route::prefix('floor')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::post('update/{id}', [FloorController::class,"update"])->name('admin.floor.update');
     Route::post('delete', [FloorController::class,"destroy"])->name('admin.floor.delete');
     Route::get('/status/{id}', [FloorController::class, 'status'])->name('admin.floor.status');
+});
+Route::prefix('room')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add room for admin
+    Route::get('index', [RoomController::class,"index"])->name('admin.room.index');
+    Route::get('create', [RoomController::class,"create"])->name('admin.room.create');
+    Route::post('store', [RoomController::class,"store"])->name('admin.room.store');
+    Route::get('edit/{id}', [RoomController::class,"edit"])->name('admin.room.edit');
+    Route::post('update/{id}', [RoomController::class,"update"])->name('admin.room.update');
+    Route::post('delete', [RoomController::class,"destroy"])->name('admin.room.delete');
+    Route::get('/status/{id}', [RoomController::class, 'status'])->name('admin.room.status');
 });
 
