@@ -306,52 +306,7 @@
             </ul>
         </li> --}}
 
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
-                <span class="menu-item-label">Class</span>
-            </a>
-            @php
-            $r_check = ( Route::is('viewAllClass') ||  Route::is('addNewBatch') ||  Route::is('addRoutine') || Route::is('getHomework') || Route::is('addHomework') || Route::is('addResult') || Route::is('addClassTest'));
-            @endphp
-            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('viewAllClass') }}" class="sub-link {{( Route::is('viewAllClass') ) ?'active':''}}">View All Batch</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('addNewBatch') }}" class="sub-link {{(Route::is('addNewBatch')) ?'active':''}}">Add new Batch</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('addRoutine') }}" class="sub-link {{(Route::is('addRoutine') ) ?'active':''}}">Add class routine</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('getHomework') }}" class="sub-link {{(Route::is('getHomework')) ?'active':''}}">Homework</a>
-                </li>
-                @if (auth()->user()->type == 2 )
-                <li class="sub-item"><a href="{{ route('addHomework') }}" class="sub-link {{(Route::is('addHomework')) ?'active':''}}">Add Homework</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('addResult') }}" class="sub-link {{(Route::is('addResult')) ?'active':''}}">Add Score</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('addClassTest') }}" class="sub-link {{(Route::is('addClassTest')) ?'active':''}}">Class Test</a>
-                </li>
-                @endif
-            </ul>
-        </li>
-
-
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{($prefix == 'courses')?'active':''}} ">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
-                <span class="menu-item-label">Course</span>
-            </a><!-- br-menu-link -->
-            @php
-            $r_check = ( Route::is('admin.course.create') ||  Route::is('admin.course.index') || Route::is('admin.course.edit'));
-            @endphp
-            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.course.create') }}" class="sub-link {{( Route::is('admin.course.create') ) ?'active':''}}">Add New Course</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('admin.course.index') }}" class="sub-link {{(Route::is('admin.course.index') || Route::is('admin.course.edit')) ?'active':''}}">Manage Course</a>
-                </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
-                </li> --}}
-            </ul>
-        </li><!-- br-Speakers-item -->
+        
 
 
         <li class="br-menu-item">
@@ -380,6 +335,52 @@
                 <li class="sub-item"><a href="{{ route('admin.floor.index') }}" class="sub-link {{(Route::is('admin.floor.index') || Route::is('admin.floor.edit') || Route::is('admin.floor.create')) ?'active':''}}">Manage Floors</a></li>
                 <li class="sub-item"><a href="{{ route('admin.room.index') }}" class="sub-link {{(Route::is('admin.room.index') || Route::is('admin.room.edit') || Route::is('admin.room.create')) ?'active':''}}">Manage Rooms</a></li>
                
+            </ul>
+        </li><!-- br-Speakers-item -->
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Class</span>
+            </a>
+            @php
+            $r_check = ( Route::is('viewAllClass') ||  Route::is('addNewBatch') ||  Route::is('addRoutine') || Route::is('getHomework') || Route::is('addHomework') || Route::is('addResult') || Route::is('addClassTest'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('viewAllClass') }}" class="sub-link {{( Route::is('viewAllClass') ) ?'active':''}}">View All Batch</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addNewBatch') }}" class="sub-link {{(Route::is('addNewBatch')) ?'active':''}}">Add new Batch</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addRoutine') }}" class="sub-link {{(Route::is('addRoutine') ) ?'active':''}}">Add class routine</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('getHomework') }}" class="sub-link {{(Route::is('getHomework')) ?'active':''}}">Homework</a>
+                </li>
+                @if (auth()->user()->type == 2 )
+                <li class="sub-item"><a href="{{ route('addHomework') }}" class="sub-link {{(Route::is('addHomework')) ?'active':''}}">Add Homework</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addResult') }}" class="sub-link {{(Route::is('addResult')) ?'active':''}}">Add Score</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('addClassTest') }}" class="sub-link {{(Route::is('addClassTest')) ?'active':''}}">Class Test</a>
+                </li>
+                @endif
+            </ul>
+        </li>
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'courses')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Course</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('admin.course.create') ||  Route::is('admin.course.index') || Route::is('admin.course.edit'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.course.create') }}" class="sub-link {{( Route::is('admin.course.create') ) ?'active':''}}">Add New Course</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.course.index') }}" class="sub-link {{(Route::is('admin.course.index') || Route::is('admin.course.edit')) ?'active':''}}">Manage Course</a>
+                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
+                </li> --}}
             </ul>
         </li><!-- br-Speakers-item -->
 

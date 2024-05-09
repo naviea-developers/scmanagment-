@@ -1,0 +1,50 @@
+.classbox {
+    height: 250px;
+    width: 200px;
+    background: #fff;
+    box-shadow: 0px 0px 4px -1px #8d8787e8;
+    border-radius: 5px;
+    transition: 0.3s linear;
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -ms-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+}
+
+.classbox:hover {
+    box-shadow: 0px 0px 10px -2px #00000059;
+    transition: .3s linear;
+    -webkit-transition: .3s linear;
+    -moz-transition: .3s linear;
+    -ms-transition: .3s linear;
+    -o-transition: .3s linear;
+}
+
+.classbox img {
+    height: 150px;
+    width: 180px;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+
+.stName {
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+.stclass {
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    font-weight: bold;
+}
