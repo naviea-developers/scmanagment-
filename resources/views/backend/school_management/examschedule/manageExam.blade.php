@@ -1,4 +1,4 @@
-@extends('backend.master')
+@extends('Backend.layouts.layouts')
 
 @section('title','All Exam')
 
