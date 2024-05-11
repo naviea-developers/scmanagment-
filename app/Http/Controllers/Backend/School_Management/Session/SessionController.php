@@ -30,6 +30,7 @@ class SessionController extends Controller
     {
       // dd($request->all());
         $request->validate([
+            'session' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
 
@@ -37,6 +38,7 @@ class SessionController extends Controller
         try{
             DB::beginTransaction();
             $session = New session;
+            $session->session = $request->session;
             $session->start_date = $request->start_date;
             $session->end_date = $request->end_date;
             $session->save();
@@ -82,6 +84,7 @@ class SessionController extends Controller
     try{
         DB::beginTransaction();
         $session = session::find($id);
+        $session->session = $request->session;
         $session->start_date = $request->start_date;
         $session->end_date = $request->end_date;
         $session->save();

@@ -34,7 +34,16 @@
                         @csrf
 
                         <div class="row">
-                          <div class="col-sm-12">
+                          <div class="col-sm-12 mt-3">
+                              <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="text" name="session" class="form-control" placeholder="Enter session Like- (2023-2024)" value="{{ $session->session }}" required>
+                              </div>
+                          </div>
+                      </div>
+
+                        <div class="row">
+                          <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
                                   <input type="date" name="start_date" class="form-control" placeholder="Enter Group Name" value="{{ $session->start_date }}" required>

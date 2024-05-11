@@ -36,6 +36,7 @@ Admin - All Session
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Session</th>
                     <th class="wd-15p">Start Date</th>
                     <th class="wd-15p">End Date</th>
                     <th class="wd-15p">Status</th>
@@ -50,6 +51,7 @@ Admin - All Session
                     @foreach ($sessions as $session)
                       <tr>
                           <td>{{ $i++ }}</td>
+                          <td>{{ $session->session }}</td>
                           <td>{{ $session->start_date }}</td>
                           <td>{{ $session->end_date }}</td>
                           <td>

@@ -11,16 +11,12 @@ Admin - All Classes
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
+            
+
             <h6 class="br-section-label text-center">All Classes</h6>
-
-            <a style="margin-bottom: 20px" href="{{ route('admin.class.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Class
-            </a>
-
-               {{-- success message start --}}
+            {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button>
             {{session()->get('message')}}
             </div>
             <script>
@@ -30,6 +26,11 @@ Admin - All Classes
             </script>
             @endif
             {{-- success message End --}}
+            <a style="margin-bottom: 20px" href="{{ route('admin.class.create') }}" class="btn btn-primary btn-sm float-right">
+              <i class="fa fa-plus"></i> Add Class
+            </a>
+
+              
 
             <div class="table-wrapper">
               <table id="datatable1" class="table display responsive nowrap">
