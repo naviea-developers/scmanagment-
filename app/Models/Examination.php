@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Examination extends Model
 {
     use HasFactory;
+
+    public function academicYear(){
+        return $this->belongsTo(AcademicYear::class,"academin_year_id",'id');
+    }
+    public function session(){
+        return $this->belongsTo(Session::class,"session_id",'id');
+    }
+
 }

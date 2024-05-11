@@ -34,28 +34,63 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label class="form-control-label">Examination Name: <span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                <input type="text" name="name" class="form-control" placeholder="Enter Examination Name" value="{{ $exam->name }}" required>
-                            </div>
-                            </div>
-                           
-                        </div>
+                          <div class="col-sm-12">
+                              <label class="form-control-label">Examination Name: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                              <input type="text" name="name" class="form-control" placeholder="Enter Examination Name" value="{{ $exam->name }}" required>
+                          </div>
+                          </div>
+                         
+                      </div>
 
-                        {{-- <div class="row">
-                            <div class="col-sm-12 mt-3">
-                                <label class="form-control-label">Class Teacher Name: <span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="class_teacher_id" class="form-control">
-                                    <option value=""> Select Teacher</option>
-                                    @foreach ($teachers as $teacher)
-                                    <option @if ($teacher->id == $class->class_teacher_id) Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                    @endforeach
-                                  </select>
-                                </div>
+
+                        <div class="row">
+                          <div class="col-sm-12 mt-3">
+                              <label class="form-control-label">Academic Year: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <select name="academin_year_id" class="form-control">
+                                  <option value=""> Select Year</option>
+                                  @foreach ($academin_years as $y)
+                                  <option @if ($y->id == $exam->academin_year_id) Selected @endif  value="{{ $y->id }}">{{ $y->year }}</option>
+                                  @endforeach
+                                </select>
                               </div>
-                        </div> --}}
+                            </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-sm-12 mt-3">
+                              <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <select name="session_id" class="form-control">
+                                  <option value=""> Select Session</option>
+                                  @foreach ($sessions as $session)
+                                  <option @if ($session->id == $exam->session_id) Selected @endif value="{{ $session->id }}">{{ $session->session }}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+                        
+                      </div>
+
+                       
+                        <div class="row">
+                          <div class="col-sm-6 mt-3">
+                              <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="date" name="start_date" class="form-control" value="{{ $exam->start_date }}" required>
+                              </div>
+                          </div>
+                      {{-- </div>
+
+                      <div class="row"> --}}
+                          <div class="col-sm-6 mt-3">
+                              <label class="form-control-label">End Date: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="date" name="end_date" class="form-control" value="{{ $exam->end_date }}" required>
+                              </div>
+                          </div>
+                      </div>
 
                         </div>
 

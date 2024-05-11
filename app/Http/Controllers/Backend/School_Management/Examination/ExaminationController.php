@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend\School_management\Examination;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicYear;
 use App\Models\Examination;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +22,9 @@ class ExaminationController extends Controller
      */
     public function create()
     {
-        return view("Backend.school_management.examination.create");
+        $data['academin_years'] = AcademicYear::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        return view("Backend.school_management.examination.create", $data);
     }
 
     /**
@@ -36,7 +40,11 @@ class ExaminationController extends Controller
         try{
             DB::beginTransaction();
             $exam = New Examination();
+            $exam->academin_year_id = $request->academin_year_id;
+            $exam->session_id = $request->session_id;
             $exam->name = $request->name;
+            $exam->start_date = $request->start_date;
+            $exam->end_date = $request->end_date;
             $exam->save();
 
             DB::commit();
@@ -63,6 +71,8 @@ class ExaminationController extends Controller
     {
        // dd('hi');
         $data["exam"]= Examination::find($id);
+        $data['academin_years'] = AcademicYear::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
         return view("Backend.school_management.examination.update",$data);
     }
 
@@ -79,7 +89,11 @@ class ExaminationController extends Controller
     try{
         DB::beginTransaction();
         $exam = Examination::find($id);
+        $exam->academin_year_id = $request->academin_year_id;
+        $exam->session_id = $request->session_id;
         $exam->name = $request->name;
+        $exam->start_date = $request->start_date;
+        $exam->end_date = $request->end_date;
         $exam->save();
 
         DB::commit();

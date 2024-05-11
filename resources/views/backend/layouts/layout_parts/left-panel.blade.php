@@ -325,6 +325,7 @@
             || Route::is('admin.room.create') ||  Route::is('admin.room.index') || Route::is('admin.room.edit')
             || Route::is('admin.school_section.create') ||  Route::is('admin.school_section.index') || Route::is('admin.school_section.edit')
             || Route::is('admin.examination.create') ||  Route::is('admin.examination.index') || Route::is('admin.examination.edit')
+            || Route::is('admin.notice.create') ||  Route::is('admin.notice.index') || Route::is('admin.notice.edit')
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
@@ -338,6 +339,7 @@
                 <li class="sub-item"><a href="{{ route('admin.school_section.index') }}" class="sub-link {{(Route::is('admin.school_section.index') || Route::is('admin.school_section.edit') || Route::is('admin.school_section.create')) ?'active':''}}">Manage Section</a></li>
                 <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examinations</a></li>
+                <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                
             </ul>
         </li><!-- br-Speakers-item -->
@@ -348,12 +350,12 @@
                 <span class="menu-item-label">Class</span>
             </a>
             @php
-            $r_check = ( Route::is('viewAllClass') ||  Route::is('addNewBatch') ||  Route::is('addRoutine') || Route::is('getHomework') || Route::is('addHomework') || Route::is('addResult') || Route::is('addClassTest'));
+            $r_check = ( Route::is('admin.batch.index') ||  Route::is('admin.batch.create') ||  Route::is('addRoutine') || Route::is('getHomework') || Route::is('addHomework') || Route::is('addResult') || Route::is('addClassTest'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('viewAllClass') }}" class="sub-link {{( Route::is('viewAllClass') ) ?'active':''}}">View All Batch</a>
+                <li class="sub-item"><a href="{{ route('admin.batch.index') }}" class="sub-link {{( Route::is('admin.batch.index') ) ?'active':''}}">View All Batch</a>
                 </li>
-                <li class="sub-item"><a href="{{ route('addNewBatch') }}" class="sub-link {{(Route::is('addNewBatch')) ?'active':''}}">Add new Batch</a>
+                <li class="sub-item"><a href="{{ route('admin.batch.create') }}" class="sub-link {{(Route::is('admin.batch.create')) ?'active':''}}">Add new Batch</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('addRoutine') }}" class="sub-link {{(Route::is('addRoutine') ) ?'active':''}}">Add class routine</a>
                 </li>

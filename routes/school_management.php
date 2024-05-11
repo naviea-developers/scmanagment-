@@ -4,11 +4,13 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\School_management\Academic_year\AcademicYearController;
+use App\Http\Controllers\Backend\School_management\Batch\BatchController;
 use App\Http\Controllers\Backend\School_management\Bulding\BuldingController;
 use App\Http\Controllers\Backend\School_management\Class\ClassController;
 use App\Http\Controllers\Backend\School_management\Examination\ExaminationController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
+use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
@@ -107,5 +109,26 @@ Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group(
     Route::post('update/{id}', [ExaminationController::class,"update"])->name('admin.examination.update');
     Route::post('delete', [ExaminationController::class,"destroy"])->name('admin.examination.delete');
     Route::get('/status/{id}', [ExaminationController::class, 'status'])->name('admin.examination.status');
+});
+Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add Notice for admin
+    Route::get('index', [NoticeController::class,"index"])->name('admin.notice.index');
+    Route::get('create', [NoticeController::class,"create"])->name('admin.notice.create');
+    Route::post('store', [NoticeController::class,"store"])->name('admin.notice.store');
+    Route::get('edit/{id}', [NoticeController::class,"edit"])->name('admin.notice.edit');
+    Route::post('update/{id}', [NoticeController::class,"update"])->name('admin.notice.update');
+    Route::post('delete', [NoticeController::class,"destroy"])->name('admin.notice.delete');
+    Route::get('/status/{id}', [NoticeController::class, 'status'])->name('admin.notice.status');
+});
+Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add Batch for admin
+    Route::get('index', [BatchController::class,"index"])->name('admin.batch.index');
+    Route::get('create', [BatchController::class,"create"])->name('admin.batch.create');
+    Route::post('store', [BatchController::class,"store"])->name('admin.batch.store');
+    Route::get('details/{id}', [BatchController::class,"details"])->name('admin.batch.details');
+    Route::get('edit/{id}', [BatchController::class,"edit"])->name('admin.batch.edit');
+    Route::post('update/{id}', [BatchController::class,"update"])->name('admin.batch.update');
+    Route::get('delete/{id}', [BatchController::class,"destroy"])->name('admin.batch.delete');
+    Route::get('/status/{id}', [BatchController::class, 'status'])->name('admin.batch.status');
 });
 

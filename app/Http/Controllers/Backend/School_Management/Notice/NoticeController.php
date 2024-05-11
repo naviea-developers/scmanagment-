@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Backend\School_management\Class;
+namespace App\Http\Controllers\Backend\School_management\Notice;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classe;
-use App\Models\User;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClassController extends Controller
+class NoticeController extends Controller
 {
     public function index()
     {
-        $data['classes'] = Classe::all();
-        return view("Backend.school_management.class.index",$data);
+        $data['notices'] = Notice::orderBy('id', 'desc')->get();
+        return view("Backend.school_management.notice.index",$data);
     }
 
     /**
@@ -21,8 +20,7 @@ class ClassController extends Controller
      */
     public function create()
     {
-        $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
-        return view("Backend.school_management.class.create", $data);
+        return view("Backend.school_management.notice.create");
     }
 
     /**
@@ -37,13 +35,14 @@ class ClassController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $class = New Classe;
-            $class->class_teacher_id = $request->class_teacher_id;
-            $class->name = $request->name;
-            $class->save();
+            $notice = New Notice;
+            $notice->type = $request->type;
+            $notice->name = $request->name;
+            $notice->description = $request->description;
+            $notice->save();
 
             DB::commit();
-            return redirect()->route('admin.class.index')->with('message','Class Add Successfully');
+            return redirect()->route('admin.notice.index')->with('message','Notice Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -65,9 +64,8 @@ class ClassController extends Controller
     public function edit(string $id)
     {
        // dd('hi');
-        $data["class"]= Classe::find($id);
-        $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
-        return view("Backend.school_management.class.update",$data);
+        $data["notice"]= Notice::find($id);
+        return view("Backend.school_management.notice.update",$data);
     }
 
     /**
@@ -82,13 +80,14 @@ class ClassController extends Controller
     ]);
     try{
         DB::beginTransaction();
-        $class = Classe::find($id);
-        $class->class_teacher_id = $request->class_teacher_id;
-        $class->name = $request->name;
-        $class->save();
+        $notice = Notice::find($id);
+        $notice->type = $request->type;
+        $notice->name = $request->name;
+        $notice->description = $request->description;
+        $notice->save();
 
         DB::commit();
-        return redirect()->route('admin.class.index')->with('message','Class Update Successfully');
+        return redirect()->route('admin.notice.index')->with('message','Notice Update Successfully');
     }catch(\Exception $e){
         DB::rollBack();
        // dd($e);
@@ -102,23 +101,23 @@ class ClassController extends Controller
     public function destroy(Request $request)
     {
 
-        $class =  Classe::find($request->class_id);
-        $class->delete();
-        return back()->with('message','Class Deleted Successfully');
+        $notice =  Notice::find($request->notice_id);
+        $notice->delete();
+        return back()->with('message','Notice Deleted Successfully');
     }
 
 
     public function status($id)
     {
-        $class = Classe::find($id);
-        if($class->status == 0)
+        $notice = Notice::find($id);
+        if($notice->status == 0)
         {
-            $class->status = 1;
-        }elseif($class->status == 1)
+            $notice->status = 1;
+        }elseif($notice->status == 1)
         {
-            $class->status = 0;
+            $notice->status = 0;
         }
-        $class->update();
-        return redirect()->route('admin.class.index')->with('message','Class Status Update Successfully');
+        $notice->update();
+        return redirect()->route('admin.notice.index');
     }
 }
