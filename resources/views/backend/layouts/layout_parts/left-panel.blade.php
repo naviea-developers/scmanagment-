@@ -324,6 +324,7 @@
             || Route::is('admin.floor.create') ||  Route::is('admin.floor.index') || Route::is('admin.floor.edit')
             || Route::is('admin.room.create') ||  Route::is('admin.room.index') || Route::is('admin.room.edit')
             || Route::is('admin.school_section.create') ||  Route::is('admin.school_section.index') || Route::is('admin.school_section.edit')
+            || Route::is('admin.examination.create') ||  Route::is('admin.examination.index') || Route::is('admin.examination.edit')
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
@@ -336,6 +337,7 @@
                 <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
                 <li class="sub-item"><a href="{{ route('admin.school_section.index') }}" class="sub-link {{(Route::is('admin.school_section.index') || Route::is('admin.school_section.edit') || Route::is('admin.school_section.create')) ?'active':''}}">Manage Section</a></li>
                 <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
+                <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examinations</a></li>
                
             </ul>
         </li><!-- br-Speakers-item -->
