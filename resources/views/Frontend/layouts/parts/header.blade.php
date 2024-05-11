@@ -306,7 +306,8 @@
                             <!-- student notification end -->
 
                             <li class="nav-item m-1 signin-li">
-                                <a href="" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: var(--button2_color)!important ; color:var(--button2_text_color)">
+                                <a href="" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: red ; color:var(--button2_text_color)">
+                                {{-- <a href="" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: var(--button2_color)!important ; color:var(--button2_text_color)"> --}}
                                     Admission
                                 </a>
                             </li>
