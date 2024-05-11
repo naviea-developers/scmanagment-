@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ExamSchedule;
+use App\Models\Classe;
+use App\Models\Subject;
 
 class ExamSchedulesController extends Controller
 {
@@ -118,9 +120,11 @@ class ExamSchedulesController extends Controller
     // }
 
     public function addExam(){
-        $className = DB::table('classlist')->get();
-
-        $subjectName = DB::table('allsubject')->get();
+        // $className = DB::table('classlist')->get();
+        // $subjectName = DB::table('allsubject')->get();
+        
+        $className=Classe::orderBy('id', 'desc')->get(); 
+        $subjectName=Subject::orderBy('id', 'desc')->get();
 
         return view('Backend.school_management.examschedule.addExam',compact('className','subjectName'));
     }

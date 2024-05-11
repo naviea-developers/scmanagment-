@@ -3,9 +3,10 @@
 @section('title','All Exam')
 
 
-<link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}">
+{{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
-@section('content')
+@section('main_contain')
 
 <div class="br-mainpanel">
 

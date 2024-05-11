@@ -2,9 +2,10 @@
 
 @section('title', 'Add Class')
 
-<link rel="stylesheet" href="css/custom/class.css">
+{{-- <link rel="stylesheet" href="css/custom/class.css"> --}}
+<link rel="stylesheet" href="{{ asset('public') }}/css/custom/class.css">
 
-@section('content')
+@section('main_contain')
 
 <div class="br-mainpanel">
 
@@ -30,8 +31,8 @@
                             <select name="className" id=""
                             class="form-select">
                                 @foreach ($className as $class)
-                                    <option value="{{ $class->class_id}}">
-                                        {{ $class->class_name }}
+                                    <option value="{{ $class->id}}">
+                                        {{ $class->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -61,8 +62,8 @@
                             <select name="subjectName[]" id=""
                             class="form-select">
                                 @foreach ($subjectName as $subject)
-                                    <option value="{{ $subject->subject }}">
-                                        {{ $subject->subject }}
+                                    <option value="{{ $subject->id }}">
+                                        {{ $subject->name }}
                                     </option>
                                 @endforeach
                             </select>
