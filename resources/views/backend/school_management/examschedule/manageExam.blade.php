@@ -1,8 +1,6 @@
 @extends('Backend.layouts.layouts')
 
 @section('title','All Exam')
-
-
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
@@ -40,13 +38,14 @@
                       @foreach ($allData as $data)
 
                         <tr>
-                            <td>{{$data->title}}</td>
-                            <td>{{$data->className}}</td>
+                            <td>{{@$data->examination->name}}</td>
+                            <td>{{@$data->class->name}}</td>
+                           
                             <td>
                                 <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">
                                     @csrf
-                                    <input type="hidden" name="title" value="{{ $data->title }}">
-                                    <input type="hidden" name="className" value="{{ $data->className }}">
+                                    <input type="hidden" name="examschedule_id" value="{{ $data->id }}">
+                                    {{-- <input type="hidden" name="className" value="{{ $data->className }}"> --}}
                                 <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
                                 </form>
                             </td>

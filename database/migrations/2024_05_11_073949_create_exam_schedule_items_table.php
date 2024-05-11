@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_schedules', function (Blueprint $table) {
+        Schema::create('exam_schedule_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('class_id')->default(0);
-            $table->unsignedBigInteger('examination_id')->default(0);
+            $table->unsignedBigInteger('examschedule_id')->default(0);
+            $table->unsignedBigInteger('subject_id')->default(0);
+            $table->string('date')->nullable();
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exam_schedules');
+        Schema::dropIfExists('exam_schedule_items');
     }
 };

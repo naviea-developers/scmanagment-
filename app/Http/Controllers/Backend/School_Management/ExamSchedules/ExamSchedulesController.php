@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ExamSchedule;
 use App\Models\Classe;
 use App\Models\Subject;
+use App\Models\Examination;
+use App\Models\ExamScheduleItem;
 
 class ExamSchedulesController extends Controller
 {
@@ -125,40 +127,79 @@ class ExamSchedulesController extends Controller
         
         $className=Classe::orderBy('id', 'desc')->get(); 
         $subjectName=Subject::orderBy('id', 'desc')->get();
+        $examinations=Examination::orderBy('id', 'desc')->get();
 
-        return view('Backend.school_management.examschedule.addExam',compact('className','subjectName'));
+        return view('Backend.school_management.examschedule.addExam',compact('className','subjectName','examinations'));
     }
 
-    public function storeExam( Request $request){
+    // public function storeExam( Request $request){
 
-        $input = $request->input();
+    //     $input = $request->input();
 
 
-        foreach ($input['subjectName'] as $subject => $subjectName) {
+    //     foreach ($input['subjectName'] as $subject => $subjectName) {
 
-            $exam = DB::table('exam')->insert(
-                array(
-                    [
-                        'title' => $request->title,
-                        'className' => $request->className,
-                        'subjectName' => $input['subjectName'][$subject],
-                        'date' => $input['date'][$subject],
-                        'startAt' => $input['startAt'][$subject],
-                        'endAt' => $input['endAt'][$subject],
-                    ]
-                )
-            );
+    //         $exam = DB::table('exam')->insert(
+    //             array(
+    //                 [
+    //                     'title' => $request->title,
+    //                     'className' => $request->className,
+    //                     'subjectName' => $input['subjectName'][$subject],
+    //                     'date' => $input['date'][$subject],
+    //                     'startAt' => $input['startAt'][$subject],
+    //                     'endAt' => $input['endAt'][$subject],
+    //                 ]
+    //             )
+    //         );
+    //     }
+
+    //     return redirect()->back();
+    // }
+
+    public function storeExam(Request $request)
+    {
+      // dd($request->all());
+        $request->validate([
+            'class_id' => 'required',
+            'examination_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $examschedule = new ExamSchedule();
+            $examschedule->class_id = $request->class_id;
+            $examschedule->examination_id = $request->examination_id;
+            $examschedule->save();
+
+            if($request->subject_id){
+                foreach( $request->subject_id as $k=>$value){
+                    $exam_schedule_item = new ExamScheduleItem();
+                    $exam_schedule_item->examschedule_id = $examschedule->id;
+                    $exam_schedule_item->subject_id = $value;
+                    $exam_schedule_item->date = $request->date[$k];
+                    $exam_schedule_item->start_time = $request->start_time[$k];
+                    $exam_schedule_item->end_time = $request->end_time[$k];
+                    $exam_schedule_item->save();
+                }
+            }
+
+
+            DB::commit();
+            return redirect()->route('allExam')->with('message','Exam Schedule Add Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
         }
-
-        return redirect()->back();
     }
 
     public function examDetails(Request $request){
 
-        $examRoutine = DB::table('exam')->where('title',$request->title)->where('className',$request->className)->get();
+        $examRoutine =  ExamSchedule::find($request->examschedule_id);
+        // dd($examschedule);
+        // $examRoutine = DB::table('exam')->where('title',$request->title)->where('className',$request->className)->get();
 
-        return view('Backend.school_management.examschedule.viewExam',
-        compact('examRoutine'));
+        return view('Backend.school_management.examschedule.viewExam',compact('examRoutine'));
     }
 
     public function edit($id){

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ExamSchedule extends Model
 {
     use HasFactory;
+
+    public function class(){
+        return $this->belongsTo(Classe::class,"class_id",'id');
+    }
+
+    public function examination(){
+        return $this->belongsTo(Examination::class,"examination_id",'id');
+    }
 }
