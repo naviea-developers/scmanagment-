@@ -73,8 +73,9 @@ Route::post('examDetails', [ExamSchedulesController::class,"examDetails"])->name
 Route::get('addExam', [ExamSchedulesController::class,"addExam"])->name('addExam');
 Route::post('storeExam', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
 Route::get('show', [ExamSchedulesController::class,"show"])->name('show');
-Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('edit');
-Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('update');
+Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('editExam');
+Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
+Route::post('delete', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
 // Route::get('/allExam', 'App\Http\Controllers\edicationStructure@allExam')->name('allExam');
 // Route::post('/examDetails', 'App\Http\Controllers\edicationStructure@examDetails')->name('examDetails');
 // Route::get('/addExam', 'App\Http\Controllers\edicationStructure@addExam')->name('addExam');

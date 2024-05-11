@@ -9,5 +9,9 @@ class ExamScheduleItem extends Model
 {
     use HasFactory;
 
+    public function subject(){
+        return $this->belongsTo(Subject::class,"subject_id",'id');
+    }
+
    
 }
