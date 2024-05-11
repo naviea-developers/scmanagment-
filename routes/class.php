@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Result\resultController;
 use App\Http\Controllers\Backend\Class\classController;
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
+use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
 
 
 
@@ -39,7 +40,6 @@ use App\Http\Controllers\Backend\School_management\Session\SessionController;
 
 
 //-----------------------------Result Route Start---------------------------//
-
 // Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add Subject for admin
     Route::get('/viewResult', [resultController::class,"viewResult"])->name('viewResult');
@@ -53,29 +53,7 @@ use App\Http\Controllers\Backend\School_management\Session\SessionController;
 //-----------------------------Result Route End---------------------------// 
 
 
-// Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
-    Route::get('/viewResult', [resultController::class,"viewResult"])->name('viewResult');
-    Route::get('/addResult', [resultController::class,"addResult"])->name('addResult');
-    Route::post('/storeResult',[resultController::class,"storeResult"])->name('storeResult');
-    Route::get('/resultInfo', [resultController::class,"resultInfo"])->name('resultInfo');
-    Route::get('/showResult', [resultController::class,"showResult"])->name('showResult');
-    Route::get('/deleteResult/{id}', [resultController::class,"deleteResult"])->name('deleteResult');
-    Route::get('/getStudent', [resultController::class, 'getStudent'])->name('getStudent');
-// });
-
-// Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
-    Route::get('/viewResult', [resultController::class,"viewResult"])->name('viewResult');
-    Route::get('/addResult', [resultController::class,"addResult"])->name('addResult');
-    Route::post('/storeResult',[resultController::class,"storeResult"])->name('storeResult');
-    Route::get('/resultInfo', [resultController::class,"resultInfo"])->name('resultInfo');
-    Route::get('/showResult', [resultController::class,"showResult"])->name('showResult');
-    Route::get('/deleteResult/{id}', [resultController::class,"deleteResult"])->name('deleteResult');
-    Route::get('/getStudent', [resultController::class, 'getStudent'])->name('getStudent');
-// });
-
-
+//-----------------------------session Route start---------------------------//
 Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add Subject for admin
     Route::get('index', [SessionController::class,"index"])->name('admin.session.index');
@@ -86,3 +64,22 @@ Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::post('delete', [SessionController::class,"destroy"])->name('admin.session.delete');
     Route::get('/status/{id}', [SessionController::class, 'status'])->name('admin.session.status');
 });
+//-----------------------------session Route End---------------------------//
+
+
+//-----------------------------Exam Route Start---------------------------//
+Route::get('allExam', [ExamSchedulesController::class,"allExam"])->name('allExam');
+Route::post('examDetails', [ExamSchedulesController::class,"examDetails"])->name('examDetails');
+Route::get('addExam', [ExamSchedulesController::class,"addExam"])->name('addExam');
+Route::post('storeExam', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
+Route::get('show', [ExamSchedulesController::class,"show"])->name('show');
+Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('edit');
+Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('update');
+// Route::get('/allExam', 'App\Http\Controllers\edicationStructure@allExam')->name('allExam');
+// Route::post('/examDetails', 'App\Http\Controllers\edicationStructure@examDetails')->name('examDetails');
+// Route::get('/addExam', 'App\Http\Controllers\edicationStructure@addExam')->name('addExam');
+// Route::post('/storeExam', 'App\Http\Controllers\edicationStructure@storeExam')->name('storeExam');
+// Route::get('/show', 'App\Http\Controllers\edicationStructure@show')->name('show');
+// Route::get('/edit/{id}', 'App\Http\Controllers\edicationStructure@edit')->name('edit');
+// Route::post('/update/{id}', 'App\Http\Controllers\edicationStructure@update')->name('update');
+//-----------------------------Exam Route End---------------------------//

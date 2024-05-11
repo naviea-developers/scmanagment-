@@ -367,6 +367,25 @@
         </li>
 
         <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Exam</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('allExam') ||  Route::is('admin.course.index') || Route::is('admin.course.edit'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('allExam') }}" class="sub-link {{( Route::is('allExam') ) ?'active':''}}">Exam Schedule</a>
+                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.course.index') }}" class="sub-link {{(Route::is('admin.course.index') || Route::is('admin.course.edit')) ?'active':''}}">Manage Course</a>
+                </li> --}}
+                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
+                </li> --}}
+            </ul>
+        </li><!-- br-Speakers-item -->
+
+
+        <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'courses')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Course</span>
