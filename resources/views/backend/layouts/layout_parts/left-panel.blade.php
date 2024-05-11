@@ -371,7 +371,7 @@
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
-                <span class="menu-item-label">Exam</span>
+                <span class="menu-item-label">Exam Schedule</span>
             </a><!-- br-menu-link -->
             @php
             $r_check = ( Route::is('allExam') ||  Route::is('admin.course.index') || Route::is('admin.course.edit'));
