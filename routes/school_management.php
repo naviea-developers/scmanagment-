@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\School_management\Academic_year\AcademicYearController;
 use App\Http\Controllers\Backend\School_management\Bulding\BuldingController;
 use App\Http\Controllers\Backend\School_management\Class\ClassController;
+use App\Http\Controllers\Backend\School_management\Examination\ExaminationController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
@@ -96,5 +97,15 @@ Route::prefix('school-section')->middleware(['auth:admin', 'adminCheck:0'])->gro
     Route::post('update/{id}', [SchoolSectionController::class,"update"])->name('admin.school_section.update');
     Route::post('delete', [SchoolSectionController::class,"destroy"])->name('admin.school_section.delete');
     Route::get('/status/{id}', [SchoolSectionController::class, 'status'])->name('admin.school_section.status');
+});
+Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add Examination for admin
+    Route::get('index', [ExaminationController::class,"index"])->name('admin.examination.index');
+    Route::get('create', [ExaminationController::class,"create"])->name('admin.examination.create');
+    Route::post('store', [ExaminationController::class,"store"])->name('admin.examination.store');
+    Route::get('edit/{id}', [ExaminationController::class,"edit"])->name('admin.examination.edit');
+    Route::post('update/{id}', [ExaminationController::class,"update"])->name('admin.examination.update');
+    Route::post('delete', [ExaminationController::class,"destroy"])->name('admin.examination.delete');
+    Route::get('/status/{id}', [ExaminationController::class, 'status'])->name('admin.examination.status');
 });
 
