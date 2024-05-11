@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\School_management\Class\ClassController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
+use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
 use App\Http\Controllers\Frontend\ReviewController;
 
@@ -85,5 +86,15 @@ Route::prefix('room')->middleware(['auth:admin', 'adminCheck:0'])->group( functi
     Route::post('update/{id}', [RoomController::class,"update"])->name('admin.room.update');
     Route::post('delete', [RoomController::class,"destroy"])->name('admin.room.delete');
     Route::get('/status/{id}', [RoomController::class, 'status'])->name('admin.room.status');
+});
+Route::prefix('school-section')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add school-section for admin
+    Route::get('index', [SchoolSectionController::class,"index"])->name('admin.school_section.index');
+    Route::get('create', [SchoolSectionController::class,"create"])->name('admin.school_section.create');
+    Route::post('store', [SchoolSectionController::class,"store"])->name('admin.school_section.store');
+    Route::get('edit/{id}', [SchoolSectionController::class,"edit"])->name('admin.school_section.edit');
+    Route::post('update/{id}', [SchoolSectionController::class,"update"])->name('admin.school_section.update');
+    Route::post('delete', [SchoolSectionController::class,"destroy"])->name('admin.school_section.delete');
+    Route::get('/status/{id}', [SchoolSectionController::class, 'status'])->name('admin.school_section.status');
 });
 

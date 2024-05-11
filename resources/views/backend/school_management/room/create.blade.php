@@ -44,8 +44,8 @@
 
                         </div> --}}
 
-                        <div class="row mt-4">
-                        <div class="col-sm-12 mt-3">
+                        <div class="row">
+                        <div class="col-sm-12">
                           <label class="form-control-label">Bulding Name: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
                             <select name="bulding_id" class="form-control">
