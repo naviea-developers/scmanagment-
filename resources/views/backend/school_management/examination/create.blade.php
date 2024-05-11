@@ -33,6 +33,14 @@
                     <form action="{{ route('admin.examination.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
+                        <div class="row">
+                          <div class="col-sm-12">
+                              <label class="form-control-label">Examination Name: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="text" name="name" class="form-control" placeholder="Enter Examination Name" value="{{ old('name') }}" required>
+                              </div>
+                          </div>
+                      </div>
 
                         <div class="row">
                             <div class="col-sm-12 mt-3">
@@ -64,14 +72,7 @@
 
 
 
-                        <div class="row">
-                            <div class="col-sm-12 mt-3">
-                                <label class="form-control-label">Examination Name: <span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="name" class="form-control" placeholder="Enter Examination Name" value="{{ old('name') }}" required>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-sm-6 mt-3">
                                 <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>

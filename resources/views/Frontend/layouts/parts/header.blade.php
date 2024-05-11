@@ -136,6 +136,10 @@
 
                                     <li class="nav-item me-2 dropdown dmenu dropdown-cart" id="cardbody">
 
+                                       
+
+
+
                                         @if(session()->has('cart'))
                                         <a class="nav-link dropdown-toggle" href="#" id="cart" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -300,6 +304,13 @@
                                 </div>
                             </li>
                             <!-- student notification end -->
+
+                            <li class="nav-item m-1 signin-li">
+                                <a href="" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: var(--button2_color)!important ; color:var(--button2_text_color)">
+                                    Admission
+                                </a>
+                            </li>
+
                             @if (Auth::check())
                             <li class="nav-item dropdown dmenu dropdown-user">
                                 <a class="nav-link dropdown-toggle" href="#" id="user" role="button"
