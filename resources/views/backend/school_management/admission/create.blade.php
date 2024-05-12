@@ -5,7 +5,11 @@
 @extends('Backend.layouts.layouts')
 
 @section('main_contain')
-
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="br-mainpanel">
         <div class="br-pageheader">
@@ -46,16 +50,7 @@
                         <div class="row mt-4">
 
 
-                            <div class="col-sm-4">
-                            <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="class_id">
-                                <option value="">Select Class</option>
-                                @foreach ($classes as $class)
-                                <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                @endforeach
-                            </select>
-                            </div>
-
+                            
                             <div class="col-sm-4">
                             <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="academic_year_id" >
@@ -76,6 +71,17 @@
                             </select>
                             </div>
 
+                            <div class="col-sm-4">
+                                <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
+                                <select class="form-control" name="class_id">
+                                    <option value="">Select Class</option>
+                                    @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+    
+
                             <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="group_id" >
@@ -92,6 +98,16 @@
                                 <option value="">Select Section</option>
                                 @foreach ($sections as $section)
                                 <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                @endforeach
+                            </select>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                            <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
+                            <select class="form-control" name="fee_id" >
+                                <option value="">Select Fee</option>
+                                @foreach ($fees as $fee)
+                                <option value="{{ $fee->id }}">{{ $fee->fee_amount }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -131,6 +147,18 @@
                                 <input type="text" name="student_nid" class="form-control" placeholder="Enter NID/Birth Certificate" value="{{ old('student_nid') }}" required>
                                 </div>
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -263,6 +291,62 @@
 
                             </div> --}}
 
+
+
+
+
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="checkbox" id="showInputs">
+                                </div>
+                            </div>
+
+                            <div id="inputs" class="hidden">
+                                <div class="row">
+                                    <div class="col-sm-4 mt-3">
+                                        <label class="form-control-label">Pre School Name: <span class="tx-danger">*</span></label>
+                                        <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="text" name="pre_school_name" class="form-control" placeholder="Enter Pre School Name" value="{{ old('studentpre_school_name_nid') }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 mt-3">
+                                        <label class=" form-control-label">Pre Class: <span class="tx-danger">*</span></label>
+                                        <select class="form-control" name="pre_class_id">
+                                            <option value="">Select Class</option>
+                                            @foreach ($classes as $class)
+                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-4 mt-3">
+                                        <label class="form-control-label">Role Number: <span class="tx-danger">*</span></label>
+                                        <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="text" name="pre_roll_number" class="form-control" placeholder="Enter Pre Class Roll" value="{{ old('pre_roll_number') }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 mt-3">
+                                        <label class="form-control-label">Pre School Address: <span class="tx-danger">*</span></label>
+                                        <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="text" name="pre_school_address" class="form-control" placeholder="Enter Pre School Address" value="{{ old('pre_school_address') }}" >
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
             </div>
 
                 
@@ -366,5 +450,18 @@
 
 
 
+</script>
+
+<script>
+    const checkbox = document.getElementById('showInputs');
+    const inputsDiv = document.getElementById('inputs');
+
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            inputsDiv.classList.remove('hidden');
+        } else {
+            inputsDiv.classList.add('hidden');
+        }
+    });
 </script>
 @endsection
