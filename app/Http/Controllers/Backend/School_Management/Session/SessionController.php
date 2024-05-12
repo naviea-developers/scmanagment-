@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\School_management\Session;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use App\Models\Session;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,8 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return view("Backend.school_management.session.create");
+        $data['years'] = AcademicYear::all();
+        return view("Backend.school_management.session.create", $data);
     }
 
     /**
@@ -30,17 +32,16 @@ class SessionController extends Controller
     {
       // dd($request->all());
         $request->validate([
-            'session' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            
 
         ]);
         try{
             DB::beginTransaction();
             $session = New session;
-            $session->session = $request->session;
-            $session->start_date = $request->start_date;
-            $session->end_date = $request->end_date;
+            $session->start_month = $request->start_month;
+            $session->start_year_id = $request->start_year_id;
+            $session->end_month = $request->end_month;
+            $session->end_year_id = $request->end_year_id;
             $session->save();
 
             DB::commit();
@@ -67,6 +68,7 @@ class SessionController extends Controller
     {
        // dd('hi');
         $data["session"]= session::find($id);
+        $data['years'] = AcademicYear::all();
         return view("Backend.school_management.session.update",$data);
     }
 
@@ -77,16 +79,16 @@ class SessionController extends Controller
     {
         //dd($request->all());
        $request->validate([
-        'start_date' => 'required',
-        'end_date' => 'required',
+        
 
     ]);
     try{
         DB::beginTransaction();
         $session = session::find($id);
-        $session->session = $request->session;
-        $session->start_date = $request->start_date;
-        $session->end_date = $request->end_date;
+        $session->start_month = $request->start_month;
+        $session->start_year_id = $request->start_year_id;
+        $session->end_month = $request->end_month;
+        $session->end_year_id = $request->end_year_id;
         $session->save();
 
         DB::commit();

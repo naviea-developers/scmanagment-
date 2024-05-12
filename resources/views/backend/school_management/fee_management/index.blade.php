@@ -15,7 +15,7 @@ Admin - All fees
 
           
 
-            <h6 class="br-section-label text-center">All Fees</h6>
+            <h6 class="br-section-label text-center">Fees Management</h6>
 
             <a style="margin-bottom: 20px" href="{{ route('admin.fee_management.create') }}" class="btn btn-primary btn-sm float-right">
               <i class="fa fa-plus"></i> Add Fee
@@ -41,6 +41,7 @@ Admin - All fees
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Class</th>
+                    <th class="wd-15p">Session</th>
                     <th class="wd-15p">Fee Name</th>
                     <th class="wd-15p">Fee Amount</th>
                     <th class="wd-15p">Status</th>
@@ -56,6 +57,7 @@ Admin - All fees
                       <tr>
                           <td>{{ $i++ }}</td>
                           <td>{{ @$fee_management->class->name }}</td>
+                          <td>{{ @$fee_management->session->start_year->year }} - {{ @$fee_management->session->end_year->year }}</td>
                           <td>{{ @$fee_management->fee->particular_name }}</td>
                           <td>{{ @$fee_management->fee_amount }}</td>
                           <td>

@@ -32,31 +32,82 @@
 
                     <form action="{{ route('admin.session.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
+                 
                         <div class="row">
-                          <div class="col-sm-12 mt-3">
-                              <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
-                              <div class="mg-t-10 mg-sm-t-0">
-                                  <input type="text" name="session" class="form-control" placeholder="Enter session Like- (2023-2024)" value="{{ old('session') }}" required>
-                              </div>
-                          </div>
-                      </div>
-                        
-                        <div class="row">
-                            <div class="col-sm-12 mt-3">
-                                <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>
+                            <div class="col-sm-6">
+                                <label class="form-control-label">Start Session: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="date" name="start_date" class="form-control" placeholder="Enter Group Name" value="{{ old('start_date') }}" required>
+                                  <div class="mg-t-10 mg-sm-t-0">
+                                    <select name="start_month" class="form-control">
+                                      <option value=""> Select Month</option>
+                                      <option value="1"> January</option>
+                                      <option value="2"> February</option>
+                                      <option value="3"> March</option>
+                                      <option value="4"> April</option>
+                                      <option value="5"> May</option>
+                                      <option value="6"> June</option>
+                                      <option value="7"> July</option>
+                                      <option value="8"> August</option>
+                                      <option value="9"> September</option>
+                                      <option value="10"> October</option>
+                                      <option value="11"> November</option>
+                                      <option value="12"> December</option>
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6" style="margin-top: 20px">
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <div class="mg-t-10 mg-sm-t-0">
+                                    <select name="start_year_id" class="form-control">
+                                      <option value=""> Select Year</option>
+                                      @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                    @endforeach
+                                    </select>
+                                  </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                          <div class="col-sm-12 mt-3">
-                              <label class="form-control-label">End Date: <span class="tx-danger">*</span></label>
+                        <div class="row mt-3">
+                          <div class="col-sm-6">
+                              <label class="form-control-label">End Session: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                  <input type="date" name="end_date" class="form-control" placeholder="Enter Group Name" value="{{ old('end_date') }}" required>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="end_month" class="form-control">
+                                    <option value=""> Select Month</option>
+                                    <option value="1"> January</option>
+                                    <option value="2"> February</option>
+                                    <option value="3"> March</option>
+                                    <option value="4"> April</option>
+                                    <option value="5"> May</option>
+                                    <option value="6"> June</option>
+                                    <option value="7"> July</option>
+                                    <option value="8"> August</option>
+                                    <option value="9"> September</option>
+                                    <option value="10"> October</option>
+                                    <option value="11"> November</option>
+                                    <option value="12"> December</option>
+                                  </select>
+                                </div>
                               </div>
                           </div>
+
+                          <div class="col-sm-6" style="margin-top: 20px">
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="end_year_id" class="form-control">
+                                    <option value=""> Select Year</option>
+                                    @foreach ($years as $year)
+                                  <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                  @endforeach
+                                  </select>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
                       </div>
 
                         {{-- <div class="row">

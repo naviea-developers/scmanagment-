@@ -15,4 +15,7 @@ class FeeManagement extends Model
     public function fee(){
         return $this->belongsTo(Fee::class,"fee_id",'id');
     }
+    public function session(){
+        return $this->belongsTo(Session::class,"session_id",'id');
+    }
 }

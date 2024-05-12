@@ -36,9 +36,8 @@ Admin - All Session
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Session</th>
-                    <th class="wd-15p">Start Date</th>
-                    <th class="wd-15p">End Date</th>
+                    <th class="wd-15p">Start Session</th>
+                    <th class="wd-15p">End Session</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -51,9 +50,37 @@ Admin - All Session
                     @foreach ($sessions as $session)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $session->session }}</td>
-                          <td>{{ $session->start_date }}</td>
-                          <td>{{ $session->end_date }}</td>
+                          <td>
+                            @if ($session->start_month == '1') January 
+                            @elseif ($session->start_month == '2') February 
+                            @elseif ($session->start_month == '3') March 
+                            @elseif ($session->start_month == '4') April 
+                            @elseif ($session->start_month == '5') May 
+                            @elseif ($session->start_month == '6') June 
+                            @elseif ($session->start_month == '7') July 
+                            @elseif ($session->start_month == '8') August 
+                            @elseif ($session->start_month == '9') September 
+                            @elseif ($session->start_month == '10') October 
+                            @elseif ($session->start_month == '11') November 
+                            @elseif ($session->start_month == '12') December
+                            @endif {{ @$session->start_year->year }}
+                          </td>
+
+                          <td>
+                            @if ($session->end_month == '1') January 
+                            @elseif ($session->end_month == '2') February 
+                            @elseif ($session->end_month == '3') March 
+                            @elseif ($session->end_month == '4') April 
+                            @elseif ($session->end_month == '5') May 
+                            @elseif ($session->end_month == '6') June 
+                            @elseif ($session->end_month == '7') July 
+                            @elseif ($session->end_month == '8') August 
+                            @elseif ($session->end_month == '9') September 
+                            @elseif ($session->end_month == '10') October 
+                            @elseif ($session->end_month == '11') November 
+                            @elseif ($session->end_month == '12') December 
+                            @endif {{  @$session->end_year->year }}
+                          </td>
                           <td>
                             @if(@$session->status == 0)
                             <a href="{{ route('admin.session.status',$session->id) }}" class="btn btn-sm btn-warning">Inactive</a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use App\Models\Fee;
 use App\Models\FeeManagement;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class FeeManagementController extends Controller
     {
         $data['classes'] = Classe::where('status', 1)->get();
         $data['fee_names'] = Fee::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
         return view("Backend.school_management.fee_management.create", $data);
     }
 
@@ -40,6 +42,7 @@ class FeeManagementController extends Controller
         try{
             DB::beginTransaction();
             $fee = New FeeManagement();
+            $fee->session_id = $request->session_id;
             $fee->class_id = $request->class_id;
             $fee->fee_id = $request->fee_id;
             $fee->fee_amount = $request->fee_amount;
@@ -71,6 +74,7 @@ class FeeManagementController extends Controller
         $data["fee_management"]= FeeManagement::find($id);
         $data['classes'] = Classe::where('status', 1)->get();
         $data['fee_names'] = Fee::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
         return view("Backend.school_management.fee_management.update",$data);
     }
 
@@ -87,6 +91,7 @@ class FeeManagementController extends Controller
     try{
         DB::beginTransaction();
         $fee = FeeManagement::find($id);
+        $fee->session_id = $request->session_id;
         $fee->class_id = $request->class_id;
         $fee->fee_id = $request->fee_id;
         $fee->fee_amount = $request->fee_amount;

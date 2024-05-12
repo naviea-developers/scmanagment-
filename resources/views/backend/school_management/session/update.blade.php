@@ -34,28 +34,77 @@
                         @csrf
 
                         <div class="row">
-                          <div class="col-sm-12 mt-3">
-                              <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
+                          <div class="col-sm-6">
+                              <label class="form-control-label">Start Session: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                  <input type="text" name="session" class="form-control" placeholder="Enter session Like- (2023-2024)" value="{{ $session->session }}" required>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="start_month" class="form-control">
+                                    <option value=""> Select Month</option>
+                                    <option @if ($session->start_month == '1') Selected @endif value="1"> January</option>
+                                    <option @if ($session->start_month == '2') Selected @endif value="2"> February</option>
+                                    <option @if ($session->start_month == '3') Selected @endif value="3"> March</option>
+                                    <option @if ($session->start_month == '4') Selected @endif value="4"> April</option>
+                                    <option @if ($session->start_month == '5') Selected @endif value="5"> May</option>
+                                    <option @if ($session->start_month == '6') Selected @endif value="6"> June</option>
+                                    <option @if ($session->start_month == '7') Selected @endif value="7"> July</option>
+                                    <option @if ($session->start_month == '8') Selected @endif value="8"> August</option>
+                                    <option @if ($session->start_month == '9') Selected @endif value="9"> September</option>
+                                    <option @if ($session->start_month == '10') Selected @endif value="10"> October</option>
+                                    <option @if ($session->start_month == '11') Selected @endif value="11"> November</option>
+                                    <option @if ($session->start_month == '12') Selected @endif value="12"> December</option>
+                                  </select>
+                                </div>
+                              </div>
+                          </div>
+
+                          <div class="col-sm-6" style="margin-top: 20px">
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="start_year_id" class="form-control">
+                                    <option value=""> Select Year</option>
+                                    @foreach ($years as $year)
+                                  <option @if ($year->id == $session->start_year_id) Selected @endif value="{{ $year->id }}">{{ $year->year }}</option>
+                                  @endforeach
+                                  </select>
+                                </div>
                               </div>
                           </div>
                       </div>
 
-                        <div class="row">
-                          <div class="col-sm-12 mt-3">
-                              <label class="form-control-label">Start Date: <span class="tx-danger">*</span></label>
-                              <div class="mg-t-10 mg-sm-t-0">
-                                  <input type="date" name="start_date" class="form-control" placeholder="Enter Group Name" value="{{ $session->start_date }}" required>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-sm-12 mt-3">
-                            <label class="form-control-label">End Date: <span class="tx-danger">*</span></label>
+                      <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <label class="form-control-label">End Session: <span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <input type="date" name="end_date" class="form-control" placeholder="Enter Group Name" value="{{ $session->end_date }}" required>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <select name="end_month" class="form-control">
+                                  <option value=""> Select Month</option>
+                                  <option @if ($session->end_month == '1') Selected @endif value="1"> January</option>
+                                  <option @if ($session->end_month == '2') Selected @endif value="2"> February</option>
+                                  <option @if ($session->end_month == '3') Selected @endif value="3"> March</option>
+                                  <option @if ($session->end_month == '4') Selected @endif value="4"> April</option>
+                                  <option @if ($session->end_month == '5') Selected @endif value="5"> May</option>
+                                  <option @if ($session->end_month == '6') Selected @endif value="6"> June</option>
+                                  <option @if ($session->end_month == '7') Selected @endif value="7"> July</option>
+                                  <option @if ($session->end_month == '8') Selected @endif value="8"> August</option>
+                                  <option @if ($session->end_month == '9') Selected @endif value="9"> September</option>
+                                  <option @if ($session->end_month == '10') Selected @endif value="10"> October</option>
+                                  <option @if ($session->end_month == '11') Selected @endif value="11"> November</option>
+                                  <option @if ($session->end_month == '12') Selected @endif value="12"> December</option>
+                                </select>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6" style="margin-top: 20px">
+                            <div class="mg-t-10 mg-sm-t-0">
+                              <div class="mg-t-10 mg-sm-t-0">
+                                <select name="end_year_id" class="form-control">
+                                  <option value=""> Select Year</option>
+                                  @foreach ($years as $year)
+                                <option  @if ($year->id == $session->end_year_id) Selected @endif  value="{{ $year->id }}">{{ $year->year }}</option>
+                                @endforeach
+                                </select>
+                              </div>
                             </div>
                         </div>
                     </div>

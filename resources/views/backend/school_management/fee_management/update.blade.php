@@ -35,6 +35,19 @@
 
 
                       <div class="row">
+
+                        <div class="col-sm-12">
+                          <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
+                          <div class="mg-t-10 mg-sm-t-0">
+                            <select name="session_id" class="form-control">
+                              <option value=""> Select Session</option>
+                              @foreach ($sessions as $session)
+                              <option @if ($session->id == $fee_management->session_id) Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                        </div>
+
                         <div class="col-sm-12 mt-3">
                           <label class="form-control-label">Class: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
