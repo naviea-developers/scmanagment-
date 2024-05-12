@@ -34,7 +34,20 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-sm-12">
+
+                          <div class="col-sm-12">
+                            <label class="form-control-label">Class Name: <span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                              <select name="class_id" class="form-control">
+                                <option value=""> Select Class</option>
+                                @foreach ($classes as $class)
+                                <option  @if($class->id == $group->class_id)  Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                          </div>
+
+                            <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Group Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                 <input type="text" name="name" class="form-control" placeholder="Enter Group Name" value="{{ $group->name }}" required>

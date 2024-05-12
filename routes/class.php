@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Result\resultController;
 use App\Http\Controllers\Backend\Class\classController;
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
 use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
+use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
 
 
 
@@ -73,8 +74,9 @@ Route::post('examDetails', [ExamSchedulesController::class,"examDetails"])->name
 Route::get('addExam', [ExamSchedulesController::class,"addExam"])->name('addExam');
 Route::post('storeExam', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
 Route::get('show', [ExamSchedulesController::class,"show"])->name('show');
-Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('edit');
-Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('update');
+Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('editExam');
+Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
+Route::post('delete', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
 // Route::get('/allExam', 'App\Http\Controllers\edicationStructure@allExam')->name('allExam');
 // Route::post('/examDetails', 'App\Http\Controllers\edicationStructure@examDetails')->name('examDetails');
 // Route::get('/addExam', 'App\Http\Controllers\edicationStructure@addExam')->name('addExam');
@@ -83,3 +85,18 @@ Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('up
 // Route::get('/edit/{id}', 'App\Http\Controllers\edicationStructure@edit')->name('edit');
 // Route::post('/update/{id}', 'App\Http\Controllers\edicationStructure@update')->name('update');
 //-----------------------------Exam Route End---------------------------//
+
+
+//-----------------------------routine Route start---------------------------//
+Route::prefix('routine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add Subject for admin
+    Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
+    Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
+    Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
+    Route::get('edit/{id}', [ClassRoutineController::class,"edit"])->name('admin.routine.edit');
+    Route::post('update/{id}', [ClassRoutineController::class,"update"])->name('admin.routine.update');
+    Route::post('delete', [ClassRoutineController::class,"destroy"])->name('admin.routine.delete');
+    Route::get('/status/{id}', [ClassRoutineController::class, 'status'])->name('admin.routine.status');
+    Route::get('details/{id}', [ClassRoutineController::class,"details"])->name('admin.routine.details');
+});
+//-----------------------------routine Route End---------------------------//

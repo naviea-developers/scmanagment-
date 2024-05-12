@@ -36,6 +36,7 @@ Admin - All Groups
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Class</th>
                     <th class="wd-15p">Group Name</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
@@ -49,6 +50,7 @@ Admin - All Groups
                     @foreach ($groups as $group)
                       <tr>
                           <td>{{ $i++ }}</td>
+                          <td>{{ @$group->class->name }}</td>
                           <td>{{ $group->name }}</td>
                           <td>
                             @if(@$group->status == 0)
