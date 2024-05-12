@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicYear;
 use App\Models\Admission;
 use App\Models\Classe;
+use App\Models\FeeManagement;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Session;
@@ -27,6 +28,7 @@ class AdmissionController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('status', 1)->get();
         return view('Backend.school_management.admission.create', $data);
     }
     public function store(Request $request)
