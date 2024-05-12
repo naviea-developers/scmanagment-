@@ -93,16 +93,19 @@ Route::prefix('degree')->middleware(['auth:admin', 'adminCheck:0'])->group( func
 
 });
 
-Route::prefix('language')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-   //language Start
-   Route::get('index/language', [CourseLanguageController::class,"index"])->name('admin.language.index');
-   Route::get('create/language', [CourseLanguageController::class,"create"])->name('admin.language.create');
-   Route::post('store/language', [CourseLanguageController::class,"store"])->name('admin.language.store');
-   Route::get('edit/language/{id}', [CourseLanguageController::class,"edit"])->name('admin.language.edit');
-   Route::post('update/language/{id}', [CourseLanguageController::class,"update"])->name('admin.language.update');
-   Route::post('delete/language', [CourseLanguageController::class,"destroy"])->name('admin.language.delete');
-   //language Start
-});
+//language Start
+// Route::prefix('language')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+   
+//    Route::get('index/language', [CourseLanguageController::class,"index"])->name('admin.language.index');
+//    Route::get('create/language', [CourseLanguageController::class,"create"])->name('admin.language.create');
+//    Route::post('store/language', [CourseLanguageController::class,"store"])->name('admin.language.store');
+//    Route::get('edit/language/{id}', [CourseLanguageController::class,"edit"])->name('admin.language.edit');
+//    Route::post('update/language/{id}', [CourseLanguageController::class,"update"])->name('admin.language.update');
+//    Route::post('delete/language', [CourseLanguageController::class,"destroy"])->name('admin.language.delete');
+  
+// });
+
+ //language Start
 
 Route::prefix('section')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Course Create
