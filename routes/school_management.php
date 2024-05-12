@@ -176,10 +176,14 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 });
 
 
-Route::get('get-groups/{class_id}', [AdmissionController::class, 'getGroups']);
-Route::get('get-sections/{class_id}', [AdmissionController::class, 'getSections']);
+Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 
-// Route::get('/get-groups/{class_id}', 'App\Http\Controllers\ClassController@getGroups');
-// Route::get('/get-sections/{class_id}', 'App\Http\Controllers\ClassController@getSections');
+
+
+// Route::get('/get-groups/{class_id}', [AdmissionController::class, 'getGroups']);
+// Route::get('/get-sections/{class_id}', [AdmissionController::class, 'getSections']);
+
+
+
 
 
