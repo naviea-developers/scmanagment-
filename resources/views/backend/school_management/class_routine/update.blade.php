@@ -16,8 +16,8 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-person-chalkboard"></i>
                     <div>
-                      <h4>Update exam Routine</h4>
-                      <p class="mg-b-0">Update exam Routine Information</p>
+                      <h4>Update Class Routine</h4>
+                      <p class="mg-b-0">Update Class Routine Information</p>
                     </div>
                   </div>
 
@@ -29,7 +29,7 @@
                @endif
                {{-- validate End  --}}
 
-                <form action="{{ route('updateExam',$editData->id) }}" method="POST">
+                <form action="{{ route('admin.routine.update',$editData->id) }}" method="POST">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -41,7 +41,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <label for="">Exam title :</label>
                             <select name="examination_id" id="" class="form-select">
                                 <option value="">Select Exam title</option>
@@ -50,7 +50,7 @@
                                 @endforeach
 
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     {{-- <button style="margin-left: 14px;" type="button" class="btn btn-sm btn-add" id="plus-btn-data">Add</button> --}}
                     <button style="   
@@ -63,58 +63,14 @@
                     display: inline-block;
                     font-size: 16px;" type="button" class="btn btn-sm btn-add" id="plus-btn-data">Add</button>
 
-                    {{-- <div class="row">
-                        <div class="col-md-3 col-1">
-                            <label>Select Subject : </label>
-                            <select name="subjectName[]" id=""class="form-select">
-                                <option value="">Select Subject</option>
-                                @foreach ($subjectName as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3 column-2">
-                            <label for="">Exam Date :</label>
-                            <input type="date" name="date[]" class="form-control">
-                        </div>
-                        <div class="col-md-3 column-3">
-                            <label for="">Start At :</label>
-                            <input type="time" name="startAt[]" class="form-control">
-                        </div>
-                        <div class="col-md-3 column-4">
-                            <label for="">End At :</label>
-                            <input type="time" name="endAt[]" class="form-control">
-                        </div>
-                    </div> --}}
-
                     {{-- Pre Requisites start --}}
                     <div class="row mt-4">
                         <div class="col-sm-12">
                             <div class="mg-t-10 mg-sm-t-0 add-data">
-                                @if($editData->exam_schedule_items->count() == 0)
+                                @if($editData->class_routine_items->count() == 0)
                                     <div class="d-flex align-items-center mt-2">
                                         <div class="d-flex align-items-center select-add-section" style="width: 97%;">
-                                            {{-- <div class="col-md-3 col-1">
-                                                <label>Select Subject : </label>
-                                                <select name="subject_id[]" id=""class="form-select">
-                                                    <option value="">Select Subject</option>
-                                                    @foreach ($subjectName as $subject)
-                                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3 column-2">
-                                                <label for="">Exam Date :</label>
-                                                <input type="date" name="date[]" class="form-control">
-                                            </div>
-                                            <div class="col-md-3 column-3">
-                                                <label for="">Start At :</label>
-                                                <input type="time" name="start_time[]" class="form-control">
-                                            </div>
-                                            <div class="col-md-3 column-4">
-                                                <label for="">End At :</label>
-                                                <input type="time" name="end_time[]" class="form-control">
-                                            </div> --}}
+
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <label>Select Subject : </label>
@@ -125,16 +81,17 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-    
+
                                                 <div class="col-md-3">
-                                                    <label>Select Rooms : </label>
-                                                    <select name="room_id[]" id=""class="form-select">
-                                                        <option value="">Select Rooms</option>
-                                                        @foreach ($rooms as $room)
-                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                    <label>Select Teacher : </label>
+                                                    <select name="teacher_id[]" id=""class="form-select">
+                                                        <option value="">Select Teacher</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+    
                                                 <div class="col-md-3">
                                                     <label>Select Buldings : </label>
                                                     <select name="bulding_id[]" id=""class="form-select">
@@ -153,25 +110,22 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3 mt-3">
-                                                    <label for="">Pass Marke :</label>
-                                                    <input type="number" name="pass_marke[]" class="form-control">
-                                                </div>
-                                                <div class="col-md-3 mt-3">
-                                                    <label for="">Fail Marke :</label>
-                                                    <input type="number" name="fail_marke[]" class="form-control">
-                                                </div>
-                                            
-                                                <div class="col-md-2 mt-3">
-                                                    <label for="">Exam Date :</label>
-                                                    <input type="date" name="date[]" class="form-control">
+
+                                                <div class="col-md-3">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="room_id[]" id=""class="form-select">
+                                                        <option value="">Select Rooms</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="col-md-2 mt-3">
-                                                    <label for="">Start At :</label>
+                                                    <label for="">Start Time :</label>
                                                     <input type="time" name="start_time[]" class="form-control">
                                                 </div>
                                                 <div class="col-md-2 mt-3">
-                                                    <label for="">End At :</label>
+                                                    <label for="">End Rime :</label>
                                                     <input type="time" name="end_time[]" class="form-control">
                                                 </div>
                                             </div>
@@ -179,75 +133,74 @@
                                         <a id="plus-btn-data" href="javascript:void(0)" class="plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
                                     </div>
                                 @else
-                                    @foreach ($editData->exam_schedule_items as $k=>$exam_schedule_item)
+                                    @foreach ($editData->class_routine_items as $k=>$class_routine_item)
 
                                     <div class="d-flex align-items-center mt-2">
                                         <div class="d-flex align-items-center select-add-section" style="width: 97%;">
                                             <div class="row">
                                                 <div class="col-md-3 col-1">
                                                     <label>Select Subject : </label>
-                                                    <select name="old_subject_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
+                                                    <select name="old_subject_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                         <option value="">Select Subject</option>
                                                         @foreach ($subjectName as $subject)
-                                                            <option @if($subject->id == $exam_schedule_item->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                            <option @if($subject->id == $class_routine_item->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
                                                 <div class="col-md-3">
-                                                    <label>Select Rooms : </label>
-                                                    <select name="old_room_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
-                                                        <option value="">Select Rooms</option>
-                                                        @foreach ($rooms as $room)
-                                                            <option @if($room->id == $exam_schedule_item->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>
+                                                    <label>Select Teacher : </label>
+                                                    <select name="old_teacher_id[{{ $class_routine_item->id }}]" id=""class="form-select">
+                                                        <option value="">Select Teacher</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option  @if($teacher->id == $class_routine_item->teacher_id)  Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+
                                                 <div class="col-md-3">
                                                     <label>Select Buldings : </label>
-                                                    <select name="old_bulding_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
+                                                    <select name="old_bulding_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                         <option value="">Select Buldings</option>
                                                         @foreach ($buldings as $bulding)
-                                                            <option @if($bulding->id == $exam_schedule_item->bulding_id)  Selected @endif value="{{ $bulding->id }}">{{ $bulding->name }}</option>
+                                                            <option @if($bulding->id == $class_routine_item->bulding_id)  Selected @endif value="{{ $bulding->id }}">{{ $bulding->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Select Floors : </label>
-                                                    <select name="old_floor_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
+                                                    <select name="old_floor_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                         <option value="">Select Floors</option>
                                                         @foreach ($floors as $floor)
-                                                            <option @if($floor->id == $exam_schedule_item->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                                            <option @if($floor->id == $class_routine_item->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3 mt-3">
-                                                    <label for="">Pass Marke :</label>
-                                                    <input type="number" value="{{ $exam_schedule_item->pass_marke }}" name="old_pass_marke[{{ $exam_schedule_item->id }}]" class="form-control">
-                                                </div>
-                                                <div class="col-md-3 mt-3">
-                                                    <label for="">Fail Marke :</label>
-                                                    <input type="number" value="{{ $exam_schedule_item->fail_marke }}" name="old_fail_marke[{{ $exam_schedule_item->id }}]" class="form-control">
-                                                </div>
 
-                                                <div class="col-md-2 column-2 mt-3">
-                                                    <label for="">Exam Date :</label>
-                                                    <input value="{{ @$exam_schedule_item->date }}" type="date" name="old_date[{{ $exam_schedule_item->id }}]" class="form-control">
+                                                <div class="col-md-3 mt-3">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="old_room_id[{{ $class_routine_item->id }}]" id=""class="form-select">
+                                                        <option value="">Select Rooms</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option @if($room->id == $class_routine_item->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <div class="col-md-2 column-3 mt-3">
-                                                    <label for="">Start At :</label>
-                                                    <input value="{{ @$exam_schedule_item->start_time }}" type="time" name="old_start_time[{{ $exam_schedule_item->id }}]" class="form-control">
+                                               
+                                                <div class="col-md-3 column-3 mt-3">
+                                                    <label for="">Start Time :</label>
+                                                    <input value="{{ @$class_routine_item->start_time }}" type="time" name="old_start_time[{{ $class_routine_item->id }}]" class="form-control">
                                                 </div>
-                                                <div class="col-md-2 column-4 mt-3">
-                                                    <label for="">End At :</label>
-                                                    <input value="{{ @$exam_schedule_item->end_time }}" type="time" name="old_end_time[{{ $exam_schedule_item->id }}]" class="form-control">
+                                                <div class="col-md-3 column-4 mt-3">
+                                                    <label for="">End Time :</label>
+                                                    <input value="{{ @$class_routine_item->end_time }}" type="time" name="old_end_time[{{ $class_routine_item->id }}]" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- @if($k == $editData->exam_schedule_items->count() - 1)
+                                        {{-- @if($k == $editData->class_routine_items->count() - 1)
                                         <a id="plus-btn-data" href="javascript:void(0)" class="plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
                                         @else --}}
-                                        <a exam_schedule_item_id="{{ $exam_schedule_item->id }}" href="javascript:void(0)" class="minus-btn-data-old px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
+                                        <a class_routine_item_id="{{ $class_routine_item->id }}" href="javascript:void(0)" class="minus-btn-data-old px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
                                         {{-- @endif --}}
                                     </div>
 
@@ -260,7 +213,7 @@
                       {{-- Pre Requisites End --}}
 
                     <div class="col-md-12 mt-4">
-                        <button style="margin-left: -14px;" type="submit" class="btn btn-primary createClass">Create New Class</button>
+                        <button style="margin-left: -14px;" type="submit" class="btn btn-primary createClass">Create New Class Routine</button>
                     </div>
                 </form>
 
@@ -295,14 +248,16 @@ $(document).ready(function() {
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label>Select Rooms : </label>
-                                            <select name="room_id[]" id=""class="form-select">
-                                                <option value="">Select Rooms</option>
-                                                @foreach ($rooms as $room)
-                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                                    <label>Select Teacher : </label>
+                                                    <select name="teacher_id[]" id=""class="form-select">
+                                                        <option value="">Select Teacher</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                        
                                         <div class="col-md-3">
                                             <label>Select Buldings : </label>
                                             <select name="bulding_id[]" id=""class="form-select">
@@ -322,24 +277,21 @@ $(document).ready(function() {
                                             </select>
                                         </div>
                                         <div class="col-md-3 mt-3">
-                                            <label for="">Pass Marke :</label>
-                                            <input type="number" name="pass_marke[]" class="form-control">
+                                            <label>Select Rooms : </label>
+                                            <select name="room_id[]" id=""class="form-select">
+                                                <option value="">Select Rooms</option>
+                                                @foreach ($rooms as $room)
+                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
+                                        
                                         <div class="col-md-3 mt-3">
-                                            <label for="">Fail Marke :</label>
-                                            <input type="number" name="fail_marke[]" class="form-control">
-                                        </div>
-                                     
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">Exam Date :</label>
-                                            <input type="date" name="date[]" class="form-control">
-                                        </div>
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">Start At :</label>
+                                            <label for="">Start Time :</label>
                                             <input type="time" name="start_time[]" class="form-control">
                                         </div>
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">End At :</label>
+                                        <div class="col-md-3 mt-3">
+                                            <label for="">End Time :</label>
                                             <input type="time" name="end_time[]" class="form-control">
                                         </div>
                                     </div>
@@ -356,7 +308,7 @@ $(document).ready(function() {
         });
 
         $(document).on('click','.minus-btn-data-old',function(){
-             $(this).parent().parent().append('<input type="hidden" name="delete_exam_schedule_item[]" value="'+$(this).attr('exam_schedule_item_id')+'">');
+             $(this).parent().parent().append('<input type="hidden" name="delete_class_routine_item[]" value="'+$(this).attr('class_routine_item_id')+'">');
             $(this).parent().remove();
         });
 
