@@ -194,6 +194,12 @@ class ClassRoutineController extends Controller
         return view('Backend.school_management.class_routine.view_class_routine',compact('class_routine'));
     }
 
+    public function print(Request $request,$id){
+        // dd('hi');
+        $class_routine =  ClassRoutine::find($id);
+        return view('Backend.school_management.class_routine.view_class_routine_print',compact('class_routine'));
+    }
+
 
 
 
