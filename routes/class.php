@@ -102,3 +102,4 @@ Route::prefix('routine')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::get('print/{id}', [ClassRoutineController::class,"print"])->name('admin.routine.print');
 });
 //-----------------------------routine Route End---------------------------//
+

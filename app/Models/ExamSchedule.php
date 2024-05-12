@@ -20,4 +20,8 @@ class ExamSchedule extends Model
     public function exam_schedule_items(){
         return $this->hasMany(ExamScheduleItem::class,"examschedule_id",'id');
     }
+
+    public function session(){
+        return $this->belongsTo(Session::class,"session_id",'id');
+    }
 }

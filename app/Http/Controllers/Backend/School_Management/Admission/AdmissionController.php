@@ -176,4 +176,37 @@ class AdmissionController extends Controller
         $admission->update();
         return redirect()->route('admin.admission.index')->with('message', 'Admiddion Status Updated');
     }
+
+
+      //ajax getCountry
+    //   public function getGroup($id){
+    //     $group = Group::where("class_id",$id)->get();
+    //     return $group;
+	// }
+
+    public function getGroups($class_id)
+    {
+        $groups = Group::where('class_id', $class_id)->get();
+        $options = '<option value="">Select Group</option>';
+        foreach ($groups as $group) {
+            $options .= '<option value="' . $group->id . '">' . $group->name . '</option>';
+        }
+        return response()->json($options);
+    }
+
+    public function getSections($class_id)
+    {
+        $sections = Session::where('class_id', $class_id)->get();
+        $options = '<option value="">Select Section</option>';
+        foreach ($sections as $section) {
+            $options .= '<option value="' . $section->id . '">' . $section->id . '</option>';
+        }
+        return response()->json($options);
+    }
+
+
+
+
+
+
 }

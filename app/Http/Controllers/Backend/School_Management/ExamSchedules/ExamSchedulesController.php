@@ -13,6 +13,7 @@ use App\Models\ExamScheduleItem;
 use App\Models\Bulding;
 use App\Models\Room;
 use App\Models\Floor;
+use App\Models\Session;
 
 class ExamSchedulesController extends Controller
 {
@@ -35,6 +36,7 @@ class ExamSchedulesController extends Controller
         $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
         $data['rooms'] = Room::orderBy('id', 'desc')->get();
         $data['floors'] = Floor::orderBy('id', 'desc')->get();
+        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
 
         return view('Backend.school_management.examschedule.addExam',$data);
     }
@@ -54,6 +56,7 @@ class ExamSchedulesController extends Controller
             $examschedule = new ExamSchedule();
             $examschedule->class_id = $request->class_id;
             $examschedule->examination_id = $request->examination_id;
+            $examschedule->session_id = $request->session_id;
             $examschedule->save();
 
             if($request->subject_id){
@@ -97,6 +100,7 @@ class ExamSchedulesController extends Controller
        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
        $data['rooms'] = Room::orderBy('id', 'desc')->get();
        $data['floors'] = Floor::orderBy('id', 'desc')->get();
+       $data['sessions']=Session::orderBy('id', 'desc')->get(); 
         return view('Backend.school_management.examschedule.editExamdetails',$data);
     }
 
@@ -113,6 +117,7 @@ class ExamSchedulesController extends Controller
             $examschedule = ExamSchedule::find($id);
             $examschedule->class_id = $request->class_id;
             $examschedule->examination_id = $request->examination_id;
+            $examschedule->session_id = $request->session_id;
             $examschedule->save();
 
             if($request->subject_id){

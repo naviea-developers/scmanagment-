@@ -53,7 +53,7 @@
                             <select class="form-control" name="session_id" >
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ $session->session }}</option>
+                                <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -108,25 +108,25 @@
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Student Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                <input type="text" name="student_name" class="form-control" placeholder="Enter Student Name" value="{{ auth()->user()->name }}" required>
+                                <input type="text" name="student_name" class="form-control" placeholder="Enter Student Name" value="{{ old('student_name') }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Date of Birth: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                <input type="date" name="dob" class="form-control" placeholder="Enter Student Age" value="{{ auth()->user()->dob }}" required>
+                                <input type="date" name="dob" class="form-control" placeholder="Enter Student Age" value="{{ old('dob') }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Student Phone: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                <input type="text" name="student_phone" class="form-control" placeholder="Enter Student Phone Num" value="{{ auth()->user()->mobile }}" required>
+                                <input type="text" name="student_phone" class="form-control" placeholder="Enter Student Phone Num" value="{{ old('student_phone') }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Student Email: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                <input type="email" name="student_email" class="form-control" placeholder="Enter Student Email" value="{{ auth()->user()->email }}" required>
+                                <input type="email" name="student_email" class="form-control" placeholder="Enter Student Email" value="{{ old('student_email') }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">

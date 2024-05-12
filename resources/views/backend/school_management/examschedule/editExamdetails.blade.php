@@ -32,7 +32,7 @@
                 <form action="{{ route('updateExam',$editData->id) }}" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Select Class : </label>
                             <select name="class_id" id=""class="form-select">
                                 <option value="">Select Class</option>
@@ -41,7 +41,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="">Exam title :</label>
                             <select name="examination_id" id="" class="form-select">
                                 <option value="">Select Exam title</option>
@@ -49,6 +49,15 @@
                                     <option @if($examination->id == $editData->examination_id)  Selected @endif value="{{ $examination->id }}">{{ $examination->name }}</option>
                                 @endforeach
 
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Section :</label>
+                            <select name="session_id" id="" class="form-select">
+                                <option value="">Select Section</option>
+                                @foreach (@$sessions as $session)
+                                    <option @if($session->id == $editData->session_id)  Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

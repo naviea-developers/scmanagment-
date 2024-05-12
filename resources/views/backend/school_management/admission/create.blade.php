@@ -66,40 +66,64 @@
                             <select class="form-control" name="session_id" >
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ $session->session }}</option>
+                                <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
                             </select>
                             </div>
 
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                                 <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
-                                <select class="form-control" name="class_id">
+                                <select class="form-control" name="class_id" id="class">
+                                    <option value="">Select Class</option>
+                                    @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+    
+
+                            {{-- <div class="col-sm-4 mt-3">
+                            <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
+                            <select class="form-control" name="group_id" id="group">
+                                <option value="">Select Group</option>
+                                @foreach ($groups as $group)
+                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                            </div> --}}
+
+                            {{-- <div class="col-sm-4 mt-3">
+                            <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
+                            <select class="form-control" name="section_id" id="section">
+                                <option value="">Select Section</option>
+                                @foreach ($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                @endforeach
+                            </select>
+                            </div> --}}
+
+                            <div class="col-sm-4">
+                                <label class="form-control-label">Class: <span class="tx-danger">*</span></label>
+                                <select class="form-control" name="class_id" id="class">
                                     <option value="">Select Class</option>
                                     @foreach ($classes as $class)
                                     <option value="{{ $class->id }}">{{ $class->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-    
-
+                            
                             <div class="col-sm-4 mt-3">
-                            <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="group_id" >
-                                <option value="">Select Group</option>
-                                @foreach ($groups as $group)
-                                <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                @endforeach
-                            </select>
+                                <label class="form-control-label">Group: <span class="tx-danger">*</span></label>
+                                <select class="form-control" name="group_id" id="group">
+                                    <option value="">Select Group</option>
+                                </select>
                             </div>
-
+                            
                             <div class="col-sm-4 mt-3">
-                            <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="section_id" >
-                                <option value="">Select Section</option>
-                                @foreach ($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->name }}</option>
-                                @endforeach
-                            </select>
+                                <label class="form-control-label">Section: <span class="tx-danger">*</span></label>
+                                <select class="form-control" name="section_id" id="section">
+                                    <option value="">Select Section</option>
+                                </select>
                             </div>
 
                             <div class="col-sm-4 mt-3">
@@ -375,6 +399,74 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
 
 <script>
+     $(document).ready(function() {
+        $('#class').change(function() {
+            var class_id = $(this).val();
+            console.log(class_id);
+            if(class_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "/get-groups/" + class_id,
+                    success: function(data) {
+                        $('#group').html(data);
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "/get-sections/" + class_id,
+                    success: function(data) {
+                        $('#section').html(data);
+                    }
+                });
+            } else {
+                $('#group').html('<option value="">Select Group</option>');
+                $('#section').html('<option value="">Select Section</option>');
+            }
+        });
+    });
+//class axios start
+// $('body').on("change",'#class',function(){
+//       let id = $(this).val();
+//       getGroup(id,"group");
+//   });
+
+//   function getGroup(id,outid){
+//       let url = '{{ url("get/group/") }}/' + id;
+//       axios.get(url)
+//           .then(res => {
+//               console.log(res);
+//           $('#'+outid).empty();
+//               let html = '';
+//               html += '<option value="">Select Group</option>'
+//               res.data.forEach(element => {
+//                   html += "<option value=" + element.id + ">" + element.name + "</option>"
+//               });
+              
+
+//               $('#'+outid).append(html);
+//               $('#'+outid).val("").change();
+//           });
+//   }
+
+
+//   $('body').on("change",'#country',function(){
+//       console.log("this");
+//       let id = $(this).val();
+//       getState(id,"state");
+//   });
+
+
+
+
+//class axios end
+
+
+
+
+
+
+
+
 
   $('body').on("change",'#continent',function(){
       let id = $(this).val();
