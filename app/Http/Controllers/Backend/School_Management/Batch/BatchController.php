@@ -13,7 +13,7 @@ class BatchController extends Controller
 {
     public function index()
     { 
-        $data['batchs'] = Batch::where('status', 1)->get();
+        $data['batchs'] = Batch::all();
         // dd($data);
         return view('Backend.school_management.batch.index', $data);
     }
