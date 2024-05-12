@@ -197,6 +197,19 @@ $(document).ready(function() {
                                     <div class="d-flex align-items-center select-add-section" style="width: 97%;">
                                        <div class="row">
                                         <div class="col-md-3">
+                                                <label>Select Day : </label>
+                                                <select name="day_id[]" id=""class="form-select">
+                                                    <option value="">Select Day</option>
+                                                    <option value="1">Saturday</option>
+                                                    <option value="2">Sunday</option>
+                                                    <option value="3">Monday</option>
+                                                    <option value="4">Tuesday</option>
+                                                    <option value="5">Wednesday</option>
+                                                    <option value="6">Thursday</option>
+                                                    <option value="7">Friday</option>
+                                                </select>
+                                            </div>
+                                        <div class="col-md-3">
                                             <label>Select Subject : </label>
                                             <select name="subject_id[]" id=""class="form-select">
                                                 <option value="">Select Subject</option>
@@ -225,7 +238,7 @@ $(document).ready(function() {
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 mt-3">
                                             <label>Select Floors : </label>
                                             <select name="floor_id[]" id=""class="form-select">
                                                 <option value="">Select Floors</option>

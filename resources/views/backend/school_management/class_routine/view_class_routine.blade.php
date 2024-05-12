@@ -92,6 +92,32 @@
               </tr>
           @endforeach
 
+          {{-- @foreach ($class_routine->class_routine_items as $key => $item)
+          @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+              <tr>
+                  <td>{{ $item->day }}</td>
+                  <td>{{ $item->Teacher->name }}</td>
+                  <td>{{ $item->subject->name }}</td>
+                  <td>{{ $item->bulding->name }}</td>
+                  <td>{{ $item->floor->name }}</td>
+                  <td>{{ $item->room->name }}</td>
+                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+              </tr>
+          @else
+              <tr>
+                  <td></td>
+                  <td>{{ $item->Teacher->name }}</td>
+                  <td>{{ $item->subject->name }}</td>
+                  <td>{{ $item->bulding->name }}</td>
+                  <td>{{ $item->floor->name }}</td>
+                  <td>{{ $item->room->name }}</td>
+                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+              </tr>
+          @endif
+      @endforeach --}}
+
+
+
 
         </tbody>
       </table>

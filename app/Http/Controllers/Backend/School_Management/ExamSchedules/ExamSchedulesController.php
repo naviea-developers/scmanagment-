@@ -183,5 +183,11 @@ class ExamSchedulesController extends Controller
         return back()->with('message','exam schedule Deleted Successfully');
     }
 
+    public function print(Request $request,$id){
+        // dd('hi');
+        $examRoutine =  ExamSchedule::find($id);
+        return view('Backend.school_management.examschedule.view_exam_routine_print',compact('examRoutine'));
+    }
+
   
 }
