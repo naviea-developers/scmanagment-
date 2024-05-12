@@ -30,5 +30,39 @@ class Admission extends Model
     public function group(){
         return $this->belongsTo(Group::class,"group_id",'id');
     }
+    
+//present
+    public function present_continent(){
+        return $this->belongsTo(Continent::class,"present_continent_id",'id');
+    }
+    public function present_country(){
+        return $this->belongsTo(Country::class,"present_country_id",'id');
+    }
+    public function present_state(){
+        return $this->belongsTo(State::class,"present_state_id",'id');
+    }
+    public function present_city(){
+        return $this->belongsTo(City::class,"present_city_id",'id');
+    }
+
+//Permanent
+    public function permanent_continent(){
+        return $this->belongsTo(Continent::class,"permanent_continent_id",'id');
+    }
+    public function permanent_country(){
+        return $this->belongsTo(Country::class,"permanent_country_id",'id');
+    }
+    public function permanent_state(){
+        return $this->belongsTo(State::class,"permanent_state_id",'id');
+    }
+    public function permanent_city(){
+        return $this->belongsTo(City::class,"permanent_city_id",'id');
+    }
+
+
+
+    public function pre_class(){
+        return $this->belongsTo(Classe::class,"pre_class_id",'id');
+    }
 
 }

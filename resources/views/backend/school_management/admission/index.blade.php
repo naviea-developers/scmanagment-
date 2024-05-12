@@ -57,7 +57,7 @@ Admin - All Admissions
                           <td>{{ $admission->student_name }}</td>
                           <td>{{ @$admission->class->name }}</td>
                           <td>{{ @$admission->academic_year->year }}</td>
-                          <td>{{ @$admission->session->session }}</td>
+                          <td>{{ @$admission->session->start_year->year }} - {{ @$admission->session->end_year->year }}</td>
                           <td>{{ @$admission->section->name }}</td>
                           <td>{{ @$admission->group->name }}</td>
                           <td>

@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
-
+use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
 Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -185,5 +185,28 @@ Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 
 
 
+
+
+
+// -------------------------------------
+//Add Admission for Student
+// Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('admission', [AdmissionAdmissionController::class,"studentAdmission"])->name('frontend.student_admission');
+    Route::post('store', [AdmissionAdmissionController::class,"store"])->name('frontend.student_admission.store');
+
+
+    // Route::post('store', [AdmissionAdmissionController::class,"store"])->name('admin.admission.store');
+    // Route::get('details/{id}', [AdmissionAdmissionController::class,"details"])->name('admin.admission.details');
+    // Route::get('edit/{id}', [AdmissionAdmissionController::class,"edit"])->name('admin.admission.edit');
+    // Route::post('update/{id}', [AdmissionAdmissionController::class,"update"])->name('admin.admission.update');
+    // Route::post('delete', [AdmissionAdmissionController::class,"destroy"])->name('admin.admission.delete');
+    // Route::get('/status/{id}', [AdmissionAdmissionController::class, 'status'])->name('admin.admission.status');
+// });
+
+Route::get('get-groups/{class_id}', [AdmissionController::class, 'getGroups']);
+Route::get('get-sections/{class_id}', [AdmissionController::class, 'getSections']);
+
+// Route::get('/get-groups/{class_id}', 'App\Http\Controllers\ClassController@getGroups');
+// Route::get('/get-sections/{class_id}', 'App\Http\Controllers\ClassController@getSections');
 
 
