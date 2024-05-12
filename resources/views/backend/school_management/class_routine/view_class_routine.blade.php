@@ -28,13 +28,19 @@
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
 @section('main_contain')
-
+<br>
 <div class="br-mainpanel">
 
+  
   <div class="container">
+
+    <div class="float-end">
+      <a href="{{ route('admin.routine.print',$class_routine->id) }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
+    </div>
+
     <div class="school-name">
       <h1>School Name</h1>
-      <h5>Class Name{{ @$class_routine->class->name }}</h5>
+      <h5>Class Name: {{ @$class_routine->class->name }}</h5>
       <h5>Session: {{@$class_routine->session->start_date}} - {{@$class_routine->session->end_date}}</h5>
     </div>
   
@@ -45,38 +51,47 @@
         <thead>
           <tr>
             <th>Day</th>
-            <th>9:00 AM</th>
-            <th>11:00 AM</th>
-            <th>2:00 PM</th>
+            <th>Teacher Name</th>
+            <th>Subject Name</th>
+            <th>Bulding Name</th>
+            <th>Floor Name</th>
+            <th>Room Name</th>
+            <th>Time</th>
+            
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>Monday</td>
-            <td>Math</td>
-            <td>Science</td>
-            <td>English</td>
-          </tr>
+          {{-- @foreach (@$class_routine->class_routine_items as $item)
+            <tr>
+              <td>{{ $item->day }}</td>
+              <td>{{ $item->Teacher->name }}</td>
+              <td>{{ $item->subject->name }}</td>
+              <td>{{ $item->bulding->name }}</td>
+              <td>{{ $item->floor->name }}</td>
+              <td>{{ $item->room->name }}</td>
+              <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+            </tr>
+          @endforeach --}}
 
-          {{-- <tr>
-            <td>Tuesday</td>
-            <td>History</td>
-            <td>Geography</td>
-            <td>Art</td>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td>Math</td>
-            <td>Science</td>
-            <td>English</td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td>History</td>
-            <td>Geography</td>
-            <td>Art</td>
-          </tr> --}}
+          @php
+              $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
+          @endphp
+
+          @foreach ($class_routine->class_routine_items as $key => $item)
+              <tr>
+                  @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+                      <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
+                  @endif
+                  <td>{{ $item->Teacher->name }}</td>
+                  <td>{{ $item->subject->name }}</td>
+                  <td>{{ $item->bulding->name }}</td>
+                  <td>{{ $item->floor->name }}</td>
+                  <td>{{ $item->room->name }}</td>
+                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+              </tr>
+          @endforeach
+
 
         </tbody>
       </table>

@@ -98,5 +98,6 @@ Route::prefix('routine')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::post('delete', [ClassRoutineController::class,"destroy"])->name('admin.routine.delete');
     Route::get('/status/{id}', [ClassRoutineController::class, 'status'])->name('admin.routine.status');
     Route::get('details/{id}', [ClassRoutineController::class,"details"])->name('admin.routine.details');
+    Route::get('print/{id}', [ClassRoutineController::class,"print"])->name('admin.routine.print');
 });
 //-----------------------------routine Route End---------------------------//
