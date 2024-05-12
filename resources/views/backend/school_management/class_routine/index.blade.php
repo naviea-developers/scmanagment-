@@ -39,7 +39,7 @@
 
                         <tr>
                             <td>{{@$data->class->name}}</td>
-                            <td>{{@$data->session->start_date}} - {{@$data->session->end_date}}</td>
+                            <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
                            
                             <td>
                                 {{-- <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">

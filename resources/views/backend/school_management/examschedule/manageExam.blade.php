@@ -28,8 +28,9 @@
                 <table class="table" id="datatable1">
                     <thead>
                       <tr>
-                        <th scope="col">Title</th>
+                        <th scope="col">Exam Title</th>
                         <th scope="col">Class Name</th>
+                        <th scope="col">Session</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -40,6 +41,7 @@
                         <tr>
                             <td>{{@$data->examination->name}}</td>
                             <td>{{@$data->class->name}}</td>
+                            <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
                            
                             <td>
                                 <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">
