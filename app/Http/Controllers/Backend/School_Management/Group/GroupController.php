@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\School_management\Group;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
+use App\Models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view("Backend.school_management.group.create");
+        $data['classes'] = Classe::orderBy('id', 'desc')->get();
+        return view("Backend.school_management.group.create",$data);
     }
 
     /**
@@ -37,6 +39,7 @@ class GroupController extends Controller
             DB::beginTransaction();
             $group = New Group;
             $group->name = $request->name;
+            $group->class_id = $request->class_id;
             $group->save();
 
             DB::commit();
@@ -63,6 +66,7 @@ class GroupController extends Controller
     {
        // dd('hi');
         $data["group"]= Group::find($id);
+        $data['classes'] = Classe::orderBy('id', 'desc')->get();
         return view("Backend.school_management.group.update",$data);
     }
 
@@ -80,6 +84,7 @@ class GroupController extends Controller
         DB::beginTransaction();
         $group = Group::find($id);
         $group->name = $request->name;
+        $group->class_id = $request->class_id;
         $group->save();
 
         DB::commit();
