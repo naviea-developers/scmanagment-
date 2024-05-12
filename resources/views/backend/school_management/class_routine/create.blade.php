@@ -43,15 +43,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{-- <div class="col-md-6">
-                            <label for="">Exam title :</label>
-                            <select name="examination_id" id="" class="form-select">
-                                <option value="">Select Exam title</option>
-                                @foreach (@$examinations as $examination)
-                                    <option value="{{ $examination->id }}">{{ $examination->name }}</option>
+                        <div class="col-md-6">
+                            <label for="">Section :</label>
+                            <select name="session_id" id="" class="form-select">
+                                <option value="">Select Section</option>
+                                @foreach (@$sessions as $session)
+                                    <option value="{{ $session->id }}">{{ $session->start_date }} - {{ $session->end_date }}</option>
                                 @endforeach
                             </select>
-                        </div> --}}
+                        </div>
                     </div>
                     
                     <button type="button" class="btn btn-sm btn-add" id="plus-btn-data">Add</button>
@@ -63,6 +63,19 @@
                                 <div class="d-flex align-items-center mt-2">
                                     <div class="d-flex align-items-center select-add-section" style="width: 97%;">
                                         <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Select Day : </label>
+                                                <select name="day_id[]" id=""class="form-select">
+                                                    <option value="">Select Day</option>
+                                                    <option value="1">Saturday</option>
+                                                    <option value="2">Sunday</option>
+                                                    <option value="3">Monday</option>
+                                                    <option value="4">Tuesday</option>
+                                                    <option value="5">Wednesday</option>
+                                                    <option value="6">Thursday</option>
+                                                    <option value="7">Friday</option>
+                                                </select>
+                                            </div>
                                             <div class="col-md-3">
                                                 <label>Select Subject : </label>
                                                 <select name="subject_id[]" id=""class="form-select">
@@ -101,7 +114,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3 mt-3">
                                                 <label>Select Floors : </label>
                                                 <select name="floor_id[]" id=""class="form-select">
                                                     <option value="">Select Floors</option>

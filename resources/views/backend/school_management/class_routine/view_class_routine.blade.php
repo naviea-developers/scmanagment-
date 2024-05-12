@@ -34,11 +34,14 @@
   <div class="container">
     <div class="school-name">
       <h1>School Name</h1>
+      <h5>Class Name{{ @$class_routine->class->name }}</h5>
+      <h5>Session: {{@$class_routine->session->start_date}} - {{@$class_routine->session->end_date}}</h5>
     </div>
   
     <div class="class-routine">
       <h2>Class Routine</h2>
       <table>
+
         <thead>
           <tr>
             <th>Day</th>
@@ -47,6 +50,7 @@
             <th>2:00 PM</th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
             <td>Monday</td>
@@ -54,7 +58,8 @@
             <td>Science</td>
             <td>English</td>
           </tr>
-          <tr>
+
+          {{-- <tr>
             <td>Tuesday</td>
             <td>History</td>
             <td>Geography</td>
@@ -71,7 +76,8 @@
             <td>History</td>
             <td>Geography</td>
             <td>Art</td>
-          </tr>
+          </tr> --}}
+
         </tbody>
       </table>
     </div>

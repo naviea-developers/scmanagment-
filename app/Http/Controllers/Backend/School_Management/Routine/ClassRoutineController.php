@@ -16,6 +16,7 @@ use App\Models\Floor;
 use App\Models\ClassRoutine;
 use App\Models\ClassRoutineItem;
 use App\Models\User;
+use App\Models\Session;
 
 class ClassRoutineController extends Controller
 {
@@ -31,6 +32,7 @@ class ClassRoutineController extends Controller
 
     public function create(){
         $data['className']=Classe::orderBy('id', 'desc')->get(); 
+        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
         $data['subjectName']=Subject::orderBy('id', 'desc')->get();
         $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->get();
         $data['examinations']=Examination::orderBy('id', 'desc')->get();
@@ -48,14 +50,15 @@ class ClassRoutineController extends Controller
       // dd($request->all());
         $request->validate([
             'class_id' => 'required',
-            // 'examination_id' => 'required',
+            'session_id' => 'required',
+            'day_id' => 'required',
 
         ]);
         try{
             DB::beginTransaction();
             $class_routine = new ClassRoutine();
             $class_routine->class_id = $request->class_id;
-            // $examschedule->examination_id = $request->examination_id;
+            $class_routine->session_id = $request->session_id;
             $class_routine->save();
 
             if($request->subject_id){
@@ -63,6 +66,7 @@ class ClassRoutineController extends Controller
                     $class_routine_item = new ClassRoutineItem();
                     $class_routine_item->class_routine_id = $class_routine->id;
                     $class_routine_item->subject_id = $value;
+                    $class_routine_item->day_id = $request->day_id[$k];
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
                     $class_routine_item->bulding_id = $request->bulding_id[$k];
@@ -91,6 +95,7 @@ class ClassRoutineController extends Controller
 
     public function edit($id){
        $data['editData'] =  ClassRoutine::find($id);
+       $data['sessions']=Session::orderBy('id', 'desc')->get(); 
        $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->get();
        $data['className']=Classe::orderBy('id', 'desc')->get(); 
        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
@@ -106,14 +111,15 @@ class ClassRoutineController extends Controller
     // dd($request->all());
         $request->validate([
             'class_id' => 'required',
-            // 'examination_id' => 'required',
+            'session_id' => 'required',
+            // 'day_id' => 'required',
 
         ]);
         try{
             DB::beginTransaction();
             $class_routine = ClassRoutine::find($id);
             $class_routine->class_id = $request->class_id;
-            // $examschedule->examination_id = $request->examination_id;
+            $class_routine->session_id = $request->session_id;
             $class_routine->save();
 
             if($request->subject_id){
@@ -121,6 +127,7 @@ class ClassRoutineController extends Controller
                     $class_routine_item = new ClassRoutineItem();
                     $class_routine_item->class_routine_id = $class_routine->id;
                     $class_routine_item->subject_id = $value;
+                    $class_routine_item->day_id = $request->day_id[$k];
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
                     $class_routine_item->bulding_id = $request->bulding_id[$k];
@@ -136,6 +143,7 @@ class ClassRoutineController extends Controller
                     $class_routine_item = ClassRoutineItem::find($k);
                     $class_routine_item->class_routine_id = $class_routine->id;
                     $class_routine_item->subject_id = $value;
+                    $class_routine_item->day_id = $request->old_day_id[$k];
                     $class_routine_item->teacher_id = $request->old_teacher_id[$k];
                     $class_routine_item->room_id = $request->old_room_id[$k];
                     $class_routine_item->bulding_id = $request->old_bulding_id[$k];

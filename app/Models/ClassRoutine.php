@@ -13,6 +13,9 @@ class ClassRoutine extends Model
         return $this->belongsTo(Classe::class,"class_id",'id');
     }
 
+    public function session(){
+        return $this->belongsTo(Session::class,"session_id",'id');
+    }
 
     public function class_routine_items(){
         return $this->hasMany(ClassRoutineItem::class,"class_routine_id",'id');
