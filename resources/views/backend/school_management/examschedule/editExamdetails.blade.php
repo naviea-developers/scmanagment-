@@ -94,27 +94,6 @@
                                 @if($editData->exam_schedule_items->count() == 0)
                                     <div class="d-flex align-items-center mt-2">
                                         <div class="d-flex align-items-center select-add-section" style="width: 97%;">
-                                            {{-- <div class="col-md-3 col-1">
-                                                <label>Select Subject : </label>
-                                                <select name="subject_id[]" id=""class="form-select">
-                                                    <option value="">Select Subject</option>
-                                                    @foreach ($subjectName as $subject)
-                                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3 column-2">
-                                                <label for="">Exam Date :</label>
-                                                <input type="date" name="date[]" class="form-control">
-                                            </div>
-                                            <div class="col-md-3 column-3">
-                                                <label for="">Start At :</label>
-                                                <input type="time" name="start_time[]" class="form-control">
-                                            </div>
-                                            <div class="col-md-3 column-4">
-                                                <label for="">End At :</label>
-                                                <input type="time" name="end_time[]" class="form-control">
-                                            </div> --}}
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <label>Select Subject : </label>
@@ -126,15 +105,7 @@
                                                     </select>
                                                 </div>
     
-                                                <div class="col-md-3">
-                                                    <label>Select Rooms : </label>
-                                                    <select name="room_id[]" id=""class="form-select">
-                                                        <option value="">Select Rooms</option>
-                                                        @foreach ($rooms as $room)
-                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                
                                                 <div class="col-md-3">
                                                     <label>Select Buldings : </label>
                                                     <select name="bulding_id[]" id=""class="form-select">
@@ -150,6 +121,15 @@
                                                         <option value="">Select Floors</option>
                                                         @foreach ($floors as $floor)
                                                             <option value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="room_id[]" id=""class="form-select">
+                                                        <option value="">Select Rooms</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -194,15 +174,7 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <label>Select Rooms : </label>
-                                                    <select name="old_room_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
-                                                        <option value="">Select Rooms</option>
-                                                        @foreach ($rooms as $room)
-                                                            <option @if($room->id == $exam_schedule_item->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                
                                                 <div class="col-md-3">
                                                     <label>Select Buldings : </label>
                                                     <select name="old_bulding_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
@@ -218,6 +190,15 @@
                                                         <option value="">Select Floors</option>
                                                         @foreach ($floors as $floor)
                                                             <option @if($floor->id == $exam_schedule_item->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="old_room_id[{{ $exam_schedule_item->id }}]" id=""class="form-select">
+                                                        <option value="">Select Rooms</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option @if($room->id == $exam_schedule_item->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -294,15 +275,7 @@ $(document).ready(function() {
                                             </select>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <label>Select Rooms : </label>
-                                            <select name="room_id[]" id=""class="form-select">
-                                                <option value="">Select Rooms</option>
-                                                @foreach ($rooms as $room)
-                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                       
                                         <div class="col-md-3">
                                             <label>Select Buldings : </label>
                                             <select name="bulding_id[]" id=""class="form-select">
@@ -318,6 +291,15 @@ $(document).ready(function() {
                                                 <option value="">Select Floors</option>
                                                 @foreach ($floors as $floor)
                                                     <option value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Select Rooms : </label>
+                                            <select name="room_id[]" id=""class="form-select">
+                                                <option value="">Select Rooms</option>
+                                                @foreach ($rooms as $room)
+                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
