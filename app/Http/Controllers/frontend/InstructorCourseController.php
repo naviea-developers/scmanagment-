@@ -21,6 +21,9 @@ use App\Models\CoursezprojectFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\RelatedCourse;
+use App\Models\HomeWork;
+use App\Models\Classe;
+use App\Models\Subject;
 
 class InstructorCourseController extends Controller
 {
@@ -734,4 +737,106 @@ class InstructorCourseController extends Controller
         $course->delete();
         return back()->with('message','Course Deleted Successfully');
     }
+
+// home work start
+
+    public function indexHomeWork()
+    {
+         //dd('hi');
+        $data['home_works'] = HomeWork::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+        return view('user.instructor.home_worke_index', $data);
+    }
+
+    public function createHomeWork()
+    {
+        // dd('hi');
+        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        return view('user.instructor.home_worke_create', $data);
+    }
+
+    public function storeHomeWork(Request $request)
+    {
+        // dd('hi');
+        $request->validate([
+            'class_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $home_work = New HomeWork();
+            $home_work->teacher_id = auth()->user()->id;
+            $home_work->class_id = $request->class_id;
+            $home_work->subject_id = $request->subject_id;
+            if($request->hasFile('image')){
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/home_work/'),$fileName);
+                $home_work->image = $fileName;
+            }
+            // $home_work->image = $request->image;
+            $home_work->details = $request->details;
+            $home_work->save();
+            DB::commit();
+            return redirect()->route('instructor.homework.index')->with('message','Home Work Add Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+    public function editHomeWork(string $id)
+    {
+        // dd('hi');
+        $data["home_work"]= HomeWork::find($id);
+        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        return view("user.instructor.home_worke_update",$data);
+    }
+
+   
+    public function updateHomeWork(Request $request, $id)
+    {
+        $request->validate([
+            'class_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $home_work = HomeWork::find($id);
+            $home_work->teacher_id = auth()->user()->id;
+            $home_work->class_id = $request->class_id;
+            $home_work->subject_id = $request->subject_id;
+            if($request->hasFile('image')){
+                @unlink(public_path("upload/home_work/".$home_work->image));
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/home_work/'),$fileName);
+                $home_work->image = $fileName;
+            }
+            $home_work->details = $request->details;
+            $home_work->save();
+
+           
+
+            DB::commit();
+            return redirect()->route('instructor.homework.index')->with('message','Home Work Update Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+    public function destroyHomeWork(Request $request)
+    {
+        // dd('hi');
+        $home_work =  HomeWork::find($request->homework_id);
+        $home_work->delete();
+        return redirect()->route('instructor.homework.index')->with('message','Home Work Deleted Successfully');
+    }
+// home work End
+
+
+
+
 }
