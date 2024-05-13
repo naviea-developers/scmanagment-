@@ -34,14 +34,14 @@ class AdmissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'class_id' => 'required',
-            'academic_year_id' => 'required',
-            'session_id' => 'required',
-            'section_id' => 'required',
-            'group_id' => 'required',
-            'student_name' => 'required',
-            'student_email' => 'required',
-            'password' => 'required',
+            // 'class_id' => 'required',
+            // 'academic_year_id' => 'required',
+            // 'session_id' => 'required',
+            // 'section_id' => 'required',
+            // 'group_id' => 'required',
+            // 'student_name' => 'required',
+            // 'student_email' => 'required',
+            // 'password' => 'required',
 
         ]);
         try{
@@ -178,10 +178,15 @@ class AdmissionController extends Controller
     }
 
 
-      //ajax getCountry
+      //ajax getGroup
       public function getGroup($id){
         $group = Group::where("class_id",$id)->get();
         return $group;
+	  }
+      //ajax getFees
+      public function getFees($id){
+        $fee = FeeManagement::where("class_id",$id)->with('fee')->get();
+        return $fee;
 	  }
 
 

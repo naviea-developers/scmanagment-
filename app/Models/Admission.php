@@ -10,7 +10,7 @@ class Admission extends Model
     use HasFactory;
 
     public function getImageShowAttribute(){
-        return $this->image != "" ? asset('public/upload/users/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
+        return $this->image != "" ? asset('public/upload/admission/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
     }
     public function user(){
         return $this->belongsTo(User::class,"user_id",'id');
@@ -29,6 +29,9 @@ class Admission extends Model
     }
     public function group(){
         return $this->belongsTo(Group::class,"group_id",'id');
+    }
+    public function feeManagement(){
+        return $this->belongsTo(FeeManagement::class,"fee_id",'id');
     }
     
 //present
@@ -63,6 +66,9 @@ class Admission extends Model
 
     public function pre_class(){
         return $this->belongsTo(Classe::class,"pre_class_id",'id');
+    }
+    public function certificate(){
+        return $this->belongsTo(AdmissionCertificate::class,"admission_id",'id');
     }
 
 }
