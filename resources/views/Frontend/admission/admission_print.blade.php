@@ -32,47 +32,40 @@
 <body>
 
 <div class="container">
-  <div class="school-name">
-    <h1>School Name</h1>
-    <h5>Class Name: {{ @$class_routine->class->name }}</h5>
-    <h5>Session: {{@$class_routine->session->start_date}} - {{@$class_routine->session->end_date}}</h5>
-  </div>
 
-  <div class="class-routine">
-    <h2>Class Routine</h2>
-    <table>
-      <thead>
-        <tr>
-            <th>Day</th>
-            <th>Teacher Name</th>
-            <th>Subject Name</th>
-            <th>Bulding Name</th>
-            <th>Floor Name</th>
-            <th>Room Name</th>
-            <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{-- @php
-            $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
-        @endphp
+    <div class="col-md-12 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5" >
+        <h3 class="text-center">Admission Form</h3>
+        
+            <div class="row ">
+                <div class="col-sm-4" >
+                    <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 180px;">
+                        <img class="display-upload-img" style="width: 180px;height: 200px;" src="{{ $details->image_show }}" alt="">
+                        <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
+                    </div>
+                </div>
+            </div>
 
-        @foreach ($class_routine->class_routine_items as $key => $item)
-            <tr>
-                @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                    <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
-                @endif
-                <td>{{ $item->Teacher->name }}</td>
-                <td>{{ $item->subject->name }}</td>
-                <td>{{ $item->bulding->name }}</td>
-                <td>{{ $item->floor->name }}</td>
-                <td>{{ $item->room->name }}</td>
-                <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
-            </tr>
-        @endforeach --}}
-      </tbody>
-    </table>
-  </div>
+            <div class="row mt-4">
+                <hr>
+
+                <div class="col-sm-4">
+                    <label class=" form-control-label"><b>Class: </b></label>
+                        <p >{{ @$details->class->name }}</p>
+                </div>
+
+                <div class="col-sm-4">
+                <label class=" form-control-label"><b>Group: </b></label>
+                <p >{{ @$details->group->name }}</p>
+                </div>
+
+                <div class="col-sm-4">
+                <label class=" form-control-label"><b>Fees: </b></label>
+                <p >{{ @$details->feeManagement->fee->particular_name }} - ({{ @$details->feeManagement->fee_amount }})</p>
+                </div>
+                
+            </div>
+
+    </div>
 </div>
 
 <!-- Bootstrap JS -->
