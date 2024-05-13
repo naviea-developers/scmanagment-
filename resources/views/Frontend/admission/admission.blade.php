@@ -38,7 +38,7 @@
 
 
                             
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                             <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="academic_year_id" >
                                 <option value="">Select Academic Year</option>
@@ -56,11 +56,11 @@
                                 <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
-                                <select class="form-control" name="class_id">
+                                <select class="form-control class_fee" name="class_id" id="class">
                                     <option value="">Select Class</option>
                                     @foreach ($classes as $class)
                                     <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -69,17 +69,17 @@
                             </div>
     
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="group_id" >
+                            <select class="form-control" name="group_id" id="group">
                                 <option value="">Select Group</option>
-                                @foreach ($groups as $group)
+                                {{-- @foreach ($groups as $group)
                                 <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             </div>
 
-                            <div class="col-sm-4 mt-3">
+                            {{-- <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="section_id" >
                                 <option value="">Select Section</option>
@@ -87,15 +87,15 @@
                                 <option value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="fee_id" >
+                            <select class="form-control" name="fee_id" id="fee">
                                 <option value="">Select Fee</option>
-                                @foreach ($fees as $fee)
+                                {{-- @foreach ($fees as $fee)
                                 <option value="{{ $fee->id }}">{{ $fee->fee_amount }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             </div>
 <hr class="mt-3">
@@ -223,7 +223,7 @@
     
                                 <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">State Name:<span class="tx-danger">*</span></label>
-                                <select  class="form-control" name="present_state_id" id="state" >
+                                <select  class="form-control state" name="present_state_id" id="state" >
                                     <option value="">Select State</option>
                                     </select>
                                 </div>
@@ -320,7 +320,7 @@
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="checkbox" name="pre_school" id="showInputs">
+                                    <input type="checkbox" name="pre_school" value="1" id="showInputs">
                                 </div>
                             </div>
 
@@ -356,6 +356,144 @@
                                         <input type="text" name="pre_school_address" class="form-control" placeholder="Enter Pre School Address" value="{{ old('pre_school_address') }}" >
                                         </div>
                                     </div>
+                                    {{-- <div class="col-sm-4 mt-3">
+                                        <label class="form-control-label">Certificate: <span class="tx-danger">*</span></label>
+                                        <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="file" name="certificate" class="form-control">
+                                        </div>
+                                    </div> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="mg-t-10 mg-sm-t-0 add-data-content">
+                                        {{-- @if(auth()->user()->certificate->count() == 0) --}}
+                                        <div class="d-flex align-items-center mt-2 row">
+                                            <div class="col-md-7">
+                                                <label class="form-control-label"><b>Certificate Name:</b></label>
+                                                <div class="d-flex  align-items-center select-add-section " >
+                                                    <input type="text" name="certificates_name[]" value="{{ old('$certificates_name') }}" class=" form-control" placeholder="Certificate Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-control-label"><b>Certificate File:</b></label>
+                                                <div class="d-flex  align-items-center select-add-section">
+                                                    <input type="file" name="certificates_file[]" accept="image/jpeg,image/gif,image/png,application/pdf" value="{{ old('$certificates_file') }}" class=" form-control">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-1">
+                                                <a id="plus-btn-data-content" href="javascript:void(0)" class="plus-btn-data-content px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        {{-- @else
+                                        @foreach (auth()->user()->certificate as $k=>$item)
+                                        <div class="d-flex align-items-center mt-2 row">
+                                            <div class="col-md-7">
+                                                <label class="form-control-label"><b>Certificate Name:</b></label>
+                                                <div class="d-flex  align-items-center select-add-section " >
+                                                    <input type="text" name="old_certificates_name[{{ $item->id }}]" value="{{ $item->certificates_name }}" class=" form-control" placeholder="Certificate Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-control-label"><b>Certificate File:</b></label>
+                                                <div class="d-flex  align-items-center select-add-section">
+                                                    <input type="file" accept="image/jpeg,image/gif,image/png,application/pdf" name="old_certificates_file[{{ $item->id }}]"  value="{{ $item->certificates_file }}" class=" form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="form-control-label"><b>View:</b></label>
+                                                <div class="d-flex  align-items-center select-add-section">
+                                                    <a class="btn btn-primary"  data-toggle="modal" data-target="#certificateModal{{ $k }}"> &nbsp;<i class="fa-solid fa-eye"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                @if($k == auth()->user()->certificate->count() - 1)
+                                                <a id="plus-btn-data-content" href="javascript:void(0)" class="plus-btn-data-content px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
+                                                @else
+                                                <a audio_file_id="{{ $item->id }}" href="javascript:void(0)" class="minus-btn-data-old-audio px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
+                                                @endif
+                                            </div>
+                                        </div>
+        
+        
+        
+                                         <!-- Modal -->
+                                        <div class="modal fade" id="certificateModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="audioModalLabel" style="color: black">{{ $item->certificates_name }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @if ($item->extension == 'pdf')
+                                                        <iframe src="{{ $item->certificates_file_show  }}" width="100%" height="500"></iframe>
+                                                    @else
+                                                    <img src="{{ $item->certificates_file_show  }}" alt="image" style="height: 300px; width:450px">
+                                                    @endif
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+        
+        
+                                        @endforeach 
+                                        @endif --}}
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 </div>
                             </div>
@@ -390,7 +528,119 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
 
+
+
 <script>
+
+    //Audio Contents start
+    $(document).ready(function() {
+            $(document).on('click','#plus-btn-data-content',function(){
+
+
+
+                var myvar = '<div class="d-flex align-items-center mt-2 row">'+
+    '                                            <div class="col-md-7">'+
+    '                                                <label class="form-control-label"><b>Certificate Name:</b></label>'+
+    '                                                <div class="d-flex  align-items-center select-add-section " >'+
+    '                                                    <input type="text" name="certificates_name[]" value="{{ old('$certificates_name') }}" class=" form-control" placeholder="Certificate Name">'+
+    '                                                </div>'+
+    '                                            </div>'+
+    '                                            <div class="col-md-4">'+
+    '                                                <label class="form-control-label"><b>Certificate File:</b></label>'+
+    '                                                <div class="d-flex  align-items-center select-add-section">'+
+    '                                                    <input type="file"  name="certificates_file[]" accept="image/jpeg,image/gif,image/png,application/pdf" value="{{ old('$certificates_file') }}" class=" form-control">'+
+    '                                                </div>'+
+    '                                            </div>'+
+    '                                            <div class="col-md-1">'+
+    '                                             <a href="javascript:void(0)" class="minus-btn-data-content px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>'+
+    '                                            </div>'+
+    '                                        </div>';
+
+
+    $('.add-data-content').prepend(myvar);
+                //console.log();
+            });
+
+            $(document).on('click','.minus-btn-data-content',function(){
+                $(this).parent().parent().remove();
+            });
+
+
+        });
+        $(document).on('click','.minus-btn-data-old-audio',function(){
+            console.log(this);
+             $(this).parent().parent().parent().append('<input type="hidden" name="delete_certificates_file[]" value="'+$(this).attr('audio_file_id')+'">');
+             $(this).parent().parent().remove();
+        });
+
+    //Audio Contents end
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+$('body').on("change",'#class',function(){
+      let id = $(this).val();
+       console.log(id);
+      getGroup(id,"group");
+  });
+
+  function getGroup(id,outid){
+      let url = '{{ url("get/group/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select Group</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.name + "</option>"
+              });
+
+
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+  }
+
+$('body').on("change",'.class_fee',function(){
+      let id = $(this).val();
+       console.log(id);
+       getFees(id,"fee");
+  });
+
+  function getFees(id,outid){
+      let url = '{{ url("get/fee_management/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select Fee</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
+              });
+
+
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+  }
+
+
+
+
+
+
 //present Address
   $('body').on("change",'#continent',function(){
       let id = $(this).val();
@@ -439,7 +689,7 @@
   });
 
 
-  $('body').on("change",'#state',function(){
+  $('body').on("change",'.state',function(){
       console.log("this");
       let id = $(this).val();
       getCity(id,"city");
