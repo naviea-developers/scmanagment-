@@ -68,7 +68,7 @@ class Admission extends Model
         return $this->belongsTo(Classe::class,"pre_class_id",'id');
     }
     public function certificate(){
-        return $this->belongsTo(AdmissionCertificate::class,"admission_id",'id');
+        return $this->hasMany(AdmissionCertificate::class,"admission_id",'id');
     }
 
 }

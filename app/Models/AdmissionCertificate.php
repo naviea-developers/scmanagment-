@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdmissionCertificate extends Model
 {
     use HasFactory;
+    public function getCertificatesFileShowAttribute(){
+        return $this->certificates_file != "" ? asset("public/upload/certificates/".$this->certificates_file) : asset("public/frontend/images/no-profile.jpg");
+    }
 }

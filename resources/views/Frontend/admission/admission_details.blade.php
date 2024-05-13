@@ -1,5 +1,5 @@
 @extends('Frontend.layouts.master-layout')
-@section('title','- Admission')
+@section('title','- Admission Form Details')
 @section('head')
 
 @endsection
@@ -19,7 +19,7 @@
                 <div class="row mx-0 align-items-center border-md rounded-3">
                     
                     <div class="col-md-12 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5" >
-                        <h3 class="text-center">School Admission</h3>
+                        <h3 class="text-center">Admission Form</h3>
                          
                         
                         
@@ -353,7 +353,7 @@
 
 
                                     <div class="mg-t-10 mg-sm-t-0 add-data-content">
-                                        @if(auth()->user()->certificate->count() == 0)
+                                        @if($details->certificate->count() == 0)
                                         {{-- <div class="d-flex align-items-center mt-2 row">
                                             <div class="col-md-7">
                                                 <label class="form-control-label"><b>Certificate Name:</b></label>
@@ -373,7 +373,7 @@
                                             </div>
                                         </div> --}}
                                         @else
-                                        @foreach (auth()->user()->certificate as $k=>$item)
+                                        @foreach ($details->certificate as $k=>$item)
                                         <div class="d-flex align-items-center mt-2 row">
                                             <div class="col-md-5">
                                                 <label class="form-control-label"><b>Certificate Name:</b></label>
@@ -455,10 +455,13 @@
                 
                         <div class="row mt-3">
                             <hr>
-                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                            <a href="{{route('admin.teacher.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
-                            <button type="submit" class="btn btn-info ">Save</button>
-                          </div>
+                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 ">
+                            <div class="float-right">
+                                <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-edit"></i> Edit</a>
+                                <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-download"></i> Download</a>
+                                <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-print"></i> Print</a>
+                            </div>
+                        </div>
                         </div>
 
 
@@ -471,6 +474,10 @@
 
 
 @include('Frontend.layouts.parts.news-letter')
+
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> --}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @endsection
 

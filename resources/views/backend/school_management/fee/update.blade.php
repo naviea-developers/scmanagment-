@@ -49,14 +49,14 @@
                               </div>
                           </div>
                       </div> --}}
-                      <div class="row">
+                      {{-- <div class="row">
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Is Dynamic: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
                                   <input type="checkbox" name="is_dynamic" @if ($fee->is_dynamic == 1) checked @endif value="1">
                               </div>
                           </div>
-                      </div>
+                      </div> --}}
 
                         {{-- <div class="row">
                             <div class="col-sm-12 mt-3">
