@@ -152,6 +152,12 @@ class AdmissionController extends Controller
         $data['details'] = Admission::find($id);
         return view('Frontend.admission.admission_details', $data);
     }
+
+    public function print($id)
+    {
+        $data['details'] = Admission::find($id);
+        return view('Frontend.admission.admission_print', $data);
+    }
     public function edit($id)
     {
         $data['admission'] = Admission::find($id);
