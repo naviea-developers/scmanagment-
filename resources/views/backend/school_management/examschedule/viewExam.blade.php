@@ -38,7 +38,7 @@
     </div>
 
     <div class="school-name">
-      <h1>School Name</h1>
+      <h1 style="margin-left: 80px;">School Name</h1>
       <h5>Class Name: {{ @$examRoutine->class->name }}</h5>
       <h5>Examination: {{@$examRoutine->examination->name}}</h5>
     </div>

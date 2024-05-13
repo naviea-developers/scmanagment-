@@ -39,7 +39,7 @@
     </div>
 
     <div class="school-name">
-      <h1>School Name</h1>
+      <h1 style="margin-left: 80px;">School Name</h1>
       <h5>Class Name: {{ @$class_routine->class->name }}</h5>
       <h5>Session: {{@$class_routine->session->start_date}} - {{@$class_routine->session->end_date}}</h5>
     </div>
