@@ -794,13 +794,6 @@ class InstructorCourseController extends Controller
         return view("user.instructor.home_worke_update",$data);
     }
 
-
-    public function details(string $id)
-    {
-       // dd('hi');
-        $data["batch"]= Batch::find($id);
-        return view("Backend.school_management.batch.details",$data);
-    }
    
     public function updateHomeWork(Request $request, $id)
     {
