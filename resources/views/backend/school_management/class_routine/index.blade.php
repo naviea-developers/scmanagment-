@@ -30,6 +30,7 @@
                       <tr>
                         <th scope="col">Class Name</th>
                         <th scope="col">Session</th>
+                        <th scope="col">Class Type</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -40,7 +41,14 @@
                         <tr>
                             <td>{{@$data->class->name}}</td>
                             <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
-                           
+                            <td>
+                                @if (@$data->class_type=='1')
+                                    Online
+                                @elseif(@$data->class_type=='2')
+                                    Offline
+                                @endif
+                                {{-- {{@$data->class_type}} --}}
+                            </td>
                             <td>
                                 {{-- <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">
                                     @csrf

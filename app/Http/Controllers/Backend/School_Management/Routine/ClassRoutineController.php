@@ -59,6 +59,7 @@ class ClassRoutineController extends Controller
             $class_routine = new ClassRoutine();
             $class_routine->class_id = $request->class_id;
             $class_routine->session_id = $request->session_id;
+            $class_routine->class_type = $request->class_type;
             $class_routine->save();
 
             if($request->subject_id){
@@ -120,6 +121,7 @@ class ClassRoutineController extends Controller
             $class_routine = ClassRoutine::find($id);
             $class_routine->class_id = $request->class_id;
             $class_routine->session_id = $request->session_id;
+            $class_routine->class_type = $request->class_type;
             $class_routine->save();
 
             if($request->subject_id){
