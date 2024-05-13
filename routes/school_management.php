@@ -173,6 +173,8 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
     Route::post('update/{id}', [AdmissionController::class,"update"])->name('admin.admission.update');
     Route::post('delete', [AdmissionController::class,"destroy"])->name('admin.admission.delete');
     Route::get('/status/{id}', [AdmissionController::class, 'status'])->name('admin.admission.status');
+
+    Route::get('/admission/doc/download/{id}', [AdmissionController::class, 'certificateDownload'])->name('admin.admission.download');
 });
 
 
@@ -188,7 +190,6 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
     Route::post('update/{id}', [AdmissionAdmissionController::class,"update"])->name('frontend.student_admission.update');
     Route::get('print/{id}', [AdmissionAdmissionController::class,"print"])->name('frontend.student_admission.print');
     
-
 
 
 

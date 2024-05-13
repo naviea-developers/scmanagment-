@@ -318,7 +318,7 @@
                                             <label class="form-control-label"><b>View:</b></label>
                                             <div class="d-flex  align-items-center select-add-section">
                                                 <a style="color: white" class="btn btn-primary"  data-toggle="modal" data-target="#certificateModal{{ $k }}"> &nbsp;<i class="fa fa-solid fa-eye"></i></a>
-                                                <a style="margin-left: 10px" href="{{ route('admin.application-file-download', $details->id) }}" class="btn btn-primary"><i class="fa fa-solid fa-download"></i></a>
+                                                <a style="margin-left: 10px" href="{{ route('admin.admission.download', $item->id) }}" class="btn btn-primary"><i class="fa fa-solid fa-download"></i></a>
                                             </div>
                                         </div>
                                         {{-- <div class="col-md-1">

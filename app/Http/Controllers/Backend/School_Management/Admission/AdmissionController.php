@@ -269,6 +269,23 @@ class AdmissionController extends Controller
         return redirect()->route('admin.admission.index')->with('message', 'Admiddion Status Updated');
     }
 
+    public function certificateDownload($id)
+    {
+        $file = AdmissionCertificate::find($id);
+    
+        if (!$file) {
+            abort(404, 'File not found');
+        }
+    
+        $filePath = public_path("upload/certificates/" . $file->certificates_file);
+    
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found');
+        }
+    
+        return response()->download($filePath);
+    }
+
 
       //ajax getGroup
       public function getGroup($id){
