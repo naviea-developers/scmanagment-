@@ -112,7 +112,7 @@ class AdmissionController extends Controller
     public function details(string $id)
     {
        // dd('hi');
-        $data["admission"]= Admission::find($id);
+        $data["details"]= Admission::find($id);
         return view("Backend.school_management.admission.details",$data);
     }
     public function edit(string $id)
@@ -183,7 +183,7 @@ class AdmissionController extends Controller
             $admission->permanent_city_id = $request->permanent_city_id ?? 0;
             $admission->parmanent_address = $request->parmanent_address;
 
-            $admission->pre_school = $request->pre_school;
+            $admission->pre_school = $request->pre_school ?? 0;
             $admission->pre_school_name = $request->pre_school_name;
             $admission->pre_class_id = $request->pre_class_id ?? 0;
             $admission->pre_roll_number = $request->pre_roll_number;

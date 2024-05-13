@@ -17,7 +17,7 @@
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center mb-4">Update Admission</h6>
+            <h6 class="br-section-label text-center mb-4">Update Admission Form</h6>
              {{-- validate start  --}}
              @if(count($errors) > 0)
              @foreach($errors->all() as $error)
@@ -304,44 +304,15 @@
 
 <hr class="mt-3">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        @if (Auth::check())
-                            @else
-                            <div class="col-sm-4 mt-3">
-                                <label class="form-control-label">Login Password: <span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                <input type="password" name="password" class="form-control" placeholder="Enter Login Password" required>
+                            {{-- @if ($admission->pre_school == 1)    --}}
+                                <div class="col-sm-4 mt-3">
+                                    <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
+                                    <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="checkbox" name="pre_school" @if ($admission->pre_school == 1) checked  @endif value="1" id="showInputs">
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
-                            
-
-
-                            <div class="col-sm-4 mt-3">
-                                <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="checkbox" name="pre_school" @if ($admission->pre_school == 1) checked  @endif value="1" id="showInputs">
-                                </div>
-                            </div>
-
-                            <div id="inputs" class="hidden" @if ($admission->pre_school != 1) style="display:none;" @endif >
+                            {{-- @endif --}}
+                            {{-- <div id="inputs" class="hidden" @if ($admission->pre_school != 1) style="display:none;" @endif > --}}
                                 <div class="row">
                                     <div class="col-sm-4 mt-3">
                                         <label class="form-control-label">Pre School Name: <span class="tx-danger">*</span></label>
@@ -457,21 +428,8 @@
                                         @endif
                                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 </div>
-                            </div>
+                            {{-- </div> --}}
 
                     </div>
 
@@ -480,7 +438,7 @@
                         <div class="row mt-3">
                             <hr>
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                            <a href="{{url('/')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
+                            <a href="{{route('admin.admission.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
                             <button type="submit" class="btn btn-info ">Save</button>
                           </div>
                         </div>
