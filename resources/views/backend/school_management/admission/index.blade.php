@@ -68,6 +68,7 @@ Admin - All Admissions
                             @endif
                           </td>
                           <td>
+                            <a class="btn text-info" href="{{ route('admin.admission.details', $admission->id) }}"><i class="icon ion-eye tx-28"></i></i></a>
                             <a class="btn text-info" href="{{ route('admin.admission.edit', $admission->id) }}"><i class="icon ion-compose tx-28"></i></a>
                             <button class="btn text-danger bg-white"  value="{{$admission->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
                           </td>
