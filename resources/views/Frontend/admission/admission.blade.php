@@ -98,8 +98,8 @@
                                 @endforeach --}}
                             </select>
                             </div>
-<hr class="mt-3">
-<h4>Student Information</h4>
+                            <hr class="mt-3">
+                            <h4>Student Information</h4>
                         {{-- </div>
 
                         <hr style="border: 5px">
@@ -202,8 +202,8 @@
 
 
 
-<hr class="mt-3">
-<h4>Present Address</h4>
+                            <hr class="mt-3">
+                            <h4>Present Address</h4>
                             <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Continent Name:<span class="tx-danger">*</span></label>
                                 <select id="continent"  class="form-control" name="present_continent_id" >
@@ -244,8 +244,8 @@
                                 </div>
                             </div>
 
-<hr class="mt-3">
-<h4>Permanent Address</h4>
+                            <hr class="mt-3">
+                            <h4>Permanent Address</h4>
                             <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Continent Name:<span class="tx-danger">*</span></label>
                                 <select id="continent1"  class="form-control" name="permanent_continent_id" >
@@ -285,7 +285,7 @@
                                 </div>
 
 
-<hr class="mt-3">
+                                    <hr class="mt-3">
 
 
 
