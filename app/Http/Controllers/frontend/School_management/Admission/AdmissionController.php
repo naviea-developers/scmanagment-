@@ -89,10 +89,11 @@ class AdmissionController extends Controller
             $admission = New Admission();
             $admission->user_id = $user->id;
             $admission->class_id = $request->class_id ?? 0;
-            $admission->academic_year_id = $request->academic_year_id ?? 0;
-            $admission->session_id = $request->session_id ?? 0;
-            $admission->section_id = $request->section_id ?? 0;
+            // $admission->academic_year_id = $request->academic_year_id ?? 0;
+            // $admission->session_id = $request->session_id ?? 0;
+            // $admission->section_id = $request->section_id ?? 0;
             $admission->group_id = $request->group_id ?? 0;
+            $admission->fee_id = $request->fee_id ?? 0;
             $admission->student_name = $request->student_name;
             $admission->dob = $request->dob;
             $admission->student_phone = $request->student_phone;
@@ -113,7 +114,6 @@ class AdmissionController extends Controller
             $admission->image = $user->image;
 
 
-            
             $admission->present_continent_id = $request->present_continent_id ?? 0;
             $admission->present_country_id = $request->present_country_id ?? 0;
             $admission->present_state_id = $request->present_state_id ?? 0;
@@ -126,13 +126,17 @@ class AdmissionController extends Controller
             $admission->permanent_city_id = $request->permanent_city_id ?? 0;
             $admission->parmanent_address = $request->parmanent_address;
 
-
-
             $admission->pre_school = $request->pre_school;
             $admission->pre_school_name = $request->pre_school_name;
             $admission->pre_class_id = $request->pre_class_id ?? 0;
             $admission->pre_roll_number = $request->pre_roll_number;
             $admission->pre_school_address = $request->pre_school_address;
+
+            if ($request->hasFile('certificate')) {
+                $fileName = rand() . time() . '_student_certificate.' . request()->certificate->getClientOriginalExtension();
+                request()->certificate->move(public_path('upload/certificate/'), $fileName);
+                $user->certificate = $fileName;
+            }
 
             $admission->save();
 

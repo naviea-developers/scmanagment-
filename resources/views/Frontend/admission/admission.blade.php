@@ -38,7 +38,7 @@
 
 
                             
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                             <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="academic_year_id" >
                                 <option value="">Select Academic Year</option>
@@ -56,7 +56,7 @@
                                 <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
@@ -69,7 +69,7 @@
                             </div>
     
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="group_id" >
                                 <option value="">Select Group</option>
@@ -79,7 +79,7 @@
                             </select>
                             </div>
 
-                            <div class="col-sm-4 mt-3">
+                            {{-- <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="section_id" >
                                 <option value="">Select Section</option>
@@ -87,9 +87,9 @@
                                 <option value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="fee_id" >
                                 <option value="">Select Fee</option>
@@ -350,10 +350,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12 mt-3">
+                                    <div class="col-sm-8 mt-3">
                                         <label class="form-control-label">Pre School Address: <span class="tx-danger">*</span></label>
                                         <div class="mg-t-10 mg-sm-t-0">
                                         <input type="text" name="pre_school_address" class="form-control" placeholder="Enter Pre School Address" value="{{ old('pre_school_address') }}" >
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 mt-3">
+                                        <label class="form-control-label">Certificate: <span class="tx-danger">*</span></label>
+                                        <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="file" name="certificate" class="form-control">
                                         </div>
                                     </div>
 
