@@ -179,30 +179,32 @@ class AdmissionController extends Controller
 
 
       //ajax getCountry
-    //   public function getGroup($id){
-    //     $group = Group::where("class_id",$id)->get();
-    //     return $group;
-	// }
+      public function getGroup($id){
+        $group = Group::where("class_id",$id)->get();
+        return $group;
+	  }
 
-    public function getGroups($class_id)
-    {
-        $groups = Group::where('class_id', $class_id)->get();
-        $options = '<option value="">Select Group</option>';
-        foreach ($groups as $group) {
-            $options .= '<option value="' . $group->id . '">' . $group->name . '</option>';
-        }
-        return response()->json($options);
-    }
 
-    public function getSections($class_id)
-    {
-        $sections = Session::where('class_id', $class_id)->get();
-        $options = '<option value="">Select Section</option>';
-        foreach ($sections as $section) {
-            $options .= '<option value="' . $section->id . '">' . $section->id . '</option>';
-        }
-        return response()->json($options);
-    }
+
+    //   public function getGroups($class_id)
+    //   {
+    //       $groups = Group::where('class_id', $class_id)->get();
+    //       $options = '<option value="">Select Group</option>';
+    //       foreach ($groups as $group) {
+    //           $options .= '<option value="' . $group->id . '">' . $group->name . '</option>';
+    //       }
+    //       return response()->json($options);
+    //   }
+  
+    //   public function getSections($class_id)
+    //   {
+    //       $sections = Section::where('class_id', $class_id)->get();
+    //       $options = '<option value="">Select Section</option>';
+    //       foreach ($sections as $section) {
+    //           $options .= '<option value="' . $section->id . '">' . $section->name . '</option>';
+    //       }
+    //       return response()->json($options);
+    //   }
 
 
 

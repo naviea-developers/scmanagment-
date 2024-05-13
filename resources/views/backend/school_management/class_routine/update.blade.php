@@ -32,7 +32,7 @@
                 <form action="{{ route('admin.routine.update',$editData->id) }}" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Select Class : </label>
                             <select name="class_id" id=""class="form-select">
                                 <option value="">Select Class</option>
@@ -41,13 +41,21 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="">Section :</label>
                             <select name="session_id" id="" class="form-select">
                                 <option value="">Select Section</option>
                                 @foreach (@$sessions as $session)
                                     <option @if($session->id == $editData->session_id)  Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Class Type :</label>
+                            <select name="class_type" id="" class="form-select">
+                                <option value="">Select class type</option>
+                                <option @if($editData->class_type == '1')  Selected @endif value="1">Online</option>
+                                <option @if($editData->class_type == '2')  Selected @endif value="2">Offline</option>
                             </select>
                         </div>
                     </div>

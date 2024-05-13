@@ -34,7 +34,7 @@
                 <form action="{{ route('admin.routine.store') }}" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label>Select Class : </label>
                             <select name="class_id" id=""class="form-select">
                                 <option value="">Select Class</option>
@@ -43,13 +43,21 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="">Section :</label>
                             <select name="session_id" id="" class="form-select">
                                 <option value="">Select Section</option>
                                 @foreach (@$sessions as $session)
                                     <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Class Type :</label>
+                            <select name="class_type" id="" class="form-select">
+                                <option value="">Select class type</option>
+                                <option value="1">Online</option>
+                                <option value="2">Offline</option>
                             </select>
                         </div>
                     </div>
