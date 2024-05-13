@@ -459,7 +459,7 @@
                             <div class="float-right">
                                 <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-edit"></i> Edit</a>
                                 <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-download"></i> Download</a>
-                                <a href="{{route('frontend.student_admission.edit', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-print"></i> Print</a>
+                                <a href="{{route('frontend.student_admission.print', $details->id)}}" class="btn btn-primary text-white mr-2" ><i class="fa fa-print"></i> Print</a>
                             </div>
                         </div>
                         </div>
