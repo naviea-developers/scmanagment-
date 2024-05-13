@@ -1,36 +1,27 @@
-@section('title')
-    Admin - Edit Admission Form
+@extends('Frontend.layouts.master-layout')
+@section('title','- Edit Admission Form')
+@section('head')
+
 @endsection
-
-@extends('Backend.layouts.layouts')
-
-@section('main_contain')
-
-    <!-- ########## START: MAIN PANEL ########## -->
-    <div class="br-mainpanel">
-        <div class="br-pageheader">
-          <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a class="breadcrumb-item" href="{{route('admin.dashboard')}}">Home</a>
-            <a class="breadcrumb-item" href="{{route('admin.admission.index')}}"> <i class="icon ion-reply text-22"></i> All Admissions</a>
-          </nav>
-        </div><!-- br-pageheader -->
-
-        <div class="br-pagebody">
-          <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center mb-4">Update Admission</h6>
-             {{-- validate start  --}}
-             @if(count($errors) > 0)
-             @foreach($errors->all() as $error)
-                 <div class="alert alert-danger">{{ $error }}</div>
-             @endforeach
-             @endif
-             {{-- validate End  --}}
-
-            <!----- Start Add Category Form input ------->
-            <div class="col-xl-12 mx-auto">
-                <div class="form-layout form-layout-4 py-5">
-
-                    <form action="{{ route('admin.admission.update', $admission->id) }}" class="myform" id="learner_myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+@section('main_contend')
+{{-- <style>
+    .hidden {
+        display: none;
+    }
+</style> --}}
+<br>
+<br>
+<br>
+<div class="py-5">
+    <div class="container-lg">
+        <div class="row justify-content-center">
+            <div class="col-xl-12">
+                <div class="row mx-0 align-items-center border-md rounded-3">
+                    
+                    <div class="col-md-12 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5" style="background: #117873; color:white">
+                        <h3 class="text-center">Edit Admission Form</h3>
+                         
+                        <form action="{{ route('frontend.student_admission.update', $admission->id) }}" class="myform" id="learner_myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                         @csrf
                         
                             <div class="row ">
@@ -47,12 +38,12 @@
 
                             <hr>
                             
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                             <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="academic_year_id" >
                                 <option value="">Select Academic Year</option>
                                 @foreach ($academic_years as $year)
-                                <option  @if ($year->id == $admission->academic_year_id) Selected @endif value="{{ $year->id }}">{{ $year->year }}</option>
+                                <option value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -62,10 +53,10 @@
                             <select class="form-control" name="session_id" >
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
-                                <option  @if ($session->id == $admission->session_id) Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
+                                <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
@@ -78,7 +69,7 @@
                             </div>
     
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
                                 <select class="form-control" name="group_id" id="group">
                                     <option value="">Select Group</option>
@@ -88,7 +79,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-sm-4 mt-3">
+                            {{-- <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="section_id" >
                                 <option value="">Select Section</option>
@@ -96,9 +87,9 @@
                                 <option value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="fee_id" id="fee">
                                 <option value="">Select Fee</option>
@@ -486,17 +477,18 @@
                         </div>
                         </form>
 
-                </div><!-- form-layout -->
-            </div><!-- col-6 -->
-            <!----- Start Add Category Form input ------->
-          </div><!-- br-section-wrapper -->
-        </div><!-- br-pagebody -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    </div><!-- br-mainpanel -->
-    <!-- ########## END: MAIN PANEL ########## -->
 
+@include('Frontend.layouts.parts.news-letter')
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 @endsection
-
 
 
 
@@ -551,6 +543,15 @@
 
     //Audio Contents end
     </script>
+
+
+
+
+
+
+
+
+
 
 
 <script>

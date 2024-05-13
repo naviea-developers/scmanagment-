@@ -183,12 +183,13 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 // Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('admission', [AdmissionAdmissionController::class,"studentAdmission"])->name('frontend.student_admission');
     Route::post('store', [AdmissionAdmissionController::class,"store"])->name('frontend.student_admission.store');
-    Route::get('details/{id}', [AdmissionAdmissionController::class,"details"])->name('admin.student_admission.details');
+    Route::get('details/{id}', [AdmissionAdmissionController::class,"details"])->name('frontend.student_admission.details');
+    Route::get('edit/{id}', [AdmissionAdmissionController::class,"edit"])->name('frontend.student_admission.edit');
+    Route::post('update/{id}', [AdmissionAdmissionController::class,"update"])->name('frontend.student_admission.update');
 
-    // Route::post('store', [AdmissionAdmissionController::class,"store"])->name('admin.admission.store');
-    
-    // Route::get('edit/{id}', [AdmissionAdmissionController::class,"edit"])->name('admin.admission.edit');
-    // Route::post('update/{id}', [AdmissionAdmissionController::class,"update"])->name('admin.admission.update');
+
+
+
     // Route::post('delete', [AdmissionAdmissionController::class,"destroy"])->name('admin.admission.delete');
     // Route::get('/status/{id}', [AdmissionAdmissionController::class, 'status'])->name('admin.admission.status');
 // });

@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Backend\School_management\Admission;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicYear;
 use App\Models\Admission;
+use App\Models\AdmissionCertificate;
+use App\Models\City;
 use App\Models\Classe;
+use App\Models\Continent;
+use App\Models\Country;
 use App\Models\FeeManagement;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Session;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +33,10 @@ class AdmissionController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('status', 1)->get(); 
+        $data['continents'] = Continent::all();
+        $data['countries'] = Country::all();
+        $data['states'] = State::all();
         return view('Backend.school_management.admission.create', $data);
     }
     public function store(Request $request)
@@ -116,6 +124,11 @@ class AdmissionController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('status', 1)->get();
+        $data['continents'] = Continent::all();
+        $data['countries'] = Country::all();
+        $data['states'] = State::all();
+        $data['cities'] = City::all();
         return view("Backend.school_management.admission.update",$data);
     }
 
@@ -127,24 +140,103 @@ class AdmissionController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $admission = Admission::find($id);
-            $admission->class_id = $request->class_id;
-            $admission->academic_year_id = $request->academic_year_id;
-            $admission->session_id = $request->session_id;
-            $admission->section_id = $request->section_id;
-            $admission->group_id = $request->group_id;
+            $admission = $user =  Admission::find($id);
+            $admission->user_id = $user->id;
+            $admission->class_id = $request->class_id ?? 0;
+            $admission->academic_year_id = $request->academic_year_id ?? 0;
+            $admission->session_id = $request->session_id ?? 0;
+            $admission->section_id = $request->section_id ?? 0;
+            $admission->group_id = $request->group_id ?? 0;
+            $admission->fee_id = $request->fee_id ?? 0;
+            $admission->student_name = $request->student_name;
+            $admission->dob = $request->dob;
+            $admission->student_phone = $request->student_phone;
+            $admission->student_email = $request->student_email;
+            $admission->student_nid = $request->student_nid;
+
+            $admission->father_name = $request->father_name;
+            $admission->father_occupation = $request->father_occupation;
+            $admission->father_phone = $request->father_phone;
+            $admission->father_nid = $request->father_nid;
+
+            $admission->mother_name = $request->mother_name;
+            $admission->mother_occupation = $request->mother_occupation;
+            $admission->mother_phone = $request->mother_phone;
+
+            $admission->yearly_income = $request->yearly_income;
+
+            if ($request->hasFile('image')) {
+                $fileName = rand() . time() . '_student_image.' . request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/admission/'), $fileName);
+                $admission->image = $fileName;
+            }
+
+            $admission->present_continent_id = $request->present_continent_id ?? 0;
+            $admission->present_country_id = $request->present_country_id ?? 0;
+            $admission->present_state_id = $request->present_state_id ?? 0;
+            $admission->present_city_id = $request->present_city_id ?? 0;
+            $admission->present_address = $request->present_address;
+
+            $admission->permanent_continent_id = $request->permanent_continent_id ?? 0;
+            $admission->permanent_country_id = $request->permanent_country_id ?? 0;
+            $admission->permanent_state_id = $request->permanent_state_id ?? 0;
+            $admission->permanent_city_id = $request->permanent_city_id ?? 0;
+            $admission->parmanent_address = $request->parmanent_address;
+
+            $admission->pre_school = $request->pre_school;
+            $admission->pre_school_name = $request->pre_school_name;
+            $admission->pre_class_id = $request->pre_class_id ?? 0;
+            $admission->pre_roll_number = $request->pre_roll_number;
+            $admission->pre_school_address = $request->pre_school_address;
+
             $admission->save();
 
-            // if ($request->day) {
-            //     $batch->batchDay()->delete();
-                
-            //     foreach ($request->day as $value) {
-            //         $b_day = new BatchDay();
-            //         $b_day->batch_id = $batch->id;
-            //         $b_day->day = $value;
-            //         $b_day->save();
-            //     }
-            // }
+
+
+             //add certificate file
+        if($request->certificates_file){
+            foreach( $request->certificates_file as $k=>$value){
+                $certificates = new AdmissionCertificate();
+                $certificates->user_id = $user->id;
+                $certificates->admission_id = $admission->id;
+                $certificates->certificates_name = $request->certificates_name[$k];
+                $filename=$request->certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$value->getClientOriginalExtension();
+                $value->move(public_path('upload/certificates/'), $filename);
+                $certificates->certificates_file=$filename;
+                $certificates->extension = $value->getClientOriginalExtension();
+                $certificates->save();
+            }
+        }
+
+         //Update certificate file
+        if($request->old_certificates_name){
+            foreach($request->old_certificates_name as $k => $value){
+                $certificates = AdmissionCertificate::find($k);
+                $certificates->user_id = $user->id;
+                $certificates->admission_id = $admission->id;
+                $certificates->certificates_name = $value;
+
+                if(isset($request->file('old_certificates_file')[$k])){
+                    @unlink(public_path('upload/certificates/'.$certificates->certificates_file));
+                    $filename=$request->old_certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$request->file('old_certificates_file')[$k]->getClientOriginalExtension();
+                    $request->file('old_certificates_file')[$k]->move(public_path('upload/certificates/'), $filename);
+                    $certificates->certificates_file=$filename;
+                    $certificates->extension = $request->file('old_certificates_file')[$k]->getClientOriginalExtension();
+                }
+
+                $certificates->update();
+            }
+        }
+
+        //delete certificate file
+        if($request->delete_certificates_file){
+            foreach($request->delete_certificates_file as $k => $value){
+                $audio = AdmissionCertificate::find($value);
+                @unlink(public_path('upload/certificates/'.$audio->certificates_file));
+                $audio->delete();
+
+            }
+        }
 
             DB::commit();
             return redirect()->route('admin.admission.index')->with('message','Admission Update Successfully');
