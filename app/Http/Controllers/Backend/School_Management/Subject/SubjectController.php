@@ -13,7 +13,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $data['subjects'] = Subject::orderBy('id', 'desc')->get();
+        $data['subjects'] = Subject::orderBy('id', 'asc')->get();
         return view("Backend.school_management.subject.index",$data);
     }
 

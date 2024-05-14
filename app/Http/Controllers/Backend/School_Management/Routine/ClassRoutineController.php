@@ -16,6 +16,7 @@ use App\Models\Floor;
 use App\Models\ClassRoutine;
 use App\Models\ClassRoutineItem;
 use App\Models\User;
+use App\Models\ClassDuration;
 use App\Models\Session;
 
 class ClassRoutineController extends Controller
@@ -39,6 +40,7 @@ class ClassRoutineController extends Controller
         $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
         $data['rooms'] = Room::orderBy('id', 'desc')->get();
         $data['floors'] = Floor::orderBy('id', 'desc')->get();
+        $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
 
         return view('Backend.school_management.class_routine.create',$data);
     }
@@ -71,9 +73,10 @@ class ClassRoutineController extends Controller
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
                     $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    $class_routine_item->floor_id = $request->floor_id[$k];         
-                    $class_routine_item->start_time = $request->start_time[$k];
-                    $class_routine_item->end_time = $request->end_time[$k];
+                    $class_routine_item->floor_id = $request->floor_id[$k];  
+                    $class_routine_item->class_duration_id = $request->class_duration_id[$k];       
+                    // $class_routine_item->start_time = $request->start_time[$k];
+                    // $class_routine_item->end_time = $request->end_time[$k];
                     $class_routine_item->save();
                 }
             }
@@ -104,7 +107,8 @@ class ClassRoutineController extends Controller
        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
        $data['rooms'] = Room::orderBy('id', 'desc')->get();
        $data['floors'] = Floor::orderBy('id', 'desc')->get();
-        return view('Backend.school_management.class_routine.update',$data);
+       $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
+       return view('Backend.school_management.class_routine.update',$data);
     }
 
     public function update(Request $request,$id)
@@ -133,9 +137,10 @@ class ClassRoutineController extends Controller
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
                     $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    $class_routine_item->floor_id = $request->floor_id[$k];         
-                    $class_routine_item->start_time = $request->start_time[$k];
-                    $class_routine_item->end_time = $request->end_time[$k];
+                    $class_routine_item->floor_id = $request->floor_id[$k];    
+                    $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
+                    // $class_routine_item->start_time = $request->start_time[$k];
+                    // $class_routine_item->end_time = $request->end_time[$k];
                     $class_routine_item->save();
                 }
             }
@@ -149,9 +154,10 @@ class ClassRoutineController extends Controller
                     $class_routine_item->teacher_id = $request->old_teacher_id[$k];
                     $class_routine_item->room_id = $request->old_room_id[$k];
                     $class_routine_item->bulding_id = $request->old_bulding_id[$k];
-                    $class_routine_item->floor_id = $request->old_floor_id[$k];              
-                    $class_routine_item->start_time = $request->old_start_time[$k];
-                    $class_routine_item->end_time = $request->old_end_time[$k];
+                    $class_routine_item->floor_id = $request->old_floor_id[$k]; 
+                    $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
+                    // $class_routine_item->start_time = $request->old_start_time[$k];
+                    // $class_routine_item->end_time = $request->old_end_time[$k];
                     $class_routine_item->save();
                 }
             }

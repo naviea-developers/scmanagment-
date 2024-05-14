@@ -630,7 +630,7 @@ $('body').on("change",'#class',function(){
             $('#'+outid).val("").change();
   });
 
-
+}
   $('body').on("change",'.state',function(){
       console.log("this");
       let id = $(this).val();
@@ -654,7 +654,7 @@ $('body').on("change",'#class',function(){
       });
 
   }
-}
+
 
 </script>
 
@@ -707,7 +707,7 @@ $('body').on("change",'#class',function(){
                 $('#'+outid).val("").change();
       });
     
-    
+    }
       $('body').on("change",'#state1',function(){
           console.log("this");
           let id = $(this).val();
@@ -731,7 +731,7 @@ $('body').on("change",'#class',function(){
           });
     
       }
-    }
+    
     
 </script>
 

@@ -74,7 +74,7 @@
                 <td>{{ $item->bulding->name }}</td>
                 <td>{{ $item->floor->name }}</td>
                 <td>{{ $item->room->name }}</td>
-                <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+                <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
             </tr>
         @endforeach
       </tbody>

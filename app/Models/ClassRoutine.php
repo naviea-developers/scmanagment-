@@ -20,4 +20,6 @@ class ClassRoutine extends Model
     public function class_routine_items(){
         return $this->hasMany(ClassRoutineItem::class,"class_routine_id",'id');
     }
+
+    
 }

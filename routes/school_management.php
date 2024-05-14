@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
+use App\Http\Controllers\Backend\School_management\ClassDuration\ClassDurationController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -28,6 +29,17 @@ Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::post('update/{id}', [ClassController::class,"update"])->name('admin.class.update');
     Route::post('delete', [ClassController::class,"destroy"])->name('admin.class.delete');
     Route::get('/status/{id}', [ClassController::class, 'status'])->name('admin.class.status');
+});
+
+//Add Class for admin
+Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [ClassDurationController::class,"index"])->name('admin.class_duration.index');
+    Route::get('create', [ClassDurationController::class,"create"])->name('admin.class_duration.create');
+    Route::post('store', [ClassDurationController::class,"store"])->name('admin.class_duration.store');
+    Route::get('edit/{id}', [ClassDurationController::class,"edit"])->name('admin.class_duration.edit');
+    Route::post('update/{id}', [ClassDurationController::class,"update"])->name('admin.class_duration.update');
+    Route::post('delete', [ClassDurationController::class,"destroy"])->name('admin.class_duration.delete');
+    Route::get('/status/{id}', [ClassDurationController::class, 'status'])->name('admin.class_duration.status');
 });
 
 

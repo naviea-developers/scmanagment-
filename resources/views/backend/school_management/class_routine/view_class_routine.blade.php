@@ -63,13 +63,17 @@
             <th>Bulding Name</th>
             <th>Floor Name</th>
             <th>Room Name</th>
-            <th>Time</th>
+            {{-- <th>Time</th> --}}
+            <th>Duration</th>
             
           </tr>
         </thead>
 
         <tbody>
-          {{-- @foreach (@$class_routine->class_routine_items as $item)
+
+      
+          {{-- 
+          @foreach (@$class_routine->class_routine_items as $item)
             <tr>
               <td>{{ $item->day }}</td>
               <td>{{ $item->Teacher->name }}</td>
@@ -77,9 +81,27 @@
               <td>{{ $item->bulding->name }}</td>
               <td>{{ $item->floor->name }}</td>
               <td>{{ $item->room->name }}</td>
-              <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+              <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
             </tr>
           @endforeach --}}
+
+          {{-- @php
+              $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
+          @endphp
+
+          @foreach ($class_routine->class_routine_items as $key => $item)
+              <tr>
+                  @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+                      <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
+                  @endif
+                  <td>{{ $item->Teacher->name }}</td>
+                  <td>{{ $item->subject->name }}</td>
+                  <td>{{ $item->bulding->name }}</td>
+                  <td>{{ $item->floor->name }}</td>
+                  <td>{{ $item->room->name }}</td>
+                   <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
+              </tr>
+          @endforeach  --}}
 
           @php
               $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
@@ -95,7 +117,7 @@
                   <td>{{ $item->bulding->name }}</td>
                   <td>{{ $item->floor->name }}</td>
                   <td>{{ $item->room->name }}</td>
-                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
+                  <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
               </tr>
           @endforeach
 
