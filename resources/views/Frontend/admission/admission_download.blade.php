@@ -201,15 +201,6 @@
         
         
 </div>
-<script>
-    window.print();
-    window.onafterprint = back;
-
-    function back() {
-        window.close();
-        window.history.back();
-    }
-</script>
 
 </body>
 </html>

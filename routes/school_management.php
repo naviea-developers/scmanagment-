@@ -189,6 +189,7 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
     Route::get('edit/{id}', [AdmissionAdmissionController::class,"edit"])->name('frontend.student_admission.edit');
     Route::post('update/{id}', [AdmissionAdmissionController::class,"update"])->name('frontend.student_admission.update');
     Route::get('print/{id}', [AdmissionAdmissionController::class,"print"])->name('frontend.student_admission.print');
+    Route::get('download/{id}', [AdmissionAdmissionController::class,"download"])->name('frontend.student_admission.download');
     
 
 

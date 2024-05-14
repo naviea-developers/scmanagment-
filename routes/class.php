@@ -69,15 +69,15 @@ Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 
 
 //-----------------------------Exam Route Start---------------------------//
-Route::get('allExam', [ExamSchedulesController::class,"allExam"])->name('allExam');
-Route::post('examDetails', [ExamSchedulesController::class,"examDetails"])->name('examDetails');
-Route::get('addExam', [ExamSchedulesController::class,"addExam"])->name('addExam');
-Route::post('storeExam', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
-Route::get('show', [ExamSchedulesController::class,"show"])->name('show');
-Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('editExam');
-Route::post('/update/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
-Route::post('delete', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
-Route::get('print/{id}', [ExamSchedulesController::class,"print"])->name('admin.exam.print');
+Route::get('all-exam-routine', [ExamSchedulesController::class,"allExam"])->name('allExam');
+Route::post('exam-details-routine', [ExamSchedulesController::class,"examDetails"])->name('examDetails');
+Route::get('add-exam-routine', [ExamSchedulesController::class,"addExam"])->name('addExam');
+Route::post('store-exam-routine', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
+Route::get('show-exam-routine', [ExamSchedulesController::class,"show"])->name('show');
+Route::get('edit-exam-routine/{id}', [ExamSchedulesController::class,"edit"])->name('editExam');
+Route::post('/update-exam-routine/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
+Route::post('delete-exam-routine', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
+Route::get('print-exam-routine/{id}', [ExamSchedulesController::class,"print"])->name('admin.exam.print');
 // Route::get('/allExam', 'App\Http\Controllers\edicationStructure@allExam')->name('allExam');
 // Route::post('/examDetails', 'App\Http\Controllers\edicationStructure@examDetails')->name('examDetails');
 // Route::get('/addExam', 'App\Http\Controllers\edicationStructure@addExam')->name('addExam');

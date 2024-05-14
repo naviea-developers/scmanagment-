@@ -20,6 +20,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mpdf\Mpdf;
 
 class AdmissionController extends Controller
 {
@@ -153,11 +154,7 @@ class AdmissionController extends Controller
         return view('Frontend.admission.admission_details', $data);
     }
 
-    public function print($id)
-    {
-        $data['details'] = Admission::find($id);
-        return view('Frontend.admission.admission_print', $data);
-    }
+
     public function edit($id)
     {
         $data['admission'] = Admission::find($id);
@@ -315,6 +312,44 @@ class AdmissionController extends Controller
             return back()->with ('error_message', $e->getMessage());
         }
     }
+
+    public function print($id)
+    {
+        $data['details'] = Admission::find($id);
+        return view('Frontend.admission.admission_print', $data);
+    }
+
+
+    public function download($id)
+    {
+        $data['details'] = Admission::find($id);
+        $html = view('Frontend.admission.admission_download', $data);
+        $mpdf = new Mpdf([
+            'mode' => 'UTF-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+        ]);
+
+        //For Multilanguage Start
+        $mpdf->autoScriptToLang = true;
+        $mpdf->baseScript = 1;
+        $mpdf->autoLangToFont = true;
+        $mpdf->autoVietnamese = true;
+        $mpdf->autoArabic = true;
+
+        //For Multilanguage End
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->writeHTML($html);
+        $name = 'admission_download_form' . date('Y-m-d i:h:s');
+        $mpdf->Output($name.'.pdf', 'D');
+    }
+
+    
 
 
 }

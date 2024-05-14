@@ -35,7 +35,14 @@
   <div class="school-name">
     <h1>School Name</h1>
     <h5>Class Name: {{ @$class_routine->class->name }}</h5>
-    <h5>Session: {{@$class_routine->session->start_date}} - {{@$class_routine->session->end_date}}</h5>
+    <h5>Session: {{@$class_routine->session->start_year->year}} - {{@$class_routine->session->end_year->year}}</h5>
+    <h5>Class Type: 
+        @if (@$class_routine->class_type=='1')
+          Online
+        @elseif (@$class_routine->class_type=='2')
+          Offline
+        @endif
+    </h5>
   </div>
 
   <div class="class-routine">
