@@ -515,7 +515,7 @@
 
 $('body').on("change",'#class',function(){
       let id = $(this).val();
-       console.log(id);
+    //    console.log(id);
       getGroup(id,"group");
       getFees(id,"fee");
       getSection(id,"section");
@@ -564,7 +564,7 @@ $('body').on("change",'#class',function(){
   }
 
   function getSection(id,outid){
-      let url = '{{ url("get/section/") }}/' + id;
+      let url = '{{ url("get/school_section/") }}/' + id;
       axios.get(url)
           .then(res => {
               console.log(res);

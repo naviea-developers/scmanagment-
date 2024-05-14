@@ -121,4 +121,7 @@ class ClassController extends Controller
         $class->update();
         return redirect()->route('admin.class.index')->with('message','Class Status Update Successfully');
     }
+
+
+
 }

@@ -288,18 +288,18 @@ class AdmissionController extends Controller
     }
 
 
-      //ajax getGroup
+      //ajax get Group
       public function getGroup($id){
         $group = Group::where("class_id",$id)->get();
         return $group;
 	  }
-      //ajax getFees
+      //ajax get Fees
       public function getFees($id){
         $fee = FeeManagement::where("class_id",$id)->with('fee')->get();
         return $fee;
 	  }
-      //ajax getSection
-      public function getSection($id){
+      //ajax School Section
+      public function schoolSection($id){
         $section = SchoolSection::where("class_id",$id)->get();
         return $section;
 	  }

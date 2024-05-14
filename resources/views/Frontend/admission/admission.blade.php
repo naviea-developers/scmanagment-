@@ -546,7 +546,7 @@ $('body').on("change",'.class_fee',function(){
             $('#'+outid).append(html);
             $('#'+outid).val("").change();
   });
-
+}
 
   $('body').on("change",'.state',function(){
       console.log("this");
@@ -571,7 +571,7 @@ $('body').on("change",'.class_fee',function(){
       });
 
   }
-}
+
 
 </script>
 
@@ -623,7 +623,7 @@ $('body').on("change",'.class_fee',function(){
                 $('#'+outid).append(html);
                 $('#'+outid).val("").change();
       });
-    
+    }
     
       $('body').on("change",'#state1',function(){
           console.log("this");
@@ -648,7 +648,7 @@ $('body').on("change",'.class_fee',function(){
           });
     
       }
-    }
+    
     
 </script>
 

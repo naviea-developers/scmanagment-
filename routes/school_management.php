@@ -30,6 +30,7 @@ Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::get('/status/{id}', [ClassController::class, 'status'])->name('admin.class.status');
 });
 
+
 //Add Subject for admin
 Route::prefix('subject')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SubjectController::class,"index"])->name('admin.subject.index');
@@ -202,4 +203,4 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 
 Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 Route::get('/get/fee_management/{id}', [AdmissionController::class, 'getFees']);
-Route::get('/get/section/{id}', [AdmissionController::class, 'getSection']);
+Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSection']);
