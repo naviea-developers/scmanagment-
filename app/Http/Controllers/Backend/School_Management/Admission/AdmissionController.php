@@ -118,11 +118,12 @@ class AdmissionController extends Controller
     public function edit(string $id)
     {
        // dd('hi');
-        $data["admission"]= Admission::find($id);
+        $data["admission"]=$admission= Admission::find($id);
         $data['classes'] = Classe::where('status', 1)->get();
         $data['academic_years'] = AcademicYear::where('status', 1)->get();
         $data['sessions'] = Session::where('status', 1)->get();
-        $data['sections'] = SchoolSection::where('status', 1)->get();
+        // $data['sections'] = SchoolSection::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('class_id',$admission->class_id)->where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
         $data['fees'] = FeeManagement::where('status', 1)->get();
         $data['continents'] = Continent::all();
@@ -297,28 +298,15 @@ class AdmissionController extends Controller
         $fee = FeeManagement::where("class_id",$id)->with('fee')->get();
         return $fee;
 	  }
+      //ajax getSection
+      public function getSection($id){
+        $section = SchoolSection::where("class_id",$id)->get();
+        return $section;
+	  }
 
 
 
-    //   public function getGroups($class_id)
-    //   {
-    //       $groups = Group::where('class_id', $class_id)->get();
-    //       $options = '<option value="">Select Group</option>';
-    //       foreach ($groups as $group) {
-    //           $options .= '<option value="' . $group->id . '">' . $group->name . '</option>';
-    //       }
-    //       return response()->json($options);
-    //   }
-  
-    //   public function getSections($class_id)
-    //   {
-    //       $sections = Section::where('class_id', $class_id)->get();
-    //       $options = '<option value="">Select Section</option>';
-    //       foreach ($sections as $section) {
-    //           $options .= '<option value="' . $section->id . '">' . $section->name . '</option>';
-    //       }
-    //       return response()->json($options);
-    //   }
+
 
 
 

@@ -202,3 +202,4 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 
 Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 Route::get('/get/fee_management/{id}', [AdmissionController::class, 'getFees']);
+Route::get('/get/section/{id}', [AdmissionController::class, 'getSection']);

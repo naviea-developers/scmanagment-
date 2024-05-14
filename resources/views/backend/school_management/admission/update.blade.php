@@ -90,10 +90,10 @@
 
                             <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
-                            <select class="form-control" name="section_id" >
+                            <select class="form-control" name="section_id" id="section">
                                 <option value="">Select Section</option>
                                 @foreach ($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                <option @if ($section->id == $admission->section_id) Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -517,6 +517,8 @@ $('body').on("change",'#class',function(){
       let id = $(this).val();
        console.log(id);
       getGroup(id,"group");
+      getFees(id,"fee");
+      getSection(id,"section");
   });
 
   function getGroup(id,outid){
@@ -537,11 +539,13 @@ $('body').on("change",'#class',function(){
           });
   }
 
-$('body').on("change",'.class_fee',function(){
-      let id = $(this).val();
-       console.log(id);
-       getFees(id,"fee");
-  });
+// $('body').on("change",'.class_fee',function(){
+//       let id = $(this).val();
+//        console.log(id);
+//        getFees(id,"fee");
+//        getSection(id,"section");
+       
+//   });
 
   function getFees(id,outid){
       let url = '{{ url("get/fee_management/") }}/' + id;
@@ -554,15 +558,28 @@ $('body').on("change",'.class_fee',function(){
               res.data.forEach(element => {
                   html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
               });
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+  }
+
+  function getSection(id,outid){
+      let url = '{{ url("get/section/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select Section</option>'
+              res.data.forEach(element => {
+                html += "<option value=" + element.id + ">" + element.name + "</option>"
+              });
 
 
               $('#'+outid).append(html);
               $('#'+outid).val("").change();
           });
   }
-
-
-
 
 
 
