@@ -5,20 +5,31 @@
 
 @endsection
 @section('main_content')
+<link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
+<style>
+  /* Additional custom styles */
+  .school-name {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .class-routine {
+    margin-bottom: 50px;
+  }
+  .class-routine table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .class-routine th, .class-routine td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  .class-routine th {
+    background-color: #f2f2f2;
+  }
+</style>
 
-    {{-- success message start --}}
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-    {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-    {{session()->get('message')}}
-    </div>
-    <script>
-        setTimeout(function(){
-            $('.alert.alert-success').hide();
-        }, 3000);
-    </script>
-    @endif
-    {{-- success message start --}}
+
     <div class="right_section">
         <div>
             <h4 style="color: black">Class Routine</h4>
@@ -29,30 +40,93 @@
         <di class="col-md-12">
             <div class="row">
 
-                <div class="item">
+                {{-- <div class="item">
                     <i class="fa-solid fa-user"></i>
                     <span class="text-center">  Class {{ $admission->class->name }}</span>
-                </div>
-                {{-- @foreach ($notices as $notice)
-                <div class="col-md-4">
-                    <div class="card card-body" style="height: 100%">
-                        <p class="text-center" style="color: black"><b>
-                            @if ($notice->type == 'daily')
-                                Daily Notice
-                            @elseif ($notice->type == 'monthly')
-                                Monthly Notice
-                            @elseif ($notice->type == 'yearly')
-                                Yearly Notice
-                            @elseif ($notice->type == 'instant')
-                                Istant Notice
+                </div> --}}
+                <div class="school-name">
+                    <h3>School Name</h3>
+                    <h6>Class Name: {{ $admission->class->name ?? '' }}</h6>
+                    <h6>Session: {{ $admission->session->start_year->year ?? '' }} - {{ $admission->session->end_year->year ?? '' }}</h6>
+                    <h6>Class Type: 
+                        @if ($class_routine->isNotEmpty())
+                            @if ($class_routine[0]->class_type == '1')
+                                Online
+                            @elseif ($class_routine[0]->class_type == '2')
+                                Offline
                             @endif
-                        </b></p>
-                        <h5 class="mb-3" style="color: black">Title: {{ $notice->name }}</h5>
-                        <p class="" style="color: black; text-align: justify;"><b>Description:</b> {{ $notice->description }}</p>
-                        <p style="color: black"><b>Created at:</b> {{ \Carbon\Carbon::parse($notice->created_at)->isoFormat('Do MMM YYYY') }}</p>
-                    </div>
+                        @endif
+                    </h6>
+                    <h4>Class Routine</h4>
                 </div>
-                @endforeach --}}
+                
+                
+                  <div class="class-routine">
+                    
+                    <table>
+              
+                      <thead style="color: black">
+                        <tr>
+                          <th>Day</th>
+                            {{-- @foreach ($class_durations as $class_duration)
+                                <th>{{ $class_duration->name }} ({{ date('h:i:A', strtotime($class_duration->start_time)) }} - {{ date('h:i:A', strtotime($class_duration->end_time)) }})</th>
+                            @endforeach --}}
+                      
+
+
+
+                          {{-- <th>Teacher Name</th>
+                          <th>Subject Name</th>
+                          <th>Bulding Name</th>
+                          <th>Floor Name</th>
+                          <th>Room Name</th>
+                          <th>Duration</th> --}}
+                          
+                        </tr>
+                      </thead>
+              
+                  
+                      <tbody>
+              
+                        @php
+                            $dayCounts = $class_routine[0]->class_routine_items->groupBy('day')->map->count();
+                        @endphp
+
+                        {{-- @foreach ($class_routine->class_routine_items as $key => $item)
+                            <tr>
+                                @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+                                    <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
+                                @endif
+                                <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
+                                 --}}
+                                
+                                
+                                {{-- <td>{{ $item->subject->name }}</td>
+                                <td>{{ $item->bulding->name }}</td>
+                                <td>{{ $item->floor->name }}</td>
+                                <td>{{ $item->room->name }}</td>
+                                 <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td> --}}
+                           
+                           
+                           
+                                {{-- </tr>
+                        @endforeach  --}}
+              
+                        {{-- @php
+                            $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
+                        @endphp
+              
+                        @foreach ($class_routine->class_routine_items as $key => $item)
+                          <tr>
+                              @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+                                  <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
+                              @endif
+                              <td>{{ $item->Teacher->name }} {{ $item->subject->name }} {{ $item->bulding->name }}</td>
+                          </tr>
+                        @endforeach --}}
+                      </tbody>
+                    </table>
+                  </div>
             </div>
         </di>
     </div>

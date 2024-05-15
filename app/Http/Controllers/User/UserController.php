@@ -18,7 +18,9 @@ use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\CourseParticipant;
 use App\Models\ApplicationDocument;
+use App\Models\ClassDuration;
 use App\Models\ClassRoutine;
+use App\Models\ClassRoutineItem;
 use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
@@ -282,13 +284,16 @@ class UserController extends Controller
     }
     public function classRoutine() //all user
     {
-        $user = auth()->user()->id; 
+        $user = auth()->user()->id;
         $data['admission'] = $admission = Admission::where('user_id', $user)->first();
         // dd($admission);
-        $data['routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
+        $data['class_routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
                                         ->where('session_id', $admission->session_id)
                                         ->where('status', 1)->get();
-                                        // dd($routins);
+
+        // $data['class_durations']= $class_durations = ClassRoutineItem::where('class_routine_id', $routins->class_routine_id)
+        //                                 ->where('status', 1)->get();
+        //                                  dd($class_durations);
         return view('user.class_routine.routine', $data);
     }
     public function wishlist() //coustomer
