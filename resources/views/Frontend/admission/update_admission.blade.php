@@ -775,4 +775,17 @@ $('body').on("change",'.class_fee',function(){
         }
     });
 </script>
+
+<script>
+    $(document).on('change','.upload-img',function(){
+       var files = $(this).get(0).files;
+       var reader = new FileReader();
+       reader.readAsDataURL(files[0]);
+       var arg=this;
+       reader.addEventListener("load", function(e) {
+           var image = e.target.result;
+           $(arg).parent().find('.display-upload-img').attr('src', image);
+       });
+   });
+   </script>
 @endsection

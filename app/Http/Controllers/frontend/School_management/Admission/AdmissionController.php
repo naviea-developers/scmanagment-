@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\School_management\Admission;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdmissionEmail;
 use App\Models\AcademicYear;
 use App\Models\Admission;
 use App\Models\AdmissionCertificate;
@@ -55,9 +56,9 @@ class AdmissionController extends Controller
         try{
             DB::beginTransaction();
 
-            if (Auth::check()) {
-                $user = Auth::user();
-            } else {
+            // if (Auth::check()) {
+            //     $user = Auth::user();
+            // } else {
                 $user = new User();
                 $user->name = $request->student_name;
                 $user->email = $request->student_email;
@@ -67,13 +68,13 @@ class AdmissionController extends Controller
                 $user->password = $request->password;
             
                 $user->save();
-            }
+            // }
 
             $admission = New Admission();
             $admission->user_id = $user->id;
             $admission->class_id = $request->class_id ?? 0;
-            // $admission->academic_year_id = $request->academic_year_id ?? 0;
-            // $admission->session_id = $request->session_id ?? 0;
+            $admission->academic_year_id = $request->academic_year_id ?? 0;
+            $admission->session_id = $request->session_id ?? 0;
             // $admission->section_id = $request->section_id ?? 0;
             $admission->group_id = $request->group_id ?? 0;
             $admission->fee_id = $request->fee_id ?? 0;
@@ -113,7 +114,7 @@ class AdmissionController extends Controller
             $admission->permanent_city_id = $request->permanent_city_id ?? 0;
             $admission->parmanent_address = $request->parmanent_address;
 
-            $admission->pre_school = $request->pre_school;
+            $admission->pre_school = $request->pre_school ?? 0;
             $admission->pre_school_name = $request->pre_school_name;
             $admission->pre_class_id = $request->pre_class_id ?? 0;
             $admission->pre_roll_number = $request->pre_roll_number;
@@ -123,7 +124,7 @@ class AdmissionController extends Controller
 
 
 
-             //add certificate file
+        //add certificate file
         if($request->certificates_file){
             foreach( $request->certificates_file as $k=>$value){
                 $certificates = new AdmissionCertificate();
@@ -137,6 +138,30 @@ class AdmissionController extends Controller
                 $certificates->save();
             }
         }
+
+
+
+            //email notification start
+            //admin
+            // $admin = User::where('type', 0)->first();
+            // $data2['order'] = $order;
+            // $details2['email'] = $admin->email;
+            // $details2['send_item']=new Admission($data2);
+            // dispatch(new \App\Jobs\SendEmailJob($details2));
+
+            //user
+            $data['email'] = $user->email;
+            $data['password'] = $request->password;
+            $details['email'] = $user->email;
+            $details['send_item']=new AdmissionEmail($data);
+            dispatch(new \App\Jobs\SendEmailJob($details));
+            ///email notification end
+
+
+
+
+
+
 
             DB::commit();
             // return redirect()->back()->with('message','Admission Add Successfully');

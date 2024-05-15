@@ -38,7 +38,7 @@
 
 
                                 
-                                        {{-- <div class="col-sm-4">
+                                        <div class="col-sm-4">
                                         <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                                         <select class="form-control" name="academic_year_id" >
                                             <option value="">Select Academic Year</option>
@@ -56,7 +56,7 @@
                                             <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                             @endforeach
                                         </select>
-                                        </div> --}}
+                                        </div>
 
                                         <div class="col-sm-4">
                                             <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
@@ -69,7 +69,7 @@
                                         </div>
         
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4 mt-3">
                                         <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
                                         <select class="form-control" name="group_id" id="group">
                                             <option value="">Select Group</option>
@@ -89,7 +89,7 @@
                                         </select>
                                         </div> --}}
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4 mt-3">
                                         <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
                                         <select class="form-control" name="fee_id" id="fee">
                                             <option value="">Select Fee</option>
@@ -275,15 +275,14 @@
 
                                         <hr class="mt-3">
 
-                                        @if (Auth::check())
-                                            @else
+                                       
                                             <div class="col-sm-4 mt-3">
                                                 <label class="form-control-label">Login Password: <span class="tx-danger">*</span></label>
                                                 <div class="mg-t-10 mg-sm-t-0">
                                                     <input type="password" name="password" class="form-control" placeholder="Enter Login Password" required>
                                                 </div>
                                             </div>
-                                        @endif
+                                     
                                 
 
 
@@ -666,4 +665,17 @@ $('body').on("change",'.class_fee',function(){
         }
     });
 </script>
+
+<script>
+    $(document).on('change','.upload-img',function(){
+       var files = $(this).get(0).files;
+       var reader = new FileReader();
+       reader.readAsDataURL(files[0]);
+       var arg=this;
+       reader.addEventListener("load", function(e) {
+           var image = e.target.result;
+           $(arg).parent().find('.display-upload-img').attr('src', image);
+       });
+   });
+   </script>
 @endsection
