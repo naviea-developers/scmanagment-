@@ -49,7 +49,7 @@ class ClassRoutineController extends Controller
 
     public function store(Request $request)
     {
-      // dd($request->all());
+       dd($request->all());
         $request->validate([
             'class_id' => 'required',
             'session_id' => 'required',
@@ -80,6 +80,25 @@ class ClassRoutineController extends Controller
                     $class_routine_item->save();
                 }
             }
+
+            // if($request->day_id){
+            //     foreach($request->day_id as $k=>$value){
+            //         $class_routine_day= New ClassRoutineDay();
+            //         $class_routine_day->class_routine_id=$class_routine->id;
+            //         $class_routine_day->day_id = $value;
+            //         $class_routine_day->save();
+    
+            //         foreach($request->subject_id[$k] as $i=>$data){
+            //             $class_routine_item= New ClassRoutineItem;
+            //             $class_routine_item->class_routine_day=$class_routine_day->id;
+            //             $class_routine_item->subject_id=$data;
+            //             $class_routine_item->teacher_id=$request->teacher_id[$k][$i];
+            //             $class_routine_item->room_id=$request->room_id[$k][$i];
+            //             $class_routine_item->class_duration_id=$request->class_duration_id[$k][$i];
+            //             $class_routine_item->save();
+            //         }
+            //     }
+            // }
 
 
             DB::commit();
@@ -198,8 +217,9 @@ class ClassRoutineController extends Controller
 
     public function details(Request $request,$id){
         // dd('hi');
-        $class_routine =  ClassRoutine::find($id);
-        return view('Backend.school_management.class_routine.view_class_routine',compact('class_routine'));
+        $data['class_routine']=$class_routine =  ClassRoutine::find($id);
+        $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
+        return view('Backend.school_management.class_routine.view_class_routine',$data);
     }
 
     public function print(Request $request,$id){

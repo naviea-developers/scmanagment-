@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Add Class')
+@section('title', 'Add Class routine')
 
 {{-- <link rel="stylesheet" href="css/custom/class.css"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
@@ -64,29 +64,39 @@
                     
                     <button type="button" class="btn btn-sm btn-add" id="plus-btn-data">Add</button>
                 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="mg-t-10 mg-sm-t-0 add-data">
-                                <div class="col-sm-12 mt-3"  style="border: 1px solid;padding:10px">
-                                    <div class="d-flex align-items-center mt-2">
-                                        <div class="d-flex align-items-center select-add-section" style="width: 97%;">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label>Select Day : </label>
-                                                    <select name="day_id[]" id=""class="form-select">
-                                                        <option value="">Select Day</option>
-                                                        <option value="1">Saturday</option>
-                                                        <option value="2">Sunday</option>
-                                                        <option value="3">Monday</option>
-                                                        <option value="4">Tuesday</option>
-                                                        <option value="5">Wednesday</option>
-                                                        <option value="6">Thursday</option>
-                                                        <option value="7">Friday</option>
-                                                    </select>
-                                                </div>
+                  
+
+                    <hr>
+                    <h4>Pacakage Details List:</h4>
+                    <div class="show-add-tagline-data">
+                        <div class="d-flex mt-3">
+                            <div class="" style="border: 1px solid;padding:10px;width: 97%;">
+                                <div class="row mt-3">
+                                    <div class="col-sm-9">
+                                        <label>Select Day : </label>
+                                        <select name="day_id[0]" id=""class="form-select">
+                                            <option value="">Select Day</option>
+                                            <option value="1">Saturday</option>
+                                            <option value="2">Sunday</option>
+                                            <option value="3">Monday</option>
+                                            <option value="4">Tuesday</option>
+                                            <option value="5">Wednesday</option>
+                                            <option value="6">Thursday</option>
+                                            <option value="7">Friday</option>
+                                        </select>
+                                      
+                                    </div>
+                                    <hr style="width:95%;">
+                                </div>
+
+                                <div class="show-add-list-data">
+                                    <div class="row mt-3">
+                                        <label class="col-sm-3 form-control-label"> </label>
+                                        <div class="col-sm-12 mg-t-10 mg-sm-t-0">
+                                            <div class="d-flex align-items-center ">
                                                 <div class="col-md-3">
                                                     <label>Select Subject : </label>
-                                                    <select name="subject_id[]" id=""class="form-select">
+                                                    <select name="subject_id[0][]" id=""class="form-select">
                                                         <option value="">Select Subject</option>
                                                         @foreach ($subjectName as $subject)
                                                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -96,7 +106,7 @@
 
                                                 <div class="col-md-3">
                                                     <label>Select Teacher : </label>
-                                                    <select name="teacher_id[]" id=""class="form-select">
+                                                    <select name="teacher_id[0][]" id=""class="form-select">
                                                         <option value="">Select Teacher</option>
                                                         @foreach ($teachers as $teacher)
                                                             <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
@@ -104,61 +114,37 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <label>Select Buldings : </label>
-                                                    <select name="bulding_id[]" id=""class="form-select">
-                                                        <option value="">Select Buldings</option>
-                                                        @foreach ($buldings as $bulding)
-                                                            <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mt-3">
-                                                    <label>Select Floors : </label>
-                                                    <select name="floor_id[]" id=""class="form-select">
-                                                        <option value="">Select Floors</option>
-                                                        @foreach ($floors as $floor)
-                                                            <option value="{{ $floor->id }}">{{ $floor->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-4 mt-3">
+                                                <div class="col-md-2">
                                                     <label>Select Rooms : </label>
-                                                    <select name="room_id[]" id=""class="form-select">
-                                                        <option value="">Select Rooms</option>
+                                                    <select name="room_id[0][]" id=""class="form-select">
+                                                        <option value="">sel..room</option>
                                                         @foreach ($rooms as $room)
                                                             <option value="{{ $room->id }}">{{ $room->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-4 mt-3">
+                                                <div class="col-md-3">
                                                     <label>Select Period : </label>
-                                                    <select name="class_duration_id[]" id=""class="form-select">
+                                                    <select name="class_duration_id[0][]" id=""class="form-select">
                                                         <option value="">Select period</option>
                                                         @foreach ($class_durations as $class_duration)
                                                             <option value="{{ $class_duration->id }}">{{ $class_duration->name }} ({{date('h:i:A',strtotime($class_duration->start_time))}} - {{date('h:i:A',strtotime($class_duration->end_time))}})</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                
-                                                {{-- <div class="col-md-3 mt-3">
-                                                    <label for="">Start Time :</label>
-                                                    <input type="time" name="start_time[]" class="form-control">
-                                                </div>
-                                                <div class="col-md-3 mt-3">
-                                                    <label for="">End Time :</label>
-                                                    <input type="time" name="end_time[]" class="form-control">
-                                                </div> --}}
+                                                <a tag_id="0" href="javascript:void(0)" class="plus-btn-data-detail plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </div>
-                                        <a href="javascript:void(0)" class="minus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
                                     </div>
                                 </div>
+
                             </div>
+                            <a id="plus-btn-data-tagline" href="javascript:void(0)" class="plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
                         </div>
-                    </div><!-- row -->
+                    </div>
+
+
                
 
                     <div class="col-md-12 mt-4" >
@@ -238,26 +224,7 @@ $(document).ready(function() {
                                                 </select>
                                             </div>
 
-                                       
                                         <div class="col-md-3">
-                                            <label>Select Buldings : </label>
-                                            <select name="bulding_id[]" id=""class="form-select">
-                                                <option value="">Select Buldings</option>
-                                                @foreach ($buldings as $bulding)
-                                                    <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mt-3">
-                                            <label>Select Floors : </label>
-                                            <select name="floor_id[]" id=""class="form-select">
-                                                <option value="">Select Floors</option>
-                                                @foreach ($floors as $floor)
-                                                    <option value="{{ $floor->id }}">{{ $floor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mt-3">
                                             <label>Select Rooms : </label>
                                             <select name="room_id[]" id=""class="form-select">
                                                 <option value="">Select Rooms</option>
@@ -266,7 +233,7 @@ $(document).ready(function() {
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4 mt-3">
+                                        <div class="col-md-6 mt-3">
                                             <label>Select Period : </label>
                                             <select name="class_duration_id[]" id=""class="form-select">
                                                 <option value="">Select period</option>
@@ -295,6 +262,200 @@ $(document).ready(function() {
     });
 
     //Course Pre Requisites End
+</script>
+
+
+
+<script>
+        var tagline =1;
+    $(document).on('click','.plus-btn-data-detail',function(){
+
+        let out = `<div class="row mt-3">
+                                        <label class="col-sm-3 form-control-label"> </label>
+                                        <div class="col-sm-12 mg-t-10 mg-sm-t-0">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="col-md-3">
+                                                    <label>Select Subject : </label>
+                                                    <select name="subject_id['+$(this).attr('tag_id')+'][]" class="form-select">
+                                                        <option value="">Select Subject</option>
+                                                        @foreach ($subjectName as $subject)
+                                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label>Select Teacher : </label>
+                                                    <select name="teacher_id['+$(this).attr('tag_id')+'][]" class="form-select">
+                                                        <option value="">Select Teacher</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="room_id['+$(this).attr('tag_id')+'][]" class="form-select">
+                                                        <option value="">sel..room</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label>Select Period : </label>
+                                                    <select name="class_duration_id['+$(this).attr('tag_id')+'][]" class="form-select">
+                                                        <option value="">Select period</option>
+                                                        @foreach ($class_durations as $class_duration)
+                                                            <option value="{{ $class_duration->id }}">{{ $class_duration->name }} ({{date('h:i:A',strtotime($class_duration->start_time))}} - {{date('h:i:A',strtotime($class_duration->end_time))}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <a href="javascript:void(0)" class="minus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+        let out = '<div class="row mt-3">'+
+                  '<label class="col-sm-3 form-control-label"> </label>'+
+                  '<div class="col-sm-9 mg-t-10 mg-sm-t-0">'+
+                    '<div class="d-flex align-items-center ">'+
+                    '<input  value="" type="text" name="details['+$(this).attr('tag_id')+'][]" class="form-control" placeholder="Enter Details">'+
+                    '<a href="javascript:void(0)" class="minus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>'+
+                    '</div></div></div>';
+
+
+                    
+       $(this).parent().parent().parent().parent().prepend(out);
+    });
+
+    $(document).on('click','.minus-btn-data',function(){
+        $(this).parent().parent().parent().remove();
+    });
+
+
+
+
+
+    $('#plus-btn-data-tagline').on('click',function(){
+
+        let myvar = `<div class="d-flex mt-3">
+                            <div class="" style="border: 1px solid;padding:10px;width: 97%;">
+                                <div class="row mt-3">
+                                    <div class="col-sm-9">
+                                        <label>Select Day : </label>
+                                        <select name="day_id['+tagline+']" id=""class="form-select">
+                                            <option value="">Select Day</option>
+                                            <option value="1">Saturday</option>
+                                            <option value="2">Sunday</option>
+                                            <option value="3">Monday</option>
+                                            <option value="4">Tuesday</option>
+                                            <option value="5">Wednesday</option>
+                                            <option value="6">Thursday</option>
+                                            <option value="7">Friday</option>
+                                        </select>
+                                      
+                                    </div>
+                                    <hr style="width:95%;">
+                                </div>
+
+                                <div class="show-add-list-data">
+                                    <div class="row mt-3">
+                                        <label class="col-sm-3 form-control-label"> </label>
+                                        <div class="col-sm-12 mg-t-10 mg-sm-t-0">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="col-md-3">
+                                                    <label>Select Subject : </label>
+                                                    <select name="subject_id['+tagline+'][]" id=""class="form-select">
+                                                        <option value="">Select Subject</option>
+                                                        @foreach ($subjectName as $subject)
+                                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label>Select Teacher : </label>
+                                                    <select name="teacher_id['+tagline+'][]" id=""class="form-select">
+                                                        <option value="">Select Teacher</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <label>Select Rooms : </label>
+                                                    <select name="room_id['+tagline+'][]" id=""class="form-select">
+                                                        <option value="">sel..room</option>
+                                                        @foreach ($rooms as $room)
+                                                            <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label>Select Period : </label>
+                                                    <select name="class_duration_id['+tagline+'][]" id=""class="form-select">
+                                                        <option value="">Select period</option>
+                                                        @foreach ($class_durations as $class_duration)
+                                                            <option value="{{ $class_duration->id }}">{{ $class_duration->name }} ({{date('h:i:A',strtotime($class_duration->start_time))}} - {{date('h:i:A',strtotime($class_duration->end_time))}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <a tag_id="'+tagline+'" href="javascript:void(0)" class="plus-btn-data-detail plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <a href="javascript:void(0)" class="minus-btn-data-tagline px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
+                        </div>`;
+
+
+
+        // var myvar1 = '<div class="d-flex mt-3">'+
+        // '                                <div class="" style="border: 1px solid;padding:10px;width: 97%;">'+
+        // '                                    <div class="row mt-3">'+
+        // '                                        <div class="col-sm-3">'+
+        // '                                            <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 100px;">'+
+        // '                                                <img class="display-upload-img" style="width: 100px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">'+
+        // '                                                <input type="file" name="tagline_image['+tagline+']" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">'+
+        // '                                            </div>'+
+        // '                                        </div>'+
+        // '                                        <div class="col-sm-9">'+
+        // '                                            <input  value="" type="text" name="tagline['+tagline+']" class="form-control" placeholder="Enter Tagline">'+
+        // '                                        </div>'+
+        // '                                        <hr style="width:95%;">'+
+        // '                                    </div>'+
+        // '                                    <div class="show-add-list-data">'+
+        // '                                        <div class="row mt-3">'+
+        // '                                            <label class="col-sm-3 form-control-label"> </label>'+
+        // '                                            <div class="col-sm-9 mg-t-10 mg-sm-t-0">'+
+        // '                                                <div class="d-flex align-items-center ">'+
+        // '                                                    <input  value="" type="text" name="details['+tagline+'][]" class="form-control" placeholder="Enter Details">'+
+        // '                                                    <a tag_id="'+tagline+'" class="plus-btn-data-detail" href="javascript:void(0)" class="plus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>'+
+        // '                                                </div>'+
+        // '                                            </div>'+
+        // '                                        </div>'+
+        // '                                    </div>'+
+        // '                                </div>'+
+        // '                                <a href="javascript:void(0)" class="minus-btn-data-tagline px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>'+
+        // '                            </div>';
+
+
+
+        $('.show-add-tagline-data').prepend(myvar);
+        tagline++;
+        $(this).focus();
+    });
+    $(document).on('click','.minus-btn-data-tagline',function(){
+        $(this).parent().remove();
+    });
+
 </script>
     
 @endsection
