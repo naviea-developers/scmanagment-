@@ -28,6 +28,11 @@
     <div class="passwodBox mb-3" style="background-color: #07477D; color:white">
         <di class="col-md-12">
             <div class="row">
+
+                <div class="item">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="text-center">  Class {{ $admission->class->name }}</span>
+                </div>
                 {{-- @foreach ($notices as $notice)
                 <div class="col-md-4">
                     <div class="card card-body" style="height: 100%">
