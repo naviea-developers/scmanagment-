@@ -1,13 +1,13 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Manage Homework')
+@section('title','- Manage Courses')
 
 @endsection
 @section('main_content')
 
 <div class="right_section">
     <div>
-        <h3>Manage Home Work</h3>
+        <h3>Manage Class Test</h3>
     </div>
 </div>
 
@@ -31,7 +31,8 @@
             <th scope="col">SL</th>
             <th scope="col">Class Name</th>
             <th scope="col">Subject Name</th>
-            <th scope="col">HOMEWORK IMAGE</th>
+            <th scope="col">Class Test IMAGE</th>
+            <th scope="col">Class Test Duration</th>
             <th scope="col">DETAILS</th>
             <th scope="col">Action</th>
         </tr>
@@ -40,23 +41,25 @@
             @php
                 $i = 1;
             @endphp
-            @if (count($home_works) > 0)
-            @foreach ($home_works as $home_work)
+            @if (count($class_tests) > 0)
+            @foreach ($class_tests as $class_test)
 
             <tr>
             <td>{{ $i++ }}</td>
-            <td>{{  $home_work->class->name }}</td>
-            <td>{{  $home_work->subject->name }}</td>
+            <td>{{  $class_test->class->name }}</td>
+            <td>{{  $class_test->subject->name }}</td>
+            
             <td>
-                <img src="{{$home_work->image_show}}" alt="" width="60px" height="40px" srcset="">
+                <img src="{{$class_test->image_show}}" alt="" width="60px" height="40px" srcset="">
             </td>
-            <td>{{  $home_work->details }}</td>
+            <td>{{date('h:i:A',strtotime(@$class_test->class_test_duration))}}</td>
+            <td>{{  $class_test->details }}</td>
             <td>
-                <a href="{{ route('instructor.homework.edit', $home_work->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
+                <a href="{{ route('instructor.class_exam.edit', $class_test->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
                 {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
                 &nbsp;
-                <button class="btn text-danger delete-button" courseId="{{ $home_work->id }}"><i class="icon fa fa-trash tx-28"></i></button>
+                <button class="btn text-danger delete-button" courseId="{{ $class_test->id }}"><i class="icon fa fa-trash tx-28"></i></button>
             </td>
             </tr>
 
@@ -67,14 +70,14 @@
                 <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content tx-size-sm">
                     <div class="modal-body tx-center pd-y-20 pd-x-20">
-                        <form action="{{ route('instructor.homework.delete') }}" method="post">
+                        <form action="{{ route('instructor.class_exam.delete') }}" method="post">
                             @csrf
                             {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button> --}}
                             {{-- <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i> --}}
                             <h4 class="tx-semibold mg-b-20 mt-2 " >Are you sure! you want to delete this?</h4>
-                            <input type="hidden" value="{{ $home_work->id }}" name="homework_id" id="course_id">
+                            <input type="hidden" value="{{ $class_test->id }}" name="class_test_id" id="course_id">
                             <button type="submit"  class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">
                                 yes
                             </button>

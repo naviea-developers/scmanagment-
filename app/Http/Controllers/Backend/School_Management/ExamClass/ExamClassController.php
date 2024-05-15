@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\School_management\ExamSchedules;
+namespace App\Http\Controllers\Backend\School_management\ExamClass;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,13 +18,13 @@ use App\Models\ExamType;
 use App\Models\Group;
 use App\Models\ExamClass;
 
-class ExamSchedulesController extends Controller
+class ExamClassController extends Controller
 {
     //--------------Exam------------//
 
     public function index(){
-        $allData=ExamSchedule::orderBy('id', 'desc')->get();
-        return view('Backend.school_management.exam_schedule.index',compact('allData'));
+        $allData=ExamClass::orderBy('id', 'desc')->get();
+        return view('Backend.school_management.exam_class.index',compact('allData'));
     }
 
     public function create(){
@@ -38,9 +38,8 @@ class ExamSchedulesController extends Controller
         $data['sessions']=Session::orderBy('id', 'desc')->get(); 
         $data['examTypes'] = ExamType::orderBy('id','desc')->get();
         $data['groups'] = Group::orderBy('id','desc')->get();
-        $data['examClasss']=ExamClass::orderBy('id', 'desc')->get();
 
-        return view('Backend.school_management.exam_schedule.create',$data);
+        return view('Backend.school_management.exam_class.create',$data);
     }
 
  
@@ -55,7 +54,7 @@ class ExamSchedulesController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $exam_class = new ExamSchedule();
+            $exam_class = new ExamClass();
             $exam_class->examination_id = $request->examination_id;
             $exam_class->class_id = $request->class_id;
             $exam_class->group_id = $request->group_id;
@@ -68,7 +67,7 @@ class ExamSchedulesController extends Controller
             $exam_class->end_time = $request->end_time;
             $exam_class->save();
             DB::commit();
-            return redirect()->route('admin.examschedule.index')->with('message','Exam Schedule Add Successfully');
+            return redirect()->route('admin.examclass.index')->with('message','Exam class Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -78,7 +77,7 @@ class ExamSchedulesController extends Controller
 
     public function edit($id){
         // dd('hi');
-       $data['editData'] =  ExamSchedule::find($id);
+       $data['editData'] =  ExamClass::find($id);
        $data['className']=Classe::orderBy('id', 'desc')->get(); 
        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
        $data['examinations']=Examination::orderBy('id', 'desc')->get();
@@ -88,7 +87,7 @@ class ExamSchedulesController extends Controller
        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
        $data['examTypes'] = ExamType::orderBy('id','desc')->get();
        $data['groups'] = Group::orderBy('id','desc')->get();
-        return view('Backend.school_management.exam_schedule.update',$data);
+        return view('Backend.school_management.exam_class.update',$data);
     }
 
     public function update(Request $request,$id)
@@ -101,7 +100,7 @@ class ExamSchedulesController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $exam_class = ExamSchedule::find($id);
+            $exam_class = ExamClass::find($id);
             $exam_class->examination_id = $request->examination_id;
             $exam_class->class_id = $request->class_id;
             $exam_class->group_id = $request->group_id;
@@ -115,7 +114,7 @@ class ExamSchedulesController extends Controller
             $exam_class->save();
 
             DB::commit();
-            return redirect()->route('admin.examschedule.index')->with('message','exam schedule Update Successfully');
+            return redirect()->route('admin.examclass.index')->with('message','Exam class Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -126,11 +125,11 @@ class ExamSchedulesController extends Controller
     public function destroy(Request $request)
     {
         // dd('hi');
-        $exam_class =  ExamSchedule::find($request->exam_class_id);
+        $exam_class =  ExamClass::find($request->exam_class_id);
         // dd($examschedule);
         $exam_class->delete();
         return back()->with('message','exam class Deleted Successfully');
     }
 
-  
+   
 }
