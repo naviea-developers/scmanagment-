@@ -72,8 +72,8 @@ class ClassRoutineController extends Controller
                     $class_routine_item->day_id = $request->day_id[$k];
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
-                    $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    $class_routine_item->floor_id = $request->floor_id[$k];  
+                    // $class_routine_item->bulding_id = $request->bulding_id[$k];
+                    // $class_routine_item->floor_id = $request->floor_id[$k];  
                     $class_routine_item->class_duration_id = $request->class_duration_id[$k];       
                     // $class_routine_item->start_time = $request->start_time[$k];
                     // $class_routine_item->end_time = $request->end_time[$k];
@@ -155,8 +155,8 @@ class ClassRoutineController extends Controller
                     $class_routine_item->day_id = $request->day_id[$k];
                     $class_routine_item->room_id = $request->room_id[$k];
                     $class_routine_item->teacher_id = $request->teacher_id[$k];
-                    $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    $class_routine_item->floor_id = $request->floor_id[$k];    
+                    // $class_routine_item->bulding_id = $request->bulding_id[$k];
+                    // $class_routine_item->floor_id = $request->floor_id[$k];    
                     $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
                     // $class_routine_item->start_time = $request->start_time[$k];
                     // $class_routine_item->end_time = $request->end_time[$k];
@@ -172,8 +172,8 @@ class ClassRoutineController extends Controller
                     $class_routine_item->day_id = $request->old_day_id[$k];
                     $class_routine_item->teacher_id = $request->old_teacher_id[$k];
                     $class_routine_item->room_id = $request->old_room_id[$k];
-                    $class_routine_item->bulding_id = $request->old_bulding_id[$k];
-                    $class_routine_item->floor_id = $request->old_floor_id[$k]; 
+                    // $class_routine_item->bulding_id = $request->old_bulding_id[$k];
+                    // $class_routine_item->floor_id = $request->old_floor_id[$k]; 
                     $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
                     // $class_routine_item->start_time = $request->old_start_time[$k];
                     // $class_routine_item->end_time = $request->old_end_time[$k];

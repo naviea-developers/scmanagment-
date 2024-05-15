@@ -56,8 +56,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::post('/update-course/{id}', [InstructorCourseController::class, 'updateCourse'])->name('instructor.update_course');
         Route::post('/delete-course', [InstructorCourseController::class, 'deleteCourse'])->name('instructor.delete_course');
 
-        // Route::get('/index-home-work', [InstructorCourseController::class, 'indexHomeWork'])->name('instructor.index_homework');
-
+         //Teacher home work
         Route::get('index_home_work', [InstructorCourseController::class,"indexHomeWork"])->name('instructor.homework.index');
         Route::get('create_home_work', [InstructorCourseController::class,"createHomeWork"])->name('instructor.homework.create');
         Route::post('store_home_work', [InstructorCourseController::class,"storeHomeWork"])->name('instructor.homework.store');
@@ -65,6 +64,15 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::post('update_home_work/{id}', [InstructorCourseController::class,"updateHomeWork"])->name('instructor.homework.update');
         Route::post('delete_home_work', [InstructorCourseController::class,"destroyHomeWork"])->name('instructor.homework.delete');
         Route::get('/status_home_work/{id}', [InstructorCourseController::class, 'statusHomeWork'])->name('instructor.homework.status');
+
+         //Teacher class exam
+        Route::get('index_class_exam', [InstructorCourseController::class,"indexClassExam"])->name('instructor.class_exam.index');
+        Route::get('create_class_exam', [InstructorCourseController::class,"createClassExam"])->name('instructor.homework.create');
+        Route::post('store_class_exam', [InstructorCourseController::class,"storeClassExam"])->name('instructor.homework.store');
+        Route::get('edit_class_exam/{id}', [InstructorCourseController::class,"editClassExam"])->name('instructor.homework.edit');
+        Route::post('update_class_exam/{id}', [InstructorCourseController::class,"updateClassExam"])->name('instructor.homework.update');
+        Route::post('delete_class_exam', [InstructorCourseController::class,"destroyClassExam"])->name('instructor.homework.delete');
+        Route::get('/status_class_exam/{id}', [InstructorCourseController::class, 'statusClassExam'])->name('instructor.homework.status');
         
 
 
