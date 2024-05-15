@@ -278,6 +278,11 @@ class UserController extends Controller
         $data['notices'] = Notice::where('status', 1)->get();
         return view('user.notice.notice', $data);
     }
+    public function classRoutine() //all user
+    {
+        $data['notices'] = Notice::where('status', 1)->get();
+        return view('user.class_routine.routine', $data);
+    }
     public function wishlist() //coustomer
     {
         $data['saves'] = CourseSave::where('user_id', auth()->user()->id)->get();
