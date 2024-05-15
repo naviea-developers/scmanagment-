@@ -20,6 +20,7 @@ use App\Models\ApplicationDocument;
 use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
+use App\Models\Notice;
 use App\Models\Withdrawal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -271,6 +272,11 @@ class UserController extends Controller
         $data['privacy'] = Page::where('template', 'privacy-policy')->first();
         $data['terms_conditions'] = Page::where('template', 'terms-conditions')->first();
         return view('user.privacy_policy', $data);
+    }
+    public function notice() //all user
+    {
+        $data['notices'] = Notice::where('status', 1)->get();
+        return view('user.notice.notice', $data);
     }
     public function wishlist() //coustomer
     {

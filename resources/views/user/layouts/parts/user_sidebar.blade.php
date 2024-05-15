@@ -15,14 +15,23 @@
                 <i class="fa-solid fa-shield"></i>
                 <span> Security </span>
             </a>
-            <a href="{{ route('privacy') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            <a href="{{ route('notice') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-user-check"></i>
+                <span>  Notice </span>
+            </a>
+            {{-- <a href="{{ route('privacy') }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-user-check"></i>
                 <span>  Privacy & Policy </span>
-            </a>
+            </a> --}}
 
             <a href="{{ route('user.notification', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-bell"></i>
                 <span> Notification </span>
+            </a>
+
+            <a href="{{ route('user.application_order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span> Class Routine </span>
             </a>
 
             <a href="{{ route('user.application_order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
@@ -77,10 +86,14 @@
                     <i class="fa-solid fa-shield"></i>
                     <span> Security </span>
                 </a>
-                <a href="{{ route('privacy') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <a href="{{ route('notice') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>  Notice </span>
+                </a>
+                {{-- <a href="{{ route('privacy') }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-user-check"></i>
                     <span>  Privacy & Policy </span>
-                </a>
+                </a> --}}
 
                 <a href="{{ route('user.notification', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-bell"></i>

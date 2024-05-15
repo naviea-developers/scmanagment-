@@ -36,6 +36,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/wishlist', [UserController::class, 'wishlist'])->name('user.wishlist');
         Route::get('/notification', [UserController::class, 'notification'])->name('user.notification');
         Route::get('/privacy', [UserController::class, 'privacy'])->name('privacy');
+        Route::get('/notice', [UserController::class, 'notice'])->name('notice');
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
         Route::get('/my-course', [UserController::class, 'myCourseList'])->name('user.my_course');
         Route::get('/my-course-list', [UserController::class, 'myOrderList'])->name('user.my_order');

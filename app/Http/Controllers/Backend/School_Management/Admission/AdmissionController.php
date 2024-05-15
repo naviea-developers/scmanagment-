@@ -124,12 +124,15 @@ class AdmissionController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
         // $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('class_id',$admission->class_id)->where('status', 1)->get();
-        $data['groups'] = Group::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('status', 1)->get();
+        $data['groups'] = Group::where('class_id',$admission->class_id)->where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('class_id',$admission->class_id)->where('status', 1)->get();
         $data['continents'] = Continent::all();
-        $data['countries'] = Country::all();
-        $data['states'] = State::all();
-        $data['cities'] = City::all();
+        $data['countries'] = Country::where('continent_id',$admission->present_continent_id)->get();
+        $data['states'] = State::where('country_id',$admission->present_country_id)->get();
+        $data['cities'] = City::where('state_id',$admission->present_state_id)->get();
+        $data['permanent_countries'] = Country::where('continent_id',$admission->permanent_continent_id)->get();
+        $data['permanent_states'] = State::where('country_id',$admission->permanent_country_id)->get();
+        $data['permanent_cities'] = City::where('state_id',$admission->permanent_state_id)->get();
         return view("Backend.school_management.admission.update",$data);
     }
 
@@ -141,8 +144,9 @@ class AdmissionController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $admission = $user =  Admission::find($id);
-            $admission->user_id = $user->id;
+            $admission = Admission::find($id);
+            $admission->user_id = $admission->user_id;
+            // dd($admission);
             $admission->class_id = $request->class_id ?? 0;
             $admission->academic_year_id = $request->academic_year_id ?? 0;
             $admission->session_id = $request->session_id ?? 0;
@@ -198,10 +202,10 @@ class AdmissionController extends Controller
         if($request->certificates_file){
             foreach( $request->certificates_file as $k=>$value){
                 $certificates = new AdmissionCertificate();
-                $certificates->user_id = $user->id;
+                $certificates->user_id = $admission->user_id;
                 $certificates->admission_id = $admission->id;
                 $certificates->certificates_name = $request->certificates_name[$k];
-                $filename=$request->certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$value->getClientOriginalExtension();
+                $filename=$request->certificates_name[$k].'-'.$admission->user->name.'_certificat_file'.'.'.$value->getClientOriginalExtension();
                 $value->move(public_path('upload/certificates/'), $filename);
                 $certificates->certificates_file=$filename;
                 $certificates->extension = $value->getClientOriginalExtension();
@@ -213,13 +217,13 @@ class AdmissionController extends Controller
         if($request->old_certificates_name){
             foreach($request->old_certificates_name as $k => $value){
                 $certificates = AdmissionCertificate::find($k);
-                $certificates->user_id = $user->id;
+                $certificates->user_id = $admission->user_id;
                 $certificates->admission_id = $admission->id;
                 $certificates->certificates_name = $value;
 
                 if(isset($request->file('old_certificates_file')[$k])){
                     @unlink(public_path('upload/certificates/'.$certificates->certificates_file));
-                    $filename=$request->old_certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$request->file('old_certificates_file')[$k]->getClientOriginalExtension();
+                    $filename=$request->old_certificates_name[$k].'-'.$admission->user->name.'_certificat_file'.'.'.$request->file('old_certificates_file')[$k]->getClientOriginalExtension();
                     $request->file('old_certificates_file')[$k]->move(public_path('upload/certificates/'), $filename);
                     $certificates->certificates_file=$filename;
                     $certificates->extension = $request->file('old_certificates_file')[$k]->getClientOriginalExtension();
@@ -252,6 +256,9 @@ class AdmissionController extends Controller
     public function destroy(Request $request)
     {
         $admission =  Admission::find($request->admission_id);
+            foreach($admission->certificate as $item){
+                $item->delete();
+            }
         $admission->delete();
         return redirect()->route('admin.admission.index')->with('message','Admission Deleted Successfully');
     }

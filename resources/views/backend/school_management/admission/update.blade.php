@@ -268,7 +268,7 @@
                                 <label class=" form-control-label">Country Name:<span class="tx-danger">*</span></label>
                                 <select  class="form-control" name="permanent_country_id" id="country1" >
                                     <option value="">Select Country</option>
-                                    @foreach ($countries as $country)
+                                    @foreach ($permanent_countries as $country)
                                     <option @if ($country->id == $admission->permanent_country_id) Selected @endif value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
@@ -278,7 +278,7 @@
                                 <label class=" form-control-label">State Name:<span class="tx-danger">*</span></label>
                                 <select  class="form-control" name="permanent_state_id" id="state1" >
                                     <option value="">Select State</option>
-                                    @foreach ($states as $state)
+                                    @foreach ($permanent_states as $state)
                                     <option @if ($state->id == $admission->permanent_state_id) Selected @endif value="{{ $state->id }}">{{ $state->name }}</option>
                                     @endforeach
                                 </select>
@@ -288,7 +288,7 @@
                                 <label class=" form-control-label">City Name:<span class="tx-danger">*</span></label>
                                 <select  class="form-control" name="permanent_city_id" id="city1" >
                                     <option value="">Select State</option>
-                                    @foreach ($cities as $city)
+                                    @foreach ($permanent_cities as $city)
                                     <option @if ($city->id == $admission->permanent_city_id) Selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach
                                     </select>
