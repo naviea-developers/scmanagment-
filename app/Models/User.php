@@ -56,4 +56,7 @@ class User extends Authenticatable
     public function continents(){
         return $this->belongsTo(Continent::class,"continent_id",'id');
     }
+    public function admission(){
+        return $this->belongsTo(Admission::class,"class_id",'id');
+    }
 }

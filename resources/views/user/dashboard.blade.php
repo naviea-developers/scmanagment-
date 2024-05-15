@@ -154,10 +154,10 @@
         @if (auth()->user()->type == 1)
         <div class="daily mt-2 text-center">
 
-            {{-- <div class="item">
+            <div class="item">
                 <i class="fa-solid fa-user"></i>
-                <span class="text-center">  82 Visitor</span>
-            </div> --}}
+                <span class="text-center">  Class {{ auth()->user()->admission->class->name }}</span>
+            </div>
 
             {{-- <div class="item">
                 <i class="fa-solid fa-user-plus"></i>

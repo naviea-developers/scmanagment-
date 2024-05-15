@@ -63,7 +63,7 @@
                                   <select name="session_id" class="form-control">
                                     <option value=""> Select Session</option>
                                     @foreach ($sessions as $session)
-                                    <option value="{{ $session->id }}">{{ $session->session }}</option>
+                                    <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                     @endforeach
                                   </select>
                                 </div>
