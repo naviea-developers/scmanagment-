@@ -49,7 +49,7 @@ class ClassRoutineController extends Controller
 
     public function store(Request $request)
     {
-       dd($request->all());
+    //    dd($request->all());
         $request->validate([
             'class_id' => 'required',
             'session_id' => 'required',
