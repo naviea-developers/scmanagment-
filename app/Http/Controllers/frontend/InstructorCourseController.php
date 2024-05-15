@@ -837,6 +837,105 @@ class InstructorCourseController extends Controller
 // home work End
 
 
+// home Class Exam
+
+    public function indexClassExam()
+    {
+        //dd('hi');
+        $data['home_works'] = HomeWork::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+        return view('user.instructor.home_worke_index', $data);
+    }
+
+    public function createClassExam()
+    {
+        // dd('hi');
+        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        return view('user.instructor.home_worke_create', $data);
+    }
+
+    public function storeClassExam(Request $request)
+    {
+        // dd('hi');
+        $request->validate([
+            'class_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $home_work = New HomeWork();
+            $home_work->teacher_id = auth()->user()->id;
+            $home_work->class_id = $request->class_id;
+            $home_work->subject_id = $request->subject_id;
+            if($request->hasFile('image')){
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/home_work/'),$fileName);
+                $home_work->image = $fileName;
+            }
+            // $home_work->image = $request->image;
+            $home_work->details = $request->details;
+            $home_work->save();
+            DB::commit();
+            return redirect()->route('instructor.homework.index')->with('message','Class Exam Add Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+    public function editClassExam(string $id)
+    {
+        // dd('hi');
+        $data["home_work"]= HomeWork::find($id);
+        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        return view("user.instructor.home_worke_update",$data);
+    }
+
+
+    public function updateClassExam(Request $request, $id)
+    {
+        $request->validate([
+            'class_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $home_work = HomeWork::find($id);
+            $home_work->teacher_id = auth()->user()->id;
+            $home_work->class_id = $request->class_id;
+            $home_work->subject_id = $request->subject_id;
+            if($request->hasFile('image')){
+                @unlink(public_path("upload/home_work/".$home_work->image));
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/home_work/'),$fileName);
+                $home_work->image = $fileName;
+            }
+            $home_work->details = $request->details;
+            $home_work->save();
+
+        
+
+            DB::commit();
+            return redirect()->route('instructor.homework.index')->with('message','Class Exam Update Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+    public function destroyClassExam(Request $request)
+    {
+        // dd('hi');
+        $home_work =  HomeWork::find($request->homework_id);
+        $home_work->delete();
+        return redirect()->route('instructor.homework.index')->with('message','Class Exam Deleted Successfully');
+    }
+// home Class Exam
+
+
 
 
 }
