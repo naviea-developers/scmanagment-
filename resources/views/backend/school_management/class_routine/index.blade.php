@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title','All Exam')
+@section('title','All class routine')
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 

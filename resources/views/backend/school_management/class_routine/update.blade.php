@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Edit Exams')
+@section('title', 'Edit class routine')
 
 
 <link rel="stylesheet" href="#">
@@ -113,7 +113,7 @@
                                                         </select>
                                                     </div>
         
-                                                    <div class="col-md-3">
+                                                    {{-- <div class="col-md-3">
                                                         <label>Select Buldings : </label>
                                                         <select name="bulding_id[]" id=""class="form-select">
                                                             <option value="">Select Buldings</option>
@@ -121,8 +121,8 @@
                                                                 <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="col-md-4 mt-3">
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-4 mt-3">
                                                         <label>Select Floors : </label>
                                                         <select name="floor_id[]" id=""class="form-select">
                                                             <option value="">Select Floors</option>
@@ -130,9 +130,9 @@
                                                                 <option value="{{ $floor->id }}">{{ $floor->name }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
+                                                    </div> --}}
 
-                                                    <div class="col-md-4 mt-3">
+                                                    <div class="col-md-3 mt-3">
                                                         <label>Select Rooms : </label>
                                                         <select name="room_id[]" id=""class="form-select">
                                                             <option value="">Select Rooms</option>
@@ -142,7 +142,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-4 mt-3">
+                                                    <div class="col-md-6 mt-3">
                                                         <label>Select Period : </label>
                                                         <select name="class_duration_id[]" id=""class="form-select">
                                                             <option value="">Select period</option>
@@ -204,7 +204,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    {{-- <div class="col-md-3">
                                                         <label>Select Buldings : </label>
                                                         <select name="old_bulding_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                             <option value="">Select Buldings</option>
@@ -212,8 +212,8 @@
                                                                 <option @if($bulding->id == $class_routine_item->bulding_id)  Selected @endif value="{{ $bulding->id }}">{{ $bulding->name }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="col-md-4 mt-3">
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-4 mt-3">
                                                         <label>Select Floors : </label>
                                                         <select name="old_floor_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                             <option value="">Select Floors</option>
@@ -221,9 +221,9 @@
                                                                 <option @if($floor->id == $class_routine_item->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
+                                                    </div> --}}
 
-                                                    <div class="col-md-4 mt-3">
+                                                    <div class="col-md-3">
                                                         <label>Select Rooms : </label>
                                                         <select name="old_room_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                             <option value="">Select Rooms</option>
@@ -233,7 +233,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-md-4 mt-3">
+                                                    <div class="col-md-6 mt-3">
                                                         <label>Select Period : </label>
                                                         <select name="old_class_duration_id[{{ $class_routine_item->id }}]" id=""class="form-select">
                                                             <option value="">Select period</option>
@@ -327,26 +327,8 @@ $(document).ready(function() {
                                                     </select>
                                                 </div>
 
-                                        
+                                    
                                         <div class="col-md-3">
-                                            <label>Select Buldings : </label>
-                                            <select name="bulding_id[]" id=""class="form-select">
-                                                <option value="">Select Buldings</option>
-                                                @foreach ($buldings as $bulding)
-                                                    <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mt-3">
-                                            <label>Select Floors : </label>
-                                            <select name="floor_id[]" id=""class="form-select">
-                                                <option value="">Select Floors</option>
-                                                @foreach ($floors as $floor)
-                                                    <option value="{{ $floor->id }}">{{ $floor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mt-3">
                                             <label>Select Rooms : </label>
                                             <select name="room_id[]" id=""class="form-select">
                                                 <option value="">Select Rooms</option>
@@ -356,7 +338,7 @@ $(document).ready(function() {
                                             </select>
                                         </div>
                                         
-                                        <div class="col-md-4 mt-3">
+                                        <div class="col-md-6 mt-3">
                                             <label>Select Period : </label>
                                             <select name="class_duration_id[]" id=""class="form-select">
                                                 <option value="">Select period</option>

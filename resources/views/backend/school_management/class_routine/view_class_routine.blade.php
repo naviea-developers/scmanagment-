@@ -23,7 +23,7 @@
   }
 </style>
 @endsection
-@section('title','Exam Details')
+@section('title','class routine Details')
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
@@ -58,50 +58,21 @@
         <thead>
           <tr>
             <th>Day</th>
-            <th>Teacher Name</th>
+            @foreach (@$class_durations as $class_duration)
+            <th>{{ @$class_duration->name }} ({{date('h:i:A',strtotime(@$class_duration->start_time))}} - {{date('h:i:A',strtotime(@$class_duration->end_time))}})</th>
+            @endforeach
+            {{-- <th>Teacher Name</th>
             <th>Subject Name</th>
             <th>Bulding Name</th>
             <th>Floor Name</th>
             <th>Room Name</th>
-            {{-- <th>Time</th> --}}
-            <th>Duration</th>
+            <th>Duration</th> --}}
             
           </tr>
         </thead>
 
+    
         <tbody>
-
-      
-          {{-- 
-          @foreach (@$class_routine->class_routine_items as $item)
-            <tr>
-              <td>{{ $item->day }}</td>
-              <td>{{ $item->Teacher->name }}</td>
-              <td>{{ $item->subject->name }}</td>
-              <td>{{ $item->bulding->name }}</td>
-              <td>{{ $item->floor->name }}</td>
-              <td>{{ $item->room->name }}</td>
-              <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
-            </tr>
-          @endforeach --}}
-
-          {{-- @php
-              $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
-          @endphp
-
-          @foreach ($class_routine->class_routine_items as $key => $item)
-              <tr>
-                  @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                      <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
-                  @endif
-                  <td>{{ $item->Teacher->name }}</td>
-                  <td>{{ $item->subject->name }}</td>
-                  <td>{{ $item->bulding->name }}</td>
-                  <td>{{ $item->floor->name }}</td>
-                  <td>{{ $item->room->name }}</td>
-                   <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
-              </tr>
-          @endforeach  --}}
 
           @php
               $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
@@ -110,44 +81,29 @@
           @foreach ($class_routine->class_routine_items as $key => $item)
               <tr>
                   @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                      <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
+                      <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
                   @endif
-                  <td>{{ $item->Teacher->name }}</td>
-                  <td>{{ $item->subject->name }}</td>
+                  <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
+                  {{-- <td>{{ $item->subject->name }}</td>
                   <td>{{ $item->bulding->name }}</td>
                   <td>{{ $item->floor->name }}</td>
                   <td>{{ $item->room->name }}</td>
-                  <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
+                   <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td> --}}
               </tr>
-          @endforeach
+          @endforeach 
 
-          {{-- @foreach ($class_routine->class_routine_items as $key => $item)
-          @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-              <tr>
-                  <td>{{ $item->day }}</td>
-                  <td>{{ $item->Teacher->name }}</td>
-                  <td>{{ $item->subject->name }}</td>
-                  <td>{{ $item->bulding->name }}</td>
-                  <td>{{ $item->floor->name }}</td>
-                  <td>{{ $item->room->name }}</td>
-                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
-              </tr>
-          @else
-              <tr>
-                  <td></td>
-                  <td>{{ $item->Teacher->name }}</td>
-                  <td>{{ $item->subject->name }}</td>
-                  <td>{{ $item->bulding->name }}</td>
-                  <td>{{ $item->floor->name }}</td>
-                  <td>{{ $item->room->name }}</td>
-                  <td>{{ $item->start_time }} - {{ $item->end_time }}</td>
-              </tr>
-          @endif
-      @endforeach --}}
+          {{-- @php
+              $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
+          @endphp
 
-
-
-
+          @foreach ($class_routine->class_routine_items as $key => $item)
+            <tr>
+                @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
+                    <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
+                @endif
+                <td>{{ $item->Teacher->name }} {{ $item->subject->name }} {{ $item->bulding->name }}</td>
+            </tr>
+          @endforeach --}}
         </tbody>
       </table>
     </div>
