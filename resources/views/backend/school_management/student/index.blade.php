@@ -173,7 +173,6 @@ Admin - All Student
     <!--_-- ########### End Delete Category MODAL ############---->
 
 @endsection
-<<<<<<< HEAD
 
 
 @section('script')
@@ -244,33 +243,3 @@ Admin - All Student
     });
   </script>
 @endsection
-=======
-{{-- 
-@section('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  // When class dropdown changes
-  $('#class').change(function() {
-      var classId = $(this).val();
-      if (classId !== '') {
-          // AJAX request to fetch students of selected class
-          $.ajax({
-              url: "{{ route('admin.school_student.get_students_by_class') }}",
-              method: 'GET',
-              data: {class_id: classId},
-              success: function(response) {
-                  // Update table content with new student data
-                  $('#admission-list').html(response);
-              },
-              error: function(xhr, status, error) {
-                  console.error(xhr.responseText);
-              }
-          });
-      } else {
-          // Clear table content if no class selected
-          $('#admission-list').html('');
-      }
-  });
-</script>
-@endsection --}}
->>>>>>> 17ca96a8e46be2295c77ebf5c043d82420cb3f8b
