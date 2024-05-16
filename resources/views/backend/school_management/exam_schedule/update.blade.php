@@ -49,7 +49,7 @@
                             <select name="exam_class_id" id="" class="form-control form-select select2">
                                 <option value="">Select Exam class</option>
                                 @foreach (@$examClasss as $examClass)
-                                    <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ $examClass->subject->name }}</option>
+                                    <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
                                 @endforeach
                             </select>
                         </div>

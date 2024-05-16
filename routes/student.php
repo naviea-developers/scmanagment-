@@ -15,4 +15,8 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
 
 });
 
+<<<<<<< HEAD
 Route::get('/get-search-student', [StudentController::class, 'getSearchStudent'])->name('admin.school_student.search-student');
+=======
+
+>>>>>>> 17ca96a8e46be2295c77ebf5c043d82420cb3f8b

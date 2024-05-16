@@ -18,6 +18,7 @@ use App\Models\Country;
 use App\Models\FeeManagement;
 use App\Models\Group;
 use App\Models\SchoolSection;
+use App\Models\Section;
 use App\Models\Session;
 use App\Models\State;
 use App\Models\User;
@@ -36,6 +37,9 @@ class StudentController extends Controller
         $data['sections'] = SchoolSection::where('status', 1)->get();
         return view('Backend.school_management.student.index', $data);
     }
+
+
+
 
     public function create()
     {
