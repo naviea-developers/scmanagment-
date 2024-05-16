@@ -37,7 +37,7 @@
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Class Teacher Name: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="teacher_id" class="form-control">
+                                <select name="teacher_id" class="form-control form-select">
                                   <option value=""> Select Teacher</option>
                                   @foreach ($teachers as $teacher)
                                   <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
@@ -51,7 +51,7 @@
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Class Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="class_id" id="class" class="form-control">
+                                  <select name="class_id" id="class" class="form-control form-select">
                                     <option value=""> Select Class</option>
                                     @foreach ($classes as $class)
                                     <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -61,26 +61,40 @@
                               </div>
                          </div>
 
-                         <div class="row">
-                          <div class="col-sm-12 mt-3">
-                              <label class="form-control-label">Sections Name: <span class="tx-danger">*</span></label>
-                              <div class="mg-t-10 mg-sm-t-0">
-                                <select name="section_id"  id="section" class="form-control">
-                                  <option value=""> Select Class</option>
-                                  {{-- @foreach ($sections as $section)
-                                  <option value="{{ $section->id }}">{{ $section->name }}</option>
-                                  @endforeach --}}
+                          <div class="row">
+                            <div class="col-sm-12 mt-3">
+                                <label class="form-control-label">Select Subject : <span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="subject_id" id="subject" class="form-control form-select">
+                                    <option value="">Select Subject</option>
+                                    {{-- @foreach ($subjectName as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    @endforeach --}}
                                 </select>
+                                </div>
                               </div>
-                            </div>
-                       </div>
+                          </div>
+
+                         <div class="row">
+                            <div class="col-sm-12 mt-3">
+                                <label class="form-control-label">Sections Name: <span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="section_id"  id="section" class="form-control form-select">
+                                    <option value=""> Select Class</option>
+                                    {{-- @foreach ($sections as $section)
+                                    <option value="{{ $section->id }}">{{ $section->name }}</option>
+                                    @endforeach --}}
+                                  </select>
+                                </div>
+                              </div>
+                         </div>
 
 
                          <div class="row">
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Session Name: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="session_id" class="form-control">
+                                <select name="session_id" class="form-control form-select">
                                   <option value=""> Select Session</option>
                                   @foreach ($sessions as $session)
                                   <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>

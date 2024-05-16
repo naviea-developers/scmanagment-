@@ -285,6 +285,7 @@
             console.log(id);
         getSection(id,"section");
         getSubject(id,"subject");
+        getGroup(id,"group");
     });
 
     function getSection(id,outid){
@@ -321,6 +322,24 @@
                 $('#'+outid).append(html);
                 $('#'+outid).val("").change();
             });
+    }
+
+    function getGroup(id,outid){
+      let url = '{{ url("get/group/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select group</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.name + "</option>"
+              });
+
+
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
     }
 
     $('body').on("change",'#bulding',function(){

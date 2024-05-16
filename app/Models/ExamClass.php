@@ -20,4 +20,5 @@ class ExamClass extends Model
     public function subject(){
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }
+    
 }

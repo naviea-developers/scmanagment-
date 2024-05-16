@@ -1,7 +1,12 @@
 @extends('Backend.layouts.layouts')
 
 @section('title', 'Add exam Class')
-
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 41px;}
+</style>
+@endsection
 {{-- <link rel="stylesheet" href="css/custom/class.css"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
@@ -35,7 +40,7 @@
     
                         <div class="col-md-3">
                             <label for="">Exam title :</label>
-                            <select name="examination_id" id="" class="form-select">
+                            <select name="examination_id" id="" class="form-control form-select select2">
                                 <option value="0">Select Exam title</option>
                                 @foreach (@$examinations as $examination)
                                     <option value="{{ $examination->id }}">{{ $examination->name }}</option>
@@ -44,36 +49,37 @@
                         </div>
                         <div class="col-md-3">
                             <label>Select Class : </label>
-                            <select name="class_id" id=""class="form-select">
+                            <select name="class_id" id="class" class="form-control form-select select2">
                                 <option value="0">Select Class</option>
                                 @foreach ($className as $class)
                                     <option value="{{ $class->id}}">{{ $class->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="col-md-3">
                             <label for="">Group :</label>
-                            <select name="group_id" id="" class="form-select">
+                            <select name="group_id" id="group" class="form-control form-select select2">
                                 <option value="0">Select group</option>
-                                @foreach (@$groups as $group)
+                                {{-- @foreach (@$groups as $group)
                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
 
                         <div class="col-md-3">
                             <label>Select Subject : </label>
-                            <select name="subject_id" id=""class="form-select">
+                            <select name="subject_id" id="subject" class="form-control form-select select2">
                                 <option value="0">Select Subject</option>
-                                @foreach ($subjectName as $subject)
+                                {{-- @foreach ($subjectName as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
 
                         <div class="col-md-3 mt-3">
                             <label>Select Exam Types : </label>
-                            <select name="examtype_id" id=""class="form-select">
+                            <select name="examtype_id" id=""class="form-control form-select select2">
                                 <option value="0">select exam type</option>
                                 @foreach ($examTypes as $examType)
                                     <option value="{{ $examType->id }}">{{ $examType->name }}</option>

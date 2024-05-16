@@ -6,7 +6,7 @@ use App\Http\Controllers\Backend\Result\resultController;
 use App\Http\Controllers\Backend\Class\classController;
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
 use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
-use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
+
 
 
 
@@ -80,18 +80,5 @@ Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //-----------------------------Exam Route End---------------------------//
 
 
-//-----------------------------routine Route start---------------------------//
-Route::prefix('routine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
-    Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
-    Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
-    Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
-    Route::get('edit/{id}', [ClassRoutineController::class,"edit"])->name('admin.routine.edit');
-    Route::post('update/{id}', [ClassRoutineController::class,"update"])->name('admin.routine.update');
-    Route::post('delete', [ClassRoutineController::class,"destroy"])->name('admin.routine.delete');
-    Route::get('/status/{id}', [ClassRoutineController::class, 'status'])->name('admin.routine.status');
-    Route::get('details/{id}', [ClassRoutineController::class,"details"])->name('admin.routine.details');
-    Route::get('print/{id}', [ClassRoutineController::class,"print"])->name('admin.routine.print');
-});
-//-----------------------------routine Route End---------------------------//
+
 
