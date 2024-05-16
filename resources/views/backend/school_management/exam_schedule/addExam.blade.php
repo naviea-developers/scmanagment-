@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Add Class')
+@section('title', 'Add exam Class')
 
 {{-- <link rel="stylesheet" href="css/custom/class.css"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
@@ -18,8 +18,8 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-screen-users"></i>
                     <div>
-                      <h4>Add Exam Routine</h4>
-                      <p class="mg-b-0">Add Exams Routine</p>
+                      <h4>Add Exam Class</h4>
+                      <p class="mg-b-0">Add Exams Class</p>
                     </div>
                 </div>
 
@@ -34,16 +34,8 @@
                 <form action="{{ route('storeExam') }}" method="POST">
                     @csrf
                     <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label>Select Class : </label>
-                            <select name="class_id" id=""class="form-select">
-                                <option value="">Select Class</option>
-                                @foreach ($className as $class)
-                                    <option value="{{ $class->id}}">{{ $class->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-4">
+    
+                        <div class="col-md-3">
                             <label for="">Exam title :</label>
                             <select name="examination_id" id="" class="form-select">
                                 <option value="">Select Exam title</option>
@@ -52,14 +44,65 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label for="">Section :</label>
-                            <select name="session_id" id="" class="form-select">
-                                <option value="">Select Section</option>
-                                @foreach (@$sessions as $session)
-                                    <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
+                        <div class="col-md-3">
+                            <label>Select Class : </label>
+                            <select name="class_id" id=""class="form-select">
+                                <option value="">Select Class</option>
+                                @foreach ($className as $class)
+                                    <option value="{{ $class->id}}">{{ $class->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">Group :</label>
+                            <select name="group_id" id="" class="form-select">
+                                <option value="">Select group</option>
+                                @foreach (@$groups as $group)
+                                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Select Subject : </label>
+                            <select name="subject_id" id=""class="form-select">
+                                <option value="">Select Subject</option>
+                                @foreach ($subjectName as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label>Select Exam Types : </label>
+                            <select name="examtype_id" id=""class="form-select">
+                                <option value="">select exam type</option>
+                                @foreach ($examTypes as $examType)
+                                    <option value="{{ $examType->id }}">{{ $examType->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label for="">Marke :</label>
+                            <input type="number" name="marke" class="form-control">
+                        </div>
+                        <div class="col-md-3 mt-3">
+                            <label for="">Pass Marke :</label>
+                            <input type="number" name="pass_marke" class="form-control">
+                        </div>
+                    
+                        <div class="col-md-3 mt-3">
+                            <label for="">Date :</label>
+                            <input type="date" name="date" class="form-control">
+                        </div>
+                        <div class="col-md-3 mt-3">
+                            <label for="">Start Time :</label>
+                            <input type="time" name="start_time" class="form-control">
+                        </div>
+                        <div class="col-md-3 mt-3">
+                            <label for="">End Time :</label>
+                            <input type="time" name="end_time" class="form-control">
                         </div>
                     </div>
                     

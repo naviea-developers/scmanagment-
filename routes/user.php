@@ -67,12 +67,12 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
          //Teacher class exam
         Route::get('index_class_exam', [InstructorCourseController::class,"indexClassExam"])->name('instructor.class_exam.index');
-        Route::get('create_class_exam', [InstructorCourseController::class,"createClassExam"])->name('instructor.homework.create');
-        Route::post('store_class_exam', [InstructorCourseController::class,"storeClassExam"])->name('instructor.homework.store');
-        Route::get('edit_class_exam/{id}', [InstructorCourseController::class,"editClassExam"])->name('instructor.homework.edit');
-        Route::post('update_class_exam/{id}', [InstructorCourseController::class,"updateClassExam"])->name('instructor.homework.update');
-        Route::post('delete_class_exam', [InstructorCourseController::class,"destroyClassExam"])->name('instructor.homework.delete');
-        Route::get('/status_class_exam/{id}', [InstructorCourseController::class, 'statusClassExam'])->name('instructor.homework.status');
+        Route::get('create_class_exam', [InstructorCourseController::class,"createClassExam"])->name('instructor.class_exam.create');
+        Route::post('store_class_exam', [InstructorCourseController::class,"storeClassExam"])->name('instructor.class_exam.store');
+        Route::get('edit_class_exam/{id}', [InstructorCourseController::class,"editClassExam"])->name('instructor.class_exam.edit');
+        Route::post('update_class_exam/{id}', [InstructorCourseController::class,"updateClassExam"])->name('instructor.class_exam.update');
+        Route::post('delete_class_exam', [InstructorCourseController::class,"destroyClassExam"])->name('instructor.class_exam.delete');
+        Route::get('/status_class_exam/{id}', [InstructorCourseController::class, 'statusClassExam'])->name('instructor.class_exam.status');
         
 
 

@@ -1,6 +1,6 @@
 @extends('user.layouts.master-layout')
 
-@section('title','- Add New Homework')
+@section('title','- Add New Course')
 @section('head')
 <link href="{{asset('public/backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
 @endsection
@@ -12,8 +12,8 @@
 
     <div class="br-pagebody card shadow p-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
       <div class="br-section-wrapper">
-        <h5 class="br-section-label text-center mb-4"> Add Homework</h5>
-         <p  class="br-section-label text-center mb-1">Add Daily Homework For Students</p>
+        <h5 class="br-section-label text-center mb-4"> Add Class Exam</h5>
+         <p  class="br-section-label text-center mb-1">Add Class Exam For Students</p>
 
         <hr>
         @if(count($errors) > 0)
@@ -41,7 +41,7 @@
         <div class="col-xl-12 mx-auto">
             <div class="form-layout form-layout-4">
 
-                <form action="{{ route('instructor.homework.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('instructor.class_exam.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-4">
                         <div class="col-sm-4">
@@ -55,6 +55,18 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        {{-- <div class="col-sm-4">
+                            <label class="form-control-label"><b>Examination Name :</b></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <select class="form-control" name="exam_id">
+                                    <option value="">Select Exam</option>
+                                    @foreach ($exams as $exam)                                   
+                                        <option value="{{ $exam->id }}">{{ $exam->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
                         
 
                         <div class="col-sm-4">
@@ -70,6 +82,14 @@
                         </div>
 
                         <div class="col-sm-4">
+                            <label class="form-control-label"><b>Class Test Duration :</b></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <input type="time" name="class_test_duration" value="{{ old('class_test_duration') }}" class="form-control" placeholder="enter class test duration">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4 mt-3">
                             <label class="form-control-label"><b>Homework Image :</b></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <input type="file" name="image" value="{{ old('image') }}" class="form-control" placeholder="enter image">
@@ -82,7 +102,7 @@
                 
                     <div class="row mt-4">
                         <div class="col-sm-12">
-                            <label class="form-control-label"><b>About Homework : </b><span class="tx-danger">*</span></label>
+                            <label class="form-control-label"><b>Details : </b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <textarea class="form-control" id="summernote_two" name="details">{{ old('details') }}</textarea>
                             </div>
@@ -91,7 +111,7 @@
 
                     <div class="row mt-4">
                       <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                        <a href="{{route('instructor.manage_course')}}" type="button" class="btn btn-secondary text-white mr-2" >Close</a>
+                        <a href="{{route('instructor.class_exam.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Close</a>
                         <button type="submit" class="btn btn-info ">Save</button>
                       </div>
                     </div>

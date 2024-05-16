@@ -18,6 +18,10 @@ use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
 use App\Http\Controllers\Backend\School_management\ClassDuration\ClassDurationController;
+use App\Http\Controllers\Backend\School_management\ExamType\ExamTypeController;
+use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
+use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController;
+use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -40,6 +44,17 @@ Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->gro
     Route::post('update/{id}', [ClassDurationController::class,"update"])->name('admin.class_duration.update');
     Route::post('delete', [ClassDurationController::class,"destroy"])->name('admin.class_duration.delete');
     Route::get('/status/{id}', [ClassDurationController::class, 'status'])->name('admin.class_duration.status');
+});
+
+//Add subject_teacher_assent
+Route::prefix('subject_teacher_assent')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [SubjectTeacherAssentController::class,"index"])->name('admin.subject_teacher_assent.index');
+    Route::get('create', [SubjectTeacherAssentController::class,"create"])->name('admin.subject_teacher_assent.create');
+    Route::post('store', [SubjectTeacherAssentController::class,"store"])->name('admin.subject_teacher_assent.store');
+    Route::get('edit/{id}', [SubjectTeacherAssentController::class,"edit"])->name('admin.subject_teacher_assent.edit');
+    Route::post('update/{id}', [SubjectTeacherAssentController::class,"update"])->name('admin.subject_teacher_assent.update');
+    Route::post('delete', [SubjectTeacherAssentController::class,"destroy"])->name('admin.subject_teacher_assent.delete');
+    Route::get('/status/{id}', [SubjectTeacherAssentController::class, 'status'])->name('admin.subject_teacher_assent.status');
 });
 
 
@@ -131,6 +146,55 @@ Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group(
     Route::get('/status/{id}', [ExaminationController::class, 'status'])->name('admin.examination.status');
 });
 
+//-----------------------------exam type Route start---------------------------//
+Route::prefix('examtype')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Add Subject for admin
+    Route::get('index', [ExamTypeController::class,"index"])->name('admin.examtype.index');
+    Route::get('create', [ExamTypeController::class,"create"])->name('admin.examtype.create');
+    Route::post('store', [ExamTypeController::class,"store"])->name('admin.examtype.store');
+    Route::get('edit/{id}', [ExamTypeController::class,"edit"])->name('admin.examtype.edit');
+    Route::post('update/{id}', [ExamTypeController::class,"update"])->name('admin.examtype.update');
+    Route::post('delete', [ExamTypeController::class,"destroy"])->name('admin.examtype.delete');
+    Route::get('/status/{id}', [ExamTypeController::class, 'status'])->name('admin.examtype.status');
+});
+//-----------------------------exam type Route End---------------------------//
+
+//-----------------------------Exam class Route Start---------------------------//
+Route::prefix('examclass')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+Route::get('index', [ExamClassController::class,"index"])->name('admin.examclass.index');
+Route::get('create', [ExamClassController::class,"create"])->name('admin.examclass.create');
+Route::post('store', [ExamClassController::class,"store"])->name('admin.examclass.store');
+Route::get('edit/{id}', [ExamClassController::class,"edit"])->name('admin.examclass.edit');
+Route::post('update/{id}', [ExamClassController::class,"update"])->name('admin.examclass.update');
+Route::post('delete', [ExamClassController::class,"destroy"])->name('admin.examclass.delete');
+Route::get('/status/{id}', [ExamClassController::class,"status"])->name('admin.examclass.status');
+});
+//-----------------------------Exam class Route end---------------------------//
+
+
+//-----------------------------Exam class Route Start---------------------------//
+Route::prefix('examschedule')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [ExamSchedulesController::class,"index"])->name('admin.examschedule.index');
+    Route::get('create', [ExamSchedulesController::class,"create"])->name('admin.examschedule.create');
+    Route::post('store', [ExamSchedulesController::class,"store"])->name('admin.examschedule.store');
+    Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('admin.examschedule.edit');
+    Route::post('update/{id}', [ExamSchedulesController::class,"update"])->name('admin.examschedule.update');
+    Route::post('delete', [ExamSchedulesController::class,"destroy"])->name('admin.examschedule.delete');
+    Route::get('/status/{id}', [ExamSchedulesController::class,"status"])->name('admin.examschedule.status');
+    });
+    //-----------------------------Exam class Route end---------------------------//
+
+//-----------------------------Exam Route Start---------------------------//
+// Route::get('all-exam-routine', [ExamSchedulesController::class,"allExam"])->name('allExam');
+// Route::post('exam-details-routine', [ExamSchedulesController::class,"examDetails"])->name('examDetails');
+// Route::get('add-exam-routine', [ExamSchedulesController::class,"addExam"])->name('addExam');
+// Route::post('store-exam-routine', [ExamSchedulesController::class,"storeExam"])->name('storeExam');
+// Route::get('show-exam-routine', [ExamSchedulesController::class,"show"])->name('show');
+// Route::get('edit-exam-routine/{id}', [ExamSchedulesController::class,"edit"])->name('editExam');
+// Route::post('/update-exam-routine/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
+// Route::post('delete-exam-routine', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
+// Route::get('print-exam-routine/{id}', [ExamSchedulesController::class,"print"])->name('admin.exam.print');
+
 //Add Notice for admin
 Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [NoticeController::class,"index"])->name('admin.notice.index');
@@ -216,3 +280,6 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 Route::get('/get/fee_management/{id}', [AdmissionController::class, 'getFees']);
 Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSection']);
+Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
+Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);
+Route::get('/get/subject/{id}', [ExamSchedulesController::class, 'getSubject']);
