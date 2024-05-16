@@ -436,4 +436,43 @@ class StudentController extends Controller
     //     $name = 'admission_download_form' . date('Y-m-d i:h:s');
     //     $mpdf->Output($name.'.pdf', 'D');
     // }
+
+    public function getSearchStudent(Request $request)
+    {
+        $academicYearId = $request->input('academic_year_id');
+        $sessionId = $request->input('session_id');
+        $classId = $request->input('class_id');
+        $sectionId = $request->input('section_id');
+    
+        // return response()->json(['academicYearId' => $academicYearId,'sessionId' => $sessionId,'classId' => $classId,'sectionId' => $sectionId]);
+       
+        $studentsQuery = Student::query();
+
+        if ($academicYearId) {
+            $studentsQuery->where('academic_year_id', $academicYearId);
+        }
+    
+        if ($sessionId) {
+            $studentsQuery->where('session_id', $sessionId);
+        }
+    
+        if ($classId) {
+            $studentsQuery->where('class_id', $classId);
+        }
+    
+        if ($sectionId) {
+            $studentsQuery->where('section_id', $sectionId);
+        }
+    
+        $students = $studentsQuery->get();
+        
+        return response()->json($students);
+    }
+
+
+
+
+
+
+
 }

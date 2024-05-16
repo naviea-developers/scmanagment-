@@ -31,7 +31,7 @@ Admin - All Student
               <div class="row">
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Academic Year:</b></label>
-                  <select class="form-control" name="academic_year_id">
+                  <select class="form-control searchbtn" name="academic_year_id" id="academic_year_id">
                       <option value="">Select Year</option>
                       @foreach ($academic_years as $academic_year)
                       <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
@@ -40,7 +40,7 @@ Admin - All Student
                 </div>
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Session:</b></label>
-                  <select class="form-control" name="session_id">
+                  <select class="form-control" name="session_id" id="session_id">
                       <option value="">Select Session</option>
                       @foreach ($sessions as $session)
                       <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
@@ -50,7 +50,7 @@ Admin - All Student
                 
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Class:</b></label>
-                  <select class="form-control" name="class_id" id="class">
+                  <select class="form-control" name="class_id" id="class_id">
                       <option value="">Select Class</option>
                       @foreach ($classes as $class)
                       <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -59,7 +59,7 @@ Admin - All Student
                 </div>
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Section:</b></label>
-                  <select class="form-control" name="section_id" id="section">
+                  <select class="form-control" name="section_id" id="section_id">
                       <option value="">Select Section</option>
                       @foreach ($sections as $section)
                       <option value="{{ $section->id }}">{{ $section->name }}</option>
@@ -175,4 +175,74 @@ Admin - All Student
 
     <!--_-- ########### End Delete Category MODAL ############---->
 
+@endsection
+
+
+@section('script')
+{{-- <script>
+  $('#search-category').on('change',function(){
+      $('#searchbtn').click();
+  })
+</script> --}}
+
+  {{-- <script>
+      $(document).ready(function(){
+          $('#academic_year_id, #session_id, #class_id, #section_id').change(function(){
+              var academicYearId = $('#academic_year_id').val();
+              // console.log(academicYearId);
+              var sessionId = $('#session_id').val();
+              var classId = $('#class_id').val();
+              var sectionId = $('#section_id').val();
+
+              
+              if(academicYearId){
+                  $.ajax({
+                      url: '/get-search-student',
+                      type: 'GET',
+                      data: {
+                          academic_year_id: academicYearId,
+                          session_id: sessionId,
+                          class_id: classId,
+                          section_id: sectionId
+                      },
+                      dataType: 'json',
+                      success: function(data){
+                          $('select[name="session_id"]').empty();
+                          $.each(data, function(key, value){
+                              $('select[name="session_id"]').append('<option value="'+ key +'">' + value + '</option>');
+                          });
+                      }
+                  });
+              }else{
+                  $('select[name="session_id"]').empty();
+              }
+          });
+      });
+  </script> --}}
+
+  <script>
+        $(document).ready(function(){
+        $('#academic_year_id, #session_id, #class_id, #section_id').change(function(){
+            var academicYearId = $('#academic_year_id').val();
+            var sessionId = $('#session_id').val();
+            var classId = $('#class_id').val();
+            var sectionId = $('#section_id').val();
+            
+            $.ajax({
+                url: '/get-search-student',
+                type: 'GET',
+                data: {
+                    academic_year_id: academicYearId,
+                    session_id: sessionId,
+                    class_id: classId,
+                    section_id: sectionId
+                },
+                dataType: 'json',
+                success: function(data){
+                    // Update the student table with the received data
+                }
+            });
+        });
+    });
+  </script>
 @endsection
