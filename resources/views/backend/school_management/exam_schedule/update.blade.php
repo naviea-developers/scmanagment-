@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Edit Exams')
+@section('title', 'Edit Schedule')
 
 
 <link rel="stylesheet" href="#">
@@ -16,8 +16,8 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-person-chalkboard"></i>
                     <div>
-                      <h4>Update exam Class</h4>
-                      <p class="mg-b-0">Update exam Class Information</p>
+                      <h4>Update exam Schedule</h4>
+                      <p class="mg-b-0">Update exam Schedule Information</p>
                     </div>
                   </div>
 
@@ -29,7 +29,7 @@
                @endif
                {{-- validate End  --}}
 
-                <form action="{{ route('admin.examclass.update',$editData->id) }}" method="POST">
+                <form action="{{ route('admin.examschedule.update',$editData->id) }}" method="POST">
                     @csrf
                     <div class="row mb-3">
 
@@ -43,8 +43,17 @@
                             </select>
                         </div>
                         <div class="col-md-3">
+                            <label for="">Exam Class :</label>
+                            <select name="exam_class_id" id="" class="form-select">
+                                <option value="">Select Exam class</option>
+                                @foreach (@$examClasss as $examClass)
+                                    <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ $examClass->subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <label>Select Class : </label>
-                            <select name="class_id" id=""class="form-select">
+                            <select name="class_id" id="class" class="form-select">
                                 <option value="">Select Class</option>
                                 @foreach ($className as $class)
                                     <option @if($class->id == $editData->class_id)  Selected @endif value="{{ $class->id}}">{{ $class->name }}</option>
@@ -52,62 +61,48 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Group :</label>
-                            <select name="group_id" id="" class="form-select">
-                                <option value="">Select group</option>
-                                @foreach (@$groups as $group)
-                                    <option @if($group->id == $editData->group_id)  Selected @endif value="{{ $group->id }}">{{ $group->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label>Select Subject : </label>
-                            <select name="subject_id" id=""class="form-select">
-                                <option value="">Select Subject</option>
-                                @foreach ($subjectName as $subject)
-                                    <option @if($subject->id == $editData->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
+                            <label>Sections : </label>
+                            <select name="section_id" id="section" class="form-select">
+                                <option value="">Select section</option>
+                                @foreach ($sections as $section)
+                                    <option @if($section->id == $editData->section_id)  Selected @endif value="{{ $section->id}}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-3 mt-3">
-                            <label>Select Exam Types : </label>
-                            <select name="examtype_id" id=""class="form-select">
-                                <option value="">select exam type</option>
-                                @foreach ($examTypes as $examType)
-                                    <option @if($examType->id == $editData->examtype_id)  Selected @endif value="{{ $examType->id }}">{{ $examType->name }}</option>
+                            <label>Select Buldings : </label>
+                            <select name="bulding_id" id="bulding"class="form-select">
+                                <option value="">Select Buldings</option>
+                                @foreach ($buldings as $bulding)
+                                    <option @if($bulding->id == $editData->bulding_id)  Selected @endif value="{{ $bulding->id }}">{{ $bulding->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-
                         <div class="col-md-3 mt-3">
-                            <label for="">Marke :</label>
-                            <input type="number" value="{{ $editData->marke }}" name="marke" class="form-control">
+                            <label>Select Floors : </label>
+                            <select name="floor_id" id="floor" class="form-select">
+                                <option value="">Select Floors</option>
+                                @foreach ($floors as $floor)
+                                    <option @if($floor->id == $editData->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-3 mt-3">
-                            <label for="">Pass Marke :</label>
-                            <input type="number" value="{{ $editData->pass_marke }}" name="pass_marke" class="form-control">
-                        </div>
-                    
-                        <div class="col-md-3 mt-3">
-                            <label for="">Date :</label>
-                            <input type="date" value="{{ $editData->date }}" name="date" class="form-control">
-                        </div>
-                        <div class="col-md-3 mt-3">
-                            <label for="">Start Time :</label>
-                            <input type="time" value="{{ $editData->start_time }}" name="start_time" class="form-control">
-                        </div>
-                        <div class="col-md-3 mt-3">
-                            <label for="">End Time :</label>
-                            <input type="time" value="{{ $editData->end_time }}" name="end_time" class="form-control">
+                            <label>Select Rooms : </label>
+                            <select name="room_id" id="room"class="form-select">
+                                <option value="">Select Rooms</option>
+                                @foreach ($rooms as $room)
+                                    <option @if($room->id == $editData->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     
 
                     <div class="col-md-12 mt-4" >
                         <button type="submit" style="margin-left: -14px;" class="btn btn-primary createClass">
-                            Create New Exam Class</button>
+                            Create New Exam Schedule</button>
                     </div>
                 </form>
 
@@ -122,96 +117,79 @@
 @endsection
 
 @section('script')
-
-<script>
-//Course Pre Requisites start
-$(document).ready(function() {
-        $('#plus-btn-data').on('click',function(){
-
-            let myvar = `<div class="d-flex align-items-center mt-2">
-                                    <div class="d-flex align-items-center select-add-section" style="width: 97%;">
-                                       <div class="row">
-                                        <div class="col-md-3">
-                                            <label>Select Subject : </label>
-                                            <select name="subject_id[]" id=""class="form-select">
-                                                <option value="">Select Subject</option>
-                                                @foreach ($subjectName as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                       
-                                        <div class="col-md-3">
-                                            <label>Select Buldings : </label>
-                                            <select name="bulding_id[]" id=""class="form-select">
-                                                <option value="">Select Buldings</option>
-                                                @foreach ($buldings as $bulding)
-                                                    <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Select Floors : </label>
-                                            <select name="floor_id[]" id=""class="form-select">
-                                                <option value="">Select Floors</option>
-                                                @foreach ($floors as $floor)
-                                                    <option value="{{ $floor->id }}">{{ $floor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Select Rooms : </label>
-                                            <select name="room_id[]" id=""class="form-select">
-                                                <option value="">Select Rooms</option>
-                                                @foreach ($rooms as $room)
-                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 mt-3">
-                                            <label for="">Pass Marke :</label>
-                                            <input type="number" name="pass_marke[]" class="form-control">
-                                        </div>
-                                        <div class="col-md-3 mt-3">
-                                            <label for="">Fail Marke :</label>
-                                            <input type="number" name="fail_marke[]" class="form-control">
-                                        </div>
-                                     
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">Exam Date :</label>
-                                            <input type="date" name="date[]" class="form-control">
-                                        </div>
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">Start At :</label>
-                                            <input type="time" name="start_time[]" class="form-control">
-                                        </div>
-                                        <div class="col-md-2 mt-3">
-                                            <label for="">End At :</label>
-                                            <input type="time" name="end_time[]" class="form-control">
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <a href="javascript:void(0)" class="minus-btn-data px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
-                                </div>`;
-
-
-        $('.add-data').prepend(myvar);
-            //console.log();
-        });
-        $(document).on('click','.minus-btn-data',function(){
-            $(this).parent().remove();
-        });
-
-        $(document).on('click','.minus-btn-data-old',function(){
-             $(this).parent().parent().append('<input type="hidden" name="delete_exam_schedule_item[]" value="'+$(this).attr('exam_schedule_item_id')+'">');
-            $(this).parent().remove();
-        });
-
+    <script>
+    $('body').on("change",'#class',function(){
+        let id = $(this).val();
+            console.log(id);
+        getSection(id,"section");
     });
 
-    //Course Pre Requisites End
-</script>
-    
-@endsection
+        function getSection(id,outid){
+            let url = '{{ url("get/school_section/") }}/' + id;
+            axios.get(url)
+                .then(res => {
+                    console.log(res);
+                $('#'+outid).empty();
+                    let html = '';
+                    html += '<option value="">Select Section</option>'
+                    res.data.forEach(element => {
+                        html += "<option value=" + element.id + ">" + element.name + "</option>"
+                    });
 
+
+                    $('#'+outid).append(html);
+                    $('#'+outid).val("").change();
+                });
+        }
+
+        $('body').on("change",'#bulding',function(){
+            let id = $(this).val();
+            //    console.log(id);
+            getFloor(id,"floor");
+        });
+
+        function getFloor(id,outid){
+            let url = '{{ url("get/floor/") }}/' + id;
+            axios.get(url)
+                .then(res => {
+                    console.log(res);
+                $('#'+outid).empty();
+                    let html = '';
+                    html += '<option value="">Select floor</option>'
+                    res.data.forEach(element => {
+                        html += "<option value=" + element.id + ">" + element.name + "</option>"
+                    });
+
+
+                    $('#'+outid).append(html);
+                    $('#'+outid).val("").change();
+                });
+        }
+
+        $('body').on("change",'#floor',function(){
+            let id = $(this).val();
+            //    console.log(id);
+            getRoom(id,"room");
+        });
+
+        function getRoom(id,outid){
+            let url = '{{ url("get/room/") }}/' + id;
+            axios.get(url)
+                .then(res => {
+                    console.log(res);
+                $('#'+outid).empty();
+                    let html = '';
+                    html += '<option value="">Select room</option>'
+                    res.data.forEach(element => {
+                        html += "<option value=" + element.id + ">" + element.name + "</option>"
+                    });
+
+
+                    $('#'+outid).append(html);
+                    $('#'+outid).val("").change();
+                });
+        }
+
+        
+    </script>
+@endsection

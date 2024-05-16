@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\School_management\ClassDuration\ClassDurationCo
 use App\Http\Controllers\Backend\School_management\ExamType\ExamTypeController;
 use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
 use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController;
+use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -43,6 +44,17 @@ Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->gro
     Route::post('update/{id}', [ClassDurationController::class,"update"])->name('admin.class_duration.update');
     Route::post('delete', [ClassDurationController::class,"destroy"])->name('admin.class_duration.delete');
     Route::get('/status/{id}', [ClassDurationController::class, 'status'])->name('admin.class_duration.status');
+});
+
+//Add subject_teacher_assent
+Route::prefix('subject_teacher_assent')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [SubjectTeacherAssentController::class,"index"])->name('admin.subject_teacher_assent.index');
+    Route::get('create', [SubjectTeacherAssentController::class,"create"])->name('admin.subject_teacher_assent.create');
+    Route::post('store', [SubjectTeacherAssentController::class,"store"])->name('admin.subject_teacher_assent.store');
+    Route::get('edit/{id}', [SubjectTeacherAssentController::class,"edit"])->name('admin.subject_teacher_assent.edit');
+    Route::post('update/{id}', [SubjectTeacherAssentController::class,"update"])->name('admin.subject_teacher_assent.update');
+    Route::post('delete', [SubjectTeacherAssentController::class,"destroy"])->name('admin.subject_teacher_assent.delete');
+    Route::get('/status/{id}', [SubjectTeacherAssentController::class, 'status'])->name('admin.subject_teacher_assent.status');
 });
 
 
@@ -268,3 +280,5 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 Route::get('/get/group/{id}', [AdmissionController::class, 'getGroup']);
 Route::get('/get/fee_management/{id}', [AdmissionController::class, 'getFees']);
 Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSection']);
+Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
+Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);

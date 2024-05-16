@@ -36,7 +36,7 @@
                         <div class="col-md-3">
                             <label for="">Exam title :</label>
                             <select name="examination_id" id="" class="form-select">
-                                <option value="">Select Exam title</option>
+                                <option value="0">Select Exam title</option>
                                 @foreach (@$examinations as $examination)
                                     <option @if($examination->id == $editData->examination_id)  Selected @endif value="{{ $examination->id }}">{{ $examination->name }}</option>
                                 @endforeach
@@ -45,7 +45,7 @@
                         <div class="col-md-3">
                             <label>Select Class : </label>
                             <select name="class_id" id=""class="form-select">
-                                <option value="">Select Class</option>
+                                <option value="0">Select Class</option>
                                 @foreach ($className as $class)
                                     <option @if($class->id == $editData->class_id)  Selected @endif value="{{ $class->id}}">{{ $class->name }}</option>
                                 @endforeach
@@ -54,7 +54,7 @@
                         <div class="col-md-3">
                             <label for="">Group :</label>
                             <select name="group_id" id="" class="form-select">
-                                <option value="">Select group</option>
+                                <option value="0">Select group</option>
                                 @foreach (@$groups as $group)
                                     <option @if($group->id == $editData->group_id)  Selected @endif value="{{ $group->id }}">{{ $group->name }}</option>
                                 @endforeach
@@ -64,7 +64,7 @@
                         <div class="col-md-3">
                             <label>Select Subject : </label>
                             <select name="subject_id" id=""class="form-select">
-                                <option value="">Select Subject</option>
+                                <option value="0">Select Subject</option>
                                 @foreach ($subjectName as $subject)
                                     <option @if($subject->id == $editData->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
                                 @endforeach
@@ -74,7 +74,7 @@
                         <div class="col-md-3 mt-3">
                             <label>Select Exam Types : </label>
                             <select name="examtype_id" id=""class="form-select">
-                                <option value="">select exam type</option>
+                                <option value="0">select exam type</option>
                                 @foreach ($examTypes as $examType)
                                     <option @if($examType->id == $editData->examtype_id)  Selected @endif value="{{ $examType->id }}">{{ $examType->name }}</option>
                                 @endforeach

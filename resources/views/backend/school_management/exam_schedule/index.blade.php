@@ -30,6 +30,7 @@
                       <tr>
                         <th scope="col">Exam Title</th>
                         <th scope="col">Class Name</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -40,6 +41,13 @@
                         <tr>
                             <td>{{@$data->examination->name}}</td>
                             <td>{{@$data->class->name}}</td>
+                            <td>
+                                @if(@$data->status == 0)
+                                <a href="{{ route('admin.examschedule.status',$data->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                                @elseif(@$data->status == 1)
+                                <a href="{{ route('admin.examschedule.status',$data->id) }}" class="btn btn-sm btn-success">Active</a>
+                                @endif
+                              </td>
                             <td>
                                 <a href="{{ route('admin.examschedule.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a>
                                 {{-- <a href="javascript:void(0)" class="btn btn-danger" value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></a> --}}
@@ -69,7 +77,7 @@
               </button>
               <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
               <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-               <input type="hidden" name="exam_class_id" id="modal_data_id">
+               <input type="hidden" name="exam_schedule_id" id="modal_data_id">
               <button type="submit" class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
                   yes
               </button>

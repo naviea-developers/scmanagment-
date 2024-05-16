@@ -17,6 +17,7 @@ use App\Models\Session;
 use App\Models\ExamType;
 use App\Models\Group;
 use App\Models\ExamClass;
+use App\Models\SchoolSection;
 
 class ExamSchedulesController extends Controller
 {
@@ -39,6 +40,7 @@ class ExamSchedulesController extends Controller
         $data['examTypes'] = ExamType::orderBy('id','desc')->get();
         $data['groups'] = Group::orderBy('id','desc')->get();
         $data['examClasss']=ExamClass::orderBy('id', 'desc')->get();
+        $data['sections']=SchoolSection::orderBy('id', 'desc')->get();
 
         return view('Backend.school_management.exam_schedule.create',$data);
     }
@@ -55,18 +57,15 @@ class ExamSchedulesController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $exam_class = new ExamSchedule();
-            $exam_class->examination_id = $request->examination_id;
-            $exam_class->class_id = $request->class_id;
-            $exam_class->group_id = $request->group_id;
-            $exam_class->subject_id = $request->subject_id;
-            $exam_class->examtype_id = $request->examtype_id;
-            $exam_class->marke = $request->marke;
-            $exam_class->pass_marke = $request->pass_marke;
-            $exam_class->date = $request->date;
-            $exam_class->start_time = $request->start_time;
-            $exam_class->end_time = $request->end_time;
-            $exam_class->save();
+            $exam_schedule = new ExamSchedule();
+            $exam_schedule->examination_id = $request->examination_id;
+            $exam_schedule->exam_class_id = $request->exam_class_id;
+            $exam_schedule->class_id = $request->class_id;
+            $exam_schedule->section_id = $request->section_id;
+            $exam_schedule->bulding_id = $request->bulding_id;
+            $exam_schedule->floor_id = $request->floor_id;
+            $exam_schedule->room_id = $request->room_id;
+            $exam_schedule->save();
             DB::commit();
             return redirect()->route('admin.examschedule.index')->with('message','Exam Schedule Add Successfully');
         }catch(\Exception $e){
@@ -78,8 +77,9 @@ class ExamSchedulesController extends Controller
 
     public function edit($id){
         // dd('hi');
-       $data['editData'] =  ExamSchedule::find($id);
+       $data['editData']=$editData =  ExamSchedule::find($id);
        $data['className']=Classe::orderBy('id', 'desc')->get(); 
+       $data['sections']=SchoolSection::where('class_id',$editData->class_id)->orderBy('id', 'asc')->get();
        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
        $data['examinations']=Examination::orderBy('id', 'desc')->get();
        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
@@ -88,6 +88,9 @@ class ExamSchedulesController extends Controller
        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
        $data['examTypes'] = ExamType::orderBy('id','desc')->get();
        $data['groups'] = Group::orderBy('id','desc')->get();
+       $data['examClasss']=ExamClass::orderBy('id', 'desc')->get();
+       
+
         return view('Backend.school_management.exam_schedule.update',$data);
     }
 
@@ -101,18 +104,15 @@ class ExamSchedulesController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $exam_class = ExamSchedule::find($id);
-            $exam_class->examination_id = $request->examination_id;
-            $exam_class->class_id = $request->class_id;
-            $exam_class->group_id = $request->group_id;
-            $exam_class->subject_id = $request->subject_id;
-            $exam_class->examtype_id = $request->examtype_id;
-            $exam_class->marke = $request->marke;
-            $exam_class->pass_marke = $request->pass_marke;
-            $exam_class->date = $request->date;
-            $exam_class->start_time = $request->start_time;
-            $exam_class->end_time = $request->end_time;
-            $exam_class->save();
+            $exam_schedule = ExamSchedule::find($id);
+            $exam_schedule->examination_id = $request->examination_id;
+            $exam_schedule->exam_class_id = $request->exam_class_id;
+            $exam_schedule->class_id = $request->class_id;
+            $exam_schedule->section_id = $request->section_id;
+            $exam_schedule->bulding_id = $request->bulding_id;
+            $exam_schedule->floor_id = $request->floor_id;
+            $exam_schedule->room_id = $request->room_id;
+            $exam_schedule->save();
 
             DB::commit();
             return redirect()->route('admin.examschedule.index')->with('message','exam schedule Update Successfully');
@@ -125,12 +125,38 @@ class ExamSchedulesController extends Controller
 
     public function destroy(Request $request)
     {
-        // dd('hi');
-        $exam_class =  ExamSchedule::find($request->exam_class_id);
+        //  dd('hi');
+        $exam_schedule =  ExamSchedule::find($request->exam_schedule_id);
         // dd($examschedule);
-        $exam_class->delete();
-        return back()->with('message','exam class Deleted Successfully');
+        $exam_schedule->delete();
+        return back()->with('message','Exam Schedule Deleted Successfully');
     }
+
+    public function status($id)
+    {
+        $exam_schedule = ExamSchedule::find($id);
+        if($exam_schedule->status == 0)
+        {
+            $exam_schedule->status = 1;
+        }elseif($exam_schedule->status == 1)
+        {
+            $exam_schedule->status = 0;
+        }
+        $exam_schedule->update();
+        return redirect()->route('admin.examschedule.index')->with('message','Exam Schedule Status Update Successfully');
+    }
+
+    //ajax get Floor
+    public function getFloor($id){
+        $bulding = Floor::where("bulding_id",$id)->get();
+        return $bulding;
+	}
+
+    //ajax get Room
+    public function getRoom($id){
+        $room = Room::where("floor_id",$id)->get();
+        return $room;
+	  }
 
   
 }

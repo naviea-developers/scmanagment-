@@ -16,4 +16,8 @@ class ExamClass extends Model
     public function examination(){
         return $this->belongsTo(Examination::class,"examination_id",'id');
     }
+
+    public function subject(){
+        return $this->belongsTo(Subject::class,"subject_id",'id');
+    }
 }
