@@ -83,7 +83,7 @@
                   @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
                       <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
                   @endif
-                  <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
+                  <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
                   {{-- <td>{{ $item->subject->name }}</td>
                   <td>{{ $item->bulding->name }}</td>
                   <td>{{ $item->floor->name }}</td>

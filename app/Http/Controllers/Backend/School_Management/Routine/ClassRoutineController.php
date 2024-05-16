@@ -32,14 +32,14 @@ class ClassRoutineController extends Controller
     // }
 
     public function create(){
-        $data['className']=Classe::orderBy('id', 'desc')->get(); 
+        $data['className']=Classe::orderBy('id', 'asc')->get(); 
         $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-        $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->get();
-        $data['examinations']=Examination::orderBy('id', 'desc')->get();
-        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-        $data['rooms'] = Room::orderBy('id', 'desc')->get();
-        $data['floors'] = Floor::orderBy('id', 'desc')->get();
+        $data['subjectName']=Subject::orderBy('id', 'asc')->get();
+        $data['teachers'] = User::where('type','2')->orderBy('id', 'asc')->get();
+        $data['examinations']=Examination::orderBy('id', 'asc')->get();
+        $data['buldings'] = Bulding::orderBy('id', 'asc')->get();
+        $data['rooms'] = Room::orderBy('id', 'asc')->get();
+        $data['floors'] = Floor::orderBy('id', 'asc')->get();
         $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
 
         return view('Backend.school_management.class_routine.create',$data);
@@ -119,13 +119,13 @@ class ClassRoutineController extends Controller
     public function edit($id){
        $data['editData'] =  ClassRoutine::find($id);
        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-       $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->get();
-       $data['className']=Classe::orderBy('id', 'desc')->get(); 
-       $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-       $data['examinations']=Examination::orderBy('id', 'desc')->get();
-       $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-       $data['rooms'] = Room::orderBy('id', 'desc')->get();
-       $data['floors'] = Floor::orderBy('id', 'desc')->get();
+       $data['teachers'] = User::where('type','2')->orderBy('id', 'asc')->get();
+       $data['className']=Classe::orderBy('id', 'asc')->get(); 
+       $data['subjectName']=Subject::orderBy('id', 'asc')->get();
+       $data['examinations']=Examination::orderBy('id', 'asc')->get();
+       $data['buldings'] = Bulding::orderBy('id', 'asc')->get();
+       $data['rooms'] = Room::orderBy('id', 'asc')->get();
+       $data['floors'] = Floor::orderBy('id', 'asc')->get();
        $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
        return view('Backend.school_management.class_routine.update',$data);
     }

@@ -158,5 +158,11 @@ class ExamSchedulesController extends Controller
         return $room;
 	  }
 
+    //ajax get subject
+    public function getSubject($id){
+        $subject = Subject::where("class_id",$id)->get();
+        return $subject;
+	  }  
+
   
 }

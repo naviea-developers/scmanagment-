@@ -42,9 +42,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="">Section :</label>
+                            <label for="">Session :</label>
                             <select name="session_id" id="" class="form-select">
-                                <option value="">Select Section</option>
+                                <option value="">Select Session</option>
                                 @foreach (@$sessions as $session)
                                     <option @if($session->id == $editData->session_id)  Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
@@ -95,7 +95,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label>Select Subject : </label>
-                                                        <select name="subject_id[]" id=""class="form-select">
+                                                        <select name="subject_id[]" id="subject" class="form-select">
                                                             <option value="">Select Subject</option>
                                                             @foreach ($subjectName as $subject)
                                                                 <option value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -186,7 +186,7 @@
                                                     </div>
                                                     <div class="col-md-3 col-1">
                                                         <label>Select Subject : </label>
-                                                        <select name="old_subject_id[{{ $class_routine_item->id }}]" id=""class="form-select">
+                                                        <select name="old_subject_id[{{ $class_routine_item->id }}]" id="subject"class="form-select">
                                                             <option value="">Select Subject</option>
                                                             @foreach ($subjectName as $subject)
                                                                 <option @if($subject->id == $class_routine_item->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -309,7 +309,7 @@ $(document).ready(function() {
                                                 </div>
                                         <div class="col-md-3">
                                             <label>Select Subject : </label>
-                                            <select name="subject_id[]" id=""class="form-select">
+                                            <select name="subject_id[]" id="subject" class="form-select">
                                                 <option value="">Select Subject</option>
                                                 @foreach ($subjectName as $subject)
                                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>

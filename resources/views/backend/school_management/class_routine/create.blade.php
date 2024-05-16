@@ -36,7 +36,7 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label>Select Class : </label>
-                            <select name="class_id" id=""class="form-select">
+                            <select name="class_id" id="class" class="form-select">
                                 <option value="">Select Class</option>
                                 @foreach ($className as $class)
                                     <option value="{{ $class->id}}">{{ $class->name }}</option>
@@ -44,9 +44,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="">Section :</label>
+                            <label for="">Session :</label>
                             <select name="session_id" id="" class="form-select">
-                                <option value="">Select Section</option>
+                                <option value="">Select Session</option>
                                 @foreach (@$sessions as $session)
                                     <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                                 @endforeach
@@ -86,11 +86,11 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <label>Select Subject : </label>
-                                                    <select name="subject_id[]" id=""class="form-select">
+                                                    <select name="subject_id[]" id="subject" class="form-select">
                                                         <option value="">Select Subject</option>
-                                                        @foreach ($subjectName as $subject)
+                                                        {{-- @foreach ($subjectName as $subject)
                                                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                 </div>
 
@@ -301,11 +301,8 @@ $(document).ready(function() {
                                             </div>
                                         <div class="col-md-3">
                                             <label>Select Subject : </label>
-                                            <select name="subject_id[]" id=""class="form-select">
+                                            <select name="subject_id[]" id="subject" class="form-select">
                                                 <option value="">Select Subject</option>
-                                                @foreach ($subjectName as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-3">
@@ -441,9 +438,9 @@ $(document).on('click','.plus-btn-data-detail',function(){
    $(this).parent().parent().parent().parent().prepend(out);
 });
 
-$(document).on('click','.minus-btn-data',function(){
-    $(this).parent().parent().parent().remove();
-});
+// $(document).on('click','.minus-btn-data',function(){
+//     $(this).parent().parent().parent().remove();
+// });
 
 
 
@@ -562,9 +559,9 @@ $('#plus-btn-data-tagline').on('click',function(){
     tagline++;
     $(this).focus();
 });
-$(document).on('click','.minus-btn-data-tagline',function(){
-    $(this).parent().remove();
-});
+// $(document).on('click','.minus-btn-data-tagline',function(){
+//     $(this).parent().remove();
+// });
 
 </script>
     

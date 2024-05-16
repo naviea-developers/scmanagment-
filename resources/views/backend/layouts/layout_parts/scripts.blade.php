@@ -284,73 +284,92 @@
         let id = $(this).val();
             console.log(id);
         getSection(id,"section");
+        getSubject(id,"subject");
     });
 
-        function getSection(id,outid){
-            let url = '{{ url("get/school_section/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
-                $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select Section</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
-
-
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+    function getSection(id,outid){
+        let url = '{{ url("get/school_section/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Section</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
-        }
-
-        $('body').on("change",'#bulding',function(){
-            let id = $(this).val();
-            //    console.log(id);
-            getFloor(id,"floor");
-        });
-
-        function getFloor(id,outid){
-            let url = '{{ url("get/floor/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
-                $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select floor</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
 
 
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+    function getSubject(id,outid){
+        let url = '{{ url("get/subject/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Subject</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
-        }
-
-        $('body').on("change",'#floor',function(){
-            let id = $(this).val();
-            //    console.log(id);
-            getRoom(id,"room");
-        });
-
-        function getRoom(id,outid){
-            let url = '{{ url("get/room/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
-                $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select room</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
 
 
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+    $('body').on("change",'#bulding',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getFloor(id,"floor");
+    });
+
+    function getFloor(id,outid){
+        let url = '{{ url("get/floor/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select floor</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
-        }
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+    $('body').on("change",'#floor',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getRoom(id,"room");
+    });
+
+    function getRoom(id,outid){
+        let url = '{{ url("get/room/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select room</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
 
         
 </script>

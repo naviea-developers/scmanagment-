@@ -282,3 +282,4 @@ Route::get('/get/fee_management/{id}', [AdmissionController::class, 'getFees']);
 Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSection']);
 Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
 Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);
+Route::get('/get/subject/{id}', [ExamSchedulesController::class, 'getSubject']);

@@ -42,7 +42,7 @@ class SubjectController extends Controller
             $subject = New Subject;
             $subject->class_id = $request->class_id;
             $subject->name = $request->name;
-            $subject->group_id = $request->group_id;
+            $subject->group_id = $request->group_id ?? 0;
 
             if($request->hasFile('image')){
                 $fileName = rand().time().'_subject_image.'.request()->image->getClientOriginalExtension();
@@ -95,7 +95,7 @@ class SubjectController extends Controller
         $subject = Subject::find($id);
         $subject->class_id = $request->class_id;
         $subject->name = $request->name;
-        $subject->group_id = $request->group_id;
+        $subject->group_id = $request->group_id ?? 0;
         if($request->hasFile('image')){
             @unlink(public_path('upload/subject/'.$subject->image));
             $fileName = rand().time().'_subject_image.'.request()->image->getClientOriginalExtension();
