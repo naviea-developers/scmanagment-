@@ -14,3 +14,5 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
      Route::get('/status/{id}', [StudentController::class, 'status'])->name('admin.school_student.status');
 
 });
+
+

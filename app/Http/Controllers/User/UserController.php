@@ -310,18 +310,19 @@ class UserController extends Controller
             if ($admission) {
                 $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
+                    // ->where('section_id', $admission->section_id)
                     ->get()
                     ->filter(function ($routine) {
                         return $routine->examination && $routine->examination->end_date >= Carbon::now();
                     });
                     // dd($routines);
 
-                // Now you can use $data['examRoutine'] to access the exam routines for the authenticated user
+                    
             } else {
-                // Handle case where admission record doesn't exist for the user
+                
             }
         } else {
-            // Handle case where user is not authenticated
+
         }
 
         return view('user.exam_routine.routine', $data);
@@ -339,6 +340,7 @@ class UserController extends Controller
             if ($admission) {
                 $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
+                    // ->where('section_id', $admission->section_id)
                     ->get()
                     ->filter(function ($routine) {
                         return $routine->examination && $routine->examination->end_date >= Carbon::now();

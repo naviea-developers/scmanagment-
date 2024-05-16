@@ -29,54 +29,58 @@ Admin - All Student
 
             <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
               <div class="row">
-                <div class="col-md-3">
-                  <label class=" form-control-label"><b>Academic Year:</b></label>
-                  <select class="form-control" name="academic_year_id">
-                      <option value="">Select Year</option>
-                      @foreach ($academic_years as $academic_year)
-                      <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
-                      @endforeach
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label class=" form-control-label"><b>Session:</b></label>
-                  <select class="form-control" name="session_id">
-                      <option value="">Select Session</option>
-                      @foreach ($sessions as $session)
-                      <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
-                      @endforeach
-                  </select>
-                </div>
-                
-                <div class="col-md-3">
-                  <label class=" form-control-label"><b>Class:</b></label>
-                  <select class="form-control" name="class_id" id="class">
-                      <option value="">Select Class</option>
-                      @foreach ($classes as $class)
-                      <option value="{{ $class->id }}">{{ $class->name }}</option>
-                      @endforeach
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label class=" form-control-label"><b>Section:</b></label>
-                  <select class="form-control" name="section_id" id="section">
-                      <option value="">Select Section</option>
-                      @foreach ($sections as $section)
-                      <option value="{{ $section->id }}">{{ $section->name }}</option>
-                      @endforeach
-                  </select>
-                </div>
+
+                {{-- <form id="filter-form"> --}}
+                  <div class="col-md-3">
+                    <label class=" form-control-label"><b>Academic Year:</b></label>
+                    <select class="form-control" name="academic_year_id" id="academic-year">
+                        <option value="">Select Year</option>
+                        @foreach ($academic_years as $academic_year)
+                        <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  <div class="col-md-3">
+                    <label class=" form-control-label"><b>Session:</b></label>
+                    <select class="form-control" name="session_id" id="session">
+                        <option value="">Select Session</option>
+                        @foreach ($sessions as $session)
+                        <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  {{-- <form> --}}
+                    <div class="col-md-3">
+                        <label class="form-control-label"><b>Class:</b></label>
+                        <select class="form-control class" name="class_id" id="class">
+                            <option value="">Select Class</option>
+                            @foreach ($classes as $class)
+                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  {{-- </form> --}}
+
+                  <div class="col-md-3">
+                    <label class=" form-control-label"><b>Section:</b></label>
+                    <select class="form-control" name="section_id" id="section">
+                        <option value="">Select Section</option>
+                        @foreach ($sections as $section)
+                        <option value="{{ $section->id }}">{{ $section->name }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                {{-- </form> --}}
               </div>
             </div>
 
 
 
-
-
-
             <div class="table-wrapper">
-              <table  class="table display responsive nowrap">
-              {{-- <table id="datatable1" class="table display responsive nowrap"> --}}
+              {{-- <table  class="table display responsive nowrap"> --}}
+              <table id="datatable1" class="table display responsive nowrap">
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
@@ -91,7 +95,7 @@ Admin - All Student
                     <th class="wd-10p">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="admission-list">
                     @php
                         $i = 1;
                     @endphp
@@ -176,3 +180,31 @@ Admin - All Student
     <!--_-- ########### End Delete Category MODAL ############---->
 
 @endsection
+{{-- 
+@section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // When class dropdown changes
+  $('#class').change(function() {
+      var classId = $(this).val();
+      if (classId !== '') {
+          // AJAX request to fetch students of selected class
+          $.ajax({
+              url: "{{ route('admin.school_student.get_students_by_class') }}",
+              method: 'GET',
+              data: {class_id: classId},
+              success: function(response) {
+                  // Update table content with new student data
+                  $('#admission-list').html(response);
+              },
+              error: function(xhr, status, error) {
+                  console.error(xhr.responseText);
+              }
+          });
+      } else {
+          // Clear table content if no class selected
+          $('#admission-list').html('');
+      }
+  });
+</script>
+@endsection --}}
