@@ -38,7 +38,7 @@ Admin - All Fees Name
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Particular Fees Name</th>
                     {{-- <th class="wd-15p">Particular Duration</th> --}}
-                    <th class="wd-15p">Is Dynamic</th>
+                    {{-- <th class="wd-15p">Is Dynamic</th> --}}
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -53,7 +53,7 @@ Admin - All Fees Name
                           <td>{{ $i++ }}</td>
                           <td>{{ $fee->particular_name }}</td>
                           {{-- <td>{{ $fee->particular_duration }}</td> --}}
-                          <td>{{ $fee->is_dynamic }}</td>
+                          {{-- <td>{{ $fee->is_dynamic }}</td> --}}
                           <td>
                             @if(@$fee->status == 0)
                             <a href="{{ route('admin.fee.status',$fee->id) }}" class="btn btn-sm btn-warning">Inactive</a>

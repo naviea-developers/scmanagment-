@@ -53,7 +53,7 @@ Admin - All Examinations
                           <td>{{ $i++ }}</td>
                           <td>{{ $exam->name }}</td>
                           <td>{{ @$exam->academicYear->year }}</td>
-                          <td>{{ @$exam->session->session }}</td>
+                          <td>{{ @$exam->session->start_year->year }} - {{ @$exam->session->end_year->year }}</td>
                           <td>
                             @if(@$exam->status == 0)
                             <a href="{{ route('admin.examination.status',$exam->id) }}" class="btn btn-sm btn-warning">Inactive</a>

@@ -51,7 +51,7 @@
 
                       <div class="row mt-4">
 
-                          {{-- <div class="col-sm-4">
+                          <div class="col-sm-4">
                           <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                           <select class="form-control" name="academic_year_id" >
                               <option value="">Select Academic Year</option>
@@ -69,7 +69,7 @@
                               <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
                               @endforeach
                           </select>
-                          </div> --}}
+                          </div>
 
                           <div class="col-sm-4">
                               <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>
@@ -82,7 +82,7 @@
                           </div>
   
 
-                          <div class="col-sm-4">
+                          <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Group: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="group_id" id="group">
                                 <option value="">Select Group</option>
@@ -92,17 +92,17 @@
                             </select>
                           </div>
 
-                          {{-- <div class="col-sm-4 mt-3">
+                          <div class="col-sm-4 mt-3">
                           <label class=" form-control-label">Section: <span class="tx-danger">*</span></label>
-                          <select class="form-control" name="section_id" >
+                          <select class="form-control" name="section_id" id="section">
                               <option value="">Select Section</option>
-                              @foreach ($sections as $section)
+                              {{-- @foreach ($sections as $section)
                               <option value="{{ $section->id }}">{{ $section->name }}</option>
-                              @endforeach
+                              @endforeach --}}
                           </select>
-                          </div> --}}
+                          </div>
 
-                          <div class="col-sm-4">
+                          <div class="col-sm-4 mt-3">
                             <label class=" form-control-label">Fees: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="fee_id" id="fee">
                                 <option value="">Select Fee</option>
@@ -294,7 +294,14 @@
 
 
                                 <div class="col-sm-4 mt-3">
-                                    <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label">New Student: </label>
+                                    <div class="mg-t-10 mg-sm-t-0">
+                                        <input type="checkbox" name="pre_school" value="1">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mt-3">
+                                    <label class="form-control-label">Pre School: </label>
                                     <div class="mg-t-10 mg-sm-t-0">
                                         <input type="checkbox" name="pre_school" value="1" id="showInputs">
                                     </div>
@@ -429,7 +436,7 @@
               
                       <div class="row mt-3">
                         <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                          <a href="{{route('admin.teacher.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
+                          <a href="{{route('admin.school_student.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
                           <button type="submit" class="btn btn-info ">Save</button>
                         </div>
                       </div>
@@ -506,6 +513,32 @@
 
 
 <script>
+
+$('body').on("change",'#class',function(){
+      let id = $(this).val();
+       console.log(id);
+       schoolSection(id,"section");
+  });
+
+  function schoolSection(id,outid){
+      let url = '{{ url("get/school_section/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select Section</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.name + "</option>"
+              });
+
+
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+  }
+
+
 
 $('body').on("change",'#class',function(){
       let id = $(this).val();

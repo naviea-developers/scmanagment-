@@ -283,11 +283,16 @@
                                                 </div>
                                             </div>
                                      
-                                
+                                            <div class="col-sm-4 mt-3">
+                                                <label class="form-control-label">New Student:</label>
+                                                <div class="mg-t-10 mg-sm-t-0">
+                                                    <input type="checkbox" name="is_new" value="1">
+                                                </div>
+                                            </div>
 
 
                                         <div class="col-sm-4 mt-3">
-                                            <label class="form-control-label">Pre School: <span class="tx-danger">*</span></label>
+                                            <label class="form-control-label">Pre School: </label>
                                             <div class="mg-t-10 mg-sm-t-0">
                                                 <input type="checkbox" name="pre_school" value="1" id="showInputs">
                                             </div>

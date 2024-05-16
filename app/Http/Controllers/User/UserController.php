@@ -24,6 +24,7 @@ use App\Models\ClassRoutineItem;
 use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
+use App\Models\ExamSchedule;
 use App\Models\Notice;
 use App\Models\Withdrawal;
 use Carbon\Carbon;
@@ -285,17 +286,76 @@ class UserController extends Controller
     public function classRoutine() //all user
     {
         $user = auth()->user()->id;
+        // dd($user);
         $data['admission'] = $admission = Admission::where('user_id', $user)->first();
         // dd($admission);
         $data['class_routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
                                         ->where('session_id', $admission->session_id)
                                         ->where('status', 1)->get();
+        $data['class_durations'] = ClassDuration::where('status', 1)->get();
 
         // $data['class_durations']= $class_durations = ClassRoutineItem::where('class_routine_id', $routins->class_routine_id)
         //                                 ->where('status', 1)->get();
         //                                  dd($class_durations);
         return view('user.class_routine.routine', $data);
     }
+    public function examRoutine() //all user
+    {
+
+        $user = auth()->user();
+
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+
+            if ($admission) {
+                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    ->get()
+                    ->filter(function ($routine) {
+                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    });
+                    // dd($routines);
+
+                // Now you can use $data['examRoutine'] to access the exam routines for the authenticated user
+            } else {
+                // Handle case where admission record doesn't exist for the user
+            }
+        } else {
+            // Handle case where user is not authenticated
+        }
+
+        return view('user.exam_routine.routine', $data);
+    }
+
+    public function examPrint(){
+        // dd('hi');
+        // $examRoutine =  ExamSchedule::find($id);
+
+        $user = auth()->user();
+
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+
+            if ($admission) {
+                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    ->get()
+                    ->filter(function ($routine) {
+                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    });
+                    // dd($routines);
+
+               
+            } else {
+                
+            }
+        } else {
+            
+        }
+
+        return view('user.exam_routine.view_exam_routine_print',$data);
+    }
+
     public function wishlist() //coustomer
     {
         $data['saves'] = CourseSave::where('user_id', auth()->user()->id)->get();
