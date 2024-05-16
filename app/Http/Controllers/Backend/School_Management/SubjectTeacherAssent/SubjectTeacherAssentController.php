@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Session;
 use App\Models\SchoolSection;
 use App\Models\SubjectTeacherAssent;
+use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
 
 class SubjectTeacherAssentController extends Controller
@@ -28,6 +29,7 @@ class SubjectTeacherAssentController extends Controller
         $data['sessions'] = Session::orderBy('id', 'desc')->where('status', 1)->get();
         $data['sections'] = SchoolSection::orderBy('id', 'desc')->where('status', 1)->get();
         $data['classes'] = Classe::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['subjectName']=Subject::orderBy('id', 'asc')->get();
         return view("Backend.school_management.subject_teacher_assent.create", $data);
     }
 
@@ -49,6 +51,7 @@ class SubjectTeacherAssentController extends Controller
             $subject_teacher_assent->class_id = $request->class_id;
             $subject_teacher_assent->section_id = $request->section_id;
             $subject_teacher_assent->session_id = $request->session_id;
+            $subject_teacher_assent->subject_id = $request->subject_id;
             $subject_teacher_assent->save();
 
             DB::commit();
@@ -78,6 +81,7 @@ class SubjectTeacherAssentController extends Controller
         $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
         $data['sessions'] = Session::orderBy('id', 'desc')->where('status', 1)->get();
         // $data['sections'] = SchoolSection::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['subjectName']=Subject::where('class_id',$subject_teacher_assent->class_id)->orderBy('id', 'asc')->get();
         $data['sections']=SchoolSection::where('class_id',$subject_teacher_assent->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
         $data['classes'] = Classe::orderBy('id', 'desc')->where('status', 1)->get();
         return view("Backend.school_management.subject_teacher_assent.update",$data);
@@ -101,6 +105,7 @@ class SubjectTeacherAssentController extends Controller
         $subject_teacher_assent->class_id = $request->class_id;
         $subject_teacher_assent->section_id = $request->section_id;
         $subject_teacher_assent->session_id = $request->session_id;
+        $subject_teacher_assent->subject_id = $request->subject_id;
         $subject_teacher_assent->save();
 
         DB::commit();

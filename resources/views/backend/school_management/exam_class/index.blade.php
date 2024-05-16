@@ -30,6 +30,7 @@
                       <tr>
                         <th scope="col">Exam Title</th>
                         <th scope="col">Class Name</th>
+                        <th scope="col">Subject</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -40,6 +41,7 @@
                         <tr>
                             <td>{{@$data->examination->name}}</td>
                             <td>{{@$data->class->name}}</td>
+                            <td>{{@$data->subject->name}}</td>
                             <td>
                                 <a href="{{ route('admin.examclass.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a>
                                 {{-- <a href="javascript:void(0)" class="btn btn-danger" value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></a> --}}

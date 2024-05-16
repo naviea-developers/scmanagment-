@@ -18,6 +18,7 @@ use App\Models\ClassRoutineItem;
 use App\Models\User;
 use App\Models\ClassDuration;
 use App\Models\Session;
+use App\Models\SchoolSection;
 
 class ClassRoutineController extends Controller
 {
@@ -59,48 +60,16 @@ class ClassRoutineController extends Controller
         try{
             DB::beginTransaction();
             $class_routine = new ClassRoutine();
-            $class_routine->class_id = $request->class_id;
             $class_routine->session_id = $request->session_id;
-            $class_routine->class_type = $request->class_type;
+            $class_routine->class_id = $request->class_id;
+            $class_routine->section_id = $request->section_id;
+            $class_routine->subject_id = $request->subject_id;
+            $class_routine->teacher_id = $request->teacher_id;
+            $class_routine->room_id = $request->room_id;
+            $class_routine->class_duration_id = $request->class_duration_id;
+            $class_routine->day_id = $request->day_id;
+            // $class_routine->class_type = $request->class_type;
             $class_routine->save();
-
-            if($request->subject_id){
-                foreach( $request->subject_id as $k=>$value){
-                    $class_routine_item = new ClassRoutineItem();
-                    $class_routine_item->class_routine_id = $class_routine->id;
-                    $class_routine_item->subject_id = $value;
-                    $class_routine_item->day_id = $request->day_id[$k];
-                    $class_routine_item->room_id = $request->room_id[$k];
-                    $class_routine_item->teacher_id = $request->teacher_id[$k];
-                    // $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    // $class_routine_item->floor_id = $request->floor_id[$k];  
-                    $class_routine_item->class_duration_id = $request->class_duration_id[$k];       
-                    // $class_routine_item->start_time = $request->start_time[$k];
-                    // $class_routine_item->end_time = $request->end_time[$k];
-                    $class_routine_item->save();
-                }
-            }
-
-            // if($request->day_id){
-            //     foreach($request->day_id as $k=>$value){
-            //         $class_routine_day= New ClassRoutineDay();
-            //         $class_routine_day->class_routine_id=$class_routine->id;
-            //         $class_routine_day->day_id = $value;
-            //         $class_routine_day->save();
-    
-            //         foreach($request->subject_id[$k] as $i=>$data){
-            //             $class_routine_item= New ClassRoutineItem;
-            //             $class_routine_item->class_routine_day=$class_routine_day->id;
-            //             $class_routine_item->subject_id=$data;
-            //             $class_routine_item->teacher_id=$request->teacher_id[$k][$i];
-            //             $class_routine_item->room_id=$request->room_id[$k][$i];
-            //             $class_routine_item->class_duration_id=$request->class_duration_id[$k][$i];
-            //             $class_routine_item->save();
-            //         }
-            //     }
-            // }
-
-
             DB::commit();
             return redirect()->route('admin.routine.index')->with('message','Class Routine Add Successfully');
         }catch(\Exception $e){
@@ -117,11 +86,13 @@ class ClassRoutineController extends Controller
     }
 
     public function edit($id){
-       $data['editData'] =  ClassRoutine::find($id);
+       $data['editData']=$class_routine =  ClassRoutine::find($id);
        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
+       $data['subjectName']=Subject::where('class_id',$class_routine->class_id)->orderBy('id', 'asc')->get();
+       $data['sections']=SchoolSection::where('class_id',$class_routine->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
        $data['teachers'] = User::where('type','2')->orderBy('id', 'asc')->get();
        $data['className']=Classe::orderBy('id', 'asc')->get(); 
-       $data['subjectName']=Subject::orderBy('id', 'asc')->get();
+    //    $data['subjectName']=Subject::orderBy('id', 'asc')->get();
        $data['examinations']=Examination::orderBy('id', 'asc')->get();
        $data['buldings'] = Bulding::orderBy('id', 'asc')->get();
        $data['rooms'] = Room::orderBy('id', 'asc')->get();
@@ -142,52 +113,57 @@ class ClassRoutineController extends Controller
         try{
             DB::beginTransaction();
             $class_routine = ClassRoutine::find($id);
-            $class_routine->class_id = $request->class_id;
             $class_routine->session_id = $request->session_id;
-            $class_routine->class_type = $request->class_type;
+            $class_routine->class_id = $request->class_id;
+            $class_routine->section_id = $request->section_id;
+            $class_routine->subject_id = $request->subject_id;
+            $class_routine->teacher_id = $request->teacher_id;
+            $class_routine->room_id = $request->room_id;
+            $class_routine->class_duration_id = $request->class_duration_id;
+            $class_routine->day_id = $request->day_id;
             $class_routine->save();
 
-            if($request->subject_id){
-                foreach( $request->subject_id as $k=>$value){
-                    $class_routine_item = new ClassRoutineItem();
-                    $class_routine_item->class_routine_id = $class_routine->id;
-                    $class_routine_item->subject_id = $value;
-                    $class_routine_item->day_id = $request->day_id[$k];
-                    $class_routine_item->room_id = $request->room_id[$k];
-                    $class_routine_item->teacher_id = $request->teacher_id[$k];
-                    // $class_routine_item->bulding_id = $request->bulding_id[$k];
-                    // $class_routine_item->floor_id = $request->floor_id[$k];    
-                    $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
-                    // $class_routine_item->start_time = $request->start_time[$k];
-                    // $class_routine_item->end_time = $request->end_time[$k];
-                    $class_routine_item->save();
-                }
-            }
+            // if($request->subject_id){
+            //     foreach( $request->subject_id as $k=>$value){
+            //         $class_routine_item = new ClassRoutineItem();
+            //         $class_routine_item->class_routine_id = $class_routine->id;
+            //         $class_routine_item->subject_id = $value;
+            //         $class_routine_item->day_id = $request->day_id[$k];
+            //         $class_routine_item->room_id = $request->room_id[$k];
+            //         $class_routine_item->teacher_id = $request->teacher_id[$k];
+            //         // $class_routine_item->bulding_id = $request->bulding_id[$k];
+            //         // $class_routine_item->floor_id = $request->floor_id[$k];    
+            //         $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
+            //         // $class_routine_item->start_time = $request->start_time[$k];
+            //         // $class_routine_item->end_time = $request->end_time[$k];
+            //         $class_routine_item->save();
+            //     }
+            // }
 
-            if($request->old_subject_id){
-                foreach($request->old_subject_id as $k => $value){
-                    $class_routine_item = ClassRoutineItem::find($k);
-                    $class_routine_item->class_routine_id = $class_routine->id;
-                    $class_routine_item->subject_id = $value;
-                    $class_routine_item->day_id = $request->old_day_id[$k];
-                    $class_routine_item->teacher_id = $request->old_teacher_id[$k];
-                    $class_routine_item->room_id = $request->old_room_id[$k];
-                    // $class_routine_item->bulding_id = $request->old_bulding_id[$k];
-                    // $class_routine_item->floor_id = $request->old_floor_id[$k]; 
-                    $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
-                    // $class_routine_item->start_time = $request->old_start_time[$k];
-                    // $class_routine_item->end_time = $request->old_end_time[$k];
-                    $class_routine_item->save();
-                }
-            }
+            // if($request->old_subject_id){
+            //     foreach($request->old_subject_id as $k => $value){
+            //         $class_routine_item = ClassRoutineItem::find($k);
+            //         $class_routine_item->class_routine_id = $class_routine->id;
+            //         $class_routine_item->subject_id = $value;
+            //         $class_routine_item->day_id = $request->old_day_id[$k];
+            //         $class_routine_item->teacher_id = $request->old_teacher_id[$k];
+            //         $class_routine_item->room_id = $request->old_room_id[$k];
+            //         // $class_routine_item->bulding_id = $request->old_bulding_id[$k];
+            //         // $class_routine_item->floor_id = $request->old_floor_id[$k]; 
+            //         $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
+            //         // $class_routine_item->start_time = $request->old_start_time[$k];
+            //         // $class_routine_item->end_time = $request->old_end_time[$k];
+            //         $class_routine_item->save();
+            //     }
+            // }
     
-            if($request->delete_class_routine_item){
-                foreach($request->delete_class_routine_item as $key => $value){
-                    $class_routine_item = ClassRoutineItem::find($value);
-                    $class_routine_item->delete();
+            // if($request->delete_class_routine_item){
+            //     foreach($request->delete_class_routine_item as $key => $value){
+            //         $class_routine_item = ClassRoutineItem::find($value);
+            //         $class_routine_item->delete();
     
-                }
-            }
+            //     }
+            // }
     
              //CourseConten  End
 
@@ -207,9 +183,9 @@ class ClassRoutineController extends Controller
         // dd('hi');
         $class_routine =  ClassRoutine::find($request->class_routine_id);
         // dd($examschedule);
-        foreach($class_routine->class_routine_items as $class_routine_item){
-            $class_routine_item->delete();
-        }
+        // foreach($class_routine->class_routine_items as $class_routine_item){
+        //     $class_routine_item->delete();
+        // }
 
         $class_routine->delete();
         return back()->with('message','Class Routine Deleted Successfully');

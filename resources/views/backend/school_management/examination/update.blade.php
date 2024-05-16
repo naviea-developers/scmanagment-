@@ -1,7 +1,12 @@
 @section('title')
     Admin - Edit Examination
 @endsection
-
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 41px;}
+</style>
+@endsection
 @extends('Backend.layouts.layouts')
 
 @section('main_contain')
@@ -48,7 +53,7 @@
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="academin_year_id" class="form-control">
+                                <select name="academin_year_id" class="form-control form-select select2">
                                   <option value=""> Select Year</option>
                                   @foreach ($academin_years as $y)
                                   <option @if ($y->id == $exam->academin_year_id) Selected @endif  value="{{ $y->id }}">{{ $y->year }}</option>
@@ -62,7 +67,7 @@
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Session: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="session_id" class="form-control">
+                                <select name="session_id" class="form-control form-select select2">
                                   <option value=""> Select Session</option>
                                   @foreach ($sessions as $session)
                                   <option @if ($session->id == $exam->session_id) Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>

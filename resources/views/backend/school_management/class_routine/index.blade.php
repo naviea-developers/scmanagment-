@@ -28,9 +28,12 @@
                 <table class="table" id="datatable1">
                     <thead>
                       <tr>
-                        <th scope="col">Class Name</th>
                         <th scope="col">Session</th>
-                        <th scope="col">Class Type</th>
+                        <th scope="col">Class Name</th>
+                        <th scope="col">Sections</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Teacher</th>
+                        <th scope="col">Day</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -39,25 +42,17 @@
                       @foreach ($allData as $data)
 
                         <tr>
-                            <td>{{@$data->class->name}}</td>
                             <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
+                            <td>{{@$data->class->name}}</td>
+                            <td>{{@$data->schoolsection->name}}</td>
+                            <td>{{@$data->subject->name}}</td>
+                            <td>{{@$data->teacher->name}}</td>
+                            <td>{{@$data->day}}</td>
                             <td>
-                                @if (@$data->class_type=='1')
-                                    Online
-                                @elseif(@$data->class_type=='2')
-                                    Offline
-                                @endif
-                                {{-- {{@$data->class_type}} --}}
-                            </td>
-                            <td>
-                                {{-- <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">
-                                    @csrf
-                                    <input type="hidden" name="examschedule_id" value="{{ $data->id }}">
-                                    <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-                                </form> --}}
-                                <a href="{{ route('admin.routine.details',$data->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                                <a href="{{ route('admin.routine.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a>
-                                {{-- <a href="javascript:void(0)" class="btn btn-danger" value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></a> --}}
+                            
+                                {{-- <a href="{{ route('admin.routine.details',$data->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> --}}
+                                {{-- <a href="{{ route('admin.routine.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a> --}}
+                                <a class="btn text-info" href="{{ route('admin.routine.edit',$data->id) }}"><i class="icon ion-compose tx-28"></i></a>
                                 <button class="btn text-danger bg-white"  value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>

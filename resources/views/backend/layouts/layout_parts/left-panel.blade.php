@@ -330,6 +330,7 @@
             || Route::is('admin.examtype.create') ||  Route::is('admin.examtype.index') || Route::is('admin.examtype.edit')
             || Route::is('admin.examclass.create') ||  Route::is('admin.examclass.index') || Route::is('admin.examclass.edit')
             || Route::is('admin.examschedule.create') ||  Route::is('admin.examschedule.index') || Route::is('admin.examschedule.edit')
+            || Route::is('admin.routine.create') ||  Route::is('admin.routine.index') || Route::is('admin.routine.edit')
             || Route::is('admin.notice.create') ||  Route::is('admin.notice.index') || Route::is('admin.notice.edit')
             || Route::is('admin.fee.create') ||  Route::is('admin.fee.index') || Route::is('admin.fee.edit')
             || Route::is('admin.fee_management.create') ||  Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit')
@@ -354,6 +355,7 @@
                 <li class="sub-item"><a href="{{ route('admin.examtype.index') }}" class="sub-link {{(Route::is('admin.examtype.index') || Route::is('admin.examtype.edit') || Route::is('admin.examtype.create')) ?'active':''}}">Manage Exam Type</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examclass.index') }}" class="sub-link {{(Route::is('admin.examclass.index') || Route::is('admin.examclass.edit') || Route::is('admin.examclass.create')) ?'active':''}}">Manage Exam Class</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examschedule.index') }}" class="sub-link {{(Route::is('admin.examschedule.index') || Route::is('admin.examschedule.edit') || Route::is('admin.examschedule.create')) ?'active':''}}">Manage Exam Schedule</a></li>
+                <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Class Routine</a></li>
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                 {{-- <li class="sub-item"><a href="{{ route('admin.admission.create') }}" class="sub-link {{(Route::is('admin.admission.create')) ?'active':''}}">Add New Admission</a></li> --}}
                 <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission</a></li>
@@ -403,23 +405,6 @@
             </ul>
         </li><!-- br-Speakers-item --> --}}
 
-        <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
-                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
-                <span class="menu-item-label">Class Routine</span>
-            </a><!-- br-menu-link -->
-            @php
-            $r_check = ( Route::is('admin.routine.index') );
-            @endphp
-            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Class Routine</a>
-                </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{(Route::is('admin.routine.index') || Route::is('admin.routine.edit')) ?'active':''}}">Manage routine</a>
-                </li> --}}
-                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
-                </li> --}}
-            </ul>
-        </li><!-- br-Speakers-item -->
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'school_student')?'active':''}} ">
