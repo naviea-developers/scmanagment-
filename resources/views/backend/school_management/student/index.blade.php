@@ -29,7 +29,6 @@ Admin - All Student
 
             <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
               <div class="row">
-<<<<<<< HEAD
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Academic Year:</b></label>
                   <select class="form-control searchbtn" name="academic_year_id" id="academic_year_id">
@@ -67,52 +66,6 @@ Admin - All Student
                       @endforeach
                   </select>
                 </div>
-=======
-
-                {{-- <form id="filter-form"> --}}
-                  <div class="col-md-3">
-                    <label class=" form-control-label"><b>Academic Year:</b></label>
-                    <select class="form-control" name="academic_year_id" id="academic-year">
-                        <option value="">Select Year</option>
-                        @foreach ($academic_years as $academic_year)
-                        <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
-                        @endforeach
-                    </select>
-                  </div>
-
-                  <div class="col-md-3">
-                    <label class=" form-control-label"><b>Session:</b></label>
-                    <select class="form-control" name="session_id" id="session">
-                        <option value="">Select Session</option>
-                        @foreach ($sessions as $session)
-                        <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
-                        @endforeach
-                    </select>
-                  </div>
-
-                  {{-- <form> --}}
-                    <div class="col-md-3">
-                        <label class="form-control-label"><b>Class:</b></label>
-                        <select class="form-control class" name="class_id" id="class">
-                            <option value="">Select Class</option>
-                            @foreach ($classes as $class)
-                            <option value="{{ $class->id }}">{{ $class->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                  {{-- </form> --}}
-
-                  <div class="col-md-3">
-                    <label class=" form-control-label"><b>Section:</b></label>
-                    <select class="form-control" name="section_id" id="section">
-                        <option value="">Select Section</option>
-                        @foreach ($sections as $section)
-                        <option value="{{ $section->id }}">{{ $section->name }}</option>
-                        @endforeach
-                    </select>
-                  </div>
-                {{-- </form> --}}
->>>>>>> 17ca96a8e46be2295c77ebf5c043d82420cb3f8b
               </div>
             </div>
 
