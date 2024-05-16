@@ -285,18 +285,43 @@ class UserController extends Controller
     }
     public function classRoutine() //all user
     {
-        $user = auth()->user()->id;
-        // dd($user);
-        $data['admission'] = $admission = Admission::where('user_id', $user)->first();
-        // dd($admission);
-        $data['class_routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
-                                        ->where('session_id', $admission->session_id)
-                                        ->where('status', 1)->get();
-        $data['class_durations'] = ClassDuration::where('status', 1)->get();
+        // $user = auth()->user()->id;
+        // // dd($user);
+        // $data['admission'] = $admission = Admission::where('user_id', $user)->first();
+        // // dd($admission);
+        // $data['class_routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
+        //                                 ->where('session_id', $admission->session_id)
+        //                                 ->where('status', 1)->get();
+        // $data['class_durations'] = ClassDuration::where('status', 1)->get();
 
         // $data['class_durations']= $class_durations = ClassRoutineItem::where('class_routine_id', $routins->class_routine_id)
         //                                 ->where('status', 1)->get();
         //                                  dd($class_durations);
+
+
+        $user = auth()->user();
+
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            // dd($admission);
+            if ($admission) {
+                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    // ->where('section_id', $admission->section_id)
+                    ->get();
+                    // ->filter(function ($routine) {
+                    //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    // });
+                    // dd($routines);
+
+                    
+            } else {
+                
+            }
+        } else {
+
+        }
+        $data['class_durations'] = ClassDuration::where('status', 1)->get();
         return view('user.class_routine.routine', $data);
     }
     public function examRoutine() //all user

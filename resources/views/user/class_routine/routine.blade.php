@@ -30,12 +30,12 @@
 </style>
 
 
-    <div class="right_section">
+    {{-- <div class="right_section">
         <div>
             <h4 style="color: black">Class Routine</h4>
-            {{-- <span style="color: white">Confirm Code.</span> --}}
+            <span style="color: white">Confirm Code.</span>
         </div>
-    </div>
+    </div> --}}
     <div class="passwodBox mb-3" style="background-color: #07477D; color:white">
         <di class="col-md-12">
             <div class="row">
@@ -64,66 +64,26 @@
                   <div class="class-routine">
                     
                     <table>
-              
                       <thead style="color: black">
                         <tr>
                           <th>Day</th>
                             @foreach ($class_durations as $class_duration)
                                 <th>{{ $class_duration->name }} ({{ date('h:i:A', strtotime($class_duration->start_time)) }} - {{ date('h:i:A', strtotime($class_duration->end_time)) }})</th>
                             @endforeach
-                      
-
-
-
-                          {{-- <th>Teacher Name</th>
-                          <th>Subject Name</th>
-                          <th>Bulding Name</th>
-                          <th>Floor Name</th>
-                          <th>Room Name</th>
-                          <th>Duration</th> --}}
-                          
                         </tr>
                       </thead>
-              
-                  
                       <tbody>
-              
                         {{-- @php
                             $dayCounts = $class_routine[0]->class_routine_items->groupBy('day')->map->count();
                         @endphp
-
-                        @foreach (@$class_routine->class_routine_items as $key => $item)
-                            <tr>
-                                @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                                    <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
-                                @endif
-                                <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td> --}}
-                                
-                                
-                                
-                                {{-- <td>{{ $item->subject->name }}</td>
-                                <td>{{ $item->bulding->name }}</td>
-                                <td>{{ $item->floor->name }}</td>
-                                <td>{{ $item->room->name }}</td>
-                                 <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td> --}}
-                           
-                           
-                           
-                                {{-- </tr>
-                        @endforeach  --}}
-              
-                        {{-- @php
-                            $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
-                        @endphp
-              
-                        @foreach ($class_routine->class_routine_items as $key => $item)
+                        @foreach (@$class_routine[0]->class_routine_items as $key => $item)
                           <tr>
-                              @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                                  <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
-                              @endif
-                              <td>{{ $item->Teacher->name }} {{ $item->subject->name }} {{ $item->bulding->name }}</td>
+                            @if ($key === 0 || $item->day !== $class_routine[0]->class_routine_items[$key - 1]->day)
+                              <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
+                            @endif
+                              <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
                           </tr>
-                        @endforeach --}}
+                        @endforeach  --}}
                       </tbody>
                     </table>
                   </div>
