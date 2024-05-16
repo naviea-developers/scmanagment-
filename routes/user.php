@@ -140,6 +140,8 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         
         Route::get('/notice', [UserController::class, 'notice'])->name('notice');
         Route::get('/class-routine', [UserController::class, 'classRoutine'])->name('class_routine');
+        Route::get('/exam-routine', [UserController::class, 'examRoutine'])->name('exam_routine');
+        Route::get('print-user-exam-routine', [UserController::class,"examPrint"])->name('user.exam_routine.print');
 
 
 

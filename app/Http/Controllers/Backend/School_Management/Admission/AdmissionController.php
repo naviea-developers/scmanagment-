@@ -23,7 +23,7 @@ class AdmissionController extends Controller
 {
     public function index()
     { 
-        $data['admissions'] = Admission::all();
+        $data['admissions'] = Admission::where('is_new', 1)->get();
         return view('Backend.school_management.admission.index', $data);
     }
     public function create()

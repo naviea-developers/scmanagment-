@@ -37,25 +37,16 @@
                         <hr>
 
                             
-                            {{-- <div class="col-sm-4">
-                            <label class=" form-control-label">Academic Year: </label>
-                            <select class="form-control" name="academic_year_id" >
-                                <option value="">Select Academic Year</option>
-                                @foreach ($academic_years as $year)
-                                <option value="{{ $year->id }}">{{ $year->year }}</option>
-                                @endforeach
-                            </select>
+                            <div class="col-sm-4">
+                            <label class=" form-control-label"><b>Academic Year: </b></label>
+                            <p >{{ @$details->academic_year->year }}</p>
                             </div>
 
                             <div class="col-sm-4">
-                            <label class=" form-control-label">Session: </label>
-                            <select class="form-control" name="session_id" >
-                                <option value="">Select Session</option>
-                                @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
-                                @endforeach
+                            <label class=" form-control-label"><b>Session: </b></label>
+                            <p >{{ @$details->session->start_year->year }} - {{ @$details->session->end_year->year }}</p>
                             </select>
-                            </div> --}}
+                            </div>
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label"><b>Class: </b></label>

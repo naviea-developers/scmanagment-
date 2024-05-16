@@ -68,9 +68,9 @@
                       <thead style="color: black">
                         <tr>
                           <th>Day</th>
-                            {{-- @foreach ($class_durations as $class_duration)
+                            @foreach ($class_durations as $class_duration)
                                 <th>{{ $class_duration->name }} ({{ date('h:i:A', strtotime($class_duration->start_time)) }} - {{ date('h:i:A', strtotime($class_duration->end_time)) }})</th>
-                            @endforeach --}}
+                            @endforeach
                       
 
 
@@ -88,17 +88,17 @@
                   
                       <tbody>
               
-                        @php
+                        {{-- @php
                             $dayCounts = $class_routine[0]->class_routine_items->groupBy('day')->map->count();
                         @endphp
 
-                        {{-- @foreach ($class_routine->class_routine_items as $key => $item)
+                        @foreach (@$class_routine->class_routine_items as $key => $item)
                             <tr>
                                 @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
                                     <td rowspan="{{ $dayCounts[$item->day] }}">{{ @$item->day }}</td>
                                 @endif
-                                <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td>
-                                 --}}
+                                <td>{{ @$item->Teacher->name }} <br> {{ @$item->subject->name }} {{ @$item->room->name }}</td> --}}
+                                
                                 
                                 
                                 {{-- <td>{{ $item->subject->name }}</td>
