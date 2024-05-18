@@ -196,7 +196,8 @@ Route::prefix('examschedule')->middleware(['auth:admin', 'adminCheck:0'])->group
         Route::post('delete', [ClassRoutineController::class,"destroy"])->name('admin.routine.delete');
         Route::get('/status/{id}', [ClassRoutineController::class, 'status'])->name('admin.routine.status');
         Route::get('details/{id}', [ClassRoutineController::class,"details"])->name('admin.routine.details');
-        Route::get('print/{id}', [ClassRoutineController::class,"print"])->name('admin.routine.print');
+        // Route::get('print/{id}', [ClassRoutineController::class,"print"])->name('admin.routine.print');
+        Route::get('print', [ClassRoutineController::class,"print"])->name('admin.routine.print');
     });
     //-----------------------------routine Route End---------------------------//
 //-----------------------------Exam Route Start---------------------------//
@@ -298,3 +299,7 @@ Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSecti
 Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
 Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);
 Route::get('/get/subject/{id}', [ExamSchedulesController::class, 'getSubject']);
+
+// Route::get('/get-search-student-routine', [ClassRoutineController::class, 'getSearchStudentRoutine']);
+
+Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');

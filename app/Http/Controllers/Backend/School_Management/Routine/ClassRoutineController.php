@@ -23,8 +23,12 @@ use App\Models\SchoolSection;
 class ClassRoutineController extends Controller
 {
     public function index(){
-        $allData=ClassRoutine::orderBy('id', 'desc')->get();
-        return view('Backend.school_management.class_routine.index',compact('allData'));
+        $data['allData']=$allData=ClassRoutine::orderBy('id', 'desc')->get();
+        $data['classes']=Classe::orderBy('id', 'asc')->get(); 
+        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
+        // $data['sections']=SchoolSection::where('class_id',$allData->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
+        $data['sections']=SchoolSection::where('status', 1)->orderBy('id', 'asc')->get();
+        return view('Backend.school_management.class_routine.index',$data);
     }
 
     // public function examDetails(){
@@ -198,11 +202,41 @@ class ClassRoutineController extends Controller
         return view('Backend.school_management.class_routine.view_class_routine',$data);
     }
 
-    public function print(Request $request,$id){
-        // dd('hi');
-        $class_routine =  ClassRoutine::find($id);
-        return view('Backend.school_management.class_routine.view_class_routine_print',compact('class_routine'));
+    public function print(Request $request){
+        //  dd('hi');
+        // $class_routine =  ClassRoutine::find($id);
+        // return view('Backend.school_management.class_routine.view_class_routine_print',compact('class_routine'));
+
+        $classId = $request->input('class_id');
+        $sectionId = $request->input('section_id');
+        $sessionId = $request->input('session_id');
+
+        if( $classId && $sessionId &&  $sectionId){
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+        }elseif($classId && $sessionId){
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
+        }
+        return view('Backend.school_management.class_routine.view_class_routine_print',$data);
     }
+
+
+
+    public function getClassRoutine(Request $request)
+    {
+        $classId = $request->input('class_id');
+        $sectionId = $request->input('section_id');
+        $sessionId = $request->input('session_id');
+        // return response()->json(['sessionId' => $sessionId,'classId' => $classId,'sectionId' => $sectionId]);
+        if( $classId && $sessionId &&  $sectionId){
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+        }elseif($classId && $sessionId){
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
+        }
+        return view('Backend.school_management.class_routine.view_class_routine',$data);
+        // return view('Backend.school_management.class_routine.view_class_routine_print',$data);
+        // return response()->json(['routine' => $routine]);
+    }
+    
 
 
 

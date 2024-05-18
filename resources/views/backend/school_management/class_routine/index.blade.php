@@ -18,47 +18,84 @@
                       <h4>View All Class Routine</h4>
                       <p class="mg-b-0">Manage all Class Routine</p>
                     </div>
-                  </div>
+                </div>
 
-                    <a href="{{ route('admin.routine.create') }}"
-                    class="btn btn-primary btn-sm addclassbtn">
-                        Add Class Routine
-                    </a>
-                    <br>
-                <table class="table" id="datatable1">
-                    <thead>
-                      <tr>
-                        <th scope="col">Session</th>
-                        <th scope="col">Class Name</th>
-                        <th scope="col">Sections</th>
-                        <th scope="col">Subject</th>
-                        <th scope="col">Teacher</th>
-                        <th scope="col">Day</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                    <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+                        <div class="row">
 
-                      @foreach ($allData as $data)
+                        <div class="col-md-4">
+                            <label class="form-control-label"><b>Class:</b></label>
+                            <select class="form-control" id="class">
+                                <option value="">Select Class</option>
+                                @foreach ($classes as $class)
+                                <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-control-label"><b>Section:</b></label>
+                            <select class="form-control section_id" id="section">
+                                <option value="">Select Section</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-control-label"><b>Session:</b></label>
+                            <select class="form-control" name="session_id" id="session_id">
+                                <option value="">Select Session</option>
+                                @foreach ($sessions as $session)
+                                <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
-                            <td>{{@$data->class->name}}</td>
-                            <td>{{@$data->schoolsection->name}}</td>
-                            <td>{{@$data->subject->name}}</td>
-                            <td>{{@$data->teacher->name}}</td>
-                            <td>{{@$data->day}}</td>
-                            <td>
-                            
-                                {{-- <a href="{{ route('admin.routine.details',$data->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> --}}
-                                {{-- <a href="{{ route('admin.routine.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a> --}}
-                                <a class="btn text-info" href="{{ route('admin.routine.edit',$data->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                                <button class="btn text-danger bg-white"  value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                  </table>
+
+                    <div class="get-search-student-class-routine">
+                        <a href="{{ route('admin.routine.create') }}"
+                        class="btn btn-primary btn-sm addclassbtn">
+                            Add Class Routine
+                        </a>
+                        <br>
+                    
+                        <table class="table" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th scope="col">Session</th>
+                                <th scope="col">Class Name</th>
+                                <th scope="col">Sections</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Teacher</th>
+                                <th scope="col">Day</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach ($allData as $data)
+
+                                <tr>
+                                    <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
+                                    <td>{{@$data->class->name}}</td>
+                                    <td>{{@$data->schoolsection->name}}</td>
+                                    <td>{{@$data->subject->name}}</td>
+                                    <td>{{@$data->teacher->name}}</td>
+                                    <td>{{@$data->day}}</td>
+                                    <td>
+                                    
+                                        {{-- <a href="{{ route('admin.routine.details',$data->id) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a> --}}
+                                        {{-- <a href="{{ route('admin.routine.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a> --}}
+                                        <a class="btn text-info" href="{{ route('admin.routine.edit',$data->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                                        <button class="btn text-danger bg-white"  value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
             </div>
 
         </div>
@@ -93,4 +130,44 @@
 </div><!-- modal -->
 
 <!--_-- ########### End Delete Category MODAL ############---->
+@endsection
+
+
+@section('script')
+
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+<script>
+    $(document).ready(function() {
+       
+        $('#class_id,.section_id, #session_id').change(function() {
+            fetchClassRoutine();
+        });
+
+        function fetchClassRoutine() {
+            var classId = $('#class').val();
+            // console.log(classId);
+            var sectionId = $('#section').val();
+            // console.log(sectionId);
+            var sessionId = $('#session_id').val();
+            // console.log(sessionId);
+
+            // if (classId && sectionId && sessionId) {
+                $.ajax({
+                    url: "{{ route('get.class.routine') }}",
+                    type: 'GET',
+                    data: { class_id: classId, section_id: sectionId, session_id: sessionId },
+                    success: function(response) {
+                        console.log(response);
+                        $(".get-search-student-class-routine").html(response);
+                        // var tbody = $('#class_routine_table tbody');
+                        // tbody.empty();
+                        // $.each(response.routine, function(key, routine) {
+                        //     tbody.append('<tr><td>' + routine.id + '</td><td>' + routine.id + '</td><td>' + routine.id + '</td></tr>');
+                        // });
+                    }
+                });
+            // }
+        }
+    });
+</script>
 @endsection
