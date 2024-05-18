@@ -307,7 +307,9 @@
         </li> --}}
 
         
-
+        @php
+        $admissions = \App\Models\Admission::where('is_new', 1)->get();
+        @endphp
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
@@ -358,7 +360,7 @@
                 <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Class Routine</a></li>
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                 {{-- <li class="sub-item"><a href="{{ route('admin.admission.create') }}" class="sub-link {{(Route::is('admin.admission.create')) ?'active':''}}">Add New Admission</a></li> --}}
-                <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission</a></li>
+                <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission ({{ $admissions->count() }})</a></li>
                
             </ul>
         </li><!-- br-Speakers-item -->

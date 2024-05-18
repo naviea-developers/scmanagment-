@@ -26,16 +26,76 @@ Admin - All Admissions
             @endif
             {{-- success message End --}}
 
+
+
+            <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+              <div class="row">
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Academic Year:</b></label>
+                  <select class="form-control searchbtn" name="academic_year_id" id="academic_year_id">
+                      <option value="">Select Year</option>
+                      @foreach ($academic_years as $academic_year)
+                      <option value="{{ $academic_year->id }}">{{ $academic_year->year }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Session:</b></label>
+                  <select class="form-control" name="session_id" id="session_id">
+                      <option value="">Select Session</option>
+                      @foreach ($sessions as $session)
+                      <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Class:</b></label>
+                  <select class="form-control class_id" name="class_id" id="class">
+                      <option value="">Select Class</option>
+                      @foreach ($classes as $class)
+                      <option value="{{ $class->id }}">{{ $class->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Group:</b></label>
+                  <select class="form-control group_id" name="group_id" id="group">
+                      <option value="">Select Group</option>
+                      {{-- @foreach ($groups as $group)
+                      <option value="{{ $group->id }}">{{ $group->name }}</option>
+                      @endforeach --}}
+                  </select>
+                </div>
+                {{-- <div class="col-md-2">
+                  <label class=" form-control-label"><b>Section:</b></label>
+                  <select class="form-control section_id" name="section_id" id="section">
+                      <option value="">Select Section</option>
+                  </select>
+                </div> --}}
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
             <div class="table-wrapper">
-              <table id="datatable1" class="table display responsive nowrap">
+              <table id="dataTableA" class="table display responsive nowrap">
+              {{-- <table id="datatable1" class="table display responsive nowrap"> --}}
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Student Image</th>
                     <th class="wd-15p">Student Name</th>
-                    <th class="wd-15p">Class</th>
                     <th class="wd-15p">Academic Year</th>
                     <th class="wd-15p">Session</th>
+                    <th class="wd-15p">Class</th>
                     <th class="wd-15p">Section</th>
                     <th class="wd-15p">Group</th>
                     <th class="wd-10p">Status</th>
@@ -43,7 +103,7 @@ Admin - All Admissions
                   </tr>
                 </thead>
                 <tbody>
-                    @php
+                    {{-- @php
                         $i = 1;
                     @endphp
                   @if (count($admissions) > 0)
@@ -74,7 +134,7 @@ Admin - All Admissions
                           </td>
                       </tr>
                     @endforeach
-                  @endif
+                  @endif --}}
 
                 </tbody>
               </table>
@@ -126,4 +186,51 @@ Admin - All Admissions
 
     <!--_-- ########### End Delete Category MODAL ############---->
 
+@endsection
+
+@section('script')
+
+  <script>
+    var s_data = $('#dataTableA').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            "url": "{{ route('admin.admission.ajax') }}",
+            "dataType": "json",
+            "type": "POST",
+            data: function(data){
+              data.academic_year_id= $('#academic_year_id').val(),
+              data.session_id=$('#session_id').val(),
+              data.class_id= $('.class_id').val(),
+              data.group_id= $('.group_id').val(),
+              data.section_id= $('.section_id').val(),
+              data._token = "{{ csrf_token() }}";
+
+            },
+        },
+        "columns": [
+            { "data": "id"},
+            { "data": "image"},
+            { "data": "student_name"},
+            { "data": "academic_year_id"},
+            { "data": "session_id"},
+            { "data": "class_id"},
+            { "data": "section_id"},
+            { "data": "group_id"},
+            { "data": "status"},
+            { "data": "options"},
+        ],
+        "columnDefs": [ {
+          "targets": 9,
+          "orderable": false
+          } ]
+
+    });
+    $('#academic_year_id, #session_id, .class_id, .group_id, .section_id').change(function(){
+      console.log(this);
+      console.log(s_data);
+      s_data.draw();
+    });
+    
+  </script>
 @endsection

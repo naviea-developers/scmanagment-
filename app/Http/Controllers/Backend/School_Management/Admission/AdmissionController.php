@@ -24,8 +24,140 @@ class AdmissionController extends Controller
     public function index()
     { 
         $data['admissions'] = Admission::where('is_new', 1)->get();
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['academic_years'] = AcademicYear::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('status', 1)->get();
+        $data['groups'] = Group::where('status', 1)->get();
         return view('Backend.school_management.admission.index', $data);
     }
+
+    function getAdmissionByAjax(Request $request){
+        // dd($request->all());
+         $columns = array(
+            0 => 'id',
+            1 => 'image',
+            2 => 'student_name',
+            3 => 'class_id',
+            4 => 'academic_year_id',
+            5 => 'session_id',
+            6 => 'section_id',
+            7 => 'group_id',
+            8 => 'status',
+            9 => 'options',
+        );
+        $totalData = Admission::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $students = Admission::where('is_new',1);
+        if(!empty($search)){
+ 
+            $students =$students->where("student_name","LIKE","%{$search}%");
+           
+        }
+         if($request->academic_year_id !=''){
+                 $students =$students->where("academic_year_id",$request->academic_year_id);
+         }
+         if($request->session_id !=''){
+             $students =$students->where("session_id",$request->session_id);
+         }
+         if($request->class_id !=''){
+             $students =$students->where("class_id",$request->class_id);
+         }
+         if($request->group_id !=''){
+             $students =$students->where("group_id",$request->group_id);
+         }
+         if($request->section_id !=''){
+             $students =$students->where("section_id",$request->section_id);
+         }
+ 
+         $students = $students->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        $totalFiltered = $students->count();
+ 
+        $data = array();
+        if(!empty($students))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($students as $student)
+            {
+                $nestedData['id'] = $i++;
+ 
+                $nestedData['image'] = '<img src="'.$student->image_show.'" style="height:50px;width:50px;">';
+                $nestedData['student_name'] = $student->student_name;
+                $nestedData['academic_year_id'] = $student->academic_year?->year;
+                $nestedData['session_id'] = $student->session?->start_year?->year ." - ". $student->session?->end_year?->year;
+                $nestedData['class_id'] = $student->class?->name;
+                $nestedData['section_id'] = $student->section?->name;
+                $nestedData['group_id'] = $student->group?->name;
+ 
+                $nestedData['status'] = '';
+                if ($student->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.admission.status', $student->id).'" class="btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($student->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.admission.status', $student->id).'" class="btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.admission.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
+ 
+                $nestedData['options'] .= '<a href="#"  value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+ 
+        return json_encode($json_data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function create()
     {
         $data['classes'] = Classe::where('status', 1)->get();
