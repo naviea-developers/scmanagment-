@@ -16,3 +16,7 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
 });
 
 Route::get('/get-search-student', [StudentController::class, 'getSearchStudent'])->name('admin.school_student.search-student');
+
+
+
+Route::post('/get-student-by-ajax', [StudentController::class, 'getStudentByAjax'])->name('admin.school_student.ajax');

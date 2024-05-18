@@ -269,6 +269,7 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 
     Route::get('/admission/doc/download/{id}', [AdmissionController::class, 'certificateDownload'])->name('admin.admission.download');
 });
+Route::post('/get-admission-by-ajax', [AdmissionController::class, 'getAdmissionByAjax'])->name('admin.admission.ajax');
 
 
 
