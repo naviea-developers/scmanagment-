@@ -21,7 +21,7 @@
   }
 </style>
 
-
+@if (@$class_routine->count() > 0)
     <div class="float-end">
       {{-- <a href="{{ route('admin.routine.print',$class_routine->id) }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a> --}}
       <a href="{{ route('admin.routine.print') }}?class_id={{ @$class_routine[0]->class_id }}&session_id={{ @$class_routine[0]->session_id }}&section_id={{ @$class_routine[0]->section_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
@@ -140,7 +140,7 @@
             @endforeach
         </tbody>
     </table> --}}
-
+   
     <table>
       <thead>
           <tr>
@@ -178,9 +178,12 @@
           @endforeach
       </tbody>
   </table>
-
-    
+ 
       
     </div>
     
- 
+    @else
+    <div class="text-center">
+      <h2>Data Not Found !</h2>
+  </div>
+  @endif

@@ -34,10 +34,15 @@
 <div class="container">
   <div class="school-name">
     <h1>School Name</h1>
+    <h5>Class Name: {{ @$class_routine[0]->class->name }}</h5>
+    <h5>Session: {{@$class_routine[0]->session->start_year->year}} - {{@$class_routine[0]->session->end_year->year}}</h5>
+    <h5>Section : {{ @$class_routine[0]->schoolsection->name }}</h5>
   </div>
 
   <div class="class-routine">
     <h2>Class Routine</h2>
+    
+        
     <table>
         <thead>
             <tr>
@@ -64,8 +69,8 @@
                         @foreach ($class_routine as $routine)
                             @if ($routine->day == $data->day)
                                 <td>{{ $routine->subject->name }} <br>
-                                  {{ $routine->teacher->name }} <br>
-                                   {{ $routine->room->name }}
+                                    {{ $routine->teacher->name }} <br>
+                               Room-{{ $routine->room->name }}
                                 </td>
                             @endif
                         @endforeach
@@ -75,6 +80,7 @@
             @endforeach
         </tbody>
     </table>
+ 
   </div>
 </div>
 
