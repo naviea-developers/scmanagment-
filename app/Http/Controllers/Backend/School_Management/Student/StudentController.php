@@ -468,9 +468,11 @@ class StudentController extends Controller
             $studentsQuery->where('section_id', $sectionId);
         }
     
-        $students = $studentsQuery->get();
+        $data['admissions']=$students = $studentsQuery->get();
+
+        return view('Backend.school_management.student.get-search-student',$data);
         
-        return response()->json($students);
+        // return response()->json($students);
     }
 
 

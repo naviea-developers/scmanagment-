@@ -50,7 +50,7 @@ Admin - All Student
                 
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Class:</b></label>
-                  <select class="form-control" name="class_id" id="class_id">
+                  <select class="form-control" name="class_id" id="class">
                       <option value="">Select Class</option>
                       @foreach ($classes as $class)
                       <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -59,11 +59,11 @@ Admin - All Student
                 </div>
                 <div class="col-md-3">
                   <label class=" form-control-label"><b>Section:</b></label>
-                  <select class="form-control" name="section_id" id="section_id">
+                  <select class="form-control" name="section_id" id="section">
                       <option value="">Select Section</option>
-                      @foreach ($sections as $section)
+                      {{-- @foreach ($sections as $section)
                       <option value="{{ $section->id }}">{{ $section->name }}</option>
-                      @endforeach
+                      @endforeach --}}
                   </select>
                 </div>
               </div>
@@ -71,7 +71,7 @@ Admin - All Student
 
 
 
-            <div class="table-wrapper">
+            <div class="table-wrapper get-search-student-all">
               {{-- <table  class="table display responsive nowrap"> --}}
               <table id="datatable1" class="table display responsive nowrap">
                 <thead>
@@ -219,11 +219,11 @@ Admin - All Student
 
   <script>
         $(document).ready(function(){
-        $('#academic_year_id, #session_id, #class_id, #section_id').change(function(){
+        $('#academic_year_id, #session_id, #class, #section').change(function(){
             var academicYearId = $('#academic_year_id').val();
             var sessionId = $('#session_id').val();
-            var classId = $('#class_id').val();
-            var sectionId = $('#section_id').val();
+            var classId = $('#class').val();
+            var sectionId = $('#section').val();
             
             $.ajax({
                 url: '/get-search-student',
@@ -234,8 +234,9 @@ Admin - All Student
                     class_id: classId,
                     section_id: sectionId
                 },
-                dataType: 'json',
+                // dataType: 'json',
                 success: function(data){
+                  $(".get-search-student-all").html(data);
                     // Update the student table with the received data
                 }
             });
