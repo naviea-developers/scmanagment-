@@ -140,8 +140,10 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         ///School Management route
         Route::get('/notice', [UserController::class, 'notice'])->name('notice');
         Route::get('/class-routine', [UserController::class, 'classRoutine'])->name('class_routine');
+        Route::get('/teacher-class-routine', [UserController::class, 'teacherClassRoutine'])->name('teacher.class_routine');
         Route::get('/exam-routine', [UserController::class, 'examRoutine'])->name('exam_routine');
         Route::get('print-user-exam-routine', [UserController::class,"examPrint"])->name('user.exam_routine.print');
+        Route::get('print-user-class-routine', [UserController::class,"classPrint"])->name('user.class_routine.print');
 
 
         //HomeWork for student
