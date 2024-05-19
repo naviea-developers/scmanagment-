@@ -25,7 +25,9 @@ use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
 use App\Models\ExamSchedule;
+use App\Models\HomeWork;
 use App\Models\Notice;
+use App\Models\SubjectTeacherAssent;
 use App\Models\Withdrawal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -673,6 +675,48 @@ class UserController extends Controller
     function myApplicationOrderPrint($id){
        $data['orderdetails'] = StudentApplication::find($id);
        return view('user.application_order.print', $data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///School Management 
+
+
+
+    public function getAssignTeacherSubject($id){
+        // $subject = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->get();
+        $class = SubjectTeacherAssent::where("class_id",$id)->get();
+        return $class;
+    }
+ 
+
+    public function homeWork()
+    {
+        $user = auth()->user()->id;
+        $admission = Admission::where('user_id', $user)->first();
+        // $data = $admission->session_id;
+        // dd($data);
+        $data['home_works'] = HomeWork::where('class_id', $admission->class_id)
+                                        ->where('session_id', $admission->session_id)
+                                        ->where('status', 1)->get();
+        return view('user.student.homework.index', $data);
+    }
+
+    public function homeWorkDetails($id)
+    {
+        $data['details'] = HomeWork::find($id);
+        return view('user.student.homework.details', $data);
     }
 
 }

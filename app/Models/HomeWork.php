@@ -13,6 +13,9 @@ class HomeWork extends Model
         return $this->image != "" ? asset('public/upload/home_work/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
     }
 
+    public function session(){
+        return $this->belongsTo(Session::class,"session_id",'id');
+    }
     public function subject(){
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }

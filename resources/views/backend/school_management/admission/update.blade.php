@@ -17,6 +17,8 @@
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
+           
+
             <h6 class="br-section-label text-center mb-4">Update Admission Form</h6>
              {{-- validate start  --}}
              @if(count($errors) > 0)
@@ -27,9 +29,12 @@
              {{-- validate End  --}}
 
             <!----- Start Add Category Form input ------->
+            
             <div class="col-xl-12 mx-auto">
+                
                 <div class="form-layout form-layout-4 py-5">
 
+                    
                     <form action="{{ route('admin.admission.update', $admission->id) }}" class="myform" id="learner_myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                         @csrf
                         
@@ -444,9 +449,21 @@
                             <hr>
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
                             <a href="{{route('admin.admission.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
-                            <button type="submit" class="btn btn-info ">Save</button>
+                            <button type="submit" class="btn btn-info ">Update</button>
                           </div>
                         </div>
+                        </form>
+                        <hr>
+                        <form action="{{ route('admin.admission.approve', $admission->id) }}" class="myform" id="learner_myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                            @csrf
+                            <div class="col-md-12 ">
+                               <div class="row">
+                                <div class="col-md-12 text-center">                                    
+                                    <button type="submit" class="btn btn-success">Approve</button>
+                                </div>
+                                <div class="col-md-11"></div>
+                               </div>
+                            </div>
                         </form>
 
                 </div><!-- form-layout -->

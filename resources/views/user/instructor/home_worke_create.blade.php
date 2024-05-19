@@ -44,33 +44,45 @@
                 <form action="{{ route('instructor.homework.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-4">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
+                            <label class="form-control-label"><b>Sessions :</b><span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <select class="form-control" name="session_id">
+                                    <option value="">Select session</option>
+                                    @foreach ($sessions as $session)                                   
+                                        <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
                             <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <select class="form-control" name="class_id">
+                                <select class="form-control" name="class_id" id="assign_class">
                                     <option value="">Select class</option>
-                                    @foreach ($classs as $class)                                   
-                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @foreach ($teacherAssents as $teacherAssent)                                   
+                                        <option value="{{ $teacherAssent->class->id }}">{{ $teacherAssent->class->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label class="form-control-label"><b>Subject :</b></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <select class="form-control" name="subject_id">
+                                <select class="form-control" name="subject_id" id="assign_subject">
                                     <option value="">Select Subject</option>
-                                    @foreach ($subjects as $subject)                                   
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                    @endforeach
+                                    {{-- @foreach ($teacherAssents as $teacherAssent)                                   
+                                        <option value="{{ $teacherAssent->subject->id }}">{{ $teacherAssent->subject->name }}</option>
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
-                            <label class="form-control-label"><b>Homework Image :</b></label>
+                        <div class="col-sm-3">
+                            <label class="form-control-label"><b>Homework File :</b></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <input type="file" name="image" value="{{ old('image') }}" class="form-control" placeholder="enter image">
                             </div>
@@ -136,5 +148,37 @@
 
     </script>
 <!--- End Summernote Editor Js ---->
+
+
+
+
+
+<script>
+     $('body').on("change",'#assign_class',function(){
+        let id = $(this).val();
+            console.log(id);
+        
+            getAssignTeacherSubject(id,"assign_subject");
+      
+    });
+
+     function getAssignTeacherSubject(id,outid){
+        let url = '{{ url("get-assign-teacher-subject/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Niaz</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.id + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+</script>
 @endsection
 

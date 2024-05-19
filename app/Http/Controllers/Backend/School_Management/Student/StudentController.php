@@ -46,15 +46,16 @@ class StudentController extends Controller
        // dd($request->all());
         $columns = array(
            0 => 'id',
-           1 => 'image',
-           2 => 'student_name',
-           3 => 'class_id',
-           4 => 'academic_year_id',
-           5 => 'session_id',
-           6 => 'section_id',
-           7 => 'group_id',
-           8 => 'status',
-           9 => 'options',
+           1 => 'roll_number',
+           2 => 'image',
+           3 => 'student_name',
+           4 => 'class_id',
+           5 => 'academic_year_id',
+           6 => 'session_id',
+           7 => 'section_id',
+           8 => 'group_id',
+           9 => 'status',
+           10 => 'options',
        );
        $totalData = Admission::count();
        $totalFiltered = $totalData;
@@ -65,7 +66,7 @@ class StudentController extends Controller
        $order = $columns[$request->input('order.0.column')];
        $dir = $request->input('order.0.dir');
        $search = $request->input('search.value');
-       $students = Admission::where('is_new',0);
+       $students = Admission::where('is_new',1);
        if(!empty($search)){
 
            $students =$students->where("student_name","LIKE","%{$search}%");
@@ -86,6 +87,9 @@ class StudentController extends Controller
         if($request->section_id !=''){
             $students =$students->where("section_id",$request->section_id);
         }
+        if($request->roll_number !=''){
+            $students =$students->where("roll_number",$request->roll_number);
+        }
 
         $students = $students->offset($start)->limit($limit)->orderBy($order,$dir)->get();
        $totalFiltered = $students->count();
@@ -97,7 +101,7 @@ class StudentController extends Controller
            foreach($students as $student)
            {
                $nestedData['id'] = $i++;
-
+               $nestedData['roll_number'] = $student->roll_number;
                $nestedData['image'] = '<img src="'.$student->image_show.'" style="height:50px;width:50px;">';
                $nestedData['student_name'] = $student->student_name;
                $nestedData['academic_year_id'] = $student->academic_year?->year;
@@ -115,7 +119,7 @@ class StudentController extends Controller
 
                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.school_student.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
 
-               $nestedData['options'] .= '<a href="#"  value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+               $nestedData['options'] .= '<a href="#" style="margin-left: 10px" value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
 
                $data[] = $nestedData;
 
@@ -186,20 +190,25 @@ class StudentController extends Controller
             $student->group_id = $request->group_id ?? 0;
             $student->fee_id = $request->fee_id ?? 0;
 
-            // $existingStudentsRoll = Admission::where('class_id',$student->class_id)
-            //                                    ->where('academic_year_id',$student->academic_year_id)
-            //                                    ->where('session_id',$student->session_id)
-            //                                    ->first();
-            // // dd($existingStudentsRoll);
-            // if ($existingStudentsRoll == 0) {
-            //     $rollNumber = 1;
-            // } else {
-            //     $rollNumber = $existingStudentsRoll->roll_number + 1;
-            // }
-            // // dd($newRollNumber);
-            //$student->roll_number = $rollNumber;
-            // // dd($admission);
+            $existingStudentsRoll = Admission::where('class_id', $student->class_id)
+                                            ->where('academic_year_id', $student->academic_year_id)
+                                            ->where('session_id', $student->session_id)
+                                            ->orderBy('roll_number', 'desc')
+                                            ->first();
 
+            if ($existingStudentsRoll) {
+                $roll_number = $existingStudentsRoll->roll_number;
+
+                if ($roll_number === null || $roll_number == 0) {
+                    $rollNumber = 1;
+                } else {
+                    $rollNumber = $roll_number + 1;
+                }
+            } else {
+                $rollNumber = 1;
+            }
+            $student->roll_number = $rollNumber;
+            // dd($student);
             $student->student_name = $request->student_name;
             $student->dob = $request->dob;
             $student->student_phone = $request->student_phone;

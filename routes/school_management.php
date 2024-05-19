@@ -265,6 +265,7 @@ Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( f
     Route::post('update/{id}', [AdmissionController::class,"update"])->name('admin.admission.update');
     Route::post('delete', [AdmissionController::class,"destroy"])->name('admin.admission.delete');
     Route::get('/status/{id}', [AdmissionController::class, 'status'])->name('admin.admission.status');
+    Route::post('/approve/{id}', [AdmissionController::class, 'approve'])->name('admin.admission.approve');
 
     Route::get('/admission/doc/download/{id}', [AdmissionController::class, 'certificateDownload'])->name('admin.admission.download');
 });

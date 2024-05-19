@@ -1,28 +1,16 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Manage Homework')
+@section('title','- Homework')
 
 @endsection
 @section('main_content')
 
 <div class="right_section">
     <div>
-        <h3>Manage Home Work</h3>
+        <h3>Home Work</h3>
     </div>
 </div>
 
-    {{-- success message start --}}
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-    {{session()->get('message')}}
-    </div>
-    <script>
-        setTimeout(function(){
-            $('.alert.alert-success').hide();
-        }, 3000);
-    </script>
-    @endif
-    {{-- success message start --}}
 
 <div style="overflow-x:auto;">
     <table class="table table-striped mt-3" style="min-width: 800px;">
@@ -61,15 +49,11 @@
                 <img src="{{ asset('public/frontend/images/pdf.jpg') }}" alt="description" width="60px" height="40px"/>
                 @endif
             </td>
-            <td>{{ substr($home_work->details, 0, 40) }}</td>
+            <td>{{  substr($home_work->details, 0, 40) }}</td>
             <td>
                 <a href="{{ route('student.homework.details', $home_work->id ) }}"><i class="fa-duotone fa fa-eye"></i></a>
                 &nbsp;
-                &nbsp;
-                <a href="{{ route('instructor.homework.edit', $home_work->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
-                {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
-                &nbsp;
-                <button class="btn text-danger delete-button" courseId="{{ $home_work->id }}"><i class="icon fa fa-trash tx-28"></i></button>
+                {{-- <button class="btn text-danger delete-button" courseId="{{ $home_work->id }}"><i class="icon fa fa-trash tx-28"></i></button> --}}
             </td>
             </tr>
 
@@ -82,10 +66,7 @@
                     <div class="modal-body tx-center pd-y-20 pd-x-20">
                         <form action="{{ route('instructor.homework.delete') }}" method="post">
                             @csrf
-                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> --}}
-                            {{-- <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i> --}}
+                           
                             <h4 class="tx-semibold mg-b-20 mt-2 " >Are you sure! you want to delete this?</h4>
                             <input type="hidden" value="{{ $home_work->id }}" name="homework_id" id="course_id">
                             <button type="submit"  class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">

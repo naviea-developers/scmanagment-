@@ -293,12 +293,12 @@
                           
 
 
-                                <div class="col-sm-4 mt-3">
+                                {{-- <div class="col-sm-4 mt-3">
                                     <label class="form-control-label">New Student: </label>
                                     <div class="mg-t-10 mg-sm-t-0">
                                         <input type="checkbox" name="pre_school" value="1">
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-sm-4 mt-3">
                                     <label class="form-control-label">Pre School: </label>

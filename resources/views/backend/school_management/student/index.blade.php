@@ -75,6 +75,10 @@ Admin - All Student
                       @endforeach --}}
                   </select>
                 </div>
+                <div class="col-md-2">
+                  <label class=" form-control-label"><b>Roll Number:</b></label>
+                  <input type="number" class="form-control" name="roll_number" id="roll_number">
+                </div>
               </div>
             </div>
 
@@ -87,6 +91,7 @@ Admin - All Student
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Roll Number</th>
                     <th class="wd-15p">Student Image</th>
                     <th class="wd-15p">Student Name</th>
                     <th class="wd-15p">Academic Year</th>
@@ -201,12 +206,14 @@ Admin - All Student
               data.class_id= $('.class_id').val(),
               data.group_id= $('.group_id').val(),
               data.section_id= $('.section_id').val(),
+              data.roll_number= $('.roll_number').val(),
               data._token = "{{ csrf_token() }}";
 
             },
         },
         "columns": [
             { "data": "id"},
+            { "data": "roll_number"},
             { "data": "image"},
             { "data": "student_name"},
             { "data": "academic_year_id"},
@@ -218,12 +225,12 @@ Admin - All Student
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 9,
+          "targets": 10,
           "orderable": false
           } ]
 
     });
-    $('#academic_year_id, #session_id, .class_id, .group_id, .section_id').change(function(){
+    $('#academic_year_id, #session_id, .class_id, .group_id, .section_id, #roll_number').change(function(){
       console.log(this);
       console.log(s_data);
       s_data.draw();
