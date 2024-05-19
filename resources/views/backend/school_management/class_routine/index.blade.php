@@ -145,17 +145,14 @@
 <script>
     $(document).ready(function() {
        
-        $('#class_id,.section_id, #session_id').change(function() {
+        $('#class,.section_id, #session_id').change(function() {
             fetchClassRoutine();
         });
 
         function fetchClassRoutine() {
             var classId = $('#class').val();
-            // console.log(classId);
             var sectionId = $('#section').val();
-            // console.log(sectionId);
             var sessionId = $('#session_id').val();
-            // console.log(sessionId);
 
             // if (classId && sectionId && sessionId) {
                 $.ajax({
@@ -165,11 +162,6 @@
                     success: function(response) {
                         console.log(response);
                         $(".get-search-student-class-routine").html(response);
-                        // var tbody = $('#class_routine_table tbody');
-                        // tbody.empty();
-                        // $.each(response.routine, function(key, routine) {
-                        //     tbody.append('<tr><td>' + routine.id + '</td><td>' + routine.id + '</td><td>' + routine.id + '</td></tr>');
-                        // });
                     }
                 });
             // }

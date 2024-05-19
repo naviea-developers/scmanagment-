@@ -286,6 +286,7 @@
         getSection(id,"section");
         getSubject(id,"subject");
         getGroup(id,"group");
+        getExamClassSubject(id,"examclassSubject");
     });
 
     function getSection(id,outid){
@@ -340,6 +341,48 @@
               $('#'+outid).append(html);
               $('#'+outid).val("").change();
           });
+    }
+
+    function getExamClassSubject(id,outid){
+      let url = '{{ url("get/exam-class-subject/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select Exam class</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.subject.name + "</option>"
+              });
+
+
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+    }
+
+    $('body').on("change",'#examination_id',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getClass(id,"class");
+    });
+
+    function getClass(id,outid){
+        let url = '{{ url("get/examination_class/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select class</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.class.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
     }
 
     $('body').on("change",'#bulding',function(){

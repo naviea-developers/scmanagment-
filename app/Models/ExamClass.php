@@ -20,5 +20,9 @@ class ExamClass extends Model
     public function subject(){
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }
+
+    public function examtype(){
+        return $this->belongsTo(ExamType::class,"examtype_id",'id');
+    }
     
 }

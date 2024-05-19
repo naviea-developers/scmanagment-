@@ -29,7 +29,7 @@ class ExamClassController extends Controller
 
     public function create(){
         // dd('hi');
-        $data['className']=Classe::orderBy('id', 'desc')->get(); 
+        $data['className']=Classe::orderBy('id', 'asc')->get(); 
         $data['subjectName']=Subject::orderBy('id', 'desc')->get();
         $data['examinations']=Examination::orderBy('id', 'desc')->get();
         $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
@@ -57,7 +57,7 @@ class ExamClassController extends Controller
             $exam_class = new ExamClass();
             $exam_class->examination_id = $request->examination_id;
             $exam_class->class_id = $request->class_id;
-            $exam_class->group_id = $request->group_id;
+            $exam_class->group_id = $request->group_id ?? 0;
             $exam_class->subject_id = $request->subject_id;
             $exam_class->examtype_id = $request->examtype_id;
             $exam_class->marke = $request->marke;
@@ -103,7 +103,7 @@ class ExamClassController extends Controller
             $exam_class = ExamClass::find($id);
             $exam_class->examination_id = $request->examination_id;
             $exam_class->class_id = $request->class_id;
-            $exam_class->group_id = $request->group_id;
+            $exam_class->group_id = $request->group_id ?? 0;
             $exam_class->subject_id = $request->subject_id;
             $exam_class->examtype_id = $request->examtype_id;
             $exam_class->marke = $request->marke;

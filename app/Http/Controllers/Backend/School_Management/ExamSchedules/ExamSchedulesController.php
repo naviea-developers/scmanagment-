@@ -24,13 +24,14 @@ class ExamSchedulesController extends Controller
     //--------------Exam------------//
 
     public function index(){
-        $allData=ExamSchedule::orderBy('id', 'desc')->get();
-        return view('Backend.school_management.exam_schedule.index',compact('allData'));
+        $data['allData']=$allData=ExamSchedule::orderBy('id', 'desc')->get();
+        $data['examinations']=Examination::orderBy('id', 'desc')->get();
+        return view('Backend.school_management.exam_schedule.index',$data);
     }
 
     public function create(){
         // dd('hi');
-        $data['className']=Classe::orderBy('id', 'desc')->get(); 
+        $data['className']=Classe::orderBy('id', 'asc')->get(); 
         $data['subjectName']=Subject::orderBy('id', 'desc')->get();
         $data['examinations']=Examination::orderBy('id', 'desc')->get();
         $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
@@ -58,13 +59,13 @@ class ExamSchedulesController extends Controller
         try{
             DB::beginTransaction();
             $exam_schedule = new ExamSchedule();
-            $exam_schedule->examination_id = $request->examination_id;
-            $exam_schedule->exam_class_id = $request->exam_class_id;
-            $exam_schedule->class_id = $request->class_id;
-            $exam_schedule->section_id = $request->section_id;
-            $exam_schedule->bulding_id = $request->bulding_id;
-            $exam_schedule->floor_id = $request->floor_id;
-            $exam_schedule->room_id = $request->room_id;
+            $exam_schedule->examination_id = $request->examination_id ?? 0;
+            $exam_schedule->exam_class_id = $request->exam_class_id ?? 0;
+            $exam_schedule->class_id = $request->class_id ?? 0;
+            $exam_schedule->section_id = $request->section_id ?? 0;
+            $exam_schedule->bulding_id = $request->bulding_id ?? 0;
+            $exam_schedule->floor_id = $request->floor_id ?? 0;
+            $exam_schedule->room_id = $request->room_id ?? 0;
             $exam_schedule->save();
             DB::commit();
             return redirect()->route('admin.examschedule.index')->with('message','Exam Schedule Add Successfully');
@@ -105,13 +106,13 @@ class ExamSchedulesController extends Controller
         try{
             DB::beginTransaction();
             $exam_schedule = ExamSchedule::find($id);
-            $exam_schedule->examination_id = $request->examination_id;
-            $exam_schedule->exam_class_id = $request->exam_class_id;
-            $exam_schedule->class_id = $request->class_id;
-            $exam_schedule->section_id = $request->section_id;
-            $exam_schedule->bulding_id = $request->bulding_id;
-            $exam_schedule->floor_id = $request->floor_id;
-            $exam_schedule->room_id = $request->room_id;
+            $exam_schedule->examination_id = $request->examination_id ?? 0;
+            $exam_schedule->exam_class_id = $request->exam_class_id ?? 0;
+            $exam_schedule->class_id = $request->class_id ?? 0;
+            $exam_schedule->section_id = $request->section_id ?? 0;
+            $exam_schedule->bulding_id = $request->bulding_id ?? 0;
+            $exam_schedule->floor_id = $request->floor_id ?? 0;
+            $exam_schedule->room_id = $request->room_id ?? 0;
             $exam_schedule->save();
 
             DB::commit();
@@ -162,7 +163,35 @@ class ExamSchedulesController extends Controller
     public function getSubject($id){
         $subject = Subject::where("class_id",$id)->get();
         return $subject;
-	  }  
+	}  
+
+
+    //ajax get exam Class Subject
+    public function examClassSubject($id){
+        $subject = ExamClass::where("class_id",$id)->with('subject')->get();
+        return $subject;
+	  }
+
+    //ajax get ExaminatioClass
+    public function getExaminationClass($id){
+        // $class = ExamClass::where("examination_id",$id)->with('class')->get();
+        // return $class;
+
+        $classes = ExamClass::where("examination_id", $id)->with('class')->get();
+    
+        // Grouping the classes by class name
+        $groupedClasses = $classes->groupBy(function ($item) {
+            return $item->class->name;
+        });
+        
+        // Selecting the first class for each group
+        $uniqueClasses = $groupedClasses->map(function ($group) {
+            return $group->first();
+        });
+    
+        return $uniqueClasses->values();
+        
+	  } 
 
   
 }
