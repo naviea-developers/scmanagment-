@@ -26,6 +26,8 @@ use App\Models\Classe;
 use App\Models\Subject;
 use App\Models\Examination;
 use App\Models\ClassTestExam;
+use App\Models\Session;
+use App\Models\SubjectTeacherAssent;
 
 class InstructorCourseController extends Controller
 {
@@ -752,6 +754,8 @@ class InstructorCourseController extends Controller
     public function createHomeWork()
     {
         // dd('hi');
+        $data['sessions']=Session::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->orderBy('id', 'desc')->where('status', 1)->get(); 
         $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
         $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
         return view('user.instructor.home_worke_create', $data);
@@ -768,6 +772,7 @@ class InstructorCourseController extends Controller
             DB::beginTransaction();
             $home_work = New HomeWork();
             $home_work->teacher_id = auth()->user()->id;
+            $home_work->session_id = $request->session_id;
             $home_work->class_id = $request->class_id;
             $home_work->subject_id = $request->subject_id;
             if($request->hasFile('image')){
@@ -791,6 +796,8 @@ class InstructorCourseController extends Controller
     {
         // dd('hi');
         $data["home_work"]= HomeWork::find($id);
+        $data['sessions']=Session::orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->orderBy('id', 'desc')->where('status', 1)->get(); 
         $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
         $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
         return view("user.instructor.home_worke_update",$data);
@@ -808,6 +815,7 @@ class InstructorCourseController extends Controller
             $home_work = HomeWork::find($id);
             $home_work->teacher_id = auth()->user()->id;
             $home_work->class_id = $request->class_id;
+            $home_work->session_id = $request->session_id;
             $home_work->subject_id = $request->subject_id;
             if($request->hasFile('image')){
                 @unlink(public_path("upload/home_work/".$home_work->image));

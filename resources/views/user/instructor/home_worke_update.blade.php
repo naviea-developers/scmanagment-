@@ -44,32 +44,45 @@
                 <form action="{{ route('instructor.homework.update',$home_work->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-4">
-                        <div class="col-sm-4">
+
+                        <div class="col-sm-3">
+                            <label class="form-control-label"><b>Sessions :</b><span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <select class="form-control" name="session_id">
+                                    <option value="">Select session</option>
+                                    @foreach ($sessions as $session)                                   
+                                        <option @if($session->id == $home_work->session_id)  Selected @endif value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
                             <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <select class="form-control" name="class_id">
                                     <option value="">Select class</option>
-                                    @foreach ($classs as $class)                                   
-                                        <option @if($class->id == $home_work->class_id)  Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @foreach ($teacherAssents as $teacherAssent)                                   
+                                        <option @if($teacherAssent->class->id == $home_work->class_id)  Selected @endif value="{{ $teacherAssent->class->id }}">{{ $teacherAssent->class->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label class="form-control-label"><b>Subject :</b></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <select class="form-control" name="subject_id">
                                     <option value="">Select Subject</option>
-                                    @foreach ($subjects as $subject)                                   
-                                        <option @if($subject->id == $home_work->subject_id)  Selected @endif  value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    @foreach ($teacherAssents as $teacherAssent)                                   
+                                        <option @if($teacherAssent->subject->id == $home_work->subject_id)  Selected @endif  value="{{ $teacherAssent->subject->id }}">{{ $teacherAssent->subject->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label class="form-control-label"><b>Homework Image :</b></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <input type="file" name="image" value="{{ $home_work->image }}" class="form-control" placeholder="enter image">

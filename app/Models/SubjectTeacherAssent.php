@@ -20,6 +20,9 @@ class SubjectTeacherAssent extends Model
     public function session(){
         return $this->belongsTo(Session::class,"session_id",'id');
     }
+    public function subject(){
+        return $this->belongsTo(Subject::class,"subject_id",'id');
+    }
 
     public function schoolsection(){
         return $this->belongsTo(SchoolSection::class,"section_id",'id');

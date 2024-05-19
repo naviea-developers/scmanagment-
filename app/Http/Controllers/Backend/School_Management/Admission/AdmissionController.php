@@ -103,10 +103,14 @@ class AdmissionController extends Controller
                     $nestedData['status'] .= '<a href="'.route('admin.admission.status', $student->id).'" class="btn btn-sm btn-success">Active</a>';
                 }
  
-                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.admission.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
- 
-                $nestedData['options'] .= '<a href="#"  value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
- 
+                $nestedData['options'] = '';
+                // View details button
+                $nestedData['options'] .= '<a class="btn btn-info" href="'.route('admin.admission.details', $student->id).'"><i class="icon ion-eye"></i></a>';
+                // Edit button
+                $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.admission.edit', $student->id).'"><i class="fa fa-edit"></i></a>';
+                // Delete button
+                $nestedData['options'] .= ' <a href="#"  value="'.$student->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+                
                 $data[] = $nestedData;
  
             }
@@ -120,42 +124,6 @@ class AdmissionController extends Controller
  
         return json_encode($json_data);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function create()
@@ -408,6 +376,24 @@ class AdmissionController extends Controller
         $admission->update();
         return redirect()->route('admin.admission.index')->with('message', 'Admiddion Status Updated');
     }
+
+
+    public function approve($id)
+    {
+        $admission = Admission::find($id);
+        $admission->is_new = 0;
+        $admission->save();
+        return redirect()->route('admin.admission.index')->with('message', 'Student Approved Successfully, Thank you.');
+    }
+
+
+
+
+
+
+
+
+
 
     public function certificateDownload($id)
     {

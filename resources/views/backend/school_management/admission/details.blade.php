@@ -392,7 +392,18 @@
                     </div>
 
 
-
+                    <hr>
+                    <form action="{{ route('admin.admission.approve', $details->id) }}" class="myform" id="learner_myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                        @csrf
+                        <div class="col-md-12 ">
+                           <div class="row">
+                            <div class="col-md-12 text-center">                                    
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </div>
+                            <div class="col-md-11"></div>
+                           </div>
+                        </div>
+                    </form>
 
 
 

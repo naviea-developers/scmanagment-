@@ -79,19 +79,29 @@ class AdmissionController extends Controller
             $admission->group_id = $request->group_id ?? 0;
             $admission->fee_id = $request->fee_id ?? 0;
 
-            // $existingStudentsRoll = Admission::where('class_id', $admission->class_id)
-            //                                    ->where('academic_year_id', $admission->academic_year_id)
-            //                                    ->where('session_id', $admission->session_id)
-            //                                    ->first();
-            // // dd($existingStudentsRoll);
-            // if ($existingStudentsRoll == 0) {
-            //     $rollNumber = 1;
-            // } else {
-            //     $rollNumber = $existingStudentsRoll->roll_number + 1;
-            // }
-            // // dd($newRollNumber);
-            // $admission->roll_number = $rollNumber;
-            // // dd($admission);
+            // dd($admission);
+
+            $existingStudentsRoll = Admission::where('class_id', $admission->class_id)
+                                            ->where('academic_year_id', $admission->academic_year_id)
+                                            ->where('session_id', $admission->session_id)
+                                            ->orderBy('roll_number', 'desc')
+                                            ->first();
+
+            if ($existingStudentsRoll) {
+            $roll_number = $existingStudentsRoll->roll_number;
+            if ($roll_number === null || $roll_number == 0) {
+            $rollNumber = 1;
+            } else {
+            $rollNumber = $roll_number + 1;
+            }
+            } else {
+            $rollNumber = 1;
+            }
+
+            $admission->roll_number = $rollNumber;
+
+            // dd($admission);
+
 
             $admission->student_name = $request->student_name;
             $admission->dob = $request->dob;

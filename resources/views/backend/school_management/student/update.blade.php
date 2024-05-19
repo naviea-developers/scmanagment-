@@ -304,12 +304,12 @@
 
 <hr class="mt-3">
 
-                            <div class="col-sm-4 mt-3">
+                            {{-- <div class="col-sm-4 mt-3">
                               <label class="form-control-label">New Student?: </label>
                               <div class="mg-t-10 mg-sm-t-0">
                                   <input type="checkbox" name="is_new" @if ($admission->is_new == 1) checked  @endif value="1">
                               </div>
-                            </div>
+                            </div> --}}
 
                             {{-- @if ($admission->pre_school == 1)    --}}
                                 <div class="col-sm-4 mt-3">
