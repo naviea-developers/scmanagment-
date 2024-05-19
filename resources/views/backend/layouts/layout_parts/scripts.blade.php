@@ -282,7 +282,7 @@
 <script>
     $('body').on("change",'#class',function(){
         let id = $(this).val();
-        console.log(id);
+            console.log(id);
         getSection(id,"section");
         getSubject(id,"subject");
         getGroup(id,"group");
@@ -341,6 +341,8 @@
               $('#'+outid).val("").change();
           });
     }
+
+  
 
     $('body').on("change",'#bulding',function(){
         let id = $(this).val();

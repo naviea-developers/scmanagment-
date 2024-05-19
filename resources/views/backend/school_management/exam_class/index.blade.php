@@ -31,6 +31,9 @@
                         <th scope="col">Exam Title</th>
                         <th scope="col">Class Name</th>
                         <th scope="col">Subject</th>
+                        <th scope="col">Exam Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -42,6 +45,9 @@
                             <td>{{@$data->examination->name}}</td>
                             <td>{{@$data->class->name}}</td>
                             <td>{{@$data->subject->name}}</td>
+                            <td>{{@$data->examtype->name}}</td>
+                            <td>{{date('d,F,Y',strtotime(@$data->date))}}</td>
+                            <td>{{ date('h:i A', strtotime($data->start_time)) }} - {{ date('h:i A', strtotime($data->end_time)) }}</td>
                             <td>
                                 <a href="{{ route('admin.examclass.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a>
                                 {{-- <a href="javascript:void(0)" class="btn btn-danger" value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></a> --}}

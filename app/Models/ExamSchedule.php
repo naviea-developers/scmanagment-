@@ -24,4 +24,37 @@ class ExamSchedule extends Model
     public function session(){
         return $this->belongsTo(Session::class,"session_id",'id');
     }
+
+    public function bulding(){
+        return $this->belongsTo(Bulding::class,"bulding_id",'id');
+    }
+
+    public function floor(){
+        return $this->belongsTo(Floor::class,"floor_id",'id');
+    }
+
+    public function teacher(){
+        return $this->belongsTo(User::class,"teacher_id",'id');
+    }
+
+    public function room(){
+        return $this->belongsTo(Room::class,"room_id",'id');
+    }
+
+    public function examClass(){
+        return $this->belongsTo(ExamClass::class,"exam_class_id",'id');
+    }
+
+    public function subject(){
+        return $this->belongsTo(Subject::class,"subject_id",'id');
+    }
+
+    public function schoolsection(){
+        return $this->belongsTo(SchoolSection::class,"section_id",'id');
+    }
+
+
+
+
+
 }
