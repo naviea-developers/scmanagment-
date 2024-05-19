@@ -32,6 +32,14 @@ class ClassRoutine extends Model
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }
 
+    public function classDuration(){
+        return $this->belongsTo(ClassDuration::class,"class_duration_id",'id');
+    }
+
+    public function room(){
+        return $this->belongsTo(Room::class,"room_id",'id');
+    }
+
     function getDayAttribute(){
         if ($this->day_id==1)
             return "Saturday";

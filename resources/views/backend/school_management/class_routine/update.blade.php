@@ -57,7 +57,7 @@
                             <select name="section_id"  id="section" class="form-control form-select select2">
                             <option value="0"> Select Class</option>
                                 @foreach ($sections as $section)
-                                <option @if($session->id == $editData->session_id)  Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>
+                                <option @if($section->id == $editData->section_id)  Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
                             </select>
                         </div>
