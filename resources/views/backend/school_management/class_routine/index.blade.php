@@ -1,6 +1,12 @@
 @extends('Backend.layouts.layouts')
 
 @section('title','All class routine')
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 41px;}
+</style>
+@endsection
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
@@ -25,7 +31,7 @@
 
                         <div class="col-md-4">
                             <label class="form-control-label"><b>Class:</b></label>
-                            <select class="form-control" id="class">
+                            <select class="form-control form-select select2" id="class">
                                 <option value="">Select Class</option>
                                 @foreach ($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -35,14 +41,14 @@
                         
                         <div class="col-md-4">
                             <label class="form-control-label"><b>Section:</b></label>
-                            <select class="form-control section_id" id="section">
+                            <select class="form-control form-select select2 section_id" id="section">
                                 <option value="">Select Section</option>
                             </select>
                         </div>
                         
                         <div class="col-md-4">
                             <label class="form-control-label"><b>Session:</b></label>
-                            <select class="form-control" name="session_id" id="session_id">
+                            <select class="form-control form-select select2" name="session_id" id="session_id">
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
                                 <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>

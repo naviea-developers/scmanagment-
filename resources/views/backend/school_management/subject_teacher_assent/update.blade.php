@@ -1,6 +1,12 @@
 @section('title')
     Admin - Edit subject_teacher_assent
 @endsection
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 41px;}
+</style>
+@endsection
 
 @extends('Backend.layouts.layouts')
 
@@ -36,7 +42,7 @@
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Class Teacher Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="teacher_id" class="form-control form-select">
+                                  <select name="teacher_id" class="form-control form-select select2">
                                     <option value="0"> Select Teacher</option>
                                     @foreach ($teachers as $teacher)
                                     <option @if ($teacher->id == $subject_teacher_assent->teacher_id) Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
@@ -50,7 +56,7 @@
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Class Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="class_id" class="form-control form-select">
+                                  <select name="class_id" class="form-control form-select select2">
                                     <option value="0"> Select Class</option>
                                     @foreach ($classes as $class)
                                     <option @if ($class->id == $subject_teacher_assent->class_id) Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
@@ -64,7 +70,7 @@
                           <div class="col-sm-12 mt-3">
                               <label class="form-control-label">Select Subject : <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="subject_id" id="subject" class="form-control form-select">
+                                <select name="subject_id" id="subject" class="form-control form-select select2">
                                   <option value="">Select Subject</option>
                                   @foreach ($subjectName as $subject)
                                       <option @if ($subject->id == $subject_teacher_assent->subject_id) Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -78,7 +84,7 @@
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Sections Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="section_id" class="form-control form-select">
+                                  <select name="section_id" class="form-control form-select select2">
                                     <option value="0"> Select Class</option>
                                     @foreach ($sections as $section)
                                     <option @if ($section->id == $subject_teacher_assent->section_id) Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>
@@ -92,7 +98,7 @@
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Session Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="session_id" class="form-control form-select">
+                                  <select name="session_id" class="form-control form-select select2">
                                     <option value="0"> Select Session</option>
                                     @foreach ($sessions as $session)
                                     <option @if ($session->id == $subject_teacher_assent->session_id) Selected @endif value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
