@@ -15,14 +15,14 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-chalkboard-user"></i>
                     <div>
-                      <h4>View All Exam Routine</h4>
-                      <p class="mg-b-0">Manage all Exam Routine</p>
+                      <h4>View All Exam Class</h4>
+                      <p class="mg-b-0">Manage all Exam Class</p>
                     </div>
                   </div>
 
                     <a href="{{ route('admin.examclass.create') }}"
                     class="btn btn-primary btn-sm addclassbtn">
-                        Add Exam Routine
+                        Add Exam Class
                     </a>
                     <br>
                 <table class="table" id="datatable1">
