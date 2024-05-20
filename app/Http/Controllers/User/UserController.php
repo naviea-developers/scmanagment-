@@ -285,105 +285,7 @@ class UserController extends Controller
         $data['notices'] = Notice::where('status', 1)->get();
         return view('user.notice.notice', $data);
     }
-    public function classRoutine() //all user
-    {
-        // $user = auth()->user()->id;
-        // // dd($user);
-        // $data['admission'] = $admission = Admission::where('user_id', $user)->first();
-        // // dd($admission);
-        // $data['class_routine']= $routins = ClassRoutine::where('class_id', $admission->class_id)
-        //                                 ->where('session_id', $admission->session_id)
-        //                                 ->where('status', 1)->get();
-        // $data['class_durations'] = ClassDuration::where('status', 1)->get();
-
-        // $data['class_durations']= $class_durations = ClassRoutineItem::where('class_routine_id', $routins->class_routine_id)
-        //                                 ->where('status', 1)->get();
-        //                                  dd($class_durations);
-
-
-        $user = auth()->user();
-
-        if ($user) {
-            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-            // dd($admission);
-            if ($admission) {
-                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    // ->where('section_id', $admission->section_id)
-                    ->get();
-                    // ->filter(function ($routine) {
-                    //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    // });
-                    // dd($routines);
-
-                    
-            } else {
-                
-            }
-        } else {
-
-        }
-        $data['class_durations'] = ClassDuration::where('status', 1)->get();
-        return view('user.class_routine.routine', $data);
-    }
-    public function examRoutine() //all user
-    {
-
-        $user = auth()->user();
-
-        if ($user) {
-            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-
-            if ($admission) {
-                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    // ->where('section_id', $admission->section_id)
-                    ->get()
-                    ->filter(function ($routine) {
-                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    });
-                    // dd($routines);
-
-                    
-            } else {
-                
-            }
-        } else {
-
-        }
-
-        return view('user.exam_routine.routine', $data);
-    }
-
-    public function examPrint(){
-        // dd('hi');
-        // $examRoutine =  ExamSchedule::find($id);
-
-        $user = auth()->user();
-
-        if ($user) {
-            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-
-            if ($admission) {
-                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    // ->where('section_id', $admission->section_id)
-                    ->get()
-                    ->filter(function ($routine) {
-                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    });
-                    // dd($routines);
-
-               
-            } else {
-                
-            }
-        } else {
-            
-        }
-
-        return view('user.exam_routine.view_exam_routine_print',$data);
-    }
+   
 
     public function wishlist() //coustomer
     {
@@ -690,14 +592,132 @@ class UserController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+
+
     ///School Management 
 
 
+    public function classRoutine() //for student user
+    {
+        $user = auth()->user();
+        
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            // dd($admission->class->name);
+            if ($admission) {
+                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    ->where('section_id', $admission->section_id)
+                    ->get();
+                    // ->filter(function ($routine) {
+                    //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    // });
+                    // dd($routines);
+            } else {
+                
+            }
+        } else {
+
+        }
+        return view('user.class_routine.routine', $data);
+    }
+
+
+
+    public function teacherClassRoutine() //all user
+    {
+        $user = auth()->user();
+
+            $data['class_routine'] = $routines = ClassRoutine::where('teacher_id', $user->id)->get();
+                // dd($routines);
+        return view('user.class_routine.teacher_class_routine', $data);
+    }
+
+
+    public function classPrint(){
+
+        $user = auth()->user();
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            // dd($admission);
+            if ($admission) {
+                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    ->where('section_id', $admission->section_id)
+                    ->get();
+            } else {
+                
+            }
+        } else {
+
+        }
+
+        return view('user.class_routine.view_class_routine_print',$data);
+    }
+
+
+    public function examRoutine() //all user
+    {
+
+        $user = auth()->user();
+
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+
+            if ($admission) {
+                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    // ->where('section_id', $admission->section_id)
+                    ->get()
+                    ->filter(function ($routine) {
+                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    });
+            } else {
+                
+            }
+        } else {
+
+        }
+        return view('user.exam_routine.routine', $data);
+    }
+
+    public function examPrint(){
+        // dd('hi');
+        // $examRoutine =  ExamSchedule::find($id);
+
+        $user = auth()->user();
+
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+
+            if ($admission) {
+                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
+                    ->where('session_id', $admission->session_id)
+                    // ->where('section_id', $admission->section_id)
+                    ->get()
+                    ->filter(function ($routine) {
+                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                    });
+            } else {
+                
+            }
+        } else {
+            
+        }
+        return view('user.exam_routine.view_exam_routine_print',$data);
+    }
 
     public function getAssignTeacherSubject($id){
-        // $subject = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->get();
-        $class = SubjectTeacherAssent::where("class_id",$id)->get();
-        return $class;
+        $classes = SubjectTeacherAssent::where("class_id",$id)->with('class')->get();
+        return $classes;
     }
  
 

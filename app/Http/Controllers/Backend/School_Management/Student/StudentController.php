@@ -66,7 +66,7 @@ class StudentController extends Controller
        $order = $columns[$request->input('order.0.column')];
        $dir = $request->input('order.0.dir');
        $search = $request->input('search.value');
-       $students = Admission::where('is_new',1);
+       $students = Admission::where('is_new',0);
        if(!empty($search)){
 
            $students =$students->where("student_name","LIKE","%{$search}%");
@@ -351,23 +351,10 @@ class StudentController extends Controller
         try{
             DB::beginTransaction();
 
-            if (Auth::check()) {
-                $user = Auth::user();
-            } else {
-                $user = new User();
-                $user->name = $request->student_name;
-                $user->email = $request->student_email;
-                $user->mobile = $request->student_phone;
-                $user->type = 1;
-                $user->is_admission = 1;
-                $user->password = $request->password;
-            
-                $user->save();
-            }
-
             $student = Admission::find($id);
-            $student->user_id = $user->id;
+            $student->user_id = $student->user_id;
             $student->class_id = $request->class_id ?? 0;
+            // dd($student);
             $student->academic_year_id = $request->academic_year_id ?? 0;
             $student->session_id = $request->session_id ?? 0;
             $student->section_id = $request->section_id ?? 0;
@@ -426,10 +413,10 @@ class StudentController extends Controller
         if($request->certificates_file){
             foreach( $request->certificates_file as $k=>$value){
                 $certificates = new AdmissionCertificate();
-                $certificates->user_id = $user->id;
+                $certificates->user_id = $student->id;
                 $certificates->admission_id =$student->id;
                 $certificates->certificates_name = $request->certificates_name[$k];
-                $filename=$request->certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$value->getClientOriginalExtension();
+                $filename=$request->certificates_name[$k].'-'.$student->name.'_certificat_file'.'.'.$value->getClientOriginalExtension();
                 $value->move(public_path('upload/certificates/'), $filename);
                 $certificates->certificates_file=$filename;
                 $certificates->extension = $value->getClientOriginalExtension();
@@ -441,13 +428,13 @@ class StudentController extends Controller
         if($request->old_certificates_name){
             foreach($request->old_certificates_name as $k => $value){
                 $certificates = AdmissionCertificate::find($k);
-                $certificates->user_id = $user->id;
+                $certificates->user_id = $student->id;
                 $certificates->admission_id =$student->id;
                 $certificates->certificates_name = $value;
 
                 if(isset($request->file('old_certificates_file')[$k])){
                     @unlink(public_path('upload/certificates/'.$certificates->certificates_file));
-                    $filename=$request->old_certificates_name[$k].'-'.$user->name.'_certificat_file'.'.'.$request->file('old_certificates_file')[$k]->getClientOriginalExtension();
+                    $filename=$request->old_certificates_name[$k].'-'.$student->name.'_certificat_file'.'.'.$request->file('old_certificates_file')[$k]->getClientOriginalExtension();
                     $request->file('old_certificates_file')[$k]->move(public_path('upload/certificates/'), $filename);
                     $certificates->certificates_file=$filename;
                     $certificates->extension = $request->file('old_certificates_file')[$k]->getClientOriginalExtension();

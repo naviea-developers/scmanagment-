@@ -169,9 +169,9 @@
                 console.log(res);
             $('#'+outid).empty();
                 let html = '';
-                html += '<option value="">Select Niaz</option>'
+                html += '<option value="">Select Subject</option>'
                 res.data.forEach(element => {
-                    html += "<option value=" + element.id + ">" + element.id + "</option>"
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
 
 

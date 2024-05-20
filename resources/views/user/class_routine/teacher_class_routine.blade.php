@@ -46,9 +46,9 @@
 
                 <div class="school-name">
                     <h3>School Name</h3>
-                    <h6>Class Name: {{ @$admission->class->name ?? '' }}</h6>
+                    {{-- <h6>Class Name: {{ @$admission->class->name ?? '' }}</h6>
                     <h6>Session: {{ @$admission->session->start_year->year ?? '' }} - {{ @$admission->session->end_year->year ?? '' }}</h6>
-                    <h6>Sesction: {{ @$admission->section->name }} </h6>
+                    <h6>Sesction: {{ @$admission->section->name }} </h6> --}}
                     <h4>Class Routine</h4>
                 </div>
                 
@@ -57,8 +57,13 @@
                     
                     <table>
                       <thead>
+
                           <tr style="color: black">
+
                               <th scope="col">Day</th>
+                              <th scope="col">Class</th>
+                              <th scope="col">Section</th>
+                              
                               @php $prevDurations = []; @endphp
                               @foreach ($class_routine as $data)
                                   @if (!in_array($data->classDuration->name, $prevDurations))
@@ -70,14 +75,33 @@
                                       @php $prevDurations[] = $data->classDuration->name; @endphp
                                   @endif
                               @endforeach
+
                           </tr>
+                          
                       </thead>
+
+
+
                       <tbody>
-                          @php $prevDay = null; @endphp
+                          {{-- @php $prevDay = null; @endphp
                           @foreach ($class_routine as $data)
                               @if ($prevDay != $data->day)
                                   <tr>
-                                      <td>{{ $data->day }}</td>
+                                      <td rowspan="6">{{ $data->day }}</td>
+                                      <td rowspan="2">{{ @$data->class->name }}</td>
+                                      <td>
+                                        @foreach ($class_routine as $routine)
+                                          @if ($routine->day == $data->day)
+                                              <td>{{ $routine->subject->name }} <br>
+                                                {{ $routine->teacher->name }} <br>
+                                                Room- {{ $routine->room->name }}
+                                              </td>
+                                          @endif
+                                        @endforeach
+                                      </td>
+
+
+
                                       @foreach ($class_routine as $routine)
                                           @if ($routine->day == $data->day)
                                               <td>{{ $routine->subject->name }} <br>
@@ -86,10 +110,53 @@
                                               </td>
                                           @endif
                                       @endforeach
+
                                   </tr>
                                   @php $prevDay = $data->day; @endphp
                               @endif
-                          @endforeach
+                          @endforeach --}}
+
+                        <tr>
+                            <td rowspan="6">Sunday</td>
+
+
+                          <td rowspan="2">Class1</td>
+                            <td>A section</td>
+                            <td>10:00 am</td>
+                            <td>11:00 am</td>
+                          </tr>
+                          <tr>
+                              <td>B section</td>
+                              <td>10:00 am</td>
+                              <td>11:00 am</td>
+                          </tr>
+
+
+                          <tr>
+                              <td rowspan="2">Class2</td>
+                              <td>A section</td>
+                              <td>10:00 am</td>
+                              <td>11:00 am</td>
+                          </tr>
+                          <tr>
+                              <td>B section</td>
+                              <td>10:00 am</td>
+                              <td>11:00 am</td>
+                          </tr>
+
+
+                          <tr>
+                              <td rowspan="2">Class3</td>
+                              <td>A section</td>
+                              <td>10:00 am</td>
+                              <td>11:00 am</td>
+                          </tr>
+                          <tr>
+                              <td>B section</td>
+                              <td>10:00 am</td>
+                              <td>11:00 am</td>
+                        </tr>
+
                       </tbody>
                   </table>
                     

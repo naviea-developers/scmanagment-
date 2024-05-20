@@ -33,10 +33,12 @@
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Home work </span>
             </a>
+
             <a href="{{ route('class_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Class Routine </span>
             </a>
+
             <a href="{{ route('exam_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Exam Routine </span>
@@ -120,6 +122,11 @@
                 <a href="{{ route('user.my_order', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-book"></i>
                     <span> My Course List </span>
+                </a>
+
+                <a href="{{ route('teacher.class_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span> Class Routine </span>
                 </a>
 
                 <a href="{{ route('instructor.homework.create', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
