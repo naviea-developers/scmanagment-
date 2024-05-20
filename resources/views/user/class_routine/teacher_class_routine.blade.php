@@ -1,8 +1,9 @@
 @extends('user.layouts.master-layout')
 @section('head')
 @section('title','- Class Routine')
-@endsection
 
+
+@endsection
 @section('main_content')
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 <style>
@@ -28,95 +29,79 @@
   }
 </style>
 
+
 @if ($class_routine->isNotEmpty())
+
     <div class="passwodBox mb-3" style="background-color: #07477D; color:white">
-        <div class="col-md-12">
+        <di class="col-md-12">
             <div class="row">
-                <div class="float-right">
-                    <a href="{{ route('user.class_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                        <i class="fas fa-print text-primary"></i> Print
-                    </a>
-                </div>
+
+              <div class="float-right">
+                <a href="{{ route('user.class_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                    <i class="fas fa-print text-primary"></i> Print
+                </a>
+              </div>
+
+
 
                 <div class="school-name">
                     <h3>School Name</h3>
+                    {{-- <h6>Class Name: {{ @$admission->class->name ?? '' }}</h6> --}}
+                    {{-- <h6>Session: {{ @$admission->session->start_year ?? '' }} - {{ @$admission->session->end_year ?? '' }}</h6>
+                    <h6>Sesction: {{ @$admission->section->name }} </h6> --}}
                     <h4>Class Routine</h4>
                 </div>
-
-                <div class="class-routine">
+                
+                
+                  <div class="class-routine">
+                    
                     <table>
-                        <thead>
-                            <tr style="color: black">
-                                <th scope="col">Day</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Section</th>
-                                @php
-                                    $durations = $class_routine->groupBy('class_duration_id')->keys();
-                                @endphp
-                                @foreach ($durations as $durationId)
-                                    @php
-                                        $duration = $class_routine->firstWhere('class_duration_id', $durationId)->classDuration;
-                                    @endphp
-                                    <th scope="col">
-                                        {{ $duration->name }} 
-                                        {{ date('h:i A', strtotime($duration->start_time)) }} - 
-                                        {{ date('h:i A', strtotime($duration->end_time)) }}
-                                    </th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php $prevDay = null; @endphp
-                            @foreach ($class_routine->groupBy('day') as $dayName => $dayRoutines)
-                                @php
-                                    $firstDayRow = true;
-                                @endphp
-                                @foreach ($dayRoutines->groupBy('class_id') as $classId => $classRoutines)
-                                    @php
-                                        $class = $classRoutines->first()->class->name;
-                                        $firstClassRow = true;
-                                    @endphp
-                                    @foreach ($classRoutines->groupBy('section_id') as $sectionId => $sectionRoutines)
-                                        @php
-                                            $section = $sectionRoutines->first()->section->name;
-                                            $firstSectionRow = true;
-                                        @endphp
-                                        @foreach ($sectionRoutines as $routine)
-                                            <tr>
-                                                @if ($firstDayRow)
-                                                    <td rowspan="{{ $dayRoutines->count() }}">{{ $dayName }}</td>
-                                                    @php $firstDayRow = false; @endphp
-                                                @endif
-                                                @if ($firstClassRow)
-                                                    <td rowspan="{{ $sectionRoutines->count() }}">{{ $class }}</td>
-                                                    @php $firstClassRow = false; @endphp
-                                                @endif
-                                                @if ($firstSectionRow)
-                                                    <td rowspan="{{ $sectionRoutines->count() }}">{{ $section }}</td>
-                                                    @php $firstSectionRow = false; @endphp
-                                                @endif
-                                                @foreach ($class_routine as $routine)
-                                                    @if ($routine->day == $dayName)
-                                                        <td>{{ $routine->subject->name }} <br>
-                                                          {{ $routine->teacher->name }} <br>
-                                                          Room- {{ $routine->room->name }}
-                                                        </td>
-                                                    @endif
-                                                @endforeach
-                                            </tr>
-                                        @endforeach
-                                    @endforeach
-                                @endforeach
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                      <thead>
+                          <tr style="color: black">
+                              <th scope="col">Day</th>
+                              @php $prevDurations = []; @endphp
+                              @foreach ($class_routine as $data)
+                                  @if (!in_array($data->classDuration->name, $prevDurations))
+                                      <th scope="col">
+                                          {{ $data->classDuration->name }} 
+                                          {{ date('h:i A', strtotime($data->classDuration->start_time)) }} - 
+                                          {{ date('h:i A', strtotime($data->classDuration->end_time)) }}
+                                      </th>
+                                      @php $prevDurations[] = $data->classDuration->name; @endphp
+                                  @endif
+                              @endforeach
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @php $prevDay = null; @endphp
+                          @foreach ($class_routine as $data)
+                              @if ($prevDay != $data->day)
+                                  <tr>
+                                      <td>{{ $data->day }}</td>
+                                      @foreach ($class_routine as $routine)
+                                          @if ($routine->day == $data->day)
+                                              <td>{{ $routine->subject->name }} <br>
+                                                {{ @$routine->class->name }} <br>
+                                                {{ @$routine->section->name }} <br>
+                                                Room- {{ $routine->room->name }}
+                                              </td>
+                                          @endif
+                                      @endforeach
+                                  </tr>
+                                  @php $prevDay = $data->day; @endphp
+                              @endif
+                          @endforeach
+                      </tbody>
+                  </table>
+                    
+                  </div>
             </div>
-        </div>
+        </di>
     </div>
+
 @else
-    <div class="passwodBox" style="background-color: #07477D; padding:20px; border:1px; color:white">
-        <h5 class="text-center">Class routine not available right now.</h5>
-    </div>
+<div class="passwodBox" style="background-color: #07477D; padding:20px; border:1px; color:white">
+  <h5 class="text-center">Class routine not available right now.</h5>
+</div>
 @endif
 @endsection

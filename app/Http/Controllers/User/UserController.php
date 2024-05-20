@@ -632,20 +632,11 @@ class UserController extends Controller
     }
 
 
-
-    // public function teacherClassRoutine() //all user
-    // {
-    //     $user = auth()->user();
-
-    //         $data['class_routine'] = $routines = ClassRoutine::where('teacher_id', $user->id)->get();
-    //             // dd($routines);
-    //     return view('user.class_routine.teacher_class_routine', $data);
-    // }
-
     public function teacherClassRoutine()
     {
         $user = auth()->user();
 
+        
         $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
                                 ->with(['class', 'section', 'subject', 'room', 'classDuration'])
                                 ->get();
