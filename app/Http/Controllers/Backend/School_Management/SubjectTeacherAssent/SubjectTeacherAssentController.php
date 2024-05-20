@@ -28,7 +28,7 @@ class SubjectTeacherAssentController extends Controller
         $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
         $data['sessions'] = Session::orderBy('id', 'desc')->where('status', 1)->get();
         $data['sections'] = SchoolSection::orderBy('id', 'desc')->where('status', 1)->get();
-        $data['classes'] = Classe::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['classes'] = Classe::orderBy('id', 'asc')->where('status', 1)->get();
         $data['subjectName']=Subject::orderBy('id', 'asc')->get();
         return view("Backend.school_management.subject_teacher_assent.create", $data);
     }

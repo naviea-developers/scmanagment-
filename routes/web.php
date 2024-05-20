@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\EventCartController;
 use App\Http\Controllers\Frontend\CourseUserSubscriptionsController;
 use App\Http\Controllers\Frontend\EbookCartController;
 use App\Http\Controllers\Frontend\StudentApplicationController;
+use App\Http\Controllers\Frontend\InstructorCourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -318,3 +319,10 @@ Route::get('university-program-details/{id}', [FrontendController::class,"progra
 
 
 });
+
+
+Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
+Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
+Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
+Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
+// Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);

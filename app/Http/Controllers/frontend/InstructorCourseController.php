@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admission;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseCareerOutcome;
@@ -27,6 +28,7 @@ use App\Models\Subject;
 use App\Models\Examination;
 use App\Models\ClassTestExam;
 use App\Models\Session;
+use App\Models\Student;
 use App\Models\SubjectTeacherAssent;
 
 class InstructorCourseController extends Controller
@@ -946,9 +948,59 @@ class InstructorCourseController extends Controller
         $home_work->delete();
         return redirect()->route('instructor.class_exam.index')->with('message','Class Exam Deleted Successfully');
     }
-// home Class Exam
+    // home Class Exam
 
 
+    // Result Exam start
+    public function indexResultExam()
+    {
+        // dd('hi');
+        // $data['courses'] = Course::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+        $data['examinations']=Examination::orderBy('id', 'desc')->get();
+        $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        return view('user.instructor.exam_result_index',$data);
+    }
+
+    //ajax get subject
+    public function getTeacherAssentSubject($id){
+        $subject = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('subject')->get();
+        return $subject;
+	}  
+
+     //ajax get Teacher Assent School Section
+     public function getTeacherAssentSchoolSection($id){
+        $section = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('schoolsection')->get();
+        return $section;
+	}  
+
+     //ajax get Teacher Assent School Section
+    //  public function getTeacherAssentSession($id){
+    //     $session = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('session')->get();
+    //     return $session;
+	// }  
+
+
+    public function getTeacherAssentResult(Request $request)
+    {
+        $examinationId = $request->input('examination_id');
+        $classId = $request->input('class_id');
+        $sectionId = $request->input('section_id');
+        $subjectId = $request->input('subject_id');
+        // return response()->json(['examination_id' => $examinationId,'classId' => $classId,'sectionId' => $sectionId,'subject_id' => $subjectId]);
+        // if( $classId && $sessionId &&  $sectionId){
+        //     $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+        // }elseif($classId && $sessionId){
+        //     $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
+        // }
+        // $data['class_routine']=$class_routine = Student::where('class_id',$classId)->where('session_id', $sessionId)->get();
+        if( $classId && $sectionId ){
+        $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->get();
+        }
+        return view('user.instructor.student_show',$data);
+        // return view('Backend.school_management.class_routine.view_class_routine_print',$data);
+        // return response()->json(['routine' => $routine]);
+    }
+   // Result Exam end
 
 
 }

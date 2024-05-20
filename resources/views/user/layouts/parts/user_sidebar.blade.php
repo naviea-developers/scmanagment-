@@ -154,6 +154,11 @@
                     <span> Manage class Exam </span>
                 </a>
 
+                <a href="{{ route('instructor.exam_result.index', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-upload"></i>
+                    <span> Manage Exam Result </span>
+                </a>
+
                 <a href="{{ route('user.order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span> My Order List </span>
