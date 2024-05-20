@@ -14,7 +14,7 @@
                 <h3>Home Work</h3>
                 <h6>Class: {{ @$details->class->name ?? '' }}</h6>
                 <h6>Subject: {{ @$details->subject->name ?? '' }}</h6>
-                {{-- <h6>Session: {{ $details->session->start_year->year ?? '' }} - {{ $details->session->end_year->year ?? '' }}</h6> --}}
+                {{-- <h6>Session: {{ $details->session->start_year ?? '' }} - {{ $details->session->end_year ?? '' }}</h6> --}}
             </div>
             <hr>
             <div class="class-routine">

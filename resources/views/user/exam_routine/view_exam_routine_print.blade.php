@@ -35,7 +35,7 @@
   <div class="school-name">
     <h3>School Name</h3>
     <h6>Class Name: {{ $admission->class->name ?? '' }}</h6>
-    <h6>Session: {{ $admission->session->start_year->year ?? '' }} - {{ $admission->session->end_year->year ?? '' }}</h6>
+    <h6>Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6>
   
     @foreach ($examRoutine as $routine)
         <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
@@ -59,19 +59,15 @@
       </thead>
       <tbody>
         @foreach ($examRoutine as $routine)
-        @foreach ($routine->exam_schedule_items as $item)
-            <tr>
-                <td>{{ @$item->date }}</td>
-                <td>{{ @$item->subject->name }}</td>
-                <td>{{ @$item->bulding->name }}</td>
-                <td>{{ @$item->floor->name }}</td>
-                <td>{{ @$item->room->name }}</td>
-                {{-- <td>{{ $item->pass_marke }}</td>
-                <td>{{ $item->fail_marke }}</td> --}}
-                <td>{{ \Carbon\Carbon::parse($item->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse($item->end_time)->format('h:iA') }}</td>
-            </tr>
+        <tr>
+            <td>{{ @$routine->examClass->date }}</td>
+            <td>{{ @$routine->examClass->subject->name }}</td>
+            <td>{{ @$routine->bulding->name }}</td>
+            <td>{{ @$routine->floor->name }}</td>
+            <td>{{ @$routine->room->name }}</td>
+            <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
+        </tr>
         @endforeach
-      @endforeach
       </tbody>
     </table>
   </div>

@@ -55,6 +55,14 @@
     
         <div class="row">
             <div class="column">
+                <label for="firstName">Academic Year:</label>
+                <p>{{ @$details->academic_year->year }}</p>
+            </div>
+            <div class="column">
+                <label for="firstName">Session:</label>
+                <p >{{ @$details->session->start_year }} - {{ @$details->session->end_year }}</p>
+            </div>
+            <div class="column">
                 <label for="firstName">Class:</label>
                 <p>{{ @$details->class->name }}</p>
             </div>

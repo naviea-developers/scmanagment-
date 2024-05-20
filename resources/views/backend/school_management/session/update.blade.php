@@ -30,6 +30,12 @@
             <div class="col-xl-7 mx-auto">
                 <div class="form-layout form-layout-4 py-5">
 
+                  @php
+                  $currentYear = date("Y");
+                  $previewYears = 100;
+                  $nextYears = 10; 
+                  @endphp
+
                     <form action="{{ route('admin.session.update', $session->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
 
@@ -60,11 +66,14 @@
                           <div class="col-sm-6" style="margin-top: 20px">
                               <div class="mg-t-10 mg-sm-t-0">
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="start_year_id" class="form-control">
+                                  <select name="start_year" class="form-control">
                                     <option value=""> Select Year</option>
-                                    @foreach ($years as $year)
+                                    {{-- @foreach ($years as $year)
                                   <option @if ($year->id == $session->start_year_id) Selected @endif value="{{ $year->id }}">{{ $year->year }}</option>
-                                  @endforeach
+                                  @endforeach --}}
+                                    @foreach (range($currentYear - $previewYears, $currentYear + $nextYears) as $year)
+                                      <option value="{{ $year }}" @if($year == $session->start_year) selected @endif>{{ $year }}</option>
+                                    @endforeach
                                   </select>
                                 </div>
                               </div>
@@ -98,11 +107,14 @@
                         <div class="col-sm-6" style="margin-top: 20px">
                             <div class="mg-t-10 mg-sm-t-0">
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="end_year_id" class="form-control">
+                                <select name="end_year" class="form-control">
                                   <option value=""> Select Year</option>
-                                  @foreach ($years as $year)
-                                <option  @if ($year->id == $session->end_year_id) Selected @endif  value="{{ $year->id }}">{{ $year->year }}</option>
-                                @endforeach
+                                  {{-- @foreach ($years as $year)
+                                  <option  @if ($year->id == $session->end_year_id) Selected @endif  value="{{ $year->id }}">{{ $year->year }}</option>
+                                  @endforeach --}}
+                                  @foreach (range($currentYear - $previewYears, $currentYear + $nextYears) as $year)
+                                  <option value="{{ $year }}" @if($year == $session->end_year) selected @endif>{{ $year }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </div>

@@ -105,7 +105,7 @@ class StudentController extends Controller
                $nestedData['image'] = '<img src="'.$student->image_show.'" style="height:50px;width:50px;">';
                $nestedData['student_name'] = $student->student_name;
                $nestedData['academic_year_id'] = $student->academic_year?->year;
-               $nestedData['session_id'] = $student->session?->start_year?->year ." - ". $student->session?->end_year?->year;
+               $nestedData['session_id'] = $student->session?->start_year ." - ". $student->session?->end_year;
                $nestedData['class_id'] = $student->class?->name;
                $nestedData['section_id'] = $student->section?->name;
                $nestedData['group_id'] = $student->group?->name;

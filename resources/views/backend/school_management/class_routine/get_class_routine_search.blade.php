@@ -15,7 +15,7 @@
       @foreach ($allData as $data)
 
         <tr>
-            <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
+            <td>{{@$data->session->start_year}} - {{@$data->session->end_year}}</td>
             <td>{{@$data->class->name}}</td>
             <td>{{@$data->schoolsection->name}}</td>
             <td>{{@$data->subject->name}}</td>

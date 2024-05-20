@@ -63,7 +63,7 @@ Admin - All Session
                             @elseif ($session->start_month == '10') October 
                             @elseif ($session->start_month == '11') November 
                             @elseif ($session->start_month == '12') December
-                            @endif {{ @$session->start_year->year }}
+                            @endif {{ @$session->start_year }}
                           </td>
 
                           <td>
@@ -79,7 +79,7 @@ Admin - All Session
                             @elseif ($session->end_month == '10') October 
                             @elseif ($session->end_month == '11') November 
                             @elseif ($session->end_month == '12') December 
-                            @endif {{  @$session->end_year->year }}
+                            @endif {{  @$session->end_year }}
                           </td>
                           <td>
                             @if(@$session->status == 0)

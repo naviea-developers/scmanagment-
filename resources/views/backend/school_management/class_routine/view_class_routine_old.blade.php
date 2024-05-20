@@ -41,7 +41,7 @@
     <div class="school-name">
       <h1 style="margin-left: 80px;">School Name</h1>
       <h5>Class Name: {{ @$class_routine->class->name }}</h5>
-      <h5>Session: {{@$class_routine->session->start_year->year}} - {{@$class_routine->session->end_year->year}}</h5>
+      <h5>Session: {{@$class_routine->session->start_year}} - {{@$class_routine->session->end_year}}</h5>
       <h5>Class Type : 
         @if (@$class_routine->class_type=='1')
           Online

@@ -139,11 +139,18 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
         ///School Management route
         Route::get('/notice', [UserController::class, 'notice'])->name('notice');
+        //class routine for student
         Route::get('/class-routine', [UserController::class, 'classRoutine'])->name('class_routine');
-        Route::get('/teacher-class-routine', [UserController::class, 'teacherClassRoutine'])->name('teacher.class_routine');
+        Route::get('print-user-class-routine', [UserController::class,"classPrint"])->name('user.class_routine.print');
+         //exam routine for student
         Route::get('/exam-routine', [UserController::class, 'examRoutine'])->name('exam_routine');
         Route::get('print-user-exam-routine', [UserController::class,"examPrint"])->name('user.exam_routine.print');
-        Route::get('print-user-class-routine', [UserController::class,"classPrint"])->name('user.class_routine.print');
+
+        //class routine for Teacher
+        Route::get('/teacher-class-routine', [UserController::class, 'teacherClassRoutine'])->name('teacher.class_routine');
+        //Exam routine for Teacher
+        Route::get('/teacher-exam-routine', [UserController::class, 'teacherExamRoutine'])->name('teacher.exam_routine');
+        Route::get('print-teacher-exam-routine', [UserController::class,"teacherExamRoutinePrint"])->name('teacher.exam_routine.print');
 
 
         //HomeWork for student

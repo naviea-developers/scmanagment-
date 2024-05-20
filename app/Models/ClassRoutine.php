@@ -31,6 +31,9 @@ class ClassRoutine extends Model
     public function subject(){
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }
+    public function section(){
+        return $this->belongsTo(SchoolSection::class,"section_id",'id');
+    }
 
     public function classDuration(){
         return $this->belongsTo(ClassDuration::class,"class_duration_id",'id');

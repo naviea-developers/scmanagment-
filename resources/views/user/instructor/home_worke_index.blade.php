@@ -46,7 +46,7 @@
 
             <tr>
             <td>{{ $i++ }}</td>
-            <td>{{  @$home_work->session->start_year->year }} - {{  @$home_work->session->end_year->year }}</td>
+            <td>{{  @$home_work->session->start_year }} - {{  @$home_work->session->end_year }}</td>
             <td>{{  @$home_work->class->name }}</td>
             <td>{{  @$home_work->subject->name }}</td>
             <td>

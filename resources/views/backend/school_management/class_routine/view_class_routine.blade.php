@@ -30,7 +30,7 @@
     <div class="school-name">
       <h1 style="margin-left: 80px;">School Name</h1>
       <h5>Class Name: {{ @$class_routine[0]->class->name }}</h5>
-      <h5>Session: {{@$class_routine[0]->session->start_year->year}} - {{@$class_routine[0]->session->end_year->year}}</h5>
+      <h5>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</h5>
       <h5>Section : {{ @$class_routine[0]->schoolsection->name }}</h5>
     </div>
   

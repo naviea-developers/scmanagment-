@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{@$data->examination->name}}</td>
                             <td>{{@$data->class->name}}</td>
-                            <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
+                            <td>{{@$data->session->start_year}} - {{@$data->session->end_year}}</td>
                            
                             <td>
                                 <form action="{{ route('examDetails') }}" method="POST" style="float: left;margin-right:5px;">

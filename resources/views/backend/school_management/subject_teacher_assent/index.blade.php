@@ -56,7 +56,7 @@ Admin - All subject_teacher_assent
                           <td>{{ $data->class->name }}</td>
                           <td>{{ @$data->teacher->name }}</td>
                           <td>{{ $data->schoolsection->name }}</td>
-                          <td>{{ @$data->session->start_year->year }} - {{ @$data->session->end_year->year }}</td>
+                          <td>{{ @$data->session->start_year }} - {{ @$data->session->end_year }}</td>
                           <td>
                             @if(@$data->status == 0)
                             <a href="{{ route('admin.subject_teacher_assent.status',$data->id) }}" class="btn btn-sm btn-warning">Inactive</a>
