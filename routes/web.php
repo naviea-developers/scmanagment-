@@ -325,4 +325,4 @@ Route::get('index_exam_result', [InstructorCourseController::class,"indexResultE
 Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
 Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
 Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
-// Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);
+Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);

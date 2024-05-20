@@ -41,6 +41,7 @@
             <th>Class</th>
             <th>Session</th>
             <th>Section</th>
+            <th>Mark</th>
             <th>Add Mark</th>
         </tr>
       </thead>
@@ -56,8 +57,9 @@
                     <td>{{ $student->student_name }}</td>
                     <td>{{ $student->father_name }}</td>
                     <td>{{ $student->class->name }}</td>
-                    <td>{{ $student->session->name }}</td>
+                    <td>{{ $student->session->start_year }}-{{ $student->session->end_year }}</td>
                     <td>{{ $student->section->name }}</td>
+                    <td>{{ $Examclass->marke }}</td>
                     <td>
                         <input type="number" class="">
                     </td>
