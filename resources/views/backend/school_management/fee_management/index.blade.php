@@ -57,7 +57,7 @@ Admin - All fees
                       <tr>
                           <td>{{ $i++ }}</td>
                           <td>{{ @$fee_management->class->name }}</td>
-                          <td>{{ @$fee_management->session->start_year->year }} - {{ @$fee_management->session->end_year->year }}</td>
+                          <td>{{ @$fee_management->session->start_year }} - {{ @$fee_management->session->end_year }}</td>
                           <td>{{ @$fee_management->fee->particular_name }}</td>
                           <td>{{ @$fee_management->fee_amount }}</td>
                           <td>

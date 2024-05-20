@@ -44,7 +44,7 @@
 
                             <div class="col-sm-4">
                             <label class=" form-control-label"><b>Session: </b></label>
-                            <p >{{ @$details->session->start_year->year }} - {{ @$details->session->end_year->year }}</p>
+                            <p >{{ @$details->session->start_year }} - {{ @$details->session->end_year }}</p>
                             </select>
                             </div>
 

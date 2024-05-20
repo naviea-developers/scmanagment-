@@ -38,7 +38,7 @@
 
                             <hr>
                             
-                            {{-- <div class="col-sm-4">
+                            <div class="col-sm-4">
                             <label class=" form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                             <select class="form-control" name="academic_year_id" >
                                 <option value="">Select Academic Year</option>
@@ -53,10 +53,10 @@
                             <select class="form-control" name="session_id" >
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ @$session->start_year->year }} - {{ @$session->end_year->year }}</option>
+                                <option @if($session->id == $admission->session_id) Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
                                 @endforeach
                             </select>
-                            </div> --}}
+                            </div>
 
                             <div class="col-sm-4">
                                 <label class=" form-control-label">Class: <span class="tx-danger">*</span></label>

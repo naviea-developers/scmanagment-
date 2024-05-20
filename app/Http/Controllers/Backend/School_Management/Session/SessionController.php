@@ -39,9 +39,9 @@ class SessionController extends Controller
             DB::beginTransaction();
             $session = New session;
             $session->start_month = $request->start_month;
-            $session->start_year_id = $request->start_year_id;
+            $session->start_year = $request->start_year;
             $session->end_month = $request->end_month;
-            $session->end_year_id = $request->end_year_id;
+            $session->end_year = $request->end_year;
             $session->save();
 
             DB::commit();
@@ -86,9 +86,9 @@ class SessionController extends Controller
         DB::beginTransaction();
         $session = session::find($id);
         $session->start_month = $request->start_month;
-        $session->start_year_id = $request->start_year_id;
+        $session->start_year = $request->start_year;
         $session->end_month = $request->end_month;
-        $session->end_year_id = $request->end_year_id;
+        $session->end_year = $request->end_year;
         $session->save();
 
         DB::commit();

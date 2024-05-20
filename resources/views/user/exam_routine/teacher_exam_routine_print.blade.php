@@ -33,49 +33,40 @@
 
 <div class="container">
   <div class="school-name">
-    <h1>School Name</h1>
-    <h5>Class Name: {{ @$class_routine->class->name }}</h5>
-    <h5>Session: {{@$class_routine->session->start_year}} - {{ @$class_routine->session->end_year }}</h5>
-    <h5>Class Type: 
-        @if (@$class_routine->class_type=='1')
-          Online
-        @elseif (@$class_routine->class_type=='2')
-          Offline
-        @endif
-    </h5>
+    <h3>School Name</h3>
+    <h6>Class Name: {{ $teacher->class->name ?? '' }}</h6>
+    {{-- <h6>Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6> --}}
+  
+    @foreach ($examRoutine as $routine)
+        <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
+    @endforeach
+    <h2>Exam Routine</h2>
   </div>
 
   <div class="class-routine">
-    <h2>Class Routine</h2>
     <table>
       <thead>
         <tr>
-            <th>Day</th>
-            <th>Teacher Name</th>
-            <th>Subject Name</th>
-            <th>Bulding Name</th>
-            <th>Floor Name</th>
-            <th>Room Name</th>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Bulding</th>
+            <th>Floor</th>
+            <th>Room</th>
+            {{-- <th>Pass Marke</th>
+            <th>Fail Marke</th> --}}
             <th>Time</th>
         </tr>
       </thead>
       <tbody>
-        @php
-            $dayCounts = $class_routine->class_routine_items->groupBy('day')->map->count();
-        @endphp
-
-        @foreach ($class_routine->class_routine_items as $key => $item)
-            <tr>
-                @if ($key === 0 || $item->day !== $class_routine->class_routine_items[$key - 1]->day)
-                    <td rowspan="{{ $dayCounts[$item->day] }}">{{ $item->day }}</td>
-                @endif
-                <td>{{ $item->Teacher->name }}</td>
-                <td>{{ $item->subject->name }}</td>
-                <td>{{ $item->bulding->name }}</td>
-                <td>{{ $item->floor->name }}</td>
-                <td>{{ $item->room->name }}</td>
-                <td>{{ @$item->classDuration->name }} ({{date('h:i:A',strtotime(@$item->classDuration->start_time))}} - {{date('h:i:A',strtotime(@$item->classDuration->end_time))}})</td>
-            </tr>
+        @foreach ($examRoutine as $routine)
+        <tr>
+            <td>{{ @$routine->examClass->date }}</td>
+            <td>{{ @$routine->examClass->subject->name }}</td>
+            <td>{{ @$routine->bulding->name }}</td>
+            <td>{{ @$routine->floor->name }}</td>
+            <td>{{ @$routine->room->name }}</td>
+            <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
+        </tr>
         @endforeach
       </tbody>
     </table>

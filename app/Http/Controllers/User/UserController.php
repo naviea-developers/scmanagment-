@@ -24,6 +24,7 @@ use App\Models\ClassRoutineItem;
 use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
+use App\Models\ExamClass;
 use App\Models\ExamSchedule;
 use App\Models\HomeWork;
 use App\Models\Notice;
@@ -652,6 +653,46 @@ class UserController extends Controller
         return view('user.class_routine.teacher_class_routine', $data);
     }
 
+    public function teacherExamRoutine()
+    {
+        $user = auth()->user();
+        if ($user) {
+            $data['teacher'] = $teacher = SubjectTeacherAssent::where('teacher_id', $user->id)->first();
+            // dd($data);
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $teacher->class_id)
+                                ->where('section_id', $teacher->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
+                                // dd($examSchedule);
+        }
+        return view('user.exam_routine.teacher_exam_routine', $data);
+    }
+    public function teacherExamRoutinePrint(){
+
+        $user = auth()->user();
+        if ($user) {
+            $data['teacher'] = $teacher = SubjectTeacherAssent::where('teacher_id', $user->id)->first();
+            // dd($data);
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $teacher->class_id)
+                                ->where('section_id', $teacher->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
+                                // dd($examSchedule);
+        }
+        return view('user.exam_routine.teacher_exam_routine_print',$data);
+    }
+
+
+
+
+
+
+
+
 
     public function classPrint(){
 
@@ -679,49 +720,31 @@ class UserController extends Controller
     {
 
         $user = auth()->user();
-
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-
-            if ($admission) {
-                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    // ->where('section_id', $admission->section_id)
-                    ->get()
-                    ->filter(function ($routine) {
-                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    });
-            } else {
-                
-            }
-        } else {
-
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
+                                ->where('section_id', $admission->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
         }
+
         return view('user.exam_routine.routine', $data);
     }
 
+   
     public function examPrint(){
-        // dd('hi');
-        // $examRoutine =  ExamSchedule::find($id);
 
         $user = auth()->user();
-
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-
-            if ($admission) {
-                $data['examRoutine'] = $routines = ExamSchedule::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    // ->where('section_id', $admission->section_id)
-                    ->get()
-                    ->filter(function ($routine) {
-                        return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    });
-            } else {
-                
-            }
-        } else {
-            
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
+                                ->where('section_id', $admission->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
         }
         return view('user.exam_routine.view_exam_routine_print',$data);
     }

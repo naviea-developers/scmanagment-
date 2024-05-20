@@ -39,6 +39,7 @@ Admin - All Examinations
                     <th class="wd-15p">Examination Name</th>
                     <th class="wd-15p">Academic Year</th>
                     <th class="wd-15p">Session</th>
+                    <th class="wd-15p">Start-End Date</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -53,7 +54,8 @@ Admin - All Examinations
                           <td>{{ $i++ }}</td>
                           <td>{{ $exam->name }}</td>
                           <td>{{ @$exam->academicYear->year }}</td>
-                          <td>{{ @$exam->session->start_year->year }} - {{ @$exam->session->end_year->year }}</td>
+                          <td>{{ @$exam->session->start_year }} - {{ @$exam->session->end_year }}</td>
+                          <td>{{ date('j M Y', strtotime($exam->start_date)) }} - {{ date('j M Y', strtotime($exam->end_date)) }}</td>
                           <td>
                             @if(@$exam->status == 0)
                             <a href="{{ route('admin.examination.status',$exam->id) }}" class="btn btn-sm btn-warning">Inactive</a>

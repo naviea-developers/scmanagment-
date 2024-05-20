@@ -43,7 +43,7 @@ Admin - All Student
                   <select class="form-control" name="session_id" id="session_id">
                       <option value="">Select Session</option>
                       @foreach ($sessions as $session)
-                      <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                      <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
                       @endforeach
                   </select>
                 </div>
@@ -118,7 +118,7 @@ Admin - All Student
                           <td>{{ $admission->student_name }}</td>
                           <td>{{ @$admission->class->name }}</td>
                           <td>{{ @$admission->academic_year->year }}</td>
-                          <td>{{ @$admission->session->start_year->year }} - {{ @$admission->session->end_year->year }}</td>
+                          <td>{{ @$admission->session->start_year }} - {{ @$admission->session->end_year }}</td>
                           <td>{{ @$admission->section->name }}</td>
                           <td>{{ @$admission->group->name }}</td>
                           <td>

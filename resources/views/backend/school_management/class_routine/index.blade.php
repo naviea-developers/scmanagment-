@@ -51,7 +51,7 @@
                             <select class="form-control form-select select2" name="session_id" id="session_id">
                                 <option value="">Select Session</option>
                                 @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
+                                <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -84,7 +84,7 @@
                             @foreach ($allData as $data)
 
                                 <tr>
-                                    <td>{{@$data->session->start_year->year}} - {{@$data->session->end_year->year}}</td>
+                                    <td>{{@$data->session->start_year}} - {{@$data->session->end_year}}</td>
                                     <td>{{@$data->class->name}}</td>
                                     <td>{{@$data->schoolsection->name}}</td>
                                     <td>{{@$data->subject->name}}</td>

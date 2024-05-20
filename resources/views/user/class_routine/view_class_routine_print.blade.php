@@ -35,7 +35,7 @@
   <div class="school-name">
     <h3>School Name</h3>
     <p>Class Name: {{ @$admission->class->name ?? '' }}</p>
-    <p>Session: {{ @$admission->session->start_year->year ?? '' }} - {{ $admission->session->end_year->year ?? '' }}</p>
+    <p>Session: {{ @$admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</p>
     <p>Sesction: {{ @$admission->section->name }} </p>
     <h4>Class Routine</h4>
   </div>
