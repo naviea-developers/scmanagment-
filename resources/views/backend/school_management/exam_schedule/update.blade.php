@@ -37,7 +37,7 @@
 
                         <div class="col-md-3">
                             <label for="">Exam title :</label>
-                            <select name="examination_id" id="" class="form-control form-select select2">
+                            <select name="examination_id" id="examination" class="form-control form-select select2">
                                 <option value="">Select Exam title</option>
                                 @foreach (@$examinations as $examination)
                                     <option @if($examination->id == $editData->examination_id)  Selected @endif value="{{ $examination->id }}">{{ $examination->name }}</option>
@@ -45,23 +45,24 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Exam Class :</label>
-                            <select name="exam_class_id" id="" class="form-control form-select select2">
-                                <option value="">Select Exam class</option>
-                                @foreach (@$examClasss as $examClass)
-                                    <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
                             <label>Select Class : </label>
-                            <select name="class_id" id="class" class="form-control form-select select2">
+                            <select name="class_id" id="class_exam" class="form-control form-select select2">
                                 <option value="">Select Class</option>
                                 @foreach ($className as $class)
                                     <option @if($class->id == $editData->class_id)  Selected @endif value="{{ $class->id}}">{{ $class->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-3">
+                            <label for="">Exam Class :</label>
+                            <select name="exam_class_id" id="examclassSub" class="form-control form-select select2">
+                                <option value="">Select Exam class</option>
+                                @foreach (@$examClasss as $examClass)
+                                    <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
                         <div class="col-md-3">
                             <label>Sections : </label>
                             <select name="section_id" id="section" class="form-control form-select select2">
@@ -119,79 +120,101 @@
 @endsection
 
 @section('script')
-    <script>
-    $('body').on("change",'#class',function(){
+<script>
+
+    $(document).on('change','#examination',function(e){
         let id = $(this).val();
             console.log(id);
-        getSection(id,"section");
+        getClassExam(id,"class_exam");
     });
 
-        function getSection(id,outid){
-            let url = '{{ url("get/school_section/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
-                $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select Section</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
-
-
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+    function getClassExam(id,outid){
+        let url = '{{ url("get/examination_class/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select class</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.class.id + ">" + element.class.name + "</option>"
                 });
-        }
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+</script>
 
-        $('body').on("change",'#bulding',function(){
-            let id = $(this).val();
-            //    console.log(id);
-            getFloor(id,"floor");
-        });
+<script>
+    //  $(document).on('change','#class_exam',function(e){
+    //     let id = $(this).val();
+    //     console.log(id);
+    //     getExamClassSub(id,"examclassSub");
+    //     getSection(id,"section");
+    // });
 
-        function getFloor(id,outid){
-            let url = '{{ url("get/floor/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
+    // function getExamClassSub(id,outid){
+    //   let url = '{{ url("get/exam-class-subject/") }}/' + id;
+    //   axios.get(url)
+    //       .then(res => {
+    //           console.log(res);
+    //       $('#'+outid).empty();
+    //           let html = '';
+    //           html += '<option value="">Select Exam class subject</option>'
+    //           res.data.forEach(element => {
+    //               html += "<option value=" + element.subject.id + ">" + element.subject.name + "</option>"
+    //           });
+    //           $('#'+outid).append(html);
+    //           $('#'+outid).val("").change();
+    //       });
+    // }
+
+
+    $(document).on('change','#class_exam,#examination',function(e){
+    var examinationId = $('#examination').val();
+    var classExamId = $('#class_exam').val();
+    // console.log({ examinationId, classExamId }); 
+    getSection(classExamId,"section");
+    getExamClassSub(examinationId, classExamId, "examclassSub");
+   
+    });
+
+    function getExamClassSub(examinationId, classExamId, outid){
+        let url = `{{ url("get/exam-class-subject/") }}/${examinationId}/${classExamId}`;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
                 $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select floor</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
-
-
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+                let html = '<option value="">Select Exam class subject</option>';
+                res.data.forEach(element => {
+                    html += `<option value="${element.id}">${element.subject.name}</option>`;
                 });
-        }
-
-        $('body').on("change",'#floor',function(){
-            let id = $(this).val();
-            //    console.log(id);
-            getRoom(id,"room");
-        });
-
-        function getRoom(id,outid){
-            let url = '{{ url("get/room/") }}/' + id;
-            axios.get(url)
-                .then(res => {
-                    console.log(res);
-                $('#'+outid).empty();
-                    let html = '';
-                    html += '<option value="">Select room</option>'
-                    res.data.forEach(element => {
-                        html += "<option value=" + element.id + ">" + element.name + "</option>"
-                    });
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            })
+            .catch(error => {
+                console.error("There was an error fetching the data!", error);
+            });
+    }
 
 
-                    $('#'+outid).append(html);
-                    $('#'+outid).val("").change();
+    function getSection(id,outid){
+        let url = '{{ url("get/school_section/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Section</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
-        }
 
-        
-    </script>
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+</script>
 @endsection

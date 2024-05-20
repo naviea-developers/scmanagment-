@@ -149,10 +149,10 @@
 
 @section('script')
 <script>
-    //  $('body').on("change",'#examination',function(){
-        $(document).on('change','#examination',function(e){
+
+    $(document).on('change','#examination',function(e){
         let id = $(this).val();
-           console.log(id);
+            console.log(id);
         getClassExam(id,"class_exam");
     });
 
@@ -172,8 +172,6 @@
             });
     }
 </script>
-
-
 
 <script>
     //  $(document).on('change','#class_exam',function(e){
@@ -203,7 +201,7 @@
     $(document).on('change','#class_exam,#examination',function(e){
     var examinationId = $('#examination').val();
     var classExamId = $('#class_exam').val();
-    // console.log({ examinationId, classExamId }); // Corrected log to display both IDs
+    // console.log({ examinationId, classExamId }); 
     getSection(classExamId,"section");
     getExamClassSub(examinationId, classExamId, "examclassSub");
    
@@ -228,9 +226,6 @@
     }
 
 
-
-
-
     function getSection(id,outid){
         let url = '{{ url("get/school_section/") }}/' + id;
         axios.get(url)
@@ -249,30 +244,6 @@
             });
     }
 
-
-//     $(document).ready(function() {
-       
-//        $('#examination, #class_exam').change(function() {
-//            fetchClassRoutinek();
-//        });
-
-//        function fetchClassRoutinek() {
-//            var examinationId = $('#examination').val();
-//            var classExamId = $('#class_exam').val();
-
-//            // if (classId && sectionId && sessionId) {
-//                $.ajax({
-//                    url: "{{ route('get.class.routine') }}",
-//                    type: 'GET',
-//                    data: { classExam_id: classExamId, examination_id: examinationId },
-//                    success: function(response) {
-//                        console.log(response);
-//                        $(".get-search-student-class-routine").html(response);
-//                    }
-//                });
-//            // }
-//        }
-//    });
 </script>
 @endsection
 
