@@ -149,10 +149,10 @@
 
 @section('script')
 <script>
-    //  $('body').on("change",'#examination',function(){
-        $(document).on('change','#examination',function(e){
+
+    $(document).on('change','#examination',function(e){
         let id = $(this).val();
-           console.log(id);
+            console.log(id);
         getClassExam(id,"class_exam");
     });
 
@@ -171,37 +171,60 @@
                 $('#'+outid).val("").change();
             });
     }
-
-
-   
 </script>
 
-
-
 <script>
-//    $('body').on("change",'#class_exam',function(){
-    $(document).on('change','#class_exam',function(e){
-        let id = $(this).val();
-        console.log(id);
-        getExamClassSub(id,"examclassSub");
-        getSection(id,"section");
+    //  $(document).on('change','#class_exam',function(e){
+    //     let id = $(this).val();
+    //     console.log(id);
+    //     getExamClassSub(id,"examclassSub");
+    //     getSection(id,"section");
+    // });
+
+    // function getExamClassSub(id,outid){
+    //   let url = '{{ url("get/exam-class-subject/") }}/' + id;
+    //   axios.get(url)
+    //       .then(res => {
+    //           console.log(res);
+    //       $('#'+outid).empty();
+    //           let html = '';
+    //           html += '<option value="">Select Exam class subject</option>'
+    //           res.data.forEach(element => {
+    //               html += "<option value=" + element.subject.id + ">" + element.subject.name + "</option>"
+    //           });
+    //           $('#'+outid).append(html);
+    //           $('#'+outid).val("").change();
+    //       });
+    // }
+
+
+    $(document).on('change','#class_exam,#examination',function(e){
+    var examinationId = $('#examination').val();
+    var classExamId = $('#class_exam').val();
+    // console.log({ examinationId, classExamId }); 
+    getSection(classExamId,"section");
+    getExamClassSub(examinationId, classExamId, "examclassSub");
+   
     });
 
-    function getExamClassSub(id,outid){
-      let url = '{{ url("get/exam-class-subject/") }}/' + id;
-      axios.get(url)
-          .then(res => {
-              console.log(res);
-          $('#'+outid).empty();
-              let html = '';
-              html += '<option value="">Select Exam class subject</option>'
-              res.data.forEach(element => {
-                  html += "<option value=" + element.subject.id + ">" + element.subject.name + "</option>"
-              });
-              $('#'+outid).append(html);
-              $('#'+outid).val("").change();
-          });
+    function getExamClassSub(examinationId, classExamId, outid){
+        let url = `{{ url("get/exam-class-subject/") }}/${examinationId}/${classExamId}`;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+                $('#'+outid).empty();
+                let html = '<option value="">Select Exam class subject</option>';
+                res.data.forEach(element => {
+                    html += `<option value="${element.id}">${element.subject.name}</option>`;
+                });
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            })
+            .catch(error => {
+                console.error("There was an error fetching the data!", error);
+            });
     }
+
 
     function getSection(id,outid){
         let url = '{{ url("get/school_section/") }}/' + id;
@@ -220,6 +243,7 @@
                 $('#'+outid).val("").change();
             });
     }
+
 </script>
 @endsection
 

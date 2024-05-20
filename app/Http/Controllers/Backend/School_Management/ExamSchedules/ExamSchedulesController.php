@@ -79,7 +79,8 @@ class ExamSchedulesController extends Controller
     public function edit($id){
         // dd('hi');
        $data['editData']=$editData =  ExamSchedule::find($id);
-       $data['className']=Classe::orderBy('id', 'desc')->get(); 
+       $data['className']=Classe::orderBy('id', 'asc')->get(); 
+       $data['examClasss']=ExamClass::where("class_id",$editData->class_id)->where('examination_id',$editData->examination_id)->orderBy('id', 'desc')->get();
        $data['sections']=SchoolSection::where('class_id',$editData->class_id)->orderBy('id', 'asc')->get();
        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
        $data['examinations']=Examination::orderBy('id', 'desc')->get();
@@ -89,9 +90,6 @@ class ExamSchedulesController extends Controller
        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
        $data['examTypes'] = ExamType::orderBy('id','desc')->get();
        $data['groups'] = Group::orderBy('id','desc')->get();
-       $data['examClasss']=ExamClass::orderBy('id', 'desc')->get();
-       
-
         return view('Backend.school_management.exam_schedule.update',$data);
     }
 
@@ -167,19 +165,10 @@ class ExamSchedulesController extends Controller
 
 
     //ajax get exam Class Subject
-    public function examClassSubject($id){
+    public function examClassSubject($examinationId,$classExamId){
         // $subject = ExamClass::where("class_id",$id)->with('subject')->get();
-        // return $subject;
-        $subjects = ExamClass::where("class_id", $id)->with('subject')->get();
-        // Grouping the classes by class name
-        $groupedSubject = $subjects->groupBy(function ($item) {
-            return $item->subject->name;
-        });
-        // Selecting the first class for each group
-        $uniqueSubject = $groupedSubject->map(function ($group) {
-            return $group->first();
-        });
-        return $uniqueSubject->values();
+        $subject = ExamClass::where("class_id",$classExamId)->where('examination_id',$examinationId)->with('subject')->get();
+        return $subject;
 	  }
 
     //ajax get ExaminatioClass
