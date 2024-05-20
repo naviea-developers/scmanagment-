@@ -314,7 +314,7 @@ Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSecti
 Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
 Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);
 Route::get('/get/subject/{id}', [ExamSchedulesController::class, 'getSubject']);
-Route::get('/get/exam-class-subject/{id}', [ExamSchedulesController::class, 'examClassSubject']);
+
 
 Route::get('/get/examination_class/{id}', [ExamSchedulesController::class, 'getExaminationClass']);
 
@@ -324,3 +324,4 @@ Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutin
 
 Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');
 
+Route::get('/get/exam-class-subject/{examinationId}/{classExamId}', [ExamSchedulesController::class, 'examClassSubject']);

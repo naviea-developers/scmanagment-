@@ -167,19 +167,10 @@ class ExamSchedulesController extends Controller
 
 
     //ajax get exam Class Subject
-    public function examClassSubject($id){
+    public function examClassSubject($examinationId,$classExamId){
         // $subject = ExamClass::where("class_id",$id)->with('subject')->get();
-        // return $subject;
-        $subjects = ExamClass::where("class_id", $id)->with('subject')->get();
-        // Grouping the classes by class name
-        $groupedSubject = $subjects->groupBy(function ($item) {
-            return $item->subject->name;
-        });
-        // Selecting the first class for each group
-        $uniqueSubject = $groupedSubject->map(function ($group) {
-            return $group->first();
-        });
-        return $uniqueSubject->values();
+        $subject = ExamClass::where("class_id",$classExamId)->where('examination_id',$examinationId)->with('subject')->get();
+        return $subject;
 	  }
 
     //ajax get ExaminatioClass
