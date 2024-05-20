@@ -129,6 +129,11 @@
                     <span> Class Routine </span>
                 </a>
 
+                <a href="{{ route('teacher.exam_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span> Exam Routine </span>
+                </a>
+
                 <a href="{{ route('instructor.homework.create', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-upload"></i>
                     <span> Add Homework </span>
