@@ -260,15 +260,15 @@
                 <span class="menu-item-label">Teacher</span>
             </a><!-- br-menu-link -->
             @php
-            $r_check = ( Route::is('admin.teacher.create') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit'));
+            $r_check = ( Route::is('admin.teacher.create') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit') || Route::is('admin.designation.edit'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
                 <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.teacher.index') }}" class="sub-link {{(Route::is('admin.teacher.index') || Route::is('admin.teacher.edit')) ?'active':''}}">Manage Teacher</a>
                 </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
-                </li> --}}
+                <li class="sub-item"><a href="{{ route('admin.designation.index') }}" class="sub-link {{(Route::is('admin.designation.index') ) ?'active':''}}">Manage Designation</a>
+                </li>
             </ul>
         </li><!-- br-Speakers-item -->
 

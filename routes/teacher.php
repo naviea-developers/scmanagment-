@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\All_users\TeacherController;
 use App\Http\Controllers\Backend\All_users\InstructorController;
 use App\Http\Controllers\Backend\All_users\HostController;
 use App\Http\Controllers\Backend\All_users\SeleryController;
+use App\Http\Controllers\Backend\School_management\Designation\DesignationController;
 
 // Route::middleware(['accessLogin'])->group(function () {
 Route::middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -21,6 +22,17 @@ Route::prefix('teacher')->group(function () {
         Route::post('delete', [TeacherController::class,"destroy"])->name('admin.teacher.delete');
         Route::post('teacher-change-password', [TeacherController::class,"changePassword"])->name('admin.teacher_change_password');
         Route::get('/status/{id}', [TeacherController::class, 'status'])->name('admin.teacher.status');
+});
+
+Route::prefix('designation')->group(function () {
+       //designation
+        Route::get('index', [DesignationController::class,"index"])->name('admin.designation.index');
+        Route::get('create', [DesignationController::class,"create"])->name('admin.designation.create');
+        Route::post('store', [DesignationController::class,"store"])->name('admin.designation.store');
+        Route::get('edit/{id}', [DesignationController::class,"edit"])->name('admin.designation.edit');
+        Route::post('update/{id}', [DesignationController::class,"update"])->name('admin.designation.update');
+        Route::post('delete', [DesignationController::class,"destroy"])->name('admin.designation.delete');
+        Route::get('/status/{id}', [DesignationController::class, 'status'])->name('admin.designation.status');
 });
 
 

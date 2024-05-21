@@ -59,4 +59,7 @@ class User extends Authenticatable
     public function admission(){
         return $this->belongsTo(Admission::class,"class_id",'id');
     }
+    public function user_designation(){
+        return $this->belongsTo(Designation::class,"designation_id","id");
+    }
 }

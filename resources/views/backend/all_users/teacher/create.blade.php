@@ -33,7 +33,7 @@
                     <form action="{{ route('admin.teacher.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-sm-4" >
                                 <label class="form-control-label">Teacher Image: <span class="tx-danger">*</span></label>
                                 <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
@@ -51,36 +51,58 @@
                             </div> --}}
                         </div>
 
-                        <div class="row mt-4">
+                        <div class="row mt-3">
                             <div class="col-sm-4">
                                 <label class="form-control-label">Teacher Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                 <input type="text" name="name" class="form-control" placeholder="Enter Teacher Name" value="{{ old('name') }}" required>
+                              </div>
                             </div>
-                            </div>
-                            <div class="col-sm-4">
+
+                           <div class="col-sm-4">
+                              <label class=" form-control-label">Designation:</label>
+                              <select  class="form-control" name="designation_id" required>
+                                  <option value="">Select Designation</option>
+                                  @foreach ($designations as $designation)
+                                  <option  value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+
+                          <div class="col-sm-4">
+                           <label class=" form-control-label">Teacher Type:</label>
+                           <select  class="form-control" name="teacher_type" required>
+                               <option value="">Select Gender</option>
+                               <option  value="permanent">Permanent</option>
+                               <option  value="guest">Guest</option>
+                           </select>
+                           </div>
+
+
+
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Mobile Number: <span class="tx-danger">*</span></label>
                                 <div class="cmg-t-10 mg-sm-t-0">
                                 <input value="{{ old('mobile') }}" type="text" name="mobile" class="form-control" placeholder="Enter Mobile Number" required>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('email') }}" type="email" name="email" class="form-control" placeholder="Enter Email" required>
                                 </div>
                             </div>
-                        </div>
+                        {{-- </div>
 
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
+                        <div class="row mt-3"> --}}
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">NID:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('nid') }}" type="text" name="nid" class="form-control" placeholder="Enter NID">
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Gender:</label>
                                 <select  class="form-control" name="gender" required>
                                     <option value="">Select Gender</option>
@@ -89,30 +111,30 @@
                                 </select>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Date of Birth:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('dob') }}" type="date" name="dob" class="form-control" placeholder="Enter Date of Birth">
                                 </div>
                             </div>
-                        </div>
+                        {{-- </div>
 
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
+                        <div class="row mt-3"> --}}
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Qualification:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('qualification') }}" type="text" name="qualification" class="form-control" placeholder="Enter qualification">
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Experience:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('experience') }}" type="text" name="experience" class="form-control" placeholder="Enter experience">
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Language:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select class="form-select form-control" name="language">
@@ -126,24 +148,24 @@
                                 </div>
                             </div>
 
-                        </div>
+                        {{-- </div>
 
-                        <div class="row mt-4">
-                            <div class="col-sm-4">
+                        <div class="row mt-3"> --}}
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Institution:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('institution') }}" type="text" name="institution" class="form-control" placeholder="Enter institution name">
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Designation:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input value="{{ old('designation') }}" type="text" name="designation" class="form-control" placeholder="Enter designation">
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class=" form-control-label">Country:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select class="form-control" name="country">
@@ -657,10 +679,37 @@
                                 </div>
                             </div>
 
+
+
+
+
+
+
+
+                           <div>
+                                 <h4 class="mt-3">Social Links</h4>
+                           </div>
+                          <div class="col-md-6">
+                              <label class="mb-2">Facebook</label>
+                              <input type="text" class="form-control mb-2 " name="facebook_id"  placeholder="Facebook URL"/>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="mb-2">Twitter</label>
+                              <input type="text" class="form-control mb-2 " name="twitter_id"  placeholder="Twitter URL"/>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="mb-2">Google Plus</label>
+                              <input type="text" class="form-control mb-2 " name="google_id"  placeholder="Google Plus URL"/>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="mb-2">Instagram</label>
+                              <input type="text" class="form-control mb-2 " name="instagram_id"  placeholder="Instagram URL"/>
+                          </div>
+
                         </div>
 
 
-                        <div class="row mt-4 mb-5">
+                        <div class="row mt-3 mb-5">
                             <div class="col-sm-12">
                                 <label class=" form-control-label">Description:</label>
                                 <div class="mg-t-10 mg-sm-t-0">
