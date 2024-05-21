@@ -154,6 +154,11 @@
                     <span> Manage class Exam </span>
                 </a>
 
+                <a href="{{ route('instructor.exam_result.create', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-upload"></i>
+                    <span> Add Exam Result </span>
+                </a>
+
                 <a href="{{ route('instructor.exam_result.index', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-upload"></i>
                     <span> Manage Exam Result </span>
