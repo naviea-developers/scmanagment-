@@ -44,6 +44,11 @@
                 <span> Exam Routine </span>
             </a>
 
+            <a href="{{ route('student.exam_result', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span> Exam Result </span>
+            </a>
+
             <a href="{{ route('user.application_order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span> My Application List </span>

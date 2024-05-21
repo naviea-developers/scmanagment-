@@ -1033,6 +1033,7 @@ class InstructorCourseController extends Controller
         if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
             $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+
         }
         // elseif( $classId && $sessionId && $examinationId && $subjectId){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();

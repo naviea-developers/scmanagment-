@@ -30,6 +30,7 @@ use App\Models\HomeWork;
 use App\Models\Notice;
 use App\Models\SubjectTeacherAssent;
 use App\Models\Withdrawal;
+use App\Models\ExamResult;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -166,6 +167,21 @@ class UserController extends Controller
     {
         $data['my_events'] = EventCart::where('user_id', auth()->user()->id)->get();
         return view('user.customer.my_event_list', $data);
+    }
+
+    public function studentExamResult()
+    {
+        $user_id = auth()->user()->id;
+        if($user_id){
+            $data['student']=$student=Admission::where('user_id',$user_id)->first();
+            $data['examResults']=ExamResult::where('student_id',$student->id)
+                                            ->where('class_id',$student->class_id)
+                                            ->where('section_id',$student->section_id)
+                                            ->where('session_id',$student->session_id)
+                                            ->where('is_publis','1')
+                                            ->orderBy('id', 'desc')->get();
+        }
+        return view('user.student.result.index',$data);
     }
     public function updateUserPic(Request $request, $id)
     {

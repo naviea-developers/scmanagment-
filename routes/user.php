@@ -44,6 +44,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/my-order-print/{id}', [UserController::class, 'myOrderPrint'])->name('user.order_print');
         Route::get('/my-event', [UserController::class, 'myEventList'])->name('user.my_event');
         Route::get('/my-package', [UserController::class, 'myPackageList'])->name('user.my_package');
+        Route::get('/student-exam_result', [UserController::class, 'studentExamResult'])->name('student.exam_result');
 
 
 
