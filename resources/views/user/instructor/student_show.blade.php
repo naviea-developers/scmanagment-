@@ -40,8 +40,10 @@
             <th>Student Father</th>
             <th>Class</th>
             <th>Session</th>
+            <th>Academic year</th>
             <th>Section</th>
             <th>Mark</th>
+            <th>Pass Mark</th>
             <th>Add Mark</th>
         </tr>
       </thead>
@@ -53,16 +55,35 @@
             @foreach ($students as $student)
                 <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{ $student->roll_number }}</td>
-                    <td>{{ $student->student_name }}</td>
-                    <td>{{ $student->father_name }}</td>
-                    <td>{{ $student->class->name }}</td>
-                    <td>{{ $student->session->start_year }}-{{ $student->session->end_year }}</td>
-                    <td>{{ $student->section->name }}</td>
-                    <td>{{ $Examclass->marke }}</td>
+                    <td>{{ @$student->roll_number }}</td> 
+                    <td>{{ @$student->student_name }}</td>          
+                    <td>{{ @$student->father_name }}</td>                     
+                    <td>{{ @$student->class->name }}</td>                    
+                    <td>{{ @$student->session->start_year }}-{{ $student->session->end_year }}</td>
+                    <td>{{ @$student->academic_year->year }}</td>    
+                    <td>{{ @$student->section->name }}</td>                   
+                    <td>{{ @$Examclass->marke }}</td>                    
+                    <td>{{ @$Examclass->pass_marke }}</td>
+                    
                     <td>
-                        <input type="number" class="">
+                        {{-- <input type="number" class=""> --}}
+                        <input type="number" name="obtained_marke[{{ $student->id }}]" class="form-control">
+                        <input type='hidden' name='roll_number[{{ $student->id }}]' value="{{ $student->roll_number }}">
+                        {{-- <input type='hidden' name='student_name[{{ $student->id }}]' value="{{ $student->student_name }}"> --}}
+                        {{-- <input type='hidden' name='father_name[{{ $student->id }}]' value="{{ $student->father_name }}"> --}}
+                        <input type='hidden' name='class_id[{{ $student->id }}]' value="{{ $student->class->id }}">
+                        <input type='hidden' name='session_id[{{ $student->id }}]' value="{{ $student->session->id }}">
+                        <input type='hidden' name='section_id[{{ $student->id }}]' value="{{  $student->section->id }}">
+                        <input type='hidden' name='academic_year_id[{{ $student->id }}]' value="{{ @$student->academic_year->id  }}">
+
+                        <input type='hidden' name='marke[{{ $student->id }}]' value="{{ $Examclass->marke }}">
+                        <input type='hidden' name='pass_marke[{{ $student->id }}]' value="{{ $Examclass->pass_marke }}">
+                        <input type='hidden' name='examination_id[{{ $student->id }}]' value="{{ $Examclass->examination_id }}">
+                        <input type='hidden' name='exam_class_id[{{ $student->id }}]' value="{{ $Examclass->id }}">
+                        
+                        
                     </td>
+                   
                 </tr>
             @endforeach
         @endif

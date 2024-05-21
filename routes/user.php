@@ -73,6 +73,8 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::post('update_class_exam/{id}', [InstructorCourseController::class,"updateClassExam"])->name('instructor.class_exam.update');
         Route::post('delete_class_exam', [InstructorCourseController::class,"destroyClassExam"])->name('instructor.class_exam.delete');
         Route::get('/status_class_exam/{id}', [InstructorCourseController::class, 'statusClassExam'])->name('instructor.class_exam.status');
+
+        Route::post('/student_result_store', [InstructorCourseController::class, 'storeStudentResult'])->name('instructor.student_result_store');
         
 
 
