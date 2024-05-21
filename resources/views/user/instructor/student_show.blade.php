@@ -44,7 +44,7 @@
             <th>Section</th>
             <th>Mark</th>
             <th>Pass Mark</th>
-            <th>Add Mark</th>
+            <th>Obtained Marke</th>
         </tr>
       </thead>
       <tbody>
@@ -75,7 +75,8 @@
                         <input type='hidden' name='session_id[{{ $student->id }}]' value="{{ $student->session->id }}">
                         <input type='hidden' name='section_id[{{ $student->id }}]' value="{{  $student->section->id }}">
                         <input type='hidden' name='academic_year_id[{{ $student->id }}]' value="{{ @$student->academic_year->id  }}">
-
+                        
+                        <input type='hidden' name='subject_id[{{ $student->id }}]' value="{{ $Examclass->subject_id }}">
                         <input type='hidden' name='marke[{{ $student->id }}]' value="{{ $Examclass->marke }}">
                         <input type='hidden' name='pass_marke[{{ $student->id }}]' value="{{ $Examclass->pass_marke }}">
                         <input type='hidden' name='examination_id[{{ $student->id }}]' value="{{ $Examclass->examination_id }}">
