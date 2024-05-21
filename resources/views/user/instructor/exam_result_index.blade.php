@@ -7,7 +7,7 @@
 
 <div class="right_section">
     <div>
-        <h3>Manage Class Test</h3>
+        <h3>Manage Exam Result</h3>
     </div>
 </div>
 
@@ -29,11 +29,17 @@
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
+            <th scope="col">Roll</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Student Father</th>
             <th scope="col">Class Name</th>
             <th scope="col">Subject Name</th>
-            <th scope="col">Class Test IMAGE</th>
-            <th scope="col">Class Test Duration</th>
-            <th scope="col">DETAILS</th>
+            <th scope="col">Section</th>
+            <th scope="col">session</th>
+            <th scope="col">Academic year</th>
+            <th scope="col">Mark</th>
+            <th scope="col">Pass Mark</th>
+            <th scope="col">Obtained Marke</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -46,18 +52,21 @@
 
             <tr>
             <td>{{ $i++ }}</td>
-            <td>{{  $examResult->class->name }}</td>
-            {{-- <td>{{  $class_test->subject->name }}</td> --}}
-{{--             
+            <td>{{ @$examResult->admissionStudent->roll_number }}</td>
+            <td>{{ @$examResult->admissionStudent->student_name }}</td>
+            <td>{{ @$examResult->admissionStudent->father_name }}</td>
+            <td>{{ @$examResult->class->name }}</td>
+            <td>{{ @$examResult->subject->name }}</td>
+            <td>{{ @$examResult->schoolsection->name }}</td> 
+            <td>{{ @$examResult->session->start_year }}-{{ $examResult->session->end_year }}</td>
+            <td>{{ @$examResult->admissionStudent->academic_year->year }}</td>    
+            <td>{{ @$examResult->marke }}</td>                    
+            <td>{{ @$examResult->pass_marke }}</td>
+            <td>{{ @$examResult->obtained_marke }}</td>
             <td>
-                <img src="{{$class_test->image_show}}" alt="" width="60px" height="40px" srcset="">
+                <a href="{{ route('instructor.exam_result.edit', $examResult->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
+                {{-- <button class="btn text-danger delete-button" courseId="{{ $class_test->id }}"><i class="icon fa fa-trash tx-28"></i></button> --}}
             </td>
-            <td>{{date('h:i:A',strtotime(@$class_test->class_test_duration))}}</td>
-            <td>{{  $class_test->details }}</td>
-            <td>
-                <a href="{{ route('instructor.class_exam.edit', $class_test->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
-                <button class="btn text-danger delete-button" courseId="{{ $class_test->id }}"><i class="icon fa fa-trash tx-28"></i></button>
-            </td> --}}
             </tr>
 
 

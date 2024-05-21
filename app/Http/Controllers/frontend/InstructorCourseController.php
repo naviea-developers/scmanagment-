@@ -965,7 +965,7 @@ class InstructorCourseController extends Controller
     public function indexResultExam()
     {
         // dd('hi');
-        $data['teacherAssents']=$teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        $data['teacherAssents']=$teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->first();
         $data['examResults']=ExamResult::where('teacher_id',$teacherAssents->teacher_id)
                                          ->where('class_id',$teacherAssents->class_id)
                                          ->where('section_id',$teacherAssents->section_id)
@@ -973,8 +973,33 @@ class InstructorCourseController extends Controller
                                          ->where('subject_id',$teacherAssents->subject_id)
                                         ->orderBy('id', 'desc')->get();
         // $data['examinations']=Examination::orderBy('id', 'desc')->get();
-        
         return view('user.instructor.exam_result_index',$data);
+    }
+
+    public function editResultExam($id)
+    {
+        $data['examResult']=ExamResult::find($id);
+        // $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        return view('user.instructor.exam_result_update',$data);
+    }
+
+    public function updateResultExam(Request $request, $id)
+    {
+        $request->validate([
+            'obtained_marke' => 'required',
+        ]);
+        try{
+            DB::beginTransaction();
+            $examResult = ExamResult::find($id);
+            $examResult->obtained_marke = $request->obtained_marke;    
+            $examResult->save();
+            DB::commit();
+            return redirect()->route('instructor.exam_result.index')->with('message','Exam Result Update Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
     }
 
 
@@ -1008,10 +1033,11 @@ class InstructorCourseController extends Controller
         if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
             $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-        }elseif( $classId && $sessionId && $examinationId && $subjectId){
-            $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
-            $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
         }
+        // elseif( $classId && $sessionId && $examinationId && $subjectId){
+        //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
+        //     $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+        // }
 
         // if( $classId && $sectionId && $sessionId){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
@@ -1116,6 +1142,7 @@ class InstructorCourseController extends Controller
             $examResult->class_id = $request->class_id[$studentId] ?? 0;
             $examResult->session_id = $request->session_id[$studentId] ?? 0;
             $examResult->section_id =$request->section_id[$studentId] ?? 0;
+            $examResult->subject_id =$request->subject_id[$studentId] ?? 0;
             $examResult->academic_year_id = $request->academic_year_id[$studentId] ?? 0;
             $examResult->marke = $request->marke[$studentId] ?? 0;
             $examResult->pass_marke = $request->pass_marke[$studentId] ?? 0;

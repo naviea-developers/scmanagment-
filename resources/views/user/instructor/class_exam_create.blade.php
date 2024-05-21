@@ -14,15 +14,15 @@
       <div class="br-section-wrapper">
         <h5 class="br-section-label text-center mb-4"> Add Class Exam</h5>
          <p  class="br-section-label text-center mb-1">Add Class Exam For Students</p>
-
         <hr>
+
         @if(count($errors) > 0)
         @foreach($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
         @endforeach
         @endif
 
-            {{-- success message start --}}
+        {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
             {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
@@ -34,7 +34,7 @@
                 }, 3000);
             </script>
             @endif
-            {{-- success message start --}}
+        {{-- success message start --}}
 
 
         <!----- Start Add Product Form input ------->

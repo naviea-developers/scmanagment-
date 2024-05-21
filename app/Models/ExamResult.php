@@ -44,4 +44,8 @@ class ExamResult extends Model
         return $this->belongsTo(AcademicYear::class,"academic_year_id",'id');
     }
 
+    public function admissionStudent(){
+        return $this->belongsTo(Admission::class,"student_id",'id');
+    }
+
 }
