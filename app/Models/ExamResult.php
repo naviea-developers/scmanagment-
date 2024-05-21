@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ExamResult extends Model
 {
     use HasFactory;
+    
+    public function student(){
+        return $this->belongsTo(Admission::class,"student_id",'id');
+    }
     public function subject(){
         return $this->belongsTo(Subject::class,"subject_id",'id');
     }
@@ -18,6 +22,9 @@ class ExamResult extends Model
 
     public function session(){
         return $this->belongsTo(Session::class,"session_id",'id');
+    }
+    public function section(){
+        return $this->belongsTo(SchoolSection::class,"section_id",'id');
     }
 
     public function academicYear(){

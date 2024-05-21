@@ -31,40 +31,99 @@ Admin - All Results
             @endif
             {{-- success message End --}}
 
+
+
+            <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+              <div class="row">
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Examination:</b></label>
+                  <select class="form-control searchbtn" name="examination_id" id="examination_id">
+                      <option value="">Select Examination</option>
+                      @foreach ($examinations as $examination)
+                      <option value="{{ $examination->id }}">{{ $examination->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Session:</b></label>
+                  <select class="form-control" name="session_id" id="session_id">
+                      <option value="">Select Session</option>
+                      @foreach ($sessions as $session)
+                      <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Class:</b></label>
+                  <select class="form-control class_id" name="class_id" id="class">
+                      <option value="">Select Class</option>
+                      @foreach ($classes as $class)
+                      <option value="{{ $class->id }}">{{ $class->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                {{-- <div class="col-md-2">
+                  <label class=" form-control-label"><b>Group:</b></label>
+                  <select class="form-control group_id" name="group_id" id="group">
+                      <option value="">Select Group</option>
+                     
+                  </select>
+                </div> --}}
+                <div class="col-md-3">
+                  <label class=" form-control-label"><b>Section:</b></label>
+                  <select class="form-control section_id" name="section_id" id="section">
+                      <option value="">Select Section</option>
+                      {{-- @foreach ($sections as $section)
+                      <option value="{{ $section->id }}">{{ $section->name }}</option>
+                      @endforeach --}}
+                  </select>
+                </div>
+                {{-- <div class="col-md-2">
+                  <label class=" form-control-label"><b>Roll Number:</b></label>
+                  <input type="number" class="form-control" name="roll_number" id="roll_number">
+                </div> --}}
+              </div>
+            </div>
+
+
+
             <div class="table-wrapper">
-              <table id="datatable1" class="table display responsive nowrap">
+              <table id="dataTableB" class="table display responsive nowrap">
+              {{-- <table id="datatable1" class="table display responsive nowrap"> --}}
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Exam Name</th>
+                    <th class="wd-15p">Teacher</th>
                     <th class="wd-15p">Class</th>
-                    <th class="wd-15p">Sutdent</th>
                     <th class="wd-15p">Roll</th>
+                    <th class="wd-15p">Sutdent</th>
                     <th class="wd-15p">Session</th>
+                    <th class="wd-15p">Section</th>
                     <th class="wd-15p">Full Marks</th>
                     <th class="wd-15p">Pass Marks</th>
-                    <th class="wd-15p">Fail Marks</th>
+                    <th class="wd-15p">Obtained Marks</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @php
+                    {{-- @php
                         $i = 1;
                     @endphp
                   @if (count($results) > 0)
                     @foreach ($results as $result)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-                          <td>Name</td>
-
+                          <td>{{ @$result->examination->name }}</td>
+                          <td>{{ @$result->class->name }}</td>
+                          <td>{{ @$result->roll_number }}</td>
+                          <td>{{ @$result->student->student_name }}</td>
+                          <td>{{ @$result->session->start_year }} - {{ @$result->session->end_year }}</td>
+                          <td>{{ @$result->marke }}</td>
+                          <td>{{ @$result->pass_marke }}</td>
+                          <td>{{ @$result->obtained_marke }}</td>
 
                           <td>
                             @if(@$result->status == 0)
@@ -79,7 +138,7 @@ Admin - All Results
                           </td>
                       </tr> 
                     @endforeach
-                  @endif
+                  @endif --}}
 
                 </tbody>
               </table>
@@ -130,4 +189,60 @@ Admin - All Results
     </div><!-- modal -->
 
    
+@endsection
+
+
+
+
+
+
+@section('script')
+
+  <script>
+    var s_data = $('#dataTableB').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            "url": "{{ route('admin.getResultByAjax') }}",
+            "dataType": "json",
+            "type": "POST",
+            data: function(data){
+              data.examination_id= $('#examination_id').val(),
+              data.session_id=$('#session_id').val(),
+              data.class_id= $('.class_id').val(),
+              // data.group_id= $('.group_id').val(),
+              data.section_id= $('.section_id').val(),
+              // data.roll_number= $('.roll_number').val(),
+              data._token = "{{ csrf_token() }}";
+
+            },
+        },
+        "columns": [
+            { "data": "id"},
+            { "data": "examination_id"},
+            { "data": "teacher_id"},
+            { "data": "class_id"},
+            { "data": "roll_number"},
+            { "data": "student_id"},
+            { "data": "session_id"},
+            { "data": "section_id"},
+            { "data": "marke"},
+            { "data": "pass_marke"},
+            { "data": "obtained_marke"},
+            { "data": "status"},
+            { "data": "options"},
+        ],
+        "columnDefs": [ {
+          "targets": 12,
+          "orderable": false
+          } ]
+
+    });
+    $('#examination_id, #session_id, .class_id, .group_id, .section_id, #roll_number').change(function(){
+      console.log(this);
+      console.log(s_data);
+      s_data.draw();
+    });
+    
+  </script>
 @endsection
