@@ -65,17 +65,17 @@
                           <select  class="form-control" name="url">
                             <option value="">Select Page</option>
                             <option @if ($menu->url == 'about') Selected @endif  value="about">about page</option>
-                            <option @if ($menu->url == 'learner') Selected @endif value="learner">learnar page</option>
-                            <option @if ($menu->url == 'instructor') Selected @endif value="instructor">instructor page</option>
+                            <option @if ($menu->url == 'learner') Selected @endif value="learner">student page</option>
+                            <option @if ($menu->url == 'instructor') Selected @endif value="instructor">teacher page</option>
                             <option @if ($menu->url == 'contact') Selected @endif value="contact">contact page</option>
                             <option @if ($menu->url == 'library') Selected @endif value="library">library page</option>
                             <option @if ($menu->url == 'event-list') Selected @endif value="event-list">event page</option>
                             <option @if ($menu->url == 'blogs') Selected @endif value="blogs">blogs page</option>
-                            <option @if ($menu->url == 'maestro-class') Selected @endif value="maestro-class">master course page</option>
+                            {{-- <option @if ($menu->url == 'maestro-class') Selected @endif value="maestro-class">master course page</option> --}}
                             <option @if ($menu->url == 'e-book-list') Selected @endif value="e-book-list">e-book</option>
                             <option @if ($menu->url == 'e-book-audio-list') Selected @endif value="e-book-audio-list">e-book-audio</option>
                             <option @if ($menu->url == 'e-book-video-list') Selected @endif value="e-book-video-list">e-book-video</option>
-                            <option @if ($menu->url == 'course_list') Selected @endif value="course_list">admission</option>
+                            {{-- <option @if ($menu->url == 'course_list') Selected @endif value="course_list">admission</option> --}}
 
                             <option @if ($menu->url == 'faqs') Selected @endif value="faqs">faqs page</option>
                             <option @if ($menu->url == 'privacy-policy') Selected @endif value="privacy-policy">privacy policy page</option>
