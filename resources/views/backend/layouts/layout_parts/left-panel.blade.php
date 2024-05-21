@@ -84,166 +84,10 @@
 
 
 
-            {{-- <li class="sub-item">
-                @php
-                    $r_check = ( Route::is('home-sub-category.create') ||  Route::is('home-sub-category.index') || Route::is('home-sub-category.edit'));
-                @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Sub Category</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-sub-category.create') }}" class="sub-link {{(Route::is('home-sub-category.create') ) ?'active':''}}">Add New Sub Category</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-sub-category.index') }}" class="sub-link {{(Route::is('home-sub-category.index') || Route::is('home-sub-category.edit')) ?'active':''}}">Manage Sub Category</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-child-category.create') ||  Route::is('home-child-category.index') || Route::is('home-child-category.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-
-                    <span class="menu-item-label">Child Category</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-child-category.create') }}" class="sub-link {{(Route::is('home-child-category.create') ) ?'active':''}}">Add New Child Category</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-child-category.index') }}" class="sub-link {{(Route::is('home-child-category.index') || Route::is('home-child-category.edit')) ?'active':''}}">Manage Child Category</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-banner.create') ||  Route::is('home-banner.index') || Route::is('home-banner.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Banner</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-banner.create') }}" class="sub-link {{( Route::is('home-banner.create') ) ?'active':''}}">Add New Banner</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-banner.index') }}" class="sub-link {{(Route::is('home-banner.index') || Route::is('home-banner.edit')) ?'active':''}}">Manage Banner</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-slider.create') ||  Route::is('home-slider.index') || Route::is('home-slider.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Slider</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-slider.create') }}" class="sub-link {{( Route::is('home-slider.create') ) ?'active':''}}">Add New Slider</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-slider.index') }}" class="sub-link {{(Route::is('home-slider.index') || Route::is('home-slider.edit')) ?'active':''}}">Manage Slider</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- // Brand // --}}
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-brands.create') ||  Route::is('home-brands.index') || Route::is('home-brands.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Brand</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-brands.create') }}" class="sub-link {{( Route::is('home-brands.create') ) ?'active':''}}">Add New Brand</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-brands.index') }}" class="sub-link {{(Route::is('home-brands.index') || Route::is('home-brands.edit')) ?'active':''}}">Manage Brand</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- // Brand // --}}
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-partner.create') ||  Route::is('home-partner.index') || Route::is('home-partner.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Our Partner</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-partner.create') }}" class="sub-link {{( Route::is('home-partner.create') ) ?'active':''}}">Add New partner</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-partner.index') }}" class="sub-link {{(Route::is('home-partner.index') || Route::is('home-partner.edit')) ?'active':''}}">Manage partner</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('admin.country.create') ||  Route::is('admin.country.index') || Route::is('admin.country.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Country</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('admin.country.create') }}" class="sub-link {{( Route::is('admin.country.create') ) ?'active':''}}">Add New Country</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('admin.country.index') }}" class="sub-link {{(Route::is('admin.country.index') || Route::is('admin.country.edit')) ?'active':''}}">Manage Country</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-client.create') ||  Route::is('home-client.index') || Route::is('home-client.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Our Media Partner</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-client.create') }}" class="sub-link {{( Route::is('home-client.create') ) ?'active':''}}">Add New Media Partner</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-client.index') }}" class="sub-link {{(Route::is('home-client.index') || Route::is('home-client.edit')) ?'active':''}}">Manage Media Partner</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class="sub-item">
-                @php
-                    $r_check = ( Route::is('admin.language.create') ||  Route::is('admin.language.index') || Route::is('admin.language.edit'));
-                @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Language</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('admin.language.create') }}" class="sub-link {{( Route::is('admin.language.create') ) ?'active':''}}">Add New Language</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('admin.language.index') }}" class="sub-link {{(Route::is('admin.language.index') || Route::is('admin.language.edit')) ?'active':''}}">Manage Language</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-            {{-- <li class="sub-item">
-                @php
-                $r_check = ( Route::is('home-servicetab.create') ||  Route::is('home-servicetab.index') || Route::is('home-servicetab.edit'));
-               @endphp
-                 <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
-                    <span class="menu-item-label">Service Tab</span>
-                </a>
-                <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
-                    <li class="sub-item"><a href="{{ route('home-servicetab.create') }}" class="sub-link {{( Route::is('home-servicetab.create') ) ?'active':''}}">Add Service Tab</a>
-                    </li>
-                    <li class="sub-item"><a href="{{ route('home-servicetab.index') }}" class="sub-link {{(Route::is('home-servicetab.index') || Route::is('home-servicetab.edit')) ?'active':''}}">Manage Service Tab</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- <li class="sub-item">
-                <a href="{{ route('backend.home_content') }}"  class="sub-link {{(Route::is('backend.home_content')) ?'active':''}}">Content Setup</a>
-            </li> --}}
+          
 
             </ul>
-        </li><!-- home-menu-item -->
+        </li>
 
          {{-- Class Section Sidebar --}}
          {{-- <li class="br-menu-item">
@@ -341,20 +185,20 @@
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.bulding.index') }}" class="sub-link {{(Route::is('admin.bulding.index') || Route::is('admin.bulding.edit') || Route::is('admin.bulding.create')) ?'active':''}}">Manage Buldings</a></li>
-                <li class="sub-item"><a href="{{ route('admin.floor.index') }}" class="sub-link {{(Route::is('admin.floor.index') || Route::is('admin.floor.edit') || Route::is('admin.floor.create')) ?'active':''}}">Manage Floors</a></li>
+                <li class="sub-item"><a href="{{ route('admin.bulding.index') }}" class="sub-link {{(Route::is('admin.bulding.index') || Route::is('admin.bulding.edit') || Route::is('admin.bulding.create')) ?'active':''}}">Manage Bulding</a></li>
+                <li class="sub-item"><a href="{{ route('admin.floor.index') }}" class="sub-link {{(Route::is('admin.floor.index') || Route::is('admin.floor.edit') || Route::is('admin.floor.create')) ?'active':''}}">Manage Floor</a></li>
                 <li class="sub-item"><a href="{{ route('admin.room.index') }}" class="sub-link {{(Route::is('admin.room.index') || Route::is('admin.room.edit') || Route::is('admin.room.create')) ?'active':''}}">Manage Rooms</a></li>
-                <li class="sub-item"><a href="{{ route('admin.academic_year.index') }}" class="sub-link {{(Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit') || Route::is('admin.academic_year.create')) ?'active':''}}">Manage Academic Years</a></li>
+                <li class="sub-item"><a href="{{ route('admin.academic_year.index') }}" class="sub-link {{(Route::is('admin.academic_year.index') || Route::is('admin.academic_year.edit') || Route::is('admin.academic_year.create')) ?'active':''}}">Manage Academic Year</a></li>
                 <li class="sub-item"><a href="{{ route('admin.session.index') }}" class="sub-link {{(Route::is('admin.session.index') || Route::is('admin.session.edit') || Route::is('admin.session.create')) ?'active':''}}">Manage Session</a></li>
-                <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Classes</a></li>
+                <li class="sub-item"><a href="{{ route('admin.class.index') }}" class="sub-link {{(Route::is('admin.class.index') || Route::is('admin.class.edit') || Route::is('admin.class.create')) ?'active':''}}">Manage Class</a></li>
                 <li class="sub-item"><a href="{{ route('admin.subject_teacher_assent.index') }}" class="sub-link {{(Route::is('admin.subject_teacher_assent.index') || Route::is('admin.subject_teacher_assent.edit') || Route::is('admin.subject_teacher_assent.create')) ?'active':''}}">Manage Teacher Assent</a></li>
                 <li class="sub-item"><a href="{{ route('admin.class_duration.index') }}" class="sub-link {{(Route::is('admin.class_duration.index') || Route::is('admin.class_duration.edit') || Route::is('admin.class_duration.create')) ?'active':''}}">Manage Class Duration</a></li>
-                <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Groups</a></li>
+                <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Group</a></li>
                 <li class="sub-item"><a href="{{ route('admin.school_section.index') }}" class="sub-link {{(Route::is('admin.school_section.index') || Route::is('admin.school_section.edit') || Route::is('admin.school_section.create')) ?'active':''}}">Manage Section</a></li>
-                <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subjects</a></li>
+                <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subject</a></li>
                 <li class="sub-item"><a href="{{ route('admin.fee.index') }}" class="sub-link {{(Route::is('admin.fee.index') || Route::is('admin.fee.edit') || Route::is('admin.fee.create')) ?'active':''}}">Manage Fees Name</a></li>
                 <li class="sub-item"><a href="{{ route('admin.fee_management.index') }}" class="sub-link {{(Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit') || Route::is('admin.subject.create')) ?'active':''}}">Fees Management</a></li>
-                <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examinations</a></li>
+                <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examination</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examtype.index') }}" class="sub-link {{(Route::is('admin.examtype.index') || Route::is('admin.examtype.edit') || Route::is('admin.examtype.create')) ?'active':''}}">Manage Exam Type</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examclass.index') }}" class="sub-link {{(Route::is('admin.examclass.index') || Route::is('admin.examclass.edit') || Route::is('admin.examclass.create')) ?'active':''}}">Manage Exam Class</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examschedule.index') }}" class="sub-link {{(Route::is('admin.examschedule.index') || Route::is('admin.examschedule.edit') || Route::is('admin.examschedule.create')) ?'active':''}}">Manage Exam Schedule</a></li>
@@ -409,6 +253,24 @@
             </ul>
         </li><!-- br-Speakers-item --> --}}
 
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Teacher</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('admin.teacher.create') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.teacher.index') }}" class="sub-link {{(Route::is('admin.teacher.index') || Route::is('admin.teacher.edit')) ?'active':''}}">Manage Teacher</a>
+                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
+                </li> --}}
+            </ul>
+        </li><!-- br-Speakers-item -->
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'school_student')?'active':''}} ">
@@ -499,7 +361,7 @@
         </li>
 
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'u_course')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Programs</span>
@@ -517,12 +379,10 @@
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.u_course.index') }}" class="sub-link {{(Route::is('admin.u_course.index') || Route::is('admin.u_course.edit')) ?'active':''}}">Manage Programs</a>
                 </li>
-               {{-- department ment --}}
                 <li class="sub-item"><a href="{{ route('admin.department.create') }}" class="sub-link {{( Route::is('admin.department.create') ) ?'active':''}}">Add Department</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.department.index') }}" class="sub-link {{(Route::is('admin.department.index') || Route::is('admin.department.edit')) ?'active':''}}">Manage Department</a>
                 </li>
-                {{-- degree ment --}}
                 <li class="sub-item"><a href="{{ route('admin.degree.create') }}" class="sub-link {{( Route::is('admin.degree.create') ) ?'active':''}}">Add Degree</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.degree.index') }}" class="sub-link {{(Route::is('admin.degree.index') || Route::is('admin.degree.edit')) ?'active':''}}">Manage Degree</a>
@@ -536,21 +396,19 @@
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.language.index') }}" class="sub-link {{(Route::is('admin.language.index') || Route::is('admin.language.edit')) ?'active':''}}">Manage Language</a>
                 </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
-                </li> --}}
             </ul>
-        </li><!-- br-Speakers-item -->
+        </li>
 
         <li class="br-menu-item">
             <a href="{{ route('admin.student_appliction_list') }}" class="br-menu-link {{ Route::is('admin.student_appliction_list') ? "show-sub" :""}}">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Program Applictions</span>
             </a><!-- br-menu-link -->
-        </li>
+        </li> --}}
 
 
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'university')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">University</span>
@@ -568,7 +426,7 @@
                 </li>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
 
@@ -831,11 +689,11 @@
                 <span class="menu-item-label">All User</span>
             </a><!-- br-menu-link -->
             @php
-            $r_check = ( Route::is('admin.teacher.create') || Route::is('admin.host.create') || Route::is('admin.selery.create')
+            $r_check = ( Route::is('admin.host.create') || Route::is('admin.selery.create')
             || Route::is('admin.selery.index') || Route::is('admin.selery.edit')  ||  Route::is('admin.host.index')
             || Route::is('admin.host.edit') || Route::is('admin.instrutor.create') ||  Route::is('admin.instrutor.index')
-            || Route::is('admin.instrutor.edit') ||  Route::is('admin.teacher.index') ||  Route::is('admin.student.create')
-            || Route::is('admin.student.index') ||  Route::is('admin.student.edit') || Route::is('admin.teacher.edit')
+            || Route::is('admin.instrutor.edit') ||  Route::is('admin.student.create')
+            || Route::is('admin.student.index') ||  Route::is('admin.student.edit')
             || Route::is('admin.affiliate.index') ||  Route::is('admin.affiliate.create') || Route::is('admin.affiliate.edit')
             || Route::is('backend.create_admin') ||  Route::is('backend.manage_admin') || Route::is('backendog.edit_admin')
             || Route::is('admin.consultant.create') ||  Route::is('admin.consultant.index') || Route::is('admin.consultant.edit'));
@@ -851,12 +709,12 @@
                 <li class="sub-item"><a href="{{ route('admin.teacher.index') }}" class="sub-link {{(Route::is('admin.teacher.index') || Route::is('admin.teacher.edit')) ?'active':''}}">Manage Teacher</a>
                 </li>
 
-                <li class="sub-item"><a href="{{ route('admin.student.create') }}" class="sub-link {{( Route::is('admin.student.create') ) ?'active':''}}">Add New Student</a>
+                <li class="sub-item"><a href="{{ route('admin.student.create') }}" class="sub-link {{( Route::is('admin.student.create') ) ?'active':''}}">Add New User</a>
                 </li>
-                <li class="sub-item"><a href="{{ route('admin.student.index') }}" class="sub-link {{(Route::is('admin.student.index') || Route::is('admin.student.edit')) ?'active':''}}">Manage Student</a>
+                <li class="sub-item"><a href="{{ route('admin.student.index') }}" class="sub-link {{(Route::is('admin.student.index') || Route::is('admin.student.edit')) ?'active':''}}">Manage User</a>
                 </li>
 
-                <li class="sub-item"><a href="{{ route('admin.instrutor.create') }}" class="sub-link {{( Route::is('admin.instrutor.create') ) ?'active':''}}">Add New Speakers</a>
+                {{-- <li class="sub-item"><a href="{{ route('admin.instrutor.create') }}" class="sub-link {{( Route::is('admin.instrutor.create') ) ?'active':''}}">Add New Speakers</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.instrutor.index') }}" class="sub-link {{(Route::is('admin.instrutor.index') || Route::is('admin.instrutor.edit')) ?'active':''}}">Manage Speakers</a>
                 </li>
@@ -879,7 +737,7 @@
                 <li class="sub-item"><a href="{{ route('admin.consultant.create') }}" class="sub-link {{( Route::is('admin.consultant.create') ) ?'active':''}}">Add New Consultant</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.consultant.index') }}" class="sub-link {{(Route::is('admin.consultant.index') || Route::is('admin.consultant.edit')) ?'active':''}}">Manage Consultant</a>
-                </li>
+                </li> --}}
 
             </ul>
         </li><!-- br-Teacher-item -->
@@ -1023,7 +881,7 @@
             </ul>
         </li><!-- br-blog-item -->
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'show-sub':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Packages</span>
@@ -1032,20 +890,12 @@
             $r_check = ( Route::is('admin.all_package') ||  Route::is('package.order.details') ||  Route::is('admin.all_year_package') || Route::is('admin.package.order.manage') || Route::is('admin.edit_package') || Route::is('admin.edit_year_package'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-
                 <li class="sub-item"><a href="{{ route('admin.all_package') }}" class="sub-link {{( Route::is('admin.all_package') || Route::is('admin.edit_package')) ?'active':''}}">Manage Packages</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.package.order.manage') }}" class="sub-link {{( Route::is('admin.package.order.manage') || Route::is('package.order.details') ) ?'active':''}}">Package Subscription</a>
                 </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.all_year_package') }}" class="sub-link {{(Route::is('admin.all_year_package') || Route::is('admin.edit_year_package')) ?'active':''}}">Yearly Package</a>
-                </li>
-                <li class="sub-item"><a href="{{ route('package.index') }}" class="sub-link {{(Route::is('package.index') || Route::is('package.edit')) ?'active':''}}">All Package</a>
-                </li> --}}
-
-
             </ul>
-
-        </li><!-- package-menu-item -->
+        </li> --}}
 
 
 

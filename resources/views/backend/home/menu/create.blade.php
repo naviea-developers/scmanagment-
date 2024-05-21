@@ -64,17 +64,17 @@
                             <select  class="form-control" name="url">
                               <option value="">Select Page</option>
                               <option value="about">about page</option>
-                              <option value="learner">learnar page</option>
-                              <option value="instructor">instructor page</option>
+                              <option value="learner">student page</option>
+                              <option value="instructor">teacher page</option>
                               <option value="contact">contact page</option>
                               <option value="library">library page</option>
                               <option value="event-list">event page</option>
                               <option value="blogs">blogs page</option>
-                              <option value="maestro-class">master course page</option>
+                              {{-- <option value="maestro-class">master course page</option> --}}
                               <option value="e-book-list">e-book</option>
                               <option value="e-book-audio-list">e-book-audio</option>
                               <option value="e-book-video-list">e-book-video</option>
-                              <option value="course_list">admission</option>
+                              {{-- <option value="course_list">admission</option> --}}
 
                               <option value="faqs">faq</option>
                               <option value="privacy-policy">privacy policy</option>

@@ -22,8 +22,9 @@
                            {{ $home_content->register_des }}                        </h4>
                         <br>
                         <center class="text-center">
-                            <a href="{{ route('frontend.teacher_register') }}"><strong> Become an Teacher</strong></a>                        </center>
-                        <center class="text-center">
+                            <a href="{{ route('frontend.teacher_register') }}"><strong> Become an Teacher</strong></a>                        
+                        </center>
+                        {{-- <center class="text-center">
                             <a href="{{ route('frontend.seller_register') }}"><strong> Become an Seller</strong></a>                        </center>
                         <center class="text-center">
                         <a href="{{ route('frontend.affiliate_register') }}">
@@ -34,7 +35,7 @@
                            <a href="{{ route('frontend.consultant_register') }}">
                            <strong>
                                Become a Consultant                        </strong></a>
-                           </center>
+                           </center> --}}
                         <img class="d-block img-fluid mx-auto" style="margin-top:100px; height:380px; width:330px;" src="{{  $home_content->register_image_show }}"
                             width="344" alt="Illustartion">
                     </div>

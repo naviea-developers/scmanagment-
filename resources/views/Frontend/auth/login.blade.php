@@ -19,7 +19,7 @@
                             Login as                            <strong>
                                 <a href="{{ route('frontend.teacher_signin') }}" class="text-decoration-underline">Teacher</a>                            </strong>
                         </div>
-                        <div class="mt-sm-2 text-center">
+                        {{-- <div class="mt-sm-2 text-center">
                             Login as                            <strong>
                                 <a href="{{ route('frontend.seller_signin') }}" class="text-decoration-underline">Seller</a>                            </strong>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="mt-sm-2 mb-sm-4 text-center">
                             Login as                            <strong>
                                 <a href="{{ route('frontend.consultant_signin') }}" class="text-decoration-underline">Consultant</a>                            </strong>
-                        </div>
+                        </div> --}}
                         <img class="d-block mx-auto img-fluid" src="{{ asset('public/frontend') }}/application/modules/frontend/views/themes/default/assets/img/signin.svg"
                             width="344" alt="Illustartion">
                         <!--<div class="mt-4 mt-sm-5">Don't have an account? <a href="" class="text-decoration-underline">Sign up here</a></div>-->
