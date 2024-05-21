@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\School_management\ExamType\ExamTypeController;
 use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
 use App\Http\Controllers\Backend\School_management\ExamRoutine\ExamRoutineController;
 use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController;
+use App\Http\Controllers\Backend\School_management\Result\ExamResultController;
 use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
 use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
@@ -289,6 +290,29 @@ Route::post('/get-admission-by-ajax', [AdmissionController::class, 'getAdmission
 
 
 
+
+
+//Add Admission for admin
+Route::prefix('manage-result')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [ExamResultController::class,"index"])->name('admin.exam_result.index');
+    // Route::get('create', [ExamResultController::class,"create"])->name('admin.admission.create');
+    // Route::post('store', [ExamResultController::class,"store"])->name('admin.admission.store');
+    Route::get('details/{id}', [ExamResultController::class,"details"])->name('admin.exam_result.details');
+    Route::get('edit/{id}', [ExamResultController::class,"edit"])->name('admin.exam_result.edit');
+    Route::post('update/{id}', [ExamResultController::class,"update"])->name('admin.exam_result.update');
+    Route::post('delete', [ExamResultController::class,"destroy"])->name('admin.exam_result.delete');
+    Route::get('/status/{id}', [ExamResultController::class, 'status'])->name('admin.exam_result.status');
+    Route::post('/published/{id}', [ExamResultController::class, 'publish'])->name('admin.exam_result.publish');
+
+    // Route::get('/admission/doc/download/{id}', [AdmissionController::class, 'certificateDownload'])->name('admin.admission.download');
+});
+
+
+
+
+
+
+
 // -------------------------------------
 //Add Admission for Student
 // Route::prefix('admission')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -306,6 +330,19 @@ Route::post('/get-admission-by-ajax', [AdmissionController::class, 'getAdmission
     // Route::post('delete', [AdmissionAdmissionController::class,"destroy"])->name('admin.admission.delete');
     // Route::get('/status/{id}', [AdmissionAdmissionController::class, 'status'])->name('admin.admission.status');
 // });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
