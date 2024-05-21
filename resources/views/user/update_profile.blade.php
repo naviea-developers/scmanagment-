@@ -93,6 +93,7 @@
                                 {{-- <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->language }}" name="language"  placeholder="language"/> --}}
                             </div>
 
+
                             @if (auth()->user()->type == 1 || auth()->user()->type == 7)
                                 <div class="col-sm-6">
                                     <label class="mb-2">Continent</label>
@@ -368,12 +369,41 @@
                                 <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->country }}" name="country"  placeholder="country"/>
                             </div> --}}
 
-
                             <div class="col-md-12 mt-3 mb-3">
                                 <label class="mb-2">Address</label>
                                 <input type="text" class="form-control  mb-2" value="{{ auth()->user()->address }}" name="address" placeholder="Address"/>
                             </div>
 
+
+                            @if (auth()->user()->type == 2)
+                            <hr>
+                            <div class="right_section">
+                                <div>
+                                    <h4 style="color: white">Social Links</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mb-2">Facebook</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->facebook_id }}" name="facebook_id"  placeholder="Facebook URL"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mb-2">Twitter</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->twitter_id }}" name="twitter_id"  placeholder="Twitter URL"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mb-2">Google Plus</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->google_id }}" name="google_id"  placeholder="Google Plus URL"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mb-2">Instagram</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->instagram_id }}" name="instagram_id"  placeholder="Instagram URL"/>
+                            </div>
+                        @endif
+
+
+
+
+                           
                             {{-- Customer --}}
                             @if (auth()->user()->type == 1)
                                 

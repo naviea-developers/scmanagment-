@@ -9,18 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('subject_teacher_assents', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('class_id')->default(0);
-            $table->unsignedBigInteger('teacher_id')->default(0);
-            $table->unsignedBigInteger('session_id')->default(0);
-            $table->unsignedBigInteger('section_id')->default(0);
-            $table->tinyInteger('status')->default(1);
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('subject_teacher_assents', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('class_id')->default(0);
+    //         $table->unsignedBigInteger('teacher_id')->default(0);
+    //         $table->unsignedBigInteger('session_id')->default(0);
+    //         $table->unsignedBigInteger('section_id')->default(0);
+    //         $table->tinyInteger('status')->default(1);
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.

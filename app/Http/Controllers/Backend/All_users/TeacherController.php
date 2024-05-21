@@ -7,13 +7,15 @@ use App\Models\Certificate;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Designation;
 use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
     public function index()
     {
-        $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->get();
+        $data['teachers'] = User::where('type','2')->get();
+        // dd($data);
         return view("Backend.all_users.teacher.index",$data);
     }
 
@@ -22,7 +24,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        $data['courses'] = Course::orderBy('id','desc')->get();
+        // $data['courses'] = Course::orderBy('id','desc')->get();
+        $data['designations'] = Designation::where('status',1)->get();
         return view("Backend.all_users.teacher.create",$data);
     }
 
@@ -43,6 +46,8 @@ class TeacherController extends Controller
             $user = New User;
             // $user->course_id = $request->course_id;
             $user->name = $request->name;
+            $user->designation_id = $request->designation_id;
+            $user->teacher_type = $request->teacher_type;
             $user->mobile = $request->mobile;
             $user->email = $request->email;
             $user->nid = $request->nid;
@@ -60,6 +65,12 @@ class TeacherController extends Controller
             $user->description = $request->description ?? "";
             $user->type = 2;
             $user->password = 12345678;
+
+            // Social URL
+            $user->facebook_id = $request->facebook_id;
+            $user->twitter_id = $request->twitter_id;
+            $user->google_id = $request->google_id;
+            $user->instagram_id = $request->instagram_id;
 
             // Bank Information
             $user->bank_name = $request->bank_name;
@@ -123,6 +134,7 @@ class TeacherController extends Controller
     {
        // dd('hi');
         $data["teacher"]= User::find($id);
+        $data['designations'] = Designation::where('status',1)->get();
         return view("Backend.all_users.teacher.update",$data);
     }
 
@@ -142,6 +154,8 @@ class TeacherController extends Controller
         DB::beginTransaction();
         $user = User::find($id);
         $user->name = $request->name;
+        $user->designation_id = $request->designation_id;
+        $user->teacher_type = $request->teacher_type;
         $user->mobile = $request->mobile;
         $user->email = $request->email;
         $user->nid = $request->nid;
@@ -160,6 +174,12 @@ class TeacherController extends Controller
         $user->designation = $request->designation ?? "";
         $user->description = $request->description ?? "";
 
+        // Social URL
+        $user->facebook_id = $request->facebook_id;
+        $user->twitter_id = $request->twitter_id;
+        $user->google_id = $request->google_id;
+        $user->instagram_id = $request->instagram_id;
+        
         // Bank Information
         $user->bank_name = $request->bank_name;
         $user->bank_code_ifsc = $request->bank_code_ifsc;

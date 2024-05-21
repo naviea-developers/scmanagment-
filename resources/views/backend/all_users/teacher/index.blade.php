@@ -31,14 +31,13 @@ Admin - all Teacher
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Name</th>
                     <th class="wd-15p">Image</th>
+                    <th class="wd-15p">Name</th>
+                    <th class="wd-15p">Designation</th>
+                    <th class="wd-15p">Type</th>
                     <th class="wd-15p">mobile</th>
                     <th class="wd-15p">email</th>
-                    <th class="wd-15p">Language</th>
                     <th class="wd-15p">gender</th>
-                    <th class="wd-15p">address</th>
-                    <th class="wd-15p">nid</th>
                     <th class="wd-10p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -51,38 +50,27 @@ Admin - all Teacher
                     @foreach ($teachers as $teacher)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $teacher->name }}</td>
                           <td>
                             <img src="{{$teacher->image_show}}" alt="" width="60px" height="40px" srcset="">
                           </td>
-                          <td>{{ $teacher->mobile }}</td>
-                          <td>{{ $teacher->email }}</td>
+                          <td>{{ $teacher->name }}</td>
+                          <td>{{ @$teacher->user_designation->name }}</td>
                           <td>
-                            @if ($teacher->language == '1')
-                                <p>Bangla</p>
-                            @elseif ($teacher->language == '2')
-                                <p>English</p>
-                            @elseif ($teacher->language == '3')
-                                <p>Hindi</p>
-                            @elseif ($teacher->language == '4')
-                                <p>Arabic</p>
+                            @if ($teacher->teacher_type == 'permanent')
+                            <p>Permanent</p>
+                            @elseif ($teacher->teacher_type == 'guest')
+                            <p>Guest</p>
                             @endif
                           </td>
-
+                          <td>{{ $teacher->mobile }}</td>
+                          <td>{{ $teacher->email }}</td>
                           <td>
                             @if ($teacher->gender=='0')
                               Male
                           @else
                               Female
                           @endif
-
                         </td>
-
-                          <td>{{ $teacher->address }}</td>
-                          <td>{{ $teacher->nid }}</td>
-
-
-
                           <td>
                             @if($teacher->status == 0)
                             <a href="{{ route('admin.teacher.status',$teacher->id) }}" class="btn btn-sm btn-warning">Inactive</a>
