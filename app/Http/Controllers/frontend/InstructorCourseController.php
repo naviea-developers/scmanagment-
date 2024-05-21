@@ -28,6 +28,7 @@ use App\Models\Subject;
 use App\Models\Examination;
 use App\Models\ClassTestExam;
 use App\Models\ExamClass;
+use App\Models\ExamResult;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\SubjectTeacherAssent;
@@ -988,8 +989,9 @@ class InstructorCourseController extends Controller
         $sessionId = $request->input('session_id');
         $subjectId = $request->input('subject_id');
         // return response()->json(['examination_id' => $examinationId,'classId' => $classId,'sectionId' => $sectionId,'subject_id' => $subjectId,'sessionId' => $sessionId]);
-        if( $classId && $sectionId && $sessionId){
+        if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+            $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
         }elseif( $classId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
             $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
@@ -997,11 +999,123 @@ class InstructorCourseController extends Controller
 
         // if( $classId && $sectionId && $sessionId){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
-        // }elseif( $classId && $sessionId && $examinationId && $subjectId){
+        // }elseif( $classId && $sessionId ){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
         //     $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
         // }
+        
         return view('user.instructor.student_show',$data);
+    }
+
+    // public function getTeacherAssentResult(Request $request)
+    // {
+    //     try {
+    //         // Retrieve input parameters
+    //         $examinationId = $request->input('examination_id');
+    //         $classId = $request->input('class_id');
+    //         $sectionId = $request->input('section_id');
+    //         $sessionId = $request->input('session_id');
+    //         $subjectId = $request->input('subject_id');
+
+    //         // Log the input parameters for debugging purposes
+    //         // \Log::info('Received parameters', [
+    //         //     'examination_id' => $examinationId,
+    //         //     'class_id' => $classId,
+    //         //     'section_id' => $sectionId,
+    //         //     'session_id' => $sessionId,
+    //         //     'subject_id' => $subjectId,
+    //         // ]);
+
+    //         // Initialize the query
+    //         // $query = Admission::query();
+
+    //         // // Add conditions to the query based on the received parameters
+    //         // if ($classId) {
+    //         //     $query->where('class_id', $classId);
+    //         // }
+    //         // if ($sectionId) {
+    //         //     $query->where('section_id', $sectionId);
+    //         // }
+    //         // if ($sessionId) {
+    //         //     $query->where('session_id', $sessionId);
+    //         // }
+
+    //         // // Execute the query and get the data
+    //         // $alldata = $query->get();
+
+    //         if( $classId && $sectionId && $sessionId){
+    //             $alldata = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+                
+    //         }elseif( $classId && $sessionId ){
+    //             $alldata = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
+            
+    //         }
+
+    //         // Check if data is found
+    //         if ($alldata->isEmpty()) {
+    //             return response()->json([
+    //                 'status' => 404,
+    //                 'message' => 'No data found'
+    //             ], 404);
+    //         }
+
+    //         // Return the data
+    //         return response()->json([
+    //             'status' => 200,
+    //             'data' => $alldata
+    //         ]);
+
+    //     } catch (\Exception $e) {
+    //         // Log the exception for debugging purposes
+    //         // \Log::error('Error fetching teacher assent results', ['error' => $e->getMessage()]);
+
+    //         // Return a JSON response indicating an internal server error
+    //         return response()->json([
+    //             'status' => 500,
+    //             'error' => 'Internal Server Error'
+    //         ], 500);
+    //     }
+    // }
+
+    public function storeStudentResult(Request $request)
+    {
+        // $marks = $request->input('marks');
+        //  dd($request->all());
+        $request->validate([
+            'obtained_marke' => 'required',
+        ]);
+
+        try{
+            DB::beginTransaction();
+
+        // Loop through each student's data
+        foreach ($request->obtained_marke as $studentId => $marks) {
+            $examResult = new ExamResult();
+            $examResult->student_id = $studentId;
+            $examResult->obtained_marke = $marks;
+           
+            $examResult->roll_number =  $request->roll_number[$studentId] ?? 0;
+            // $examResult->student_name = $request->student_name[$studentId];
+            // $examResult->father_name = $request->father_name[$studentId];
+            $examResult->class_id = $request->class_id[$studentId] ?? 0;
+            $examResult->session_id = $request->session_id[$studentId] ?? 0;
+            $examResult->section_id =$request->section_id[$studentId] ?? 0;
+            $examResult->academic_year_id = $request->academic_year_id[$studentId] ?? 0;
+            $examResult->marke = $request->marke[$studentId] ?? 0;
+            $examResult->pass_marke = $request->pass_marke[$studentId] ?? 0;
+            $examResult->examination_id = $request->examination_id[$studentId] ?? 0;
+            $examResult->exam_class_id = $request->exam_class_id[$studentId] ?? 0;
+            $examResult->teacher_id = auth()->user()->id;
+            $examResult->is_publis = '0';
+            $examResult->save();
+        }
+            DB::commit();
+            return redirect()->route('instructor.exam_result.index')->with('message','Exam Result Add Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
     }
    // Result Exam end
 
