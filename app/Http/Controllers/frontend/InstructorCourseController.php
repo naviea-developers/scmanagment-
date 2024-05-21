@@ -954,13 +954,29 @@ class InstructorCourseController extends Controller
 
 
     // Result Exam start
-    public function indexResultExam()
+    public function createResultExam()
     {
         // dd('hi');
         $data['examinations']=Examination::orderBy('id', 'desc')->get();
         $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        return view('user.instructor.exam_result_create',$data);
+    }
+
+    public function indexResultExam()
+    {
+        // dd('hi');
+        $data['teacherAssents']=$teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        $data['examResults']=ExamResult::where('teacher_id',$teacherAssents->teacher_id)
+                                         ->where('class_id',$teacherAssents->class_id)
+                                         ->where('section_id',$teacherAssents->section_id)
+                                         ->where('session_id',$teacherAssents->session_id)
+                                         ->where('subject_id',$teacherAssents->subject_id)
+                                        ->orderBy('id', 'desc')->get();
+        // $data['examinations']=Examination::orderBy('id', 'desc')->get();
+        
         return view('user.instructor.exam_result_index',$data);
     }
+
 
     //ajax get subject
     public function getTeacherAssentSubject($id){

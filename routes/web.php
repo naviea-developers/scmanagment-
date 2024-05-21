@@ -322,6 +322,7 @@ Route::get('university-program-details/{id}', [FrontendController::class,"progra
 
 
 Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
+Route::get('create_exam_result', [InstructorCourseController::class,"createResultExam"])->name('instructor.exam_result.create');
 Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
 Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
 Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
