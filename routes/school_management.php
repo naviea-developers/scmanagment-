@@ -297,10 +297,10 @@ Route::prefix('manage-result')->middleware(['auth:admin', 'adminCheck:0'])->grou
     Route::get('index', [ExamResultController::class,"index"])->name('admin.exam_result.index');
     // Route::get('create', [ExamResultController::class,"create"])->name('admin.admission.create');
     // Route::post('store', [ExamResultController::class,"store"])->name('admin.admission.store');
-    Route::get('details/{id}', [ExamResultController::class,"details"])->name('admin.exam_result.details');
+    // Route::get('details/{id}', [ExamResultController::class,"details"])->name('admin.exam_result.details');
     Route::get('edit/{id}', [ExamResultController::class,"edit"])->name('admin.exam_result.edit');
     Route::post('update/{id}', [ExamResultController::class,"update"])->name('admin.exam_result.update');
-    Route::post('delete', [ExamResultController::class,"destroy"])->name('admin.exam_result.delete');
+    // Route::post('delete', [ExamResultController::class,"destroy"])->name('admin.exam_result.delete');
     Route::get('/status/{id}', [ExamResultController::class, 'status'])->name('admin.exam_result.status');
     Route::post('/published/{id}', [ExamResultController::class, 'publish'])->name('admin.exam_result.publish');
 
@@ -308,6 +308,7 @@ Route::prefix('manage-result')->middleware(['auth:admin', 'adminCheck:0'])->grou
 });
 
 
+    Route::post('/exam-result-manage-ajax', [ExamResultController::class, 'getResultByAjax'])->name('admin.getResultByAjax');
 
 
 
