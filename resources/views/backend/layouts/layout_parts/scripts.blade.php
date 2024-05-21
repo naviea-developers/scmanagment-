@@ -104,7 +104,7 @@
         $(document).click(function() {
             document.getElementById('sun-editor').value = suneditor.getContents();
         });
-    }
+        }
         $(function(){
         'use strict';
 

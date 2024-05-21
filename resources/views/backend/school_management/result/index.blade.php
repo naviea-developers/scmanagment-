@@ -164,7 +164,7 @@ Admin - All Results
 
     <!--_-- ########### Start Delete Category MODAL ############---->
 
-    <div id="datamodalshow" class="modal fade">
+    {{-- <div id="datamodalshow" class="modal fade">
         <div class="modal-dialog modal-dialog-top" role="document">
         <div class="modal-content tx-size-sm">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
@@ -186,7 +186,7 @@ Admin - All Results
             </div><!-- modal-body -->
         </div><!-- modal-content -->
         </div><!-- modal-dialog -->
-    </div><!-- modal -->
+    </div><!-- modal --> --}}
 
    
 @endsection
