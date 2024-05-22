@@ -426,7 +426,7 @@
 <section class="ourteam-section">
 
 	@foreach (@$designations as $designation)
-		<div class="container ">
+		<div class="container">
 			<div class="our-team-title">
 				<h2 style="color: var(--text_color)">{{ @$designation->name }}</h2>
 			</div>
