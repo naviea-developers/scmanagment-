@@ -40,8 +40,16 @@
                                 <input type="text" name="name" class="form-control" placeholder="Enter Bulding Name" value="{{ $designation->name }}" required>
                             </div>
                             </div>
-                           
                         </div>
+
+                        <div class="row mt-3">
+                          <div class="col-sm-12 ">
+                              <label class="form-control-label">Position: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="number" name="position" class="form-control" placeholder="Enter position" value="{{ $designation->position }}" required>
+                              </div>
+                          </div>
+                      </div>
 
                         {{-- <div class="row">
                             <div class="col-sm-12 mt-3">
@@ -57,7 +65,7 @@
                               </div>
                         </div> --}}
 
-                        </div>
+                        {{-- </div> --}}
 
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">

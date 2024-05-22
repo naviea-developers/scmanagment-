@@ -1,5 +1,5 @@
 @extends('Backend.layouts.layouts')
-@section('title', 'Edit Exams')
+@section('title', 'Edit Exams Subject')
 @section('style')
 <style>
     .select2-container--default .select2-selection--single {
@@ -17,8 +17,8 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-person-chalkboard"></i>
                     <div>
-                      <h4>Update exam Class</h4>
-                      <p class="mg-b-0">Update exam Class Information</p>
+                      <h4>Update exam Subject</h4>
+                      <p class="mg-b-0">Update exam Subject Information</p>
                     </div>
                   </div>
 

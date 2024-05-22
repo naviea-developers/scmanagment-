@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Add exam Class')
+@section('title', 'Add exam Subject')
 @section('style')
 <style>
     .select2-container--default .select2-selection--single {
@@ -21,8 +21,8 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-screen-users"></i>
                     <div>
-                      <h4>Add Exam Class</h4>
-                      <p class="mg-b-0">Add Exams Class</p>
+                      <h4>Add Exam Subject</h4>
+                      <p class="mg-b-0">Add Exams Subject</p>
                     </div>
                 </div>
 

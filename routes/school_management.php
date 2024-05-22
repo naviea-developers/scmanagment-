@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\School_management\Fee\FeeManagementController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
 use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
+use App\Http\Controllers\Backend\School_management\Gallery\GalleryController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
 use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
@@ -147,6 +148,7 @@ Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group(
     Route::post('update/{id}', [ExaminationController::class,"update"])->name('admin.examination.update');
     Route::post('delete', [ExaminationController::class,"destroy"])->name('admin.examination.delete');
     Route::get('/status/{id}', [ExaminationController::class, 'status'])->name('admin.examination.status');
+    Route::get('publish', [ExaminationController::class,"publish"])->name('admin.examination.publish');
 });
 
 //-----------------------------exam type Route start---------------------------//
@@ -235,6 +237,17 @@ Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( func
     Route::post('update/{id}', [NoticeController::class,"update"])->name('admin.notice.update');
     Route::post('delete', [NoticeController::class,"destroy"])->name('admin.notice.delete');
     Route::get('/status/{id}', [NoticeController::class, 'status'])->name('admin.notice.status');
+});
+
+//Add Gallery for admin 
+Route::prefix('gallery')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [GalleryController::class,"index"])->name('admin.gallery.index');
+    Route::get('create', [GalleryController::class,"create"])->name('admin.gallery.create');
+    Route::post('store', [GalleryController::class,"store"])->name('admin.gallery.store');
+    Route::get('edit/{id}', [GalleryController::class,"edit"])->name('admin.gallery.edit');
+    Route::post('update/{id}', [GalleryController::class,"update"])->name('admin.gallery.update');
+    Route::post('delete', [GalleryController::class,"destroy"])->name('admin.gallery.delete');
+    Route::get('/status/{id}', [GalleryController::class, 'status'])->name('admin.gallery.status');
 });
 
 //Add Fee for admin

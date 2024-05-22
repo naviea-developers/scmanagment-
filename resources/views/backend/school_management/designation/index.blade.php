@@ -37,6 +37,7 @@ Admin - All Designation
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Designation Name</th>
+                    <th class="wd-15p">Position</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -50,6 +51,7 @@ Admin - All Designation
                       <tr>
                           <td>{{ $i++ }}</td>
                           <td>{{ $designation->name }}</td>
+                          <td>{{ $designation->position }}</td>
                           <td>
                             @if(@$designation->status == 0)
                             <a href="{{ route('admin.designation.status',$designation->id) }}" class="btn btn-sm btn-warning">Inactive</a>

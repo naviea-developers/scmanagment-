@@ -60,7 +60,9 @@ use App\Models\Department;
 use App\Models\Degree;
 use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
+use App\Models\Designation;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Gallery;
 
 
 class FrontendController extends Controller
@@ -85,6 +87,7 @@ class FrontendController extends Controller
 
         $data['homecontentlocations']= HomeContentLocation::orderBy('id','desc')->get();
         $data['universities'] = University::where('status',1)->inRandomOrder()->take(12)->get();
+        $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->take(7)->get();
 
         $data['search']=$name = $request->input('search');
         if(isset(request()->search)){
@@ -155,6 +158,13 @@ class FrontendController extends Controller
     public function getCourse(){
         $data['courses'] = Course::where('type','course')->where('status',1)->where('is_master','0')->orderBy('id','desc')->paginate(4);
         return view('Frontend.course.ajaxseecourse',$data);
+    }
+
+    //ajax get Course
+    public function getGallery(){
+        $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->paginate(4);
+        // $data['gallerys'] = Gallery::where('type','course')->where('status',1)->where('is_master','0')->orderBy('id','desc')->paginate(4);
+        return view('Frontend.gallery.ajax_see_gallery',$data);
     }
 
     //course By CatAjax
@@ -327,7 +337,8 @@ class FrontendController extends Controller
     }
     public function instructor()
     {
-        $data['teachers'] = User::where('type','3')->orderBy('id', 'desc')->get();
+        $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->where('status',1)->get();
+        $data['designations'] = Designation::orderBy('position', 'asc')->where('status',1)->get();
         $data['instructor'] = InstructorPageSetup::first();
         return view('Frontend.pages.instructor',$data);
     }
@@ -810,6 +821,13 @@ class FrontendController extends Controller
 
      }
      //ebook audio end
+
+     //ebook Video start
+     public function gallery(Request $request)
+     {
+        $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->paginate(4);
+         return view('Frontend.gallery.gallery_list', $data);
+     }
 
 
      public function courseResourceFilesDownload($id)

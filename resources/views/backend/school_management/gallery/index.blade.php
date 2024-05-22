@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Examinations
+Admin - All Buldings
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -11,16 +11,16 @@ Admin - All Examinations
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center">All Examinations</h6>
+            <h6 class="br-section-label text-center">All Gallery</h6>
 
-            <a style="margin-bottom: 20px" href="{{ route('admin.examination.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Examination
+            <a style="margin-bottom: 20px" href="{{ route('admin.gallery.create') }}" class="btn btn-primary btn-sm float-right">
+              <i class="fa fa-plus"></i> Add Image
             </a>
 
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button>
             {{session()->get('message')}}
             </div>
             <script>
@@ -36,10 +36,8 @@ Admin - All Examinations
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Examination Name</th>
-                    <th class="wd-15p">Academic Year</th>
-                    <th class="wd-15p">Session</th>
-                    <th class="wd-15p">Start-End Date</th>
+                    <th class="wd-15p">Name</th>
+                    <th class="wd-15p">Image</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -48,25 +46,24 @@ Admin - All Examinations
                     @php
                         $i = 1;
                     @endphp
-                  @if (count($exams) > 0)
-                    @foreach ($exams as $exam)
+                  @if (count($gallerys) > 0)
+                    @foreach ($gallerys as $gallery)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $exam->name }}</td>
-                          <td>{{ @$exam->academicYear->year }}</td>
-                          <td>{{ @$exam->session->start_year }} - {{ @$exam->session->end_year }}</td>
-                          <td>{{ date('j M Y', strtotime($exam->start_date)) }} - {{ date('j M Y', strtotime($exam->end_date)) }}</td>
+                          <td>{{ $gallery->name }}</td>
                           <td>
-                            @if(@$exam->status == 0)
-                            <a href="{{ route('admin.examination.status',$exam->id) }}" class="btn btn-sm btn-warning">Inactive</a>
-                            @elseif(@$exam->status == 1)
-                            <a href="{{ route('admin.examination.status',$exam->id) }}" class="btn btn-sm btn-success">Active</a>
+                            <img src="{{ $gallery->image_show }}" alt="" width="60px" height="40px" srcset="">
+                          </td>
+                          <td>
+                            @if(@$gallery->status == 0)
+                            <a href="{{ route('admin.gallery.status',$gallery->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                            @elseif(@$gallery->status == 1)
+                            <a href="{{ route('admin.gallery.status',$gallery->id) }}" class="btn btn-sm btn-success">Active</a>
                             @endif
                           </td>
                           <td>
-                            <a class="btn text-info" href="{{ route('admin.examination.edit', $exam->id) }}"><i class="icon ion-compose tx-28"></i></a> 
-                            <a class="btn text-info" href="{{ route('admin.examination.publish') }}"><i class="fa-solid fa-arrow-up tx-28"></i></a>
-                            <button class="btn text-danger bg-white"  value="{{$exam->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            <a class="btn text-info" href="{{ route('admin.gallery.edit', $gallery->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                            <button class="btn text-danger bg-white"  value="{{$gallery->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
                           </td>
                       </tr> 
                     @endforeach
@@ -100,14 +97,14 @@ Admin - All Examinations
         <div class="modal-dialog modal-dialog-top" role="document">
         <div class="modal-content tx-size-sm">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
-                <form action="{{ route('admin.examination.delete') }}" method="post">
+                <form action="{{ route('admin.gallery.delete') }}" method="post">
                     @csrf
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                     <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-                     <input type="hidden" name="examination_id" id="modal_data_id">
+                     <input type="hidden" name="gallery_id" id="modal_data_id">
                     <button type="submit" class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
                         yes
                     </button>

@@ -75,6 +75,7 @@
                             <option @if ($menu->url == 'e-book-list') Selected @endif value="e-book-list">e-book</option>
                             <option @if ($menu->url == 'e-book-audio-list') Selected @endif value="e-book-audio-list">e-book-audio</option>
                             <option @if ($menu->url == 'e-book-video-list') Selected @endif value="e-book-video-list">e-book-video</option>
+                            <option @if ($menu->url == 'gallery-list') Selected @endif value="gallery-list">gallery</option>
                             {{-- <option @if ($menu->url == 'course_list') Selected @endif value="course_list">admission</option> --}}
 
                             <option @if ($menu->url == 'faqs') Selected @endif value="faqs">faqs page</option>

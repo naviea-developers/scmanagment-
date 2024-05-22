@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title','All Exam')
+@section('title','All Exam Subject')
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/eduStc.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/eduStc.css">
 
@@ -15,14 +15,14 @@
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-chalkboard-user"></i>
                     <div>
-                      <h4>View All Exam Class</h4>
-                      <p class="mg-b-0">Manage all Exam Class</p>
+                      <h4>View All Exam Subject</h4>
+                      <p class="mg-b-0">Manage all Exam Subject</p>
                     </div>
                   </div>
 
                     <a href="{{ route('admin.examclass.create') }}"
                     class="btn btn-primary btn-sm addclassbtn">
-                        Add Exam Class
+                        Add Exam Subject
                     </a>
                     <br>
                 <table class="table" id="datatable1">

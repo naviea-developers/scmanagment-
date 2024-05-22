@@ -37,6 +37,7 @@ class DesignationController extends Controller
             DB::beginTransaction();
             $designation = New Designation;
             $designation->name = $request->name;
+            $designation->position = $request->position;
             $designation->save();
 
             DB::commit();
@@ -80,6 +81,7 @@ class DesignationController extends Controller
         DB::beginTransaction();
         $designation = Designation::find($id);
         $designation->name = $request->name;
+        $designation->position = $request->position;
         $designation->save();
 
         DB::commit();

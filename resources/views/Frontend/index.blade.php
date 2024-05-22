@@ -100,24 +100,6 @@
 <input type="hidden" id="popup" value="">
 <!--============ its for header file call close =============-->
 <!-- Main content -->
-
-{{-- @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif --}}
-
-
-
-{{-- <div class="content_search" style="margin-top:70px"> --}}
-    {{-- < class="content_search" style="margin-top:70px"> --}}
-
 <!--Start Main Background Video Header -->
 <header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
 
@@ -137,20 +119,6 @@
             <div class="header-logo mb-5 pt-5">
                 <img src="{{ $home_content->banner_image_show }}" style="height: 120px; width:250px"
                     class="img-fluid" alt="">
-                    {{-- success message start --}}
-                    {{-- @if(session()->has('success'))
-                    <div class="alert alert-success">
-                    {{session()->get('success')}}
-                    </div>
-                    <script>
-                        setTimeout(function(){
-                            $('.alert.alert-success').hide();
-                        }, 3000);
-                    </script>
-                    @endif --}}
-                    {{-- success message start --}}
-
-
             </div>
 
 
@@ -160,194 +128,183 @@
                 <a href="{{ $button->answer }}" class="btn btn-dark-cerulean btn-lg mb-2" style="color: var(--button2_text_color)">{{ $button->question }}</a>
                 @endforeach
             </div>
-
-
-
     </div>
-    {{-- <div class="row align-items-center justify-content-center text-center text-sm-start mt-5">
-
-    </div> --}}
 </div>
 </header>
 
-{{-- <div class="header2 header-img_bg position-relative py-73">
-    <div class="bottom-0 end-0 overflow-hidden position-absolute start-0 top-0">
-        <img src="{{ $home_content->sub_banner_image_show }}" class="img-fluid " alt="" >
-    </div>
-    <div class="container">
-        <div class="row position-relative align-items-center header2_innner">
-            <div class="col-lg-4">
-                <h2 class="fw-medium h1 mb-0" style="color:var(--header_text_color)">{{ $home_content->sub_banner_title }}</h2>
-            </div>
-            <div class="col-lg-6 offset-lg-1">
-                <div class="header-video banner_video">
-                    <a class="popup-youtube position-relative"
-                        href="{{ $home_content->sub_banner_video }}">
-                        <img src="{{ $home_content->sub_banner_thumbnail_show }}" style="height: 275px; width:530px;"
-                            class="img-fluid" alt="">
-                        <div class="banner-video_icon position-absolute start-50 top-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 92 92">
-                                <g id="Ellipse_2" data-name="Ellipse 2" fill="none" stroke="#fff" stroke-width="3">
-                                    <circle cx="46" cy="46" r="46" stroke="none" />
-                                    <circle cx="46" cy="46" r="44.5" fill="none" />
-                                </g>
-                                <g id="Polygon_1" data-name="Polygon 1" transform="translate(63 32) rotate(90)"
-                                    fill="none">
-                                    <path d="M14.5,0,29,25H0Z" stroke="none" />
-                                    <path
-                                        d="M 14.5 5.979442596435547 L 5.208076477050781 22 L 23.79192352294922 22 L 14.5 5.979442596435547 M 14.5 0 L 29 25 L 0 25 L 14.5 0 Z"
-                                        stroke="none" fill="#fff" />
-                                </g>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
- --}}
-
- <!-- Seach by City -->
- @isset($homecontentlocations)
- <div class="pb-4 pt-4 d-none mt-1 d-lg-block">
+<!-- End of Seach by Gellery -->
+@isset($gallerys)
+<div class="pb-1 pt-4 d-none mt-1 d-lg-block">
     <h3 class="fw-bold mb-0 text-dark-cerulean text-center text-uppercase">{{ $home_content->university_location_title }}</h3>
     <div class="container flex-column p-0 d-flex mt-4">
         
         <section class="mdc-card__supporting-text p-0">
-          <section class="d-lg-flex cities-card-top py-3 justify-content-between">
-            @foreach (@$homecontentlocations as $k=>$homecontentlocation)
-            @if ($k< 3)
-                @if (@$homecontentlocation->type_loction_id=='1')
+        <section class="d-lg-flex cities-card-top py-3 justify-content-between">
+            @foreach (@$gallerys as $k=>$gallery)
+                @if ($k< 3)
                     <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->continent->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        <img style="height: 225px;width:100%" src="{{ @$gallery->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
                     </div>
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->continent->id }}">
+                    {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}"> --}}
                     <h3 class=""
                         style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->continent->name }}</h3>
-                    </a>
+                        {{ @$gallery->name }}</h3>
+                    {{-- </a> --}}
                     </div>
-                @elseif (@$homecontentlocation->type_loction_id=='2')
-                   <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->country->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                    </div>
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->country->continent_id }}&country={{ @$homecontentlocation->country->id }}">
-                    <h3 class=""
-                        style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->country->name }}</h3>
-                    </a>
-                    </div> 
-                 @elseif (@$homecontentlocation->type_loction_id=='3')
-                    <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                     <div class="embed-responsive embed-responsive-16by9">
-                         <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->state->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                     </div>
-                     {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list',@$homecontentlocation->state->id) }}"> --}}
-                      <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->state->country->continent_id }}&country={{ @$homecontentlocation->state->country_id }}&state={{ @$homecontentlocation->state->id }}">
-                     <h3 class=""
-                         style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                         {{ @$homecontentlocation->state->name }}</h3>
-                     </a>
-                     </div> 
-                 @elseif (@$homecontentlocation->type_loction_id=='4')
-                     <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                      <div class="embed-responsive embed-responsive-16by9">
-                          <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->city->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                      </div>
-                      {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list',@$homecontentlocation->city->id) }}"> --}}
-                      <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->city->state->country->continent_id }}&country={{ @$homecontentlocation->city->state->country_id }}&state={{ @$homecontentlocation->city->state->id }}&city={{ @$homecontentlocation->city->id }}">
-                      <h3 class=""
-                          style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                          {{ @$homecontentlocation->city->name }}</h3>
-                      </a>
-                      </div>                   
                 @endif
-            @endif
             @endforeach
-          </section>
         </section>
-      </div>
+        </section>
+    </div>
     <div class="container d-flex flex-column mb-5 p-0">
         <section class="mdc-card__supporting-text p-0 ">
-          <section class="d-lg-flex cities-card-bottom">
-            @foreach ($homecontentlocations as $k=>$homecontentlocation)
-            @if ($k>2)
-
-                @if (@$homecontentlocation->type_loction_id=='1')
+        <section class="d-lg-flex cities-card-bottom">
+            @foreach ($gallerys as $k=>$gallery)
+                @if ($k>2)
                     <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->continent->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        <img style="height: 225px;width:100%" src="{{ @$gallery->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
                     </div>
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->continent->id }}">
+                    {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}"> --}}
                     <h3 class=""
                         style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->continent->name }}</h3>
-                    </a>
+                        {{ @$gallery->name }}</h3>
+                    {{-- </a> --}}
                     </div>
-                @elseif (@$homecontentlocation->type_loction_id=='2')
-                <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->country->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                    </div>
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->country->continent_id }}&country={{ @$homecontentlocation->country->id }}">
-                    <h3 class=""
-                        style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->country->name }}</h3>
-                    </a>
-                    </div> 
-                @elseif (@$homecontentlocation->type_loction_id=='3')
-                    <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->state->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                    </div>
-                    {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.state.university_course_list',@$homecontentlocation->state->id) }}"> --}}
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->state->country->continent_id }}&country={{ @$homecontentlocation->state->country_id }}&state={{ @$homecontentlocation->state->id }}">
-                    <h3 class=""
-                        style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->state->name }}</h3>
-                    </a>
-                    </div> 
-                @elseif (@$homecontentlocation->type_loction_id=='4')
-                    <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->city->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
-                    </div>
-                    {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.city.university_course_list',@$homecontentlocation->city->id) }}"> --}}
-                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->city->state->country->continent_id }}&country={{ @$homecontentlocation->city->state->country_id }}&state={{ @$homecontentlocation->city->state->id }}&city={{ @$homecontentlocation->city->id }}">
-                    <h3 class=""
-                        style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                        {{ @$homecontentlocation->city->name }}</h3>
-                    </a>
-                    </div>                   
                 @endif
-            {{-- <div class="card w-sm-auto mr-2 mt-1  ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;width: 340px;">
-              <div class="embed-responsive embed-responsive-16by9">
-                <img style="height: 174px;width:100%" src="{{ $continent->image_show }}" class="card-img-top embed-responsive-item lazyload"
-                  alt="">
-              </div>
-              <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.continent.university_course_list',$continent->id) }}">
-              <h3 class=""
-                style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
-                {{ $continent->name }}</h3>
-              </a>
-  
-            </div> --}}
-            @endif
             @endforeach
-          </section>
-          {{-- <span class="d-flex"> <a href="https://www.china-admissions.com/choose-the-best-cities-in-china-for-international-students/" style="font-size: 17px; color: red;" target="_blank" class="mt-3">See More Cities</a> </span> --}}
         </section>
-  
+        </section>
+
     </div>
-  </div>
+</div>
 @endisset
+  <!-- End of Seach by Gellery -->
+
+ <!-- Seach by City -->
+ {{-- @isset($homecontentlocations)
+    <div class="pb-1 pt-4 d-none mt-1 d-lg-block">
+        <h3 class="fw-bold mb-0 text-dark-cerulean text-center text-uppercase">{{ $home_content->university_location_title }}</h3>
+        <div class="container flex-column p-0 d-flex mt-4">
+            
+            <section class="mdc-card__supporting-text p-0">
+            <section class="d-lg-flex cities-card-top py-3 justify-content-between">
+                @foreach (@$homecontentlocations as $k=>$homecontentlocation)
+                @if ($k< 3)
+                    @if (@$homecontentlocation->type_loction_id=='1')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->continent->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->continent->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->continent->name }}</h3>
+                        </a>
+                        </div>
+                    @elseif (@$homecontentlocation->type_loction_id=='2')
+                    <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->country->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->country->continent_id }}&country={{ @$homecontentlocation->country->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->country->name }}</h3>
+                        </a>
+                        </div> 
+                    @elseif (@$homecontentlocation->type_loction_id=='3')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->state->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->state->country->continent_id }}&country={{ @$homecontentlocation->state->country_id }}&state={{ @$homecontentlocation->state->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->state->name }}</h3>
+                        </a>
+                        </div> 
+                    @elseif (@$homecontentlocation->type_loction_id=='4')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->city->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->city->state->country->continent_id }}&country={{ @$homecontentlocation->city->state->country_id }}&state={{ @$homecontentlocation->city->state->id }}&city={{ @$homecontentlocation->city->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->city->name }}</h3>
+                        </a>
+                        </div>                   
+                    @endif
+                @endif
+                @endforeach
+            </section>
+            </section>
+        </div>
+        <div class="container d-flex flex-column mb-5 p-0">
+            <section class="mdc-card__supporting-text p-0 ">
+            <section class="d-lg-flex cities-card-bottom">
+                @foreach ($homecontentlocations as $k=>$homecontentlocation)
+                @if ($k>2)
+
+                    @if (@$homecontentlocation->type_loction_id=='1')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->continent->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->continent->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->continent->name }}</h3>
+                        </a>
+                        </div>
+                    @elseif (@$homecontentlocation->type_loction_id=='2')
+                    <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->country->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->country->continent_id }}&country={{ @$homecontentlocation->country->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->country->name }}</h3>
+                        </a>
+                        </div> 
+                    @elseif (@$homecontentlocation->type_loction_id=='3')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->state->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->state->country->continent_id }}&country={{ @$homecontentlocation->state->country_id }}&state={{ @$homecontentlocation->state->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->state->name }}</h3>
+                        </a>
+                        </div> 
+                    @elseif (@$homecontentlocation->type_loction_id=='4')
+                        <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img style="height: 225px;width:100%" src="{{ @$homecontentlocation->city->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        </div>
+                        <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}?continent={{ @$homecontentlocation->city->state->country->continent_id }}&country={{ @$homecontentlocation->city->state->country_id }}&state={{ @$homecontentlocation->city->state->id }}&city={{ @$homecontentlocation->city->id }}">
+                        <h3 class=""
+                            style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
+                            {{ @$homecontentlocation->city->name }}</h3>
+                        </a>
+                        </div>                   
+                    @endif
+                @endif
+                @endforeach
+            </section>
+            </section>
+    
+        </div>
+    </div>
+@endisset --}}
   <!-- End of Seach by City -->
 
   <!-- University showcase -->
-  <div id="uni-showcase" class="uni-showcase container d-flex flex-column mb-1 mt-1">
+  {{-- <div id="uni-showcase" class="uni-showcase container d-flex flex-column mb-1 mt-1">
     <div class="d-lg-flex align-items-lg-center">
       <div class="col-md-4">
         <h3 class="ca-card-title d-block text-center mb-5 mb-lg-0 ">{{ $home_content->university_title }}</h3>
@@ -373,18 +330,18 @@
 
     <span class="text-white"><a href="{{ route('frontend.all_universities_list') }}"
         class="ca-button mt-3 w-auto btn btn-txt" style="background-color: red;font-size: 20px;color: white;">View All Universities</a></span>
-  </div>
+  </div> --}}
   <!-- End of University Showcase -->
 
 
 <!--End Main Background Video Header -->
 <!--Start Course Content-->
 <!-- bg-alice-blue -->
-<div class="py-5 pt-lg-220 ">
+<div class="py-0 pt-lg-220" style="padding-top: 0px !important;">
 <div class="container-lg">
 <div class="row">
 <div class="col-12">
-<div class="text-center mb-5">
+<div class="text-center mb-1">
     <h3 class="fw-bold mb-0 text-dark-cerulean explore_course">{{ $home_content->course_title }}</h3>
 </div>
 <div class="d-sm-flex text-center">

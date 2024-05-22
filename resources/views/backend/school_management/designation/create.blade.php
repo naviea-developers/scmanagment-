@@ -41,6 +41,16 @@
                             </div>
                         </div>
 
+                        <div class="row mt-3">
+                          <div class="col-sm-12 ">
+                              <label class="form-control-label">Position: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="number" max="100" min="1" name="position" class="form-control" placeholder="Enter position" value="{{ old('position') }}" required>
+                              </div>
+                          </div>
+                      </div>
+
+
                         {{-- <div class="row">
                             <div class="col-sm-12 mt-3">
                                 <label class="form-control-label">Class Teacher Name: <span class="tx-danger">*</span></label>
@@ -54,7 +64,7 @@
                                 </div>
                               </div>
                         </div> --}}
-                        </div>
+                        {{-- </div> --}}
 
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">

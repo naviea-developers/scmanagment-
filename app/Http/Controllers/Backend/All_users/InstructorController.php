@@ -135,7 +135,7 @@ class InstructorController extends Controller
         return redirect()->route('admin.instrutor.index')->with('message','instrutor Update Successfully');
     }catch(\Exception $e){
         DB::rollBack();
-       // dd($e);
+        dd($e);
         return back()->with ('error_message', $e->getMessage());
     }
     }

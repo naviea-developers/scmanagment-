@@ -252,7 +252,7 @@ class TeacherController extends Controller
         return redirect()->route('admin.teacher.index')->with('message','Teacher Update Successfully');
     }catch(\Exception $e){
         DB::rollBack();
-       // dd($e);
+        dd($e);
         return back()->with ('error_message', $e->getMessage());
     }
     }

@@ -414,11 +414,6 @@
 	}
 
 </style>
-
-
-
-
-
 <br>
 <br>
 <br>
@@ -426,68 +421,85 @@
 <br>
 <br>
 <br>
-
+<br>
 
 <section class="ourteam-section">
+
+	@foreach (@$designations as $designation)
+		<div class="container ">
+			<div class="our-team-title">
+				<h2 style="color: var(--text_color)">{{ @$designation->name }}</h2>
+			</div>
+			<div class="row">
+				@foreach (@$designation->user_designations as $teacher)
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+						<div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
+						<div class="picture">
+							<img style="height: 131px;" class="img-fluid" src="{{ @$teacher->image_show }}">
+						</div>
+						<div class="team-content">
+							<h3 class="name">{{ @$teacher->name }}</h3>
+							<h4 class="title">{{ @$designation->name }}</h4>
+						</div>
+						<ul class="social">
+							<li><a href="{{ @$teacher->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+						</ul>
+						</div>
+					</div>
+				@endforeach
+			</div>
+		</div>
+	@endforeach
     <!-- Founder and CEO -->
-    <div class="container ">
-        <div class="our-team-title">
-            <h2 style="color: var(--text_color)">Head Teacher</h2>
-        </div>
-        <div class="row">
-            {{-- @foreach ($founders as $founder)
+	{{-- <div class="container ">
+		<div class="our-team-title">
+			<h2 style="color: var(--text_color)">Head Teacher</h2>
+		</div>
+		<div class="row">
 
+			@foreach ($founders as $founder)
+				<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
+				<div class="picture">
+					<img class="img-fluid" src="{{ @$founder->image_show }}">
+				</div>
+				<div class="team-content">
+					<h3 class="name" style="color: var(--text_color)">{{ @$founder->name }}</h3>
+					<h4 class="title" style="color: var(--text_color)">{{ @$founder->designation }}</h4>
+				</div>
+				<ul class="social">
+					<li><a href="{{ @$founder->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+					<li><a href="{{ @$founder->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+					<li><a href="{{ @$founder->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+					<li><a href="{{ @$founder->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+				</ul>
+				</div>
+			</div>
+			@endforeach
+			<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
+				<div class="picture">
+					<img class="img-fluid" src="https://www.navieasoft.com/images/leadership_image/lClEO.jpg">
+				</div>
+				<div class="team-content">
+					<h3 class="name">DR. Sharmin Shila</h3>
+					<h4 class="title">Co- Founder</h4>
+				</div>
+				<ul class="social">
+					<li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-facebook" aria-hidden="true"></a></li>
+					<li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-twitter" aria-hidden="true"></a></li>
+					<li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-google-plus" aria-hidden="true"></a></li>
+					<li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-linkedin" aria-hidden="true"></a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div> --}}
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
-              <div class="picture">
-                <img class="img-fluid" src="{{ @$founder->image_show }}">
-              </div>
-              <div class="team-content">
-                <h3 class="name" style="color: var(--text_color)">{{ @$founder->name }}</h3>
-                <h4 class="title" style="color: var(--text_color)">{{ @$founder->designation }}</h4>
-              </div>
-              <ul class="social">
-                <li><a href="{{ @$founder->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
-              </ul>
-            </div>
-          </div>
-          @endforeach --}}
-
-
-
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
-              <div class="picture">
-                <img class="img-fluid" src="https://www.navieasoft.com/images/leadership_image/lClEO.jpg">
-              </div>
-              <div class="team-content">
-                <h3 class="name">DR. Sharmin Shila</h3>
-                <h4 class="title">Co- Founder</h4>
-              </div>
-              <ul class="social">
-                <li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-facebook" aria-hidden="true"></a></li>
-                <li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-twitter" aria-hidden="true"></a></li>
-                <li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                <li><a href="https://www.facebook.com/profile.php?id=100011184093793" class="fab fa-linkedin" aria-hidden="true"></a></li>
-              </ul>
-            </div>
-          </div>
-
-
-        
-        </div>
-      </div>
-
-
-
-
-
-
-	  <div class="container">
+	  {{-- <div class="container">
         <div class="our-team-title">
             <h2 style="color: var(--text_color)">Asst Teacher</h2>
         </div>
@@ -547,8 +559,6 @@
 
         </div>
       </div>
-
-
 
 
 	  <div class="container">
@@ -627,40 +637,12 @@
           </div>
 
         </div>
-      </div>
-
-
-
+      </div> --}}
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @include('Frontend.layouts.parts.news-letter')
 
 @endsection
+
+
+

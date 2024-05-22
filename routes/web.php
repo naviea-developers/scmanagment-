@@ -269,7 +269,8 @@ Route::get('/e-book/e-video/download/{id}', [FrontendController::class, 'eVideoD
 
 Route::get('/ebook-category-video-show-ajax/{id}',[FrontendController::class,"getEbookVideoByCat"]);
 
-
+// Gallery list
+Route::get('gallery-list', [FrontendController::class, 'gallery'])->name('frontend.gallery_list');
 
 //university
 
@@ -321,11 +322,11 @@ Route::get('university-program-details/{id}', [FrontendController::class,"progra
 });
 
 
-Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
-Route::get('create_exam_result', [InstructorCourseController::class,"createResultExam"])->name('instructor.exam_result.create');
-Route::get('edit_exam_result/{id}', [InstructorCourseController::class,"editResultExam"])->name('instructor.exam_result.edit');
-Route::post('update_exam_result/{id}', [InstructorCourseController::class,"updateResultExam"])->name('instructor.exam_result.update');
-Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
-Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
-Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
-Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);
+// Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
+// Route::get('create_exam_result', [InstructorCourseController::class,"createResultExam"])->name('instructor.exam_result.create');
+// Route::get('edit_exam_result/{id}', [InstructorCourseController::class,"editResultExam"])->name('instructor.exam_result.edit');
+// Route::post('update_exam_result/{id}', [InstructorCourseController::class,"updateResultExam"])->name('instructor.exam_result.update');
+// Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
+// Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
+// Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
+// Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);

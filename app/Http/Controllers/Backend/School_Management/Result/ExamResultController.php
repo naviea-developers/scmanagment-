@@ -11,6 +11,7 @@ use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamResultController extends Controller
 {
@@ -121,4 +122,29 @@ class ExamResultController extends Controller
         $data['result'] = ExamResult::find($id);
         return view('Backend.school_management.result.update', $data);
     }
+
+    public function update(Request $request,$id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'obtained_marke' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $examResult = ExamResult::find($id);
+            $examResult->obtained_marke = $request->obtained_marke;
+            $examResult->save();
+
+            DB::commit();
+            return redirect()->route('admin.exam_result.index')->with('message','Exam Result Update Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\School_management\Examination;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicYear;
 use App\Models\Examination;
+use App\Models\ExamResult;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,4 +131,17 @@ class ExaminationController extends Controller
         $exam->update();
         return redirect()->route('admin.examination.index');
     }
+
+    public function publish()
+    {
+
+        DB::table('examinations')
+        ->join('exam_results', 'examinations.id', '=', 'exam_results.examination_id')
+        ->where('exam_results.is_publis', '=', 0) 
+        ->update(['exam_results.is_publis' => 1]);
+        return redirect()->back()->with('message','Exam Results Publish Successfully');
+
+    }
+
+
 }

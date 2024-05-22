@@ -76,6 +76,13 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/status_class_exam/{id}', [InstructorCourseController::class, 'statusClassExam'])->name('instructor.class_exam.status');
 
         Route::post('/student_result_store', [InstructorCourseController::class, 'storeStudentResult'])->name('instructor.student_result_store');
+
+        // Result Exam
+        Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
+        Route::get('create_exam_result', [InstructorCourseController::class,"createResultExam"])->name('instructor.exam_result.create');
+        Route::get('edit_exam_result/{id}', [InstructorCourseController::class,"editResultExam"])->name('instructor.exam_result.edit');
+        Route::post('update_exam_result/{id}', [InstructorCourseController::class,"updateResultExam"])->name('instructor.exam_result.update');
+
         
 
 
@@ -174,3 +181,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
 
 Route::get('/get-assign-teacher-subject/{id}', [UserController::class, 'getAssignTeacherSubject']);
+Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
+Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
+Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
+Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);

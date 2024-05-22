@@ -45,6 +45,7 @@ Route::get('/course-category-show-ajax/{id}', [FrontendController::class, 'cours
 Route::get('/course-subcategory-show-ajax/{id}', [FrontendController::class, 'courseBySubCatAjax']);
 Route::get('/home_course-subcategory-show-ajax/{id}', [FrontendController::class, 'homecourseBySubCatAjax']);
 Route::get('/get-course-all',[FrontendController::class,'getCourse']);
+Route::get('/get-gallery-all-show',[FrontendController::class,'getGallery']);
 
 //course type
 Route::get('/get-course-by-show-type/{id}',[FrontendController::class,"getCourseTypeByCat"]);

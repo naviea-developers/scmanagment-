@@ -179,6 +179,7 @@
             || Route::is('admin.examroutine.create') ||  Route::is('admin.examroutine.index') || Route::is('admin.examroutine.edit')
             || Route::is('admin.routine.create') ||  Route::is('admin.routine.index') || Route::is('admin.routine.edit')
             || Route::is('admin.notice.create') ||  Route::is('admin.notice.index') || Route::is('admin.notice.edit')
+            || Route::is('admin.gallery.create') ||  Route::is('admin.gallery.index') || Route::is('admin.gallery.edit')
             || Route::is('admin.fee.create') ||  Route::is('admin.fee.index') || Route::is('admin.fee.edit')
             || Route::is('admin.fee_management.create') ||  Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit')
             || Route::is('admin.admission.create') ||  Route::is('admin.admission.index') || Route::is('admin.admission.edit')
@@ -200,11 +201,12 @@
                 <li class="sub-item"><a href="{{ route('admin.fee_management.index') }}" class="sub-link {{(Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit') || Route::is('admin.subject.create')) ?'active':''}}">Fees Management</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examination</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examtype.index') }}" class="sub-link {{(Route::is('admin.examtype.index') || Route::is('admin.examtype.edit') || Route::is('admin.examtype.create')) ?'active':''}}">Manage Exam Type</a></li>
-                <li class="sub-item"><a href="{{ route('admin.examclass.index') }}" class="sub-link {{(Route::is('admin.examclass.index') || Route::is('admin.examclass.edit') || Route::is('admin.examclass.create')) ?'active':''}}">Manage Exam Class</a></li>
+                <li class="sub-item"><a href="{{ route('admin.examclass.index') }}" class="sub-link {{(Route::is('admin.examclass.index') || Route::is('admin.examclass.edit') || Route::is('admin.examclass.create')) ?'active':''}}">Manage Exam Subject</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examschedule.index') }}" class="sub-link {{(Route::is('admin.examschedule.index') || Route::is('admin.examschedule.edit') || Route::is('admin.examschedule.create')) ?'active':''}}">Manage Exam Schedule</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examroutine.index') }}" class="sub-link {{(Route::is('admin.examroutine.index') || Route::is('admin.examroutine.edit') || Route::is('admin.examroutine.create')) ?'active':''}}">Manage Exam Routine</a></li>
                 <li class="sub-item"><a href="{{ route('admin.exam_result.index') }}" class="sub-link {{(Route::is('admin.exam_result.edit') || Route::is('admin.exam_result.index')) ?'active':''}}">Manage Exam Result</a></li>
                 <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Manage Class Routine</a></li>
+                <li class="sub-item"><a href="{{ route('admin.gallery.index') }}" class="sub-link {{(Route::is('admin.gallery.index') || Route::is('admin.gallery.edit') || Route::is('admin.gallery.create')) ?'active':''}}">Manage Gallery</a></li>
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                 {{-- <li class="sub-item"><a href="{{ route('admin.admission.create') }}" class="sub-link {{(Route::is('admin.admission.create')) ?'active':''}}">Add New Admission</a></li> --}}
                 <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission ({{ $admissions->count() }})</a></li>
@@ -261,7 +263,7 @@
                 <span class="menu-item-label">Teacher</span>
             </a><!-- br-menu-link -->
             @php
-            $r_check = ( Route::is('admin.teacher.create') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit') || Route::is('admin.designation.edit'));
+            $r_check = ( Route::is('Manage Designation') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit') || Route::is('admin.designation.edit'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
                 <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>

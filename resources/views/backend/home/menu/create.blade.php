@@ -74,6 +74,7 @@
                               <option value="e-book-list">e-book</option>
                               <option value="e-book-audio-list">e-book-audio</option>
                               <option value="e-book-video-list">e-book-video</option>
+                              <option value="gallery-list">gallery</option>
                               {{-- <option value="course_list">admission</option> --}}
 
                               <option value="faqs">faq</option>
