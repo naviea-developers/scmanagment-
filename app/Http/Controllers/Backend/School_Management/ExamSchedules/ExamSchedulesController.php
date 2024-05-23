@@ -31,17 +31,17 @@ class ExamSchedulesController extends Controller
 
     public function create(){
         // dd('hi');
-        $data['className']=Classe::orderBy('id', 'asc')->get(); 
-        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-        $data['examinations']=Examination::orderBy('id', 'desc')->get();
-        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-        $data['rooms'] = Room::orderBy('id', 'desc')->get();
-        $data['floors'] = Floor::orderBy('id', 'desc')->get();
-        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-        $data['examTypes'] = ExamType::orderBy('id','desc')->get();
-        $data['groups'] = Group::orderBy('id','desc')->get();
-        $data['examClasss']=ExamClass::orderBy('id', 'desc')->get();
-        $data['sections']=SchoolSection::orderBy('id', 'desc')->get();
+        $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+        $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['rooms'] = Room::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['floors'] = Floor::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+        $data['examTypes'] = ExamType::where('status', 1)->orderBy('id','desc')->get();
+        $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
+        $data['examClasss']=ExamClass::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['sections']=SchoolSection::where('status', 1)->orderBy('id', 'desc')->get();
 
         return view('Backend.school_management.exam_schedule.create',$data);
     }
@@ -79,17 +79,17 @@ class ExamSchedulesController extends Controller
     public function edit($id){
         // dd('hi');
        $data['editData']=$editData =  ExamSchedule::find($id);
-       $data['className']=Classe::orderBy('id', 'asc')->get(); 
-       $data['examClasss']=ExamClass::where("class_id",$editData->class_id)->where('examination_id',$editData->examination_id)->orderBy('id', 'desc')->get();
-       $data['sections']=SchoolSection::where('class_id',$editData->class_id)->orderBy('id', 'asc')->get();
-       $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-       $data['examinations']=Examination::orderBy('id', 'desc')->get();
-       $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-       $data['rooms'] = Room::orderBy('id', 'desc')->get();
-       $data['floors'] = Floor::orderBy('id', 'desc')->get();
-       $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-       $data['examTypes'] = ExamType::orderBy('id','desc')->get();
-       $data['groups'] = Group::orderBy('id','desc')->get();
+       $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+       $data['examClasss']=ExamClass::where('status', 1)->where("class_id",$editData->class_id)->where('examination_id',$editData->examination_id)->orderBy('id', 'desc')->get();
+       $data['sections']=SchoolSection::where('status', 1)->where('class_id',$editData->class_id)->orderBy('id', 'asc')->get();
+       $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['rooms'] = Room::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['floors'] = Floor::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+       $data['examTypes'] = ExamType::where('status', 1)->orderBy('id','desc')->get();
+       $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
         return view('Backend.school_management.exam_schedule.update',$data);
     }
 

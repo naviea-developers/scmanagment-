@@ -177,6 +177,7 @@
             || Route::is('admin.examclass.create') ||  Route::is('admin.examclass.index') || Route::is('admin.examclass.edit')
             || Route::is('admin.examschedule.create') ||  Route::is('admin.examschedule.index') || Route::is('admin.examschedule.edit')
             || Route::is('admin.examroutine.create') ||  Route::is('admin.examroutine.index') || Route::is('admin.examroutine.edit')
+            || Route::is('admin.exam_result.index') || Route::is('admin.exam_result.edit')
             || Route::is('admin.routine.create') ||  Route::is('admin.routine.index') || Route::is('admin.routine.edit')
             || Route::is('admin.notice.create') ||  Route::is('admin.notice.index') || Route::is('admin.notice.edit')
             || Route::is('admin.gallery.create') ||  Route::is('admin.gallery.index') || Route::is('admin.gallery.edit')

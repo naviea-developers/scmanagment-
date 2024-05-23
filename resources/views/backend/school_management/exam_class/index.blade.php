@@ -34,6 +34,7 @@
                         <th scope="col">Exam Type</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -49,10 +50,20 @@
                             <td>{{date('d,F,Y',strtotime(@$data->date))}}</td>
                             <td>{{ date('h:i A', strtotime($data->start_time)) }} - {{ date('h:i A', strtotime($data->end_time)) }}</td>
                             <td>
+                                @if(@$data->status == 0)
+                                <a href="{{ route('admin.examclass.status',$data->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                                @elseif(@$data->status == 1)
+                                <a href="{{ route('admin.examclass.status',$data->id) }}" class="btn btn-sm btn-success">Active</a>
+                                @endif
+                              </td>
+                            <td>
+                                <a class="btn text-info" href="{{ route('admin.examclass.edit',$data->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                                <button class="btn text-danger bg-white"  value="{{$data->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                              </td>
+                            {{-- <td>
                                 <a href="{{ route('admin.examclass.edit',$data->id) }}" class="btn btn-success"><i class="fa-solid fa-edit"></i></a>
-                                {{-- <a href="javascript:void(0)" class="btn btn-danger" value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></a> --}}
                                 <button class="btn text-danger bg-white"  value="{{$data->id}}" id="dataDeleteModal"><i class="fa-solid fa-trash"></i></button>
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
                     </tbody>

@@ -29,15 +29,15 @@ class ExamClassController extends Controller
 
     public function create(){
         // dd('hi');
-        $data['className']=Classe::orderBy('id', 'asc')->get(); 
-        $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-        $data['examinations']=Examination::orderBy('id', 'desc')->get();
-        $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-        $data['rooms'] = Room::orderBy('id', 'desc')->get();
-        $data['floors'] = Floor::orderBy('id', 'desc')->get();
-        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-        $data['examTypes'] = ExamType::orderBy('id','desc')->get();
-        $data['groups'] = Group::orderBy('id','desc')->get();
+        $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+        $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['rooms'] = Room::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['floors'] = Floor::where('status', 1)->orderBy('id', 'desc')->get();
+        $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+        $data['examTypes'] = ExamType::where('status', 1)->orderBy('id','desc')->get();
+        $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
 
         return view('Backend.school_management.exam_class.create',$data);
     }
@@ -67,7 +67,7 @@ class ExamClassController extends Controller
             $exam_class->end_time = $request->end_time;
             $exam_class->save();
             DB::commit();
-            return redirect()->route('admin.examclass.index')->with('message','Exam class Add Successfully');
+            return redirect()->route('admin.examclass.index')->with('message','Exam Subjext Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -78,15 +78,15 @@ class ExamClassController extends Controller
     public function edit($id){
         // dd('hi');
        $data['editData'] =  ExamClass::find($id);
-       $data['className']=Classe::orderBy('id', 'desc')->get(); 
-       $data['subjectName']=Subject::orderBy('id', 'desc')->get();
-       $data['examinations']=Examination::orderBy('id', 'desc')->get();
-       $data['buldings'] = Bulding::orderBy('id', 'desc')->get();
-       $data['rooms'] = Room::orderBy('id', 'desc')->get();
-       $data['floors'] = Floor::orderBy('id', 'desc')->get();
-       $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-       $data['examTypes'] = ExamType::orderBy('id','desc')->get();
-       $data['groups'] = Group::orderBy('id','desc')->get();
+       $data['className']=Classe::where('status', 1)->orderBy('id', 'desc')->get(); 
+       $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['rooms'] = Room::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['floors'] = Floor::where('status', 1)->orderBy('id', 'desc')->get();
+       $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+       $data['examTypes'] = ExamType::where('status', 1)->orderBy('id','desc')->get();
+       $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
         return view('Backend.school_management.exam_class.update',$data);
     }
 
@@ -114,7 +114,7 @@ class ExamClassController extends Controller
             $exam_class->save();
 
             DB::commit();
-            return redirect()->route('admin.examclass.index')->with('message','Exam class Add Successfully');
+            return redirect()->route('admin.examclass.index')->with('message','Exam Subjext Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -128,7 +128,21 @@ class ExamClassController extends Controller
         $exam_class =  ExamClass::find($request->exam_class_id);
         // dd($examschedule);
         $exam_class->delete();
-        return back()->with('message','exam class Deleted Successfully');
+        return back()->with('message','exam Subjext Deleted Successfully');
+    }
+
+    public function status($id)
+    {
+        $exam_class = ExamClass::find($id);
+        if($exam_class->status == 0)
+        {
+            $exam_class->status = 1;
+        }elseif($exam_class->status == 1)
+        {
+            $exam_class->status = 0;
+        }
+        $exam_class->update();
+        return redirect()->route('admin.examclass.index')->with('message','Exam Subjext Status Update Successfully');
     }
 
    

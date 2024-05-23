@@ -37,15 +37,15 @@ class ClassRoutineController extends Controller
     // }
 
     public function create(){
-        $data['className']=Classe::orderBy('id', 'asc')->get(); 
-        $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-        $data['subjectName']=Subject::orderBy('id', 'asc')->get();
-        $data['teachers'] = User::where('type','2')->orderBy('id', 'asc')->get();
-        $data['examinations']=Examination::orderBy('id', 'asc')->get();
-        $data['buldings'] = Bulding::orderBy('id', 'asc')->get();
-        $data['rooms'] = Room::orderBy('id', 'asc')->get();
-        $data['floors'] = Floor::orderBy('id', 'asc')->get();
-        $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
+        $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+        $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+        $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['teachers'] = User::where('status', 1)->where('type','2')->orderBy('id', 'asc')->get();
+        $data['examinations']=Examination::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['rooms'] = Room::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['floors'] = Floor::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['class_durations'] = ClassDuration::where('status', 1)->orderBy('id', 'asc')->get();
 
         return view('Backend.school_management.class_routine.create',$data);
     }
@@ -91,17 +91,17 @@ class ClassRoutineController extends Controller
 
     public function edit($id){
        $data['editData']=$class_routine =  ClassRoutine::find($id);
-       $data['sessions']=Session::orderBy('id', 'desc')->get(); 
-       $data['subjectName']=Subject::where('class_id',$class_routine->class_id)->orderBy('id', 'asc')->get();
+       $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+       $data['subjectName']=Subject::where('status', 1)->where('class_id',$class_routine->class_id)->orderBy('id', 'asc')->get();
        $data['sections']=SchoolSection::where('class_id',$class_routine->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
-       $data['teachers'] = User::where('type','2')->orderBy('id', 'asc')->get();
-       $data['className']=Classe::orderBy('id', 'asc')->get(); 
+       $data['teachers'] = User::where('status', 1)->where('type','2')->orderBy('id', 'asc')->get();
+       $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
     //    $data['subjectName']=Subject::orderBy('id', 'asc')->get();
-       $data['examinations']=Examination::orderBy('id', 'asc')->get();
-       $data['buldings'] = Bulding::orderBy('id', 'asc')->get();
-       $data['rooms'] = Room::orderBy('id', 'asc')->get();
-       $data['floors'] = Floor::orderBy('id', 'asc')->get();
-       $data['class_durations'] = ClassDuration::orderBy('id', 'asc')->get();
+       $data['examinations']=Examination::where('status', 1)->orderBy('id', 'asc')->get();
+       $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'asc')->get();
+       $data['rooms'] = Room::where('status', 1)->orderBy('id', 'asc')->get();
+       $data['floors'] = Floor::where('status', 1)->orderBy('id', 'asc')->get();
+       $data['class_durations'] = ClassDuration::where('status', 1)->orderBy('id', 'asc')->get();
        return view('Backend.school_management.class_routine.update',$data);
     }
 

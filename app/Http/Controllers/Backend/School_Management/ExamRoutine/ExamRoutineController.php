@@ -11,20 +11,20 @@ class ExamRoutineController extends Controller
 {
 
     public function index(){
-        $data['examinations']=Examination::orderBy('id', 'desc')->get();
+        $data['examinations']=Examination::where('status','1')->orderBy('id', 'desc')->get();
         return view('Backend.school_management.exam_routine.index',$data);
     }
     
 
      //ajax get Exam Schedule Routine
      public function getExamRoutine($id){
-        $data['examSchedules']= ExamSchedule::where("examination_id",$id)->get();
+        $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
         return view('Backend.school_management.exam_routine.view_exam_routine',$data);
 	}  
 
     public function print(Request $request){
         $id= $request->input('examination_id');
-        $data['examSchedules']= ExamSchedule::where("examination_id",$id)->get();
+        $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
         return view('Backend.school_management.exam_routine.view_exam_routine_print',$data);
     }
 }
