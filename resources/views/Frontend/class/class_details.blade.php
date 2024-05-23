@@ -348,9 +348,9 @@
                 </li>
             @endif
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
-            </li>
+            </li> --}}
 
         </ul>
     </div>
@@ -461,6 +461,7 @@
                                                 <div class="team-content">
                                                     <h3 class="name">{{ @$teacherAssent->teacher->name }}</h3>
                                                     <h4 class="title">{{ @$teacherAssent->teacher->user_designation->name }}</h4>
+                                                    <h4 class="title">Subject:- {{ @$teacherAssent->subject->name }}</h4>
                                                 </div>
                                                 <ul class="social">
                                                     <li><a href="{{ @$teacherAssent->teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
@@ -562,7 +563,7 @@
                     <!--End card-->
                 @endif
  
-                <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
+                {{-- <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
                     <div class="card-body p-4 p-xl-5">
                         <!--Start Section Header-->
                         <div class="section-header mb-4 position-relative">
@@ -571,7 +572,7 @@
                         </div>
                         <!--End Section Header-->
                         <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
-                            {{-- @foreach ($class->semesters as $k=>$semester)
+                            @foreach ($class->semesters as $k=>$semester)
                             <div class="d-flex mt-3">
                                 <div class="" style="border: 1px solid;padding:10px;width: 97%;">
 
@@ -607,10 +608,10 @@
                                 </div>
                                 
                             </div>
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
-                </div>
+                </div> --}}
             
 
                 {{-- <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
