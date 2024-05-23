@@ -316,8 +316,8 @@ Route::get('/get-sort-course-list/{cat}',[FrontendController::class,"getAjaxCour
 Route::get('ajax-course-filter', [FrontendController::class,"ajaxFilterCourse"])->name('frontend.ajax_course_filter');
 Route::get('university-program-details/{id}', [FrontendController::class,"programDetails"])->name('frontend.university_program_details');
 
-
-
+// class list details
+Route::get('class_details/{id}', [FrontendController::class,"classDetails"])->name('frontend.class_details');
 
 });
 

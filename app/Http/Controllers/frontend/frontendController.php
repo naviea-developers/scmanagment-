@@ -60,9 +60,11 @@ use App\Models\Department;
 use App\Models\Degree;
 use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
+use App\Models\Classe;
 use App\Models\Designation;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
+use App\Models\HomeContentClassList;
 
 
 class FrontendController extends Controller
@@ -88,6 +90,7 @@ class FrontendController extends Controller
         $data['homecontentlocations']= HomeContentLocation::orderBy('id','desc')->get();
         $data['universities'] = University::where('status',1)->inRandomOrder()->take(12)->get();
         $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->take(7)->get();
+        $data['classLists'] = HomeContentClassList::where('status',1)->orderBy('id','desc')->take(7)->get();
 
         $data['search']=$name = $request->input('search');
         if(isset(request()->search)){
@@ -1159,6 +1162,13 @@ class FrontendController extends Controller
 // dd($data);
 
      return view('Frontend.university.programs_details',$data);
+ }
+
+
+ public function classDetails($id){
+    // dd($id);
+    $data['class'] =$classes= Classe::find($id);
+     return view('Frontend.class.class_details',$data);
  }
 
 

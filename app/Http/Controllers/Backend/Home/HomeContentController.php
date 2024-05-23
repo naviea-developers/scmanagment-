@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 
 use App\Models\HomeContentLocation;
 use App\Models\City;
+use App\Models\Classe;
 use App\Models\Continent;
 use App\Models\Country;
+use App\Models\HomeContentClassList;
 use App\Models\State;
 use Symfony\Component\Console\Input\Input;
 
@@ -26,6 +28,8 @@ class HomeContentController extends Controller
         $data['learn_texts']=  HomeContentItem::where('type',"homepage")->get();
 
         $data['home_content_locations']=  HomeContentLocation::get();
+        $data['Home_content_class_lists']=  HomeContentClassList::get();
+        $data['classs']=  Classe::where('status','1')->get();
         $data['continents'] = Continent::get();
         $data['countrys'] = Country::get();
         $data['states']  = State::get();
@@ -42,35 +46,62 @@ class HomeContentController extends Controller
         $home_content->university_location_title=$request->university_location_title;
         $home_content->save();
 
-
-        if($request->type_loction_id){
-            foreach($request->type_loction_id as $key => $value){
-                $homecontentlocation= New HomeContentLocation;
-                $homecontentlocation->type_loction_id= $value;
-                $homecontentlocation->location_id= $request->location_id[$key];
-                $homecontentlocation->save();
-
+        if($request->class_id){
+            foreach($request->class_id as $key => $value){
+                $class_list= New HomeContentClassList();
+                $class_list->class_id= $value;
+                $class_list->save();
             }
         }
 
-        if(isset($request->old_type_loction_id)){
-         if($request->old_type_loction_id){
-            foreach($request->old_type_loction_id as $k => $value){
-                $homecontentlocation= HomeContentLocation::find($k);
-                $homecontentlocation->type_loction_id= $value;
-                $homecontentlocation->location_id= $request->old_location_id[$k];
-                $homecontentlocation->save();
+        if(isset($request->old_class_id)){
+            if($request->old_class_id){
+                foreach($request->old_class_id as $k => $value){
+                    $class_list= HomeContentClassList::find($k);
+                    $class_list->class_id= $value;
+                    $class_list->save();
+                }
+            }
+        }
 
+        if($request->delete_class){
+            foreach($request->delete_class as $value){
+                $class_list= HomeContentClassList::find($value);
+                $class_list->delete();
             }
         }
-    }
-        if($request->delete_home_content_location){
-            foreach($request->delete_home_content_location as $value){
-                $homecontentlocation= HomeContentLocation::find($value);
-                $homecontentlocation->delete();
-            }
-        }
-        return redirect()->back()->with('message', 'Location Section Update successfully, Thank You.');
+
+
+
+        // if($request->type_loction_id){
+        //     foreach($request->type_loction_id as $key => $value){
+        //         $homecontentlocation= New HomeContentLocation;
+        //         $homecontentlocation->type_loction_id= $value;
+        //         $homecontentlocation->location_id= $request->location_id[$key];
+        //         $homecontentlocation->save();
+
+        //     }
+        // }
+
+        // if(isset($request->old_type_loction_id)){
+        //     if($request->old_type_loction_id){
+        //         foreach($request->old_type_loction_id as $k => $value){
+        //             $homecontentlocation= HomeContentLocation::find($k);
+        //             $homecontentlocation->type_loction_id= $value;
+        //             $homecontentlocation->location_id= $request->old_location_id[$k];
+        //             $homecontentlocation->save();
+
+        //         }
+        //     }
+        // }
+
+        // if($request->delete_home_content_location){
+        //     foreach($request->delete_home_content_location as $value){
+        //         $homecontentlocation= HomeContentLocation::find($value);
+        //         $homecontentlocation->delete();
+        //     }
+        // }
+        return redirect()->back()->with('message', 'Class list Section Update successfully, Thank You.');
 
     }
 

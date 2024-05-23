@@ -37,6 +37,7 @@ Admin - All Classes
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Image</th>
                     <th class="wd-15p">Class Name</th>
                     <th class="wd-15p">Class Teacher</th>
                     <th class="wd-15p">Status</th>
@@ -51,6 +52,9 @@ Admin - All Classes
                     @foreach ($classes as $class)
                       <tr>
                           <td>{{ $i++ }}</td>
+                          <td>
+                            <img src="{{ $class->image_show }}" alt="" width="60px" height="40px" srcset="">
+                          </td>
                           <td>{{ $class->name }}</td>
                           <td>{{ @$class->teacher->name }}</td>
                           <td>

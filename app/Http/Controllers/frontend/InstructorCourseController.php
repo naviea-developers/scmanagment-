@@ -967,10 +967,10 @@ class InstructorCourseController extends Controller
         // dd('hi');
         $data['teacherAssents']=$teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->first();
         $data['examResults']=ExamResult::where('teacher_id',$teacherAssents->teacher_id)
-                                         ->where('class_id',$teacherAssents->class_id)
-                                         ->where('section_id',$teacherAssents->section_id)
-                                         ->where('session_id',$teacherAssents->session_id)
-                                         ->where('subject_id',$teacherAssents->subject_id)
+                                         ->orWhere('class_id',$teacherAssents->class_id)
+                                         ->orwhere('section_id',$teacherAssents->section_id)
+                                         ->orwhere('session_id',$teacherAssents->session_id)
+                                         ->orwhere('subject_id',$teacherAssents->subject_id)
                                         ->orderBy('id', 'desc')->get();
         // $data['examinations']=Examination::orderBy('id', 'desc')->get();
         return view('user.instructor.exam_result_index',$data);

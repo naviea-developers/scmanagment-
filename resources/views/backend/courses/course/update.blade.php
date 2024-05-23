@@ -656,7 +656,7 @@ form label{
                                     </div>
 
                                 </div>
-                                </div><!-- row -->
+                            </div><!-- row -->
                                 {{-- Course Contents End--}}
 
 

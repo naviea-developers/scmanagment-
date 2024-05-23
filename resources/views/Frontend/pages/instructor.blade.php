@@ -442,10 +442,10 @@
 							<h4 class="title">{{ @$designation->name }}</h4>
 						</div>
 						<ul class="social">
-							<li><a href="{{ @$teacher->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
-							<li><a href="{{ @$teacher->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
-							<li><a href="{{ @$teacher->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
-							<li><a href="{{ @$teacher->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->twitter_id }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->google_id }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+							<li><a href="{{ @$teacher->instagram_id }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
 						</ul>
 						</div>
 					</div>

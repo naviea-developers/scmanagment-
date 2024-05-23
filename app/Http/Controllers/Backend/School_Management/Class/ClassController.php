@@ -40,6 +40,12 @@ class ClassController extends Controller
             $class = New Classe;
             $class->class_teacher_id = $request->class_teacher_id;
             $class->name = $request->name;
+            $class->details = $request->details;
+            if($request->hasFile('image')){
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/class/'),$fileName);
+                $class->image = $fileName;
+            }
             $class->save();
 
             DB::commit();
@@ -85,6 +91,13 @@ class ClassController extends Controller
         $class = Classe::find($id);
         $class->class_teacher_id = $request->class_teacher_id;
         $class->name = $request->name;
+        $class->details = $request->details;
+        if($request->hasFile('image')){
+            @unlink(public_path("upload/class/".$class->image));
+            $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('upload/class/'),$fileName);
+            $class->image = $fileName;
+        }
         $class->save();
 
         DB::commit();
@@ -103,6 +116,7 @@ class ClassController extends Controller
     {
 
         $class =  Classe::find($request->class_id);
+        @unlink(public_path("upload/class/".$class->image));
         $class->delete();
         return back()->with('message','Class Deleted Successfully');
     }

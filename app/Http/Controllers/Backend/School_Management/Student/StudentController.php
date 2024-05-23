@@ -118,7 +118,7 @@ class StudentController extends Controller
                }
 
                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.school_student.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
-
+            
                $nestedData['options'] .= '<a href="#" style="margin-left: 10px" value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
 
                $data[] = $nestedData;
@@ -467,12 +467,14 @@ class StudentController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
+
+        // dd($request->student_id);
         $student =  Admission::find($request->student_id);
         @unlink(public_path('upload/admission/'.$student->image));
             foreach($student->certificate as $item){
-                $item->delete();
+                @$item->delete();
             }
         
         $student->delete();

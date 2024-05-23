@@ -221,7 +221,7 @@ form label{
 
                         <div class="card card-body bg-light col-md-12 mt-3">
                             <div class="card-header" data-toggle="collapse" data-target="#university_location_section">
-                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i>Home University Location Section</h5>
+                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i>Home Class List Section</h5>
                             </div>
                             <div class="collapse" id="university_location_section">
                               <form action="{{ route('backend.home_location_section.update') }}" method="post" enctype="multipart/form-data">
@@ -232,20 +232,63 @@ form label{
 
                                     <div class="row mt-4">
                                         <div class="col-sm-12 ">
-                                            <label class=" form-control-label">University Location Title:<span class="tx-danger"></span></label>
+                                            <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
                                             <div class="mg-t-10 mg-sm-t-0">
                                             <input type="text" value="{{ $home_content->university_location_title ?? '' }}" name="university_location_title" class="form-control" placeholder="Enter Location Title">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12">
+                                            <label class="form-control-label">Class List:</label>
+                                            <div class="mg-t-10 mg-sm-t-0 add-data-class-list">
+                                                @if($Home_content_class_lists->count() == 0)
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <div class="d-flex align-items-center select-add-section p-2" style="width: 50%;">
+                                                        <select  class="form-control form-select" name="class_id[]">
+                                                            <option value="0">Select class</option>
+                                                            @foreach ($classs as $class)
+                                                            <option value="{{ @$class->id }}">{{ @$class->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+        
+                                                    <a id="plus-btn-data-class-list" href="javascript:void(0)" class="plus-btn-data-class-listpx-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
+                                                </div>
+                                                @else
+                                                @foreach ($Home_content_class_lists as $k=>$class_list)
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <div class="d-flex align-items-center select-add-section p-2" style="width: 50%;">
+                                                        <select  class="form-control form-select" name="old_class_id[{{ $class_list->id }}]">
+                                                            <option value="0">Select class</option>
+                                                            @foreach ($classs as $class)
+                                                            <option @if ($class->id == $class_list->class_id) Selected @endif value="{{ @$class->id }}">{{ @$class->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @if($k == $Home_content_class_lists->count() - 1)
+                                                <a id="plus-btn-data-class-list" href="javascript:void(0)" class="plus-btn-data-class-list px-1 p-0 m-0 ml-2"><i class="fas fa-plus"></i></a>
+                                                 @else
+                                                 <a class_list_id="{{ $class_list->id }}" href="javascript:void(0)" class="minus-btn-data-old-class-list px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>
+                                                 @endif
+        
+        
+                                                </div>
+                                                @endforeach
+                                                @endif
+        
+                                            </div>
+        
+                                        </div>
+                                    </div><!-- row -->
 
 
 
 
-                                    <label class=" form-control-label mt-4">Location:<span class="tx-danger"></span></label>
+
+                                    {{-- <label class=" form-control-label mt-4">Location:<span class="tx-danger"></span></label>
                                     <div class="col-sm-12 mt-3"  style="border: 1px solid;padding:10px">
-                                        
                                         <div class="mg-t-10 mg-sm-t-0 add-data-content">
                                             @if($home_content_locations->count() == 0)
                                                 <div class="d-flex align-items-center mt-2 row">
@@ -325,7 +368,7 @@ form label{
                                                 @endforeach
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     {{-- loctaion End --}}
                                   
                                 </div>
@@ -1374,6 +1417,54 @@ form label{
 @section('script')
 
 <script>
+
+    //Course Contents start
+$(document).ready(function() {
+        $(document).on('click','#plus-btn-data-class-list',function(){
+
+
+
+var myvar = '<div class="d-flex align-items-center mt-2">'+
+''+
+'                                     <div class="d-flex align-items-center select-add-section p-2" style="width: 50%;">'+
+    '                                                        <select  class="form-control form-select"  name="class_id[]">'+
+    '                                                            <option value="">select class</option>'+
+'                                                                @foreach ($classs as $class)'+
+'                                                                <option value="{{ @$class->id }}">{{ @$class->name }}</option>'+
+  '                                                              @endforeach'+
+    '                                                        </select>'+
+'                                    </div>'+
+''+
+''+
+'                                   <a href="javascript:void(0)" class="minus-btn-data-class-list px-1 p-0 m-0 ml-2"><i class="fas fa-minus-circle"></i></a>'+
+'                                    </div>';
+
+
+$('.add-data-class-list').prepend(myvar);
+            //console.log();
+        });
+
+        $(document).on('click','.minus-btn-data-class-list',function(){
+            $(this).parent().remove();
+        });
+
+        $(document).on('click','.minus-btn-data-old-class-list',function(){
+             $(this).parent().parent().append('<input type="hidden" name="delete_class[]" value="'+$(this).attr('class_list_id')+'">');
+            $(this).parent().remove();
+        });
+
+
+    });
+
+
+
+
+
+
+
+
+
+
 
     //University Loction start
     $(document).ready(function() {

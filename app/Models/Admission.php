@@ -9,6 +9,8 @@ class Admission extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['class_id', 'user_id'];
+
     public function getImageShowAttribute(){
         return $this->image != "" ? asset('public/upload/admission/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
     }
