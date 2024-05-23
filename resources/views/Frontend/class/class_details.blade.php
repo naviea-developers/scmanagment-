@@ -233,12 +233,6 @@
     </div>
     <div class="container-lg hero-header_wrap position-relative">
         <!--Start Breadcrumb-->
-        <!-- <nav aria-label="breadcrumb">
-            <ol class="breadcrumb text-uppercase">
-                <li class="breadcrumb-item"><ahref="" class="text-white"></ahref=></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-white"></a></li>
-            </ol>
-        </nav> -->
         <!--End Breadcrumb-->
         <!--Start Video Icon With Popup Youtube-->
         <div class="text-center my-3 my-md-5 "></div>
@@ -321,27 +315,38 @@
 <div class="bg-dark-cerulean sticky-nav" id="secNavbar">
     <div class="container-lg">
         <ul class="nav" id="navbarResponsive">
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger overview_txt active" href="#overview">Overview</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger prerequisites_txt" href="#e-class">Subject List</a>
-            </li>
+            @if ($class->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger overview_txt active" href="#overview">Overview</a>
+                </li>
+            @endif
+
+            @if (@$class->subjects->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger prerequisites_txt" href="#e-class">Subject List</a>
+                </li>
+            @endif
             {{-- <li class="nav-item">
                 <a class="nav-link js-scroll-trigger outcome_txt" href="#learnings">
                     Video                </a>
             </li> --}}
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger lessons_txt" href="#teacher">Teacher List</a>
-            </li>
+            @if (@$class->teacherAssents->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#teacher">Teacher List</a>
+                </li>
+            @endif
 
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_list">Exam List</a>
-            </li>
+            @if (@$class->examSchedules->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_list">Exam List</a>
+                </li>
+            @endif
 
-            <li class="nav-item">
-                <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_type">Exam Type</a>
-            </li>
+            @if (@$class->examClasss->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_type">Exam Type</a>
+                </li>
+            @endif
 
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
@@ -355,199 +360,207 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-8 sticky-content">
-                <!--Start card-->
-                <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="overview">
-                    <div class="card-body p-4 p-xl-5">
-                        <!--Start Section Header-->
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="section-header  position-relative ">
-                                    <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                        Overview
-                                    </h4>
-                                </div>
-
-                                <div class="section-header_divider ">
-                                </div>
-                            </div>
-                        </div>
-                        <h4 class="h5 about_this_ebook mt-3" style="color: var(--text_color)">
-                           {{-- Overview --}}
-                        </h4>
-                        <!--End Section Header-->
-                        <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 moreText">
-                            {!! @$class->details !!}
-                        </div>
-                        <button onclick="showhide()" class=" read_more_txt btn btn-primary" style="color:white"id="toggle"> Read More</button>
-
-                    </div>
-                </div>
-
-                <!--End card-->
-
-                 <!--Start card-->
-                 <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="e-class">
-                    <div class="card-body p-4 p-xl-5">
-                        <!--Start Section Header-->
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="section-header  position-relative ">
-                                    <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                        Subject List
-                                    </h4>
-                                </div>
-                                <div class="section-header_divider" style="margin-bottom: 21px;"></div>
-                            </div>
-                        </div>
-
-                        <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
-                            <div class="container">
-                                <div class="row">
-                                @foreach ( @$class->subjects as $subject)
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                                    <div class="" style="height: 166px;width: 162px;" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
-                                      <div class="picture">
-                                        <img style="height:96px; width:148px;object-fit: fill" class="img-fluid" src="{{ @$subject->image_show }}">
-                                        {{-- <p>{{ @$subject->name }}</p> --}}
-                                      </div>
-                                      <div class="team-content">
-                                        {{-- <h3 class="name">{{ @$subject->name }}</h3> --}}
-                                        <h6 class="title" style="text-align: center;">{{ @$subject->name }}</h6>
-                                      </div>
+                @if ($class->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="overview">
+                        <div class="card-body p-4 p-xl-5">
+                            <!--Start Section Header-->
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="section-header  position-relative ">
+                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
+                                            Overview
+                                        </h4>
                                     </div>
-                                  </div>
-                                @endforeach                        
-                                </div>
-                              </div>
-                        </div>                    
 
-                    </div>
-                </div>
-                <!--Start card-->
-
-                <!--Start card-->
-                <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="teacher">
-                    <div class="card-body p-4 p-xl-5">
-                        <!--Start Section Header-->
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="section-header  position-relative ">
-                                    <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                        Class Teacher
-                                    </h4>
+                                    <div class="section-header_divider ">
+                                    </div>
                                 </div>
-                                <div class="section-header_divider" style="margin-bottom: 21px;"></div>
                             </div>
-                        </div>
+                            <h4 class="h5 about_this_ebook mt-3" style="color: var(--text_color)">
+                            {{-- Overview --}}
+                            </h4>
+                            <!--End Section Header-->
+                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 moreText">
+                                {!! @$class->details !!}
+                            </div>
+                            <button onclick="showhide()" class=" read_more_txt btn btn-primary" style="color:white"id="toggle"> Read More</button>
 
-                        <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
-                            <div class="container">
+                        </div>
+                    </div>
+                    <!--End card-->
+                @endif
+
+                @if (@$class->subjects->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="e-class">
+                        <div class="card-body p-4 p-xl-5">
+                            <!--Start Section Header-->
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="section-header  position-relative ">
+                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
+                                            Subject List
+                                        </h4>
+                                    </div>
+                                    <div class="section-header_divider" style="margin-bottom: 21px;"></div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
+                                <div class="container">
                                     <div class="row">
-                                        @foreach ( @$class->teacherAssents as $teacherAssent)
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                                            <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
-                                            <div class="picture">
-                                                <img style="height: 131px;" class="img-fluid" src="{{ @$teacherAssent->teacher->image_show }}">
-                                            </div>
-                                            <div class="team-content">
-                                                <h3 class="name">{{ @$teacherAssent->teacher->name }}</h3>
-                                                <h4 class="title">{{ @$teacherAssent->teacher->user_designation->name }}</h4>
-                                            </div>
-                                            <ul class="social">
-                                                <li><a href="{{ @$teacherAssent->teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
-                                                <li><a href="{{ @$teacherAssent->teacher->twitter_id }}" class="fab fa-twitter" aria-hidden="true"></a></li>
-                                                <li><a href="{{ @$teacherAssent->teacher->google_id }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                                                <li><a href="{{ @$teacherAssent->teacher->instagram_id }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
-                                            </ul>
-                                            </div>
+                                    @foreach ( @$class->subjects as $subject)
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                        <div class="" style="height: 166px;width: 162px;" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
+                                        <div class="picture">
+                                            <img style="height:96px; width:148px;object-fit: fill" class="img-fluid" src="{{ @$subject->image_show }}">
+                                            {{-- <p>{{ @$subject->name }}</p> --}}
                                         </div>
-                                        @endforeach                       
+                                        <div class="team-content">
+                                            {{-- <h3 class="name">{{ @$subject->name }}</h3> --}}
+                                            <h6 class="title" style="text-align: center;">{{ @$subject->name }}</h6>
+                                        </div>
+                                        </div>
                                     </div>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Start card-->
-
-                <!--Start card-->
-                <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_list">
-                    <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
-                        <!--Start Section Header-->
-                        <div class="section-header mb-4 position-relative">
-                            <h4 class="h5 what_will_i_learn_txt">Exam List</h4>
-                            <div class="section-header_divider"></div>
-                        </div>
-                        <!--End Section Header-->
-                        <div class="row">
-                            {{-- @foreach ( @$class->examSchedules as $examSchedule)
-                            <div class="col-sm-6 col-md-6">
-                                <p class="benifit-checked"><i class="fas fa-check" style="color: var(--text_color)"></i>{{ @$examSchedule->examination->name }}</p>
-                            </div>
-                            @endforeach --}}
-                            @php
-                              $printedExams = [];
-                            @endphp
-
-                            @foreach ($class->examSchedules as $examSchedule)
-                                @if (!in_array($examSchedule->examination->name, $printedExams))
-                                    <div class="col-sm-6 col-md-6">
-                                        <p class="benifit-checked">
-                                            <i class="fas fa-check" style="color: var(--text_color)"></i>
-                                            {{ $examSchedule->examination->name }}
-                                        </p>
+                                    @endforeach                        
                                     </div>
-                                    @php
-                                        $printedExams[] = $examSchedule->examination->name;
-                                    @endphp
-                                @endif
-                            @endforeach
+                                </div>
+                            </div>                    
 
                         </div>
                     </div>
-                </div>
-                <!--End card-->
+                    <!--Start card-->
+                @endif
 
-                  <!--Start card-->
-                  <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_type">
-                    <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
-                        <!--Start Section Header-->
-                        <div class="section-header mb-4 position-relative">
-                            <h4 class="h5 what_will_i_learn_txt">Exam Type</h4>
-                            <div class="section-header_divider"></div>
-                        </div>
-                        <!--End Section Header-->
-                        <div class="row">
-                            {{-- @foreach ( @$class->examClasss as $examClass)
-                            <div class="col-sm-6 col-md-6">
-                                <p class="benifit-checked"><i class="fas fa-check" style="color: var(--text_color)"></i>{{ @$examClass->examtype->name }}</p>
+                @if (@$class->teacherAssents->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="teacher">
+                        <div class="card-body p-4 p-xl-5">
+                            <!--Start Section Header-->
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="section-header  position-relative ">
+                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
+                                            Class Teacher
+                                        </h4>
+                                    </div>
+                                    <div class="section-header_divider" style="margin-bottom: 21px;"></div>
+                                </div>
                             </div>
-                            @endforeach --}}
 
-                            @php
-                                $printedExamTypes = [];
-                            @endphp
-                            
-                            @foreach ($class->examClasss ?? [] as $examClass)
+                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
+                                <div class="container">
+                                        <div class="row">
+                                            @foreach ( @$class->teacherAssents as $teacherAssent)
+                                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                                <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
+                                                <div class="picture">
+                                                    <img style="height: 131px;" class="img-fluid" src="{{ @$teacherAssent->teacher->image_show }}">
+                                                </div>
+                                                <div class="team-content">
+                                                    <h3 class="name">{{ @$teacherAssent->teacher->name }}</h3>
+                                                    <h4 class="title">{{ @$teacherAssent->teacher->user_designation->name }}</h4>
+                                                </div>
+                                                <ul class="social">
+                                                    <li><a href="{{ @$teacherAssent->teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+                                                    <li><a href="{{ @$teacherAssent->teacher->twitter_id }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+                                                    <li><a href="{{ @$teacherAssent->teacher->google_id }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                                                    <li><a href="{{ @$teacherAssent->teacher->instagram_id }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                                                </ul>
+                                                </div>
+                                            </div>
+                                            @endforeach                       
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Start card-->
+                @endif
+
+                @if (@$class->examSchedules->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_list">
+                        <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
+                            <!--Start Section Header-->
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 what_will_i_learn_txt">Exam List</h4>
+                                <div class="section-header_divider"></div>
+                            </div>
+                            <!--End Section Header-->
+                            <div class="row">
+                                {{-- @foreach ( @$class->examSchedules as $examSchedule)
+                                <div class="col-sm-6 col-md-6">
+                                    <p class="benifit-checked"><i class="fas fa-check" style="color: var(--text_color)"></i>{{ @$examSchedule->examination->name }}</p>
+                                </div>
+                                @endforeach --}}
                                 @php
-                                    $examTypeName = $examClass->examtype->name ?? '';
+                                $printedExams = [];
                                 @endphp
-                                @if (!in_array($examTypeName, $printedExamTypes))
-                                    <div class="col-sm-6 col-md-6">
-                                        <p class="benifit-checked">
-                                            <i class="fas fa-check" style="color: var(--text_color)"></i>
-                                            {{ $examTypeName }}
-                                        </p>
-                                    </div>
-                                    @php
-                                        $printedExamTypes[] = $examTypeName;
-                                    @endphp
-                                @endif
-                            @endforeach
+
+                                @foreach ($class->examSchedules as $examSchedule)
+                                    @if (!in_array($examSchedule->examination->name, $printedExams))
+                                        <div class="col-sm-6 col-md-6">
+                                            <p class="benifit-checked">
+                                                <i class="fas fa-check" style="color: var(--text_color)"></i>
+                                                {{ $examSchedule->examination->name }}
+                                            </p>
+                                        </div>
+                                        @php
+                                            $printedExams[] = $examSchedule->examination->name;
+                                        @endphp
+                                    @endif
+                                @endforeach
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--End card-->
+                    <!--End card-->
+                @endif
 
+                @if (@$class->examClasss->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_type">
+                        <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
+                            <!--Start Section Header-->
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 what_will_i_learn_txt">Exam Type</h4>
+                                <div class="section-header_divider"></div>
+                            </div>
+                            <!--End Section Header-->
+                            <div class="row">
+                                {{-- @foreach ( @$class->examClasss as $examClass)
+                                <div class="col-sm-6 col-md-6">
+                                    <p class="benifit-checked"><i class="fas fa-check" style="color: var(--text_color)"></i>{{ @$examClass->examtype->name }}</p>
+                                </div>
+                                @endforeach --}}
+
+                                @php
+                                    $printedExamTypes = [];
+                                @endphp
+                                
+                                @foreach ($class->examClasss ?? [] as $examClass)
+                                    @php
+                                        $examTypeName = $examClass->examtype->name ?? '';
+                                    @endphp
+                                    @if (!in_array($examTypeName, $printedExamTypes))
+                                        <div class="col-sm-6 col-md-6">
+                                            <p class="benifit-checked">
+                                                <i class="fas fa-check" style="color: var(--text_color)"></i>
+                                                {{ $examTypeName }}
+                                            </p>
+                                        </div>
+                                        @php
+                                            $printedExamTypes[] = $examTypeName;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <!--End card-->
+                @endif
  
                 <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
                     <div class="card-body p-4 p-xl-5">

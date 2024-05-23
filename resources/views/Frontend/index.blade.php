@@ -166,11 +166,11 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <img style="height: 225px;width:320px" src="{{ @$classList->class->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
                     </div>
-                    {{-- <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.all_universities_list') }}"> --}}
+                    <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.class_details',@$classList->class->id) }}">
                     <h3 class=""
                         style="position: absolute;top: 10px;left: 20px;font-size: 1.5rem;color: #fff;font-weight: 600;text-shadow: 1px 2px 10px #202020;">
                         {{ @$classList->class->name }}</h3>
-                    {{-- </a> --}}
+                    </a>
                     </div>
                 @endif
             @endforeach
