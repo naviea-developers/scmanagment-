@@ -59,9 +59,9 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="">Exam Class :</label>
+                            <label for="">Exam Subject :</label>
                             <select name="exam_class_id" id="examclassSub" class="form-control form-select select2">
-                                <option value="">Select Exam class</option>
+                                <option value="">Select Exam subject</option>
                                 {{-- @foreach (@$examClasss as $examClass)
                                     <option value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
                                 @endforeach --}}
@@ -113,7 +113,7 @@
 
                     <div class="col-md-12 mt-4" >
                         <button type="submit" style="margin-left: -14px;" class="btn btn-primary createClass">
-                            Create New Exam Class</button>
+                            Create New Exam Schedule</button>
                     </div>
                 </form>
         </div>

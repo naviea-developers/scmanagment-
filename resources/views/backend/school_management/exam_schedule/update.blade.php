@@ -54,9 +54,9 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Exam Class :</label>
+                            <label for="">Exam Subject :</label>
                             <select name="exam_class_id" id="examclassSub" class="form-control form-select select2">
-                                <option value="">Select Exam class</option>
+                                <option value="">Select Exam subject</option>
                                 @foreach (@$examClasss as $examClass)
                                     <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
                                 @endforeach
