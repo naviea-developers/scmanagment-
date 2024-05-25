@@ -104,6 +104,7 @@ Admin - All Results
                     <th class="wd-15p">Full Marks</th>
                     <th class="wd-15p">Pass Marks</th>
                     <th class="wd-15p">Obtained Marks</th>
+                    <th class="wd-15p">Publish Status</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -229,11 +230,12 @@ Admin - All Results
             { "data": "marke"},
             { "data": "pass_marke"},
             { "data": "obtained_marke"},
+            { "data": "is_publis"},
             { "data": "status"},
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 12,
+          "targets": 13,
           "orderable": false
           } ]
 
