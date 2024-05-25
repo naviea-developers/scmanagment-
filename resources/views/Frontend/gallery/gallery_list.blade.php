@@ -24,17 +24,18 @@
 
 
               @if($gallerys->lastPage() != 1)
-              <div class="text-center mt-5">
-                <div id="load75">
-                    <button type="button" id="showMore" onClick="all_course_load('75')"
-                        class="btn btn-lg btn-dark-cerulean load browse_more_course_txt">
-                          Show more <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="28.56" height="15.666" viewBox="0 0 28.56 15.666">
-                            <path id="right-arrow_3_" data-name="right-arrow (3)"
-                                d="M20.727,107.5l-1.272,1.272,5.661,5.661H0v1.8H25.116l-5.661,5.661,1.272,1.272,7.833-7.833Z"
-                                transform="translate(0 -107.5)" fill="#fff">
-                            </path>
-                        </svg>
-                    </button>
+                <div class="text-center mt-5">
+                  <div id="load75">
+                      <button type="button" id="showMore" onClick="all_course_load('75')"
+                          class="btn btn-lg btn-dark-cerulean load browse_more_course_txt">
+                            Show more <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="28.56" height="15.666" viewBox="0 0 28.56 15.666">
+                              <path id="right-arrow_3_" data-name="right-arrow (3)"
+                                  d="M20.727,107.5l-1.272,1.272,5.661,5.661H0v1.8H25.116l-5.661,5.661,1.272,1.272,7.833-7.833Z"
+                                  transform="translate(0 -107.5)" fill="#fff">
+                              </path>
+                          </svg>
+                      </button>
+                  </div>
                 </div>
             </div>
             @endif
