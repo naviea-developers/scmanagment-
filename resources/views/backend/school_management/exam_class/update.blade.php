@@ -108,7 +108,7 @@
 
                     <div class="col-md-12 mt-4" >
                         <button type="submit" style="margin-left: -14px;" class="btn btn-primary createClass">
-                            Create New Exam Class</button>
+                            Create New Exam Subject</button>
                     </div>
                 </form>
 

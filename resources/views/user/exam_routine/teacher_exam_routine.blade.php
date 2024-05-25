@@ -44,25 +44,26 @@
                     <span class="text-center">  Class {{ $admission->class->name }}</span>
                 </div> --}}
 
-                @if ($examRoutine->isNotEmpty())
+                @if ($examSchedules->isNotEmpty())
 
                 <div class="float-right">
-                  <a href="{{ route('teacher.exam_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                  <a href="{{ route('teacher.exam_routine.print') }}?examination_id={{ @$examSchedules[0]->examination_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
                       <i class="fas fa-print text-primary"></i> Print
                   </a>
-              </div>
+                </div>
 
 
 
 
                   <div class="school-name">
                       <h3>School Name</h3>
-                      <h6>Class Name: {{ $teacher->class->name ?? '' }}</h6>
-                      {{-- <h6>Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6> --}}
+                      <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
+                      {{-- <h6>Class Name: {{ $teacher->class->name ?? '' }}</h6> --}}
+                      {{-- <h6>Session: {{ $schedules->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6> --}}
                     
-                      @foreach ($examRoutine as $routine)
+                      {{-- @foreach ($schedules as $routine)
                           <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
-                      @endforeach
+                      @endforeach --}}
                       <h4>Exam Routine</h4>
                   </div>
                   
@@ -72,24 +73,44 @@
                       <thead>
                         <tr style="color: black">
                           <th>Date</th>
-                          <th>Subject</th>
-                          <th>Bulding</th>
-                          <th>Floor</th>
-                          <th>Room</th>
-                          <th>Time</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($examRoutine as $routine)
-                              <tr>
-                                  <td>{{ @$routine->examClass->date }}</td>
-                                  <td>{{ @$routine->examClass->subject->name }}</td>
-                                  <td>{{ @$routine->bulding->name }}</td>
-                                  <td>{{ @$routine->floor->name }}</td>
-                                  <td>{{ @$routine->room->name }}</td>
-                                  <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
-                              </tr>
+                        @php
+                            $shownDates = [];
+                        @endphp
+              
+                        @php
+                            $groupedSchedules = [];
+                            foreach ($examSchedules as $routine) {
+                                $examDate = date('d,F,Y', strtotime(@$routine->examClass->date));
+                                $groupedSchedules[$examDate][] = $routine;
+                            }
+                        @endphp
+              
+                        @foreach ($groupedSchedules as $date => $schedules)
+                            @php
+                                $rowspan = count($schedules);
+                            @endphp
+                            @foreach ($schedules as $index => $routine)
+                                <tr>
+                                    @if ($index == 0)
+                                        <td rowspan="{{ $rowspan }}">{{ $date }}</td>
+                                    @endif
+                                    <td>
+                                        Class :{{ @$routine->examClass->class->name }},
+                                        Subject : {{ @$routine->examClass->subject->name }},
+                                        Bulding :{{ @$routine->bulding->name }},
+                                        Floor :{{ @$routine->floor->name }},
+                                        Room :{{ @$routine->room->name }},
+                                        Time :{{ date('h:i A', strtotime(@$routine->examClass->start_time)) }} - {{ date('h:i A', strtotime(@$routine->examClass->end_time)) }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
+
+                       
                       </tbody>
                     </table>
                   </div>
