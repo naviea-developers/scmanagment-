@@ -271,6 +271,12 @@ Route::get('/ebook-category-video-show-ajax/{id}',[FrontendController::class,"ge
 
 // Gallery list
 Route::get('gallery-list', [FrontendController::class, 'gallery'])->name('frontend.gallery_list');
+Route::get('/get-gallery-all-show',[FrontendController::class,'getGallery']);
+
+// Notice list
+Route::get('notice-list', [FrontendController::class, 'notice'])->name('frontend.notice_list');
+Route::get('notice-details/{id}', [FrontendController::class, 'noticeDetails'])->name('frontend.notice_details');
+Route::get('/get-notices-all-show',[FrontendController::class,'getNotice']);
 
 //university
 
