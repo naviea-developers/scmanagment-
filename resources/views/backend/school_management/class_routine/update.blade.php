@@ -110,7 +110,7 @@
                                 <option @if($editData->day_id == '7')  Selected @endif value="7">Friday</option>
                             </select>
                         </div>
-                       
+
                         {{-- <div class="col-md-4">
                             <label for="">Class Type :</label>
                             <select name="class_type" id="" class="form-select">

@@ -41,7 +41,8 @@
 
   <div class="class-routine">
     <h2>Class Routine</h2>
-  
+    
+        
     {{-- @php
       $classRoutinesByDay = [];
       $classDurations = [];
@@ -90,19 +91,19 @@
         </tbody>
     </table> --}}
 
-      @php
-        $classRoutinesByDay = [];
-        $classDurations = [];
+    @php
+      $classRoutinesByDay = [];
+      $classDurations = [];
 
-        // Sort class routines by day
-        $class_routine_sorted = $class_routine->sortBy('day_id');
+      // Sort class routines by day
+      $class_routine_sorted = $class_routine->sortBy('day_id');
 
-        foreach ($class_routine_sorted as $data) {
-            $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
-            if (!in_array($data->classDuration->name, $classDurations)) {
-                $classDurations[] = $data->classDuration->name;
-            }
-        }
+      foreach ($class_routine_sorted as $data) {
+          $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
+          if (!in_array($data->classDuration->name, $classDurations)) {
+              $classDurations[] = $data->classDuration->name;
+          }
+      }
     @endphp
 
     <table>

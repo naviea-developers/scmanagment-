@@ -233,7 +233,6 @@ class ClassRoutineController extends Controller
             $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
         }
         return view('Backend.school_management.class_routine.view_class_routine',$data);
-        // return view('Backend.school_management.class_routine.view_class_routine_print',$data);
         // return response()->json(['routine' => $routine]);
     }
     

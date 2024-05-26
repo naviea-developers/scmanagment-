@@ -247,6 +247,8 @@ Route::get('/e-book-list', [FrontendController::class, 'eBook'])->name('frontend
 Route::get('/e-book-details/{id}', [FrontendController::class, 'eBookDetails'])->name('frontend.ebook_details');
 Route::get('/e-book/download/{id}', [FrontendController::class, 'eBookDownload'])->name('frontend.ebook_download');
 
+
+
 Route::get('/e-book/video/download/{id}', [FrontendController::class, 'eBookVideoDownload'])->name('frontend.ebook_video_download');
 Route::get('/e-book/audio/download/{id}', [FrontendController::class, 'eBookAudioDownload'])->name('frontend.ebook_audio_download');
 
@@ -324,6 +326,8 @@ Route::get('university-program-details/{id}', [FrontendController::class,"progra
 
 // class list details
 Route::get('class_details/{id}', [FrontendController::class,"classDetails"])->name('frontend.class_details');
+Route::get('/book_list/download/{id}', [FrontendController::class, 'bookListDownload'])->name('frontend.book_list_download');
+Route::get('/class_routine/download', [FrontendController::class, 'classRoutineDownload'])->name('frontend.class_routine_download');
 
 });
 

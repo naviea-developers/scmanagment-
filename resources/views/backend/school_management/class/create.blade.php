@@ -75,6 +75,15 @@
                           </div>
                         </div>
 
+                        <div class="row mt-4">
+                          <div class="col-sm-12">
+                              <label class="form-control-label"><b>School Gargent Policy </b><span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <textarea id="summernote_two" name="gargent_policy">{{ old('gargent_policy') }}</textarea>
+                              </div>
+                          </div>
+                        </div>
+
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
                             <a href="{{route('admin.class.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>

@@ -33,6 +33,14 @@ class Classe extends Model
         return $this->hasMany(ExamClass::class,"class_id",'id');
     }
 
+    public function classRoutines(){
+        return $this->hasMany(ClassRoutine::class,"class_id",'id');
+    }
+
+    public function groups(){
+        return $this->hasMany(Group::class,"class_id",'id');
+    }
+
 
 
 }
