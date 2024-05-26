@@ -6,6 +6,8 @@
      <span class="published">{{ @$notice->created_at->diffForHumans() }}</span> | 
      <a href="{{ route('frontend.notice_details',$notice->id) }}" rel="category tag">Notice type : {{ @$notice->type }}</a>
 </p>
-{!! @$notice->description !!}
+{{-- {!! @$notice->description !!} --}}
+{{ substr( @$notice->description,0,430) }}...
+<p><a href="{{ route('frontend.notice_pdf_download',$notice->id) }}">click here to download the PDF file.</a></p>
 </article>
 @endforeach

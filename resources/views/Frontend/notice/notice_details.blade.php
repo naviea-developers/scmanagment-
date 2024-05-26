@@ -22,7 +22,10 @@
                                     <a href="{{ route('frontend.notice_details',$notice->id) }}" rel="category tag">Notice type : {{ @$notice->type }}</a>
                             </p>
                             {!! @$notice->description !!}
+                            {{-- <p>{{ @$notice->notice_file }}</p> --}}
+                            <p><a href="{{ route('frontend.notice_pdf_download',$notice->id) }}">click here to download the PDF file.</a></p>
                             </article>
+
                         </div> 
                         <div id="sidebar">
                             {{-- <div id="search-2" class="et_pb_widget widget_search">

@@ -856,6 +856,19 @@ class FrontendController extends Controller
          return view('Frontend.notice.notice_details', $data);
      }
 
+     public function noticePdfDownload(Request $request,$id)
+     {
+        // dd('hi');
+        $notice = Notice::findOrFail($id);
+        if ($notice->notice_file) {
+            $filePath = public_path('upload/notice_file/'.$notice->notice_file);
+            if (file_exists($filePath)) {
+                return response()->download($filePath, $notice->notice_file);
+            }
+        }
+        return redirect()->back();
+     }
+
      //ajax get notice
      public function getNotice(){
         $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(4); 

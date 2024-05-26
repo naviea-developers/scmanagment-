@@ -33,57 +33,57 @@
 <!-- Main content -->
 
 <div class="content_search" style="margin-top:70px">
-    <style>
-.preview-accordion .accordion-button::after {
-    display: none;
-}
-
-/*========== its for feedback reply ==========*/
-.media {
-    background: #fff;
-    box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
-    padding: 1rem;
-
-    h2 {
-        font-size: 24px;
-        font-weight: bold;
+<style>
+    .preview-accordion .accordion-button::after {
+        display: none;
     }
 
-    img {
-        float: left;
-        width: 200px;
-        margin-right: 16px;
-        border: 1px solid lightgrey;
+    /*========== its for feedback reply ==========*/
+    .media {
+        background: #fff;
+        box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
+        padding: 1rem;
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        img {
+            float: left;
+            width: 200px;
+            margin-right: 16px;
+            border: 1px solid lightgrey;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
     }
 
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
+    .media[dir="rtl"] {
+        img {
+            float: right;
+            margin-right: 0;
+            margin-left: 16px;
+        }
     }
-}
 
-.media[dir="rtl"] {
-    img {
-        float: right;
-        margin-right: 0;
-        margin-left: 16px;
+    .link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #1d7bb3;
     }
-}
 
-.link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #1d7bb3;
-}
+    .wrapper {
+        /*max-width: 800px;*/
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 
-.wrapper {
-    /*max-width: 800px;*/
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-/*============= close ===========*/
+    /*============= close ===========*/
 </style>
 
 <style>
@@ -345,11 +345,11 @@
                 </li>
             @endif
 
-            {{-- @if ($class->count() >0) --}}
+            @if ($class->count() >0)
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger overview_txt" href="#gargent_policy">Gargent Policy</a>
                 </li>
-            {{-- @endif --}}
+            @endif
 
             @if (@$class->subjects->count() >0)
                 <li class="nav-item">
@@ -396,6 +396,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-8 sticky-content">
+                
                 @if ($class->count() >0)
                     <!--Start card-->
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="overview">
@@ -427,7 +428,7 @@
                     <!--End card-->
                 @endif
 
-                {{-- @if ($class->count() >0) --}}
+                @if ($class->count() >0)
                     <!--Start card-->
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="gargent_policy">
                         <div class="card-body p-4 p-xl-5">
@@ -456,7 +457,7 @@
                         </div>
                     </div>
                     <!--End card-->
-                {{-- @endif --}}
+                @endif
       
                 @if (@$class->subjects->count() >0)
                     <!--Start card-->
@@ -502,7 +503,7 @@
 
                 @if (@$class->subjects->count() >0)
                     <!--Start card-->
-                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="book_list">
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="book-list">
                         <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
                             <!--Start Section Header-->
                             <div class="section-header mb-4 position-relative">
@@ -533,7 +534,7 @@
                                 @foreach ($class->groups as $group)
                                     <div class="col-sm-6 col-md-6">
                                         <ul>
-                                            <li>{{ $group->name }}</li> 
+                                            Group Name :- {{ $group->name }}
                                             <ul>
                                                 @foreach ($group->subjects as $sub)
                                                     <li>{{ $sub->name }}</li> <!-- Display subject name -->
@@ -682,8 +683,7 @@
                     </div>
                     <!--End card-->
                 @endif
-
-                
+               
                 @if (@$class->ClassRoutines->count() >0)
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
                         <div class="card-body p-4 p-xl-5">
@@ -721,7 +721,7 @@
                                         $section = $sectionData['section'];
                                         $classRoutinesByDay = $sectionData['routines'];
                                     @endphp
-                                    <h2>Section {{ $section->name }}</h2> 
+                                    <h2>Section : {{ $section->name }}</h2> 
                                     <table>
                                         <thead>
                                             <tr style="color: black">
@@ -770,7 +770,7 @@
                         
                         </div>
                     </div>
-               @endif
+                @endif
 
                 {{-- <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

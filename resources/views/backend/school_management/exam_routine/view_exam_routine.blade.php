@@ -21,82 +21,85 @@
   }
 </style>
 
+@if (@$examSchedules->count() > 0)
+  <div class="container">
 
-<div class="container">
+      <div class="float-end">
+        <a href="{{ route('admin.examroutine.print') }}?examination_id={{ @$examSchedules[0]->examination_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
+      </div>
 
-    <div class="float-end">
-      <a href="{{ route('admin.examroutine.print') }}?examination_id={{ @$examSchedules[0]->examination_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
-    </div>
+      <div class="school-name">
+        <h1 style="margin-left: 80px;">School Name</h1>
+        <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
+      </div>
+    
+      <div class="class-routine">
+        <h2>Exam Routine</h2>
+        <table>
 
-    <div class="school-name">
-      <h1 style="margin-left: 80px;">School Name</h1>
-      <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
-    </div>
-  
-    <div class="class-routine">
-      <h2>Exam Routine</h2>
-      <table>
-
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {{-- @foreach ($examSchedules as  $routine)
+          <thead>
             <tr>
-              <td>{{date('d,F,Y',strtotime(@$routine->examClass->date))}}</td>
-              <td>{{ $routine->examClass->class->name }},
-                 {{ $routine->examClass->subject->name }},
-                 {{ $routine->bulding->name }},
-                 {{ $routine->floor->name }},
-                 {{ date('h:i A', strtotime($routine->examClass->start_time)) }} - {{ date('h:i A', strtotime($routine->examClass->end_time)) }}
-              </td>
+              <th>Date</th>
+              <th></th>
             </tr>
-          @endforeach --}}
+          </thead>
 
-          @php
-              $shownDates = [];
-          @endphp
+          <tbody>
+            {{-- @foreach ($examSchedules as  $routine)
+              <tr>
+                <td>{{date('d,F,Y',strtotime(@$routine->examClass->date))}}</td>
+                <td>{{ $routine->examClass->class->name }},
+                  {{ $routine->examClass->subject->name }},
+                  {{ $routine->bulding->name }},
+                  {{ $routine->floor->name }},
+                  {{ date('h:i A', strtotime($routine->examClass->start_time)) }} - {{ date('h:i A', strtotime($routine->examClass->end_time)) }}
+                </td>
+              </tr>
+            @endforeach --}}
 
-          @php
-              $groupedSchedules = [];
-              foreach ($examSchedules as $routine) {
-                  $examDate = date('d,F,Y', strtotime(@$routine->examClass->date));
-                  $groupedSchedules[$examDate][] = $routine;
-              }
-          @endphp
+            @php
+                $shownDates = [];
+            @endphp
 
-          @foreach ($groupedSchedules as $date => $schedules)
-              @php
-                  $rowspan = count($schedules);
-              @endphp
-              @foreach ($schedules as $index => $routine)
-                  <tr>
-                      @if ($index == 0)
-                          <td rowspan="{{ $rowspan }}">{{ $date }}</td>
-                      @endif
-                      <td>
-                          Class :{{ @$routine->examClass->class->name }},
-                          Subject : {{ @$routine->examClass->subject->name }},
-                          Bulding :{{ @$routine->bulding->name }},
-                          Floor :{{ @$routine->floor->name }},
-                          Room :{{ @$routine->room->name }},
-                          Time :{{ date('h:i A', strtotime(@$routine->examClass->start_time)) }} - {{ date('h:i A', strtotime(@$routine->examClass->end_time)) }}
-                      </td>
-                  </tr>
-              @endforeach
-          @endforeach
+            @php
+                $groupedSchedules = [];
+                foreach ($examSchedules as $routine) {
+                    $examDate = date('d,F,Y', strtotime(@$routine->examClass->date));
+                    $groupedSchedules[$examDate][] = $routine;
+                }
+            @endphp
 
-        
-        </tbody>
-      </table>
-    </div>
-</div>
+            @foreach ($groupedSchedules as $date => $schedules)
+                @php
+                    $rowspan = count($schedules);
+                @endphp
+                @foreach ($schedules as $index => $routine)
+                    <tr>
+                        @if ($index == 0)
+                            <td rowspan="{{ $rowspan }}">{{ $date }}</td>
+                        @endif
+                        <td>
+                            Class :{{ @$routine->examClass->class->name }},
+                            Subject : {{ @$routine->examClass->subject->name }},
+                            Bulding :{{ @$routine->bulding->name }},
+                            Floor :{{ @$routine->floor->name }},
+                            Room :{{ @$routine->room->name }},
+                            Time :{{ date('h:i A', strtotime(@$routine->examClass->start_time)) }} - {{ date('h:i A', strtotime(@$routine->examClass->end_time)) }}
+                        </td>
+                    </tr>
+                @endforeach
+            @endforeach
 
-
+          
+          </tbody>
+        </table>
+      </div>
+  </div>
+@else
+  <div class="text-center">
+    <h2>Data Not Found !</h2>
+  </div>
+@endif
 
 
 

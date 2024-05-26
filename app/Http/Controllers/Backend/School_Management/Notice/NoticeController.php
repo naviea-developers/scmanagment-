@@ -39,6 +39,11 @@ class NoticeController extends Controller
             $notice->type = $request->type;
             $notice->name = $request->name;
             $notice->description = $request->description;
+            if($request->hasFile('notice_file')){
+                $fileName = rand().time().'.'.request()->notice_file->getClientOriginalExtension();
+                request()->notice_file->move(public_path('upload/notice_file/'),$fileName);
+                $notice->notice_file = $fileName;
+            }
             $notice->save();
 
             DB::commit();
@@ -84,6 +89,13 @@ class NoticeController extends Controller
         $notice->type = $request->type;
         $notice->name = $request->name;
         $notice->description = $request->description;
+
+        if($request->hasFile('notice_file')){
+            @unlink(public_path("upload/notice_file/".$notice->notice_file));
+            $fileName = rand().time().'.'.request()->notice_file->getClientOriginalExtension();
+            request()->notice_file->move(public_path('upload/notice_file/'),$fileName);
+            $notice->notice_file = $fileName;
+        }
         $notice->save();
 
         DB::commit();
@@ -100,8 +112,8 @@ class NoticeController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $notice =  Notice::find($request->notice_id);
+        @unlink(public_path("upload/notice_file/".$notice->notice_file));
         $notice->delete();
         return back()->with('message','Notice Deleted Successfully');
     }

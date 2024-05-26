@@ -22,7 +22,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $data['classes'] = Classe::where('status', 1)->orderBy('id','desc')->get();
+        $data['classes'] = Classe::where('status', 1)->orderBy('id','asc')->get();
         $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
         return view("Backend.school_management.subject.create",$data);
     }
@@ -75,7 +75,7 @@ class SubjectController extends Controller
     {
        // dd('hi');
         $data["subject"]= Subject::find($id);
-        $data['classes'] = Classe::where('status', 1)->orderBy('id','desc')->get();
+        $data['classes'] = Classe::where('status', 1)->orderBy('id','asc')->get();
         $data['groups'] = Group::where('status', 1)->orderBy('id','desc')->get();
         return view("Backend.school_management.subject.update",$data);
     }
