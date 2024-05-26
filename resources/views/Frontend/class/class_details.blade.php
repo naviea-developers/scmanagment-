@@ -270,12 +270,12 @@
 
 
                             </span>
-                            <a href="https://www.facebook.com/sharer.php?u=https://lead.academy/ebook-details/CO13RT58I93"
+                            {{-- <a href="https://www.facebook.com/sharer.php?u=https://lead.academy/ebook-details/CO13RT58I93"
                                 target="_blank" title="Facebook Share" class="text-center ms-md-3"
                                 data-bs-toggle="modal" data-bs-target="#shareModal">
                                 <i data-feather="share-2" class="share-icon"></i>
                                 <div class="share_txt">Share</div>
-                            </a>
+                            </a> --}}
 
                         </div>
                     </div>
@@ -412,9 +412,9 @@
                                     <div class="row">
                                     @foreach ( @$class->subjects as $subject)
                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                                        <div class="" style="height: 166px;width: 162px;" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
-                                        <div class="picture">
-                                            <img style="height:96px; width:148px;object-fit: fill" class="img-fluid" src="{{ @$subject->image_show }}">
+                                        <div class=" mb-3" style="width: 162px;">
+                                        <div class="picture ">
+                                            <img style="height:200px; width:148px;object-fit: fill" class="img-fluid " src="{{ @$subject->image_show }}">
                                             {{-- <p>{{ @$subject->name }}</p> --}}
                                         </div>
                                         <div class="team-content">
@@ -453,7 +453,7 @@
                                 <div class="container">
                                         <div class="row">
                                             @foreach ( @$class->teacherAssents as $teacherAssent)
-                                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
                                                 <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
                                                 <div class="picture">
                                                     <img style="height: 131px;" class="img-fluid" src="{{ @$teacherAssent->teacher->image_show }}">

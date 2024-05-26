@@ -12,40 +12,16 @@
             <div class="col-md-12">
               <div class="row g-3 show-gallery-data" >
                 @foreach ($gallerys as $key=>$gallery)
-                <div class="col-xl-3 col-md-6" >
-                  <!--Start Course Card-->
-                  {{-- <div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border"> --}}
+                <div class="col-xl-3 col-md-6">
                     <div class="">
-                    <!--Start Course Image-->
-                    <a href="javascript:void(0)" class="course-card_img d-block pt-4 px-4" data-toggle="modal" data-target="#GalleryModal{{ $key }}">
+                    <a href="javascript:void(0)" class="course-card_img d-block pt-4 px-4" data-toggle="modal" data-target="#GalleryModal" data-key="{{ $key }}" data-image="{{ @$gallery->image_show }}">
                       <img src="{{ @$gallery->image_show }}" class="img-fluid rounded-2 w-100" alt="{{ @$gallery->name }}">
-                      {{-- <p></p> --}}
                     </a>
                   </div>
-                  <!--End Course Card-->
                 </div>
-
-                    <!-- Modal Start-->
-                    <div class="modal fade" id="GalleryModal{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">                         
-                              <img src="{{ @$gallery->image_show  }}" alt="lession_file" style="height: 300px; width:450px">
-                            </div>
-                          <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </div>
-                      </div>
-                      </div>
-                  </div>
-                 <!-- Modal END-->
-                @endforeach				
+                @endforeach
               </div>
+
 
               @if($gallerys->lastPage() != 1)
                 <div class="text-center mt-5">
@@ -61,18 +37,92 @@
                       </button>
                   </div>
                 </div>
-              @endif
             </div>
+            @endif
           </div>
         </div>
       </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Start-->
+<div class="modal fade" id="GalleryModal" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content bg-transparent shadow">
+        <div class="modal-header">
+          {{-- <h5 class="modal-title" id="modalTitle" style="color: white"></h5> --}}
+        <button type="button" class="close bg-transparent" data-dismiss="modal" aria-label="Close" style="color: red">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">                         
+          <img id="modalImage" src="" alt="lesson_file" style="height: 400px; width:100%">
+          <!-- Navigation Icons -->
+          <div class="navigation-icons" style="color: yellow">
+            <span class="prev-image" style="cursor: pointer;" ><i class="fas fa-chevron-left"></i></span>
+            <span class="next-image" style="cursor: pointer;" ><i class="fas fa-chevron-right"></i></span>
+          </div>
+        </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: red">Close</button>
+      </div>
   </div>
+  </div>
+</div>
+<!-- Modal END-->
+			
 
 @include('Frontend.layouts.parts.news-letter')
+
 @endsection
 
 
+
+
 @section('script')
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(document).on('click', '.course-card_img', function() {
+      var imageSrc = $(this).data('image');
+      var title = $(this).data('title');
+      $('#modalImage').attr('src', imageSrc);
+      $('#modalTitle').text(title);
+    });
+
+    // Previous Image Navigation
+    $('.prev-image').click(function() {
+      var currentImage = $('#modalImage').attr('src');
+      var currentImageIndex = $('.show-gallery-data img[src="' + currentImage + '"]').closest('.col-xl-3').index();
+      var prevImageIndex = currentImageIndex - 1;
+      var prevImageSrc = $('.show-gallery-data .col-xl-3').eq(prevImageIndex).find('img').attr('src');
+      if (prevImageSrc) {
+        $('#modalImage').attr('src', prevImageSrc);
+        var prevImageTitle = $('.show-gallery-data .col-xl-3').eq(prevImageIndex).find('img').attr('alt');
+        $('#modalTitle').text(prevImageTitle);
+      }
+    });
+
+    // Next Image Navigation
+    $('.next-image').click(function() {
+      var currentImage = $('#modalImage').attr('src');
+      var currentImageIndex = $('.show-gallery-data img[src="' + currentImage + '"]').closest('.col-xl-3').index();
+      var nextImageIndex = currentImageIndex + 1;
+      var nextImageSrc = $('.show-gallery-data .col-xl-3').eq(nextImageIndex).find('img').attr('src');
+      if (nextImageSrc) {
+        $('#modalImage').attr('src', nextImageSrc);
+        var nextImageTitle = $('.show-gallery-data .col-xl-3').eq(nextImageIndex).find('img').attr('alt');
+        $('#modalTitle').text(nextImageTitle);
+      }
+    });
+  });
+</script>
+
+
+  
   <script>
     //lode more
     var curPageNum = "{{ $gallerys->currentPage() }}";

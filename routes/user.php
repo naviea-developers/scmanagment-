@@ -185,3 +185,4 @@ Route::get('get/teacher_assent_subject/{id}', [InstructorCourseController::class
 Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
 Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
 Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);
+Route::post('/get-teacher-result-by-ajex', [InstructorCourseController::class, 'getTeacherResultByAjax'])->name('teacher.get_result_by_ajax');

@@ -17,7 +17,7 @@ class ExamResultController extends Controller
 {
     public function index()
     {
-        $data['results'] = ExamResult::where('is_publis',0)->get();
+        $data['results'] = ExamResult::orderBy('id', 'desc')->get();
         $data['classes'] = Classe::where('status', 1)->get();
         $data['academic_years'] = AcademicYear::where('status', 1)->get();
         $data['sessions'] = Session::where('status', 1)->get();
@@ -42,8 +42,9 @@ class ExamResultController extends Controller
             8 => 'marke',
             9 => 'pass_marke',
             10 => 'obtained_marke',
-            11 => 'status',
-            12 => 'options',
+            11 => 'is_publis',
+            12 => 'status',
+            13 => 'options',
         );
         $totalData = ExamResult::count();
         $totalFiltered = $totalData;
@@ -93,6 +94,7 @@ class ExamResultController extends Controller
                 $nestedData['marke'] = $result->marke;
                 $nestedData['pass_marke'] = $result->pass_marke;
                 $nestedData['obtained_marke'] = $result->obtained_marke;
+                $nestedData['is_publis'] = ($result->is_publis == 0) ? "Unpublish" : "Publish";
  
                 $nestedData['status'] = '';
                 if ($result->status == 0) {

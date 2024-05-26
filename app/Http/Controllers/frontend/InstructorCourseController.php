@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicYear;
 use App\Models\Admission;
 use App\Models\Category;
 use App\Models\Course;
@@ -29,6 +30,7 @@ use App\Models\Examination;
 use App\Models\ClassTestExam;
 use App\Models\ExamClass;
 use App\Models\ExamResult;
+use App\Models\SchoolSection;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\SubjectTeacherAssent;
@@ -966,15 +968,115 @@ class InstructorCourseController extends Controller
     {
         // dd('hi');
         $data['teacherAssents']=$teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->first();
-        $data['examResults']=ExamResult::where('teacher_id',$teacherAssents->teacher_id)
+        // dd($teacherAssents);
+        $data['results']=ExamResult::where('teacher_id',$teacherAssents->teacher_id)
                                          ->orWhere('class_id',$teacherAssents->class_id)
                                          ->orwhere('section_id',$teacherAssents->section_id)
                                          ->orwhere('session_id',$teacherAssents->session_id)
                                          ->orwhere('subject_id',$teacherAssents->subject_id)
                                         ->orderBy('id', 'desc')->get();
-        // $data['examinations']=Examination::orderBy('id', 'desc')->get();
+        // dd($data);
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('status', 1)->get();
+        $data['examinations'] = Examination::where('status', 1)->get();
         return view('user.instructor.exam_result_index',$data);
     }
+   
+    function getTeacherResultByAjax(Request $request){
+        // dd($request->all());
+         $columns = array(
+            0 => 'id',
+            1 => 'examination_id',
+            2 => 'class_id',
+            3 => 'roll_number',
+            4 => 'student_id',
+            5 => 'session_id',
+            6 => 'section_id',
+            7 => 'marke',
+            8 => 'pass_marke',
+            9 => 'obtained_marke',
+            10 => 'options',
+           
+        );
+        
+        $totalData = ExamResult::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        // dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+
+        $teacherAssents=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->first();
+        $results = ExamResult::where('teacher_id',$teacherAssents->teacher_id);
+                                                    // ->orWhere('class_id',$teacherAssents->class_id)
+                                                    // ->orwhere('section_id',$teacherAssents->section_id)
+                                                    // ->orwhere('session_id',$teacherAssents->session_id)
+                                                    // ->orwhere('subject_id',$teacherAssents->subject_id)
+                                                    // ->orderBy('id', 'desc');
+
+
+        // $results = ExamResult::where('is_publis',0);                                     
+
+        if(!empty($search)){
+            $results =$results->where("obtained_marke","LIKE","%{$search}%");
+        }
+        if($request->examination_id !=''){
+            $results =$results->where("examination_id",$request->examination_id);
+        }
+        if($request->session_id !=''){
+            $results =$results->where("session_id",$request->session_id);
+        }
+        if($request->class_id !=''){
+            $results =$results->where("class_id",$request->class_id);
+        }
+        if($request->section_id !=''){
+            $results =$results->where("section_id",$request->section_id);
+        }
+         
+ 
+        $results = $results->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        $totalFiltered = $results->count();
+ 
+        $data = array();
+        if(!empty($results))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($results as $result)
+            {
+                $nestedData['id'] = $i++;
+                $nestedData['examination_id'] = $result->examination->name;
+                $nestedData['class_id'] = $result->class->name;
+                $nestedData['roll_number'] = $result->roll_number;
+                $nestedData['student_id'] = $result->student->student_name;
+                $nestedData['session_id'] = $result->session->start_year ." - ". $result->session->end_year;
+                $nestedData['section_id'] = $result->section->name;
+                $nestedData['marke'] = $result->marke;
+                $nestedData['pass_marke'] = $result->pass_marke;
+                $nestedData['obtained_marke'] = $result->obtained_marke;
+
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('instructor.exam_result.edit', $result->id).'"><i class="fa fa-edit"></i></a>';
+
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+ 
+        return json_encode($json_data);
+    }
+
+
+
+
 
     public function editResultExam($id)
     {
