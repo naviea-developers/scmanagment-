@@ -65,6 +65,15 @@
 
                         <div class="row mt-3">
                           <div class="col-sm-12">
+                              <label class="form-control-label">Notice Pdf: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <input type="file" name="notice_file" accept="application/pdf" class="form-control" placeholder="Enter Notice file" value="{{ old('notice_file') }}">
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="row mt-3">
+                          <div class="col-sm-12">
                               <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
                                   <textarea type="text" name="description" rows="5" class="form-control" placeholder="Enter Description">{{ old('description') }}</textarea>

@@ -12,4 +12,8 @@ class Group extends Model
     public function class(){
         return $this->belongsTo(Classe::class,"class_id",'id');
     }
+
+    public function subjects(){
+        return $this->hasMany(Subject::class,"group_id",'id');
+    }
 }

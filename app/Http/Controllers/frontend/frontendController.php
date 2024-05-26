@@ -62,6 +62,7 @@ use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
 use App\Models\Admission;
 use App\Models\Classe;
+use App\Models\ClassRoutine;
 use App\Models\Designation;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
@@ -901,6 +902,19 @@ class FrontendController extends Controller
          return view('Frontend.notice.notice_details', $data);
      }
 
+     public function noticePdfDownload(Request $request,$id)
+     {
+        // dd('hi');
+        $notice = Notice::findOrFail($id);
+        if ($notice->notice_file) {
+            $filePath = public_path('upload/notice_file/'.$notice->notice_file);
+            if (file_exists($filePath)) {
+                return response()->download($filePath, $notice->notice_file);
+            }
+        }
+        return redirect()->back();
+     }
+
      //ajax get notice
      public function getNotice(){
         $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(4); 
@@ -1244,6 +1258,69 @@ class FrontendController extends Controller
     // dd($id);
     $data['class'] =$classes= Classe::find($id);
      return view('Frontend.class.class_details',$data);
+ }
+
+ public function bookListDownload($id)
+ {
+     $data['class'] = Classe::find($id);
+     // return view('Frontend.ebook.ebook_pdf_download', $data);
+     $html = view('Frontend.class.class_list_pdf_download', $data);
+     $mpdf = new Mpdf([
+         'mode' => 'UTF-8',
+         'margin_left' => 5,
+         'margin_right' => 5,
+         'margin_top' => 5,
+         'margin_bottom' => 0,
+         'margin_header' => 0,
+         'margin_footer' => 0,
+     ]);
+
+     //For Multilanguage Start
+     $mpdf->autoScriptToLang = true;
+     $mpdf->baseScript = 1;
+     $mpdf->autoLangToFont = true;
+     $mpdf->autoVietnamese = true;
+     $mpdf->autoArabic = true;
+
+     //For Multilanguage End
+     $mpdf->setAutoTopMargin = 'stretch';
+     $mpdf->setAutoBottomMargin = 'stretch';
+     $mpdf->writeHTML($html);
+     $name = 'class_list_pdf_download ' . date('Y-m-d i:h:s');
+     $mpdf->Output($name.'.pdf', 'D');
+ }
+
+ public function classRoutineDownload(Request $request)
+ {
+    // dd('hi');
+    $class_id= $request->input('class_id');
+    $section_id= $request->input('section_id');
+    $data['class_routine'] = ClassRoutine::where('class_id',$class_id)->where('section_id',$section_id)->get();
+    //  return view('Frontend.class.class_routine_pdf_download', $data);
+     $html = view('Frontend.class.class_routine_pdf_download', $data);
+     $mpdf = new Mpdf([
+         'mode' => 'UTF-8',
+         'margin_left' => 5,
+         'margin_right' => 5,
+         'margin_top' => 5,
+         'margin_bottom' => 0,
+         'margin_header' => 0,
+         'margin_footer' => 0,
+     ]);
+
+     //For Multilanguage Start
+     $mpdf->autoScriptToLang = true;
+     $mpdf->baseScript = 1;
+     $mpdf->autoLangToFont = true;
+     $mpdf->autoVietnamese = true;
+     $mpdf->autoArabic = true;
+
+     //For Multilanguage End
+     $mpdf->setAutoTopMargin = 'stretch';
+     $mpdf->setAutoBottomMargin = 'stretch';
+     $mpdf->writeHTML($html);
+     $name = 'class_routine_pdf_download ' . date('Y-m-d i:h:s');
+     $mpdf->Output($name.'.pdf', 'D');
  }
 
 

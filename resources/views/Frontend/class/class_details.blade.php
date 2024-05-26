@@ -1,65 +1,89 @@
 @extends('Frontend.layouts.master-layout')
 @section('title','- E-video Details')
 @section('head')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-v8FpMN7PZIWiDRfM7czPpOVCKaHcJK4jO3kI+KTO9vMjCExH0EeZ3rAaxiylpDcT" crossorigin="anonymous">
 
+<style>
+    /* Additional custom styles */
+    .school-name {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .class-routine {
+      margin-bottom: 50px;
+    }
+    .class-routine table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .class-routine th, .class-routine td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    .class-routine th {
+      background-color: #f2f2f2;
+    }
+  </style>
 @endsection
+
 @section('main_contend')
 @include('Frontend.layouts.parts.header-menu')
 
 <!-- Main content -->
 
 <div class="content_search" style="margin-top:70px">
-    <style>
-.preview-accordion .accordion-button::after {
-    display: none;
-}
-
-/*========== its for feedback reply ==========*/
-.media {
-    background: #fff;
-    box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
-    padding: 1rem;
-
-    h2 {
-        font-size: 24px;
-        font-weight: bold;
+<style>
+    .preview-accordion .accordion-button::after {
+        display: none;
     }
 
-    img {
-        float: left;
-        width: 200px;
-        margin-right: 16px;
-        border: 1px solid lightgrey;
+    /*========== its for feedback reply ==========*/
+    .media {
+        background: #fff;
+        box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
+        padding: 1rem;
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        img {
+            float: left;
+            width: 200px;
+            margin-right: 16px;
+            border: 1px solid lightgrey;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
     }
 
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
+    .media[dir="rtl"] {
+        img {
+            float: right;
+            margin-right: 0;
+            margin-left: 16px;
+        }
     }
-}
 
-.media[dir="rtl"] {
-    img {
-        float: right;
-        margin-right: 0;
-        margin-left: 16px;
+    .link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #1d7bb3;
     }
-}
 
-.link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #1d7bb3;
-}
+    .wrapper {
+        /*max-width: 800px;*/
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 
-.wrapper {
-    /*max-width: 800px;*/
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-/*============= close ===========*/
+    /*============= close ===========*/
 </style>
 
 <style>
@@ -317,7 +341,13 @@
         <ul class="nav" id="navbarResponsive">
             @if ($class->count() >0)
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger overview_txt active" href="#overview">Overview</a>
+                    <a class="nav-link js-scroll-trigger overview_txt active" href="#overview">Information</a>
+                </li>
+            @endif
+
+            @if ($class->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger overview_txt" href="#gargent_policy">Gargent Policy</a>
                 </li>
             @endif
 
@@ -326,10 +356,13 @@
                     <a class="nav-link js-scroll-trigger prerequisites_txt" href="#e-class">Subject List</a>
                 </li>
             @endif
-            {{-- <li class="nav-item">
-                <a class="nav-link js-scroll-trigger outcome_txt" href="#learnings">
-                    Video                </a>
-            </li> --}}
+
+            @if (@$class->subjects->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger prerequisites_txt" href="#book-list">Book List</a>
+                </li>
+            @endif
+
             @if (@$class->teacherAssents->count() >0)
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger lessons_txt" href="#teacher">Teacher List</a>
@@ -348,9 +381,12 @@
                 </li>
             @endif
 
-            {{-- <li class="nav-item">
-                <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
-            </li> --}}
+
+            @if (@$class->ClassRoutines->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
+                </li>
+            @endif
 
         </ul>
     </div>
@@ -360,6 +396,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-8 sticky-content">
+                
                 @if ($class->count() >0)
                     <!--Start card-->
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="overview">
@@ -369,7 +406,7 @@
                                 <div class="col-md-10">
                                     <div class="section-header  position-relative ">
                                         <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                            Overview
+                                            Information
                                         </h4>
                                     </div>
 
@@ -391,6 +428,37 @@
                     <!--End card-->
                 @endif
 
+                @if ($class->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="gargent_policy">
+                        <div class="card-body p-4 p-xl-5">
+                            <!--Start Section Header-->
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="section-header  position-relative ">
+                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
+                                            Gargent Policy
+                                        </h4>
+                                    </div>
+
+                                    <div class="section-header_divider ">
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="h5 about_this_ebook mt-3" style="color: var(--text_color)">
+                            {{-- Overview --}}
+                            </h4>
+                            <!--End Section Header-->
+                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 moreText">
+                                {!! @$class->gargent_policy !!}
+                            </div>
+                            <button onclick="showhide()" class=" read_more_txt btn btn-primary" style="color:white"id="toggle"> Read More</button>
+
+                        </div>
+                    </div>
+                    <!--End card-->
+                @endif
+      
                 @if (@$class->subjects->count() >0)
                     <!--Start card-->
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="e-class">
@@ -431,6 +499,59 @@
                         </div>
                     </div>
                     <!--Start card-->
+                @endif
+
+                @if (@$class->subjects->count() >0)
+                    <!--Start card-->
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="book-list">
+                        <div class="card-body p-4 p-xl-5" style="color: var(--text_color)">
+                            <!--Start Section Header-->
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 what_will_i_learn_txt">Book List</h4>
+                                <div class="section-header_divider"></div>
+                            </div>
+                            <!--End Section Header-->
+                            <div class="row">
+                                @php
+                                $ungroupedSubjects = $class->subjects->filter(function($subject) {
+                                    return empty($subject->group_id); 
+                                });
+                                @endphp
+
+                                <div class="subject-list">
+                                    {{-- <h4>subjects list</h4> --}}
+                                    <div class="row">
+                                        @foreach ($ungroupedSubjects as $subject)
+                                            <div class="col-sm-6 col-md-6">
+                                                <ul>
+                                                    <li>{{ $subject->name }}</li> 
+                                                </ul>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                @foreach ($class->groups as $group)
+                                    <div class="col-sm-6 col-md-6">
+                                        <ul>
+                                            Group Name :- {{ $group->name }}
+                                            <ul>
+                                                @foreach ($group->subjects as $sub)
+                                                    <li>{{ $sub->name }}</li> <!-- Display subject name -->
+                                                @endforeach
+                                            </ul>
+                                        </ul>
+                                    </div>
+                                @endforeach
+
+                                <!-- Print and Download Buttons -->
+                                <div class="col-12 mt-4">
+                                    <a href="{{ route('frontend.book_list_download', @$class->id) }}" class="btn btn-secondary">Download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End card-->
                 @endif
 
                 @if (@$class->teacherAssents->count() >0)
@@ -562,57 +683,94 @@
                     </div>
                     <!--End card-->
                 @endif
- 
-                {{-- <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
-                    <div class="card-body p-4 p-xl-5">
-                        <!--Start Section Header-->
-                        <div class="section-header mb-4 position-relative">
-                            <h4 class="h5 about_this_course" style="color: var(--text_color)">Class Routine</h4>
-                            <div class="section-header_divider"></div>
-                        </div>
-                        <!--End Section Header-->
-                        <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
-                            @foreach ($class->semesters as $k=>$semester)
-                            <div class="d-flex mt-3">
-                                <div class="" style="border: 1px solid;padding:10px;width: 97%;">
-
-                                    <div class="row mt-3">
-                                     <div class="col-sm-12">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                            <input disabled value="{{ $semester->semester_name }}" type="text" name="old_semester_name[{{ $semester->id }}]" class="form-control" placeholder="Enter Semester Name">
-                                            </div>
-                                            <div class="col-sm-6">
-                                            <input disabled value="{{ $semester->duration }}" type="text" name="old_duration[{{ $semester->id }}]" class="form-control" placeholder="Enter Semester duration">
-                                            </div>
-                                        </div>
-                                     </div> 
-                                        <hr style="width:95%;">
-                                    </div>
-
-                                    <div class="show-add-list-data">
-                                        @foreach ($semester->semesterdetailss as $j=>$semesterdetails)
-                                        <div class="row mt-3">
-                                            <label class="col-sm-3 form-control-label">Course Name </label>
-                                            <div class="col-sm-12 mg-t-10 mg-sm-t-0">
-                                                <div class="d-flex align-items-center ">
-                                                    <input disabled value="{{ $semesterdetails->subject_name }}"  class="form-control mr-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="mt-3">Credit:&nbsp;</p>  <b>{{ $semesterdetails->credit }}</b>
-                                                   
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-                                </div>
-                                
+               
+                @if (@$class->ClassRoutines->count() >0)
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
+                        <div class="card-body p-4 p-xl-5">
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 about_this_course" style="color: var(--text_color)">Class Routine</h4>
+                                <div class="section-header_divider"></div>
                             </div>
-                            @endforeach
+                            @php
+                                $class_routine = $class->ClassRoutines;
+                                $classRoutinesBySection = [];
+                                $classDurations = [];
+                                
+                                foreach ($class_routine as $data) {
+                                    $sectionId = $data->section_id;
+                                    $dayId = $data->day_id; 
+                                    $day = $data->day;
+                                    $durationName = $data->classDuration->name;
+                                
+                                    $classRoutinesBySection[$sectionId]['routines'][$dayId][$durationName] = $data;
+                                    $classRoutinesBySection[$sectionId]['section'] = $data->section; 
+                                
+                                    if (!in_array($durationName, $classDurations)) {
+                                        $classDurations[] = $durationName;
+                                    }
+                                }
+                                
+                                foreach ($classRoutinesBySection as $sectionId => $sectionData) {
+                                    ksort($classRoutinesBySection[$sectionId]['routines']);
+                                }
+                            @endphp
+                            
+                            <div class="class-routine">
+                                @foreach ($classRoutinesBySection as $sectionData)
+                                    @php
+                                        $section = $sectionData['section'];
+                                        $classRoutinesByDay = $sectionData['routines'];
+                                    @endphp
+                                    <h2>Section : {{ $section->name }}</h2> 
+                                    <table>
+                                        <thead>
+                                            <tr style="color: black">
+                                                <th scope="col">Day</th>
+                                                @foreach ($classDurations as $duration)
+                                                    <th scope="col">
+                                                        {{ $duration }} <br>
+                                                        @php
+                                                            $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
+                                                        @endphp
+                                                        {{ date('h:i A', strtotime($durationData->start_time)) }} - 
+                                                        {{ date('h:i A', strtotime($durationData->end_time)) }}
+                                                    </th>
+                                                @endforeach
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($classRoutinesByDay as $dayId => $routines)
+                                                @php
+                                                    $dayName = $routines[array_key_first($routines)]->day; 
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $dayName }}</td>
+                                                    @foreach ($classDurations as $duration)
+                                                        <td>
+                                                            @isset($routines[$duration])
+                                                                {{ $routines[$duration]->subject->name }} <br>
+                                                                {{ $routines[$duration]->teacher->name }} <br>
+                                                                Room- {{ $routines[$duration]->room->name }}
+                                                            @else
+                                                            
+                                                            @endisset
+                                                        </td>
+                                                    @endforeach
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                    <div class="col-12 mt-4">
+                                        <a href="{{ route('frontend.class_routine_download') }}?class_id={{ @$class->id }}&section_id={{ @$section->id }}" class="btn btn-secondary">Download</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            
+                        
                         </div>
                     </div>
-                </div> --}}
-            
+                @endif
 
                 {{-- <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

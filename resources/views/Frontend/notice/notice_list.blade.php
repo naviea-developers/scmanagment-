@@ -22,7 +22,9 @@
                                      {{-- by <span class="author vcard"><a href="https://sunshinecssc.com/author/director-cssc/" title="Posts by Sameer Rahman" rel="author">Sameer Rahman</a></span> | --}}
                                      <span class="published">{{ @$notice->created_at->diffForHumans() }}</span> | 
                                      <a href="{{ route('frontend.notice_details',$notice->id) }}" rel="category tag">Notice type : {{ @$notice->type }}</a>
-                                </p>                                {{ substr( @$notice->description,0,430) }}...
+                                </p>         
+                                {{ substr( @$notice->description,0,430) }}...
+                                <p><a href="{{ route('frontend.notice_pdf_download',$notice->id) }}">click here to download the PDF file.</a></p>
                                 </article>
                             @endforeach
 

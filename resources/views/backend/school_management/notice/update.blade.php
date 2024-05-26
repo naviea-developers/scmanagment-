@@ -60,7 +60,16 @@
                         </div>
                         </div>
                        
-                    </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-sm-12">
+                            <label class="form-control-label">Notice Pdf: <span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <input type="file" accept="application/pdf" name="notice_file" class="form-control" placeholder="Enter Notice file" value="{{ $notice->notice_file }}">
+                            </div>
+                        </div>
+                      </div>
 
 
                       <div class="row mt-3">

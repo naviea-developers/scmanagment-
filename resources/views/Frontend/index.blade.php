@@ -164,7 +164,7 @@
                 @if ($k>2)
                     <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <img style="height: 225px;width:320px" src="{{ @$classList->class->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
+                        <img style="height: 225px;width:100%" src="{{ @$classList->class->image_show }}" class="card-img-top embed-responsive-item lazyload" alt="">
                     </div>
                     <a class="stretched-link" style="color:#007bff" href="{{ route('frontend.class_details',@$classList->class->id) }}">
                     <h3 class=""
