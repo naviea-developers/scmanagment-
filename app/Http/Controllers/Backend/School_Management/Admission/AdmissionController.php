@@ -297,6 +297,15 @@ class AdmissionController extends Controller
             $admission->save();
 
 
+            $user = User::find($admission->user_id);
+            $user->name = $request->student_name;
+            $user->email = $request->student_email;
+            $user->mobile = $request->student_phone;
+            $user->dob = $request->dob;
+            $user->nid = $request->student_nid;
+            $user->save();
+
+
 
              //add certificate file
         if($request->certificates_file){

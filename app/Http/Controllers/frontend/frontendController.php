@@ -60,12 +60,15 @@ use App\Models\Department;
 use App\Models\Degree;
 use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
+use App\Models\Admission;
 use App\Models\Classe;
 use App\Models\Designation;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
 use App\Models\HomeContentClassList;
 use App\Models\Notice;
+use App\Models\SchoolSection;
+use App\Models\Session;
 
 class FrontendController extends Controller
 {
@@ -331,8 +334,51 @@ class FrontendController extends Controller
         $data['learner'] = learnerPageSetup::first();
         $data['clients'] = Client::all();
         $data['partners'] = Partner::all();
+
+        $data['students'] = Admission::where('is_new', 0)->paginate(8);
+        $data['sessions'] = Session::where('status', 1)->get();
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('status', 1)->get();
         return view('Frontend.pages.learner', $data);
     }
+
+    public function fetchAllStudent(Request $request) 
+    {
+        $page = $request->get('page') ?: 1;
+        $students = Admission::where('is_new', 0)->paginate(8, ['*'], 'page', $page);
+    
+        return response()->json(view('Frontend.pages.learner_list_ajax', ['students' => $students])->render());
+    }
+
+    public function fetchStudentsFilter(Request $request)
+    {
+        $query = Admission::where('is_new', 0);
+    
+        if ($request->session_id) {
+            $query->where('session_id', $request->session_id);
+        }
+        if ($request->class_id) {
+            $query->where('class_id', $request->class_id);
+        }
+        if ($request->group_id) {
+            $query->where('group_id', $request->group_id);
+        }
+        if ($request->section_id) {
+            $query->where('section_id', $request->section_id);
+        }
+    
+        $students = $query->get();
+    
+        $html = view('Frontend.pages.learner_list_ajax_filter', compact('students'))->render();
+    
+        return response()->json(['html' => $html]);
+    }
+    
+
+
+
+
+
     public function instructor()
     {
         $data['teachers'] = User::where('type','2')->orderBy('id', 'desc')->where('status',1)->get();

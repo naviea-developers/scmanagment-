@@ -407,6 +407,14 @@ class StudentController extends Controller
 
            $student->save();
 
+           $user = User::find($student->user_id);
+           $user->name = $request->student_name;
+           $user->email = $request->student_email;
+           $user->mobile = $request->student_phone;
+           $user->dob = $request->dob;
+           $user->nid = $request->student_nid;
+           $user->save();
+
 
 
              //add certificate file
@@ -564,6 +572,10 @@ class StudentController extends Controller
         
         // return response()->json($students);
     }
+
+
+
+
 
 
 

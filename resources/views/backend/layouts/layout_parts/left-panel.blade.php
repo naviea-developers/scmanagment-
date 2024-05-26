@@ -215,6 +215,40 @@
             </ul>
         </li><!-- br-Speakers-item -->
 
+
+
+
+
+
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Library Management</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('admin.direction.create') ||  Route::is('admin.direction.index') || Route::is('admin.direction.edit')
+            || Route::is('admin.shelf.create') ||  Route::is('admin.shelf.index') || Route::is('admin.shelf.edit')
+            || Route::is('admin.book.create') ||  Route::is('admin.book.index') || Route::is('admin.book.edit')
+        
+         
+            );
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.direction.index') }}" class="sub-link {{(Route::is('admin.direction.index') || Route::is('admin.direction.edit') || Route::is('admin.direction.create')) ?'active':''}}">Manage Direction</a></li>
+                <li class="sub-item"><a href="{{ route('admin.shelf.index') }}" class="sub-link {{(Route::is('admin.shelf.index') || Route::is('admin.shelf.edit') || Route::is('admin.shelf.create')) ?'active':''}}">Manage shelf</a></li>
+                <li class="sub-item"><a href="{{ route('admin.book.index') }}" class="sub-link {{(Route::is('admin.book.index') || Route::is('admin.book.edit') || Route::is('admin.book.create')) ?'active':''}}">Manage Book</a></li>
+            </ul>
+        </li><!-- br-Speakers-item -->
+
+
+
+
+
+
+
+
+
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == '')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>

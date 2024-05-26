@@ -258,8 +258,8 @@ class AdmissionController extends Controller
             $admission = Admission::find($id);
             $admission->user_id = $user->id;
             $admission->class_id = $request->class_id ?? 0;
-            // $admission->academic_year_id = $request->academic_year_id ?? 0;
-            // $admission->session_id = $request->session_id ?? 0;
+            $admission->academic_year_id = $request->academic_year_id ?? 0;
+            $admission->session_id = $request->session_id ?? 0;
             // $admission->section_id = $request->section_id ?? 0;
             $admission->group_id = $request->group_id ?? 0;
             $admission->fee_id = $request->fee_id ?? 0;
@@ -305,6 +305,14 @@ class AdmissionController extends Controller
             $admission->pre_school_address = $request->pre_school_address;
 
             $admission->save();
+
+            $user = User::find($admission->user_id);
+            $user->name = $request->student_name;
+            $user->email = $request->student_email;
+            $user->mobile = $request->student_phone;
+            $user->dob = $request->dob;
+            $user->nid = $request->student_nid;
+            $user->save();
 
 
 

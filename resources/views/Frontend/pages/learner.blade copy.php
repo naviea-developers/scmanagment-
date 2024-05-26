@@ -50,91 +50,10 @@
 }
 </style>
 <br><br><br>
-
-<section class="container">
-    <h4 class="text-center mb-3 mt-3"><b>ALL STUDENTS</b></h4>
-
-    <div class="col-md-12" style="border: 1px solid; padding: 10px">
-        <div class="row">
-              
-            <div class="col-md-3">
-                <label class=" form-control-label" style=""><b>Session:</b></label>
-                <select class="form-control" name="session_id" id="session_id">
-                    <option value="">Select Session</option>
-                    @foreach ($sessions as $session)
-                    <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
-                    @endforeach
-                </select>
-            </div>
-              
-            <div class="col-md-3">
-                <label class=" form-control-label" style=""><b>Class:</b></label>
-                <select class="form-control class_id" name="class_id" id="class">
-                    <option value="">Select Class</option>
-                    @foreach ($classes as $class)
-                    <option value="{{ $class->id }}">{{ $class->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-md-3">
-                <label class=" form-control-label" style=""><b>Group:</b></label>
-                <select class="form-control group_id" name="group_id" id="group">
-                    <option value="">Select Group</option>
-                    {{-- @foreach ($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @endforeach --}}
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label class=" form-control-label" style=""><b>Section:</b></label>
-                <select class="form-control section_id" name="section_id" id="section">
-                    <option value="">Select Section</option>
-                    {{-- @foreach ($sections as $section)
-                    <option value="{{ $section->id }}">{{ $section->name }}</option>
-                    @endforeach --}}
-                </select>
-            </div>
-              
-
-        </div>
-    </div>
-</section>
-
-<section class="container py-5">
-    <div class="col-md-12">
-        <div class="row" id="fetchAllStudents-container">
-           @foreach ($students as $student)
-            <div class="col-md-3 mb-3">
-                <div class="card card-body shadow">
-                    <img style="height: 150px; width:100%" src="{{ $student->image_show }}" alt="student-image"/>
-                    <p class="text-center">{{ $student->student_name }}</p>
-                    <p class="text-center">{{ @$student->class->name }}</p>
-                </div>
-            </div>
-           @endforeach
-
-           
-
-        </div>
-        <div class="col-md-12 py-5" id="loading" style="display:none;">
-            <h6 class="text-center">Loading...</h6>
-        </div>
-        <div class="col-md-12 py-5" id="noMoreData" style="display:none;">
-            <h6 class="text-center">No More Data...</h6>
-        </div>
-    </div>
-</section>
-
-
-
-
-
-
-{{-- <div class="overall_exp">
+<div class="overall_exp">
     <div class="container-xl">
         <div class="align-items-center flex-wrap-reverse justify-content-between row text-center text-md-start">
-            <div class="col-lg-5 col-md-7">
+            <div class="col-lg-6 col-md-7">
                 <!-- Lead inhouse by @salehin 03082022 -->
                 <div class="overall_left">
                     <h2 class="font_poppins main_title mb-4" style="color: var(--text_color)"> {{ $learner->top_title }} </h2>
@@ -144,8 +63,6 @@
                 </div>
                 <!-- Lead inhouse by @salehin 03082022 -->
             </div>
-
-
             <div class="col-lg-5 col-md-5">
                 <div class="mb-5 mb-md-0">
                     <div class="position-relative">
@@ -201,10 +118,10 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 <!--Start Brand Logo-->
-{{-- <div class="brand-logo-content bg-alice-blue py-5">
+<div class="brand-logo-content bg-alice-blue py-5">
     <div class="container-lg">
         <div class="text-center mb-5">
             <h3 class="fw-bold mb-0" style="color: var(--text_color)">{{ $home_content->client_title }}</h3>
@@ -222,11 +139,11 @@
              
         </div>
     </div>
-</div> --}}
+</div>
 <!--End Brand Logo-->
 
 
-{{-- <div class="become_ins">
+<div class="become_ins">
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-4 col-md-6">
@@ -419,11 +336,11 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 
 <!--Start Brand Logo-->
-{{-- <div class="brand-logo-content bg-alice-blue py-5">
+<div class="brand-logo-content bg-alice-blue py-5">
     <div class="container-lg">
         <div class="text-center mb-5">
             <h3 class="fw-bold mb-0" style="color: var(--text_color)">
@@ -433,16 +350,18 @@
 
             @foreach ($partners as $partner)
                 <div class="brand_item">
+                    {{-- <a href="javascript:void(0)" target="_blank"> --}}
                         <img src="{{ $partner->image_show }}"
                             alt="">
+                    {{-- </a> --}}
                 </div>
             @endforeach
 
         </div>
     </div>
-</div> --}}
+</div>
 <!--End Brand Logo-->
-{{-- 
+
 <div class="beLearner py-100">
     <div class="container">
         <div class="position-relative">
@@ -517,9 +436,9 @@
 
         </div>
     </div>
-</div> --}}
+</div>
 
-{{-- <div class="bg-alice-blue py-100">
+<div class="bg-alice-blue py-100">
     <div class="container">
         <div class="align-items-center d-md-flex justify-content-between text-center text-md-start">
             <div class="mb-4 mb-md-0">
@@ -531,225 +450,8 @@
         </div>
     </div>
 </div>
-</div> --}}
+</div>
 
 @include('Frontend.layouts.parts.news-letter')
-
-@endsection
-
-
-@section('script')
-
-<script>
-    $('body').on("change",'#class',function(){
-        let id = $(this).val();
-            console.log(id);
-        getSection(id,"section");
-        getGroup(id,"group");
-    });
-
-    function getSection(id,outid){
-        let url = '{{ url("get/school_section/") }}/' + id;
-        axios.get(url)
-            .then(res => {
-                console.log(res);
-            $('#'+outid).empty();
-                let html = '';
-                html += '<option value="">Select Section</option>'
-                res.data.forEach(element => {
-                    html += "<option value=" + element.id + ">" + element.name + "</option>"
-                });
-
-
-                $('#'+outid).append(html);
-                $('#'+outid).val("").change();
-            });
-    }
-
-
-
-    function getGroup(id,outid){
-      let url = '{{ url("get/group/") }}/' + id;
-      axios.get(url)
-          .then(res => {
-              console.log(res);
-          $('#'+outid).empty();
-              let html = '';
-              html += '<option value="">Select group</option>'
-              res.data.forEach(element => {
-                  html += "<option value=" + element.id + ">" + element.name + "</option>"
-              });
-
-
-              $('#'+outid).append(html);
-              $('#'+outid).val("").change();
-          });
-    }
-
-  
-
-        
-</script>
-
-
-
-
-
-
-
-
-
-
-
-<script>
-    $(document).ready(function() {
-    function fetchFilteredStudents() {
-        var session_id = $('#session_id').val();
-        var class_id = $('#class').val();
-        var group_id = $('#group').val();
-        var section_id = $('#section').val();
-
-        $.ajax({
-            url: '{{ route("fetch.students") }}', // Replace with your route
-            type: 'GET',
-            data: {
-                session_id: session_id,
-                class_id: class_id,
-                group_id: group_id,
-                section_id: section_id
-            },
-            success: function(response) {
-                $('#fetchAllStudents-container').html(response.html);
-            },
-            error: function(xhr) {
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-    $('#session_id, #class, #group, #section').change(function() {
-        fetchFilteredStudents();
-    });
-});
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{-- ---------scrolling product view start----------------- --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    var page = 2;
-    var isLoading = false;
-    var lastPage = {{ $students->lastPage() }};
-
-    $(window).scroll(function() {
-        var scrollHeight = $(document).height();
-        var scrollPosition = $(window).height() + $(window).scrollTop();
-        var scrollPercentage = (scrollPosition / scrollHeight) * 100;
-
-        if (scrollPercentage > 60 && page <= lastPage) {
-            loadMoreProducts();
-        }
-    });
-
-    function loadMoreProducts() {
-        if (isLoading) return;
-
-        isLoading = true;
-        $('#loading').show();
-
-        $.ajax({
-            url: '{{ route("fetchAllStudent") }}',
-            type: 'GET',
-            data: { page: page },
-            success: function(response) {
-                if (response.trim() != '') {
-                    $('#fetchAllStudents-container').append(response);
-                    page++;
-                    $('#loading').hide();
-                } else {
-                    console.log('No more data');
-                    $('#loading').hide();
-                    $('#noMoreData').show();
-                    $(window).off('scroll');
-                }
-            },
-            complete: function() {
-                isLoading = false;
-            }
-        });
-    }
-</script>
-
-
 
 @endsection
