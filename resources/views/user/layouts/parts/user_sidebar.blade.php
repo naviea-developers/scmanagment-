@@ -129,6 +129,11 @@
                     <span> My Course List </span>
                 </a>
 
+                <a href="{{ route('teacher.library_index', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span> Library </span>
+                </a>
+
                 <a href="{{ route('teacher.class_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-calendar-days"></i>
                     <span> Class Routine </span>

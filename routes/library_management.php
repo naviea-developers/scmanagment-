@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Library_management\Book\BookController;
 use App\Http\Controllers\Backend\Library_management\Direction\DirectionController;
 use App\Http\Controllers\Backend\Library_management\Shelf\ShelfController;
+use App\Http\Controllers\User\Library_management\LibraryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('direction')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -40,3 +41,13 @@ Route::prefix('library-book')->middleware(['auth:admin', 'adminCheck:0'])->group
 
 
 Route::post('get-library-book-by-ajax', [BookController::class,"libraryBookByAjax"])->name('admin.libraryBookByAjax');
+
+
+
+
+Route::prefix('user')->middleware(['userCheck'])->group(function () {
+    //Library Manage from teacher Profile
+    Route::get('library-index/', [LibraryController::class,"index"])->name('teacher.library_index');
+
+});
+
