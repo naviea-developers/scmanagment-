@@ -48,6 +48,7 @@ Route::post('get-library-book-by-ajax', [BookController::class,"libraryBookByAja
 Route::prefix('user')->middleware(['userCheck'])->group(function () {
     //Library Manage from teacher Profile
     Route::get('library-index/', [LibraryController::class,"index"])->name('teacher.library_index');
+    Route::post('library-borrow-store/', [LibraryController::class,"borrowStore"])->name('teacher.library_borrow.store');
 
 });
 
