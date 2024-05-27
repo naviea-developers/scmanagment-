@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Library_management\Book\BookController;
 use App\Http\Controllers\Backend\Library_management\Direction\DirectionController;
 use App\Http\Controllers\Backend\Library_management\Shelf\ShelfController;
+use App\Http\Controllers\Backend\Library_management\Delivery\DeliveryController;
 use App\Http\Controllers\User\Library_management\LibraryController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,18 @@ Route::prefix('library-book')->middleware(['auth:admin', 'adminCheck:0'])->group
      Route::post('delete/', [BookController::class,"destroy"])->name('admin.book.delete');
      Route::get('/status/{id}', [BookController::class, 'status'])->name('admin.book.status');
 });
+
+Route::prefix('book_delivery')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //book Create
+     Route::get('index/', [DeliveryController::class,"index"])->name('admin.book_delivery.index');
+     Route::get('create/', [DeliveryController::class,"create"])->name('admin.book_delivery.create');
+     Route::post('store/', [DeliveryController::class,"store"])->name('admin.book_delivery.store');
+     Route::get('edit/{id}', [DeliveryController::class,"edit"])->name('admin.book_delivery.edit');
+     Route::post('update/{id}', [DeliveryController::class,"update"])->name('admin.book_delivery.update');
+     Route::post('delete/', [DeliveryController::class,"destroy"])->name('admin.book_delivery.delete');
+     Route::get('/status/{id}', [DeliveryController::class, 'status'])->name('admin.book_delivery.status');
+});
+
 
 
 Route::post('get-library-book-by-ajax', [BookController::class,"libraryBookByAjax"])->name('admin.libraryBookByAjax');
