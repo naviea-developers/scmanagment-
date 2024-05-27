@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User\Library_management;
 use App\Http\Controllers\Controller;
 use App\Models\Admission;
 use App\Models\Book;
+use App\Models\Borrow;
+use App\Models\BorrowItem;
 use App\Models\Classe;
 use App\Models\Group;
 use App\Models\SchoolSection;
@@ -22,5 +24,27 @@ class LibraryController extends Controller
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['books'] = Book::where('status', 1)->get();
         return view('user.library_management.index', $data);
+    }
+
+    public function borrowStore(Request $request)
+    {
+        $borrow = new Borrow();
+        $borrow->student_id_number = $request->student_id_number;
+        $borrow->class_id = $request->class_id;
+        $borrow->student_id = $request->student_id;
+        $borrow->from_date = $request->from_date;
+        $borrow->to_date = $request->to_date;
+        $borrow->save();
+
+        if($request->book_id){
+           foreach($request->book_id as $value){
+            $borrowItem = new BorrowItem();
+            $borrowItem->borrow_id = $borrow->id;
+            $borrowItem->book_id = $value;
+            $borrowItem->save();
+           }
+        }
+
+        return redirect()->back()->with('message', 'Book Borrow Successfully.');
     }
 }

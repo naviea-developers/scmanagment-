@@ -1,32 +1,18 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Change Password')
+@section('title','- Library')
 
-
+<link rel="stylesheet" href="{{asset('public/backend')}}/css/suneditor.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('main_content')
-
-    {{-- success message start --}}
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-    {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-    {{session()->get('message')}}
-    </div>
-    <script>
-        setTimeout(function(){
-            $('.alert.alert-success').hide();
-        }, 3000);
-    </script>
-    @endif
-    {{-- success message start --}}
     <div class="right_section">
         <div>
             <h4 style="color: black">Library</h4>
-            {{-- <h4 style="color: var(--seller_text_color)">Library</h4> --}}
         </div>
     </div>
-    <div class="passwodBox mb-3" style="background-color: var(  --seller_frontend_color); color:white">
-        <form action="{{ route('user.password_change', auth()->user()->id) }}" method="POST" style="margin-top: 0%">
+    <div class="passwodBox mb-3" style="background-color: var(--seller_frontend_color); color:white">
+        <form action="{{ route('teacher.library_borrow.store') }}" method="POST" style="margin-top: 0%">
             @csrf
                 
             <div class="col-md-12">
@@ -34,8 +20,8 @@
                     <div class="col-md-6">
                         <h5 class="text-center">Student Information</h5>
                         <hr>
-                        <label class="mt-3">Student Unique ID</label>
-                        <input type="text" name="unique_id" class="form-control"/>
+                        <label class="mt-3">Student ID</label>
+                        <input type="text" id="student-id-input" name="student_id_number" class="form-control"/>
 
                         <label class="mt-3">Class</label>
                         <div class="mg-t-10 mg-sm-t-0">
@@ -49,75 +35,15 @@
                         
                         <label class="mt-3">Student Name</label>
                         <div class="mg-t-10 mg-sm-t-0">
-                            <select id="student-select" name="student_id" class="form-control">
+                            <select id="student-select" name="student_id" class="form-control select2">
                                 <option value=""> Select Student</option>
                                 @foreach ($students as $student)
-                                <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}">
+                                <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}" data-student-id-number="{{ $student->student_id_number }}">
                                     {{ $student->student_name }} - {{ $student->class->name }} - {{ $student->roll_number }}
                                 </option>
                                 @endforeach
                             </select>
                         </div>
-
-
-
-                        {{-- <label class="mt-3">Student Name</label>
-                        <div class="mg-t-10 mg-sm-t-0">
-                            <select id="student-select" name="student_id" class="form-control">
-                                <option value=""> Select Student</option>
-                                @foreach ($students as $student)
-                                <option value="{{ $student->id }}" 
-                                        data-class-id="{{ $student->class_id }}"
-                                        data-session-id="{{ $student->session_id }}"
-                                        data-group-id="{{ $student->group_id }}"
-                                        data-section-id="{{ $student->section_id }}">
-                                    {{ $student->student_name }} - {{ $student->class->name }} - {{ $student->roll_number }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label class="mt-3">Session</label>
-                        <div class="mg-t-10 mg-sm-t-0">
-                            <select id="session-select" name="session_id" class="form-control">
-                                <option value=""> Select Session</option>
-                                @foreach ($sessions as $session)
-                                <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label class="mt-3">Class</label>
-                        <div class="mg-t-10 mg-sm-t-0">
-                            <select id="class-select" name="class_id" class="form-control">
-                                <option value=""> Select Class</option>
-                                @foreach ($classes as $class)
-                                <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label class="mt-3">Group</label>
-                        <div class="mg-t-10 mg-sm-t-0">
-                            <select id="group-select" name="group_id" class="form-control">
-                                <option value=""> Select Group</option>
-                                @foreach ($groups as $group)
-                                <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label class="mt-3">Section</label>
-                        <div class="mg-t-10 mg-sm-t-0">
-                            <select id="section-select" name="section_id" class="form-control">
-                                <option value=""> Select Section</option>
-                                @foreach ($sections as $section)
-                                <option value="{{ $section->id }}">{{ $section->name }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-
-
                     </div>
 
                     <div class="col-md-6">
@@ -142,7 +68,7 @@
                                 <select id="book-select" name="book_id" class="form-control">
                                     <option value=""> Select Book</option>
                                     @foreach ($books as $book)
-                                    <option value="{{ $book->id }}" book_code="{{ $book->id }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
+                                    <option value="{{ $book->id }}" data-book-code="{{ $book->book_code }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -157,19 +83,13 @@
                     
                         <!-- Hidden inputs for selected books -->
                         <div id="selected-books-inputs"></div>
-                        
-
-
-                        {{-- <label class="mt-3">Student Name</label>
-                        <input type="text" name="student_name" class="form-control"/> --}}
-                        
                     </div>
                 </div>
             </div>
             <hr>
             <div class="row mt-3">
                 <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                  <button type="submit" class="btn btn-info ">Submit</button>
+                  <button type="submit" class="btn btn-info">Submit</button>
                 </div>
             </div>
 
@@ -179,6 +99,8 @@
 
 
 @section('script')
+<script src="{{asset('public/backend')}}/js/suneditor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -191,6 +113,11 @@ $(document).ready(function() {
 
         // Filter books based on the selected class
         filterBooksByClass(classId);
+    });
+
+    $('#student-id-input').on('input', function() {
+        var studentIdNumber = $(this).val();
+        updateSelectionsByStudentIdNumber(studentIdNumber);
     });
 
     function filterStudentsByClass(classId) {
@@ -220,54 +147,70 @@ $(document).ready(function() {
         // Reset the book select value
         $('#book-select').val('');
     }
+
+    function updateSelectionsByStudentIdNumber(studentIdNumber) {
+        $('#student-select option').each(function() {
+            if ($(this).data('student-id-number') == studentIdNumber) {
+                var classId = $(this).data('class-id');
+                $('#class-select').val(classId).trigger('change');
+                $('#student-select').val($(this).val());
+                return false; // Break the loop once the student is found
+            }
+        });
+    }
+});
+
+$(document).ready(function() {
+    $('#add-book-btn').on('click', function() {
+        var selectedBook = $('#book-select option:selected');
+        var bookId = selectedBook.val();
+        var bookCode = selectedBook.data('book-code');
+        var bookName = selectedBook.text();
+        
+        // Check if a book is selected and not already added
+        if (bookId && !$("#book-" + bookId).length) {
+            var bookHtml = `
+                <div id="book-${bookId}" class="row mt-2">
+                    <div class="col-md-3">${bookCode}</div>
+                    <div class="col-md-6">${bookName}</div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn-sm remove-book-btn" data-book-id="${bookId}">
+                            X
+                        </button>
+                    </div>
+                </div>
+            `;
+            $('#selected-books-list').append(bookHtml);
+
+            // Add hidden input for selected book
+            $('#selected-books-inputs').append(`<input type="hidden" name="book_id[]" id="input-book-${bookId}" value="${bookId}">`);
+        }
+    });
+
+    // Delegate the click event to dynamically added remove buttons
+    $('#selected-books-list').on('click', '.remove-book-btn', function() {
+        var bookId = $(this).data('book-id');
+        $("#book-" + bookId).remove();
+        $("#input-book-" + bookId).remove();
+    });
+
+    // Handle form submission
+    $('#book-form').on('submit', function() {
+        // Ensure all hidden inputs are included in the form submission
+        $('#selected-books-inputs input').each(function() {
+            $(this).appendTo('#book-form');
+        });
+    });
 });
 </script>
 
+
 <script>
     $(document).ready(function() {
-        $('#add-book-btn').on('click', function() {
-            var selectedBook = $('#book-select option:selected');
-            var bookId = selectedBook.val();
-            // var book_code=attr('book_code');
-            var book_code = $(this).attr('book_code');
-            console.log(book_code);
-            var bookName = selectedBook.text();
-            
-            // Check if a book is selected and not already added
-            if (bookId && !$("#book-" + bookId).length) {
-                var bookHtml = `
-                    <div id="book-${bookId}" class="row mt-2">
-                        <div class="col-md-3">${book_code}</div>
-                        <div class="col-md-6">${bookName}</div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-danger btn-sm remove-book-btn" data-book-id="${bookId}">
-                                X
-                            </button>
-                        </div>
-                    </div>
-                `;
-                $('#selected-books-list').append(bookHtml);
-    
-                // Add hidden input for selected book
-                $('#selected-books-inputs').append(`<input type="hidden" name="book_id[]" id="input-book-${bookId}" value="${bookId}">`);
-            }
-        });
-    
-        // Delegate the click event to dynamically added remove buttons
-        $('#selected-books-list').on('click', '.remove-book-btn', function() {
-            var bookId = $(this).data('book-id');
-            $("#book-" + bookId).remove();
-            $("#input-book-" + bookId).remove();
-        });
-    
-        // Handle form submission
-        $('#book-form').on('submit', function() {
-            // Ensure all hidden inputs are included in the form submission
-            $('#selected-books-inputs input').each(function() {
-                $(this).appendTo('#book-form');
-            });
-        });
+        $('.multipleSelect2Search').select2();
+    });
+    $(document).ready(function() {
+        $('.multipleSelectSearch').select2();
     });
     </script>
-
 @endsection
