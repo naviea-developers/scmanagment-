@@ -4,18 +4,25 @@ namespace App\Http\Controllers\Backend\Library_management\Delivery;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Borrow;
+use App\Models\Classe;
+use App\Models\Group;
+use App\Models\Shelf;
 use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
     public function index()
     {
+        $data['borrows'] = Borrow::orderBy('id', 'desc')->get();
         $data['books'] = Book::orderBy('id', 'desc')->get();
+        $data['classes'] = Classe::orderBy('id', 'desc')->get();
+        $data['shelves'] = Shelf::orderBy('id', 'desc')->get();
         return view("Backend.library_management.delivery.index",$data);
     }
 
 
-    function libraryBookByAjax(Request $request){
+    function libraryDeliveryBookByAjax(Request $request){
         // dd($request->all());
          $columns = array(
             0 => 'id',
@@ -27,8 +34,9 @@ class DeliveryController extends Controller
             6 => 'status',
             7 => 'options',
             8 => 'book_code',
+            8 => 'student_id_number',
         );
-        $totalData = Book::count();
+        $totalData = Borrow::count();
         $totalFiltered = $totalData;
  
         $limit = $request->input('length');
@@ -38,7 +46,7 @@ class DeliveryController extends Controller
         $dir = $request->input('order.0.dir');
         $search = $request->input('search.value');
        // Initialize the query builder for the Book model
-        $query = Book::query();
+        $query = Borrow::query();
 
         // Apply search filter if provided
         if (!empty($search)) {
@@ -62,36 +70,37 @@ class DeliveryController extends Controller
         $totalFiltered = $query->count();
 
         // Apply pagination and sorting
-        $books = $query->offset($start)
+        $borrows = $query->offset($start)
                     ->limit($limit)
                     ->orderBy($order, $dir)
                     ->get();
  
         $data = array();
-        if(!empty($books))
+        if(!empty($borrows))
         {
              $i = $start == 0 ? 1 : $start+1;
-            foreach($books as $book)
+            foreach($borrows as $borrow)
             {
                 $nestedData['id'] = $i++;
-                $nestedData['name'] = @$book->name;
-                $nestedData['book_code'] = @$book->book_code;
-                $nestedData['class_id'] = @$book->class->name;
-                $nestedData['group_id'] = @$book->group->name;
-                $nestedData['shelf_id'] = @$book->shelf->name;
-                $nestedData['total_set'] = @$book->total_set;
+                $nestedData['student_id_number'] = @$borrow->student_id_number;
+                $nestedData['name'] = @$borrow->name;
+                $nestedData['book_code'] = @$borrow->book_code;
+                $nestedData['class_id'] = @$borrow->class->name;
+                $nestedData['group_id'] = @$borrow->group->name;
+                $nestedData['shelf_id'] = @$borrow->shelf->name;
+                $nestedData['total_set'] = @$borrow->total_set;
  
                 $nestedData['status'] = '';
-                if ($book->status == 0) {
-                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="btn btn-sm btn-warning">Inactive</a>';
-                } elseif ($book->status == 1) {
-                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="btn btn-sm btn-success">Active</a>';
+                if ($borrow->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $borrow->id).'" class="btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($borrow->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $borrow->id).'" class="btn btn-sm btn-success">Active</a>';
                 }
                 $nestedData['options'] = '';
                 // Edit button
-                $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.book.edit', $book->id).'"><i class="fa fa-edit"></i></a>';
+                $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.book.edit', $borrow->id).'"><i class="fa fa-edit"></i></a>';
                 // Delete button
-                $nestedData['options'] .= ' <a href="#"  value="'.$book->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+                $nestedData['options'] .= ' <a href="#"  value="'.$borrow->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
                 
                 $data[] = $nestedData;
  

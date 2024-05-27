@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('shelf_id')->default(0);
-            $table->unsignedBigInteger('class_id')->default(0);
-            $table->unsignedBigInteger('group_id')->default(0);
-            $table->string('name')->nullable();
-            $table->integer('total_set')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->timestamps();
-        });
+        // Schema::create('books', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('shelf_id')->default(0);
+        //     $table->unsignedBigInteger('class_id')->default(0);
+        //     $table->unsignedBigInteger('group_id')->default(0);
+        //     $table->string('name')->nullable();
+        //     $table->integer('total_set')->nullable();
+        //     $table->tinyInteger('status')->default(1);
+        //     $table->timestamps();
+        // });
     }
 
     /**
