@@ -230,6 +230,7 @@
             $r_check = ( Route::is('admin.direction.create') ||  Route::is('admin.direction.index') || Route::is('admin.direction.edit')
             || Route::is('admin.shelf.create') ||  Route::is('admin.shelf.index') || Route::is('admin.shelf.edit')
             || Route::is('admin.book.create') ||  Route::is('admin.book.index') || Route::is('admin.book.edit')
+            || Route::is('admin.book_delivery.create') ||  Route::is('admin.book_delivery.index') || Route::is('admin.book_delivery.edit')
         
          
             );
@@ -238,6 +239,7 @@
                 <li class="sub-item"><a href="{{ route('admin.direction.index') }}" class="sub-link {{(Route::is('admin.direction.index') || Route::is('admin.direction.edit') || Route::is('admin.direction.create')) ?'active':''}}">Manage Direction</a></li>
                 <li class="sub-item"><a href="{{ route('admin.shelf.index') }}" class="sub-link {{(Route::is('admin.shelf.index') || Route::is('admin.shelf.edit') || Route::is('admin.shelf.create')) ?'active':''}}">Manage shelf</a></li>
                 <li class="sub-item"><a href="{{ route('admin.book.index') }}" class="sub-link {{(Route::is('admin.book.index') || Route::is('admin.book.edit') || Route::is('admin.book.create')) ?'active':''}}">Manage Book</a></li>
+                <li class="sub-item"><a href="{{ route('admin.book_delivery.index') }}" class="sub-link {{(Route::is('admin.book_delivery.index') || Route::is('admin.book_delivery.edit') || Route::is('admin.book_delivery.create')) ?'active':''}}">Manage Book Delivery</a></li>
             </ul>
         </li><!-- br-Speakers-item -->
 
