@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Borrow extends Model
 {
     use HasFactory;
+
+    public function student(){
+        return $this->belongsTo(Admission::class,"student_id",'id');
+    }
+    public function borrowItems(){
+        return $this->hasMany(BorrowItem::class,"borrow_id",'id');
+    }
+    // public function borrowItem(){
+    //     return $this->hasMany(BorrowItem::class,"book_id",'id');
+    // }
 }
