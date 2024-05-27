@@ -55,7 +55,7 @@
                 
                   <div class="class-routine">
 
-                      {{-- @php
+                      @php
                         $classRoutinesByDay = [];
                         $classDurations = [];
                 
@@ -101,9 +101,9 @@
                                   </tr>
                               @endforeach
                           </tbody>
-                      </table> --}}
+                      </table>
 
-                    @php
+                    {{-- @php
                         $classRoutinesByDay = [];
                         $classDurations = [];
                 
@@ -152,7 +152,7 @@
                               </tr>
                           @endforeach
                       </tbody>
-                  </table>
+                  </table> --}}
                     
                   </div>
             </div>

@@ -32,6 +32,7 @@ class BookController extends Controller
             5 => 'total_set',
             6 => 'status',
             7 => 'options',
+            8 => 'book_code',
         );
         $totalData = Book::count();
         $totalFiltered = $totalData;
@@ -80,6 +81,7 @@ class BookController extends Controller
             {
                 $nestedData['id'] = $i++;
                 $nestedData['name'] = @$book->name;
+                $nestedData['book_code'] = @$book->book_code;
                 $nestedData['class_id'] = @$book->class->name;
                 $nestedData['group_id'] = @$book->group->name;
                 $nestedData['shelf_id'] = @$book->shelf->name;
@@ -112,38 +114,6 @@ class BookController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -174,7 +144,8 @@ class BookController extends Controller
             $book->name = $request->name;
             $book->total_set = $request->total_set;
             $book->save();
-
+            $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT); 
+            $book->save();
             DB::commit();
             return redirect()->route('admin.book.index')->with('message','Book Add Successfully');
         }catch(\Exception $e){
@@ -222,6 +193,8 @@ class BookController extends Controller
         $book->group_id = $request->group_id ?? 0;
         $book->name = $request->name;
         $book->total_set = $request->total_set;
+        $book->save();
+        $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
         $book->save();
 
         DB::commit();

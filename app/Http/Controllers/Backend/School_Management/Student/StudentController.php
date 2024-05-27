@@ -56,6 +56,7 @@ class StudentController extends Controller
            8 => 'group_id',
            9 => 'status',
            10 => 'options',
+           11 => 'student_id_number',
        );
        $totalData = Admission::count();
        $totalFiltered = $totalData;
@@ -101,6 +102,7 @@ class StudentController extends Controller
            foreach($students as $student)
            {
                $nestedData['id'] = $i++;
+               $nestedData['student_id_number'] = $student->student_id_number;
                $nestedData['roll_number'] = $student->roll_number;
                $nestedData['image'] = '<img src="'.$student->image_show.'" style="height:50px;width:50px;">';
                $nestedData['student_name'] = $student->student_name;
@@ -208,7 +210,11 @@ class StudentController extends Controller
                 $rollNumber = 1;
             }
             $student->roll_number = $rollNumber;
-            // dd($student);
+           
+            $currentYear = date('Y');
+            $studentsId=$currentYear.$request->class_id.str_pad($student->roll_number, 3, '0', STR_PAD_LEFT); 
+            $student->student_id_number = $studentsId;
+
             $student->student_name = $request->student_name;
             $student->dob = $request->dob;
             $student->student_phone = $request->student_phone;
@@ -255,8 +261,7 @@ class StudentController extends Controller
 
             $student->save();
 
-
-
+    
         //add certificate file
         if($request->certificates_file){
             foreach( $request->certificates_file as $k=>$value){
@@ -350,10 +355,14 @@ class StudentController extends Controller
         ]);
         try{
             DB::beginTransaction();
-
             $student = Admission::find($id);
             $student->user_id = $student->user_id;
             $student->class_id = $request->class_id ?? 0;
+
+            // $currentYear = date('Y');
+            // $studentsId=$currentYear.$request->class_id.str_pad($student->roll_number, 3, '0', STR_PAD_LEFT); 
+            // $student->student_id_number = $studentsId;
+
             // dd($student);
             $student->academic_year_id = $request->academic_year_id ?? 0;
             $student->session_id = $request->session_id ?? 0;
@@ -407,13 +416,13 @@ class StudentController extends Controller
 
            $student->save();
 
-           $user = User::find($student->user_id);
-           $user->name = $request->student_name;
-           $user->email = $request->student_email;
-           $user->mobile = $request->student_phone;
-           $user->dob = $request->dob;
-           $user->nid = $request->student_nid;
-           $user->save();
+        //    $user = User::find($student->user_id);
+        //    $user->name = $request->student_name;
+        //    $user->email = $request->student_email;
+        //    $user->mobile = $request->student_phone;
+        //    $user->dob = $request->dob;
+        //    $user->nid = $request->student_nid;
+        //    $user->save();
 
 
 

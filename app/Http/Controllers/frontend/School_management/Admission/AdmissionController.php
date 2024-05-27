@@ -102,6 +102,9 @@ class AdmissionController extends Controller
 
             // dd($admission);
 
+            $currentYear = date('Y');
+            $studentsId=$currentYear.$request->class_id.str_pad($admission->roll_number, 3, '0', STR_PAD_LEFT); 
+            $admission->student_id_number = $studentsId;
 
             $admission->student_name = $request->student_name;
             $admission->dob = $request->dob;

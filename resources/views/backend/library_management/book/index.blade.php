@@ -81,6 +81,7 @@ Admin - All Books
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Book Name</th>
+                    <th class="wd-15p">Book Code</th>
                     <th class="wd-15p">Class</th>
                     <th class="wd-15p">Group</th>
                     <th class="wd-15p">Shelf Name</th>
@@ -191,6 +192,7 @@ Admin - All Books
         "columns": [
             { "data": "id"},
             { "data": "name"},
+            { "data": "book_code"},
             { "data": "class_id"},
             { "data": "group_id"},
             { "data": "shelf_id"},
