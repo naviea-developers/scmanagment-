@@ -1,9 +1,13 @@
 @extends('user.layouts.master-layout')
 @section('head')
 @section('title','- Library')
-
 <link rel="stylesheet" href="{{asset('public/backend')}}/css/suneditor.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 35px;}
+</style>
 @endsection
 @section('main_content')
     <div class="right_section">
@@ -25,7 +29,7 @@
 
                         <label class="mt-3">Class</label>
                         <div class="mg-t-10 mg-sm-t-0">
-                            <select id="class-select" name="class_id" class="form-control">
+                            <select id="class-select" name="class_id" class="form-control select2 form-select">
                                 <option value=""> Select Class</option>
                                 @foreach ($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -35,7 +39,7 @@
                         
                         <label class="mt-3">Student Name</label>
                         <div class="mg-t-10 mg-sm-t-0">
-                            <select id="student-select" name="student_id" class="form-control select2">
+                            <select id="student-select" name="student_id" class="form-control select2 form-select">
                                 <option value=""> Select Student</option>
                                 @foreach ($students as $student)
                                 <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}" data-student-id-number="{{ $student->student_id_number }}">
@@ -206,11 +210,11 @@ $(document).ready(function() {
 
 
 <script>
-    $(document).ready(function() {
-        $('.multipleSelect2Search').select2();
+       $(document).ready(function() {
+        console.log("hi");
+    $('.select2').select2();
     });
-    $(document).ready(function() {
-        $('.multipleSelectSearch').select2();
-    });
-    </script>
+
+</script>
+
 @endsection

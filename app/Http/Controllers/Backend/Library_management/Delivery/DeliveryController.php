@@ -82,8 +82,8 @@ class DeliveryController extends Controller
             foreach($borrows as $borrow)
             {
                 $nestedData['id'] = $i++;
-                $nestedData['student_id_number'] = @$borrow->student_id_number;
-                $nestedData['name'] = @$borrow->name;
+                $nestedData['student_id_number'] = @$borrow->student->student_id_number;
+                $nestedData['name'] = @$borrow->class->name;
                 $nestedData['book_code'] = @$borrow->book_code;
                 $nestedData['class_id'] = @$borrow->class->name;
                 $nestedData['group_id'] = @$borrow->group->name;
