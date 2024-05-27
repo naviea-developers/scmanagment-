@@ -47,4 +47,10 @@ class LibraryController extends Controller
 
         return redirect()->back()->with('message', 'Book Borrow Successfully.');
     }
+
+    public function borrowManage()
+    {
+        $data['borrows'] = Borrow::all();
+        return view('user.library_management.manage', $data);
+    }
 }
