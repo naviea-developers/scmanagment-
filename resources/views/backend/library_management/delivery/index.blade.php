@@ -38,7 +38,7 @@ Admin - All Delivery Books
 
 
 
-            {{-- <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+            <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
               <div class="row">
                 
                 <div class="col-md-4">
@@ -54,11 +54,10 @@ Admin - All Delivery Books
                   <label class=" form-control-label"><b>Group:</b></label>
                   <select class="form-control group_id" name="group_id" id="group">
                       <option value="">Select Group</option>
-                     
                   </select>
                 </div>
 
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                   <label class=" form-control-label"><b>Shelf:</b></label>
                   <select class="form-control" name="shelf_id" id="shelf">
                     <option value="">Select Shelf</option>
@@ -66,9 +65,9 @@ Admin - All Delivery Books
                     <option value="{{ $shelf->id }}">{{ $shelf->name }}</option>
                     @endforeach
                   </select>
-                </div>
+                </div> --}}
               </div>
-            </div> --}}
+            </div>
 
 
 
@@ -80,12 +79,13 @@ Admin - All Delivery Books
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Student ID</th>
                     <th class="wd-15p">Book Name</th>
                     <th class="wd-15p">Book Code</th>
                     <th class="wd-15p">Class</th>
-                    <th class="wd-15p">Group</th>
+                    {{-- <th class="wd-15p">Group</th>
                     <th class="wd-15p">Shelf Name</th>
-                    <th class="wd-15p">Total Set</th>
+                    <th class="wd-15p">Total Set</th> --}}
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -178,19 +178,20 @@ Admin - All Delivery Books
         "processing": true,
         "serverSide": true,
         "ajax":{
-            "url": "{{ route('admin.libraryBookByAjax') }}",
+            "url": "{{ route('admin.libraryDeliveryBookByAjax') }}",
             "dataType": "json",
             "type": "POST",
             data: function(data){
               data.class_id= $('.class_id').val(),
               data.group_id= $('.group_id').val(),
-              data.shelf_id= $('#shelf').val(),
+              // data.shelf_id= $('#shelf').val(),
               data._token = "{{ csrf_token() }}";
 
             },
         },
         "columns": [
             { "data": "id"},
+            { "data": "student_id_number"},
             { "data": "name"},
             { "data": "book_code"},
             { "data": "class_id"},
@@ -206,7 +207,8 @@ Admin - All Delivery Books
           } ]
 
     });
-    $('.class_id, .group_id, #shelf').change(function(){
+    // $('.class_id, .group_id, #shelf').change(function(){
+      $('.class_id, .group_id').change(function(){
       console.log(this);
       console.log(s_data);
       s_data.draw();

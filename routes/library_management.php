@@ -54,6 +54,7 @@ Route::prefix('book_delivery')->middleware(['auth:admin', 'adminCheck:0'])->grou
 
 
 Route::post('get-library-book-by-ajax', [BookController::class,"libraryBookByAjax"])->name('admin.libraryBookByAjax');
+Route::post('get-library-delivery-book-by-ajax', [DeliveryController::class,"libraryDeliveryBookByAjax"])->name('admin.libraryDeliveryBookByAjax');
 
 
 

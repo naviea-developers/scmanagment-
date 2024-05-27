@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shelves', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('direction_id')->default(0);
-            $table->string('name')->nullable();
-            $table->integer('number')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->timestamps();
-        });
+        // Schema::create('shelves', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('direction_id')->default(0);
+        //     $table->string('name')->nullable();
+        //     $table->integer('number')->nullable();
+        //     $table->tinyInteger('status')->default(1);
+        //     $table->timestamps();
+        // });
     }
 
     /**
