@@ -80,9 +80,9 @@ Admin - All Delivery Books
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Student ID</th>
-                    <th class="wd-15p">Book Name</th>
-                    <th class="wd-15p">Book Code</th>
-                    <th class="wd-15p">Class</th>
+                    {{-- <th class="wd-15p">Book Name</th> --}}
+                    {{-- <th class="wd-15p">Book Code</th> --}}
+                    {{-- <th class="wd-15p">Class</th> --}}
                     {{-- <th class="wd-15p">Group</th>
                     <th class="wd-15p">Shelf Name</th>
                     <th class="wd-15p">Total Set</th> --}}
@@ -183,7 +183,7 @@ Admin - All Delivery Books
             "type": "POST",
             data: function(data){
               data.class_id= $('.class_id').val(),
-              data.group_id= $('.group_id').val(),
+              // data.group_id= $('.group_id').val(),
               // data.shelf_id= $('#shelf').val(),
               data._token = "{{ csrf_token() }}";
 
@@ -192,12 +192,12 @@ Admin - All Delivery Books
         "columns": [
             { "data": "id"},
             { "data": "student_id_number"},
-            { "data": "name"},
-            { "data": "book_code"},
-            { "data": "class_id"},
-            { "data": "group_id"},
-            { "data": "shelf_id"},
-            { "data": "total_set"},
+            // { "data": "name"},
+            // { "data": "book_code"},
+            // { "data": "class_id"},
+            // { "data": "group_id"},
+            // { "data": "shelf_id"},
+            // { "data": "total_set"},
             { "data": "status"},
             { "data": "options"},
         ],
@@ -208,7 +208,7 @@ Admin - All Delivery Books
 
     });
     // $('.class_id, .group_id, #shelf').change(function(){
-      $('.class_id, .group_id').change(function(){
+      $('.class_id').change(function(){
       console.log(this);
       console.log(s_data);
       s_data.draw();
