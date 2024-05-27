@@ -44,7 +44,7 @@
                       <div class="col-sm-12 mt-3">
                         <label class="form-control-label">Class Name: <span class="tx-danger">*</span></label>
                         <div class="mg-t-10 mg-sm-t-0">
-                          <select name="class_id" class="form-control">
+                          <select name="class_id" class="form-control" id="class">
                             <option value=""> Select Class</option>
                             @foreach ($classes as $class)
                             <option @if ($class->id == $book->class_id) Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
@@ -56,7 +56,7 @@
                       <div class="col-sm-12 mt-3">
                         <label class="form-control-label">Group Name: <span class="tx-danger">*</span></label>
                         <div class="mg-t-10 mg-sm-t-0">
-                          <select name="group_id" class="form-control">
+                          <select name="group_id" class="form-control" id="group">
                             <option value=""> Select Group</option>
                             @foreach ($groups as $group)
                             <option @if ($group->id == $book->group_id) Selected @endif value="{{ $group->id }}">{{ $group->name }}</option>

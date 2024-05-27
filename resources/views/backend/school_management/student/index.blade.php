@@ -91,6 +91,7 @@ Admin - All Student
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Student ID</th>
                     <th class="wd-15p">Roll Number</th>
                     <th class="wd-15p">Student Image</th>
                     <th class="wd-15p">Student Name</th>
@@ -213,6 +214,7 @@ Admin - All Student
         },
         "columns": [
             { "data": "id"},
+            { "data": "student_id_number"},
             { "data": "roll_number"},
             { "data": "image"},
             { "data": "student_name"},
