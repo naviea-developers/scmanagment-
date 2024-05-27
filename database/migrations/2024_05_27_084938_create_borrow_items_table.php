@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('borrow_items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('borrow_id')->default(0);
+            $table->unsignedBigInteger('book_id')->default(0);
             $table->timestamps();
         });
     }

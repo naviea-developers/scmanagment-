@@ -142,7 +142,7 @@
                                 <select id="book-select" name="book_id" class="form-control">
                                     <option value=""> Select Book</option>
                                     @foreach ($books as $book)
-                                    <option value="{{ $book->id }}" data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
+                                    <option value="{{ $book->id }}" book_code="{{ $book->id }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -228,13 +228,16 @@ $(document).ready(function() {
         $('#add-book-btn').on('click', function() {
             var selectedBook = $('#book-select option:selected');
             var bookId = selectedBook.val();
+            // var book_code=attr('book_code');
+            var book_code = $(this).attr('book_code');
+            console.log(book_code);
             var bookName = selectedBook.text();
             
             // Check if a book is selected and not already added
             if (bookId && !$("#book-" + bookId).length) {
                 var bookHtml = `
                     <div id="book-${bookId}" class="row mt-2">
-                        <div class="col-md-3">${bookId}</div>
+                        <div class="col-md-3">${book_code}</div>
                         <div class="col-md-6">${bookName}</div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-danger btn-sm remove-book-btn" data-book-id="${bookId}">
@@ -246,7 +249,7 @@ $(document).ready(function() {
                 $('#selected-books-list').append(bookHtml);
     
                 // Add hidden input for selected book
-                $('#selected-books-inputs').append(`<input type="hidden" name="book_ids[]" id="input-book-${bookId}" value="${bookId}">`);
+                $('#selected-books-inputs').append(`<input type="hidden" name="book_id[]" id="input-book-${bookId}" value="${bookId}">`);
             }
         });
     

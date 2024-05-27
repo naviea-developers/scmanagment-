@@ -194,8 +194,8 @@ class BookController extends Controller
         $book->name = $request->name;
         $book->total_set = $request->total_set;
         $book->save();
-        $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
-        $book->save();
+        // $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
+        // $book->save();
 
         DB::commit();
         return redirect()->route('admin.book.index')->with('message','Book Update Successfully');
