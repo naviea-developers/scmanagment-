@@ -35,6 +35,9 @@ class LibraryController extends Controller
         $borrow->from_date = $request->from_date;
         $borrow->to_date = $request->to_date;
         $borrow->save();
+        $todayDate = date('ymd');
+        $borrow->borrow_id_number = $todayDate.str_pad($borrow->id,STR_PAD_LEFT);
+        $borrow->save();
 
         if($request->book_id){
            foreach($request->book_id as $value){
@@ -79,14 +82,8 @@ class LibraryController extends Controller
         $borrow->student_id = $request->student_id;
         $borrow->from_date = $request->from_date;
         $borrow->to_date = $request->to_date;
-        // Generate borrow_id_number
-        $todayDate = date('ymd');
-        $lastBorrow = Borrow::whereDate('created_at', now()->format('Y-m-d'))->orderBy('id', 'desc')->first();
-        $sequenceNumber = $lastBorrow ? ((int)substr($lastBorrow->borrow_id_number, -3) + 1) : 1;
-        $borrow->borrow_id_number = $todayDate . str_pad($sequenceNumber, 3, '0', STR_PAD_LEFT);
-
         $borrow->save();
-
+       
         // Get the existing borrow items
         $existingBorrowItems = BorrowItem::where('borrow_id', $borrow->id)->get();
 
