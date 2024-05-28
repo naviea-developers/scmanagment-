@@ -1,19 +1,49 @@
 @extends('user.layouts.master-layout')
 @section('head')
 @section('title','- Manage Borrow Books')
-
+<link href="{{asset('public/backend')}}/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="{{asset('public/backend')}}/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
 @endsection
+
 @section('main_content')
 
-<div class="right_section">
+<div class="">
     <div>
         <h3 style="color: black">Manage Borrow Books</h3>
     </div>
 </div>
 
 
+
+{{-- 
+<div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+    <div class="row">
+
+      <div class="col-md-6">
+        <label class=" form-control-label"><b>Class :</b></label>
+        <select class="form-control class_id" name="class_id" id="class">
+            <option value="">Select Class</option>
+            @foreach ($classes as $class)
+            <option value="{{ $class->id }}">{{ $class->name }}</option>
+            @endforeach
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class=" form-control-label"><b>Student Name :</b></label>
+        <select class="form-control student_id" name="student_id" id="student">
+            <option value="">Select Class</option>
+         
+        </select>
+      </div>
+    </div>
+  </div> --}}
+
+
+
+
 <div style="overflow-x:auto;">
-    <table class="table table-striped mt-3" style="min-width: 800px;">
+    <table class="table display responsive nowrap" id="dataTableE" style="min-width: 800px;">
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
@@ -21,13 +51,14 @@
             <th scope="col">Book Name</th>
             <th scope="col">Student ID</th>
             <th scope="col">Student</th>
-            <th scope="col">Date</th>
+            <th scope="col">From Date</th>
+            <th scope="col">To Date</th>
             <th scope="col">Return</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
-            @php
+            {{-- @php
                 $i = 1;
             @endphp
             @if (count($borrows) > 0)
@@ -63,7 +94,6 @@
                 @if($borrow->is_return == 0)
                 <a href="{{ route('teacher.library_borrow.edit', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
-                {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
                 &nbsp;
                 <button class="btn text-danger delete-button" courseId="{{ $borrow->id }}"><i class="icon fa fa-trash tx-28"></i></button>
                 @else
@@ -71,16 +101,26 @@
                 @endif
 
 
+
+            @endforeach
+            @endif --}}
+        </tbody>
+  </table>
+
+
+
+  
+
             <!--_-- ########### Start Delete Category MODAL ############---->
 
-            <div id="delete-modal"  class="modal">
+            {{-- <div id="delete-modal"  class="modal">
                 <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content tx-size-sm">
                     <div class="modal-body tx-center pd-y-20 pd-x-20">
                         <form action="{{ route('teacher.library_borrow.delete') }}" method="post">
                             @csrf
                             <h4 class="tx-semibold mg-b-20 mt-2 " >Are you sure! you want to delete this?</h4>
-                            <input type="hidden" value="{{ $borrow->id }}" name="borrow_id" id="course_id">
+                            <input type="hidden" name="borrow_id" id="borrow_id">
                             <button type="submit"  class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">
                                 yes
                             </button>
@@ -88,40 +128,128 @@
                                 No
                             </button>
                         </form>
-                    </div><!-- modal-body -->
-                </div><!-- modal-content -->
-                </div><!-- modal-dialog -->
-            </div><!-- modal -->
+                    </div>
+                </div>
+                </div>
+            </div> --}}
+
+
+            <div id="delete-modal" class="modal">
+                <div class="modal-dialog modal-dialog-top" role="document">
+                    <div class="modal-content tx-size-sm">
+                        <div class="modal-body tx-center pd-y-20 pd-x-20">
+                            <form action="{{ route('teacher.library_borrow.delete') }}" method="post">
+                                @csrf
+                                <h4 class="tx-semibold mg-b-20 mt-2">Are you sure you want to delete this?</h4>
+                                <input type="hidden" name="borrow_id" id="borrow_id">
+                                <button type="submit" class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">
+                                    Yes
+                                </button>
+                                <button type="button" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-no">
+                                    No
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--_-- ########### Start Delete Category MODAL ############---->
 
 
-
-            @endforeach
-            @endif
-        </tbody>
-  </table>
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
 <script>
-$(document).ready(function() {
-$(".delete-button").click(function() {
-    $("#delete-modal").show();
-    $("#course_id").val($(this).attr('courseId'))
 
-});
-$("#confirm-no").click(function() {
-    $("#delete-modal").hide();
-});
-$("#confirm-yes").click(function() {
-    $("#delete-modal").hide();
-});
-});
+    // $(document).ready(function () {
+    //     $(document).on("click", "#dataDeleteModal", function () {
+    //         var id = $(this).val();
+    //         $("#delete-modal").modal("show");
+    //         $("#borrow_id").val(id);
+    //     });
+    // });
+
+
+    // $(document).ready(function() {
+    // $(".delete-button").click(function() {
+    //     $("#delete-modal").show();
+    //     $("#course_id").val($(this).attr('courseId'))
+
+    // });
+    // $("#confirm-no").click(function() {
+    //     $("#delete-modal").hide();
+    // });
+    // $("#confirm-yes").click(function() {
+    //     $("#delete-modal").hide();
+    // });
+    // });
 
 </script>
 
 
+<script>
+    $(document).ready(function () {
+        $(document).on("click", ".del_data", function () {
+            var id = $(this).data("id");
+            $("#borrow_id").val(id);
+            $("#delete-modal").modal("show");
+        });
+    });
+</script>
+
+
+@endsection
+
+
+
+@section('script')
+
+<script src="{{asset('public/backend')}}/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('public/backend')}}/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="{{asset('public/backend')}}/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{asset('public/backend')}}/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+
+
+  <script>
+    var s_data = $('#dataTableE').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax":{
+            "url": "{{ route('teacher.getBorrowBook') }}",
+            "dataType": "json",
+            "type": "POST",
+            data: function(data){
+              data.class_id= $('.class_id').val(),
+              data.student_id= $('.student_id').val(),
+              data._token = "{{ csrf_token() }}";
+
+            },
+        },
+        "columns": [
+            { "data": "id"},
+            { "data": "borrow_id_number"},
+            { "data": "book"},
+            { "data": "student_id_number"},
+            { "data": "student_id"},
+            { "data": "from_date"},
+            { "data": "to_date"},
+            { "data": "is_return"},
+            { "data": "options"},
+        ],
+        "columnDefs": [ {
+          "targets": 8,
+          "orderable": false
+          } ]
+
+    });
+    $('.class_id, .student_id').change(function(){
+      console.log(this);
+      console.log(s_data);
+      s_data.draw();
+    });
+    
+  </script>
 @endsection

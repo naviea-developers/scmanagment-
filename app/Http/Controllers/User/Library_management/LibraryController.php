@@ -31,34 +31,6 @@ class LibraryController extends Controller
         return view('user.library_management.index', $data);
     }
 
-    // public function borrowStore(Request $request)
-    // {
-    //     $borrow = new Borrow();
-    //     // $borrow->student_id_number = $request->student_id_number;
-    //     $borrow->class_id = $request->class_id;
-    //     $borrow->student_id = $request->student_id;
-    //     $borrow->from_date = $request->from_date;
-    //     $borrow->to_date = $request->to_date;
-    //     $borrow->save();
-    //     $todayDate = date('ymd');
-    //     $borrow->borrow_id_number = $todayDate.str_pad($borrow->id,STR_PAD_LEFT);
-    //     $borrow->save();
-
-    //     if($request->book_id){
-    //        foreach($request->book_id as $value){
-    //         $borrowItem = new BorrowItem();
-    //         $borrowItem->borrow_id = $borrow->id;
-    //         $borrowItem->book_id = $value;
-    //         $borrowItem->save();
-    //        }
-    //     }
-
-    //     return redirect()->back()->with('message', 'Book Borrow Successfully.');
-    // }
-
-
-
-
     public function borrowStore(Request $request)
     {
         // dd('hi');
@@ -116,7 +88,101 @@ class LibraryController extends Controller
     public function borrowManage()
     {
         $data['borrows'] = Borrow::all();
+        $data['classes'] = Classe::where('status', 1);
         return view('user.library_management.manage', $data);
+    }
+
+    function getBorrowBook(Request $request){
+        // dd($request->all());
+        $columns = array(
+            0 => 'id',
+            1 => 'borrow_id_number',
+            2 => 'book',
+            3 => 'student_id_number',
+            4 => 'student_id',
+            5 => 'from_date',
+            6 => 'to_date',
+            7 => 'is_return',
+            8 => 'options',
+        );
+        $totalData = Borrow::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        // dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $query = Borrow::query();
+
+        if (!empty($search)) {
+            $query->where("borrow_id_number", "LIKE", "%{$search}%");
+        }
+
+        $totalFiltered = $query->count();
+
+        $borrows = $query->offset($start)
+                    ->limit($limit)
+                    ->orderBy($order, $dir)
+                    ->get();
+ 
+        $data = array();
+        if(!empty($borrows))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($borrows as $borrow)
+            {
+                $nestedData['id'] = $i++;
+                $nestedData['borrow_id_number'] = @$borrow->borrow_id_number;
+                $books = [];
+                foreach ($borrow->borrowItems as $borrowItem) {
+                    $books[] = $borrowItem->book->name ?? 'N/A';
+                }
+                $nestedData['book'] = implode(', ', $books); 
+
+                $nestedData['student_id_number'] = @$borrow->student->student_id_number;
+                $nestedData['student_id'] = @$borrow->student->student_name;
+
+               
+                $nestedData['from_date'] = @$borrow->from_date;
+                $nestedData['to_date'] = @$borrow->to_date;
+
+                $nestedData['is_return'] = '';
+                if ($borrow->is_return == 0) {
+                    $nestedData['is_return'] .= '<form method="POST" action="' . route('teacher.library_borrow.return') . '">';
+                    $nestedData['is_return'] .= csrf_field();
+                    $nestedData['is_return'] .= '<input type="hidden" name="borrow_id" value="' . $borrow->id . '">';
+                    $nestedData['is_return'] .= '<button type="submit" class="btn btn-info">Return</button>';
+                    $nestedData['is_return'] .= '</form>';
+                } else {
+                    $nestedData['is_return'] .= '<p>Returned</p>';
+                }
+
+
+                $nestedData['options'] = '';
+                if ($borrow->is_return == 0) {
+                    $nestedData['options'] .= '<a href="' . route('teacher.library_borrow.edit', $borrow->id) . '"><i class="fa-duotone fa fa-edit"></i></a>';
+                    $nestedData['options'] .= '&nbsp;&nbsp;';
+                    $nestedData['options'] .= '<a href="#" data-id="' . $borrow->id . '" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+                } else {
+                    // $nestedData['options'] .= '<button class="btn text-danger delete-button" courseId="' . $borrow->id . '"><i class="icon fa fa-trash tx-28"></i></button>';
+                    $nestedData['options'] .= '<a href="#" data-id="' . $borrow->id . '" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
+                }
+
+                $data[] = $nestedData;
+ 
+            }
+
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+ 
+        return json_encode($json_data);
     }
 
 
@@ -183,23 +249,6 @@ class LibraryController extends Controller
 
         return redirect()->back()->with('message', 'Book Borrow Updated Successfully.');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function borrowDelete(Request $request)
     {
