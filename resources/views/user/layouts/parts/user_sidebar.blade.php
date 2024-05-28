@@ -129,13 +129,17 @@
                     <span> My Course List </span>
                 </a>
 
-                <a href="{{ route('teacher.library_index', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <a href="{{ route('teacher.library', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-calendar-days"></i>
                     <span> Library </span>
                 </a>
+                <a href="{{ route('teacher.library_index', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span> Borrow </span>
+                </a>
                 <a href="{{ route('teacher.library_borrow.manage', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-calendar-days"></i>
-                    <span> Manage Library </span>
+                    <span> Manage Borrow </span>
                 </a>
 
                 <a href="{{ route('teacher.class_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">

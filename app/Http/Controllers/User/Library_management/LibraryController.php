@@ -15,6 +15,11 @@ use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
+    public function library()
+    {
+        $data['books'] = Book::where('status', 1)->get();
+        return view('user.library_management.library', $data);
+    }
     public function index()
     {
         $data['students'] = Admission::where('is_new', 0)->get();

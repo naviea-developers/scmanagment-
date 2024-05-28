@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\Library_management\Book\BookController;
 use App\Http\Controllers\Backend\Library_management\Direction\DirectionController;
 use App\Http\Controllers\Backend\Library_management\Shelf\ShelfController;
 use App\Http\Controllers\Backend\Library_management\Delivery\DeliveryController;
+use App\Http\Controllers\User\Library_management\BookController as Library_managementBookController;
 use App\Http\Controllers\User\Library_management\LibraryController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,7 @@ Route::post('get-library-delivery-book-by-ajax', [DeliveryController::class,"lib
 
 Route::prefix('user')->middleware(['userCheck'])->group(function () {
     //Library Manage from teacher Profile
+    Route::get('library/', [LibraryController::class,"library"])->name('teacher.library');
     Route::get('library-index/', [LibraryController::class,"index"])->name('teacher.library_index');
     Route::post('library-borrow-store/', [LibraryController::class,"borrowStore"])->name('teacher.library_borrow.store');
     Route::post('library-borrow-return', [LibraryController::class,"returnBook"])->name('teacher.library_borrow.return');
@@ -71,3 +73,33 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
 });
 
+
+
+
+Route::prefix('user')->middleware(['userCheck'])->group( function () {
+    //add book in library Create
+     Route::get('library-book-create/', [Library_managementBookController::class,"create"])->name('teacher.library_book.create');
+     Route::post('library-book-store/', [Library_managementBookController::class,"store"])->name('teacher.library_book.store');
+     Route::get('library-book-edit/{id}', [Library_managementBookController::class,"edit"])->name('teacher.library_book.edit');
+     Route::post('library-book-update/{id}', [Library_managementBookController::class,"update"])->name('teacher.library_book.update');
+     Route::post('library-book-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_book.delete');
+    //  Route::get('/library-book-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_book.status');
+});
+Route::prefix('user')->middleware(['userCheck'])->group( function () {
+    //add book in library Create
+     Route::get('library-shelf-direction-create/', [Library_managementBookController::class,"create"])->name('teacher.library_shelf_direction.create');
+     Route::post('library-shelf-direction-store/', [Library_managementBookController::class,"store"])->name('teacher.library_shelf_direction.store');
+     Route::get('library-shelf-direction-edit/{id}', [Library_managementBookController::class,"edit"])->name('teacher.library_shelf_direction.edit');
+     Route::post('library-shelf-direction-update/{id}', [Library_managementBookController::class,"update"])->name('teacher.library_shelf_direction.update');
+     Route::post('library-shelf-direction-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_shelf_direction.delete');
+    //  Route::get('/library-direction-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_shelf_direction.status');
+});
+Route::prefix('user')->middleware(['userCheck'])->group( function () {
+    //add book in library Create
+     Route::get('library-shelf-create/', [Library_managementBookController::class,"create"])->name('teacher.library_shelf.create');
+     Route::post('library-shelf-store/', [Library_managementBookController::class,"store"])->name('teacher.library_shelf.store');
+     Route::get('library-shelf-edit/{id}', [Library_managementBookController::class,"edit"])->name('teacher.library_shelf.edit');
+     Route::post('library-shelf-update/{id}', [Library_managementBookController::class,"update"])->name('teacher.library_shelf.update');
+     Route::post('library-shelf-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_shelf.delete');
+    //  Route::get('/library-shelf-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_shelf.status');
+});
