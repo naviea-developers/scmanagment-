@@ -5,7 +5,9 @@ use App\Http\Controllers\Backend\Library_management\Direction\DirectionControlle
 use App\Http\Controllers\Backend\Library_management\Shelf\ShelfController;
 use App\Http\Controllers\Backend\Library_management\Delivery\DeliveryController;
 use App\Http\Controllers\User\Library_management\BookController as Library_managementBookController;
+use App\Http\Controllers\User\Library_management\DirectionController as Library_managementDirectionController;
 use App\Http\Controllers\User\Library_management\LibraryController;
+use App\Http\Controllers\User\Library_management\ShelfController as Library_managementShelfController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('direction')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -86,25 +88,28 @@ Route::prefix('user')->middleware(['userCheck'])->group( function () {
     //  Route::get('/library-book-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_book.status');
 });
 Route::prefix('user')->middleware(['userCheck'])->group( function () {
-    //add book in library Create
-     Route::get('library-shelf-direction-create/', [Library_managementBookController::class,"create"])->name('teacher.library_shelf_direction.create');
-     Route::post('library-shelf-direction-store/', [Library_managementBookController::class,"store"])->name('teacher.library_shelf_direction.store');
-     Route::get('library-shelf-direction-edit/{id}', [Library_managementBookController::class,"edit"])->name('teacher.library_shelf_direction.edit');
-     Route::post('library-shelf-direction-update/{id}', [Library_managementBookController::class,"update"])->name('teacher.library_shelf_direction.update');
-     Route::post('library-shelf-direction-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_shelf_direction.delete');
-    //  Route::get('/library-direction-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_shelf_direction.status');
+    //add Direction in library Create
+    Route::get('library-shelf-direction-index/', [Library_managementDirectionController::class,"index"])->name('teacher.library_shelf_direction.index');
+     Route::get('library-shelf-direction-create/', [Library_managementDirectionController::class,"create"])->name('teacher.library_shelf_direction.create');
+     Route::post('library-shelf-direction-store/', [Library_managementDirectionController::class,"store"])->name('teacher.library_shelf_direction.store');
+     Route::get('library-shelf-direction-edit/{id}', [Library_managementDirectionController::class,"edit"])->name('teacher.library_shelf_direction.edit');
+     Route::post('library-shelf-direction-update/{id}', [Library_managementDirectionController::class,"update"])->name('teacher.library_shelf_direction.update');
+     Route::post('library-shelf-direction-delete/', [Library_managementDirectionController::class,"destroy"])->name('teacher.library_shelf_direction.delete');
+    //  Route::get('/library-shelf-direction-status/{id}', [Library_managementDirectionController::class, 'status'])->name('teacher.library_shelf_direction.status');
 });
 Route::prefix('user')->middleware(['userCheck'])->group( function () {
-    //add book in library Create
-     Route::get('library-shelf-create/', [Library_managementBookController::class,"create"])->name('teacher.library_shelf.create');
-     Route::post('library-shelf-store/', [Library_managementBookController::class,"store"])->name('teacher.library_shelf.store');
-     Route::get('library-shelf-edit/{id}', [Library_managementBookController::class,"edit"])->name('teacher.library_shelf.edit');
-     Route::post('library-shelf-update/{id}', [Library_managementBookController::class,"update"])->name('teacher.library_shelf.update');
-     Route::post('library-shelf-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_shelf.delete');
-    //  Route::get('/library-shelf-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_shelf.status');
+    //add Shelf in library Create
+    Route::get('library-shelf-index/', [Library_managementShelfController::class,"index"])->name('teacher.library_shelf.index');
+     Route::get('library-shelf-create/', [Library_managementShelfController::class,"create"])->name('teacher.library_shelf.create');
+     Route::post('library-shelf-store/', [Library_managementShelfController::class,"store"])->name('teacher.library_shelf.store');
+     Route::get('library-shelf-edit/{id}', [Library_managementShelfController::class,"edit"])->name('teacher.library_shelf.edit');
+     Route::post('library-shelf-update/{id}', [Library_managementShelfController::class,"update"])->name('teacher.library_shelf.update');
+     Route::post('library-shelf-delete/', [Library_managementShelfController::class,"destroy"])->name('teacher.library_shelf.delete');
+    //  Route::get('/library-shelf-status/{id}', [Library_managementShelfController::class, 'status'])->name('teacher.library_shelf.status');
 });
 
 
+Route::post('/get-borrow-book', [LibraryController::class, 'getBorrowBook'])->name('teacher.getBorrowBook');
 Route::get('/get/student/{id}', [DeliveryController::class, 'getStudent']);
 
  

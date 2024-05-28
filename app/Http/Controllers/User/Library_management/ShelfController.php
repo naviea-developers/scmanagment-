@@ -4,15 +4,16 @@ namespace App\Http\Controllers\User\Library_management;
 
 use App\Http\Controllers\Controller;
 use App\Models\Direction;
+use App\Models\Shelf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DirectionController extends Controller
+class ShelfController extends Controller
 {
     public function index()
     {
-        $data['directions'] = Direction::orderBy('id', 'desc')->get();
-        return view("user.library_management.direction.index",$data);
+        $data['shelves'] = Shelf::orderBy('id', 'desc')->get();
+        return view("user.library_management.shelf.index",$data);
     }
 
     /**
@@ -20,7 +21,8 @@ class DirectionController extends Controller
      */
     public function create()
     {
-        return view("user.library_management.direction.create");
+        $data['directions'] = Direction::where('status', 1)->get();
+        return view("user.library_management.shelf.create", $data);
     }
 
     /**
@@ -35,12 +37,14 @@ class DirectionController extends Controller
         ]);
         try{
             DB::beginTransaction();
-            $direction = New Direction();
-            $direction->name = $request->name;
-            $direction->save();
+            $shelf = New Shelf();
+            $shelf->direction_id = $request->direction_id;
+            $shelf->name = $request->name;
+            $shelf->number = $request->number;
+            $shelf->save();
 
             DB::commit();
-            return redirect()->route('teacher.library_shelf_direction.index')->with('message','Direction Add Successfully');
+            return redirect()->route('teacher.library_shelf.index')->with('message','Shelf Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -61,9 +65,9 @@ class DirectionController extends Controller
      */
     public function edit(string $id)
     {
-       // dd('hi');
-        $data["direction"]= Direction::find($id);
-        return view("user.library_management.direction.update",$data);
+        $data["shelf"]= Shelf::find($id);
+        $data['directions'] = Direction::where('status', 1)->get();
+        return view("user.library_management.shelf.update",$data);
     }
 
     /**
@@ -78,12 +82,14 @@ class DirectionController extends Controller
     ]);
     try{
         DB::beginTransaction();
-        $direction = Direction::find($id);
-        $direction->name = $request->name;
-        $direction->save();
+        $shelf = Shelf::find($id);
+        $shelf->direction_id = $request->direction_id;
+        $shelf->name = $request->name;
+        $shelf->number = $request->number;
+        $shelf->save();
 
         DB::commit();
-        return redirect()->route('teacher.library_shelf_direction.index')->with('message','Direction Update Successfully');
+        return redirect()->route('teacher.library_shelf.index')->with('message','Shelf Update Successfully');
     }catch(\Exception $e){
         DB::rollBack();
        // dd($e);
@@ -97,23 +103,23 @@ class DirectionController extends Controller
     public function destroy(Request $request)
     {
 
-        $direction =  Direction::find($request->direction_id);
-        $direction->delete();
-        return back()->with('message','Direction Deleted Successfully');
+        $shelf =  Shelf::find($request->shelf_id);
+        $shelf->delete();
+        return back()->with('message','Shelf Deleted Successfully');
     }
 
 
     public function status($id)
     {
-        $direction = Direction::find($id);
-        if($direction->status == 0)
+        $shelf = Shelf::find($id);
+        if($shelf->status == 0)
         {
-            $direction->status = 1;
-        }elseif($direction->status == 1)
+            $shelf->status = 1;
+        }elseif($shelf->status == 1)
         {
-            $direction->status = 0;
+            $shelf->status = 0;
         }
-        $direction->update();
-        return redirect()->route('admin.direction.index');
+        $shelf->update();
+        return redirect()->route('admin.shelf.index');
     }
 }
