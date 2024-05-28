@@ -89,6 +89,7 @@ Admin - All Delivery Books
                     <th class="wd-15p">From Date</th>
                     <th class="wd-15p">To Date</th>
                     <th class="wd-15p">Status</th>
+                    {{-- <th class="wd-15p">Let</th> --}}
                     {{-- <th class="wd-10p">Action</th> --}}
                   </tr>
                 </thead>
@@ -200,6 +201,7 @@ Admin - All Delivery Books
             { "data": "from_date"},
             { "data": "to_date"},
             { "data": "is_return"},
+            // { "data": "let"},
         ],
         "columnDefs": [ {
           "targets": 8,

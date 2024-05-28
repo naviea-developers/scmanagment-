@@ -37,6 +37,7 @@ class DeliveryController extends Controller
             6 => 'from_date',
             7 => 'to_date',
             8 => 'is_return',
+            // 9 => 'let',
         );
         $totalData = Borrow::count();
         $totalFiltered = $totalData;
@@ -108,8 +109,9 @@ class DeliveryController extends Controller
                 } elseif ($borrow->is_return == 1) {
                     $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Returned</a>';
                 }
-                // elseif ($borrow->to_date >= Carbon::now()) {
-                //     $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Let</a>';
+
+                // if ($borrow->to_date >= Carbon::now()) {
+                //     $nestedData['let'] .= '<a class="btn btn-sm btn-success">Let</a>';
                 // }
 
                 // $routine->examination && $routine->examination->end_date >= Carbon::now()
