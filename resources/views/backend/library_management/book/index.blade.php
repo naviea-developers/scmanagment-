@@ -86,6 +86,8 @@ Admin - All Books
                     <th class="wd-15p">Group</th>
                     <th class="wd-15p">Shelf Name</th>
                     <th class="wd-15p">Total Set</th>
+                    <th class="wd-15p">Stock In</th>
+                    <th class="wd-15p">Stock Out</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -197,11 +199,13 @@ Admin - All Books
             { "data": "group_id"},
             { "data": "shelf_id"},
             { "data": "total_set"},
+            { "data": "stock_in"},
+            { "data": "stock_out"},
             { "data": "status"},
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 7,
+          "targets": 10,
           "orderable": false
           } ]
 

@@ -26,13 +26,16 @@ class BookController extends Controller
          $columns = array(
             0 => 'id',
             1 => 'name',
-            2 => 'class_id',
-            3 => 'group_id',
-            4 => 'shelf_id',
-            5 => 'total_set',
-            6 => 'status',
-            7 => 'options',
-            8 => 'book_code',
+            2 => 'book_code',
+            3 => 'class_id',
+            4 => 'group_id',
+            5 => 'shelf_id',
+            6 => 'total_set',
+            7 => 'stock_in',
+            8 => 'stock_out',
+            9 => 'status',
+            10 => 'options',
+           
         );
         $totalData = Book::count();
         $totalFiltered = $totalData;
@@ -86,6 +89,8 @@ class BookController extends Controller
                 $nestedData['group_id'] = @$book->group->name;
                 $nestedData['shelf_id'] = @$book->shelf->name;
                 $nestedData['total_set'] = @$book->total_set;
+                $nestedData['stock_in'] = @$book->total_set - @$book->stock_out;
+                $nestedData['stock_out'] = @$book->stock_out;
  
                 $nestedData['status'] = '';
                 if ($book->status == 0) {

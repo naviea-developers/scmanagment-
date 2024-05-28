@@ -105,7 +105,7 @@ class DeliveryController extends Controller
                 if ($borrow->is_return == 0) {
                     $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Inactive</a>';
                 } elseif ($borrow->is_return == 1) {
-                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Active</a>';
+                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Returned</a>';
                 }
 
                 $data[] = $nestedData;

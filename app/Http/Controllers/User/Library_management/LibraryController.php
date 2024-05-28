@@ -50,7 +50,7 @@ class LibraryController extends Controller
 
                 if ($book) {
                     $book->stock_out += 1;
-                    $book->stock_in = $book->total_set - $book->stock_out;
+                    // $book->stock_in = $book->total_set - $book->stock_out;
                     $book->save();
 
                     $borrowItem = new BorrowItem();
@@ -68,7 +68,6 @@ class LibraryController extends Controller
     public function returnBook(Request $request)
     {
         $borrow = Borrow::findOrFail($request->borrow_id);
-
         // Update the borrow record to mark it as returned
         $borrow->is_return = 1;
         $borrow->save();
@@ -76,8 +75,8 @@ class LibraryController extends Controller
         // Decrease the total_set count for the returned books
         foreach ($borrow->borrowItems as $borrowItem) {
             $book = $borrowItem->book;
-            $book->total_set++;
-            // $book->stock_in++;
+            $book->stock_out -= 1;
+            // $book->stock_in = $book->total_set + $book->stock_out;
             $book->save();
         }
 
@@ -224,12 +223,17 @@ class LibraryController extends Controller
                 // If the book is already in the existing borrow items, remove it from the array
                 if (isset($existingBorrowItemsArray[$bookId])) {
                     unset($existingBorrowItemsArray[$bookId]);
+
                 } else {
                     // Otherwise, add it as a new borrow item
                     $borrowItem = new BorrowItem();
                     $borrowItem->borrow_id = $borrow->id;
                     $borrowItem->book_id = $bookId;
                     $borrowItem->save();
+
+                    $book = Book::find($bookId);
+                    $book->stock_out += 1;
+                    $book->save();
                 }
             }
         }
@@ -237,6 +241,10 @@ class LibraryController extends Controller
         // Any remaining items in the array are no longer selected, so remove them
         foreach ($existingBorrowItemsArray as $borrowItem) {
             BorrowItem::find($borrowItem['id'])->delete();
+           
+            $book = Book::find($borrowItem['book_id']);
+            $book->stock_out -= 1;
+            $book->save();
         }
 
         return redirect()->back()->with('message', 'Book Borrow Updated Successfully.');
