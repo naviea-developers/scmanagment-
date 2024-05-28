@@ -40,14 +40,16 @@
             @endphp
             @if (count($books) > 0)
             @foreach ($books as $book)
-
+                @php
+                    $stock_in =@$book->total_set - @$book->stock_out;
+                @endphp
             <tr>
             <td>{{ $i++ }}</td>
             <td>{{ @$book->book_code }}</td>
             <td>{{ @$book->name }}</td>
             <td>{{ @$book->class->name }}</td>
             <td>{{ @$book->total_set }}</td>
-            <td>{{ @$book->stock_in }}</td>
+            <td>{{ @$stock_in }}</td>
             <td>{{ @$book->stock_out }}</td>
             
             <td>

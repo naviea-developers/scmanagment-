@@ -78,7 +78,7 @@ class LibraryController extends Controller
 
                 if ($book) {
                     $book->stock_out += 1;
-                    $book->stock_in = $book->total_set - $book->stock_out;
+                    // $book->stock_in = $book->total_set - $book->stock_out;
                     $book->save();
 
                     $borrowItem = new BorrowItem();
@@ -104,8 +104,8 @@ class LibraryController extends Controller
         // Decrease the total_set count for the returned books
         foreach ($borrow->borrowItems as $borrowItem) {
             $book = $borrowItem->book;
-            $book->total_set++;
-            // $book->stock_in++;
+            $book->stock_out -= 1;
+            // $book->stock_in = $book->total_set + $book->stock_out;
             $book->save();
         }
 
