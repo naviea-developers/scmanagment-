@@ -70,3 +70,6 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
 });
 
+Route::get('/get/student/{id}', [DeliveryController::class, 'getStudent']);
+
+ 

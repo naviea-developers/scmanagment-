@@ -18,7 +18,7 @@ class DeliveryController extends Controller
         $data['borrows'] = Borrow::orderBy('id', 'desc')->get();
         $data['students'] = Admission::orderBy('id', 'desc')->get();
         $data['books'] = Book::orderBy('id', 'desc')->get();
-        $data['classes'] = Classe::orderBy('id', 'desc')->get();
+        $data['classes'] = Classe::orderBy('id', 'asc')->get();
         $data['shelves'] = Shelf::orderBy('id', 'desc')->get();
         return view("Backend.library_management.delivery.index",$data);
     }
@@ -26,33 +26,16 @@ class DeliveryController extends Controller
 
     function libraryDeliveryBookByAjax(Request $request){
         // dd($request->all());
-        //  $columns = array(
-        //     0 => 'id',
-        //     // 1 => 'name',
-        //     // 2 => 'class_id',
-        //     // 3 => 'group_id',
-        //     // 4 => 'shelf_id',
-        //     // 5 => 'total_set',
-        //     6 => 'status',
-        //     7 => 'options',
-        //     // 8 => 'book_code',
-        //     8 => 'student_id_number',
-        // );
-
         $columns = array(
             0 => 'id',
-            1 => 'student_id_number',
-            2 => 'name',
-            3 => 'class_id',
-            4 => 'book',
-            5 => 'from_date',
-            6 => 'to_date',
-            // 3 => 'group_id',
-            // 4 => 'shelf_id',
-            // 5 => 'total_set',
-            // 1 => 'status',
-            7 => 'options',
-            // 8 => 'book_code',
+            1 => 'borrow_id_number',
+            2 => 'student_id_number',
+            3 => 'student_name',
+            4 => 'class_id',
+            5 => 'book',
+            6 => 'from_date',
+            7 => 'to_date',
+            8 => 'is_return',
         );
         $totalData = Borrow::count();
         $totalFiltered = $totalData;
@@ -68,7 +51,7 @@ class DeliveryController extends Controller
 
         // Apply search filter if provided
         if (!empty($search)) {
-            $query->where("id", "LIKE", "%{$search}%");
+            $query->where("borrow_id_number", "LIKE", "%{$search}%");
         }
 
         // if (!empty($search)) {
@@ -84,13 +67,9 @@ class DeliveryController extends Controller
         // Apply additional filters based on the request parameters
   
 
-        // if (!empty($request->group_id)) {
-        //     $query->where("group_id", $request->group_id);
-        // }
-
-        // if (!empty($request->shelf_id)) {
-        //     $query->where("shelf_id", $request->shelf_id);
-        // }
+        if (!empty($request->student_id)) {
+            $query->where("student_id", $request->student_id);
+        }
 
         // Get the total count before pagination
         $totalFiltered = $query->count();
@@ -108,37 +87,41 @@ class DeliveryController extends Controller
             foreach($borrows as $borrow)
             {
                 $nestedData['id'] = $i++;
+                $nestedData['borrow_id_number'] = @$borrow->borrow_id_number;
                 $nestedData['student_id_number'] = @$borrow->student->student_id_number;
                 $nestedData['student_name'] = @$borrow->student->student_name;
                 $nestedData['class_id'] = @$borrow->class->name;
 
-                foreach($borrow->borrowItems as $borrowItem){
-                    $nestedData['book'] = @$borrowItem->book->name;
+                $books = [];
+                foreach ($borrow->borrowItems as $borrowItem) {
+                    $books[] = $borrowItem->book->name ?? 'N/A';
                 }
+                $nestedData['book'] = implode(', ', $books); 
 
                 $nestedData['from_date'] = @$borrow->from_date;
                 $nestedData['to_date'] = @$borrow->to_date;
-                // $nestedData['book_code'] = @$borrow->book_code;
-                // $nestedData['class_id'] = @$borrow->class->name;
-                // $nestedData['group_id'] = @$borrow->group->name;
-                // $nestedData['shelf_id'] = @$borrow->shelf->name;
-                // $nestedData['total_set'] = @$borrow->total_set;
- 
-                // $nestedData['status'] = '';
-                // if ($borrow->status == 0) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.book.status', $borrow->id).'" class="btn btn-sm btn-warning">Inactive</a>';
-                // } elseif ($borrow->status == 1) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.book.status', $borrow->id).'" class="btn btn-sm btn-success">Active</a>';
-                // }
-                $nestedData['options'] = '';
-                // Edit button
-                $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.book.edit', $borrow->id).'"><i class="fa fa-edit"></i></a>';
-                // Delete button
-                $nestedData['options'] .= ' <a href="#"  value="'.$borrow->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
-                
+
+                $nestedData['is_return'] = '';
+                if ($borrow->is_return == 0) {
+                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($borrow->is_return == 1) {
+                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Active</a>';
+                }
+
                 $data[] = $nestedData;
  
             }
+
+
+            
+
+
+
+
+
+
+
+
         }
         $json_data = array(
             "draw"            => intval($request->input('draw')),
@@ -149,4 +132,15 @@ class DeliveryController extends Controller
  
         return json_encode($json_data);
     }
+
+    //ajax get Student
+    public function getStudent($id){
+        $student = Admission::where("class_id",$id)->orderBy('id', 'asc')->get();
+        return $student;
+    }
+
+
+
+
+
 }
