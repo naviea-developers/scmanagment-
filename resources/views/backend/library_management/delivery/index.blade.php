@@ -42,6 +42,26 @@ Admin - All Delivery Books
               <div class="row">
                 
                 <div class="col-md-4">
+                  <label class=" form-control-label"><b>Student Name :</b></label>
+                  <select class="form-control select2" name="student_id" id="student">
+                      <option value="">Select Class</option>
+                      @foreach ($students as $student)
+                      <option value="{{ $student->id }}">{{ $student->student_name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label class=" form-control-label"><b>Student ID:</b></label>
+                  <select class="form-control class_id" name="class_id" id="class">
+                      <option value="">Select Class</option>
+                      @foreach ($classes as $class)
+                      <option value="{{ $class->id }}">{{ $class->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+
+                <div class="col-md-4">
                   <label class=" form-control-label"><b>Class:</b></label>
                   <select class="form-control class_id" name="class_id" id="class">
                       <option value="">Select Class</option>
