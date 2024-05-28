@@ -64,6 +64,9 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
     Route::get('library-index/', [LibraryController::class,"index"])->name('teacher.library_index');
     Route::post('library-borrow-store/', [LibraryController::class,"borrowStore"])->name('teacher.library_borrow.store');
     Route::get('library-borrow-manage/', [LibraryController::class,"borrowManage"])->name('teacher.library_borrow.manage');
+    Route::get('library-borrow-edit/{id}', [LibraryController::class,"borrowEdit"])->name('teacher.library_borrow.edit');
+    Route::post('library-borrow-update/{id}', [LibraryController::class,"borrowUpdate"])->name('teacher.library_borrow.update');
+    Route::post('library-borrow-delete/', [LibraryController::class,"borrowDelete"])->name('teacher.library_borrow.delete');
 
 });
 

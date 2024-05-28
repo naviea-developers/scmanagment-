@@ -7,7 +7,7 @@
 
 <div class="right_section">
     <div>
-        <h3>Manage Borrow Books</h3>
+        <h3 style="color: black">Manage Borrow Books</h3>
     </div>
 </div>
 
@@ -17,12 +17,10 @@
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
-            {{-- <th scope="col">Book ID</th> --}}
             <th scope="col">Book Name</th>
             <th scope="col">Student ID</th>
             <th scope="col">Student</th>
             <th scope="col">Date</th>
-            {{-- <th scope="col">Discount</th> --}}
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -42,17 +40,14 @@
                         {{ @$borrowItem->book->book_code }}-{{ @$borrowItem->book->name }}
                     </li>
                 </ul>
-                {{-- <td>{{ @$borrow->book->name }}</td> --}}
                 @endforeach
             </td>
             <td>{{ @$borrow->student->student_id_number }}</td>
             <td>{{ @$borrow->student->student_name }}</td>
-            {{-- <td>{{ @$borrow->student->student_name }}</td>
-            <td>{{ @$borrow->student->student_name }}</td> --}}
             <td>{{ \Carbon\Carbon::parse($borrow->form_date)->format('j M Y') }} - {{ \Carbon\Carbon::parse($borrow->to_date)->format('j M Y') }}</td>
 
             <td>
-                <a href="{{ route('instructor.edit_course', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
+                <a href="{{ route('teacher.library_borrow.edit', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
                 {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
                 &nbsp;
@@ -66,14 +61,10 @@
                 <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content tx-size-sm">
                     <div class="modal-body tx-center pd-y-20 pd-x-20">
-                        <form action="{{ route('instructor.delete_course') }}" method="post">
+                        <form action="{{ route('teacher.library_borrow.delete') }}" method="post">
                             @csrf
-                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> --}}
-                            {{-- <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i> --}}
                             <h4 class="tx-semibold mg-b-20 mt-2 " >Are you sure! you want to delete this?</h4>
-                            <input type="hidden" value="{{ $borrow->id }}" name="course_id" id="course_id">
+                            <input type="hidden" value="{{ $borrow->id }}" name="borrow_id" id="course_id">
                             <button type="submit"  class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">
                                 yes
                             </button>
