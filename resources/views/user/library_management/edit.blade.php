@@ -28,7 +28,7 @@
                     <h5 class="text-center">Student Information</h5>
                     <hr>
                     <label class="mt-3">Student ID</label>
-                    <input type="number" id="student-id-input" name="student_id_number" value="{{ @$borrow->student->student_id_number }}" class="form-control" />
+                    <input type="number" id="student-id-input" style="width: 100%"  name="student_id_number" value="{{ @$borrow->student->student_id_number }}" class="form-control" />
 
                     <label class="mt-3">Class</label>
                     <div class="mg-t-10 mg-sm-t-0">
@@ -61,11 +61,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="mt-3">From Date</label>
-                                <input type="date" value="{{ $borrow->from_date }}" name="from_date" class="form-control" required />
+                                <input type="date" style="width: 100%" value="{{ $borrow->from_date }}" name="from_date" class="form-control" required />
                             </div>
                             <div class="col-md-6">
                                 <label class="mt-3">To Date</label>
-                                <input type="date" value="{{ $borrow->to_date }}" name="to_date" class="form-control" required />
+                                <input type="date" style="width: 100%" value="{{ $borrow->to_date }}" name="to_date" class="form-control" required />
                             </div>
                         </div>
                     </div>

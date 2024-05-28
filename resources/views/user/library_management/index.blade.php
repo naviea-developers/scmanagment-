@@ -1,6 +1,6 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Library')
+@section('title','- Create Borrow')
 <link rel="stylesheet" href="{{asset('public/backend')}}/css/suneditor.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -12,7 +12,7 @@
 @section('main_content')
     <div class="right_section">
         <div>
-            <h4 style="color: black">Library</h4>
+            <h4 style="color: black">Create Borrow</h4>
         </div>
     </div>
     <div class="passwodBox mb-3" style="background-color: var(--seller_frontend_color); color:white">
@@ -25,11 +25,12 @@
                         <h5 class="text-center">Student Information</h5>
                         <hr>
                         <label class="mt-3">Student ID</label>
-                        <input type="number" id="student-id-input" name="" class="form-control"/>
+                        <input type="number" id="student-id-input" style="width: 100%" name="" class="form-control"/>
 
                         <label class="mt-3">Class</label>
                         <div class="mg-t-10 mg-sm-t-0">
-                            <select id="class-select" name="class_id" class="form-control select2 form-select">
+                            <select id="class-select" name="class_id" class="form-control form-select">
+                            {{-- <select id="class-select" name="class_id" class="form-control select2 form-select"> --}}
                                 <option value=""> Select Class</option>
                                 @foreach ($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -57,11 +58,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="mt-3">From Date</label>
-                                    <input type="date" name="from_date" class="form-control" required/>
+                                    <input type="date" style="width: 100%" name="from_date" class="form-control" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="mt-3">To Date</label>
-                                    <input type="date" name="to_date" class="form-control" required/>
+                                    <input type="date" style="width: 100%" name="to_date" class="form-control" required/>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                                 <select id="book-select" name="book_id" class="form-control">
                                     <option value=""> Select Book</option>
                                     @foreach ($books as $book)
-                                    <option value="{{ $book->id }}" data-book-code="{{ $book->book_code }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }} - ({{ $book->total_set }})</option>
+                                    <option value="{{ $book->id }}" data-book-code="{{ $book->book_code }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
