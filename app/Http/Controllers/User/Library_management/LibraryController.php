@@ -29,7 +29,7 @@ class LibraryController extends Controller
     public function borrowStore(Request $request)
     {
         $borrow = new Borrow();
-        $borrow->student_id_number = $request->student_id_number;
+        // $borrow->student_id_number = $request->student_id_number;
         $borrow->class_id = $request->class_id;
         $borrow->student_id = $request->student_id;
         $borrow->from_date = $request->from_date;
@@ -52,5 +52,15 @@ class LibraryController extends Controller
     {
         $data['borrows'] = Borrow::all();
         return view('user.library_management.manage', $data);
+    }
+
+    public function borrowDelete(Request $request)
+    {
+        $borrow = Borrow::find($request->borrow_id);
+        foreach($borrow->borrowItems as $item){
+            $item->delete();
+        }
+      $borrow->delete();
+      return redirect()->back()->with('message', 'Borrow Item Delete Successfully, Thank you.');
     }
 }
