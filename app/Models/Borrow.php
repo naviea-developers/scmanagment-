@@ -15,9 +15,6 @@ class Borrow extends Model
     public function borrowItems(){
         return $this->hasMany(BorrowItem::class,"borrow_id",'id');
     }
-    // public function borrowItem(){
-    //     return $this->hasMany(BorrowItem::class,"book_id",'id');
-    // }
 
     public function class(){
         return $this->belongsTo(Classe::class,"class_id",'id');

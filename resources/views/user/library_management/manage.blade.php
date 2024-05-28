@@ -17,10 +17,12 @@
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
+            <th scope="col">Borrow ID</th>
             <th scope="col">Book Name</th>
             <th scope="col">Student ID</th>
             <th scope="col">Student</th>
             <th scope="col">Date</th>
+            <th scope="col">Return</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -33,6 +35,7 @@
 
             <tr>
             <td>{{ $i++ }}</td>
+            <td>{{ @$borrow->borrow_id_number }}</td>
             <td>
                 @foreach ($borrow->borrowItems as $borrowItem)
                 <ul>
@@ -45,14 +48,27 @@
             <td>{{ @$borrow->student->student_id_number }}</td>
             <td>{{ @$borrow->student->student_name }}</td>
             <td>{{ \Carbon\Carbon::parse($borrow->form_date)->format('j M Y') }} - {{ \Carbon\Carbon::parse($borrow->to_date)->format('j M Y') }}</td>
-
             <td>
+                @if($borrow->is_return == 0)
+                <form method="POST" action="{{ route('teacher.library_borrow.return') }}">
+                    @csrf
+                    <input type="hidden" name="borrow_id" value="{{ $borrow->id }}">
+                    <button type="submit" class="btn btn-info">Return</button>
+                </form>
+                @else
+                    <p>Returned</p>
+                @endif
+            </td>
+            <td>
+                @if($borrow->is_return == 0)
                 <a href="{{ route('teacher.library_borrow.edit', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
                 {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
                 &nbsp;
                 <button class="btn text-danger delete-button" courseId="{{ $borrow->id }}"><i class="icon fa fa-trash tx-28"></i></button>
-
+                @else
+                <button class="btn text-danger delete-button" courseId="{{ $borrow->id }}"><i class="icon fa fa-trash tx-28"></i></button>
+                @endif
 
 
             <!--_-- ########### Start Delete Category MODAL ############---->

@@ -63,6 +63,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
     //Library Manage from teacher Profile
     Route::get('library-index/', [LibraryController::class,"index"])->name('teacher.library_index');
     Route::post('library-borrow-store/', [LibraryController::class,"borrowStore"])->name('teacher.library_borrow.store');
+    Route::post('library-borrow-return', [LibraryController::class,"returnBook"])->name('teacher.library_borrow.return');
     Route::get('library-borrow-manage/', [LibraryController::class,"borrowManage"])->name('teacher.library_borrow.manage');
     Route::get('library-borrow-edit/{id}', [LibraryController::class,"borrowEdit"])->name('teacher.library_borrow.edit');
     Route::post('library-borrow-update/{id}', [LibraryController::class,"borrowUpdate"])->name('teacher.library_borrow.update');

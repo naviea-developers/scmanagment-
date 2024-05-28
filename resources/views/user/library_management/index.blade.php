@@ -72,7 +72,7 @@
                                 <select id="book-select" name="book_id" class="form-control">
                                     <option value=""> Select Book</option>
                                     @foreach ($books as $book)
-                                    <option value="{{ $book->id }}" data-book-code="{{ $book->book_code }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }}</option>
+                                    <option value="{{ $book->id }}" data-book-code="{{ $book->book_code }}"  data-class-id="{{ $book->class_id }}">{{ $book->name }} - ({{ $book->total_set }})</option>
                                     @endforeach
                                 </select>
                             </div>
