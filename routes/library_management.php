@@ -103,3 +103,8 @@ Route::prefix('user')->middleware(['userCheck'])->group( function () {
      Route::post('library-shelf-delete/', [Library_managementBookController::class,"destroy"])->name('teacher.library_shelf.delete');
     //  Route::get('/library-shelf-status/{id}', [Library_managementBookController::class, 'status'])->name('teacher.library_shelf.status');
 });
+
+
+Route::get('/get/student/{id}', [DeliveryController::class, 'getStudent']);
+
+ 

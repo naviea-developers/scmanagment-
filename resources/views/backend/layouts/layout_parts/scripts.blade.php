@@ -286,6 +286,7 @@
         getSection(id,"section");
         getSubject(id,"subject");
         getGroup(id,"group");
+        getStudent(id,"student");
     });
 
     function getSection(id,outid){
@@ -335,12 +336,27 @@
               res.data.forEach(element => {
                   html += "<option value=" + element.id + ">" + element.name + "</option>"
               });
-
-
               $('#'+outid).append(html);
               $('#'+outid).val("").change();
           });
     }
+
+    function getStudent(id,outid){
+      let url = '{{ url("get/student/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select student</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.student_name + "( Roll-"+element.roll_number+")"+ "</option>"
+              });
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+    }
+
 
   
 

@@ -1,9 +1,14 @@
 @section('title')
 Admin - All Delivery Books
 @endsection
-
 @extends('Backend.layouts.layouts')
 
+@section('style')
+<style>
+  .select2-container--default .select2-selection--single {
+      height: 35px;}
+</style>
+@endsection
 @section('main_contain')
 
     <!-- ########## START: MAIN PANEL ########## -->
@@ -40,52 +45,29 @@ Admin - All Delivery Books
 
             <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
               <div class="row">
-                
-                <div class="col-md-4">
+          
+                <div class="col-md-6">
+                  <label class=" form-control-label"><b>Class :</b></label>
+                  <select class="form-control class_id select2" name="class_id" id="class">
+                      <option value="">Select Class</option>
+                      @foreach ($classes as $class)
+                      <option value="{{ $class->id }}">{{ $class->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+
+                <div class="col-md-6">
                   <label class=" form-control-label"><b>Student Name :</b></label>
-                  <select class="form-control select2" name="student_id" id="student">
+                  <select class="form-control select2 student_id" name="student_id" id="student">
                       <option value="">Select Class</option>
-                      @foreach ($students as $student)
-                      <option value="{{ $student->id }}">{{ $student->student_name }}</option>
-                      @endforeach
+                      {{-- @foreach ($students as $student)
+                        <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}" data-student-id-number="{{ $student->student_id_number }}">
+                          {{ $student->student_name }} - ({{ $student->class->name }} - Roll {{ $student->roll_number }})
+                      </option> --}}
+                      {{-- <option value="{{ $student->id }}">{{ $student->student_name }}</option> --}}
+                      {{-- @endforeach --}}
                   </select>
                 </div>
-
-                <div class="col-md-4">
-                  <label class=" form-control-label"><b>Student ID:</b></label>
-                  <select class="form-control class_id" name="class_id" id="class">
-                      <option value="">Select Class</option>
-                      @foreach ($classes as $class)
-                      <option value="{{ $class->id }}">{{ $class->name }}</option>
-                      @endforeach
-                  </select>
-                </div>
-
-                <div class="col-md-4">
-                  <label class=" form-control-label"><b>Class:</b></label>
-                  <select class="form-control class_id" name="class_id" id="class">
-                      <option value="">Select Class</option>
-                      @foreach ($classes as $class)
-                      <option value="{{ $class->id }}">{{ $class->name }}</option>
-                      @endforeach
-                  </select>
-                </div>
-                {{-- <div class="col-md-4">
-                  <label class=" form-control-label"><b>Group:</b></label>
-                  <select class="form-control group_id" name="group_id" id="group">
-                      <option value="">Select Group</option>
-                  </select>
-                </div> --}}
-
-                {{-- <div class="col-md-4">
-                  <label class=" form-control-label"><b>Shelf:</b></label>
-                  <select class="form-control" name="shelf_id" id="shelf">
-                    <option value="">Select Shelf</option>
-                    @foreach ($shelves as $shelf)
-                    <option value="{{ $shelf->id }}">{{ $shelf->name }}</option>
-                    @endforeach
-                  </select>
-                </div> --}}
               </div>
             </div>
 
@@ -99,19 +81,15 @@ Admin - All Delivery Books
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
+                    <th class="wd-10p">Borrow Code</th>
                     <th class="wd-15p">Student ID</th>
                     <th class="wd-15p">Student Name</th>
                     <th class="wd-15p">Class</th>
                     <th class="wd-15p">Book</th>
                     <th class="wd-15p">From Date</th>
                     <th class="wd-15p">To Date</th>
-                    {{-- <th class="wd-15p">Book Name</th> --}}
-                    {{-- <th class="wd-15p">Book Code</th> --}}
-                    {{-- <th class="wd-15p">Group</th>
-                    <th class="wd-15p">Shelf Name</th>
-                    <th class="wd-15p">Total Set</th> --}}
-                    {{-- <th class="wd-15p">Status</th> --}}
-                    <th class="wd-10p">Action</th>
+                    <th class="wd-15p">Status</th>
+                    {{-- <th class="wd-10p">Action</th> --}}
                   </tr>
                 </thead>
                 <tbody>
@@ -207,36 +185,29 @@ Admin - All Delivery Books
             "type": "POST",
             data: function(data){
               data.class_id= $('.class_id').val(),
-              // data.group_id= $('.group_id').val(),
-              // data.shelf_id= $('#shelf').val(),
+              data.student_id= $('.student_id').val(),
               data._token = "{{ csrf_token() }}";
 
             },
         },
         "columns": [
             { "data": "id"},
+            { "data": "borrow_id_number"},
             { "data": "student_id_number"},
             { "data": "student_name"},
             { "data": "class_id"},
             { "data": "book"},
             { "data": "from_date"},
             { "data": "to_date"},
-            // { "data": "book_code"},
-
-            // { "data": "group_id"},
-            // { "data": "shelf_id"},
-            // { "data": "total_set"},
-            // { "data": "status"},
-            { "data": "options"},
+            { "data": "is_return"},
         ],
         "columnDefs": [ {
-          "targets": 7,
+          "targets": 8,
           "orderable": false
           } ]
 
     });
-    // $('.class_id, .group_id, #shelf').change(function(){
-      $('.class_id').change(function(){
+    $('.class_id, .student_id').change(function(){
       console.log(this);
       console.log(s_data);
       s_data.draw();
