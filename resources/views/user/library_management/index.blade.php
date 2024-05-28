@@ -43,7 +43,7 @@
                                 <option value=""> Select Student</option>
                                 @foreach ($students as $student)
                                 <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}" data-student-id-number="{{ $student->student_id_number }}">
-                                    {{ $student->student_name }} - {{ $student->class->name }} - {{ $student->roll_number }}
+                                    {{ $student->student_name }} - ({{ $student->class->name }} - Roll {{ $student->roll_number }})
                                 </option>
                                 @endforeach
                             </select>
@@ -103,9 +103,10 @@
 
 
 @section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{asset('public/backend')}}/js/suneditor.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
 $(document).ready(function() {

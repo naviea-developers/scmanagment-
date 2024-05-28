@@ -47,7 +47,7 @@
             <td>{{ \Carbon\Carbon::parse($borrow->form_date)->format('j M Y') }} - {{ \Carbon\Carbon::parse($borrow->to_date)->format('j M Y') }}</td>
 
             <td>
-                <a href="{{ route('instructor.edit_course', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
+                <a href="{{ route('teacher.library_borrow.edit', $borrow->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
                 {{-- <a href="{{ url('course/view/'.$course->slug) }}"><i class="fa-duotone fa fa-eye"></i></a> --}}
                 &nbsp;
