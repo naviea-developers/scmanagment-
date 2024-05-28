@@ -56,6 +56,7 @@ class LibraryController extends Controller
 
     public function borrowStore(Request $request)
     {
+        // dd('hi');
         $borrow = new Borrow();
         $borrow->class_id = $request->class_id;
         $borrow->student_id = $request->student_id;
@@ -68,14 +69,13 @@ class LibraryController extends Controller
 
         if($request->book_id){
             foreach($request->book_id as $value){
-                // Decrement the total_set column for each borrowed book
                 $book = Book::find($value);
-                if ($book && $book->total_set > 0) {
-                    $book->total_set--;
-                    // $book->stock_out--;
+
+                if ($book) {
+                    $book->stock_out += 1;
+                    $book->stock_in = $book->total_set - $book->stock_out;
                     $book->save();
 
-                    // Create a record for the borrowed book
                     $borrowItem = new BorrowItem();
                     $borrowItem->borrow_id = $borrow->id;
                     $borrowItem->book_id = $value;
