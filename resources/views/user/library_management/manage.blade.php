@@ -109,30 +109,6 @@
 
 
 
-  
-
-            <!--_-- ########### Start Delete Category MODAL ############---->
-
-            {{-- <div id="delete-modal"  class="modal">
-                <div class="modal-dialog modal-dialog-top" role="document">
-                <div class="modal-content tx-size-sm">
-                    <div class="modal-body tx-center pd-y-20 pd-x-20">
-                        <form action="{{ route('teacher.library_borrow.delete') }}" method="post">
-                            @csrf
-                            <h4 class="tx-semibold mg-b-20 mt-2 " >Are you sure! you want to delete this?</h4>
-                            <input type="hidden" name="borrow_id" id="borrow_id">
-                            <button type="submit"  class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-yes">
-                                yes
-                            </button>
-                            <button type="button"  class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" id="confirm-no">
-                                No
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                </div>
-            </div> --}}
-
 
             <div id="delete-modal" class="modal">
                 <div class="modal-dialog modal-dialog-top" role="document">
@@ -162,32 +138,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
-<script>
 
-    // $(document).ready(function () {
-    //     $(document).on("click", "#dataDeleteModal", function () {
-    //         var id = $(this).val();
-    //         $("#delete-modal").modal("show");
-    //         $("#borrow_id").val(id);
-    //     });
-    // });
-
-
-    // $(document).ready(function() {
-    // $(".delete-button").click(function() {
-    //     $("#delete-modal").show();
-    //     $("#course_id").val($(this).attr('courseId'))
-
-    // });
-    // $("#confirm-no").click(function() {
-    //     $("#delete-modal").hide();
-    // });
-    // $("#confirm-yes").click(function() {
-    //     $("#delete-modal").hide();
-    // });
-    // });
-
-</script>
 
 
 <script>

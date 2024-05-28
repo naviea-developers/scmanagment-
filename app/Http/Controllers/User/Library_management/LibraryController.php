@@ -159,6 +159,13 @@ class LibraryController extends Controller
                     $nestedData['is_return'] .= '<p>Returned</p>';
                 }
 
+                // $nestedData['is_return'] = '';
+                // if ($borrow->is_return == 0) {
+                //     $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Pending</a>';
+                // } elseif ($borrow->is_return == 1) {
+                //     $nestedData['status'] .= '<a class="btn btn-sm btn-success">Returned</a>';
+                // }
+
 
                 $nestedData['options'] = '';
                 if ($borrow->is_return == 0) {
