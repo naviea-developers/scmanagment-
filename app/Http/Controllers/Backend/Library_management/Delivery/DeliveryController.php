@@ -71,10 +71,18 @@ class DeliveryController extends Controller
             $query->where("id", "LIKE", "%{$search}%");
         }
 
-        // Apply additional filters based on the request parameters
+        // if (!empty($search)) {
+        //     $query ->join('admissions', 'borrows.student_id', '=', 'admissions.id')
+        //             ->where('admissions.student_id_number', 'LIKE', "%{$search}%")
+        //             ->select('borrows.*'); 
+        // } 
+
         if (!empty($request->class_id)) {
             $query->where("class_id", $request->class_id);
         }
+
+        // Apply additional filters based on the request parameters
+  
 
         // if (!empty($request->group_id)) {
         //     $query->where("group_id", $request->group_id);
