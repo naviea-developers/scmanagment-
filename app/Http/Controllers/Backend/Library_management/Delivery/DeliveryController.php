@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Library_management\Delivery;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admission;
 use App\Models\Book;
 use App\Models\Borrow;
 use App\Models\Classe;
@@ -15,6 +16,7 @@ class DeliveryController extends Controller
     public function index()
     {
         $data['borrows'] = Borrow::orderBy('id', 'desc')->get();
+        $data['students'] = Admission::orderBy('id', 'desc')->get();
         $data['books'] = Book::orderBy('id', 'desc')->get();
         $data['classes'] = Classe::orderBy('id', 'desc')->get();
         $data['shelves'] = Shelf::orderBy('id', 'desc')->get();
@@ -24,17 +26,33 @@ class DeliveryController extends Controller
 
     function libraryDeliveryBookByAjax(Request $request){
         // dd($request->all());
-         $columns = array(
+        //  $columns = array(
+        //     0 => 'id',
+        //     // 1 => 'name',
+        //     // 2 => 'class_id',
+        //     // 3 => 'group_id',
+        //     // 4 => 'shelf_id',
+        //     // 5 => 'total_set',
+        //     6 => 'status',
+        //     7 => 'options',
+        //     // 8 => 'book_code',
+        //     8 => 'student_id_number',
+        // );
+
+        $columns = array(
             0 => 'id',
-            // 1 => 'name',
-            // 2 => 'class_id',
+            1 => 'student_id_number',
+            2 => 'name',
+            3 => 'class_id',
+            4 => 'book',
+            5 => 'from_date',
+            6 => 'to_date',
             // 3 => 'group_id',
             // 4 => 'shelf_id',
             // 5 => 'total_set',
-            6 => 'status',
+            // 1 => 'status',
             7 => 'options',
             // 8 => 'book_code',
-            8 => 'student_id_number',
         );
         $totalData = Borrow::count();
         $totalFiltered = $totalData;
@@ -49,9 +67,9 @@ class DeliveryController extends Controller
         $query = Borrow::query();
 
         // Apply search filter if provided
-        // if (!empty($search)) {
-        //     $query->where("name", "LIKE", "%{$search}%");
-        // }
+        if (!empty($search)) {
+            $query->where("id", "LIKE", "%{$search}%");
+        }
 
         // Apply additional filters based on the request parameters
         if (!empty($request->class_id)) {
@@ -83,7 +101,15 @@ class DeliveryController extends Controller
             {
                 $nestedData['id'] = $i++;
                 $nestedData['student_id_number'] = @$borrow->student->student_id_number;
-                // $nestedData['name'] = @$borrow->class->name;
+                $nestedData['student_name'] = @$borrow->student->student_name;
+                $nestedData['class_id'] = @$borrow->class->name;
+
+                foreach($borrow->borrowItems as $borrowItem){
+                    $nestedData['book'] = @$borrowItem->book->name;
+                }
+
+                $nestedData['from_date'] = @$borrow->from_date;
+                $nestedData['to_date'] = @$borrow->to_date;
                 // $nestedData['book_code'] = @$borrow->book_code;
                 // $nestedData['class_id'] = @$borrow->class->name;
                 // $nestedData['group_id'] = @$borrow->group->name;
