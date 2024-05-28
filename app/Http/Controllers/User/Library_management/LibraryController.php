@@ -26,10 +26,37 @@ class LibraryController extends Controller
         return view('user.library_management.index', $data);
     }
 
+    // public function borrowStore(Request $request)
+    // {
+    //     $borrow = new Borrow();
+    //     // $borrow->student_id_number = $request->student_id_number;
+    //     $borrow->class_id = $request->class_id;
+    //     $borrow->student_id = $request->student_id;
+    //     $borrow->from_date = $request->from_date;
+    //     $borrow->to_date = $request->to_date;
+    //     $borrow->save();
+    //     $todayDate = date('ymd');
+    //     $borrow->borrow_id_number = $todayDate.str_pad($borrow->id,STR_PAD_LEFT);
+    //     $borrow->save();
+
+    //     if($request->book_id){
+    //        foreach($request->book_id as $value){
+    //         $borrowItem = new BorrowItem();
+    //         $borrowItem->borrow_id = $borrow->id;
+    //         $borrowItem->book_id = $value;
+    //         $borrowItem->save();
+    //        }
+    //     }
+
+    //     return redirect()->back()->with('message', 'Book Borrow Successfully.');
+    // }
+
+
+
+
     public function borrowStore(Request $request)
     {
         $borrow = new Borrow();
-        // $borrow->student_id_number = $request->student_id_number;
         $borrow->class_id = $request->class_id;
         $borrow->student_id = $request->student_id;
         $borrow->from_date = $request->from_date;
@@ -40,16 +67,47 @@ class LibraryController extends Controller
         $borrow->save();
 
         if($request->book_id){
-           foreach($request->book_id as $value){
-            $borrowItem = new BorrowItem();
-            $borrowItem->borrow_id = $borrow->id;
-            $borrowItem->book_id = $value;
-            $borrowItem->save();
-           }
+            foreach($request->book_id as $value){
+                // Decrement the total_set column for each borrowed book
+                $book = Book::find($value);
+                if ($book && $book->total_set > 0) {
+                    $book->total_set--;
+                    // $book->stock_out--;
+                    $book->save();
+
+                    // Create a record for the borrowed book
+                    $borrowItem = new BorrowItem();
+                    $borrowItem->borrow_id = $borrow->id;
+                    $borrowItem->book_id = $value;
+                    $borrowItem->save();
+                }
+            }
         }
 
-        return redirect()->back()->with('message', 'Book Borrow Successfully.');
+        return redirect()->back()->with('message', 'Books Borrowed Successfully.');
     }
+
+
+    public function returnBook(Request $request)
+    {
+        $borrow = Borrow::findOrFail($request->borrow_id);
+
+        // Update the borrow record to mark it as returned
+        $borrow->is_return = 1;
+        $borrow->save();
+
+        // Decrease the total_set count for the returned books
+        foreach ($borrow->borrowItems as $borrowItem) {
+            $book = $borrowItem->book;
+            $book->total_set++;
+            // $book->stock_in++;
+            $book->save();
+        }
+
+        return redirect()->back()->with('message', 'Book Returned Successfully.');
+    }
+
+
 
     public function borrowManage()
     {
