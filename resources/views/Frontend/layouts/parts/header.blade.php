@@ -353,6 +353,8 @@
                                                         Affiliate 
                                                        @elseif (auth()->user()->type=='7')
                                                         Consultant
+                                                       @elseif (auth()->user()->type=='8')
+                                                        Staff
                                                       @endif
                                                         {{-- Student Account --}}
                                                     </p>
@@ -394,11 +396,11 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-item ml-md-3 signup-li">
+                                        {{-- <li class="nav-item ml-md-3 signup-li">
                                             <a href="{{ route('frontend.register') }}" class="btn-join btn-join-alabin btn fw-bold text-dark-cerulean text-uppercase d-flex align-items-center" style="background-color:var(--button2_color)!important ; color:var(--button2_text_color)">
                                                 SIGN UP
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     @endif
 
                                 </ul>

@@ -375,7 +375,7 @@
                             </div>
 
 
-                            @if (auth()->user()->type == 2)
+                            @if (auth()->user()->type == 2 || auth()->user()->type == 8)
                             <hr>
                             <div class="right_section">
                                 <div>
@@ -408,7 +408,7 @@
                             @if (auth()->user()->type == 1)
                                 
                             {{-- Teacher --}}
-                            @elseif (auth()->user()->type == 2)
+                            @elseif (auth()->user()->type == 2 || auth()->user()->type == 8)
                             <hr>
                             <div class="right_section">
                                 <div>

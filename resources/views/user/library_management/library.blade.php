@@ -47,7 +47,10 @@
             <td>{{ @$book->name }}</td>
             <td>{{ @$book->class->name }}</td>
             <td>{{ @$book->total_set }}</td>
-            <td>{{ @$stock_in }}</td>
+            @php
+                $stock_in = $book->total_set - $book->stock_out;
+            @endphp
+            <td>{{ $stock_in }}</td>
             <td>{{ @$book->stock_out }}</td>
             
             <td>

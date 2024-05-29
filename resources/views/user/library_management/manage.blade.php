@@ -53,6 +53,7 @@
             <th scope="col">Student</th>
             <th scope="col">From Date</th>
             <th scope="col">To Date</th>
+            <th scope="col">Return Status</th>
             <th scope="col">Return</th>
             <th scope="col">Action</th>
         </tr>
@@ -187,11 +188,12 @@
             { "data": "student_id"},
             { "data": "from_date"},
             { "data": "to_date"},
+            { "data": "status"},
             { "data": "is_return"},
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 8,
+          "targets": 9,
           "orderable": false
           } ]
 

@@ -23,6 +23,20 @@ class AcademicYearController extends Controller
         return view("Backend.school_management.academic_year.create");
     }
 
+
+    public function updateCurrent(Request $request)
+    {
+        $yearId = $request->input('year_id');
+        AcademicYear::query()->update(['is_current' => 0]);
+        $year = AcademicYear::find($yearId);
+        if ($year) {
+            $year->is_current = 1;
+            $year->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -35,8 +49,10 @@ class AcademicYearController extends Controller
         ]);
         try{
             DB::beginTransaction();
+            AcademicYear::query()->update(['is_current' => 0]);
             $year = New AcademicYear;
             $year->year = $request->year;
+            $year->is_current = 1;
             $year->save();
 
             DB::commit();

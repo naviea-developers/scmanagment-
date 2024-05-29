@@ -55,18 +55,7 @@ use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesCo
 //-----------------------------Result Route End---------------------------// 
 
 
-//-----------------------------session Route start---------------------------//
-Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
-    Route::get('index', [SessionController::class,"index"])->name('admin.session.index');
-    Route::get('create', [SessionController::class,"create"])->name('admin.session.create');
-    Route::post('store', [SessionController::class,"store"])->name('admin.session.store');
-    Route::get('edit/{id}', [SessionController::class,"edit"])->name('admin.session.edit');
-    Route::post('update/{id}', [SessionController::class,"update"])->name('admin.session.update');
-    Route::post('delete', [SessionController::class,"destroy"])->name('admin.session.delete');
-    Route::get('/status/{id}', [SessionController::class, 'status'])->name('admin.session.status');
-});
-//-----------------------------session Route End---------------------------//
+
 
 
 

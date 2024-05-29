@@ -154,7 +154,7 @@ class UserLoginController extends Controller
         if($user)
         {
             $remember_me = $request->has('remember_me') ? true : false;
-            if($user->type == 1 || $user->type == 2 || $user->type == 3 || $user->type == 4 || $user->type == 5 || $user->type == 6 || $user->type == 7){
+            if($user->type == 1 || $user->type == 2 || $user->type == 3 || $user->type == 4 || $user->type == 5 || $user->type == 6 || $user->type == 7 || $user->type == 8){
                 if(auth()->attempt(['email'=>$request->email,'password'=>$request->password],$remember_me)){
                     $UserIP=$_SERVER['REMOTE_ADDR'];
                     $browser_address=$_SERVER['HTTP_USER_AGENT'];
