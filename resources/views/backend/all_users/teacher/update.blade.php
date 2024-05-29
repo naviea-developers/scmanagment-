@@ -424,6 +424,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label">Is Librarian?</label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input @if ( $teacher->is_librarian == 1) checked @endif type="checkbox" name="is_librarian" value="1">
+                                </div>
+                             </div>
+
 
 
 

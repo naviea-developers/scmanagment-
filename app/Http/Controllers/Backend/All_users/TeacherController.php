@@ -47,6 +47,7 @@ class TeacherController extends Controller
             // $user->course_id = $request->course_id;
             $user->name = $request->name;
             $user->designation_id = $request->designation_id;
+            $user->is_librarian = $request->is_librarian ?? 0;
             $user->teacher_type = $request->teacher_type;
             $user->mobile = $request->mobile;
             $user->email = $request->email;
@@ -155,6 +156,7 @@ class TeacherController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->designation_id = $request->designation_id;
+        $user->is_librarian = $request->is_librarian ?? 0;
         $user->teacher_type = $request->teacher_type;
         $user->mobile = $request->mobile;
         $user->email = $request->email;
