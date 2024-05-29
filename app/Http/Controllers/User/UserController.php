@@ -798,6 +798,21 @@ class UserController extends Controller
         return view('user.exam_routine.view_exam_routine_print',$data);
     }
 
+    public function admitCardPrint(){
+        $user = auth()->user();
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
+                                ->where('section_id', $admission->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
+        }
+        return view('user.exam_routine.admit_card_print',$data);
+    }
+
     public function getAssignTeacherSubject($id){
         $classes = SubjectTeacherAssent::where("class_id",$id)->with('class')->get();
         return $classes;

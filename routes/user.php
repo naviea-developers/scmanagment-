@@ -155,6 +155,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
          //exam routine for student
         Route::get('/exam-routine', [UserController::class, 'examRoutine'])->name('exam_routine');
         Route::get('print-user-exam-routine', [UserController::class,"examPrint"])->name('user.exam_routine.print');
+        Route::get('student/admit_card', [UserController::class,"admitCardPrint"])->name('user.admit_card.print');
 
         //class routine for Teacher
         Route::get('/teacher-class-routine', [UserController::class, 'teacherClassRoutine'])->name('teacher.class_routine');

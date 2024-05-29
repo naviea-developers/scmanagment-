@@ -48,8 +48,12 @@
 
                   <div class="float-right">
                       <a href="{{ route('user.exam_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                          <i class="fas fa-print text-primary"></i> Print
+                          <i class="fas fa-print text-primary"></i>Exam Routine Print
                       </a>
+
+                      <a href="{{ route('user.admit_card.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                        <i class="fas fa-print text-primary"></i> Admit Card Print
+                    </a>
                   </div>
 
                   <div class="school-name">

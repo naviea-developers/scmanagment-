@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController
 use App\Http\Controllers\Backend\School_management\Result\ExamResultController;
 use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
 use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
+use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -283,6 +284,18 @@ Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::post('update/{id}', [BatchController::class,"update"])->name('admin.batch.update');
     Route::get('delete/{id}', [BatchController::class,"destroy"])->name('admin.batch.delete');
     Route::get('/status/{id}', [BatchController::class, 'status'])->name('admin.batch.status');
+});
+
+//Add Batch for admin
+Route::prefix('admit')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [AdmitController::class,"index"])->name('admin.admit.index');
+    Route::get('create', [AdmitController::class,"create"])->name('admin.admit.create');
+    Route::post('store', [AdmitController::class,"store"])->name('admin.admit.store');
+    Route::get('details/{id}', [AdmitController::class,"details"])->name('admin.admit.details');
+    Route::get('edit/{id}', [AdmitController::class,"edit"])->name('admin.admit.edit');
+    Route::post('update/{id}', [AdmitController::class,"update"])->name('admin.admit.update');
+    Route::get('delete/{id}', [AdmitController::class,"destroy"])->name('admin.admit.delete');
+    Route::get('/status/{id}', [AdmitController::class, 'status'])->name('admin.admit.status');
 });
 
 //Add Admission for admin

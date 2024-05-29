@@ -124,6 +124,7 @@
             || Route::is('admin.fee.create') ||  Route::is('admin.fee.index') || Route::is('admin.fee.edit')
             || Route::is('admin.fee_management.create') ||  Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit')
             || Route::is('admin.admission.create') ||  Route::is('admin.admission.index') || Route::is('admin.admission.edit')
+            || Route::is('admin.admit.create') ||  Route::is('admin.admit.index') || Route::is('admin.admit.edit')
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
@@ -149,6 +150,7 @@
                 <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Manage Class Routine</a></li>
                 <li class="sub-item"><a href="{{ route('admin.gallery.index') }}" class="sub-link {{(Route::is('admin.gallery.index') || Route::is('admin.gallery.edit') || Route::is('admin.gallery.create')) ?'active':''}}">Manage Gallery</a></li>
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
+                <li class="sub-item"><a href="{{ route('admin.admit.index') }}" class="sub-link {{(Route::is('admin.admit.index') || Route::is('admin.admit.edit') || Route::is('admin.admit.create')) ?'active':''}}">Manage Admit</a></li>
                 {{-- <li class="sub-item"><a href="{{ route('admin.admission.create') }}" class="sub-link {{(Route::is('admin.admission.create')) ?'active':''}}">Add New Admission</a></li> --}}
                 <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission ({{ $admissions->count() }})</a></li>
                
