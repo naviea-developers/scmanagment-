@@ -6,49 +6,49 @@
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
-	.txt-center {
-    text-align: center;
-}
-.border- {
-    border: 1px solid #000 !important;
-}
-.padding {
-    padding: 15px;
-}
-.mar-bot {
-    margin-bottom: 15px;
-}
-.admit-card {
-    border: 2px solid #000;
-    padding: 15px;
-    /* margin: 20px 0; */
-    margin-left: 182px;
-}
-.BoxA h5, .BoxA p {
-    margin: 0;
-}
-h5 {
-    text-transform: uppercase;
-}
-table img {
-    width: 100%;
-    margin: 0 auto;
-}
-.table-bordered td, .table-bordered th, .table thead th {
-    border: 1px solid #000000 !important;
-}
+    .txt-center {
+      text-align: center;
+  }
+  .border- {
+      border: 1px solid #000 !important;
+  }
+  .padding {
+      padding: 15px;
+  }
+  .mar-bot {
+      margin-bottom: 15px;
+  }
+  .admit-card {
+      border: 2px solid #000;
+      padding: 15px;
+      /* margin: 20px 0; */
+      margin-left: 182px;
+  }
+  .BoxA h5, .BoxA p {
+      margin: 0;
+  }
+  h5 {
+      text-transform: uppercase;
+  }
+  table img {
+      width: 100%;
+      margin: 0 auto;
+  }
+  .table-bordered td, .table-bordered th, .table thead th {
+      border: 1px solid #000000 !important;
+  }
 
-.school-info {
-      flex: 1;
-      text-align: left;
-  }
-  .footer {
-            text-align: right;
-            margin-top: 20px;
-        }
-  .footer p {
-      margin: 5px 0;
-  }
+  .school-info {
+        flex: 1;
+        text-align: left;
+    }
+    .footer {
+              text-align: right;
+              margin-top: 20px;
+          }
+    .footer p {
+        margin: 5px 0;
+    }
 </style>
 @endsection
 @section('main_contain')

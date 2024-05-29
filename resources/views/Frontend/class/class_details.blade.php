@@ -381,7 +381,6 @@
                 </li>
             @endif
 
-
             @if (@$class->ClassRoutines->count() >0)
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
