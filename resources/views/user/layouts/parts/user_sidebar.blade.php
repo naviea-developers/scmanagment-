@@ -71,10 +71,10 @@
                 <span> My Events </span>
             </a>
 
-            <a href="{{ route('user.my_package', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            {{-- <a href="{{ route('user.my_package', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-cube"></i>
                 <span> My Package </span>
-            </a>
+            </a> --}}
             <a href="{{ route('user.wishlist', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-heart-circle-plus"></i>
                 <span> Saved </span>

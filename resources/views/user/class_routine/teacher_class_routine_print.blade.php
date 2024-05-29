@@ -33,7 +33,7 @@
 
 <div class="container">
   <div class="school-name">
-    <h3>School Name</h3>
+    <h3>{{ @$tpOption->company_name }}</h3>
     {{-- <p>Class Name: {{ @$admission->class->name ?? '' }}</p>
     <p>Session: {{ @$admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</p>
     <p>Sesction: {{ @$admission->section->name }} </p> --}}

@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\ClassDuration;
 use App\Models\Session;
 use App\Models\SchoolSection;
+use App\Models\Tp_option;
 
 class ClassRoutineController extends Controller
 {
@@ -212,8 +213,10 @@ class ClassRoutineController extends Controller
         $sessionId = $request->input('session_id');
 
         if( $classId && $sessionId &&  $sectionId){
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
             $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }elseif($classId && $sessionId){
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
             $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }
         return view('Backend.school_management.class_routine.view_class_routine_print',$data);
@@ -243,8 +246,10 @@ class ClassRoutineController extends Controller
         $sectionId = $request->input('section_id');
         $sessionId = $request->input('session_id');
         if( $classId && $sessionId &&  $sectionId){
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
             $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }elseif($classId && $sessionId){
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
             $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }
         return view('Backend.school_management.class_routine.view_class_routine',$data);

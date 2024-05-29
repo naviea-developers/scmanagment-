@@ -46,23 +46,20 @@
 
                 @if ($examRoutine->isNotEmpty())
 
-                <div class="float-right">
-                  <a href="{{ route('user.exam_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                      <i class="fas fa-print text-primary"></i> Print
-                  </a>
-              </div>
-
-
-
+                  <div class="float-right">
+                      <a href="{{ route('user.exam_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                          <i class="fas fa-print text-primary"></i> Print
+                      </a>
+                  </div>
 
                   <div class="school-name">
-                      <h3>School Name</h3>
+                      <h3>{{ @$tpOption->company_name }}</h3>
+                      {{-- @foreach ($examRoutine as $routin                      e)
+                          <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
+                      @endforeach --}}
+                      <h5>Examination: {{ @$examRoutine[0]->examination->name  }}</h5>
                       <h6>Class Name: {{ $admission->class->name ?? '' }}</h6>
                       <h6>Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6>
-                    
-                      @foreach ($examRoutine as $routine)
-                          <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
-                      @endforeach
                       <h4>Exam Routine</h4>
                   </div>
                   
