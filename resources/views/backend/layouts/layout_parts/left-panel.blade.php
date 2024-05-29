@@ -676,7 +676,9 @@
             || Route::is('admin.student.index') ||  Route::is('admin.student.edit')
             || Route::is('admin.affiliate.index') ||  Route::is('admin.affiliate.create') || Route::is('admin.affiliate.edit')
             || Route::is('backend.create_admin') ||  Route::is('backend.manage_admin') || Route::is('backendog.edit_admin')
-            || Route::is('admin.consultant.create') ||  Route::is('admin.consultant.index') || Route::is('admin.consultant.edit'));
+            || Route::is('admin.consultant.create') ||  Route::is('admin.consultant.index') || Route::is('admin.consultant.edit')
+            || Route::is('admin.staff.create') ||  Route::is('admin.staff.index') || Route::is('admin.staff.edit')
+            );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
                 <li class="sub-item"><a href="{{ route('backend.create_admin') }}" class="sub-link {{( Route::is('backend.create_admin') ) ?'active':''}}">Add New Admin</a>
@@ -687,6 +689,11 @@
                 <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.teacher.index') }}" class="sub-link {{(Route::is('admin.teacher.index') || Route::is('admin.teacher.edit')) ?'active':''}}">Manage Teacher</a>
+                </li>
+
+                <li class="sub-item"><a href="{{ route('admin.staff.create') }}" class="sub-link {{( Route::is('admin.staff.create') ) ?'active':''}}">Add New Staff</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.staff.index') }}" class="sub-link {{(Route::is('admin.staff.index') || Route::is('admin.staff.edit')) ?'active':''}}">Manage Staff</a>
                 </li>
 
                 <li class="sub-item"><a href="{{ route('admin.student.create') }}" class="sub-link {{( Route::is('admin.student.create') ) ?'active':''}}">Add New User</a>

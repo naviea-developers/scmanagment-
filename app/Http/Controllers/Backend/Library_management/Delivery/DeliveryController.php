@@ -124,16 +124,6 @@ class DeliveryController extends Controller
  
             }
 
-
-            
-
-
-
-
-
-
-
-
         }
         $json_data = array(
             "draw"            => intval($request->input('draw')),

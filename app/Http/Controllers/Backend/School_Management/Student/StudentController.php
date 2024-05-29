@@ -484,7 +484,7 @@ class StudentController extends Controller
     }
 
 
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request)
     {
 
         // dd($request->student_id);

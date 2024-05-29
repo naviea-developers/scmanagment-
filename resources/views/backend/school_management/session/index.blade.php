@@ -20,7 +20,7 @@ Admin - All Session
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button>
+            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
             {{session()->get('message')}}
             </div>
             <script>
@@ -34,8 +34,10 @@ Admin - All Session
             <div class="table-wrapper">
               <table id="datatable1" class="table display responsive nowrap">
                 <thead>
-                  <tr>
+                  <tr class="text-center">
                     <th class="wd-10p">Id</th>
+                    <th class="wd-15p">Current Session</th>
+                    <th class="wd-15p">Session</th>
                     <th class="wd-15p">Start Session</th>
                     <th class="wd-15p">End Session</th>
                     <th class="wd-15p">Status</th>
@@ -48,8 +50,12 @@ Admin - All Session
                     @endphp
                   @if (count($sessions) > 0)
                     @foreach ($sessions as $session)
-                      <tr>
+                      <tr class="text-center">
                           <td>{{ $i++ }}</td>
+                          <td >
+                            <input type="radio" name="is_current" value="{{ $session->id }}" {{ $session->is_current ? 'checked' : '' }}>
+                          </td>
+                          <td>{{ $session->start_year }} - {{ $session->end_year }}</td>
                           <td>
                             @if ($session->start_month == '1') January 
                             @elseif ($session->start_month == '2') February 
@@ -145,4 +151,35 @@ Admin - All Session
     </div><!-- modal -->
 
    
+@endsection
+
+
+@section('script')
+
+<script>
+  document.querySelectorAll('input[name="is_current"]').forEach((radio) => {
+      radio.addEventListener('change', function() {
+          let sessionId = this.value;
+          let csrfToken = document.querySelector('input[name="_token"]').value;
+
+          fetch("{{ route('admin.session.updateCurrent') }}", {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': csrfToken
+              },
+              body: JSON.stringify({ session_id: sessionId })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Current session updated successfully.');
+              } else {
+                  alert('Failed to update current session.');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  });
+</script>
 @endsection

@@ -12,6 +12,7 @@ use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LibraryController extends Controller
 {
@@ -102,8 +103,9 @@ class LibraryController extends Controller
             4 => 'student_id',
             5 => 'from_date',
             6 => 'to_date',
-            7 => 'is_return',
-            8 => 'options',
+            7 => 'status',
+            8 => 'is_return',
+            9 => 'options',
         );
         $totalData = Borrow::count();
         $totalFiltered = $totalData;
@@ -148,6 +150,20 @@ class LibraryController extends Controller
                 $nestedData['from_date'] = @$borrow->from_date;
                 $nestedData['to_date'] = @$borrow->to_date;
 
+
+                $nestedData['status'] = '';
+                if($borrow->to_date < Carbon::now() && $borrow->is_return==0){
+                    $nestedData['status'] .= '<a class="btn btn-sm btn-warning">Lete</a>';
+                }else{
+                    if ($borrow->is_return == 0) {
+                        $nestedData['status'] .= '<a class="btn btn-sm btn-warning">Pending</a>';
+                    } elseif ($borrow->is_return == 1) {
+                        $nestedData['status'] .= '<a class="btn btn-sm btn-success">Returned</a>';
+                    }
+                }
+
+
+
                 $nestedData['is_return'] = '';
                 if ($borrow->is_return == 0) {
                     $nestedData['is_return'] .= '<form method="POST" action="' . route('teacher.library_borrow.return') . '">';
@@ -169,7 +185,8 @@ class LibraryController extends Controller
 
                 $nestedData['options'] = '';
                 if ($borrow->is_return == 0) {
-                    $nestedData['options'] .= '<a href="' . route('teacher.library_borrow.edit', $borrow->id) . '"><i class="fa-duotone fa fa-edit"></i></a>';
+                    $nestedData['options'] .= '<a href="' . route('teacher.library_borrow.edit', $borrow->id) . '" class="btn btn-info"><i class="fa-duotone fa fa-edit"></i></a>';
+
                     $nestedData['options'] .= '&nbsp;&nbsp;';
                     $nestedData['options'] .= '<a href="#" data-id="' . $borrow->id . '" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
                 } else {

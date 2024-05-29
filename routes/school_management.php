@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\School_management\ExamRoutine\ExamRoutineContro
 use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController;
 use App\Http\Controllers\Backend\School_management\Result\ExamResultController;
 use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
+use App\Http\Controllers\Backend\School_management\Session\SessionController;
 use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
@@ -93,7 +94,22 @@ Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->grou
     Route::post('update/{id}', [AcademicYearController::class,"update"])->name('admin.academic_year.update');
     Route::post('delete', [AcademicYearController::class,"destroy"])->name('admin.academic_year.delete');
     Route::get('/status/{id}', [AcademicYearController::class, 'status'])->name('admin.academic_year.status');
+    Route::post('/updateCurrent', [AcademicYearController::class, 'updateCurrent'])->name('admin.academic_year.updateCurrent');
 });
+
+
+//Add Session for admin
+Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [SessionController::class,"index"])->name('admin.session.index');
+    Route::get('create', [SessionController::class,"create"])->name('admin.session.create');
+    Route::post('store', [SessionController::class,"store"])->name('admin.session.store');
+    Route::get('edit/{id}', [SessionController::class,"edit"])->name('admin.session.edit');
+    Route::post('update/{id}', [SessionController::class,"update"])->name('admin.session.update');
+    Route::post('delete', [SessionController::class,"destroy"])->name('admin.session.delete');
+    Route::get('/status/{id}', [SessionController::class, 'status'])->name('admin.session.status');
+    Route::post('/updateCurrent', [SessionController::class, 'updateCurrent'])->name('admin.session.updateCurrent');
+});
+
 
 //Add Bulding for admin
 Route::prefix('bulding')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {

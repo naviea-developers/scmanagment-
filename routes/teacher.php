@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\All_users\TeacherController;
 use App\Http\Controllers\Backend\All_users\InstructorController;
 use App\Http\Controllers\Backend\All_users\HostController;
 use App\Http\Controllers\Backend\All_users\SeleryController;
+use App\Http\Controllers\Backend\All_users\StaffController;
 use App\Http\Controllers\Backend\School_management\Designation\DesignationController;
 
 // Route::middleware(['accessLogin'])->group(function () {
@@ -102,5 +103,22 @@ Route::prefix('instrutor')->group(function () {
         Route::post('consultant-change-password', [ConsultantController::class,"changePassword"])->name('admin.consultant_change_password');
 
     });
+
+
+
+
+    Route::prefix('staff')->group(function () {
+        // staff
+        Route::get('index', [StaffController::class,"index"])->name('admin.staff.index');
+        Route::get('create', [StaffController::class,"create"])->name('admin.staff.create');
+        Route::post('store', [StaffController::class,"store"])->name('admin.staff.store');
+        Route::get('edit/{id}', [StaffController::class,"edit"])->name('admin.staff.edit');
+        Route::post('update/{id}', [StaffController::class,"update"])->name('admin.staff.update');
+        Route::post('delete/', [StaffController::class,"destroy"])->name('admin.staff.delete');
+        Route::get('status/{id}', [StaffController::class,"status"])->name('admin.staff.status');
+        Route::post('staff-change-password', [StaffController::class,"changePassword"])->name('admin.staff_change_password');
+
+    });
+
 
 // });

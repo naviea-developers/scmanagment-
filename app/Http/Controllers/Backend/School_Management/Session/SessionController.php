@@ -16,6 +16,20 @@ class SessionController extends Controller
         return view("Backend.school_management.session.index",$data);
     }
 
+
+    public function updateCurrent(Request $request)
+    {
+        $sessionId = $request->input('session_id');
+        Session::query()->update(['is_current' => 0]);
+        $session = Session::find($sessionId);
+        if ($session) {
+            $session->is_current = 1;
+            $session->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -37,11 +51,14 @@ class SessionController extends Controller
         ]);
         try{
             DB::beginTransaction();
+
+            Session::query()->update(['is_current' => 0]);
             $session = New session;
             $session->start_month = $request->start_month;
             $session->start_year = $request->start_year;
             $session->end_month = $request->end_month;
             $session->end_year = $request->end_year;
+            $session->is_current = 1;
             $session->save();
 
             DB::commit();

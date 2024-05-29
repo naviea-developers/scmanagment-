@@ -15,10 +15,10 @@
                     <div class="col-md-6 border-end-md p-4 p-sm-5">
                         <h2 class="h3 mb-4 mb-sm-3">
                             Hey there!<br>Welcome back.                        </h2>
-                        <div class="mt-sm-2 text-center">
+                        {{-- <div class="mt-sm-2 text-center">
                             Login as                            <strong>
                                 <a href="{{ route('frontend.teacher_signin') }}" class="text-decoration-underline">Teacher</a>                            </strong>
-                        </div>
+                        </div> --}}
                         {{-- <div class="mt-sm-2 text-center">
                             Login as                            <strong>
                                 <a href="{{ route('frontend.seller_signin') }}" class="text-decoration-underline">Seller</a>                            </strong>
@@ -36,20 +36,9 @@
                         <!--<div class="mt-4 mt-sm-5">Don't have an account? <a href="" class="text-decoration-underline">Sign up here</a></div>-->
                     </div>
                     <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
-                            {{-- success message start --}}
-                            @if(session()->has('message'))
-                            <div class="alert alert-success">
-                            {{session()->get('message')}}
-                            </div>
-                            <script>
-                                setTimeout(function(){
-                                    $('.alert.alert-success').hide();
-                                }, 3000);
-                            </script>
-                            @endif
-                            {{-- success message start --}}
+                           
                     <h4>
-                        Student Sign in
+                     Sign in
                     </h4>
                     
                         <!-- <a class="btn btn-outline-dark-cerulean btn-lg w-100 mb-3" href="#"><i
@@ -111,7 +100,7 @@
                         <!-- <a class="btn btn-outline-dark-cerulean btn-lg w-100 mb-3" href=""><i
                                 class="fab fa-facebook me-1"></i>Sign in with Facebook</a> -->
 
-                        <div class="text-center col-md-12 mt-3 d-flex ">
+                        {{-- <div class="text-center col-md-12 mt-3 d-flex ">
                             <div class="" style="padding: 10px; margin-left:60px">
                                 <form action="{{ route('auth.google') }}" method="get">
                                     <input type="hidden" name="login_type" value="1">
@@ -132,13 +121,13 @@
                             <strong>
                                 Social Signin                            </strong>
                         </p>
-                        </div>
+                        </div> --}}
 
-                        <div class="mt-sm-4 text-center">
+                        {{-- <div class="mt-sm-4 text-center">
                             Don't have an account?                            <strong>
 
                                 <a href="{{ route('frontend.register') }}" class="text-decoration-underline">Create an Account</a>                            </strong>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -25,8 +25,8 @@
 <div class="div-one">
     <p>Your Admission form is sumitted, Here is your's username and password</p>
     <p style="text-align: justify">username: {{ $value['email'] }}</p>
-    <p style="text-align: justify">password: {{ $value['password'] }}</p>
-    <br/>
+    <p style="text-align: justify">password: {{ $value['password'] }}</p> 
+    <p><a href="{{ url('/sign-in') }}">Click Here to Login...</a></p>
     <br/>
     <p>Thank you..</p>
     <br>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\All_users;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserEmail;
 use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,6 +93,16 @@ class StudentController extends Controller
                 $certificates->save();
             }
         }
+
+
+            //user
+            $data['name'] = $user->name;
+            $data['email'] = $user->email;
+            $data['password'] = 12345678;
+            $details['email'] = $user->email;
+            $details['send_item']= new UserEmail($data);
+            dispatch(new \App\Jobs\SendEmailJob($details));
+            ///email notification end
 
             DB::commit();
             return redirect()->route('admin.student.index')->with('message','Student Add Successfully');
@@ -236,6 +247,16 @@ class StudentController extends Controller
         $user =  User::find($request->user_id);
         $user->password = $request->password;
         $user->save();
+
+        //user
+        $data['name'] = $user->name;
+        $data['email'] = $user->email;
+        $data['password'] = $request->password;
+        $details['email'] = $user->email;
+        $details['send_item']= new UserEmail($data);
+        dispatch(new \App\Jobs\SendEmailJob($details));
+        ///email notification end
+
         return redirect()->back()->with('message','Student Profile Password Changed Successfully');
     }
 
