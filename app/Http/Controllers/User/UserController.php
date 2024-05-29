@@ -31,6 +31,7 @@ use App\Models\Notice;
 use App\Models\SubjectTeacherAssent;
 use App\Models\Withdrawal;
 use App\Models\ExamResult;
+use App\Models\Tp_option;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -619,11 +620,14 @@ class UserController extends Controller
                 $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
                     ->where('section_id', $admission->section_id)
+                    ->orderBy('day_id','asc')
+                    ->orderBy('class_duration_id', 'asc')
                     ->get();
                     // ->filter(function ($routine) {
                     //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
                     // });
                     // dd($routines);
+                $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();    
             } else {
                 
             }
@@ -639,9 +643,25 @@ class UserController extends Controller
         $user = auth()->user();
         $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
                                 ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->orderBy('day_id','asc')
+                                ->orderBy('class_duration_id', 'asc')
                                 ->get();
                                 // dd($data);
+        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                        
         return view('user.class_routine.teacher_class_routine', $data);
+    }
+
+    public function teacherClassRoutinePrint()
+    {
+        $user = auth()->user();
+        $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
+                                ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->orderBy('day_id','asc')
+                                ->orderBy('class_duration_id', 'asc')
+                                ->get();
+                                // dd($data);
+        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                        
+        return view('user.class_routine.teacher_class_routine_print', $data);
     }
 
     // public function teacherExamRoutine()
@@ -680,9 +700,12 @@ class UserController extends Controller
                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
             });
 
+        $tpOption=Tp_option::where('option_name', 'theme_option_header')->first();    
+
         $data = [
             'teacher' => $teacherAssignments,
             'examSchedules' => $examSchedules,
+            'tpOption' => $tpOption,
         ];
 
         return view('user.exam_routine.teacher_exam_routine', $data);
@@ -710,15 +733,9 @@ class UserController extends Controller
     public function teacherExamRoutinePrint(Request $request){
         $id= $request->input('examination_id');
         $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
+        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
         return view('user.exam_routine.teacher_exam_routine_print',$data);
     }
-
-
-
-
-
-
-
 
 
     public function classPrint(){
@@ -731,7 +748,10 @@ class UserController extends Controller
                 $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
                     ->where('section_id', $admission->section_id)
+                    ->orderBy('day_id','asc')
+                    ->orderBy('class_duration_id', 'asc')
                     ->get();
+                $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();    
             } else {
                 
             }
@@ -755,6 +775,7 @@ class UserController extends Controller
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
                                 });
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
         }
 
         return view('user.exam_routine.routine', $data);
@@ -772,8 +793,24 @@ class UserController extends Controller
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
                                 });
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
         }
         return view('user.exam_routine.view_exam_routine_print',$data);
+    }
+
+    public function admitCardPrint(){
+        $user = auth()->user();
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
+                                ->where('section_id', $admission->section_id)
+                                ->get()
+                                ->filter(function ($routine) {
+                                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+                                });
+            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
+        }
+        return view('user.exam_routine.admit_card_print',$data);
     }
 
     public function getAssignTeacherSubject($id){

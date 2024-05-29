@@ -29,7 +29,7 @@
       </div>
 
       <div class="school-name">
-        <h1 style="margin-left: 80px;">School Name</h1>
+        <h1 style="margin-left: 80px;">{{ @$tpOption->company_name }}</h1>
         <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
       </div>
     

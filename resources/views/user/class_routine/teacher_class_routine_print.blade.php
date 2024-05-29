@@ -33,15 +33,14 @@
 
 <div class="container">
   <div class="school-name">
-    <h1>{{ @$tpOption->company_name }}</h1>
-    <h5>Class Name: {{ @$class_routine[0]->class->name }}</h5>
-    <h5>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</h5>
-    <h5>Section : {{ @$class_routine[0]->schoolsection->name }}</h5>
+    <h3>{{ @$tpOption->company_name }}</h3>
+    {{-- <p>Class Name: {{ @$admission->class->name ?? '' }}</p>
+    <p>Session: {{ @$admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</p>
+    <p>Sesction: {{ @$admission->section->name }} </p> --}}
+    <h4>Class Routine</h4>
   </div>
 
   <div class="class-routine">
-    <h2>Class Routine</h2>
-  
     @php
         $classRoutinesByDay = [];
         $classDurations = [];
@@ -52,14 +51,13 @@
                 $classDurations[] = $data->classDuration->name;
             }
         }
-
         // Sort class durations
         sort($classDurations);
     @endphp
 
     <table>
         <thead>
-            <tr>
+            <tr style="color: black">
                 <th scope="col">Day</th>
                 @foreach ($classDurations as $duration)
                     <th scope="col">
@@ -80,9 +78,10 @@
                     @foreach ($classDurations as $duration)
                         <td>
                             @isset($routines[$duration])
+                            Class Name : {{ @$routines[$duration]->class->name }} <br>
                                 {{ @$routines[$duration]->subject->name }} <br>
                                 {{ @$routines[$duration]->teacher->name }} <br>
-                                {{ @$routines[$duration]->room->name }}
+                            Room : {{ @$routines[$duration]->room->name }}
                             @else
                                 -
                             @endisset
@@ -92,7 +91,7 @@
             @endforeach
         </tbody>
     </table>
- 
+    
   </div>
 </div>
 

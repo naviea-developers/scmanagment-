@@ -155,9 +155,11 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
          //exam routine for student
         Route::get('/exam-routine', [UserController::class, 'examRoutine'])->name('exam_routine');
         Route::get('print-user-exam-routine', [UserController::class,"examPrint"])->name('user.exam_routine.print');
+        Route::get('student/admit_card', [UserController::class,"admitCardPrint"])->name('user.admit_card.print');
 
         //class routine for Teacher
         Route::get('/teacher-class-routine', [UserController::class, 'teacherClassRoutine'])->name('teacher.class_routine');
+        Route::get('/teacher-class-routine-print', [UserController::class, 'teacherClassRoutinePrint'])->name('teacher.class_routine.print');
         //Exam routine for Teacher
         Route::get('/teacher-exam-routine', [UserController::class, 'teacherExamRoutine'])->name('teacher.exam_routine');
         Route::get('print-teacher-exam-routine', [UserController::class,"teacherExamRoutinePrint"])->name('teacher.exam_routine.print');
@@ -167,11 +169,6 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         
         Route::get('/homework', [UserController::class, 'homeWork'])->name('student.homework');
         Route::get('/homework-details/{id}', [UserController::class, 'homeWorkDetails'])->name('student.homework.details');
-
-
-
-       
-
 
 });
 

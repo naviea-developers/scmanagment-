@@ -395,7 +395,7 @@
 <div class="bg-alice-blue pt-5">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-8 sticky-content">
+            <div class="col-md-12 sticky-content">
                 
                 @if ($class->count() >0)
                     <!--Start card-->
@@ -479,7 +479,7 @@
                                 <div class="container">
                                     <div class="row">
                                     @foreach ( @$class->subjects as $subject)
-                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class=" col-sm-6 col-md-3 col-lg-2">
                                         <div class=" mb-3" style="width: 162px;">
                                         <div class="picture ">
                                             <img style="height:200px; width:148px;object-fit: fill" class="img-fluid " src="{{ @$subject->image_show }}">
@@ -522,7 +522,7 @@
                                     {{-- <h4>subjects list</h4> --}}
                                     <div class="row">
                                         @foreach ($ungroupedSubjects as $subject)
-                                            <div class="col-sm-6 col-md-6">
+                                            <div class="col-sm-6 col-md-2">
                                                 <ul>
                                                     <li>{{ $subject->name }}</li> 
                                                 </ul>
@@ -728,12 +728,12 @@
                                                 <th scope="col">Day</th>
                                                 @foreach ($classDurations as $duration)
                                                     <th scope="col">
-                                                        {{ $duration }} <br>
+                                                        {{ @$duration }} <br>
                                                         @php
                                                             $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
                                                         @endphp
-                                                        {{ date('h:i A', strtotime($durationData->start_time)) }} - 
-                                                        {{ date('h:i A', strtotime($durationData->end_time)) }}
+                                                        {{ date('h:i A', strtotime(@$durationData->start_time)) }} - 
+                                                        {{ date('h:i A', strtotime(@$durationData->end_time)) }}
                                                     </th>
                                                 @endforeach
                                             </tr>
@@ -748,9 +748,9 @@
                                                     @foreach ($classDurations as $duration)
                                                         <td>
                                                             @isset($routines[$duration])
-                                                                {{ $routines[$duration]->subject->name }} <br>
-                                                                {{ $routines[$duration]->teacher->name }} <br>
-                                                                Room- {{ $routines[$duration]->room->name }}
+                                                                {{ @$routines[$duration]->subject->name }} <br>
+                                                                {{ @$routines[$duration]->teacher->name }} <br>
+                                                                {{ @$routines[$duration]->room->name }}
                                                             @else
                                                             
                                                             @endisset
@@ -798,7 +798,7 @@
                 <!--End card-->
             </div>
 
-            <div class="col-md-4 ps-xl-5 sticky-content">
+            {{-- <div class="col-md-3 ps-xl-5 sticky-content">
                         @php
                            $com_name = \App\Models\Tp_option::where('option_name', 'theme_option_header')->first();
                            $social_url = \App\Models\Tp_option::where('option_name', 'theme_social_media')->first();
@@ -837,7 +837,7 @@
                 <div class="sidebar-block text-white mb-3 p-4 position-relative overflow-hidden">
                     <ul class="mb-0 ps-4 position-relative"></ul>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 

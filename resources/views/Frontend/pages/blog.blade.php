@@ -80,103 +80,9 @@
 							</div>
 						</div>
 					</div>
-					<!--Start offcanvas filter-->
-					{{-- <div class="category-offcanvas_filter offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-						<div class="offcanvas-header">
-							<h5 class="offcanvas-title text-dark-cerulean" id="offcanvasExampleLabel">All Classess</h5>
-							<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-						<div class="offcanvas-body">
-							<!--Start Sidebar Filter-->
-							<div class="sidebar-filter">
 
-								<div class="mb-3">
-									<select class="form-select rounded-0" aria-label="Default select example">
-										<option selected>Popular</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-								</div>
-								<div class="mb-3">
-									<select class="form-select rounded-0" aria-label="Default select example">
-										<option selected>Filters</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-
-								</div>
-								<div class="mb-3">
-									<select class="form-select rounded-0" aria-label="Default select example">
-										<option selected>Filters</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-								</div>
-								<h5 class="fw-bold text-dark-cerulean">Most Popular</h5>
-								<hr class="my-2 bg-dark-cerulean">
-								<ul class="list-unstyled cat-list my-3">
-									<li><a href="#">Graphic Design</a></li>
-									<li><a href="#">Illustration</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">UI/UX Design</a></li>
-									<li><a href="#">Web Development</a></li>
-								</ul>
-								<h5 class="fw-bold text-dark-cerulean">Creative</h5>
-								<hr class="my-2 bg-dark-cerulean">
-								<ul class="list-unstyled cat-list my-3">
-									<li><a href="#">Graphic Design</a></li>
-									<li><a href="#">Illustration</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">UI/UX Design</a></li>
-									<li><a href="#">Web Development</a></li>
-								</ul>
-								<h5 class="fw-bold text-dark-cerulean">Govt.Project</h5>
-								<hr class="my-2 bg-dark-cerulean">
-								<ul class="list-unstyled cat-list my-3">
-									<li><a href="#">Graphic Design</a></li>
-									<li><a href="#">Illustration</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">UI/UX Design</a></li>
-									<li><a href="#">Web Development</a></li>
-								</ul>
-								<h5 class="fw-bold text-dark-cerulean">Free Courses</h5>
-								<hr class="my-2 bg-dark-cerulean">
-								<ul class="list-unstyled cat-list my-3">
-									<li><a href="#">Graphic Design</a></li>
-									<li><a href="#">Illustration</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">UI/UX Design</a></li>
-									<li><a href="#">Web Development</a></li>
-								</ul>
-								<h5 class="fw-bold text-dark-cerulean">Trending Courses</h5>
-								<hr class="my-2 bg-dark-cerulean">
-								<ul class="list-unstyled cat-list my-3">
-									<li><a href="#">Graphic Design</a></li>
-									<li><a href="#">Illustration</a></li>
-									<li><a href="#">Music</a></li>
-									<li><a href="#">Photography</a></li>
-									<li><a href="#">UI/UX Design</a></li>
-									<li><a href="#">Web Development</a></li>
-								</ul>
-							</div>
-							<!--End Sidebar filter-->
-						</div>
-					</div> --}}
-					<!--End offcanvas filter-->
 					<div class="row g-3 blog_cat_ajax-show blog_topic_ajax-show blog_sort_by_ajax-show" id="alldata">
-						
-						{{-- <input type="hidden" id="forum_id" value="E16RHQDSB"> --}}
-
 						@foreach ($blogs as $blog)
-							
-						
 						<div class="col-xl-4 col-md-6" >
 							<!--Start Course Card-->
 							<div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border">
@@ -227,13 +133,7 @@
 							</div>
 							<!--End Course Card-->
 						</div>
-						@endforeach
-
-
-
-
-
-												
+						@endforeach					
 					</div>
 					<div class="text-center my-3 blog_filter_off  removebuton_16">
 						<button type="button" class="btn btn-lg btn-dark-cerulean " onclick="loadmore_blog(16);" >

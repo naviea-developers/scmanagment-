@@ -28,7 +28,7 @@
     </div>
 
     <div class="school-name">
-      <h1 style="margin-left: 80px;">School Name</h1>
+      <h1 style="margin-left: 80px;">{{ @$tpOption->company_name }}</h1>
       <h5>Class Name: {{ @$class_routine[0]->class->name }}</h5>
       <h5>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</h5>
       <h5>Section : {{ @$class_routine[0]->schoolsection->name }}</h5>
@@ -59,8 +59,8 @@
                           @php
                             $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
                           @endphp
-                          {{ date('h:i A', strtotime($durationData->start_time)) }} - 
-                          {{ date('h:i A', strtotime($durationData->end_time)) }}
+                          {{ date('h:i A', strtotime(@$durationData->start_time)) }} - 
+                          {{ date('h:i A', strtotime(@$durationData->end_time)) }}
                       </th>
                   @endforeach
               </tr>
@@ -72,9 +72,9 @@
                       @foreach ($classDurations as $duration)
                           <td>
                               @isset($routines[$duration])
-                                  {{ $routines[$duration]->subject->name }} <br>
-                                  {{ $routines[$duration]->teacher->name }} <br>
-                                  Room- {{ $routines[$duration]->room->name }}
+                                  {{ @$routines[$duration]->subject->name }} <br>
+                                  {{ @$routines[$duration]->teacher->name }} <br>
+                                  Room- {{ @$routines[$duration]->room->name }}
                               @else
                                   
                               @endisset
@@ -138,55 +138,55 @@
     </table> --}}
 
     @php
-    $classRoutinesByDay = [];
-    $classDurations = [];
+        $classRoutinesByDay = [];
+        $classDurations = [];
 
-    foreach ($class_routine as $data) {
-        $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
-        if (!in_array($data->classDuration->name, $classDurations)) {
-            $classDurations[] = $data->classDuration->name;
+        foreach ($class_routine as $data) {
+            $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
+            if (!in_array($data->classDuration->name, $classDurations)) {
+                $classDurations[] = $data->classDuration->name;
+            }
         }
-    }
 
-    // Sort class durations
-    sort($classDurations);
-@endphp
+        // Sort class durations
+        sort($classDurations);
+    @endphp
 
-<table>
-    <thead>
-        <tr>
-            <th scope="col">Day</th>
-            @foreach ($classDurations as $duration)
-                <th scope="col">
-                    {{ $duration }} <br>
-                    @php
-                        $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
-                    @endphp
-                    {{ date('h:i A', strtotime($durationData->start_time)) }} - 
-                    {{ date('h:i A', strtotime($durationData->end_time)) }}
-                </th>
-            @endforeach
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($classRoutinesByDay as $day => $routines)
+    <table>
+        <thead>
             <tr>
-                <td>{{ $day }}</td>
+                <th scope="col">Day</th>
                 @foreach ($classDurations as $duration)
-                    <td>
-                        @isset($routines[$duration])
-                            {{ $routines[$duration]->subject->name }} <br>
-                            {{ $routines[$duration]->teacher->name }} <br>
-                            Room- {{ $routines[$duration]->room->name }}
-                        @else
-                            -
-                        @endisset
-                    </td>
+                    <th scope="col">
+                        {{ @$duration }} <br>
+                        @php
+                            $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
+                        @endphp
+                        {{ date('h:i A', strtotime(@$durationData->start_time)) }} - 
+                        {{ date('h:i A', strtotime(@$durationData->end_time)) }}
+                    </th>
                 @endforeach
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach ($classRoutinesByDay as $day => $routines)
+                <tr>
+                    <td>{{ $day }}</td>
+                    @foreach ($classDurations as $duration)
+                        <td>
+                            @isset($routines[$duration])
+                                {{ @$routines[$duration]->subject->name }} <br>
+                                {{ @$routines[$duration]->teacher->name }} <br>
+                                {{ @$routines[$duration]->room->name }}
+                            @else
+                                -
+                            @endisset
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
     </div>
     

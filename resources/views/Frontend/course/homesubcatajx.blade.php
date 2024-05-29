@@ -130,27 +130,6 @@
                                 </div>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td class="ps-0">
-                                <div class="d-flex align-items-center">
-                                    <div class="course-card__hints--icon me-2">
-                                        <svg id="clock_1_" data-name="clock (1)"
-                                            xmlns="http://www.w3.org/2000/svg" width="16.706"
-                                            height="16.706" viewBox="0 0 16.706 16.706">
-                                            <path id="Path_13" data-name="Path 13"
-                                                d="M8.353,0a8.353,8.353,0,1,0,8.353,8.353A8.363,8.363,0,0,0,8.353,0Zm0,15.662a7.309,7.309,0,1,1,7.309-7.309,7.317,7.317,0,0,1-7.309,7.309Z"
-                                                fill="#fff" />
-                                            <path id="Path_14" data-name="Path 14"
-                                                d="M208.838,83.118h-1.044v5.437l3.285,3.285.738-.738-2.979-2.979Z"
-                                                transform="translate(-199.963 -79.985)"
-                                                fill="#fff" />
-                                        </svg>
-                                    </div>
-                                    <div class="course-card__hints--text">
-                                     6hr 17m                                                                    </div>
-                                </div>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
                 <!--End Course Hints-->
@@ -237,10 +216,10 @@
             <!-- add to cart  -->
             <div class="d-block">
 
-                <div class="align-items-center d-flex form-check ps-0">
+                {{-- <div class="align-items-center d-flex form-check ps-0">
                     <input name="course_price_type[{{ $course->id }}]" class="me-1 change_cart_val @if(Auth::check()) active @endif" style="width:21px;height:21px" course_id="{{ $course->id }}" id="course_subcribe{{ $course->id }}" type="radio"  @if (Auth::check() == false) disabled @endif>
                     <label class="form-check-label fw-bold @if (Auth::check() == false) opa-half @endif course_price_cart" for="course_subcribe{{ $course->id }}">Subscription</label>
-                </div>
+                </div> --}}
 
                 <div class="form-check d-flex align-items-center ps-0">
                     <input course_id="{{ $course->id }}" id="course_cart_price{{ $course->id }}" class="me-1 active change_cart_val" name="course_price_type[{{ $course->id }}]" style="width:21px;height:21px" type="radio" checked>
