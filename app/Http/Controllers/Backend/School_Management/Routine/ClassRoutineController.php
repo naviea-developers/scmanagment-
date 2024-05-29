@@ -221,19 +221,33 @@ class ClassRoutineController extends Controller
 
 
 
+    // public function getClassRoutine(Request $request)
+    // {
+    //     $classId = $request->input('class_id');
+    //     $sectionId = $request->input('section_id');
+    //     $sessionId = $request->input('session_id');
+    //     // return response()->json(['sessionId' => $sessionId,'classId' => $classId,'sectionId' => $sectionId]);
+    //     if( $classId && $sessionId &&  $sectionId){
+    //         $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->orderBy('day_id','asc')->get();
+    //     }elseif($classId && $sessionId){
+    //         $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->orderBy('day_id','asc')->get();
+    //     }
+    //     return view('Backend.school_management.class_routine.view_class_routine',$data);
+    //     // return response()->json(['routine' => $routine]);
+    // }
+
+
     public function getClassRoutine(Request $request)
     {
         $classId = $request->input('class_id');
         $sectionId = $request->input('section_id');
         $sessionId = $request->input('session_id');
-        // return response()->json(['sessionId' => $sessionId,'classId' => $classId,'sectionId' => $sectionId]);
         if( $classId && $sessionId &&  $sectionId){
-            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }elseif($classId && $sessionId){
-            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }
         return view('Backend.school_management.class_routine.view_class_routine',$data);
-        // return response()->json(['routine' => $routine]);
     }
     
 

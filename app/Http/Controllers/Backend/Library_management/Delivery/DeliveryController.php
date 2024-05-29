@@ -104,17 +104,21 @@ class DeliveryController extends Controller
                 $nestedData['to_date'] = @$borrow->to_date;
 
                 $nestedData['is_return'] = '';
-                if ($borrow->is_return == 0) {
-                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Pending</a>';
-                } elseif ($borrow->is_return == 1) {
-                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Returned</a>';
+                if($borrow->to_date < Carbon::now() && $borrow->is_return==0){
+                    $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Let</a>';
+                }else{
+                    if ($borrow->is_return == 0) {
+                        $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Pending</a>';
+                    } elseif ($borrow->is_return == 1) {
+                        $nestedData['is_return'] .= '<a class="btn btn-sm btn-success">Returned</a>';
+                    }
                 }
 
-                // if ($borrow->to_date >= Carbon::now()) {
-                //     $nestedData['let'] .= '<a class="btn btn-sm btn-success">Let</a>';
+                // if ($borrow->to_date  Carbon::now()) {
+                //     $nestedData['is_return'] .= '<a class="btn btn-sm btn-warning">Let</a>';
+                // } else {
+                //     $nestedData['is_return'] .= ''; // or some other default value
                 // }
-
-                // $routine->examination && $routine->examination->end_date >= Carbon::now()
 
                 $data[] = $nestedData;
  
