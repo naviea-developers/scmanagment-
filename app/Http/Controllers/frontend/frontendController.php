@@ -96,6 +96,8 @@ class FrontendController extends Controller
         $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->take(7)->get();
         $data['classLists'] = HomeContentClassList::where('status',1)->orderBy('id','desc')->take(7)->get();
 
+        $data['blogs'] = Blog::latest()->take(4)->get();
+
         $data['search']=$name = $request->input('search');
         if(isset(request()->search)){
             $data["courses"] = Course::where('type','course')->where('status',1)->where('is_master','0')->where('name','like','%'.request()->search.'%')->get();
@@ -1321,6 +1323,13 @@ class FrontendController extends Controller
      $mpdf->writeHTML($html);
      $name = 'class_routine_pdf_download ' . date('Y-m-d i:h:s');
      $mpdf->Output($name.'.pdf', 'D');
+ }
+
+ public function allClassListShow(){
+    // dd($id);
+    $data['home_content'] = HomeContentSetup::first();
+    $data['classLists'] = Classe::orderBy('id','asc')->get();
+     return view('Frontend.class.class_list_show',$data);
  }
 
 

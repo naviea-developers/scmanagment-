@@ -169,11 +169,6 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/homework', [UserController::class, 'homeWork'])->name('student.homework');
         Route::get('/homework-details/{id}', [UserController::class, 'homeWorkDetails'])->name('student.homework.details');
 
-
-
-       
-
-
 });
 
 
