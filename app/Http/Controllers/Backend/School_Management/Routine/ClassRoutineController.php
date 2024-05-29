@@ -64,14 +64,14 @@ class ClassRoutineController extends Controller
         try{
             DB::beginTransaction();
             $class_routine = new ClassRoutine();
-            $class_routine->session_id = $request->session_id;
-            $class_routine->class_id = $request->class_id;
-            $class_routine->section_id = $request->section_id;
-            $class_routine->subject_id = $request->subject_id;
-            $class_routine->teacher_id = $request->teacher_id;
-            $class_routine->room_id = $request->room_id;
-            $class_routine->class_duration_id = $request->class_duration_id;
-            $class_routine->day_id = $request->day_id;
+            $class_routine->session_id = $request->session_id ?? 0;
+            $class_routine->class_id = $request->class_id ?? 0;
+            $class_routine->section_id = $request->section_id ?? 0;
+            $class_routine->subject_id = $request->subject_id ?? 0;
+            $class_routine->teacher_id = $request->teacher_id ?? 0;
+            $class_routine->room_id = $request->room_id ?? 0;
+            $class_routine->class_duration_id = $request->class_duration_id ?? 0;
+            $class_routine->day_id = $request->day_id ?? 0;
             // $class_routine->class_type = $request->class_type;
             $class_routine->save();
             DB::commit();
@@ -117,14 +117,14 @@ class ClassRoutineController extends Controller
         try{
             DB::beginTransaction();
             $class_routine = ClassRoutine::find($id);
-            $class_routine->session_id = $request->session_id;
-            $class_routine->class_id = $request->class_id;
-            $class_routine->section_id = $request->section_id;
-            $class_routine->subject_id = $request->subject_id;
-            $class_routine->teacher_id = $request->teacher_id;
-            $class_routine->room_id = $request->room_id;
-            $class_routine->class_duration_id = $request->class_duration_id;
-            $class_routine->day_id = $request->day_id;
+            $class_routine->session_id = $request->session_id ?? 0;
+            $class_routine->class_id = $request->class_id ?? 0;
+            $class_routine->section_id = $request->section_id ?? 0;
+            $class_routine->subject_id = $request->subject_id ?? 0;
+            $class_routine->teacher_id = $request->teacher_id ?? 0;
+            $class_routine->room_id = $request->room_id ?? 0;
+            $class_routine->class_duration_id = $request->class_duration_id ?? 0;
+            $class_routine->day_id = $request->day_id ?? 0;
             $class_routine->save();
 
             // if($request->subject_id){
@@ -212,9 +212,9 @@ class ClassRoutineController extends Controller
         $sessionId = $request->input('session_id');
 
         if( $classId && $sessionId &&  $sectionId){
-            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }elseif($classId && $sessionId){
-            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->get();
+            $data['class_routine']=$class_routine = ClassRoutine::where('class_id',$classId)->where('session_id', $sessionId)->orderBy('day_id','asc')->orderBy('class_duration_id', 'asc')->get();
         }
         return view('Backend.school_management.class_routine.view_class_routine_print',$data);
     }

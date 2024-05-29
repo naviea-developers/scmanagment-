@@ -619,6 +619,8 @@ class UserController extends Controller
                 $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
                     ->where('section_id', $admission->section_id)
+                    ->orderBy('day_id','asc')
+                    ->orderBy('class_duration_id', 'asc')
                     ->get();
                     // ->filter(function ($routine) {
                     //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
@@ -639,9 +641,23 @@ class UserController extends Controller
         $user = auth()->user();
         $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
                                 ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->orderBy('day_id','asc')
+                                ->orderBy('class_duration_id', 'asc')
                                 ->get();
                                 // dd($data);
         return view('user.class_routine.teacher_class_routine', $data);
+    }
+
+    public function teacherClassRoutinePrint()
+    {
+        $user = auth()->user();
+        $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
+                                ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->orderBy('day_id','asc')
+                                ->orderBy('class_duration_id', 'asc')
+                                ->get();
+                                // dd($data);
+        return view('user.class_routine.teacher_class_routine_print', $data);
     }
 
     // public function teacherExamRoutine()
@@ -714,13 +730,6 @@ class UserController extends Controller
     }
 
 
-
-
-
-
-
-
-
     public function classPrint(){
 
         $user = auth()->user();
@@ -731,6 +740,8 @@ class UserController extends Controller
                 $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
                     ->where('session_id', $admission->session_id)
                     ->where('section_id', $admission->section_id)
+                    ->orderBy('day_id','asc')
+                    ->orderBy('class_duration_id', 'asc')
                     ->get();
             } else {
                 
