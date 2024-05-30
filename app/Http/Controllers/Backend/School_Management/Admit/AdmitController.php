@@ -9,8 +9,10 @@ use App\Models\Examination;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\User;
+use App\Models\ExamSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AdmitController extends Controller
 {
@@ -47,9 +49,17 @@ class AdmitController extends Controller
 
         $examination = Examination::findOrFail($request->examination_id);
 
+        // $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+        $data['examRoutine']=$examRoutine = ExamSchedule::where('class_id', $request->class_id)
+                            ->where('section_id', $request->section_id)
+                            ->get()
+                            ->filter(function ($routine) {
+                            return $routine->examination && $routine->examination->end_date >= Carbon::now();
+
+                            });   
         if ($request->filled('student_id')) {
             $student = Admission::findOrFail($request->student_id);
-            return view('Backend.school_management.admit_card.admit', compact('student', 'examination'));
+            return view('Backend.school_management.admit_card.admit', compact('student', 'examination','examRoutine'));
         } else {
             $query = Admission::where('class_id', $request->class_id);
 
@@ -61,7 +71,8 @@ class AdmitController extends Controller
             }
 
             $students = $query->get();
-            return view('Backend.school_management.admit_card.admit_all', compact('students', 'examination'));
+
+            return view('Backend.school_management.admit_card.admit_all', compact('students', 'examination','examRoutine'));
         }
     }
 

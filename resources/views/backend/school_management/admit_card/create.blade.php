@@ -6,6 +6,7 @@
 
 @section('main_contain')
 
+
 <!-- ########## START: MAIN PANEL ########## -->
 <div class="br-mainpanel">
     <div class="br-pageheader">
@@ -43,7 +44,7 @@
                             <div class="col-sm-4">
                                 <label class="form-control-label">Class: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="class-select" name="class_id" class="form-control form-select">
+                                    <select id="class-select" name="class_id" class="form-control form-select" required>
                                         <option value=""> Select Class</option>
                                         @foreach ($classes as $class)
                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -92,7 +93,7 @@
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Examination Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="" name="examination_id" class="form-control form-select">
+                                    <select id="" name="examination_id" class="form-control form-select" required>
                                         <option value=""> Select Examination</option>
                                         @foreach ($examinations as $examination)
                                         <option value="{{ $examination->id }}"> {{ $examination->name }} ({{ @$examination->session->start_year }}-{{ @$examination->session->end_year }})
