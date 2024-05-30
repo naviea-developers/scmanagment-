@@ -81,6 +81,7 @@
                                 <label class="form-control-label">Student Name: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="student-select" name="student_id" class="form-control form-select">
+                                    {{-- <select id="student-select" name="student_id" class="form-control form-select select2"> --}}
                                         <option value=""> Select Student</option>
                                         @foreach ($students as $student)
                                         <option value="{{ $student->id }}" data-class-id="{{ $student->class_id }}" data-group-id="{{ $student->group_id }}" data-section-id="{{ $student->section_id }}" data-student-id-number="{{ $student->student_id_number }}">

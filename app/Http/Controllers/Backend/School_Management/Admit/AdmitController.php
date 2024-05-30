@@ -76,13 +76,13 @@ class AdmitController extends Controller
         }
     }
 
-    public function show($student_id, $examination_id)
-    {
-        $student = Admission::findOrFail($student_id);
-        $examination = Examination::findOrFail($examination_id);
+    // public function show($student_id, $examination_id)
+    // {
+    //     $student = Admission::findOrFail($student_id);
+    //     $examination = Examination::findOrFail($examination_id);
 
-        return view('Backend.school_management.admit_card.admit', compact('students', 'examination'));
-    }
+    //     return view('Backend.school_management.admit_card.admit', compact('students', 'examination'));
+    // }
 
     // public function show(Request $request, $examination_id)
     // {
