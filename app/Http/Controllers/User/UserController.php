@@ -825,4 +825,11 @@ class UserController extends Controller
         return view('user.student.homework.details', $data);
     }
 
+
+
+    public function studentIdCard()
+    {
+        return view('user.id_card.create');
+    }
+
 }

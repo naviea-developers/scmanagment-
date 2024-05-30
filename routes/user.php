@@ -183,3 +183,13 @@ Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController
 Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');
 Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);
 Route::post('/get-teacher-result-by-ajex', [InstructorCourseController::class, 'getTeacherResultByAjax'])->name('teacher.get_result_by_ajax');
+
+
+
+
+
+
+
+
+
+Route::get('/id-card', [UserController::class, 'studentIdCard'])->name('student.id_card');
