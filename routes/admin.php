@@ -343,6 +343,9 @@ Route::post('home-content-register-update', [HomeContentController::class,'setRe
      Route::get('/theme_option_footer', [ThemeOptionController::class, 'Theme_Option_Footer'])->name('backend.theme-options-footer');
      Route::post('/theme_option_footer_save', [ThemeOptionController::class, 'SaveThemeFooter'])->name('backend.theme-options-footer-save');
 
+     Route::get('/theme_option_school_info', [ThemeOptionController::class, 'ThemeOptionSchoolInfo'])->name('backend.theme-options-school-info');
+     Route::post('/theme_option_theme-options_school_info_save', [ThemeOptionController::class, 'SaveThemeSchoolInfo'])->name('backend.theme-options-school-info-save');
+
      Route::get('/theme_option_language-switcher', [ThemeOptionController::class, 'Theme_Language_Switcher'])->name('backend.language-switcher');
 
      Route::get('/theme-options-color', [ThemeOptionController::class, 'Theme_Color'])->name('backend.theme-options-color');

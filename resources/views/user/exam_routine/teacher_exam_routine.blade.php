@@ -52,19 +52,15 @@
                   </a>
                 </div>
                 
-                  <div class="school-name">
-                      <h3>{{ @$tpOption->company_name }}</h3>
-                      <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
-                      {{-- <h6>Class Name: {{ $teacher->class->name ?? '' }}</h6> --}}
-                      {{-- <h6>Session: {{ $schedules->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6> --}}
-                    
-                      {{-- @foreach ($schedules as $routine)
-                          <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
-                      @endforeach --}}
-                      <h4>Exam Routine</h4>
-                  </div>
-                  
-                  
+                @php
+                  $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+                  $school_info = json_decode($results->option_value);
+                @endphp
+                <div class="school-name">
+                    <h3>{{ @$school_info->school_name }}</h3>
+                    <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
+                    <h2>Exam Routine</h2>
+                </div>
                   <div class="class-routine">
                     <table>
                       <thead>
