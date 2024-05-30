@@ -42,13 +42,17 @@
                 </a>
               </div>
 
-                <div class="school-name">
-                    <h3>{{ @$tpOption->company_name }}</h3>
-                    <h6>Class Name: {{ @$admission->class->name ?? '' }}</h6>
-                    <h6>Session: {{ @$admission->session->start_year ?? '' }} - {{ @$admission->session->end_year ?? '' }}</h6>
-                    <h6>Sesction: {{ @$admission->section->name }} </h6>
-                    <h4>Class Routine</h4>
-                </div>
+                  @php
+                      $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+                      $school_info = json_decode($results->option_value);
+                  @endphp
+                  <div class="school-name">
+                    <h4>{{ @$school_info->school_name }}</h4>                       
+                      <p>Class Name: {{ @$admission->class->name ?? '' }} <br>
+                        Session: {{ @$admission->session->start_year ?? '' }} - {{ @$admission->session->end_year ?? '' }} <br>
+                        Sesction: {{ @$admission->section->name }} 
+                      <h6>Class Routine</h6>
+                  </div>
                 
                   <div class="class-routine">
                     @php

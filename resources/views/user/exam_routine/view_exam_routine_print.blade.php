@@ -32,15 +32,22 @@
 <body>
 
 <div class="container">
+
+  @php
+    $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+    $school_info = json_decode($results->option_value);
+  @endphp
+
   <div class="school-name">
-    <h3>{{ @$tpOption->company_name }}</h3>
-    <h6>Class Name: {{ $admission->class->name ?? '' }}</h6>
-    <h6>Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</h6>
-  
-    @foreach ($examRoutine as $routine)
-        <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
-    @endforeach
-    <h2>Exam Routine</h2>
+      <h3>{{ @$school_info->school_name }}</h3>
+      {{-- <p>Mobile : {{ @$school_info->phone1 }} <br> Email : {{ @$school_info->email }} <br> Website : {{ @$school_info->website }} </p> --}}
+      {{-- @foreach ($examRoutine as $routin                      e)
+          <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
+      @endforeach --}}
+      <p>Examination: {{ @$examRoutine[0]->examination->name  }}<br>
+      Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }} <br>
+      Class Name: {{ $admission->class->name ?? '' }}</p>
+      <h5>Exam Routine</h5>
   </div>
 
   <div class="class-routine">

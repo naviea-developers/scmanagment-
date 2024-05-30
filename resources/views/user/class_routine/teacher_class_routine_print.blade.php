@@ -32,12 +32,15 @@
 <body>
 
 <div class="container">
+  @php
+    $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+    $school_info = json_decode($results->option_value);
+  @endphp
+
   <div class="school-name">
-    <h3>{{ @$tpOption->company_name }}</h3>
-    {{-- <p>Class Name: {{ @$admission->class->name ?? '' }}</p>
-    <p>Session: {{ @$admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }}</p>
-    <p>Sesction: {{ @$admission->section->name }} </p> --}}
-    <h4>Class Routine</h4>
+    <h4>{{ @$school_info->school_name }}</h4> 
+    <p>Mobile : {{ @$school_info->phone1 }} <br> Email : {{ @$school_info->email }} <br> Website : {{ @$school_info->website }} </p>                      
+    <h6>Class Routine</h6>
   </div>
 
   <div class="class-routine">

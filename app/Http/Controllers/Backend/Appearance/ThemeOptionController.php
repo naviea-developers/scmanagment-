@@ -130,6 +130,281 @@ class ThemeOptionController extends Controller
     return redirect()->back();
     }
 
+	function ThemeOptionSchoolInfo(){
+		$results = Tp_option::where('option_name', 'theme_option_school_info')->first();
+        if($results){
+            $dataObj = json_decode($results->option_value);
+            $data['school_name'] = $dataObj->school_name ?? '';
+            $data['phone1'] = $dataObj->phone1 ?? '';
+            $data['phone2'] = $dataObj->phone2 ?? '';
+			$data['website'] = $dataObj->website ?? '';
+            $data['email'] = $dataObj->email ?? '';
+			$data['address'] = $dataObj->address ?? '';
+			$data['school_logo'] = $dataObj->school_logo ?? '';
+        }else{
+            $data['school_name'] = "";
+            $data['phone1'] = "";
+            $data['phone2'] = "";
+            $data['email'] = "";
+			$data['website'] = "";
+			$data['address'] = "";
+			$data['school_logo'] = "";
+        }
+        $dat_a['datalist'] = $data;
+        return view('Backend.setting.appearance.theme-options-school-info',$dat_a);
+    }
+
+	// public function SaveThemeSchoolInfo(Request $request){
+	// 	$res = array();
+
+	// 	$school_name = $request->input('school_name');
+	// 	$phone1 = $request->input('phone1');
+	// 	$phone2 = $request->input('phone2');
+	// 	$email = $request->input('email');
+	// 	$website = $request->input('website');
+	// 	$address = $request->input('address');
+	// 	$school_logo = $request->input('school_logo');
+
+	// 	$validator_array = array(
+	// 		'school_name' => $request->input('school_name'),
+	// 		'phone1' => $request->input('phone1'),
+	// 		'phone2' => $request->input('phone2'),
+	// 		'email' => $request->input('email'),
+	// 		'website' => $request->input('website'),
+	// 		'address' => $request->input('address'),
+	// 		'school_logo' => $request->input('school_logo'),
+	// 	);
+
+	// 	$validator = Validator::make($validator_array, [
+	// 		'school_name' => 'required',
+	// 		'phone1' => 'required',
+	// 		'phone2' => 'required',
+	// 		'email' => 'required',
+	// 		'website' => 'required',
+	// 		'address' => 'required',
+	// 		'school_logo' => 'required',
+	// 	]);
+
+	// 	$errors = $validator->errors();
+
+	// 	if($errors->has('school_name')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('school_name');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+
+	// 	}
+
+	// 	if($errors->has('phone1')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('phone1');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+	// 	}
+
+	// 	if($errors->has('phone2')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('phone2');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+	// 	}
+
+	// 	if($errors->has('email')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('email');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+	// 	}
+
+	// 	if($errors->has('website')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('website');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+	// 	}
+
+	// 	if($errors->has('address')){
+	// 		$res['msgType'] = 'error';
+	// 		$res['msg'] = $errors->first('address');
+	// 		return redirect()->back()->with('error-message', $res['msg'])->withInput();
+	// 	}
+
+
+	// 	$option = array(
+	// 		'school_name' => $school_name,
+	// 		'phone1' => $phone1,
+	// 		'phone2' => $phone2,
+	// 		'email' => $email,
+	// 		'website' => $website,
+	// 		'address' => $address,
+	// 		'school_logo' => $school_logo,
+
+	// 	);
+
+	// 	$data = array(
+	// 		'option_name' => 'theme_option_school_info',
+	// 		'option_value' => json_encode($option)
+	// 	);
+
+	// 	$gData = Tp_option::where('option_name','theme_option_school_info')->get();
+	// 	$id = '';
+	// 	foreach ($gData as $row){
+	// 		$id = $row['id'];
+	// 	}
+
+	// 	if($id == ''){
+	// 		$response = Tp_option::create($data);
+	// 		if($response){
+	// 			$res['msgType'] = 'success';
+	// 			$res['msg'] = __('New Data Added Successfully');
+	// 		}else{
+	// 			$res['msgType'] = 'error';
+	// 			$res['msg'] = __('Data insert failed');
+	// 		}
+	// 	}else{
+	// 		$response = Tp_option::where('id', $id)->update($data);
+	// 		if($response){
+	// 			$res['msgType'] = 'success';
+	// 			$res['msg'] = __('Data Updated Successfully');
+	// 		}else{
+	// 			$res['msgType'] = 'error';
+	// 			$res['msg'] = __('Data update failed');
+	// 		}
+	// 	}
+
+	// 	// return response()->json($res);
+	// 	return redirect()->back()->with('message', $res['msg']);
+	// }
+
+	public function SaveThemeSchoolInfo(Request $request){
+        //dd($request->all());
+		$res = array();
+
+		$school_name = $request->input('school_name');
+		$phone1 = $request->input('phone1');
+		$phone2 = $request->input('phone2');
+		$email = $request->input('email');
+		$website = $request->input('website');
+		$address = $request->input('address');
+		$school_logo = $request->input('school_logo');
+
+		$gData = Tp_option::where('option_name','theme_option_school_info')->first();
+		$id = '';
+		if($gData){
+			$id = $gData->id;
+		}
+
+		$school_logo="";
+        if($request->hasFile('school_logo')){
+            $fileName = rand().time().'.'.request()->school_logo->getClientOriginalExtension();
+            request()->school_logo->move(public_path('upload/school_logo/'),$fileName);
+            $school_logo= $fileName;
+        }else{
+			if($id){
+				$dataObj = json_decode($gData->option_value);
+				$school_logo=$dataObj->school_logo ?? '';
+			}
+		}
+
+		$validator_array = array(
+			'school_name' => $request->input('school_name'),
+			'phone1' => $request->input('phone1'),
+			'phone2' => $request->input('phone2'),
+			'email' => $request->input('email'),
+			'website' => $request->input('website'),
+			'address' => $request->input('address'),
+			'school_logo' => $request->input('school_logo'),
+		);
+
+		$validator = Validator::make($validator_array, [
+			'school_name' => 'required',
+			'phone1' => 'required',
+			'phone2' => 'required',
+			'email' => 'required',
+			'website' => 'required',
+			'address' => 'required',
+			// 'school_logo' => 'required',
+		]);
+
+		$errors = $validator->errors();
+
+
+        if($errors->has('school_name')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('school_name');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+
+		}
+
+		if($errors->has('phone1')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('phone1');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
+		if($errors->has('phone2')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('phone2');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
+		if($errors->has('email')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('email');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
+		if($errors->has('website')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('website');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
+		if($errors->has('address')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('address');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
+
+		$option = array(
+			'school_name' => $school_name,
+			'phone1' => $phone1,
+			'phone2' => $phone2,
+			'email' => $email,
+			'website' => $website,
+			'address' => $address,
+			'school_logo' => $school_logo,
+
+		);
+
+		$data = array(
+			'option_name' => 'theme_option_school_info',
+			'option_value' => json_encode($option)
+		);
+
+
+
+		if($id == ''){
+			$response = Tp_option::create($data);
+			if($response){
+				$res['msgType'] = 'success';
+				$res['msg'] = __('New Data Added Successfully');
+			}else{
+				$res['msgType'] = 'error';
+				$res['msg'] = __('Data insert failed');
+			}
+		}else{
+			$response = Tp_option::where('id', $id)->update($data);
+              @unlink(public_path("upload/school_logo/".$response->school_logo));
+			if($response){
+				$res['msgType'] = 'success';
+				$res['msg'] = __('Data Updated Successfully');
+			}else{
+				$res['msgType'] = 'error';
+				$res['msg'] = __('Data update failed');
+			}
+		}
+
+		// return response()->json($res);
+		return redirect()->back()->with('message', $res['msg']);
+    }
+
     function Theme_Language_Switcher(){
         $data['results'] = Tp_option::where('option_name','theme_language_switcher')->first();
         return view("Backend.setting.appearance.language-switcher", $data);

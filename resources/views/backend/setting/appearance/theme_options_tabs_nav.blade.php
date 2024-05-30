@@ -4,6 +4,7 @@
 	{{-- <li><a href="{{ url('backend.section-manage') }}"><i class="fa fa-cog"></i>{{ __('Section Manage') }}</a></li> --}}
 	<li><a href="{{ route('backend.theme-options-header') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('Header') }}</a></li>
 	<li><a href="{{ route('backend.theme-options-footer') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('Footer') }}</a></li>
+	<li><a href="{{ route('backend.theme-options-school-info') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('School_Info') }}</a></li>
 	<li><a href="{{ route('backend.theme-options-color') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('Color') }}</a></li>
 	<li><a href="{{ route('backend.social-media') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('Social Media') }}</a></li>
 	<li><a href="{{ route('backend.theme-options-seo') }}" style="color: var(--theme_text_color)"><i class="fa fa-cog"></i>{{ __('SEO') }}</a></li>

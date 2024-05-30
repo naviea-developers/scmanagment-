@@ -627,7 +627,6 @@ class UserController extends Controller
                     //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
                     // });
                     // dd($routines);
-                $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();    
             } else {
                 
             }
@@ -646,8 +645,7 @@ class UserController extends Controller
                                 ->orderBy('day_id','asc')
                                 ->orderBy('class_duration_id', 'asc')
                                 ->get();
-                                // dd($data);
-        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                        
+                                // dd($data);                     
         return view('user.class_routine.teacher_class_routine', $data);
     }
 
@@ -659,8 +657,7 @@ class UserController extends Controller
                                 ->orderBy('day_id','asc')
                                 ->orderBy('class_duration_id', 'asc')
                                 ->get();
-                                // dd($data);
-        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                        
+                                // dd($data);                    
         return view('user.class_routine.teacher_class_routine_print', $data);
     }
 
@@ -699,13 +696,9 @@ class UserController extends Controller
             ->filter(function ($routine) {
                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
             });
-
-        $tpOption=Tp_option::where('option_name', 'theme_option_header')->first();    
-
         $data = [
             'teacher' => $teacherAssignments,
             'examSchedules' => $examSchedules,
-            'tpOption' => $tpOption,
         ];
 
         return view('user.exam_routine.teacher_exam_routine', $data);
@@ -733,7 +726,6 @@ class UserController extends Controller
     public function teacherExamRoutinePrint(Request $request){
         $id= $request->input('examination_id');
         $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
-        $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();
         return view('user.exam_routine.teacher_exam_routine_print',$data);
     }
 
@@ -750,8 +742,7 @@ class UserController extends Controller
                     ->where('section_id', $admission->section_id)
                     ->orderBy('day_id','asc')
                     ->orderBy('class_duration_id', 'asc')
-                    ->get();
-                $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();    
+                    ->get();   
             } else {
                 
             }
@@ -774,10 +765,9 @@ class UserController extends Controller
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                                });
-            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
-        }
 
+                                });                  
+        }
         return view('user.exam_routine.routine', $data);
     }
 
@@ -792,8 +782,7 @@ class UserController extends Controller
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                                });
-            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
+                                });                 
         }
         return view('user.exam_routine.view_exam_routine_print',$data);
     }
@@ -807,8 +796,7 @@ class UserController extends Controller
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                                });
-            $data['tpOption'] =Tp_option::where('option_name', 'theme_option_header')->first();                    
+                                });                   
         }
         return view('user.exam_routine.admit_card_print',$data);
     }
