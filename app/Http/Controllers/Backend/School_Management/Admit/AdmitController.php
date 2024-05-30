@@ -49,28 +49,34 @@ class AdmitController extends Controller
 
         $examination = Examination::findOrFail($request->examination_id);
 
-        // $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-        $data['examRoutine']=$examRoutine = ExamSchedule::where('class_id', $request->class_id)
-                            ->where('section_id', $request->section_id)
-                            ->get()
-                            ->filter(function ($routine) {
-                            return $routine->examination && $routine->examination->end_date >= Carbon::now();
+        // $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();  
 
-                            });   
         if ($request->filled('student_id')) {
             $student = Admission::findOrFail($request->student_id);
+
+            $data['examRoutine']=$examRoutine = ExamSchedule::where('class_id', $student->class_id)
+            ->where('section_id', $student->section_id)
+            ->where('examination_id', $request->examination_id)
+            ->get();
             return view('Backend.school_management.admit_card.admit', compact('student', 'examination','examRoutine'));
         } else {
-            $query = Admission::where('class_id', $request->class_id);
+            $query = Admission::where('is_new',0)->where('class_id', $request->class_id);
+            $examRoutineQuery = ExamSchedule::where('class_id', $request->class_id);
 
             if ($request->filled('section_id')) {
                 $query->where('section_id', $request->section_id);
+                $examRoutineQuery->where('section_id', $request->section_id);
             }
             if ($request->filled('group_id')) {
                 $query->where('group_id', $request->group_id);
             }
 
+            if ($request->filled('examination_id')) {
+                $examRoutineQuery->where('examination_id', $request->examination_id);
+            }
+
             $students = $query->get();
+            $examRoutine = $examRoutineQuery->get();
 
             return view('Backend.school_management.admit_card.admit_all', compact('students', 'examination','examRoutine'));
         }
