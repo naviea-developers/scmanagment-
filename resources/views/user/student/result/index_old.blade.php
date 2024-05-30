@@ -8,13 +8,32 @@
     </div>
 </div>
 
+    {{-- success message start --}}
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+    {{session()->get('message')}}
+    </div>
+    <script>
+        setTimeout(function(){
+            $('.alert.alert-success').hide();
+        }, 3000);
+    </script>
+    @endif
+    {{-- success message start --}}
+
 <div style="overflow-x:auto;">
     <table  class="table table-striped mt-3" style="min-width: 800px;">
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
             <th scope="col">Exam</th>
-            <th scope="col">Print</th>
+            <th scope="col">Class Name</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">session</th>
+            <th scope="col">Section</th>
+            <th scope="col">Mark</th>
+            <th scope="col">Pass Mark</th>
+            <th scope="col">Obtained Marke</th>
         </tr>
         </thead>
         <tbody>
@@ -26,11 +45,13 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ @$examResult->examination->name }}</td>
-                    <td> 
-                        <a href="{{ route('student.exam_result_print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                            <i class="fas fa-print text-primary"></i> 
-                        </a>
-                    </td>
+                    <td>{{ @$examResult->class->name }}</td>
+                    <td>{{ @$examResult->subject->name }}</td>
+                    <td>{{ @$examResult->session->start_year }}-{{ $examResult->session->end_year }}</td>
+                    <td>{{ @$examResult->schoolsection->name }}</td>   
+                    <td>{{ @$examResult->marke }}</td>                    
+                    <td>{{ @$examResult->pass_marke }}</td>
+                    <td>{{ @$examResult->obtained_marke }}</td>
                 </tr>
             @endforeach
             @endif

@@ -18,6 +18,7 @@
     <div class="br-pagebody">
         <div class="br-section-wrapper">
             <h6 class="br-section-label text-center mb-4"> Make Admit Card</h6>
+            
             {{-- validate start  --}}
             @if(count($errors) > 0)
             @foreach($errors->all() as $error)
@@ -30,7 +31,7 @@
             <div class="col-xl-12 mx-auto">
                 <div class="form-layout form-layout-4 py-5">
 
-                    <form action="{{ route('admin.admit.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.admit.show') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">

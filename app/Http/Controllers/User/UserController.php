@@ -184,6 +184,22 @@ class UserController extends Controller
         }
         return view('user.student.result.index',$data);
     }
+
+    public function studentExamPrint()
+    {
+        $user_id = auth()->user()->id;
+        if($user_id){
+            $data['student']=$student=Admission::where('user_id',$user_id)->first();
+            $data['examResults']=ExamResult::where('student_id',$student->id)
+                                            ->where('class_id',$student->class_id)
+                                            ->where('section_id',$student->section_id)
+                                            ->where('session_id',$student->session_id)
+                                            ->where('is_publis','1')
+                                            ->orderBy('id', 'desc')->get();
+        }
+        return view('user.student.result.index',$data);
+    }
+    
     public function updateUserPic(Request $request, $id)
     {
 
