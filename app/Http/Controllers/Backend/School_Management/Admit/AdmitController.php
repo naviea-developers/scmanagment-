@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend\School_management\Admit;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admission;
 use App\Models\Classe;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +15,7 @@ class AdmitController extends Controller
     public function index()
     {
         $data['classes'] = Classe::all();
-        return view("Backend.school_management.admit.index",$data);
+        return view("Backend.school_management.admit_card.index",$data);
     }
 
     /**
@@ -21,8 +23,10 @@ class AdmitController extends Controller
      */
     public function create()
     {
-        $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
-        return view("Backend.school_management.admit.create", $data);
+        $data['students'] = Admission::where('is_new', 0)->where('status', 1)->get();
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['groups'] = Group::where('status', 1)->get();
+        return view("Backend.school_management.admit_card.create", $data);
     }
 
     /**
@@ -74,7 +78,7 @@ class AdmitController extends Controller
        // dd('hi');
         $data["class"]= Classe::find($id);
         $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
-        return view("Backend.school_management.class.update",$data);
+        return view("Backend.school_management.admit_card.update",$data);
     }
 
     /**

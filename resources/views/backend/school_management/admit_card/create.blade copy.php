@@ -1,5 +1,5 @@
 @section('title')
-    Admin - Admit_Card
+    Admin - Admit Card
 @endsection
 @extends('Backend.layouts.layouts')
 @section('style')
@@ -162,7 +162,7 @@
 							<tr>
 							  <td>1</td>
 							  <td>English</td>
-                <td>100</td>
+                			<td>100</td>
 							  <td>5 July 2019</td>
 							</tr>
 							<tr>
