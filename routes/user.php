@@ -7,6 +7,7 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ebook\EbookAudioController;
 use App\Http\Controllers\User\ebook\EbookVideoController;
+use App\Http\Controllers\User\MarksheetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/my-event', [UserController::class, 'myEventList'])->name('user.my_event');
         Route::get('/my-package', [UserController::class, 'myPackageList'])->name('user.my_package');
         Route::get('/student-exam_result', [UserController::class, 'studentExamResult'])->name('student.exam_result');
+        Route::get('/student-exam_result_print', [UserController::class, 'studentExamPrint'])->name('student.exam_result_print');
 
 
 
@@ -170,6 +172,9 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/homework', [UserController::class, 'homeWork'])->name('student.homework');
         Route::get('/homework-details/{id}', [UserController::class, 'homeWorkDetails'])->name('student.homework.details');
 
+
+         //exam marksheet for student
+         Route::get('/exam-marksheet', [MarksheetController::class, 'index'])->name('student.marksheet');
 });
 
 

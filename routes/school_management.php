@@ -302,17 +302,10 @@ Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::get('/status/{id}', [BatchController::class, 'status'])->name('admin.batch.status');
 });
 
-//Add Batch for admin
+//Admin Admit Card Make
 Route::prefix('admit')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    // Route::get('index', [AdmitController::class,"index"])->name('admin.admit.index');
     Route::get('create', [AdmitController::class,"create"])->name('admin.admit.create');
-    Route::post('store', [AdmitController::class,"store"])->name('admin.admit.store');
-    Route::get('show/{examination_id}', [AdmitController::class,"show"])->name('admin.admit.show');
-    // Route::get('details/{id}', [AdmitController::class,"details"])->name('admin.admit.details');
-    // Route::get('edit/{id}', [AdmitController::class,"edit"])->name('admin.admit.edit');
-    // Route::post('update/{id}', [AdmitController::class,"update"])->name('admin.admit.update');
-    // Route::get('delete/{id}', [AdmitController::class,"destroy"])->name('admin.admit.delete');
-    // Route::get('/status/{id}', [AdmitController::class, 'status'])->name('admin.admit.status');
+    Route::post('show', [AdmitController::class,"show"])->name('admin.admit.show');
 });
 
 //Add Admission for admin

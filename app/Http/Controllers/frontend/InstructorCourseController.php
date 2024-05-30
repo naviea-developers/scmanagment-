@@ -1135,7 +1135,6 @@ class InstructorCourseController extends Controller
         if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
             $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-
         }
         // elseif( $classId && $sessionId && $examinationId && $subjectId){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
@@ -1152,75 +1151,6 @@ class InstructorCourseController extends Controller
         return view('user.instructor.student_show',$data);
     }
 
-    // public function getTeacherAssentResult(Request $request)
-    // {
-    //     try {
-    //         // Retrieve input parameters
-    //         $examinationId = $request->input('examination_id');
-    //         $classId = $request->input('class_id');
-    //         $sectionId = $request->input('section_id');
-    //         $sessionId = $request->input('session_id');
-    //         $subjectId = $request->input('subject_id');
-
-    //         // Log the input parameters for debugging purposes
-    //         // \Log::info('Received parameters', [
-    //         //     'examination_id' => $examinationId,
-    //         //     'class_id' => $classId,
-    //         //     'section_id' => $sectionId,
-    //         //     'session_id' => $sessionId,
-    //         //     'subject_id' => $subjectId,
-    //         // ]);
-
-    //         // Initialize the query
-    //         // $query = Admission::query();
-
-    //         // // Add conditions to the query based on the received parameters
-    //         // if ($classId) {
-    //         //     $query->where('class_id', $classId);
-    //         // }
-    //         // if ($sectionId) {
-    //         //     $query->where('section_id', $sectionId);
-    //         // }
-    //         // if ($sessionId) {
-    //         //     $query->where('session_id', $sessionId);
-    //         // }
-
-    //         // // Execute the query and get the data
-    //         // $alldata = $query->get();
-
-    //         if( $classId && $sectionId && $sessionId){
-    //             $alldata = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
-                
-    //         }elseif( $classId && $sessionId ){
-    //             $alldata = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
-            
-    //         }
-
-    //         // Check if data is found
-    //         if ($alldata->isEmpty()) {
-    //             return response()->json([
-    //                 'status' => 404,
-    //                 'message' => 'No data found'
-    //             ], 404);
-    //         }
-
-    //         // Return the data
-    //         return response()->json([
-    //             'status' => 200,
-    //             'data' => $alldata
-    //         ]);
-
-    //     } catch (\Exception $e) {
-    //         // Log the exception for debugging purposes
-    //         // \Log::error('Error fetching teacher assent results', ['error' => $e->getMessage()]);
-
-    //         // Return a JSON response indicating an internal server error
-    //         return response()->json([
-    //             'status' => 500,
-    //             'error' => 'Internal Server Error'
-    //         ], 500);
-    //     }
-    // }
 
     public function storeStudentResult(Request $request)
     {
