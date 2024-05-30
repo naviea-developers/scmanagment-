@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Backend\School_management\Admit;
 use App\Http\Controllers\Controller;
 use App\Models\Admission;
 use App\Models\Classe;
+use App\Models\Examination;
 use App\Models\Group;
+use App\Models\SchoolSection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdmitController extends Controller
 {
-    public function index()
-    {
-        $data['classes'] = Classe::all();
-        return view("Backend.school_management.admit_card.index",$data);
-    }
+    // public function index()
+    // {
+    //     $data['classes'] = Classe::all();
+    //     return view("Backend.school_management.admit_card.index",$data);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +27,9 @@ class AdmitController extends Controller
     {
         $data['students'] = Admission::where('is_new', 0)->where('status', 1)->get();
         $data['classes'] = Classe::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
+        $data['examinations'] = Examination::where('status', 1)->get();
         return view("Backend.school_management.admit_card.create", $data);
     }
 
@@ -34,41 +38,52 @@ class AdmitController extends Controller
      */
     public function store(Request $request)
     {
-      // dd($request->all());
-        $request->validate([
-            'name' => 'required',
+        // $validatedData = $request->validate([
+        //     'class_id' => 'required|exists:classes,id',
+        //     'group_id' => 'required|exists:groups,id',
+        //     'examination_id' => 'required|exists:examinations,id',
+        //     'student_id' => 'nullable|exists:students,id',
+        // ]);
 
-        ]);
-        try{
-            DB::beginTransaction();
-            $class = New Classe;
-            $class->class_teacher_id = $request->class_teacher_id;
-            $class->name = $request->name;
-            $class->details = $request->details;
-            $class->gargent_policy = $request->gargent_policy;
-            if($request->hasFile('image')){
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/class/'),$fileName);
-                $class->image = $fileName;
+        $examination = Examination::findOrFail($request->examination_id);
+
+        if ($request->filled('student_id')) {
+            $student = Admission::findOrFail($request->student_id);
+            return view('Backend.school_management.admit_card.admit', compact('student', 'examination'));
+        } else {
+            $query = Admission::where('class_id', $request->class_id);
+
+            if ($request->filled('section_id')) {
+                $query->where('section_id', $request->section_id);
             }
-            $class->save();
+            if ($request->filled('group_id')) {
+                $query->where('group_id', $request->group_id);
+            }
 
-            DB::commit();
-            return redirect()->route('admin.class.index')->with('message','Class Add Successfully');
-        }catch(\Exception $e){
-            DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+            $students = $query->get();
+            return view('Backend.school_management.admit_card.admit_all', compact('students', 'examination'));
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($student_id, $examination_id)
     {
-        //
+        $student = Admission::findOrFail($student_id);
+        $examination = Examination::findOrFail($examination_id);
+
+        return view('Backend.school_management.admit_card.admit', compact('students', 'examination'));
     }
+
+    // public function show(Request $request, $examination_id)
+    // {
+    //     $examination = Examination::findOrFail($examination_id);
+    //     $students = Admission::whereIn('id', $request->students)->get();
+    //     // dd($students);
+    //     return view('Backend.school_management.admit_card.admit', compact('students', 'examination'));
+    // }
+
+ 
+
+
 
     /**
      * Show the form for editing the specified resource.
