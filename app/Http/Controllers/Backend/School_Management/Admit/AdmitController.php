@@ -31,7 +31,7 @@ class AdmitController extends Controller
         $data['classes'] = Classe::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
-        $data['examinations'] = Examination::where('status', 1)->get();
+        $data['examinations'] = Examination::where('status', 1)->where('end_date', '>=', Carbon::today())->get();
         return view("Backend.school_management.admit_card.create", $data);
     }
 
