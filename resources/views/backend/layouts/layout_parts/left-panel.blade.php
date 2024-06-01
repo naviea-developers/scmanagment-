@@ -152,6 +152,7 @@
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                 <li class="sub-item"><a href="{{ route('admin.id_card.create') }}" class="sub-link {{(Route::is('admin.id_card.create')) ?'active':''}}">ID Card</a></li>
                 <li class="sub-item"><a href="{{ route('admin.admit.create') }}" class="sub-link {{(Route::is('admin.admit.create')) ?'active':''}}">Admit Card</a></li>
+                <li class="sub-item"><a href="{{ route('admin.marksheet.create') }}" class="sub-link {{(Route::is('admin.marksheet.create')) ?'active':''}}">Marksheet</a></li>
                 <li class="sub-item"><a href="{{ route('admin.admission.index') }}" class="sub-link {{(Route::is('admin.admission.index') || Route::is('admin.admission.edit')) ?'active':''}}">Manage Admission ({{ $admissions->count() }})</a></li>
                
             </ul>
