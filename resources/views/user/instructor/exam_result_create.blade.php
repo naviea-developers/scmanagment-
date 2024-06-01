@@ -28,8 +28,7 @@
 
         <div class="col-md-3">
             <label class="form-control-label"><b>Class:</b></label>
-            {{-- <select class="form-control form-select select2" name="" id="teacherAssentClass"> --}}
-                <select class="form-control form-select select2" name="" id="class">
+                <select class="form-control form-select select2 class t_class" name="" id="teacherAssentClass">
                 <option value="">Select Class</option>
                 {{-- @foreach ($uniqueAssents as $teacherAssent)
                 <option value="{{ $teacherAssent->class->id }}">{{ $teacherAssent->class->name }}</option>
@@ -39,7 +38,7 @@
 
         <div class="col-md-2">
             <label class="form-control-label"><b>Session:</b></label>
-            <select class="form-control form-select select2" name="session_id" id="teacherAssentSession">
+            <select class="form-control form-select select2" name="session" id="teacherAssentSession">
                 <option value="">Select Session</option>
                 {{-- @foreach ($sessions as $session)
                 <option value="{{ $session->id }}">{{ $session->start_year->year }} - {{ $session->end_year->year }}</option>
@@ -102,7 +101,6 @@
 @endsection
 
 @section('script')
-
 <script>
     $(document).ready(function() {
        
@@ -132,108 +130,39 @@
     });
 </script>
 
-{{-- <script>
-   $(document).ready(function() {
-    $('#examination_id, #teacherAssentClass, #teacherAssentSubject, #teacherAssentSection, #teacherAssentSession').change(function() {
-        teacherAssentResult();
-    });
-
-    function teacherAssentResult() {
-        var examinationId = $('#examination_id').val();
-        var teacherAssentClassId = $('#teacherAssentClass').val();
-        var AssentSubjectId = $('#teacherAssentSubject').val();
-        var AssentSectionId = $('#teacherAssentSection').val();
-        var AssentSessionId = $('#teacherAssentSession').val();
-
-        // console.log( {
-        //     examination_id: examinationId,
-        //     class_id: teacherAssentClassId,
-        //     subject_id: AssentSubjectId,
-        //     section_id: AssentSectionId,
-        //     session_id: AssentSessionId
-        // });
-
-        $.ajax({
-            url: "{{ route('get.teacher_assent_result') }}",
-            type: 'GET',
-            dataType: 'json',
-            data: { 
-                examination_id: examinationId,
-                class_id: teacherAssentClassId, 
-                section_id: AssentSectionId, 
-                subject_id: AssentSubjectId,
-                session_id: AssentSessionId 
-            },
-            success: function(response) {
-                // console.log("Response received:", response);
-
-                $('#result-generate').removeClass('d-none');
-                $('#result-generate_tr').empty();
-
-                if (response.status === 200) {
-                    var jsonData = response.data;
-                    console.log("Data:", jsonData);
-
-                    if ($.isArray(jsonData)) {
-                        $.each(jsonData, function(i, item) {
-                            $('<tr>').html(
-                                "<td>" + i + "</td>"+
-                                "<td>" +  item.roll_number + "</td>"+
-                                "<td>" +  item.father_name + "</td>"
-                                // "<td>" +  item.class.name + "</td>"+
-                                // "<td>" +  item.session.start_year + "</td>"+
-                                // "<td>" +  item.section.name + "</td>"
-                            ).appendTo('#roll-generate_tr');
-                        });
-                    } else {
-                        console.error("Expected an array but got:", jsonData);
-                    }
-                } else if (response.status === 404) {
-                    console.log("No data found");
-                } else {
-                    console.log("Unexpected status:", response.status);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX request failed:", status, error);
-                console.log("Response text:", xhr.responseText);
-            }
-        });
-    }
-});
-</script> --}}
-
-
 <script>
     $('body').on("change",'.examination_id',function(){
        let id = $(this).val();
-            console.log(id);
-        getAssentClass(id,"class");    
+            // console.log(id);
+        getAssentClass(id,"teacherAssentClass");    
    });
 
    function getAssentClass(id,outid){
        let url = '{{ url("get/teacher_assent_class/") }}/' + id;
        axios.get(url)
            .then(res => {
-               console.log(res);
+            //    console.log(res);
            $('#'+outid).empty();
                let html = '';
                html += '<option value="">Select class</option>'
                res.data.forEach(element => {
-                   html += "<option value=" + element.class.id + ">" + element.class.name + "</option>"
+                   html += "<option value=" + element.id + ">" + element.name + "</option>"
                });
                $('#'+outid).append(html);
                $('#'+outid).val("").change();
            });
    }
 
-   </script>
+</script>
 
 
 <script>
      $('body').on("change",'#teacherAssentClass',function(){
+    //  $(document).on("change",".t_class", function(e) {
+    //     e.preventDefault();
         let id = $(this).val();
-            //  console.log(id);
+        console.log(id);
+
         getAssentSection(id,"teacherAssentSection");
         getAssentSubject(id,"teacherAssentSubject");
         getAssentSession(id,"teacherAssentSession");
@@ -287,5 +216,5 @@
               $('#'+outid).val("").change();
           });
     }
-</>
+</script>
 @endsection
