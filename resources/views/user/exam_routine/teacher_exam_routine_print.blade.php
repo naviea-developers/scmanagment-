@@ -38,7 +38,18 @@
     @endphp
     <div class="school-name">
         <h3>{{ @$school_info->school_name }}</h3>
-        <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
+        {{-- <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5> --}}
+        @php
+            $examinationNames = [];
+            foreach ($examSchedules as $examSchedule) {
+                $examinationName = $examSchedule->examination->name ?? 'N/A';
+                if (!in_array($examinationName, $examinationNames)) {
+                    $examinationNames[] = $examinationName;
+                }
+            }
+            $examinationName = implode(', ', $examinationNames);
+        @endphp
+        <h5>Examination: {{ $examinationName }}</h5>
         <h2>Exam Routine</h2>
     </div>
 

@@ -47,7 +47,8 @@
                 @if ($examSchedules->isNotEmpty())
 
                 <div class="float-right">
-                  <a href="{{ route('teacher.exam_routine.print') }}?examination_id={{ @$examSchedules[0]->examination_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                  {{-- <a href="{{ route('teacher.exam_routine.print') }}?examination_id={{ @$examSchedules[0]->examination_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"> --}}
+                  <a href="{{ route('teacher.exam_routine.print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
                       <i class="fas fa-print text-primary"></i> Print
                   </a>
                 </div>
@@ -58,8 +59,20 @@
                 @endphp
                 <div class="school-name">
                     <h3>{{ @$school_info->school_name }}</h3>
-                    <h5>Examination: {{ $examSchedules[0]->examination->name }}</h5>
-                    <h2>Exam Routine</h2>
+
+                 @php
+                    $examinationNames = [];
+                    foreach ($examSchedules as $examSchedule) {
+                        $examinationName = $examSchedule->examination->name ?? 'N/A';
+                        if (!in_array($examinationName, $examinationNames)) {
+                            $examinationNames[] = $examinationName;
+                        }
+                    }
+                    $examinationName = implode(', ', $examinationNames);
+                @endphp
+                <h5>Examination: {{ $examinationName }}</h5>
+
+                <h2>Exam Routine</h2>
                 </div>
                   <div class="class-routine">
                     <table>

@@ -16,4 +16,10 @@ class Examination extends Model
         return $this->belongsTo(Session::class,"session_id",'id');
     }
 
+    public function examResults(){
+        return $this->hasMany(ExamResult::class,"examination_id",'id');
+    }
+
+    
+
 }

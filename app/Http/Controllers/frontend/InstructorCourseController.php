@@ -960,7 +960,20 @@ class InstructorCourseController extends Controller
     {
         // dd('hi');
         $data['examinations']=Examination::orderBy('id', 'desc')->get();
-        $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+        // $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->get();
+
+        $teacherAssents = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->with('class') // Eager load the class relationship
+        ->get();
+
+    // Group the teacher assents by class name
+    $groupedAssents = $teacherAssents->groupBy('class.name');
+
+    // Filter the groups to include only the first assent for each class name
+    $data['uniqueAssents']=$uniqueAssents = $groupedAssents->map(function ($group) {
+        return $group->first();
+    });
+
         return view('user.instructor.exam_result_create',$data);
     }
 
@@ -1103,6 +1116,15 @@ class InstructorCourseController extends Controller
             return back()->with ('error_message', $e->getMessage());
         }
     }
+
+     //ajax get Teacher Assent School Section
+     public function getTeacherAssentClass($id){
+        $classes = ExamClass::where("examination_id",$id)->with('class')->get();
+        $class = SubjectTeacherAssent::where('teacher_id',auth()->user()->id)->whereIn('class_id', $classes->pluck('class_id'))->with('class')
+                                              ->get();
+
+        return $class;
+	} 
 
 
     //ajax get subject

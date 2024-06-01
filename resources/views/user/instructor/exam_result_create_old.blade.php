@@ -18,8 +18,8 @@
 
         <div class="col-md-3">
             <label class="form-control-label"><b>Exam:</b></label>
-            <select class="form-control form-select select2 examination_id" name="" id="examination_id">
-                <option value="">Select examination</option>
+            <select class="form-control form-select select2" name="" id="examination_id">
+                <option value="">Select Class</option>
                 @foreach ($examinations as $examination)
                 <option value="{{ $examination->id }}">{{ $examination->name }}</option>
                 @endforeach
@@ -28,12 +28,11 @@
 
         <div class="col-md-3">
             <label class="form-control-label"><b>Class:</b></label>
-            {{-- <select class="form-control form-select select2" name="" id="teacherAssentClass"> --}}
-                <select class="form-control form-select select2" name="" id="class">
+            <select class="form-control form-select select2" name="" id="teacherAssentClass">
                 <option value="">Select Class</option>
-                {{-- @foreach ($uniqueAssents as $teacherAssent)
+                @foreach ($teacherAssents as $teacherAssent)
                 <option value="{{ $teacherAssent->class->id }}">{{ $teacherAssent->class->name }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
 
@@ -204,30 +203,6 @@
 </script> --}}
 
 
-<script>
-    $('body').on("change",'.examination_id',function(){
-       let id = $(this).val();
-            console.log(id);
-        getAssentClass(id,"class");    
-   });
-
-   function getAssentClass(id,outid){
-       let url = '{{ url("get/teacher_assent_class/") }}/' + id;
-       axios.get(url)
-           .then(res => {
-               console.log(res);
-           $('#'+outid).empty();
-               let html = '';
-               html += '<option value="">Select class</option>'
-               res.data.forEach(element => {
-                   html += "<option value=" + element.class.id + ">" + element.class.name + "</option>"
-               });
-               $('#'+outid).append(html);
-               $('#'+outid).val("").change();
-           });
-   }
-
-   </script>
 
 
 <script>
@@ -287,5 +262,5 @@
               $('#'+outid).val("").change();
           });
     }
-</>
+</script>
 @endsection

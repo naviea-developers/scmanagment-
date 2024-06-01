@@ -21,19 +21,25 @@
             @php
                 $i = 1;
             @endphp
-            @if (count($examResults) > 0)
-            @foreach ($examResults as $examResult)
+            @if (count($uniqueResults) > 0)
+            @foreach ($uniqueResults as $examResult)
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ @$examResult->examination->name }}</td>
                     <td> 
-                        <a href="{{ route('student.exam_result_print') }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                        <a href="{{ route('student.exam_result_marksheet_print',@$examResult->examination->id) }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
                             <i class="fas fa-print text-primary"></i> 
                         </a>
                     </td>
                 </tr>
             @endforeach
             @endif
+
+            {{-- @foreach($uniqueResults as $result)
+            <p>Examination Name: {{ $result->examination->name }}</p>
+            <!-- Display other exam result details as needed -->
+            @endforeach --}}
+
         </tbody>
   </table>
 </div>

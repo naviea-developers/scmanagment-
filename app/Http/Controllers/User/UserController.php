@@ -25,6 +25,7 @@ use App\Models\Continent;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
 use App\Models\ExamClass;
+use App\Models\Examination;
 use App\Models\ExamSchedule;
 use App\Models\HomeWork;
 use App\Models\Notice;
@@ -170,34 +171,48 @@ class UserController extends Controller
         return view('user.customer.my_event_list', $data);
     }
 
-    public function studentExamResult()
+    public function studentExamMarksheetIndex()
     {
         $user_id = auth()->user()->id;
         if($user_id){
             $data['student']=$student=Admission::where('user_id',$user_id)->first();
-            $data['examResults']=ExamResult::where('student_id',$student->id)
-                                            ->where('class_id',$student->class_id)
-                                            ->where('section_id',$student->section_id)
-                                            ->where('session_id',$student->session_id)
-                                            ->where('is_publis','1')
-                                            ->orderBy('id', 'desc')->get();
+
+            $data['examResults']=$examResults = ExamResult::where('student_id', $student->id)
+                                                ->where('class_id', $student->class_id)
+                                                ->where('section_id', $student->section_id)
+                                                ->where('session_id', $student->session_id)
+                                                ->where('is_publis', '1')
+                                                ->orderBy('id', 'desc')
+                                                ->with('examination') // Eager load the examination relationship
+                                                ->get(); 
+            // Group the exam results by examination name
+            $groupedResults = $examResults->groupBy('examination.name');
+
+            // Filter the groups to include only the first result for each examination name
+            $data['uniqueResults']= $uniqueResults = $groupedResults->map(function ($group) {
+                return $group->first();
+            });                                                               
+                                            
         }
+
         return view('user.student.result.index',$data);
     }
 
-    public function studentExamPrint()
+    public function studentExamMarksheetPrint($id)
     {
         $user_id = auth()->user()->id;
         if($user_id){
             $data['student']=$student=Admission::where('user_id',$user_id)->first();
+                    
             $data['examResults']=ExamResult::where('student_id',$student->id)
                                             ->where('class_id',$student->class_id)
                                             ->where('section_id',$student->section_id)
                                             ->where('session_id',$student->session_id)
+                                            ->where('examination_id',$id)
                                             ->where('is_publis','1')
                                             ->orderBy('id', 'desc')->get();
         }
-        return view('user.student.result.index',$data);
+        return view('user.student.result.student_exam_print',$data);
     }
     
     public function updateUserPic(Request $request, $id)
@@ -740,8 +755,28 @@ class UserController extends Controller
 
 
     public function teacherExamRoutinePrint(Request $request){
-        $id= $request->input('examination_id');
-        $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
+
+        $user = auth()->user();
+        $teacherAssignments = SubjectTeacherAssent::where('teacher_id', $user->id)->get();
+        $classIds = $teacherAssignments->pluck('class_id')->unique();
+        $sectionIds = $teacherAssignments->pluck('section_id')->unique();
+        $subjectIds = $teacherAssignments->pluck('subject_id')->unique();
+
+        $examSchedules = ExamSchedule::whereIn('class_id', $classIds)
+            ->whereIn('section_id', $sectionIds)
+            ->whereHas('examClass', function($query) use ($subjectIds) {
+                $query->whereIn('subject_id', $subjectIds);
+            })->get()
+            ->filter(function ($routine) {
+                return $routine->examination && $routine->examination->end_date >= Carbon::now();
+            });
+        $data = [
+            'teacher' => $teacherAssignments,
+            'examSchedules' => $examSchedules,
+        ];
+
+        // $id= $request->input('examination_id');
+        // $data['examSchedules']= ExamSchedule::where('status','1')->where("examination_id",$id)->get();
         return view('user.exam_routine.teacher_exam_routine_print',$data);
     }
 

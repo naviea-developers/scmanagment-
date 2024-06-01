@@ -45,8 +45,8 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('/my-order-print/{id}', [UserController::class, 'myOrderPrint'])->name('user.order_print');
         Route::get('/my-event', [UserController::class, 'myEventList'])->name('user.my_event');
         Route::get('/my-package', [UserController::class, 'myPackageList'])->name('user.my_package');
-        Route::get('/student-exam_result', [UserController::class, 'studentExamResult'])->name('student.exam_result');
-        Route::get('/student-exam_result_print', [UserController::class, 'studentExamPrint'])->name('student.exam_result_print');
+        Route::get('/student-marksheet_index', [UserController::class, 'studentExamMarksheetIndex'])->name('student.exam_marksheet_index');
+        Route::get('/student-exam_result_marksheet_print/{id}', [UserController::class, 'studentExamMarksheetPrint'])->name('student.exam_result_marksheet_print');
 
 
 
@@ -189,6 +189,8 @@ Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'ge
 Route::get('get/teacher_assent_session/{id}', [InstructorCourseController::class, 'getTeacherAssentSession']);
 Route::post('/get-teacher-result-by-ajex', [InstructorCourseController::class, 'getTeacherResultByAjax'])->name('teacher.get_result_by_ajax');
 
+
+Route::get('get/teacher_assent_class/{id}', [InstructorCourseController::class, 'getTeacherAssentClass']);
 
 
 
