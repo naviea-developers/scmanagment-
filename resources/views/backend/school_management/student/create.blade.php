@@ -150,6 +150,21 @@
                           </div>
 
                           <div class="col-sm-4 mt-3">
+                            <label class=" form-control-label">Blood Group: <span class="tx-danger">*</span></label>
+                            <select class="form-control" name="blood_group" >
+                                <option value="">Select Blood Group</option>
+                                <option value="o+">O Positive (O+)</option>
+                                <option value="o-">O Negative (O-)</option>
+                                <option value="a+">A Positive (A+)</option>
+                                <option value="a-">A Negative (A-)</option>
+                                <option value="b+">B Positive (B+)</option>
+                                <option value="b-">B Negative (B-)</option>
+                                <option value="ab+">AB Positive (AB+)</option>
+                                <option value="ab-">AB Negative (AB-)</option>
+                            </select>
+                        </div>
+
+                          <div class="col-sm-4 mt-3">
                               <label class="form-control-label">Father Name : <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
                               <input type="text" name="father_name" class="form-control" placeholder="Enter Father Name" value="{{ old('father_name') }}" required>

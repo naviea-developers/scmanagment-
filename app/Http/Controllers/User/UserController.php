@@ -878,7 +878,7 @@ class UserController extends Controller
 
 
 
-    public function studentIdCard()
+    public function userIdCard()
     {
         return view('user.id_card.create');
     }

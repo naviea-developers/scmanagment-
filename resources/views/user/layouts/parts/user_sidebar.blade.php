@@ -33,6 +33,11 @@
 
            
 
+            <a href="{{ route('user.id_card', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span> ID Card </span>
+            </a>
+
             <a href="{{ route('student.homework', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Home work </span>

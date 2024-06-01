@@ -4,6 +4,8 @@
     $social_url = \App\Models\Tp_option::where('option_name', 'theme_social_media')->first();
     $dataObj = json_decode($social_url->option_value);
     $footer_contents = \App\Models\Tp_option::where('option_name', 'theme_option_footer')->first();
+    $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+    $school_info = json_decode($results->option_value);
 @endphp
 <div class="main-footer bg-prussian-blue text-white fw-medium ">
     <div class="container-lg">
@@ -16,8 +18,8 @@
 <!--                <p class="mb-0 text">
                                     </p>-->
                 <p style="color: var(--footer_text_color)">
-                    @if (@$footer_contents->license_no > 0 )
-                    License No. {{@$footer_contents->license_no}}
+                    @if (@$school_info->eiin_number > 0 )
+                    EIIN No. {{@$school_info->eiin_number}}
                     @endif 
                 </p>
             </div>

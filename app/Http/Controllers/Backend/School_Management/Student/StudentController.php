@@ -217,6 +217,7 @@ class StudentController extends Controller
 
             $student->student_name = $request->student_name;
             $student->dob = $request->dob;
+            $student->blood_group = $request->blood_group;
             $student->student_phone = $request->student_phone;
             $student->student_email = $request->student_email;
             $student->student_nid = $request->student_nid;
@@ -371,6 +372,7 @@ class StudentController extends Controller
             $student->fee_id = $request->fee_id ?? 0;
             $student->student_name = $request->student_name;
             $student->dob = $request->dob;
+            $student->blood_group = $request->blood_group;
             $student->student_phone = $request->student_phone;
             $student->student_email = $request->student_email;
             $student->student_nid = $request->student_nid;

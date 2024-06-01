@@ -108,6 +108,7 @@ class AdmissionController extends Controller
 
             $admission->student_name = $request->student_name;
             $admission->dob = $request->dob;
+            $admission->blood_group = $request->blood_group;
             $admission->student_phone = $request->student_phone;
             $admission->student_email = $request->student_email;
             $admission->student_nid = $request->student_nid;
@@ -268,6 +269,7 @@ class AdmissionController extends Controller
             $admission->fee_id = $request->fee_id ?? 0;
             $admission->student_name = $request->student_name;
             $admission->dob = $request->dob;
+            $admission->blood_group = $request->blood_group;
             $admission->student_phone = $request->student_phone;
             $admission->student_email = $request->student_email;
             $admission->student_nid = $request->student_nid;

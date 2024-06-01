@@ -140,7 +140,9 @@ class ThemeOptionController extends Controller
 			$data['website'] = $dataObj->website ?? '';
             $data['email'] = $dataObj->email ?? '';
 			$data['address'] = $dataObj->address ?? '';
+			$data['eiin_number'] = $dataObj->eiin_number ?? '';
 			$data['school_logo'] = $dataObj->school_logo ?? '';
+			$data['principal_signature'] = $dataObj->principal_signature ?? '';
         }else{
             $data['school_name'] = "";
             $data['phone1'] = "";
@@ -148,7 +150,9 @@ class ThemeOptionController extends Controller
             $data['email'] = "";
 			$data['website'] = "";
 			$data['address'] = "";
+			$data['eiin_number'] = "";
 			$data['school_logo'] = "";
+			$data['principal_signature'] = "";
         }
         $dat_a['datalist'] = $data;
         return view('Backend.setting.appearance.theme-options-school-info',$dat_a);
@@ -282,6 +286,8 @@ class ThemeOptionController extends Controller
 		$website = $request->input('website');
 		$address = $request->input('address');
 		$school_logo = $request->input('school_logo');
+		$principal_signature = $request->input('principal_signature');
+		$eiin_number = $request->input('eiin_number');
 
 		$gData = Tp_option::where('option_name','theme_option_school_info')->first();
 		$id = '';
@@ -301,6 +307,18 @@ class ThemeOptionController extends Controller
 			}
 		}
 
+		$principal_signature="";
+        if($request->hasFile('principal_signature')){
+            $fileName = rand().time().'.'.request()->principal_signature->getClientOriginalExtension();
+            request()->principal_signature->move(public_path('upload/school_logo/principal_signature/'),$fileName);
+            $principal_signature= $fileName;
+        }else{
+			if($id){
+				$dataObj = json_decode($gData->option_value);
+				$principal_signature=$dataObj->principal_signature ?? '';
+			}
+		}
+
 		$validator_array = array(
 			'school_name' => $request->input('school_name'),
 			'phone1' => $request->input('phone1'),
@@ -309,6 +327,8 @@ class ThemeOptionController extends Controller
 			'website' => $request->input('website'),
 			'address' => $request->input('address'),
 			'school_logo' => $request->input('school_logo'),
+			'principal_signature' => $request->input('principal_signature'),
+			'eiin_number' => $request->input('eiin_number'),
 		);
 
 		$validator = Validator::make($validator_array, [
@@ -318,6 +338,7 @@ class ThemeOptionController extends Controller
 			'email' => 'required',
 			'website' => 'required',
 			'address' => 'required',
+			'eiin_number' => 'required',
 			// 'school_logo' => 'required',
 		]);
 
@@ -361,6 +382,12 @@ class ThemeOptionController extends Controller
 			return redirect()->back()->with('error-message', $res['msg'])->withInput();
 		}
 
+		if($errors->has('eiin_number')){
+			$res['msgType'] = 'error';
+			$res['msg'] = $errors->first('eiin_number');
+			return redirect()->back()->with('error-message', $res['msg'])->withInput();
+		}
+
 
 		$option = array(
 			'school_name' => $school_name,
@@ -369,7 +396,9 @@ class ThemeOptionController extends Controller
 			'email' => $email,
 			'website' => $website,
 			'address' => $address,
+			'eiin_number' => $eiin_number,
 			'school_logo' => $school_logo,
+			'principal_signature' => $principal_signature,
 
 		);
 
