@@ -28,6 +28,7 @@ use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineControlle
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
 use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
+use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -306,6 +307,11 @@ Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
 Route::prefix('admit')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('create', [AdmitController::class,"create"])->name('admin.admit.create');
     Route::post('show', [AdmitController::class,"show"])->name('admin.admit.show');
+});
+//Admin ID Card Make
+Route::prefix('id-card')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('create', [IdCardController::class,"create"])->name('admin.id_card.create');
+    Route::post('show', [IdCardController::class,"show"])->name('admin.id_card.show');
 });
 
 //Add Admission for admin

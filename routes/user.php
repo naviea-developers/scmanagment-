@@ -175,6 +175,8 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
          //exam marksheet for student
          Route::get('/exam-marksheet', [MarksheetController::class, 'index'])->name('student.marksheet');
+        ///ID card
+         Route::get('/id-card', [UserController::class, 'userIdCard'])->name('user.id_card');
 });
 
 
@@ -197,4 +199,3 @@ Route::post('/get-teacher-result-by-ajex', [InstructorCourseController::class, '
 
 
 
-Route::get('/id-card', [UserController::class, 'studentIdCard'])->name('student.id_card');

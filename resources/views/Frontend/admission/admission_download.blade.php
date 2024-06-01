@@ -101,6 +101,30 @@
               <label for="dob">Student NID/Birth Certificate :</label>
               <p>{{ @$details->student_nid }}</p>
           </div>
+
+          <div class="column">
+            <label for="blood_group">Blood Group :</label>
+            <p >
+              @if (@$details->blood_group == 'o+')
+                  O Positive (O+)
+                  @elseif (@$details->blood_group == 'o-')
+                  O Negative (O-)
+                  @elseif (@$details->blood_group == 'a+')
+                  A Positive (A+)
+                  @elseif (@$details->blood_group == 'a-')
+                  A Negative (A-)
+                  @elseif (@$details->blood_group == 'b+')
+                  B Positive (B+)
+                  @elseif (@$details->blood_group == 'b-')
+                  B Negative (B-)
+                  @elseif (@$details->blood_group == 'ab+')
+                  AB Positive (AB+)
+                  @elseif (@$details->blood_group == 'ab-')
+                  AB Negative (AB-)
+              @endif
+          </p>
+        </div>
+
           <div class="column">
               <label for="gender">Father Name :</label>
               <p>{{ @$details->father_name }}</p>

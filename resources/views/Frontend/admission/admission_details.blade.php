@@ -112,16 +112,30 @@
                             </div>
 
 
-
-
-
-
-
-
-
-
-
-
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Blood Group: </b></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <p >
+                                        @if (@$details->blood_group == 'o+')
+                                            O Positive (O+)
+                                            @elseif (@$details->blood_group == 'o-')
+                                            O Negative (O-)
+                                            @elseif (@$details->blood_group == 'a+')
+                                            A Positive (A+)
+                                            @elseif (@$details->blood_group == 'a-')
+                                            A Negative (A-)
+                                            @elseif (@$details->blood_group == 'b+')
+                                            B Positive (B+)
+                                            @elseif (@$details->blood_group == 'b-')
+                                            B Negative (B-)
+                                            @elseif (@$details->blood_group == 'ab+')
+                                            AB Positive (AB+)
+                                            @elseif (@$details->blood_group == 'ab-')
+                                            AB Negative (AB-)
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
 
 
 

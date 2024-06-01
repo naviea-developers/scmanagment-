@@ -141,7 +141,15 @@ li {
 									<div class="col-lg-12">
 										<div class="form-group">
 											<label for="phone">{{ __('Email') }}</label>
-											<input value="{{ old('email',$datalist['email']) }}" type="text" name="email" id="email" class="form-control">
+											<input value="{{ old('email',$datalist['email']) }}" type="email" name="email" id="email" class="form-control">
+										</div>
+									</div>
+								</div>
+                                <div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="phone">{{ __('EIIN') }}</label>
+											<input value="{{ old('eiin_number',$datalist['eiin_number']) }}" type="text" name="eiin_number" id="eiin_number" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -172,6 +180,21 @@ li {
 												<img class="display-upload-img" style="width: 76px;height: 70px;" src="{{ asset('public/upload/school_logo/'.$datalist['school_logo']) }}" alt="">
 												{{-- <img class="display-upload-img" style="width: 76px;height: 70px;" src="{{ @$results->footer_image == '' ? @$results->no_image : @$results->footer_image_show}}" alt=""> --}}
 													<input type="file" name="school_logo" class="form-control upload-img" placeholder="Enter Activity Image"
+													style="position: absolute;top: 0;opacity: 0;height: 100%;">
+											</div>
+										</div>
+										<em>Recommended image size width: 600px and height: 315px.</em>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="og_image">{{ __('Principal Signature') }}</label>
+										<div class="col-sm-7 mg-t-10 mg-sm-t-0">
+											<div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 76px;">
+												<img class="display-upload-img" style="width: 76px;height: 70px;" src="{{ asset('public/upload/school_logo/principal_signature/'.$datalist['principal_signature']) }}" alt="">
+												{{-- <img class="display-upload-img" style="width: 76px;height: 70px;" src="{{ @$results->footer_image == '' ? @$results->no_image : @$results->footer_image_show}}" alt=""> --}}
+													<input type="file" name="principal_signature" class="form-control upload-img" placeholder="Enter Activity Image"
 													style="position: absolute;top: 0;opacity: 0;height: 100%;">
 											</div>
 										</div>

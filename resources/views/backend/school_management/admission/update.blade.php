@@ -151,7 +151,20 @@
                             </div>
 
 
-
+                            <div class="col-sm-4 mt-3">
+                                <label class=" form-control-label">Blood Group: <span class="tx-danger">*</span></label>
+                                <select class="form-control" name="blood_group" >
+                                    <option value="">Select Blood Group</option>
+                                    <option @if ($admission->blood_group == 'o+') Selected @endif value="o+">O Positive (O+)</option>
+                                    <option @if ($admission->blood_group == 'o-') Selected @endif value="o-">O Negative (O-)</option>
+                                    <option @if ($admission->blood_group == 'a+') Selected @endif value="a+">A Positive (A+)</option>
+                                    <option @if ($admission->blood_group == 'a-') Selected @endif value="a-">A Negative (A-)</option>
+                                    <option @if ($admission->blood_group == 'b+') Selected @endif value="b+">B Positive (B+)</option>
+                                    <option @if ($admission->blood_group == 'b-') Selected @endif value="b-">B Negative (B-)</option>
+                                    <option @if ($admission->blood_group == 'ab+') Selected @endif value="ab+">AB Positive (AB+)</option>
+                                    <option @if ($admission->blood_group == 'ab-') Selected @endif value="ab-">AB Negative (AB-)</option>
+                                </select>
+                            </div>
 
 
                             <div class="col-sm-4 mt-3">
