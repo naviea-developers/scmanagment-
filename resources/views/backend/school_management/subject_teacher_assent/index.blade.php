@@ -39,6 +39,7 @@ Admin - All subject_teacher_assent
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Class Name</th>
                     <th class="wd-15p">Class Teacher</th>
+                    <th class="wd-15p">Subject</th>
                     <th class="wd-15p">Sections</th>
                     <th class="wd-15p">Session</th>
                     <th class="wd-15p">Status</th>
@@ -55,6 +56,7 @@ Admin - All subject_teacher_assent
                           <td>{{ $i++ }}</td>
                           <td>{{ $data->class->name }}</td>
                           <td>{{ @$data->teacher->name }}</td>
+                          <td>{{ @$data->subject->name }}</td>
                           <td>{{ $data->schoolsection->name }}</td>
                           <td>{{ @$data->session->start_year }} - {{ @$data->session->end_year }}</td>
                           <td>

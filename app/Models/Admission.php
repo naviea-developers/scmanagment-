@@ -73,4 +73,6 @@ class Admission extends Model
         return $this->hasMany(AdmissionCertificate::class,"admission_id",'id');
     }
 
+    
+
 }

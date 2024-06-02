@@ -23,7 +23,7 @@
     }
   </style>
 
-
+@if (@$students->count() > 0)
 <div class="container">
   {{-- <div class="school-name">
     <h1>School Name</h1>
@@ -39,6 +39,7 @@
             <th>Student Name</th>
             <th>Student Father</th>
             <th>Class</th>
+            <th>Subject</th>
             <th>Session</th>
             <th>Academic year</th>
             <th>Section</th>
@@ -58,7 +59,8 @@
                     <td>{{ @$student->roll_number }}</td> 
                     <td>{{ @$student->student_name }}</td>          
                     <td>{{ @$student->father_name }}</td>                     
-                    <td>{{ @$student->class->name }}</td>                    
+                    <td>{{ @$student->class->name }}</td>  
+                    <td>{{ @$Examclass->subject->name }}</td>                    
                     <td>{{ @$student->session->start_year }}-{{ $student->session->end_year }}</td>
                     <td>{{ @$student->academic_year->year }}</td>    
                     <td>{{ @$student->section->name }}</td>                   
@@ -66,8 +68,8 @@
                     <td>{{ @$Examclass->pass_marke }}</td>
                     
                     <td>
-                        {{-- <input type="number" class=""> --}}
-                        <input type="number" name="obtained_marke[{{ $student->id }}]" class="form-control">
+                        <input type="number" value="" name="obtained_marke[{{ $student->id }}]" class="form-control">
+                        {{-- <input type="number" value="{{ @$examResult->obtained_marke }}" name="obtained_marke[{{ $student->id }}]" class="form-control"> --}}
                         <input type='hidden' name='roll_number[{{ $student->id }}]' value="{{ $student->roll_number }}">
                         {{-- <input type='hidden' name='student_name[{{ $student->id }}]' value="{{ $student->student_name }}"> --}}
                         {{-- <input type='hidden' name='father_name[{{ $student->id }}]' value="{{ $student->father_name }}"> --}}
@@ -81,8 +83,6 @@
                         <input type='hidden' name='pass_marke[{{ $student->id }}]' value="{{ $Examclass->pass_marke }}">
                         <input type='hidden' name='examination_id[{{ $student->id }}]' value="{{ $Examclass->examination_id }}">
                         <input type='hidden' name='exam_class_id[{{ $student->id }}]' value="{{ $Examclass->id }}">
-                        
-                        
                     </td>
                    
                 </tr>
@@ -93,6 +93,11 @@
     </table>
   </div>
 </div>
+@else
+  <div class="text-center">
+    <h2>Data Not Found !</h2>
+  </div>
+@endif
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-k3A1LmfFiBCL0h9pzyvLWNs/zFwMIGg/2IQXO48JAU0MTrvYV4R8aG3g7AgL73n9" crossorigin="anonymous"></script>

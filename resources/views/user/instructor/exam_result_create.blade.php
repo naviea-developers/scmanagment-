@@ -162,36 +162,20 @@
         console.log(id);
 
         getAssentSection(id,"teacherAssentSection");
-        getAssentSubject(id,"teacherAssentSubject");
         getAssentSession(id,"teacherAssentSession");
+        // getAssentSubject(id,"teacherAssentSubject");
     });
 
     function getAssentSection(id,outid){
         let url = '{{ url("get/teacher_assent_school_section/") }}/' + id;
         axios.get(url)
             .then(res => {
-                console.log(res);
+                // console.log(res);
             $('#'+outid).empty();
                 let html = '';
                 html += '<option value="">Select Section</option>'
                 res.data.forEach(element => {
-                    html += "<option value=" + element.schoolsection.id + ">" + element.schoolsection.name + "</option>"
-                });
-                $('#'+outid).append(html);
-                $('#'+outid).val("").change();
-            });
-    }
-
-    function getAssentSubject(id,outid){
-        let url = '{{ url("get/teacher_assent_subject/") }}/' + id;
-        axios.get(url)
-            .then(res => {
-                console.log(res);
-            $('#'+outid).empty();
-                let html = '';
-                html += '<option value="">Select Subject</option>'
-                res.data.forEach(element => {
-                    html += "<option value=" + element.subject.id + ">" + element.subject.name + "</option>"
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });
                 $('#'+outid).append(html);
                 $('#'+outid).val("").change();
@@ -202,17 +186,44 @@
       let url = '{{ url("get/teacher_assent_session/") }}/' + id;
       axios.get(url)
           .then(res => {
-              console.log(res);
+            //   console.log(res);
           $('#'+outid).empty();
               let html = '';
               html += '<option value="">Select Session</option>'
               res.data.forEach(element => {
-                html += "<option value=" + element.session.id + ">" + element.session.start_year +"-"+ element.session.end_year + "</option>";
+                html += "<option value=" + element.id + ">" + element.start_year +"-"+ element.end_year + "</option>";
               });
 
               $('#'+outid).append(html);
               $('#'+outid).val("").change();
           });
     }
+
+    $('body').on("change",'#teacherAssentClass,#teacherAssentSection',function(){
+        var classId = $('#teacherAssentClass').val();
+        var sectionId = $('#teacherAssentSection').val();
+        console.log(classId,sectionId);
+        // getAssentSubject(id,"teacherAssentSubject");
+        getAssentSubject(classId, sectionId, "teacherAssentSubject");
+    });
+
+    function getAssentSubject(classId,sectionId,outid){
+        // let url = '{{ url("get/teacher_assent_subject/") }}/' + id;
+        let url = `{{ url("get/teacher_assent_subject/") }}/${classId}/${sectionId}`;
+        axios.get(url)
+            .then(res => {
+                // console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Subject</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+  
 </script>
 @endsection
