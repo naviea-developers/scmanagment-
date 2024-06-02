@@ -182,31 +182,6 @@
             });
     }
 
-    $('body').on("change",'#teacherAssentClass,#teacherAssentSection',function(){
-        var classId = $('#teacherAssentClass').val();
-        var sectionId = $('#teacherAssentSection').val();
-        console.log(classId,sectionId);
-        // getAssentSubject(id,"teacherAssentSubject");
-        getAssentSubject(classId, sectionId, "teacherAssentSubject");
-    });
-
-    function getAssentSubject(classId,sectionId,outid){
-        // let url = '{{ url("get/teacher_assent_subject/") }}/' + id;
-        let url = `{{ url("get/teacher_assent_subject/") }}/${classId}/${sectionId}`;
-        axios.get(url)
-            .then(res => {
-                console.log(res);
-            $('#'+outid).empty();
-                let html = '';
-                html += '<option value="">Select Subject</option>'
-                res.data.forEach(element => {
-                    html += "<option value=" + element.id + ">" + element.name + "</option>"
-                });
-                $('#'+outid).append(html);
-                $('#'+outid).val("").change();
-            });
-    }
-
     function getAssentSession(id,outid){
       let url = '{{ url("get/teacher_assent_session/") }}/' + id;
       axios.get(url)
@@ -223,5 +198,32 @@
               $('#'+outid).val("").change();
           });
     }
+
+    $('body').on("change",'#teacherAssentClass,#teacherAssentSection',function(){
+        var classId = $('#teacherAssentClass').val();
+        var sectionId = $('#teacherAssentSection').val();
+        console.log(classId,sectionId);
+        // getAssentSubject(id,"teacherAssentSubject");
+        getAssentSubject(classId, sectionId, "teacherAssentSubject");
+    });
+
+    function getAssentSubject(classId,sectionId,outid){
+        // let url = '{{ url("get/teacher_assent_subject/") }}/' + id;
+        let url = `{{ url("get/teacher_assent_subject/") }}/${classId}/${sectionId}`;
+        axios.get(url)
+            .then(res => {
+                // console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Subject</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+  
 </script>
 @endsection
