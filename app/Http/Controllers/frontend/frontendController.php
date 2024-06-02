@@ -64,6 +64,7 @@ use App\Models\Admission;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\Designation;
+use App\Models\ExamSchedule;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
 use App\Models\HomeContentClassList;
@@ -95,7 +96,7 @@ class FrontendController extends Controller
         $data['universities'] = University::where('status',1)->inRandomOrder()->take(12)->get();
         $data['gallerys'] = Gallery::where('status',1)->orderBy('id','desc')->take(7)->get();
         $data['classLists'] = HomeContentClassList::where('status',1)->orderBy('id','desc')->take(7)->get();
-
+        $data['classes'] = Classe::where('status',1)->orderBy('id','asc')->get();
         $data['blogs'] = Blog::latest()->take(4)->get();
 
         $data['search']=$name = $request->input('search');
@@ -1322,6 +1323,45 @@ class FrontendController extends Controller
      $mpdf->setAutoBottomMargin = 'stretch';
      $mpdf->writeHTML($html);
      $name = 'class_routine_pdf_download ' . date('Y-m-d i:h:s');
+     $mpdf->Output($name.'.pdf', 'D');
+ }
+
+ public function examRoutineDownload(Request $request)
+ {
+    // dd('hi');
+   $class_id= $request->input('class_id');
+   $data['class']=Classe::find($request->input('class_id'));
+    $data['examSchedules'] = $examSchedule = ExamSchedule::where('class_id', $class_id)
+    ->get()
+    ->filter(function ($routine) {
+    return $routine->examination && $routine->examination->end_date >= Carbon::now();
+
+    }); 
+
+    //  return view('Frontend.class.exam_routine_pdf_download', $data);
+     $html = view('Frontend.class.exam_routine_pdf_download', $data);
+     $mpdf = new Mpdf([
+         'mode' => 'UTF-8',
+         'margin_left' => 5,
+         'margin_right' => 5,
+         'margin_top' => 5,
+         'margin_bottom' => 0,
+         'margin_header' => 0,
+         'margin_footer' => 0,
+     ]);
+
+     //For Multilanguage Start
+     $mpdf->autoScriptToLang = true;
+     $mpdf->baseScript = 1;
+     $mpdf->autoLangToFont = true;
+     $mpdf->autoVietnamese = true;
+     $mpdf->autoArabic = true;
+
+     //For Multilanguage End
+     $mpdf->setAutoTopMargin = 'stretch';
+     $mpdf->setAutoBottomMargin = 'stretch';
+     $mpdf->writeHTML($html);
+     $name = 'exam_routine_pdf_download ' . date('Y-m-d i:h:s');
      $mpdf->Output($name.'.pdf', 'D');
  }
 

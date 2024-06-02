@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectT
 use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
 use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
+use App\Http\Controllers\Backend\School_management\DailyClass\DailyClassController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -290,6 +291,18 @@ Route::prefix('fee-management')->middleware(['auth:admin', 'adminCheck:0'])->gro
     Route::post('update/{id}', [FeeManagementController::class,"update"])->name('admin.fee_management.update');
     Route::post('delete', [FeeManagementController::class,"destroy"])->name('admin.fee_management.delete');
     Route::get('/status/{id}', [FeeManagementController::class, 'status'])->name('admin.fee_management.status');
+});
+
+Route::prefix('daily_class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Course Create
+     Route::get('index', [DailyClassController::class,"index"])->name('admin.daily_class.index');
+     Route::get('create', [DailyClassController::class,"create"])->name('admin.daily_class.create');
+     Route::post('store', [DailyClassController::class,"store"])->name('admin.daily_class.store');
+     Route::get('edit/{id}', [DailyClassController::class,"edit"])->name('admin.daily_class.edit');
+     Route::post('update/{id}', [DailyClassController::class,"update"])->name('admin.daily_class.update');
+     Route::post('delete', [DailyClassController::class,"destroy"])->name('admin.daily_class.delete');
+     Route::get('/status/{id}', [DailyClassController::class, 'status'])->name('admin.daily_class.status');
+
 });
 
 //Add Batch for admin

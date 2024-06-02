@@ -32,12 +32,18 @@
 <body>
 
 <div class="container">
-  <div class="school-name">
-    <h1>School Name</h1>
-    <h5>Class Name: {{ @$class_routine[0]->class->name }}</h5>
-    <h5>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</h5>
-    <h5>Section : {{ @$class_routine[0]->schoolsection->name }}</h5>
-  </div>
+
+    @php
+      $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+      $school_info = json_decode($results->option_value);
+    @endphp
+    <div class="school-name">
+      <h3>{{ @$school_info->school_name }}</h3>
+      <p>Mobile : {{ @$school_info->phone1 }} <br> Email : {{ @$school_info->email }} <br> Website : {{ @$school_info->website }} </p>
+      <p>Class Name: {{ @$class_routine[0]->class->name }}</p>
+      <p>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</p>
+      <p>Section : {{ @$class_routine[0]->schoolsection->name }}</p>
+    </div>
 
   <div class="class-routine">
     <h2>Class Routine</h2>

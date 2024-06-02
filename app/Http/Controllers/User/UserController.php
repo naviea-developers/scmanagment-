@@ -654,10 +654,6 @@ class UserController extends Controller
                     ->orderBy('day_id','asc')
                     ->orderBy('class_duration_id', 'asc')
                     ->get();
-                    // ->filter(function ($routine) {
-                    //     return $routine->examination && $routine->examination->end_date >= Carbon::now();
-                    // });
-                    // dd($routines);
             } else {
                 
             }
@@ -884,3 +880,6 @@ class UserController extends Controller
     }
 
 }
+
+
+

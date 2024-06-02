@@ -324,6 +324,7 @@ Route::get('university-program-details/{id}', [FrontendController::class,"progra
 Route::get('class_details/{id}', [FrontendController::class,"classDetails"])->name('frontend.class_details');
 Route::get('/book_list/download/{id}', [FrontendController::class, 'bookListDownload'])->name('frontend.book_list_download');
 Route::get('/class_routine/download', [FrontendController::class, 'classRoutineDownload'])->name('frontend.class_routine_download');
+Route::get('/exam_routine/download', [FrontendController::class, 'examRoutineDownload'])->name('frontend.exam_routine_download');
 
 Route::get('all/class_list',[FrontendController::class,'allClassListShow'])->name('frontend.all.class.class_list_show');
 

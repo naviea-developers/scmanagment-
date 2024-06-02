@@ -43,4 +43,5 @@ class Classe extends Model
 
 
 
+
 }

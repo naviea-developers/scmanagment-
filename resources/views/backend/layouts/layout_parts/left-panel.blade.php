@@ -187,6 +187,24 @@
         </li><!-- br-Speakers-item -->
 
 
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'daily_class')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Daily CLass</span>
+            </a>
+            @php
+            $r_check = ( Route::is('admin.daily_class.create') ||  Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.daily_class.create') }}" class="sub-link {{( Route::is('admin.daily_class.create') ) ?'active':''}}">Add Daily Class</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.daily_class.index') }}" class="sub-link {{(Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit')) ?'active':''}}">Manage Daily Class</a>
+                </li>
+                </li>
+            </ul>
+        </li>
+
+
 
 
 
@@ -274,7 +292,7 @@
         </li><!-- br-Speakers-item -->
 
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'courses')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Course</span>
@@ -287,10 +305,8 @@
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.course.index') }}" class="sub-link {{(Route::is('admin.course.index') || Route::is('admin.course.edit')) ?'active':''}}">Manage Course</a>
                 </li>
-                {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
-                </li> --}}
             </ul>
-        </li><!-- br-Speakers-item -->
+        </li><!-- br-Speakers-item --> --}}
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebook')?'active':''}} ">
@@ -658,12 +674,12 @@
         </li><!-- br-Coupon-item -->
 
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="{{ route('admin.course.order.manage') }}" class="br-menu-link {{(Route::is('admin.course.order.manage')) ?'show-sub':'' }}">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Orders</span>
             </a><!-- br-menu-link -->
-        </li>
+        </li> --}}
 
 
         <li class="br-menu-item">

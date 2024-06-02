@@ -115,8 +115,12 @@
 
                 <h2 class="fw-medium h3 text-uppercase" style="color: var(--header_text_color)">{!!  $home_content->banner_text  !!}</h2>
                 <div class="header-btn l mt-5 text-uppercase" style="letter-spacing: 2px;">
-                    @foreach ($buttons as $button)
+                    {{-- @foreach ($buttons as $button)
                     <a href="{{ $button->answer }}" class="btn btn-dark-cerulean btn-lg mb-2" style="color: var(--button2_text_color)">{{ $button->question }}</a>
+                    @endforeach --}}
+
+                    @foreach ($classes as $class)
+                    <a href="{{ route('frontend.class_details',@$class->id) }}" class="btn btn-dark-cerulean btn-lg mb-2" style="color: var(--button2_text_color)">{{ $class->name }}</a>
                     @endforeach
                 </div>
         </div>
@@ -338,7 +342,7 @@
   <!-- End of University Showcase -->
 
  <!--Start Course Content-->
-    <div class="py-0 pt-lg-220" style="padding-top: 0px !important;">
+    {{-- <div class="py-0 pt-lg-220" style="padding-top: 0px !important;">
         <div class="container-lg">
             <div class="row">
                 <div class="col-12">
@@ -484,11 +488,6 @@
                                                     <i class="far fa-bookmark ml-4" style="cursor: pointer;font-size: 30px;"></i>
 
                                                 </a>
-
-                                                    {{-- <span  class="ms-auto">
-                                                            <img src="{{ asset('public/frontend') }}/application/modules/frontend/views/themes/default/assets/img/bookmark-1.png"
-                                                            class="img-fluid ms-auto " alt="" style="cursor: pointer;">
-                                                    </span> --}}
                                                 </div>
                                                 @if($course->discount > 0)
                                                 <span class="px-0 badge m-3 position-absolute start-0 z-index-2 polygon-shape" style="top:25px; color: var(--product_text_color)">
@@ -651,10 +650,10 @@
                                                 <!-- add to cart  -->
                                                 <div class="d-block">
 
-                                                    {{-- <div class="align-items-center d-flex form-check ps-0">
+                                                    <div class="align-items-center d-flex form-check ps-0">
                                                         <input name="course_price_type[{{ $course->id }}]" class="me-1 change_cart_val @if(Auth::check()) active @endif" style="width:21px;height:21px" course_id="{{ $course->id }}" id="course_subcribe{{ $course->id }}" type="radio"  @if (Auth::check() == false) disabled @endif>
                                                         <label class="form-check-label fw-bold @if (Auth::check() == false) opa-half @endif course_price_cart" for="course_subcribe{{ $course->id }}">Subscription</label>
-                                                    </div> --}}
+                                                    </div>
 
                                                     <div class="form-check d-flex align-items-center ps-0">
                                                         <input course_id="{{ $course->id }}" id="course_cart_price{{ $course->id }}" class="me-1 active change_cart_val" name="course_price_type[{{ $course->id }}]" style="width:21px;height:21px" type="radio" checked>
@@ -683,10 +682,6 @@
                                                                 @else
                                                                 <span class="d-block fs-16 fw-bold me-2 text-success2"> {{ format_price($course->fee) }}</span>
                                                                 @endif
-
-
-                                                                {{-- <span class="d-block fs-16 fw-bold me-2 text-success2">BDT{{ $course->discount }}</span> --}}
-                                                                {{-- <del class="fs-12 fw-bold text-muted2">{{ $course->fee }}</del> --}}
                                                             </span>
                                                         </label>
                                                     </div>
@@ -777,7 +772,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 <!--End Course Content-->
 
 <!--Start  Blog Content-->

@@ -387,6 +387,13 @@
                 </li>
             @endif
 
+            @if (@$class->examSchedules->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_routine">Exam Routine</a>
+                </li>
+            @endif
+
+
         </ul>
     </div>
 </div>
@@ -771,6 +778,50 @@
                     </div>
                 @endif
 
+              
+
+                @if (@$class->examSchedules->count() >0)
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_routine">
+                        <div class="card-body p-4 p-xl-5">
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 about_this_course" style="color: var(--text_color)">Exam Routine</h4>
+                                <div class="section-header_divider"></div>
+                            </div>
+                            <div class="class-routine">
+                                <table>
+                                  <thead>
+                                    <tr style="color: black">
+                                      <th>Date</th>
+                                      <th>Subject</th>
+                                      <th>Bulding</th>
+                                      <th>Floor</th>
+                                      <th>Room</th>
+                                      <th>Time</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($class->examSchedules->filter(function ($routine) {
+                                        return $routine->examination && $routine->examination->end_date >= Carbon\Carbon::now();
+                                        }); as $routine)
+                                          <tr>
+                                              <td>{{ @$routine->examClass->date }}</td>
+                                              <td>{{ @$routine->examClass->subject->name }}</td>
+                                              <td>{{ @$routine->bulding->name }}</td>
+                                              <td>{{ @$routine->floor->name }}</td>
+                                              <td>{{ @$routine->room->name }}</td>
+                                              <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
+                                          </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                                <div class="col-12 mt-4">
+                                    <a href="{{ route('frontend.exam_routine_download') }}?class_id={{ @$class->id }}" class="btn btn-secondary">Download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 {{-- <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -793,7 +844,7 @@
                     </div>
                     </div>
                 </div> --}}
-
+             
                 <!--End card-->
             </div>
 
