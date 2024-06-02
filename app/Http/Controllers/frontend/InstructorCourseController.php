@@ -964,10 +964,11 @@ class InstructorCourseController extends Controller
         return view('user.instructor.exam_result_create',$data);
     }
 
-    //   //ajax get Teacher Assent School Section
-      public function getTeacherAssentClass($id){
+       //ajax get Teacher Assent class
+    public function getTeacherAssentClass($id){
         $classes = ExamClass::where("examination_id", $id)->with('class')->get();
         // Retrieve unique class IDs associated with the teacher
+        
         $classIds = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
             ->whereIn('class_id', $classes->pluck('class_id'))
             ->pluck('class_id')
@@ -1123,24 +1124,19 @@ class InstructorCourseController extends Controller
 	}  
 
      //ajax get Teacher Assent School Section
-     public function getTeacherAssentSchoolSection($id){
-        // $section = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('schoolsection')->get();
-        $section = SubjectTeacherAssent::where('class_id', $id)
-                                    ->where('teacher_id', auth()->user()->id)
-                                    ->with('schoolsection')
-                                    ->get()
-                                    ->unique('section_id');
+    public function getTeacherAssentSchoolSection($id){
+        $section = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('schoolsection')->get();
         return $section;
 	}  
 
      //ajax get Teacher Assent School Section
      public function getTeacherAssentSession($id){
-        $session = SubjectTeacherAssent::where('class_id', $id)
-        ->where('teacher_id', auth()->user()->id)
-        ->with('session')
-        ->get()
-        ->unique('session_id');
-        // $session = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('session')->get();
+        // $session = SubjectTeacherAssent::where('class_id', $id)
+        // ->where('teacher_id', auth()->user()->id)
+        // ->with('session')
+        // ->get()
+        // ->unique('session_id');
+        $session = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('session')->get();
         return $session;
 	}  
 

@@ -13,11 +13,45 @@
               <div class="row g-3 show-gallery-data" >
                 @foreach ($gallerys as $key=>$gallery)
                 <div class="col-xl-3 col-md-6">
-                    <div class="">
+                  <div class="">
+                    @if ($gallery->media_type == 'image')
                     <a href="javascript:void(0)" class="course-card_img d-block pt-4 px-4" data-toggle="modal" data-target="#GalleryModal" data-key="{{ $key }}" data-image="{{ @$gallery->image_show }}">
-                      <img src="{{ @$gallery->image_show }}" class="img-fluid rounded-2 w-100" alt="{{ @$gallery->name }}">
+                        <img src="{{ @$gallery->image_show }}" class="img-fluid rounded-2 w-100" alt="{{ @$gallery->name }}" style="height: 200px">
                     </a>
+                    @elseif ($gallery->media_type == 'video')
+                    <a href="#" class="course-card_img d-block pt-4 px-4" data-toggle="modal" data-target="#GalleryModal{{ $key }}">
+                        <div style="position: relative; width: 100%; height: 200px;">
+                            <!-- First Image (Overlay) -->
+                            <img src="{{ @$gallery->thumbnail_show }}" class="img-fluid rounded-2 w-100" alt="{{ @$gallery->name }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                            <!-- Play Button -->
+                            <img src="{{ asset('public/img/play.png') }}" class="img-fluid rounded-2 w-50" alt="play-icon" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height:100px; width:30px">
+                        </div>
+                    </a>
+                    @endif
+                </div>
+                
+               <!-- Modal -->
+                <div class="modal fade" id="GalleryModal{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="GalleryModalLabel{{ $key }}" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content bg-transparent">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="GalleryModalLabel{{ $key }}" style="color: white">{{ @$gallery->name }}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <!-- Video Player -->
+                              <video controls style="width: 100%;">
+                                  <source src="{{ @$gallery->video_show }}" type="video/mp4">
+                                  Your browser does not support the video tag.
+                              </video>
+                          </div>
+                      </div>
                   </div>
+                </div>
+
+                
                 </div>
                 @endforeach
               </div>

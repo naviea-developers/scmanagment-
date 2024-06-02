@@ -158,8 +158,6 @@
 
 <script>
      $('body').on("change",'#teacherAssentClass',function(){
-    //  $(document).on("change",".t_class", function(e) {
-    //     e.preventDefault();
         let id = $(this).val();
         console.log(id);
 

@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Buldings
+Admin - All Gallery
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -14,7 +14,7 @@ Admin - All Buldings
             <h6 class="br-section-label text-center">All Gallery</h6>
 
             <a style="margin-bottom: 20px" href="{{ route('admin.gallery.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Image
+              <i class="fa fa-plus"></i> Add Item
             </a>
 
                {{-- success message start --}}
@@ -37,7 +37,7 @@ Admin - All Buldings
                   <tr>
                     <th class="wd-10p">Id</th>
                     <th class="wd-15p">Name</th>
-                    <th class="wd-15p">Image</th>
+                    <th class="wd-15p">Image/Video</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -52,7 +52,11 @@ Admin - All Buldings
                           <td>{{ $i++ }}</td>
                           <td>{{ $gallery->name }}</td>
                           <td>
+                            @if ($gallery->media_type == 'image')
                             <img src="{{ $gallery->image_show }}" alt="" width="60px" height="40px" srcset="">
+                            @elseif ($gallery->media_type == 'video')
+                            <img src="{{ $gallery->thumbnail_show }}" alt="video-thumbnail" width="60px" height="40px" srcset="">
+                            @endif
                           </td>
                           <td>
                             @if(@$gallery->status == 0)
