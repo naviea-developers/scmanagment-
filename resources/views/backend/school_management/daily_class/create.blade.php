@@ -52,8 +52,8 @@
                             <div class="col-sm-4">
                                 <label class="form-control-label"><b>Teacher Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="cat"  class="form-control form-select select2" name="user_id">
-                                        <option value="">Select Seller</option>
+                                    <select id="cat"  class="form-control form-select select2" name="teacher_id">
+                                        <option value="">Select teacher</option>
                                         @foreach ($teachers as $teacher)
                                         <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                                         @endforeach
@@ -131,7 +131,7 @@
                             <div class="col-sm-6 mt-3">
                                 <label class="form-control-label"><b>Page: </b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="page_number" value="{{ old('Page') }}" class="form-control" placeholder="Enter Page" required>
+                                    <input type="text" name="page_number" value="{{ old('page_number') }}" class="form-control" placeholder="Enter Page" required>
                                 </div>
                             </div>
 
@@ -170,9 +170,9 @@
                             </div>
 
                             <div class="col-sm-8">
-                                <label class="form-control-label">Video Link: <span class="tx-danger">*</span></label>
+                                <label class="form-control-label">Video Url: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
-                                <input type="text" name="video_link" class="form-control" placeholder="Enter Video Link">
+                                <input type="text" name="video_url" class="form-control" placeholder="Enter Video Link">
                                  </div>
                             </div>
 
