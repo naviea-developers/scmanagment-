@@ -31,22 +31,33 @@ class GalleryController extends Controller
     {
       // dd($request->all());
         $request->validate([
-            'image' => 'required',
+            // 'image' => 'required',
 
         ]);
         try{
             DB::beginTransaction();
             $gallery = New Gallery;
             $gallery->name = $request->name;
+            $gallery->media_type = $request->media_type;
             if($request->hasFile('image')){
                 $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
                 request()->image->move(public_path('upload/gallery/'),$fileName);
                 $gallery->image = $fileName;
             }
+            if($request->hasFile('thumbnail')){
+                $fileName = rand().time().'.'.request()->thumbnail->getClientOriginalExtension();
+                request()->thumbnail->move(public_path('upload/gallery/thumbnail/'),$fileName);
+                $gallery->thumbnail = $fileName;
+            }
+            if($request->hasFile('video')){
+                $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+                request()->video->move(public_path('upload/gallery/video/'),$fileName);
+                $gallery->video = $fileName;
+            }
             $gallery->save();
 
             DB::commit();
-            return redirect()->route('admin.gallery.index')->with('message','Image Add Successfully');
+            return redirect()->route('admin.gallery.index')->with('message','Item Add Successfully');
         }catch(\Exception $e){
             DB::rollBack();
             dd($e);
@@ -68,7 +79,7 @@ class GalleryController extends Controller
     public function edit(string $id)
     {
        // dd('hi');
-        $data["gallery"]= Gallery::find($id);
+        $data["item"]= Gallery::find($id);
         return view("Backend.school_management.gallery.update",$data);
     }
 
@@ -92,10 +103,22 @@ class GalleryController extends Controller
             request()->image->move(public_path('upload/gallery/'),$fileName);
             $gallery->image = $fileName;
         }
+        if($request->hasFile('thumbnail')){
+            @unlink(public_path("upload/gallery/thumbnail/".$gallery->thumbnail));
+            $fileName = rand().time().'.'.request()->thumbnail->getClientOriginalExtension();
+            request()->thumbnail->move(public_path('upload/gallery/thumbnail/'),$fileName);
+            $gallery->thumbnail = $fileName;
+        }
+        if($request->hasFile('video')){
+            @unlink(public_path("upload/gallery/video/".$gallery->video));
+            $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+            request()->video->move(public_path('upload/gallery/video/'),$fileName);
+            $gallery->video = $fileName;
+        }
         $gallery->save();
 
         DB::commit();
-        return redirect()->route('admin.gallery.index')->with('message','Image Update Successfully');
+        return redirect()->route('admin.gallery.index')->with('message','Item Update Successfully');
     }catch(\Exception $e){
         DB::rollBack();
        // dd($e);
@@ -110,6 +133,8 @@ class GalleryController extends Controller
     {
 
         $gallery =  Gallery::find($request->gallery_id);
+        @unlink(public_path("upload/gallery/".$gallery->image));
+        @unlink(public_path("upload/gallery/video/".$gallery->video));
         $gallery->delete();
         return back()->with('message','Image Deleted Successfully');
     }

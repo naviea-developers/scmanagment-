@@ -4,7 +4,7 @@
             <div class="card card-body shadow">
                 <img style="height: 150px; width:100%" src="{{ $student->image_show }}" alt="student-image"/>
                 <p class="text-center">{{ $student->student_name }}</p>
-                <p class="text-center">{{ @$student->class->name }}</p>
+                <p class="text-center">{{ @$student->class->name }}<br>Session: {{ @$student->session->start_year }} - {{ @$student->session->end_year }}</p>
             </div>
         </div>
     @endforeach

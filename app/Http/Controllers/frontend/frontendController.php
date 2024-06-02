@@ -338,21 +338,55 @@ class FrontendController extends Controller
         $data['learner'] = learnerPageSetup::first();
         $data['clients'] = Client::all();
         $data['partners'] = Partner::all();
-
-        $data['students'] = Admission::where('is_new', 0)->paginate(8);
+        $session =Session::where('status', 1)->where('is_current',1)->first();
+        $data['students'] = Admission::where('is_new', 0)->where('session_id',$session->id)->paginate(4);
         $data['sessions'] = Session::where('status', 1)->get();
         $data['classes'] = Classe::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         return view('Frontend.pages.learner', $data);
     }
 
-    public function fetchAllStudent(Request $request) 
-    {
-        $page = $request->get('page') ?: 1;
-        $students = Admission::where('is_new', 0)->paginate(8, ['*'], 'page', $page);
+   
+
+    // public function getCurrentSession()
+    // {
+    //     $currentSession = Session::where('is_current', 1)->first();
+    //     return response()->json(['current_session' => $currentSession]);
+    // }
+
+    // public function fetchStudentsFilter(Request $request)
+    // {
+    //     $query = Admission::where('is_new', 0);
     
-        return response()->json(view('Frontend.pages.learner_list_ajax', ['students' => $students])->render());
-    }
+    //     if ($request->session_id) {
+    //         $query->where('session_id', $request->session_id);
+    //         if ($request->class_id) {
+    //             $query->where('class_id', $request->class_id);
+    //         }
+    //     } elseif ($request->class_id) {
+    //         $currentSession = Session::where('is_current', 1)->first();
+    //         if ($currentSession) {
+    //             $query->where('class_id', $request->class_id)
+    //                   ->where('session_id', $currentSession->id);
+    //         }
+    //     }
+    
+    //     if ($request->group_id) {
+    //         $query->where('group_id', $request->group_id);
+    //     }
+    
+    //     if ($request->section_id) {
+    //         $query->where('section_id', $request->section_id);
+    //     }
+    
+    //     $students = $query->get();
+        
+    //     $html = view('Frontend.pages.learner_list_ajax_filter', compact('students'))->render();
+        
+    //     return response()->json(['html' => $html]);
+    // }
+    
+
 
     public function fetchStudentsFilter(Request $request)
     {
@@ -370,12 +404,41 @@ class FrontendController extends Controller
         if ($request->section_id) {
             $query->where('section_id', $request->section_id);
         }
+        if ($request->has('name') && !empty($request->name)) {
+            $query->where('student_name', 'LIKE', '%' . $request->name . '%');
+        }
+        if ($request->has('roll_number') && !empty($request->roll_number)) {
+            $query->where('roll_number', 'LIKE', '%' . $request->roll_number . '%');
+        }
+        
+
+
+
+        // if ($request->filled('session_id')) {
+        //     $query->where('session_id', $request->session_id);
+        // } elseif ($request->filled('class_id')) {
+        //     $currentSession = Session::where('is_current', 1)->first();
+        //     if ($currentSession) {
+        //         $query->where('class_id', $request->class_id)
+        //               ->where('session_id', $currentSession->id);
+        //     } else {
+        //         return response()->json(['html' => '']);
+        //     }
+        // }
     
-        $students = $query->get();
+        // if ($request->filled('group_id')) {
+        //     $query->where('group_id', $request->group_id);
+        // }
+    
+        // if ($request->filled('section_id')) {
+        //     $query->where('section_id', $request->section_id);
+        // }
+    
+        $students = $query->paginate(4);
     
         $html = view('Frontend.pages.learner_list_ajax_filter', compact('students'))->render();
     
-        return response()->json(['html' => $html]);
+        return response()->json(['html' => $html,'last_page'=>$students->lastPage()]);
     }
     
 

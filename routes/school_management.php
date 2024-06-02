@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
 use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
 use App\Http\Controllers\Backend\School_management\DailyClass\DailyClassController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
 //Add Class for admin
@@ -427,3 +428,8 @@ Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutin
 
 Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');
 
+
+
+
+
+Route::get('get/current_session', [FrontendController::class, 'getCurrentSession']);

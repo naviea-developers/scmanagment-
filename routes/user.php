@@ -199,4 +199,4 @@ Route::get('get/teacher_assent_class/{id}', [InstructorCourseController::class, 
 
 
 
-Route::get('/id-card', [UserController::class, 'studentIdCard'])->name('student.id_card');
+Route::get('/id-card', [UserController::class, 'userIdCard'])->name('user.id_card');
