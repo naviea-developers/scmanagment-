@@ -973,7 +973,7 @@ class InstructorCourseController extends Controller
             ->whereIn('class_id', $classes->pluck('class_id'))
             ->pluck('class_id')
             ->unique();
-        // Retrieve unique classes based on the filtered class IDs
+
         $class = Classe::whereIn('id', $classIds)->get();                                      
 
         return $class;
@@ -1118,25 +1118,48 @@ class InstructorCourseController extends Controller
 
 
     //ajax get subject
-    public function getTeacherAssentSubject($id){
-        $subject = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('subject')->get();
+    public function getTeacherAssentSubject($classId,$sectionId){
+        // $subject = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('subject')->get();
+
+        $subject = SubjectTeacherAssent::where("class_id",$classId)->where('section_id',$sectionId)->where('teacher_id',auth()->user()->id)->with('subject')->get();
+
+        $subjectIds = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->whereIn('subject_id', $subject->pluck('subject_id'))
+        ->where('section_id',$sectionId)
+        ->pluck('subject_id')
+        ->unique();
+    
+        $subject = Subject::whereIn('id', $subjectIds)->get(); 
+
         return $subject;
 	}  
 
      //ajax get Teacher Assent School Section
     public function getTeacherAssentSchoolSection($id){
+        // $section = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('schoolsection')->get();
+       
         $section = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('schoolsection')->get();
+       
+        $sectionIds = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->whereIn('section_id', $section->pluck('section_id'))
+        ->pluck('section_id')
+        ->unique();
+
+        $section = SchoolSection::whereIn('id', $sectionIds)->get(); 
+
         return $section;
 	}  
 
      //ajax get Teacher Assent School Section
      public function getTeacherAssentSession($id){
-        // $session = SubjectTeacherAssent::where('class_id', $id)
-        // ->where('teacher_id', auth()->user()->id)
-        // ->with('session')
-        // ->get()
-        // ->unique('session_id');
         $session = SubjectTeacherAssent::where("class_id",$id)->where('teacher_id',auth()->user()->id)->with('session')->get();
+
+        $sessionIds = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->whereIn('session_id', $session->pluck('session_id'))
+        ->pluck('session_id')
+        ->unique();
+        // Retrieve unique classes based on the filtered class IDs
+        $session = Session::whereIn('id', $sessionIds)->get(); 
         return $session;
 	}  
 
@@ -1152,6 +1175,7 @@ class InstructorCourseController extends Controller
         if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
             $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
             $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+            $data['examResult']= ExamResult::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
         }
         // elseif( $classId && $sessionId && $examinationId && $subjectId){
         //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
