@@ -21,4 +21,5 @@ class Syllabus extends Model
     public function examination(){
         return $this->belongsTo(Examination::class,"examination_id",'id');
     }
+
 }

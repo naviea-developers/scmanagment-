@@ -53,7 +53,7 @@ Admin - All Examinations
                     @foreach ($exams as $exam)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $exam->name }}</td>exam_priority
+                          <td>{{ $exam->name }}</td>
                           <td>
                             @if ($exam->exam_priority == 'main')
                               Main Exam

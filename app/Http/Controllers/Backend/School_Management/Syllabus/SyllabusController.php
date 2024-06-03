@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use App\Models\Examination;
 use App\Models\Lession;
+use App\Models\Session;
 use App\Models\Subject;
 use App\Models\Syllabus;
+use App\Models\Tp_option;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +19,13 @@ class SyllabusController extends Controller
     public function index()
     {
         $data['syllabuses'] = Syllabus::orderBy('id', 'asc')->get();
+        $data['classes'] = Classe::orderBy('id', 'asc')->get();
+        $data['sessions'] = Session::orderBy('id', 'asc')->get();
+        $data['examinations'] = Examination::where('exam_priority', 'main')
+        // ->where('end_date', Carbon::today())
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();    
         return view("Backend.school_management.syllabus.index",$data);
     }
 
@@ -167,4 +176,41 @@ class SyllabusController extends Controller
         $syllabus->update();
         return redirect()->route('admin.syllabus.index')->with('message', 'Syllabus update successfully.');
     }
+
+
+
+    public function getSyllabus(Request $request)
+    {
+        $classId = $request->input('class_id');
+        $sessionId = $request->input('session_id');
+        // $examId = $request->input('examination_id');
+        // return response()->json(['class'=>$classId,'session'=>$sessionId]);
+        $data['tpOption'] = Tp_option::where('option_name', 'theme_option_header')->first();
+    
+        // if ($classId && $sessionId && $examId) {
+        //     // Fetch the examinations for the selected session
+        //     $examinations = Examination::where('session_id', $sessionId)->pluck('id');
+        //     // return response()->json(['examinations'=>$examinations]);
+        //     // Fetch the syllabus for the selected class and examinations
+        //     $data['syllabus']=$syllabus = Syllabus::where('class_id', $classId)
+        //         ->where('examination_id', $examId)
+        //         ->whereIn('examination_id', $examinations)
+        //         ->get();
+        //     // return response()->json(['syllabus'=>$syllabus]);
+        // } else
+        if ($classId && $sessionId) {
+            $examinations = Examination::where('session_id', $sessionId)->pluck('id');
+            // return response()->json(['examinations'=>$examinations]);
+            // Fetch the syllabus for the selected class and examinations
+            $data['syllabus']=$syllabus = Syllabus::where('class_id', $classId)
+                ->whereIn('examination_id', $examinations)
+                ->get();
+        }else {
+            $data['syllabus'] = [];
+        }
+    
+        return view('Backend.school_management.syllabus.syllabus_details', $data);
+    }
+    
+
 }

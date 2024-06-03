@@ -16,24 +16,64 @@ Admin - All Syllabus
           
 
             <h6 class="br-section-label text-center">All Syllabus</h6>
-
-            <a style="margin-bottom: 20px" href="{{ route('admin.syllabus.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Syllabus
-            </a>
-
                {{-- success message start --}}
-            @if(session()->has('message'))
-            <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-            {{session()->get('message')}}
-            </div>
-            <script>
-                setTimeout(function(){
-                    $('.alert.alert-success').hide();
-                }, 3000);
-            </script>
-            @endif
-            {{-- success message End --}}
+              @if(session()->has('message'))
+              <div class="alert alert-success">
+              {{session()->get('message')}}
+              </div>
+              <script>
+                  setTimeout(function(){
+                      $('.alert.alert-success').hide();
+                  }, 3000);
+              </script>
+              @endif
+              {{-- success message End --}}
+
+            <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-control-label"><b>Session:</b></label>
+                  <select class="form-control form-select select2" name="session_id" id="session_id">
+                      <option value="">Select Session</option>
+                      @foreach ($sessions as $session)
+                      <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
+                      @endforeach
+                  </select>
+                </div>
+
+                  <div class="col-md-6">
+                      <label class="form-control-label"><b>Class:</b></label>
+                      <select class="form-control form-select select2" id="class">
+                          <option value="">Select Class</option>
+                          @foreach ($classes as $class)
+                          <option value="{{ $class->id }}">{{ $class->name }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+          
+                  
+
+                  {{-- <div class="col-md-4">
+                      <label class="form-control-label"><b>Examination:</b></label>
+                      <select class="form-control form-select select2" name="examination_id" id="examination">
+                          <option value="">Select Examination</option>
+                          @foreach ($examinations as $examination)
+                          <option value="{{ $examination->id }}">{{ $examination->name }}</option>
+                          @endforeach
+                      </select>
+                  </div> --}}
+              </div>
+          </div>
+
+
+
+        <div class="get-search-syllabus">
+          <a style="margin-bottom: 20px" href="{{ route('admin.syllabus.create') }}" class="btn btn-primary btn-sm float-right">
+            <i class="fa fa-plus"></i> Add Syllabus
+          </a>
+          
+          
+
 
             <div class="table-wrapper">
               <table id="datatable1" class="table display responsive nowrap">
@@ -81,7 +121,7 @@ Admin - All Syllabus
                 </tbody>
               </table>
             </div><!-- table-wrapper -->
-
+          </div>
 
           </div><!-- br-section-wrapper -->
         </div><!-- br-pagebody -->
@@ -93,11 +133,6 @@ Admin - All Syllabus
         </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
-    <!--_-- ########### Start Add Category MODAL ############---->
-
-
-    <!--_-- ########### End Add Category MODAL ############---->
 
 
     <!--_-- ########### Start Delete Category MODAL ############---->
@@ -127,4 +162,58 @@ Admin - All Syllabus
     </div><!-- modal -->
 
    
+@endsection
+
+
+@section('script')
+
+
+<script>
+  $(document).ready(function() {
+      // $('#class, #session_id, #examination').change(function() {
+        $('#class, #session_id').change(function() {
+          fetchSyllabus();
+      });
+
+      function fetchSyllabus() {
+          var classId = $('#class').val();
+          var sessionId = $('#session_id').val();
+          // var examId = $('#examination').val();
+
+          // if (classId && sessionId && examId) {
+          //     $.ajax({
+          //         url: "{{ route('get.syllabus') }}",
+          //         type: 'GET',
+          //         data: {
+          //             class_id: classId,
+          //             session_id: sessionId,
+          //             examination_id: examId
+          //         },
+          //         success: function(response) {
+          //             console.log(response);
+          //             $(".get-search-syllabus").html(response);
+          //         }
+          //     });
+          // }
+          if (classId && sessionId) {
+              $.ajax({
+                  url: "{{ route('get.syllabus') }}",
+                  type: 'GET',
+                  data: {
+                      class_id: classId,
+                      session_id: sessionId
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      $(".get-search-syllabus").html(response);
+                  }
+              });
+          }
+
+
+
+
+      }
+  });
+</script>
 @endsection
