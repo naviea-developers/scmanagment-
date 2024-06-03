@@ -3,8 +3,12 @@
         <div class="col-md-3 mb-3">
             <div class="card card-body shadow">
                 <img style="height: 150px; width:100%" src="{{ $student->image_show }}" alt="student-image"/>
-                <p class="text-center">{{ $student->student_name }}</p>
-                <p class="text-center">{{ @$student->class->name }} <br> Session: {{ @$student->session->start_year }} - {{ @$student->session->end_year }}</p>
+                <p class="text-center mt-2"><b>{{ $student->student_name }}</b></p>
+                    <p class="text-center"> Session: {{ @$student->session->start_year }} - {{ @$student->session->end_year }}
+                        <br>{{ @$student->class->name }} 
+                       <br> Section: {{ @$student->section->name }}
+                       <br> Group: {{ @$student->group->name }}
+                    </p>
             </div>
         </div>
     @endforeach
