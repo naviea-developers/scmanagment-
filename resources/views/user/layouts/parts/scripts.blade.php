@@ -1,6 +1,6 @@
 <!-- --------------- bootstrap start ---------------->
 
-<script
+{{-- <script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 crossorigin="anonymous"
@@ -23,10 +23,10 @@ crossorigin="anonymous"
 <script src="{{ asset('public/frontend') }}/js/User-profile-modal.js"></script>
 <!-- -------------- slick carousel--------- -->
 <script src="{{ asset('public/frontend') }}/js/Jquery.js"></script>
-<script src="{{ asset('public/frontend') }}/js/slick.min.js"></script>
+<script src="{{ asset('public/frontend') }}/js/slick.min.js"></script> --}}
 
 
-<script>
+{{-- <script>
 const fileInput = document.getElementById('file');
 const fileNameDisplay = document.getElementById('file-name');
 
@@ -34,8 +34,86 @@ fileInput.addEventListener('change', (event) => {
   const fileName = event.target.files[0].name;
   fileNameDisplay.textContent = `Selected File: ${fileName}`;
 });
-</script>
+</script> --}}
 
+<script>
+    $('body').on("change",'#class',function(){
+        let id = $(this).val();
+            // console.log(id);
+        getSection(id,"section");
+        getSubject(id,"subject");
+        getGroup(id,"group");
+        getStudent(id,"student");
+    });
+
+    function getSection(id,outid){
+        let url = '{{ url("get/school_section/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Section</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+    function getSubject(id,outid){
+        let url = '{{ url("get/subject/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Subject</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+    function getGroup(id,outid){
+      let url = '{{ url("get/group/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select group</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.name + "</option>"
+              });
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+    }
+
+    function getStudent(id,outid){
+      let url = '{{ url("get/student/") }}/' + id;
+      axios.get(url)
+          .then(res => {
+              console.log(res);
+          $('#'+outid).empty();
+              let html = '';
+              html += '<option value="">Select student</option>'
+              res.data.forEach(element => {
+                  html += "<option value=" + element.id + ">" + element.student_name + "( Roll-"+element.roll_number+")"+ "</option>"
+              });
+              $('#'+outid).append(html);
+              $('#'+outid).val("").change();
+          });
+    }
+</script>
 
  <!--- Start ajax Sub Category Get Script-------->
  <script>

@@ -61,6 +61,7 @@ class DailyClassController extends Controller
             $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
             $daily_class->lesson = $request->lesson ?? 0;
             $daily_class->page_number = $request->page_number ?? 0;
+            $daily_class->sub_banner = $request->sub_banner ?? 1;
             $daily_class->details = $request->details ?? "";
 
 
@@ -137,6 +138,7 @@ class DailyClassController extends Controller
         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
         $daily_class->lesson = $request->lesson ?? 0;
         $daily_class->page_number = $request->page_number ?? 0;
+        $daily_class->sub_banner = $request->sub_banner ?? 1;
         $daily_class->details = $request->details ?? "";
 
         if($request->hasFile('image')){

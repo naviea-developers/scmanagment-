@@ -1,5 +1,5 @@
 @section('title')
-    Admin - Ebook Video Edit
+    Admin - daily_class Edit
 @endsection
 @extends('Backend.layouts.layouts')
 @section('style')
@@ -15,13 +15,13 @@
         <div class="br-pageheader">
           <nav class="breadcrumb pd-0 mg-0 tx-12">
             <a class="breadcrumb-item" href="{{route('admin.dashboard')}}">Home</a>
-            <a class="breadcrumb-item" href="{{route('admin.ebookvideo.index')}}"> <i class="icon ion-reply text-22"></i> All Ebook</a>
+            <a class="breadcrumb-item" href="{{route('admin.daily_class.index')}}"> <i class="icon ion-reply text-22"></i> All Daily Class</a>
           </nav>
         </div><!-- br-pageheader -->
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center mb-4">Update Ebook Video</h6>
+            <h6 class="br-section-label text-center mb-4">Update Daily Class</h6>
              {{-- validate start  --}}
              @if(count($errors) > 0)
              @foreach($errors->all() as $error)
@@ -70,18 +70,6 @@
                             </div>
 
                             <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="subject"  class="form-control form-select select2" name="subject_id">
-                                        <option value="">Select subject</option>
-                                        @foreach ($subjects as $subject)
-                                        <option @if($subject->id == $daily_class->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Section Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="section"  class="form-control form-select select2" name="section_id">
@@ -118,6 +106,18 @@
                             </div>
 
                             <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="subject"  class="form-control form-select select2" name="subject_id">
+                                        <option value="">Select subject</option>
+                                        @foreach ($subjects as $subject)
+                                        <option @if($subject->id == $daily_class->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Lesson: </b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input type="text" name="lesson" value="{{ @$daily_class->lesson }}" class="form-control" placeholder="Enter Lesson" required>
@@ -140,7 +140,7 @@
                                 <input type="radio" id="yes" name="sub_banner" value="1" 
                                 @if($daily_class->sub_banner==1) checked="checked" @endif >
                                 <label for="image">Video Image</label>
-                                <input type="radio" id="no" name="sub_banner" value="0" 
+                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="0" 
                                 @if($daily_class->sub_banner==0) checked="checked" @endif >
                                 <label for="video">Video</label>
                             </div>
@@ -161,7 +161,7 @@
                                 <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
                                     <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
-                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">
+                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ @$daily_class->video_thumbnail_show }}" alt="">
                                         <input type="file" name="video_thumbnail" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                             <div class="col-sm-8">
                                 <label class="form-control-label">Video Url: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
-                                <input type="text" name="video_url" class="form-control" placeholder="Enter Video Link">
+                                <input type="text" name="video_url" value="{{ @$daily_class->video_url }}" class="form-control" placeholder="Enter Video Link">
                                  </div>
                             </div>
 

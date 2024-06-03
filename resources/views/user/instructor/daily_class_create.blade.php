@@ -1,54 +1,54 @@
-@section('title')
-    Admin - Add New Ebook Video
-@endsection
-@extends('Backend.layouts.layouts')
-@section('style')
+@extends('user.layouts.master-layout')
+
+@section('title','- Add New Course')
+@section('head')
+<link href="{{asset('public/backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
 <style>
-    .select2-container--default .select2-selection--single {
-        height: 41px;}
-</style>
+    /* Hide the content initially */
+     #content2 {
+      display: none;
+    }
+  </style>
 @endsection
-@section('main_contain')
+@section('main_content')
 
-    <!-- ########## START: MAIN PANEL ########## -->
-    <div class="br-mainpanel">
-        <div class="br-pageheader">
-          <nav class="breadcrumb pd-0 mg-0 tx-12">
-            <a class="breadcrumb-item" href="{{route('admin.dashboard')}}">Home</a>
-            <a class="breadcrumb-item" href="{{route('admin.daily_class.index')}}"> <i class="icon ion-reply text-22"></i> All Daily Class</a>
-          </nav>
-        </div><!-- br-pageheader -->
+  <!-- ########## START: MAIN PANEL ########## -->
+  <div class="br-mainpanel p-4">
+    
 
-        <div class="br-pagebody">
-          <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center mb-4"> Add New Daily Class</h6>
-               {{-- validate start  --}}
-               @if(count($errors) > 0)
-               @foreach($errors->all() as $error)
-                   <div class="alert alert-danger">{{ $error }}</div>
-               @endforeach
-               @endif
-               {{-- validate End  --}}
+    <div class="br-pagebody card shadow p-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
+      <div class="br-section-wrapper">
+        <h5 class="br-section-label text-center mb-4"> Add New Course</h5>
+        <hr>
+        @if(count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+        @endif
 
-            <!----- Start Add Category Form input ------->
-            <div class="col-xl-12 mx-auto">
-                <div class="form-layout form-layout-4 py-5">
+            {{-- success message start --}}
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
+            {{session()->get('message')}}
+            </div>
+            <script>
+                setTimeout(function(){
+                    $('.alert.alert-success').hide();
+                }, 3000);
+            </script>
+            @endif
+            {{-- success message start --}}
+
+
+        <!----- Start Add Product Form input ------->
+        <div class="col-xl-12 mx-auto">
+            <div class="form-layout form-layout-4">
 
                     <form action="{{ route('admin.daily_class.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
-                        {{-- <div class="row align-items-end">
-                            <div class="col-sm-4">
-                                <label class="form-control-label"><b>Image: </b><span class="tx-danger">*</span></label>
-                                    <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
-                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">
-                                        <input type="file" accept="image/*" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;" required>
-                                    </div>
-                            </div>
-                        </div> --}}
-
                         <div class="row mt-4">
-
                             <div class="col-sm-4">
                                 <label class="form-control-label"><b>Title: </b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
@@ -56,17 +56,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
-                                <label class="form-control-label"><b>Teacher Name :</b><span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="cat"  class="form-control form-select select2" name="teacher_id">
-                                        <option value="">Select teacher</option>
-                                        @foreach ($teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="col-sm-4">
                                 <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
@@ -80,14 +69,11 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 mt-3">
+                            <div class="col-sm-4">
                                 <label class="form-control-label"><b>Section Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="section"  class="form-control form-select select2" name="section_id">
                                         <option value="">Select section</option>
-                                        {{-- @foreach ($teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -97,9 +83,6 @@
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="group"  class="form-control form-select select2" name="group_id">
                                         <option value="">Select group</option>
-                                        {{-- @foreach ($teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -121,9 +104,6 @@
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="subject"  class="form-control form-select select2" name="subject_id">
                                         <option value="">Select subject</option>
-                                        {{-- @foreach ($teachers as $teacher)
-                                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -144,28 +124,31 @@
 
                         </div>
 
-                        <div class="row" id="menudropdown">
+                        <div class="row">
                             <label class="form-control-label"><span class="tx-danger"></span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <br>
-                                <input type="radio" id="yes" name="sub_banner" value="1" checked>
-                                <label for="image">Video Image</label>
-                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="0" >
-                                <label for="video">Video</label>
+                                <input type="radio" name="sub_banner" id="radio1" value="1" checked>
+                                <label for="radio1">Video Image</label>
+                              
+                                <input type="radio" name="sub_banner" id="radio2" value="2">
+                                <label for="radio2">Video</label>
                             </div>
                         </div>
 
-                        <div class="row mt-3" id="menuimage">
-                            <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
-                            <div class="col-sm-9 mg-t-10">
-                                <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
-                                    <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">
-                                    <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
+                        <div class="row mt-3" id="content1">
+                            <div class="col-sm-4">
+                                <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
+                                <div class="col-sm-9 mg-t-10">
+                                    <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
+                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">
+                                        <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- row -->
 
-                        <div class="row mt-3" id="menuvideo" style="display: none">
+                        <div class="row mt-3" id="content2">
                             <div class="col-sm-4">
                                 <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
@@ -176,7 +159,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <label class="form-control-label">Video Url: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
                                     <input type="text" name="video_url" class="form-control" placeholder="Enter Video Link">
@@ -207,38 +190,35 @@
             <!----- Start Add Category Form input ------->
           </div><!-- br-section-wrapper -->
         </div><!-- br-pagebody -->
-
+    
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-@endsection
-
+    
+    @endsection
+    
 @section('script')
 
-
 <script>
-    $(document).ready(function() {
-        $('.multipleSelect2Search').select2();
-    });
-    $(document).ready(function() {
-        $('.multipleSelectSearch').select2();
-    });
-    
-</script>
+    // Get references to the radio buttons and divs
+    const radio1 = document.getElementById('radio1');
+    const radio2 = document.getElementById('radio2');
+    const content1 = document.getElementById('content1');
+    const content2 = document.getElementById('content2');
 
-<script>
-    $('document').ready(function () {
-      $("input[name=sub_banner]:radio").change(function () {
-      var data = $(this).val();
-      if (data == 1) {
-        $('#menuimage').show();
-        $('#menuvideo').hide();
-
-      } else {
-        $('#menuvideo').show();
-        $('#menuimage').hide();
+    // Add event listeners to the radio buttons
+    radio1.addEventListener('change', function() {
+      if (radio1.checked) {
+        content1.style.display = 'block';
+        content2.style.display = 'none';
       }
     });
+
+    radio2.addEventListener('change', function() {
+      if (radio2.checked) {
+        content1.style.display = 'none';
+        content2.style.display = 'block';
+      }
     });
-</script>
+  </script>
 
 @endsection

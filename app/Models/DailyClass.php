@@ -35,6 +35,10 @@ class DailyClass extends Model
         return $this->image != "" ? asset('public/upload/daily_class/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
     }
 
+    public function getVideoThumbnailShowAttribute(){
+        return $this->video_thumbnail != "" ? asset('public/upload/daily_class/'. $this?->video_thumbnail) : asset('public/frontend/images/No-image.jpg');
+    }
+
 
 
 
