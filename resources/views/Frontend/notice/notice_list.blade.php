@@ -2,7 +2,8 @@
 @section('title','- notice')
 @section('head')
 <link href="{{ asset('public/frontend') }}/application/modules/frontend/views/themes/default/assets/css/notice.css" rel="stylesheet"><link>
-<style>title-box {
+<style>
+title-box {
     font-size: 1.5em;
     background-color: #F6F6F6;
     padding-top: 15px;
@@ -87,14 +88,18 @@ tr:nth-child(even){background-color: #f2f2f2}
                 <!-- Right Side Start-->
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="col-sm-12 box margin-bottom10">
-                        <div class="col-sm-12 title-box margin-bottom10"> CPSCBUSMS NOTICE BOARD</div>
+                        <div class="col-sm-12 title-box margin-bottom10"> <h5>CPSCBUSMS NOTICE BOARD</h5></div>
 
                         <div class="col-sm-12 margin-bottom10">
                             <form method="GET" action="" accept-charset="UTF-8" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-xs-10 col-sm-10">
                                         <div class="row">
-                                            <select class="form-control" name="cmbCategory"><option value="">All Notice</option><option value="1">Academic Notice</option><option value="2" selected="selected">Office Notice</option></select>
+                                            <select class="form-control" name="cmbCategory">
+                                                <option value="">All Notice</option>
+                                                <option value="1">Academic Notice</option>
+                                                <option value="2" selected="selected">Office Notice</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -120,19 +125,23 @@ tr:nth-child(even){background-color: #f2f2f2}
                                         <th class="th-sm">Depertment </th>
                                     </tr>
                                 </thead>
-                                <tbody>               
-                                    <tr>
-                                    <td>24 May, 2024</td>
-                                    <td>1</td>
-                                    <td>একাদশ শ্রেণিতে ভর্তি বিজ্ঞপ্তি</td>
-                                    <td><a href="https://dupl-cms.s3.us-east-2.amazonaws.com/2024/notice/1716538795-a.pdf" target="_blank">View </a></td>
-                                    <td><a href="https://cpscbusms.edu.bd/notice/64/2" target="_blank" type="get_object()." download="একাদশ শ্রেণিতে ভর্তি বিজ্ঞপ্তি.pdf" class="download"><i class="fa fa-download" aria-hidden="true"></i>
-                                            <span style="color:#000;padding:10px">Download </span> </a></td>
-                                    <td>Office Notice</td>
-
-                                    </tr>
+                                <tbody>   
+                                    @php
+                                        $i=1;
+                                    @endphp
+                                    @foreach ($notices as $notice)            
+                                        <tr>
+                                            <td>{{date('d,F,Y',strtotime(@$notice->created_at))}}</td>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ @$notice->name }}</td>
+                                            <td><a href="{{ @$notice->notice_file_show}}" target="_blank">View </a></td>
+                                            <td><a href="{{ route('frontend.notice_pdf_download',$notice->id) }}" target="_blank" type="get_object()." download="একাদশ শ্রেণিতে ভর্তি বিজ্ঞপ্তি.pdf" class="download"><i class="fa fa-download" aria-hidden="true"></i>
+                                                   <span style="color:#000;padding:10px">Download </span> </a></td>
+                                            <td>Office Notice</td>
+                                        </tr>
+                                    @endforeach
                                     
-                                    <tr>
+                                    {{-- <tr>
                                     <td>13 Feb, 2024</td>
                                     <td>2</td>
                                     <td>২০২৩-২৪ শিক্ষাবর্ষে মেডিকেল ভর্তি পরীক্ষায়   সফল শিক্ষার্থীদের তালিকা।</td>
@@ -182,7 +191,7 @@ tr:nth-child(even){background-color: #f2f2f2}
                                             <span style="color:#000;padding:10px">Download </span> </a></td>
                                     <td>Office Notice</td>
 
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>						                          
