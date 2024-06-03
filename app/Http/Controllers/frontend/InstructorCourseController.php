@@ -34,6 +34,10 @@ use App\Models\SchoolSection;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\SubjectTeacherAssent;
+use App\Models\DailyClass;
+use App\Models\User;
+use App\Models\Group;
+use App\Models\Lession;
 
 class InstructorCourseController extends Controller
 {
@@ -1236,5 +1240,183 @@ class InstructorCourseController extends Controller
     }
    // Result Exam end
 
+   // Daily Class Start
+    public function indexDailyClass()
+    {
+        $data['daily_classes'] = DailyClass::where('teacher_id',auth()->user()->id)->orderBy('id', 'desc')->get();
+        return view('user.instructor.daily_class_index', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function createDailyClass()
+    {
+        // dd('hi');
+        $data['daily_classes'] = DailyClass::where('status','1')->orderBy('id', 'desc')->get();
+        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
+        $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        return view("user.instructor.daily_class_create",$data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeDailyClass(Request $request)
+    {
+    //    dd($request->all());
+        $request->validate([
+            'class_id' => 'required',
+
+        ]);
+        try{
+            DB::beginTransaction();
+            $daily_class = new DailyClass();
+            $daily_class->name = $request->name ?? "";
+            // $daily_class->teacher_id = $request->teacher_id ?? 0;
+            $daily_class->teacher_id = auth()->user()->id ?? 0;
+            $daily_class->class_id = $request->class_id ?? 0;
+            $daily_class->subject_id = $request->subject_id ?? 0;
+            $daily_class->session_id = $request->session_id ?? 0;
+            $daily_class->section_id = $request->section_id ?? 0;
+            $daily_class->group_id = $request->group_id ?? 0;
+            $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+            $daily_class->lession_id = $request->lession_id ?? 0;
+            $daily_class->page_number = $request->page_number ?? 0;
+            $daily_class->sub_banner = $request->sub_banner ?? 1;
+            $daily_class->details = $request->details ?? "";
+
+
+            if($request->hasFile('image')){
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/blog/'),$fileName);
+                $daily_class->image = $fileName;
+            }
+    
+            if($request->hasFile('video_thumbnail')){
+                $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+                request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+                $daily_class->video_thumbnail = $fileName;
+            }
+
+            $daily_class->save();
+
+            DB::commit();
+            return redirect()->route('instructor.daily_class.index')->with('message','Daily Class Add Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editDailyClass(string $id)
+    {
+       // dd('hi');
+       $data['daily_class'] = $daily_class = DailyClass::find($id);
+       $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
+       $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+       $data['sessions'] = Session::where('status', 1)->get(); 
+
+       $data['sections'] = SchoolSection::where('class_id',$daily_class->class_id)->where('status', 1)->get();
+       $data['groups'] = Group::where('class_id',$daily_class->class_id)->where('status', 1)->get();
+       $data['subjects']=Subject::where('class_id',$daily_class->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
+       $data['lessions']=Lession::where('subject_id',$daily_class->subject_id)->where('status', 1)->orderBy('id', 'asc')->get();
+ 
+        return view("user.instructor.daily_class_update",$data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateDailyClass(Request $request, string $id)
+    {
+        //dd($request->all());
+       $request->validate([
+        'class_id' => 'required',
+
+    ]);
+    try{
+        DB::beginTransaction();
+        $daily_class = DailyClass::find($id);
+        $daily_class->name = $request->name ?? "";
+        // $daily_class->teacher_id = $request->teacher_id ?? 0;
+        $daily_class->teacher_id = auth()->user()->id ?? 0;
+        $daily_class->class_id = $request->class_id ?? 0;
+        $daily_class->subject_id = $request->subject_id ?? 0;
+        $daily_class->session_id = $request->session_id ?? 0;
+        $daily_class->section_id = $request->section_id ?? 0;
+        $daily_class->group_id = $request->group_id ?? 0;
+        $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+        $daily_class->lession_id = $request->lession_id ?? 0;
+        $daily_class->page_number = $request->page_number ?? 0;
+        $daily_class->sub_banner = $request->sub_banner ?? 1;
+        $daily_class->details = $request->details ?? "";
+
+        if($request->hasFile('image')){
+            @unlink(public_path("upload/daily_class/".$daily_class->image));
+            $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('upload/daily_class/'),$fileName);
+            $daily_class->image = $fileName;
+        }
+
+        if($request->hasFile('video_thumbnail')){
+            @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+            $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+            request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+            $daily_class->video_thumbnail = $fileName;
+        }
+
+        $daily_class->save();
+
+        DB::commit();
+        return redirect()->route('instructor.daily_class.index')->with('message','Daily Class Update Successfully');
+    }catch(\Exception $e){
+        DB::rollBack();
+        dd($e);
+        return back()->with ('error_message', $e->getMessage());
+    }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroyDailyClass(Request $request)
+    {
+
+        $daily_class =  DailyClass::find($request->daily_class_id);
+        @unlink(public_path("upload/daily_class/".$daily_class->image));
+        @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+        $daily_class->delete();
+        return back()->with('message','Daily Class Deleted Successfully');
+    }
+
+
+    public function statusDailyClass($id)
+    {
+        $daily_class = DailyClass::find($id);
+        if($daily_class->status == 0)
+        {
+            $daily_class->status = 1;
+        }elseif($daily_class->status == 1)
+        {
+            $daily_class->status = 0;
+        }
+        $daily_class->update();
+        return redirect()->route('instructor.daily_class.index');
+    }
+   // Daily Class End
 
 }

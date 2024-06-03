@@ -34,6 +34,8 @@ Admin - all Ebook Video
                     <th scope="col">Teacher Name</th>
                     <th scope="col">Class Name</th>
                     <th scope="col">Subject</th>
+                    <th scope="col">Lession</th>
+                    <th scope="col">Page Number</th>
                     <th scope="col">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -49,6 +51,8 @@ Admin - all Ebook Video
                           <td>{{ $daily_class->teacher->name }}</td>
                           <td>{{ $daily_class->class->name }}</td>
                           <td>{{ $daily_class->subject->name }}</td>
+                          <td>{{ $daily_class->lession->name }}</td>
+                          <td>{{ $daily_class->page_number }}</td>
                           <td>
                             @if($daily_class->status == 0)
                             <a href="{{ route('admin.daily_class.status',$daily_class->id) }}" class="btn btn-sm btn-warning">Inactive</a>

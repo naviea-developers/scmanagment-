@@ -176,6 +176,16 @@
                     <span> Manage Homework </span>
                 </a>
 
+                <a href="{{ route('instructor.daily_class.create') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-upload"></i>
+                    <span> Add Daily Class </span>
+                </a>
+
+                <a href="{{ route('instructor.daily_class.index') }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                    <i class="fa-solid fa-upload"></i>
+                    <span> Manage Daily Class </span>
+                </a>
+
                 <a href="{{ route('instructor.class_exam.create', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-upload"></i>
                     <span> Add class Exam </span>

@@ -68,6 +68,15 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::post('delete_home_work', [InstructorCourseController::class,"destroyHomeWork"])->name('instructor.homework.delete');
         Route::get('/status_home_work/{id}', [InstructorCourseController::class, 'statusHomeWork'])->name('instructor.homework.status');
 
+        //Daily Class work
+        Route::get('index_daily_class', [InstructorCourseController::class,"indexDailyClass"])->name('instructor.daily_class.index');
+        Route::get('create_daily_class', [InstructorCourseController::class,"createDailyClass"])->name('instructor.daily_class.create');
+        Route::post('store_daily_class', [InstructorCourseController::class,"storeDailyClass"])->name('instructor.daily_class.store');
+        Route::get('edit_daily_class/{id}', [InstructorCourseController::class,"editDailyClass"])->name('instructor.daily_class.edit');
+        Route::post('update_daily_class/{id}', [InstructorCourseController::class,"updateDailyClass"])->name('instructor.daily_class.update');
+        Route::post('delete_daily_class', [InstructorCourseController::class,"destroyDailyClass"])->name('instructor.daily_class.delete');
+        Route::get('/status_daily_class/{id}', [InstructorCourseController::class, 'statusDailyClass'])->name('instructor.daily_class.status');
+
          //Teacher class exam
         Route::get('index_class_exam', [InstructorCourseController::class,"indexClassExam"])->name('instructor.class_exam.index');
         Route::get('create_class_exam', [InstructorCourseController::class,"createClassExam"])->name('instructor.class_exam.create');
