@@ -14,7 +14,7 @@ use App\Models\EbookAudioContent;
 use App\Models\EbookContent;
 use App\Models\EbookVideoContent;
 use App\Models\Group;
-use App\Models\RelatedEbook;
+use App\Models\SchoolSection;
 use App\Models\Subject;
 
 class DailyClassController extends Controller
@@ -51,6 +51,7 @@ class DailyClassController extends Controller
         try{
             DB::beginTransaction();
             $daily_class = new DailyClass();
+            $daily_class->name = $request->name ?? "";
             $daily_class->teacher_id = $request->teacher_id ?? 0;
             $daily_class->class_id = $request->class_id ?? 0;
             $daily_class->subject_id = $request->subject_id ?? 0;
@@ -60,6 +61,7 @@ class DailyClassController extends Controller
             $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
             $daily_class->lesson = $request->lesson ?? 0;
             $daily_class->page_number = $request->page_number ?? 0;
+            $daily_class->details = $request->details ?? "";
 
 
             if($request->hasFile('image')){
@@ -103,8 +105,11 @@ class DailyClassController extends Controller
        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
        $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
        $data['sessions'] = Session::where('status', 1)->get(); 
-       $data['subjects']=Subject::where('status', 1)->orderBy('id', 'asc')->get();
-       $data['groups']=Group::where('status', 1)->orderBy('id', 'asc')->get();
+
+       $data['sections'] = SchoolSection::where('class_id',$daily_class->class_id)->where('status', 1)->get();
+       $data['groups'] = Group::where('class_id',$daily_class->class_id)->where('status', 1)->get();
+       $data['subjects']=Subject::where('class_id',$daily_class->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
+ 
         return view("Backend.school_management.daily_class.update",$data);
     }
 
@@ -122,6 +127,7 @@ class DailyClassController extends Controller
     try{
         DB::beginTransaction();
         $daily_class = DailyClass::find($id);
+        $daily_class->name = $request->name ?? "";
         $daily_class->teacher_id = $request->teacher_id ?? 0;
         $daily_class->class_id = $request->class_id ?? 0;
         $daily_class->subject_id = $request->subject_id ?? 0;
@@ -131,6 +137,7 @@ class DailyClassController extends Controller
         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
         $daily_class->lesson = $request->lesson ?? 0;
         $daily_class->page_number = $request->page_number ?? 0;
+        $daily_class->details = $request->details ?? "";
 
         if($request->hasFile('image')){
             @unlink(public_path("upload/daily_class/".$daily_class->image));

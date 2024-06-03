@@ -1,9 +1,13 @@
 @section('title')
     Admin - Ebook Video Edit
 @endsection
-
 @extends('Backend.layouts.layouts')
-
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 41px;}
+</style>
+@endsection
 @section('main_contain')
 
     <!-- ########## START: MAIN PANEL ########## -->
@@ -30,9 +34,16 @@
             <div class="col-xl-12 mx-auto">
                 <div class="form-layout form-layout-4 py-5">
 
-                    <form action="{{ route('admin.daily_class.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.daily_class.update',$daily_class->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mt-4">
+
+                            <div class="col-sm-4">
+                                <label class="form-control-label"><b>Title: </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="text" name="name" value="{{ @$daily_class->name }}" class="form-control" placeholder="Enter title" required>
+                                </div>
+                            </div>
 
                             <div class="col-sm-4">
                                 <label class="form-control-label"><b>Teacher Name :</b><span class="tx-danger">*</span></label>
@@ -58,13 +69,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select id="subject"  class="form-control form-select select2" name="subject_id">
                                         <option value="">Select subject</option>
                                         @foreach ($subjects as $subject)
-                                        <option @if($subject->id == $daily_class->subject_id)  Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                        <option @if($subject->id == $daily_class->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,7 +87,7 @@
                                     <select id="section"  class="form-control form-select select2" name="section_id">
                                         <option value="">Select section</option>
                                         @foreach ($sections as $section)
-                                        <option @if($section->id == $daily_class->section_id)  Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                        <option @if($section->id == $daily_class->section_id)  Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -88,7 +99,7 @@
                                     <select id="group"  class="form-control form-select select2" name="group_id">
                                         <option value="">Select group</option>
                                         @foreach ($groups as $group)
-                                        <option  @if($group->id == $daily_class->group_id)  Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                        <option  @if($group->id == $daily_class->group_id)  Selected @endif value="{{ $group->id }}">{{ $group->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -113,7 +124,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 mt-3">
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Page: </b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input type="text" name="page_number" value="{{ @$daily_class->page_number }}" value="{{ old('page_number') }}" class="form-control" placeholder="Enter Page" required>
@@ -126,24 +137,26 @@
                             <label class="form-control-label"><span class="tx-danger"></span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <br>
-                                <input type="radio" id="yes" name="sub_banner" value="1" checked>
+                                <input type="radio" id="yes" name="sub_banner" value="1" 
+                                @if($daily_class->sub_banner==1) checked="checked" @endif >
                                 <label for="image">Video Image</label>
-                                <input type="radio" id="no" name="sub_banner" value="0" >
+                                <input type="radio" id="no" name="sub_banner" value="0" 
+                                @if($daily_class->sub_banner==0) checked="checked" @endif >
                                 <label for="video">Video</label>
                             </div>
                         </div>
 
-                        <div class="row mt-3" id="menuimage">
+                        <div class="row mt-3" id="menuimage" @if($daily_class->sub_banner != '1') style="display: none;" @endif>
                             <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
-                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ asset("public/frontend/images/No-image.jpg")}}" alt="">
+                                        <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ @$daily_class->image_show }}" alt="">
                                         <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                     </div>
                             </div>
                         </div><!-- row -->
 
-                        <div class="row mt-3" id="menuvideo" style="display: none">
+                        <div class="row mt-3" id="menuvideo" @if($daily_class->sub_banner != '0') style="display: none;" @endif>
                             <div class="col-sm-4">
                                 <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">
@@ -162,6 +175,15 @@
                             </div>
 
                         </div>    
+
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label class="form-control-label"><b>Details </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <textarea id="summernote" name="details">{{ @$daily_class->details }}</textarea>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
