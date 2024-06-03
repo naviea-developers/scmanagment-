@@ -30,4 +30,12 @@ class DailyClass extends Model
     public function section(){
         return $this->belongsTo(SchoolSection::class,"section_id",'id');
     }
+
+    public function getImageShowAttribute(){
+        return $this->image != "" ? asset('public/upload/daily_class/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
+    }
+
+
+
+
 }
