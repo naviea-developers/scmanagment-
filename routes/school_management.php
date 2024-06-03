@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
 use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
 use App\Http\Controllers\Backend\School_management\DailyClass\DailyClassController;
+use App\Http\Controllers\Backend\School_management\Lession\LessionController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
@@ -77,6 +78,17 @@ Route::prefix('subject')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::post('update/{id}', [SubjectController::class,"update"])->name('admin.subject.update');
     Route::post('delete', [SubjectController::class,"destroy"])->name('admin.subject.delete');
     Route::get('/status/{id}', [SubjectController::class, 'status'])->name('admin.subject.status');
+});
+
+//Add lession for admin
+Route::prefix('lession')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [LessionController::class,"index"])->name('admin.lession.index');
+    Route::get('create', [LessionController::class,"create"])->name('admin.lession.create');
+    Route::post('store', [LessionController::class,"store"])->name('admin.lession.store');
+    Route::get('edit/{id}', [LessionController::class,"edit"])->name('admin.lession.edit');
+    Route::post('update/{id}', [LessionController::class,"update"])->name('admin.lession.update');
+    Route::post('delete', [LessionController::class,"destroy"])->name('admin.lession.delete');
+    Route::get('/status/{id}', [LessionController::class, 'status'])->name('admin.lession.status');
 });
 
 //Add group for admin
@@ -175,7 +187,7 @@ Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group(
 
 //-----------------------------exam type Route start---------------------------//
 Route::prefix('examtype')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
+    //Add examtype for admin
     Route::get('index', [ExamTypeController::class,"index"])->name('admin.examtype.index');
     Route::get('create', [ExamTypeController::class,"create"])->name('admin.examtype.create');
     Route::post('store', [ExamTypeController::class,"store"])->name('admin.examtype.store');
@@ -226,7 +238,7 @@ Route::prefix('examroutine')->middleware(['auth:admin', 'adminCheck:0'])->group(
 
 //-----------------------------routine Route start---------------------------//
 Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
-    //Add Subject for admin
+    //Add classroutine for admin
     Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
     Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
     Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
