@@ -452,6 +452,8 @@ Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutin
 // Route::get('/get-search-student-routine', [ClassRoutineController::class, 'getSearchStudentRoutine']);
 
 Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');
+//Syllabus
+Route::get('/get-syllabus', [SyllabusController::class, 'getSyllabus'])->name('get.syllabus');
 
 
 

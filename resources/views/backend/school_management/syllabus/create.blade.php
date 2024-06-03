@@ -100,7 +100,7 @@
 
                      
                         <div class="col-sm-12 mt-3">
-                            <label class="form-control-label">Lession Item: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Lession Details: <span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
                               <textarea type="text" name="lession_item" id="summernote" class="form-control" placeholder="Enter lession Item" required></textarea>
                             </div>
