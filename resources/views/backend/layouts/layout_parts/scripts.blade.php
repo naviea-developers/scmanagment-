@@ -325,6 +325,8 @@
             });
     }
 
+   
+
     function getGroup(id,outid){
       let url = '{{ url("get/group/") }}/' + id;
       axios.get(url)
@@ -398,6 +400,33 @@
             $('#'+outid).empty();
                 let html = '';
                 html += '<option value="">Select room</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
+
+
+
+
+    $('body').on("change",'#subject',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getLession(id,"lession");
+    });
+
+    function getLession(id,outid){
+        let url = '{{ url("/get/lession/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Lession</option>'
                 res.data.forEach(element => {
                     html += "<option value=" + element.id + ">" + element.name + "</option>"
                 });

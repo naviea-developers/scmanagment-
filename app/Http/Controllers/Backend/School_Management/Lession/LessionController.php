@@ -22,7 +22,7 @@ class LessionController extends Controller
      */
     public function create()
     {
-        $data['classes'] = Classe::where('status', 1)->orderBy('id','asc')->get();
+        $data['classes']= Classe::where('status', 1)->orderBy('id','asc')->get();
         $data['subjects'] = Subject::where('status', 1)->orderBy('id','desc')->get();
         return view("Backend.school_management.lession.create",$data);
     }
@@ -67,14 +67,34 @@ class LessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit(string $id)
+    // {
+    //     $data["lession"] = $class = Lession::find($id);
+    //     $data['classes'] = Classe::where('status', 1)->orderBy('id','asc')->get();
+    //     $data['subjects'] = Subject::where('class_id', $class)->where('status', 1)->orderBy('id','desc')->get();
+    //     return view("Backend.school_management.lession.update",$data);
+    // }
+
+
     public function edit(string $id)
     {
-       // dd('hi');
-        $data["lession"]= Lession::find($id);
-        $data['classes'] = Classe::where('status', 1)->orderBy('id','asc')->get();
-        $data['subjects'] = Subject::where('status', 1)->orderBy('id','desc')->get();
-        return view("Backend.school_management.lession.update",$data);
+        $lession = Lession::find($id);
+        $data["lession"] = $lession;
+    
+        // Assuming the lesson has a relationship with class and you can access it like this:
+        $classId = $lession->class_id; 
+    
+        // Fetching all active classes
+        $data['classes'] = Classe::where('status', 1)->orderBy('id', 'asc')->get();
+    
+        // Fetching subjects only for the selected class
+        $data['subjects'] = Subject::where('class_id', $classId)->where('status', 1)->orderBy('id', 'desc')->get();
+    
+        return view("Backend.school_management.lession.update", $data);
     }
+
+
+
 
     /**
      * Update the specified resource in storage.

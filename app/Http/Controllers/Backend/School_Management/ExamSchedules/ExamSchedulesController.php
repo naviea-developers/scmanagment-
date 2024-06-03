@@ -17,6 +17,7 @@ use App\Models\Session;
 use App\Models\ExamType;
 use App\Models\Group;
 use App\Models\ExamClass;
+use App\Models\Lession;
 use App\Models\SchoolSection;
 
 class ExamSchedulesController extends Controller
@@ -161,6 +162,11 @@ class ExamSchedulesController extends Controller
     public function getSubject($id){
         $subject = Subject::where("class_id",$id)->get();
         return $subject;
+    }
+    //ajax get Lession
+    public function getLession($id){
+        $lession = Lession::where("subject_id",$id)->get();
+        return $lession;
 	}  
 
 

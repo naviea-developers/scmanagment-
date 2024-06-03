@@ -48,6 +48,7 @@ class ExaminationController extends Controller
             $exam->name = $request->name;
             $exam->start_date = $request->start_date;
             $exam->end_date = $request->end_date;
+            $exam->exam_priority = $request->exam_priority;
             $exam->save();
 
             DB::commit();
@@ -97,6 +98,7 @@ class ExaminationController extends Controller
         $exam->name = $request->name;
         $exam->start_date = $request->start_date;
         $exam->end_date = $request->end_date;
+        $exam->exam_priority = $request->exam_priority;
         $exam->save();
 
         DB::commit();
