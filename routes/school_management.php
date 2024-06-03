@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
 use App\Http\Controllers\Backend\School_management\Gallery\GalleryController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
-use App\Http\Controllers\Backend\School_Management\Subject\SubjectController;
+use App\Http\Controllers\Backend\School_management\Subject\SubjectController;
 use App\Http\Controllers\Backend\School_management\ClassDuration\ClassDurationController;
 use App\Http\Controllers\Backend\School_management\ExamType\ExamTypeController;
 use App\Http\Controllers\Backend\School_management\ExamSchedules\ExamSchedulesController;
@@ -26,7 +26,7 @@ use App\Http\Controllers\Backend\School_management\ExamClass\ExamClassController
 use App\Http\Controllers\Backend\School_management\Result\ExamResultController;
 use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineController;
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
-use App\Http\Controllers\Backend\School_Management\SubjectTeacherAssent\SubjectTeacherAssentController;
+use App\Http\Controllers\Backend\School_management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
 use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
