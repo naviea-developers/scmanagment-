@@ -103,6 +103,8 @@
             @php
             $r_check = ( Route::is('admin.class.create') ||  Route::is('admin.class.index') || Route::is('admin.class.edit')
             || Route::is('admin.subject.create') ||  Route::is('admin.subject.index') || Route::is('admin.subject.edit')
+            || Route::is('admin.lession.create') ||  Route::is('admin.lession.index') || Route::is('admin.lession.edit')
+            || Route::is('admin.syllabus.create') ||  Route::is('admin.syllabus.index') || Route::is('admin.syllabus.edit')
             || Route::is('admin.subject_teacher_assent.create') ||  Route::is('admin.subject_teacher_assent.index') || Route::is('admin.subject_teacher_assent.edit')
             || Route::is('admin.group.create') ||  Route::is('admin.group.index') || Route::is('admin.group.edit')
             || Route::is('admin.class_duration.create') ||  Route::is('admin.class_duration.index') || Route::is('admin.class_duration.edit')
@@ -139,6 +141,8 @@
                 <li class="sub-item"><a href="{{ route('admin.group.index') }}" class="sub-link {{(Route::is('admin.group.index') || Route::is('admin.group.edit') || Route::is('admin.group.create')) ?'active':''}}">Manage Group</a></li>
                 <li class="sub-item"><a href="{{ route('admin.school_section.index') }}" class="sub-link {{(Route::is('admin.school_section.index') || Route::is('admin.school_section.edit') || Route::is('admin.school_section.create')) ?'active':''}}">Manage Section</a></li>
                 <li class="sub-item"><a href="{{ route('admin.subject.index') }}" class="sub-link {{(Route::is('admin.subject.index') || Route::is('admin.subject.edit') || Route::is('admin.subject.create')) ?'active':''}}">Manage Subject</a></li>
+                <li class="sub-item"><a href="{{ route('admin.lession.index') }}" class="sub-link {{(Route::is('admin.lession.index') || Route::is('admin.lession.edit') || Route::is('admin.lession.create')) ?'active':''}}">Manage Lession</a></li>
+                <li class="sub-item"><a href="{{ route('admin.syllabus.index') }}" class="sub-link {{(Route::is('admin.syllabus.index') || Route::is('admin.syllabus.edit') || Route::is('admin.syllabus.create')) ?'active':''}}">Manage Syllabus</a></li>
                 <li class="sub-item"><a href="{{ route('admin.fee.index') }}" class="sub-link {{(Route::is('admin.fee.index') || Route::is('admin.fee.edit') || Route::is('admin.fee.create')) ?'active':''}}">Manage Fees Name</a></li>
                 <li class="sub-item"><a href="{{ route('admin.fee_management.index') }}" class="sub-link {{(Route::is('admin.fee_management.index') || Route::is('admin.fee_management.edit') || Route::is('admin.subject.create')) ?'active':''}}">Fees Management</a></li>
                 <li class="sub-item"><a href="{{ route('admin.examination.index') }}" class="sub-link {{(Route::is('admin.examination.index') || Route::is('admin.examination.edit') || Route::is('admin.examination.create')) ?'active':''}}">Manage Examination</a></li>

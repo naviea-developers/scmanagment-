@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
 use App\Http\Controllers\Backend\School_management\DailyClass\DailyClassController;
 use App\Http\Controllers\Backend\School_management\Lession\LessionController;
+use App\Http\Controllers\Backend\School_management\Syllabus\SyllabusController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
@@ -89,6 +90,17 @@ Route::prefix('lession')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::post('update/{id}', [LessionController::class,"update"])->name('admin.lession.update');
     Route::post('delete', [LessionController::class,"destroy"])->name('admin.lession.delete');
     Route::get('/status/{id}', [LessionController::class, 'status'])->name('admin.lession.status');
+});
+
+//Add syllabus for admin
+Route::prefix('syllabus')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [SyllabusController::class,"index"])->name('admin.syllabus.index');
+    Route::get('create', [SyllabusController::class,"create"])->name('admin.syllabus.create');
+    Route::post('store', [SyllabusController::class,"store"])->name('admin.syllabus.store');
+    Route::get('edit/{id}', [SyllabusController::class,"edit"])->name('admin.syllabus.edit');
+    Route::post('update/{id}', [SyllabusController::class,"update"])->name('admin.syllabus.update');
+    Route::post('delete', [SyllabusController::class,"destroy"])->name('admin.syllabus.delete');
+    Route::get('/status/{id}', [SyllabusController::class, 'status'])->name('admin.syllabus.status');
 });
 
 //Add group for admin
@@ -430,6 +442,7 @@ Route::get('/get/school_section/{id}', [AdmissionController::class, 'schoolSecti
 Route::get('/get/floor/{id}', [ExamSchedulesController::class, 'getFloor']);
 Route::get('/get/room/{id}', [ExamSchedulesController::class, 'getRoom']);
 Route::get('/get/subject/{id}', [ExamSchedulesController::class, 'getSubject']);
+Route::get('/get/lession/{id}', [ExamSchedulesController::class, 'getLession']);
 Route::get('/get/exam-class-subject/{examinationId}/{classExamId}', [ExamSchedulesController::class, 'examClassSubject']);
 
 Route::get('/get/examination_class/{id}', [ExamSchedulesController::class, 'getExaminationClass']);

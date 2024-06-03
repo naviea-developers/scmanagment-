@@ -75,6 +75,19 @@
                               </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-12 mt-3">
+                                <label class="form-control-label">Exam Priority: <span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                  <select name="exam_priority" class="form-control form-select" required>
+                                    <option value=""> Select Exam Priority</option>
+                                    <option value="main"> Main Exam</option>
+                                    <option value="secondary"> Secondary Exam</option>
+                                  </select>
+                                </div>
+                              </div>
+                        </div>
+
 
 
                         
