@@ -118,9 +118,14 @@
                             </div>
 
                             <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Lesson: </b><span class="tx-danger">*</span></label>
+                                <label class="form-control-label"><b>Lesson Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="lesson" value="{{ @$daily_class->lesson }}" class="form-control" placeholder="Enter Lesson" required>
+                                    <select id="lession"  class="form-control form-select select2" name="lession_id">
+                                        <option value="">Select lesson</option>
+                                        @foreach ($lessions as $lession)
+                                        <option @if($lession->id == $daily_class->lession_id)  Selected @endif value="{{ $lession->id }}">{{ $lession->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -140,7 +145,7 @@
                                 <input type="radio" id="yes" name="sub_banner" value="1" 
                                 @if($daily_class->sub_banner==1) checked="checked" @endif >
                                 <label for="image">Video Image</label>
-                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="0" 
+                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="2" 
                                 @if($daily_class->sub_banner==0) checked="checked" @endif >
                                 <label for="video">Video</label>
                             </div>
@@ -156,7 +161,7 @@
                             </div>
                         </div><!-- row -->
 
-                        <div class="row mt-3" id="menuvideo" @if($daily_class->sub_banner != '0') style="display: none;" @endif>
+                        <div class="row mt-3" id="menuvideo" @if($daily_class->sub_banner != '2') style="display: none;" @endif>
                             <div class="col-sm-4">
                                 <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                                 <div class="col-sm-9 mg-t-10">

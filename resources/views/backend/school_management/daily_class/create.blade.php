@@ -129,9 +129,11 @@
                             </div>
 
                             <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Lesson: </b><span class="tx-danger">*</span></label>
+                                <label class="form-control-label"><b>Lesson Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                    <input type="text" name="lesson" value="{{ old('lesson') }}" class="form-control" placeholder="Enter Lesson" required>
+                                    <select id="lession"  class="form-control form-select select2" name="lession_id">
+                                        <option value="">Select lesson</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -150,7 +152,7 @@
                                 <br>
                                 <input type="radio" id="yes" name="sub_banner" value="1" checked>
                                 <label for="image">Video Image</label>
-                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="0" >
+                                <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="2" >
                                 <label for="video">Video</label>
                             </div>
                         </div>

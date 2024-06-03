@@ -37,6 +37,7 @@ use App\Models\SubjectTeacherAssent;
 use App\Models\DailyClass;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Lession;
 
 class InstructorCourseController extends Controller
 {
@@ -1242,7 +1243,7 @@ class InstructorCourseController extends Controller
    // Daily Class Start
     public function indexDailyClass()
     {
-        $data['daily_classes'] = DailyClass::orderBy('id', 'desc')->get();
+        $data['daily_classes'] = DailyClass::where('teacher_id',auth()->user()->id)->orderBy('id', 'desc')->get();
         return view('user.instructor.daily_class_index', $data);
     }
 
@@ -1252,6 +1253,7 @@ class InstructorCourseController extends Controller
     public function createDailyClass()
     {
         // dd('hi');
+        $data['daily_classes'] = DailyClass::where('status','1')->orderBy('id', 'desc')->get();
         $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
         $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
         $data['sessions'] = Session::where('status', 1)->get();
@@ -1263,9 +1265,8 @@ class InstructorCourseController extends Controller
      */
     public function storeDailyClass(Request $request)
     {
-      // dd($request->all());
+    //    dd($request->all());
         $request->validate([
-            'teacher_id' => 'required',
             'class_id' => 'required',
 
         ]);
@@ -1281,7 +1282,7 @@ class InstructorCourseController extends Controller
             $daily_class->section_id = $request->section_id ?? 0;
             $daily_class->group_id = $request->group_id ?? 0;
             $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-            $daily_class->lesson = $request->lesson ?? 0;
+            $daily_class->lession_id = $request->lession_id ?? 0;
             $daily_class->page_number = $request->page_number ?? 0;
             $daily_class->sub_banner = $request->sub_banner ?? 1;
             $daily_class->details = $request->details ?? "";
@@ -1332,6 +1333,7 @@ class InstructorCourseController extends Controller
        $data['sections'] = SchoolSection::where('class_id',$daily_class->class_id)->where('status', 1)->get();
        $data['groups'] = Group::where('class_id',$daily_class->class_id)->where('status', 1)->get();
        $data['subjects']=Subject::where('class_id',$daily_class->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
+       $data['lessions']=Lession::where('subject_id',$daily_class->subject_id)->where('status', 1)->orderBy('id', 'asc')->get();
  
         return view("user.instructor.daily_class_update",$data);
     }
@@ -1339,11 +1341,10 @@ class InstructorCourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateDailyClass(Request $request, string $id)
     {
         //dd($request->all());
        $request->validate([
-        'teacher_id' => 'required',
         'class_id' => 'required',
 
     ]);
@@ -1359,7 +1360,7 @@ class InstructorCourseController extends Controller
         $daily_class->section_id = $request->section_id ?? 0;
         $daily_class->group_id = $request->group_id ?? 0;
         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-        $daily_class->lesson = $request->lesson ?? 0;
+        $daily_class->lession_id = $request->lession_id ?? 0;
         $daily_class->page_number = $request->page_number ?? 0;
         $daily_class->sub_banner = $request->sub_banner ?? 1;
         $daily_class->details = $request->details ?? "";
@@ -1392,7 +1393,7 @@ class InstructorCourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroyDailyClass(Request $request)
     {
 
         $daily_class =  DailyClass::find($request->daily_class_id);
@@ -1403,7 +1404,7 @@ class InstructorCourseController extends Controller
     }
 
 
-    public function status($id)
+    public function statusDailyClass($id)
     {
         $daily_class = DailyClass::find($id);
         if($daily_class->status == 0)

@@ -1,8 +1,14 @@
 @extends('user.layouts.master-layout')
 
-@section('title','- edit_daily_class')
+@section('title','- edit daily class')
 @section('head')
 <link href="{{asset('public/backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+{{-- <style>
+    /* Hide the content initially */
+     #content2 {
+      display: none;
+    }
+  </style> --}}
 @endsection
 @section('main_content')
 
@@ -13,9 +19,7 @@
     <div class="br-pagebody card shadow p-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
       <div class="br-section-wrapper">
         <h5 class="br-section-label text-center mb-4"> Edit Daily Class</h5>
-         {{-- <p  class="br-section-label text-center mb-1">Add Class Exam For Students</p> --}}
         <hr>
-
         @if(count($errors) > 0)
         @foreach($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
@@ -23,17 +27,17 @@
         @endif
 
         {{-- success message start --}}
-            @if(session()->has('message'))
-            <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-            {{session()->get('message')}}
-            </div>
-            <script>
-                setTimeout(function(){
-                    $('.alert.alert-success').hide();
-                }, 3000);
-            </script>
-            @endif
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+        {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
+        {{session()->get('message')}}
+        </div>
+        <script>
+            setTimeout(function(){
+                $('.alert.alert-success').hide();
+            }, 3000);
+        </script>
+        @endif
         {{-- success message start --}}
 
 
@@ -124,9 +128,14 @@
                         </div>
 
                         <div class="col-sm-4 mt-3">
-                            <label class="form-control-label"><b>Lesson: </b><span class="tx-danger">*</span></label>
+                            <label class="form-control-label"><b>Lesson Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <input type="text" name="lesson" value="{{ @$daily_class->lesson }}" class="form-control" placeholder="Enter Lesson" required>
+                                <select id="lession"  class="form-control form-select select2" name="lession_id">
+                                    <option value="">Select lesson</option>
+                                    @foreach ($lessions as $lession)
+                                    <option @if($lession->id == $daily_class->lession_id)  Selected @endif value="{{ $lession->id }}">{{ $lession->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -139,61 +148,64 @@
 
                     </div>
 
-                    <div class="row" id="menudropdown">
+                    <div class="row">
                         <label class="form-control-label"><span class="tx-danger"></span></label>
                         <div class="col-sm-9 mg-t-10">
                             <br>
-                            <input type="radio" id="yes" name="sub_banner" value="1" 
-                            @if($daily_class->sub_banner==1) checked="checked" @endif >
-                            <label for="image">Video Image</label>
-                            <input style="margin-left:28px;" type="radio" id="no" name="sub_banner" value="0" 
-                            @if($daily_class->sub_banner==0) checked="checked" @endif >
-                            <label for="video">Video</label>
+                            <input type="radio" name="sub_banner" id="radio1" value="1" 
+                            @if($daily_class->sub_banner==1) checked @endif>
+                            <label for="radio1">Video Image</label>
+                          
+                            <input type="radio" name="sub_banner" id="radio2" value="2"
+                            @if($daily_class->sub_banner==2) checked @endif>
+                            <label for="radio2">Video</label>
                         </div>
                     </div>
 
-                    <div class="row mt-3" id="menuimage" @if($daily_class->sub_banner != '1') style="display: none;" @endif>
-                        <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
-                        <div class="col-sm-9 mg-t-10">
-                            <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
+                    <div class="row mt-3" id="content1" @if($daily_class->sub_banner != '1') style="display: none;" @endif>
+                        <div class="col-sm-4">
+                            <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
+                            <div class="col-sm-9 mg-t-10">
+                                <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
                                     <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ @$daily_class->image_show }}" alt="">
                                     <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                 </div>
+                            </div>
                         </div>
                     </div><!-- row -->
 
-                    <div class="row mt-3" id="menuvideo" @if($daily_class->sub_banner != '0') style="display: none;" @endif>
+                    <div class="row mt-3" id="content2" @if($daily_class->sub_banner != '2') style="display: none;" @endif>
                         <div class="col-sm-4">
                             <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
-                                    <img class="display-upload-img" style="width: 150px;height: 70px;" src="{{ @$daily_class->video_thumbnail_show }}" alt="">
-                                    <input type="file" name="video_thumbnail" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
+                                    <img class="display-upload-img-thumbnail" style="width: 150px;height: 70px;" src="{{ @$daily_class->video_thumbnail_show }}" alt="">
+                                    <input type="file" name="video_thumbnail" class="form-control upload-img-thumbnail" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             <label class="form-control-label">Video Url: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10">
-                            <input type="text" name="video_url" value="{{ @$daily_class->video_url }}" class="form-control" placeholder="Enter Video Link">
-                             </div>
+                                <input type="text" name="video_url" value="{{ @$daily_class->video_url }}" class="form-control" placeholder="Enter Video Link">
+                            </div>
                         </div>
 
-                    </div>    
+                    </div>   
 
-                    <div class="row mt-3">
+                    <div class="row mt-4">
                         <div class="col-sm-12">
                             <label class="form-control-label"><b>Details </b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <textarea id="summernote" name="details">{{ @$daily_class->details }}</textarea>
+                                <textarea class="form-control" id="summernote_two" name="details">{!! @$daily_class->details !!}</textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                       <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                        <a href="{{route('admin.daily_class.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
+                        <a href="{{route('instructor.daily_class.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>
                         <button type="submit" class="btn btn-info ">Save</button>
                       </div>
                     </div>
@@ -206,61 +218,59 @@
 
 </div><!-- br-mainpanel -->
 <!-- ########## END: MAIN PANEL ########## -->
-  
 
 @endsection
 
 @section('script')
-<script src="{{asset('public/backend')}}/lib/summernote/summernote-bs4.min.js"></script>
+ <!--- Start on click image show Script-------->
+ <script>
+    $(document).on('change','.upload-img-thumbnail',function(){
+       var files = $(this).get(0).files;
+       var reader = new FileReader();
+       reader.readAsDataURL(files[0]);
+       var arg=this;
+       reader.addEventListener("load", function(e) {
+           var image = e.target.result;
+           $(arg).parent().find('.display-upload-img-thumbnail').attr('src', image);
+       });
+   });
+   </script>
 
-<script>
-    $(document).ready(function() {
-        $('.multipleSelect2Search').select2();
-    });
-    $(document).ready(function() {
-        $('.multipleSelectSearch').select2();
-    });
-    
-</script>
+    <!--- Start on click image show Script-------->
+ <script>
+    $(document).on('change','.upload-img',function(){
+       var files = $(this).get(0).files;
+       var reader = new FileReader();
+       reader.readAsDataURL(files[0]);
+       var arg=this;
+       reader.addEventListener("load", function(e) {
+           var image = e.target.result;
+           $(arg).parent().find('.display-upload-img').attr('src', image);
+       });
+   });
+   </script>
+    <!--- End on click image show Script-------->
+    <!--- End on click image show Script-------->
+    <script>
+        // Get references to the radio buttons and divs
+        const radio1 = document.getElementById('radio1');
+        const radio2 = document.getElementById('radio2');
+        const content1 = document.getElementById('content1');
+        const content2 = document.getElementById('content2');
 
-<script>
-    $('document').ready(function () {
-      $("input[name=sub_banner]:radio").change(function () {
-      var data = $(this).val();
-      if (data == 1) {
-        $('#menuimage').show();
-        $('#menuvideo').hide();
+        // Add event listeners to the radio buttons
+        radio1.addEventListener('change', function() {
+        if (radio1.checked) {
+            content1.style.display = 'block';
+            content2.style.display = 'none';
+        }
+        });
 
-      } else {
-        $('#menuvideo').show();
-        $('#menuimage').hide();
-      }
-    });
-    });
-</script>
-
-<!--- Start Summernote Editor Js ---->
-<script>
-
-    $(document).ready(function() {
-        /*** summernote editor one ***/
-        $('#summernote').summernote({
-            height: 150
-        })
-        /*** summernote editor two ***/
-        $('#summernote_two').summernote({
-            height: 150
-        })
-
-        $('#summernote_three').summernote({
-            height: 150
-        })
-        $('#summernote_four').summernote({
-            height: 150
-        })
-
-    });
-
+        radio2.addEventListener('change', function() {
+        if (radio2.checked) {
+            content1.style.display = 'none';
+            content2.style.display = 'block';
+        }
+        });
     </script>
-<!--- End Summernote Editor Js ---->
 @endsection

@@ -1,6 +1,6 @@
 <!-- --------------- bootstrap start ---------------->
 
-{{-- <script
+<script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 crossorigin="anonymous"
@@ -23,7 +23,7 @@ crossorigin="anonymous"
 <script src="{{ asset('public/frontend') }}/js/User-profile-modal.js"></script>
 <!-- -------------- slick carousel--------- -->
 <script src="{{ asset('public/frontend') }}/js/Jquery.js"></script>
-<script src="{{ asset('public/frontend') }}/js/slick.min.js"></script> --}}
+<script src="{{ asset('public/frontend') }}/js/slick.min.js"></script>
 
 
 {{-- <script>
@@ -113,7 +113,34 @@ fileInput.addEventListener('change', (event) => {
               $('#'+outid).val("").change();
           });
     }
+
+
+    $('body').on("change",'#subject',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getLession(id,"lession");
+    });
+
+    function getLession(id,outid){
+        let url = '{{ url("/get/lession/") }}/' + id;
+        axios.get(url)
+            .then(res => {
+                console.log(res);
+            $('#'+outid).empty();
+                let html = '';
+                html += '<option value="">Select Lession</option>'
+                res.data.forEach(element => {
+                    html += "<option value=" + element.id + ">" + element.name + "</option>"
+                });
+
+
+                $('#'+outid).append(html);
+                $('#'+outid).val("").change();
+            });
+    }
 </script>
+
+
 
  <!--- Start ajax Sub Category Get Script-------->
  <script>

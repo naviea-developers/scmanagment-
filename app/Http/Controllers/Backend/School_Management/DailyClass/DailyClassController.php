@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Session;
 use App\Models\Classe;
 use App\Models\DailyClass;
-use App\Models\Ebook;
-use App\Models\EbookAudioContent;
-use App\Models\EbookContent;
-use App\Models\EbookVideoContent;
+use App\Models\Lession;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Subject;
@@ -59,7 +56,7 @@ class DailyClassController extends Controller
             $daily_class->section_id = $request->section_id ?? 0;
             $daily_class->group_id = $request->group_id ?? 0;
             $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-            $daily_class->lesson = $request->lesson ?? 0;
+            $daily_class->lession_id = $request->lession_id ?? 0;
             $daily_class->page_number = $request->page_number ?? 0;
             $daily_class->sub_banner = $request->sub_banner ?? 1;
             $daily_class->details = $request->details ?? "";
@@ -110,7 +107,7 @@ class DailyClassController extends Controller
        $data['sections'] = SchoolSection::where('class_id',$daily_class->class_id)->where('status', 1)->get();
        $data['groups'] = Group::where('class_id',$daily_class->class_id)->where('status', 1)->get();
        $data['subjects']=Subject::where('class_id',$daily_class->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
- 
+       $data['lessions']=Lession::where('subject_id',$daily_class->subject_id)->where('status', 1)->orderBy('id', 'asc')->get();
         return view("Backend.school_management.daily_class.update",$data);
     }
 
@@ -136,7 +133,7 @@ class DailyClassController extends Controller
         $daily_class->section_id = $request->section_id ?? 0;
         $daily_class->group_id = $request->group_id ?? 0;
         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-        $daily_class->lesson = $request->lesson ?? 0;
+        $daily_class->lession_id = $request->lession_id ?? 0;
         $daily_class->page_number = $request->page_number ?? 0;
         $daily_class->sub_banner = $request->sub_banner ?? 1;
         $daily_class->details = $request->details ?? "";

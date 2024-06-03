@@ -39,6 +39,10 @@ class DailyClass extends Model
         return $this->video_thumbnail != "" ? asset('public/upload/daily_class/'. $this?->video_thumbnail) : asset('public/frontend/images/No-image.jpg');
     }
 
+    public function lession(){
+        return $this->belongsTo(Lession::class,"lession_id",'id');
+    }
+
 
 
 
