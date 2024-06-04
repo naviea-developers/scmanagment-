@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\School_management\Notice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notice;
+use App\Models\NoticeType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        return view("Backend.school_management.notice.create");
+        $data['noticeTypes'] = NoticeType::orderBy('id', 'desc')->get();
+        return view("Backend.school_management.notice.create",$data);
     }
 
     /**
@@ -36,11 +38,11 @@ class NoticeController extends Controller
         try{
             DB::beginTransaction();
             $notice = New Notice;
-            $notice->type = $request->type;
+            $notice->noticetype_id=$request->noticetype_id;
             $notice->name = $request->name;
             $notice->description = $request->description;
             if($request->hasFile('notice_file')){
-                $fileName = rand().time().'.'.request()->notice_file->getClientOriginalExtension();
+                $fileName = $request->name.time().'.'.request()->notice_file->getClientOriginalExtension();
                 request()->notice_file->move(public_path('upload/notice_file/'),$fileName);
                 $notice->notice_file = $fileName;
             }
@@ -70,6 +72,7 @@ class NoticeController extends Controller
     {
        // dd('hi');
         $data["notice"]= Notice::find($id);
+        $data['noticeTypes'] = NoticeType::orderBy('id', 'desc')->get();
         return view("Backend.school_management.notice.update",$data);
     }
 
@@ -86,13 +89,13 @@ class NoticeController extends Controller
     try{
         DB::beginTransaction();
         $notice = Notice::find($id);
-        $notice->type = $request->type;
+        $notice->noticetype_id=$request->noticetype_id;
         $notice->name = $request->name;
         $notice->description = $request->description;
 
         if($request->hasFile('notice_file')){
             @unlink(public_path("upload/notice_file/".$notice->notice_file));
-            $fileName = rand().time().'.'.request()->notice_file->getClientOriginalExtension();
+            $fileName = $request->name.time().'.'.request()->notice_file->getClientOriginalExtension();
             request()->notice_file->move(public_path('upload/notice_file/'),$fileName);
             $notice->notice_file = $fileName;
         }

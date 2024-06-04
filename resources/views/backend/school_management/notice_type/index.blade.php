@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Notice
+Admin - All Notice Type
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -11,16 +11,16 @@ Admin - All Notice
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center">All Notice</h6>
+            <h6 class="br-section-label text-center">All Notice Type</h6>
 
-            <a style="margin-bottom: 20px" href="{{ route('admin.notice.create') }}" class="btn btn-primary btn-sm float-right">
-              <i class="fa fa-plus"></i> Add Notice
+            <a style="margin-bottom: 20px" href="{{ route('admin.notice_type.create') }}" class="btn btn-primary btn-sm float-right">
+              <i class="fa fa-plus"></i> Add Notice Type
             </a>
 
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
+            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button>
             {{session()->get('message')}}
             </div>
             <script>
@@ -36,8 +36,7 @@ Admin - All Notice
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Notice Type</th>
-                    <th class="wd-15p">Notice Title</th>
+                    <th class="wd-15p">Notice Type Name</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -46,33 +45,21 @@ Admin - All Notice
                     @php
                         $i = 1;
                     @endphp
-                  @if (count($notices) > 0)
-                    @foreach ($notices as $notice)
+                  @if (count($noticeTypes) > 0)
+                    @foreach ($noticeTypes as $noticeType)
                       <tr>
                           <td>{{ $i++ }}</td>
+                          <td>{{ $noticeType->name }}</td>
                           <td>
-                            {{-- @if ($notice->type == 'daily')
-                            Daily Notice
-                            @elseif ($notice->type == 'monthly')
-                            Monthly Notice
-                            @elseif ($notice->type == 'yearly')
-                            Yearly Notice
-                            @elseif ($notice->type == 'instant')
-                            Instant Notice
-                            @endif --}}
-                            {{ @$notice->noticeType->name }}
-                          </td>
-                          <td>{{ @$notice->name }}</td>
-                          <td>
-                            @if(@$notice->status == 0)
-                            <a href="{{ route('admin.notice.status',$notice->id) }}" class="btn btn-sm btn-warning">Inactive</a>
-                            @elseif(@$notice->status == 1)
-                            <a href="{{ route('admin.notice.status',$notice->id) }}" class="btn btn-sm btn-success">Active</a>
+                            @if(@$noticeType->status == 0)
+                            <a href="{{ route('admin.notice_type.status',$noticeType->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                            @elseif(@$noticeType->status == 1)
+                            <a href="{{ route('admin.notice_type.status',$noticeType->id) }}" class="btn btn-sm btn-success">Active</a>
                             @endif
                           </td>
                           <td>
-                            <a class="btn text-info" href="{{ route('admin.notice.edit', $notice->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                            <button class="btn text-danger bg-white"  value="{{$notice->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            <a class="btn text-info" href="{{ route('admin.notice_type.edit', $noticeType->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                            <button class="btn text-danger bg-white"  value="{{$noticeType->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
                           </td>
                       </tr> 
                     @endforeach
@@ -106,14 +93,14 @@ Admin - All Notice
         <div class="modal-dialog modal-dialog-top" role="document">
         <div class="modal-content tx-size-sm">
             <div class="modal-body tx-center pd-y-20 pd-x-20">
-                <form action="{{ route('admin.notice.delete') }}" method="post">
+                <form action="{{ route('admin.notice_type.delete') }}" method="post">
                     @csrf
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                     <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-                     <input type="hidden" name="notice_id" id="modal_data_id">
+                     <input type="hidden" name="notice_type_id" id="modal_data_id">
                     <button type="submit" class="btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
                         yes
                     </button>

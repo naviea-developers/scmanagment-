@@ -121,6 +121,7 @@
             || Route::is('admin.examroutine.create') ||  Route::is('admin.examroutine.index') || Route::is('admin.examroutine.edit')
             || Route::is('admin.exam_result.index') || Route::is('admin.exam_result.edit')
             || Route::is('admin.routine.create') ||  Route::is('admin.routine.index') || Route::is('admin.routine.edit')
+            || Route::is('admin.notice_type.create') ||  Route::is('admin.notice_type.index') || Route::is('admin.notice_type.edit')
             || Route::is('admin.notice.create') ||  Route::is('admin.notice.index') || Route::is('admin.notice.edit')
             || Route::is('admin.gallery.create') ||  Route::is('admin.gallery.index') || Route::is('admin.gallery.edit')
             || Route::is('admin.fee.create') ||  Route::is('admin.fee.index') || Route::is('admin.fee.edit')
@@ -153,6 +154,7 @@
                 <li class="sub-item"><a href="{{ route('admin.exam_result.index') }}" class="sub-link {{(Route::is('admin.exam_result.edit') || Route::is('admin.exam_result.index')) ?'active':''}}">Manage Exam Result</a></li>
                 <li class="sub-item"><a href="{{ route('admin.routine.index') }}" class="sub-link {{( Route::is('admin.routine.index') ) ?'active':''}}">Manage Class Routine</a></li>
                 <li class="sub-item"><a href="{{ route('admin.gallery.index') }}" class="sub-link {{(Route::is('admin.gallery.index') || Route::is('admin.gallery.edit') || Route::is('admin.gallery.create')) ?'active':''}}">Manage Gallery</a></li>
+                <li class="sub-item"><a href="{{ route('admin.notice_type.index') }}" class="sub-link {{(Route::is('admin.notice_type.index') || Route::is('admin.notice_type.edit') || Route::is('admin.notice_type.create')) ?'active':''}}">Manage Notice Type</a></li>
                 <li class="sub-item"><a href="{{ route('admin.notice.index') }}" class="sub-link {{(Route::is('admin.notice.index') || Route::is('admin.notice.edit') || Route::is('admin.notice.create')) ?'active':''}}">Manage Notice</a></li>
                 <li class="sub-item"><a href="{{ route('admin.id_card.create') }}" class="sub-link {{(Route::is('admin.id_card.create')) ?'active':''}}">ID Card</a></li>
                 <li class="sub-item"><a href="{{ route('admin.admit.create') }}" class="sub-link {{(Route::is('admin.admit.create')) ?'active':''}}">Admit Card</a></li>
