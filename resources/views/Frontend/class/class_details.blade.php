@@ -246,6 +246,21 @@
 
 </style>
 
+@php
+    $session = \App\Models\Session::where('is_current', 1)->first();
+    $sessionId = $session->id;
+    $classRoutines = \App\Models\ClassRoutine::where('class_id', $class->id)->where('session_id', $sessionId)->get();
+    $examSchedules = \App\Models\ExamSchedule::where('class_id', $class->id)->where('session_id', $sessionId)->get();
+@endphp 
+
+
+
+
+
+
+
+
+
 <input type="hidden" id="ebook_id" name="ebook_id" value="CO13RT58I93">
 <input type="hidden" id="student_id" name="student_id" value="">
 <!--Start ebook Preview Header-->
@@ -336,6 +351,8 @@
 <!--End ebook Preview Header-->
 <!-- Navigation-->
 <!-- navbar_top  -->
+ 
+
 <div class="bg-dark-cerulean sticky-nav" id="secNavbar">
     <div class="container-lg">
         <ul class="nav" id="navbarResponsive">
@@ -357,6 +374,12 @@
                 </li>
             @endif
 
+            @if (@$syllabus->count() >0)
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger lessons_txt" href="#syllabus">Syllabus</a>
+                </li>
+            @endif
+            
             @if (@$class->subjects->count() >0)
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger prerequisites_txt" href="#book-list">Book List</a>
@@ -381,17 +404,20 @@
                 </li>
             @endif
 
-            @if (@$class->ClassRoutines->count() >0)
+            @if (@$classRoutines->count() >0)
+            {{-- @if (@$class->ClassRoutines->count() >0) --}}
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger lessons_txt" href="#class_routine">Class Routine</a>
                 </li>
             @endif
 
-            @if (@$class->examSchedules->count() >0)
+            {{-- @if (@$class->examSchedules->count() >0) --}}
+            @if (@$examSchedules->count() >0)
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger lessons_txt" href="#exam_routine">Exam Routine</a>
                 </li>
             @endif
+           
 
 
         </ul>
@@ -455,10 +481,13 @@
                             {{-- Overview --}}
                             </h4>
                             <!--End Section Header-->
-                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 moreText">
+                            <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 moreText2">
                                 {!! @$class->gargent_policy !!}
                             </div>
-                            <button onclick="showhide()" class=" read_more_txt btn btn-primary" style="color:white"id="toggle"> Read More</button>
+
+                            <div class="col-md-12">
+                                <button onclick="showhideT(this)" data-id="2" class="read_more_txt btn btn-primary"  id="toggle2">Read More</button>
+                            </div>
 
                         </div>
                     </div>
@@ -506,6 +535,140 @@
                     </div>
                     <!--Start card-->
                 @endif
+
+
+
+
+                @if (@$syllabus->count() >0)
+                    <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="syllabus">
+                        <div class="card-body p-4 p-xl-5">
+                            <div class="section-header mb-4 position-relative">
+                                <h4 class="h5 about_this_course" style="color: var(--text_color)">Syllabus</h4>
+                                <div class="section-header_divider"></div>
+
+                                <style>
+                                    /* Additional custom styles */
+                                    .school-name {
+                                      text-align: center;
+                                      margin-bottom: 30px;
+                                    }
+                                    .class-routine {
+                                      margin-bottom: 50px;
+                                    }
+                                    .class-routine table {
+                                      width: 100%;
+                                      border-collapse: collapse;
+                                    }
+                                    .class-routine th, .class-routine td {
+                                      border: 1px solid #ccc;
+                                      padding: 8px;
+                                      text-align: center;
+                                    }
+                                    .class-routine th {
+                                      background-color: #f2f2f2;
+                                    }
+                                  
+                                      .syllabus-container {
+                                          margin: 20px;
+                                      }
+                                      .examination {
+                                          border: 1px solid #000;
+                                          padding: 10px;
+                                          margin-bottom: 20px;
+                                      }
+                                      .subject {
+                                          border: 1px solid #555;
+                                          padding: 10px;
+                                          margin-bottom: 15px;
+                                          margin-left: 20px;
+                                      }
+                                      .table {
+                                          width: 100%;
+                                          border-collapse: collapse;
+                                          margin-bottom: 15px;
+                                      }
+                                      .table, .table th, .table td {
+                                          border: 1px solid #121212;
+                                      }
+                                      .table th, .table td {
+                                          padding: 8px;
+                                          text-align: left;
+                                      }
+                                </style>
+                                  
+                                <div class="float-end">
+                                    <a href="{{ route('frontend.syllabus_download') }}?class_id={{ @$class->id }}" class="btn btn-secondary"> <i class="fa fa-solid fa-download"></i> Download PDF</a>
+                               </div>
+                                <br>
+                            
+                                {{-- <div class="school-name" style="color: #000">
+                                <h1 style="margin-left: 80px;"><b>{{ @$tpOption->company_name }}</b></h1>
+                                <h5><b>Class Name: {{ @$syllabus[0]->class->name }}</b></h5>
+                                <h5><b>Session: {{@$syllabus[0]->examination->session->start_year}} - {{@$syllabus[0]->examination->session->end_year}}</b></h5>
+                                <h2><b>Syllabus</b></h2>
+                                </div>
+                                <hr style="color: black; height:2px"> --}}
+
+                                <div class="class-routine">
+                            
+                                @php
+                                    $displayedExaminations = [];
+                                @endphp
+                                
+                                <div class="syllabus-container">
+                                    @foreach ($syllabus as $syllabus_item)
+                                        @if (!in_array($syllabus_item->examination->id, $displayedExaminations))
+                                            @php
+                                                $displayedExaminations[] = $syllabus_item->examination->id;
+                                                // Get all syllabus items for the current examination
+                                                $relatedSyllabus = $syllabus->where('examination_id', $syllabus_item->examination->id);
+                                                $displayedSubjects = [];
+                                            @endphp
+                                
+                                            <div class="">
+                                                <h3 class="text-center" style="color: #000"><b>{{ @$syllabus_item->examination->name }}</b></h3>
+                                
+                                                @foreach ($relatedSyllabus as $related_item)
+                                                    @if (!in_array($related_item->subject->id, $displayedSubjects))
+                                                        @php
+                                                            $displayedSubjects[] = $related_item->subject->id;
+                                                            $relatedLessons = $relatedSyllabus->where('subject_id', $related_item->subject->id);
+                                                        @endphp
+                                
+                                                        <div class="">
+                                                            <h5 class="text-center" style="color: #000"><b>Subject: {{ @$related_item->subject->name }}</b></h5>
+                                
+                                                            <table class="table" style="border: 1px solid rgb(13, 10, 10);">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Lesson</th>
+                                                                        <th>Lesson Details</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($relatedLessons as $lesson_item)
+                                                                        <tr>
+                                                                            <td>{{ $lesson_item->lession->name }}</td>
+                                                                            <td>{!! $lesson_item->lession_item !!}</td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
+
 
                 @if (@$class->subjects->count() >0)
                     <!--Start card-->
@@ -690,7 +853,11 @@
                     <!--End card-->
                 @endif
                
-                @if (@$class->ClassRoutines->count() >0)
+
+
+                    
+                {{-- @if (@$class->ClassRoutines->count() >0) --}}
+                @if (@$classRoutines->count() >0)
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="class_routine">
                         <div class="card-body p-4 p-xl-5">
                             <div class="section-header mb-4 position-relative">
@@ -698,7 +865,8 @@
                                 <div class="section-header_divider"></div>
                             </div>
                             @php
-                                $class_routine = $class->ClassRoutines;
+                                // $class_routine = $class->ClassRoutines;
+                                $class_routine = $classRoutines;
                                 $classRoutinesBySection = [];
                                 $classDurations = [];
                                 
@@ -779,8 +947,8 @@
                 @endif
 
               
-
-                @if (@$class->examSchedules->count() >0)
+                {{-- @if (@$class->examSchedules->count() >0) --}}
+                @if (@$examSchedules->count() >0)
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="exam_routine">
                         <div class="card-body p-4 p-xl-5">
                             <div class="section-header mb-4 position-relative">
@@ -800,7 +968,8 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach ($class->examSchedules->filter(function ($routine) {
+                                    {{-- @foreach ($class->examSchedules->filter(function ($routine) { --}}
+                                    @foreach ($examSchedules->filter(function ($routine) {
                                         return $routine->examination && $routine->examination->end_date >= Carbon\Carbon::now();
                                         }); as $routine)
                                           <tr>
@@ -821,6 +990,13 @@
                         </div>
                     </div>
                 @endif
+
+
+
+
+
+
+
 
                 {{-- <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

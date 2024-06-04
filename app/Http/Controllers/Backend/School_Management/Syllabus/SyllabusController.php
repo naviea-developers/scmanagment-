@@ -11,6 +11,7 @@ use App\Models\Subject;
 use App\Models\Syllabus;
 use App\Models\Tp_option;
 use Carbon\Carbon;
+use Mpdf\Mpdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -211,6 +212,46 @@ class SyllabusController extends Controller
     
         return view('Backend.school_management.syllabus.syllabus_details', $data);
     }
+
+
+    //syllabus Download Admin
+    public function syllabusDownload(Request $request)
+    {
+    $examinations = Examination::where('session_id',$request->input('session_id'))->get();
+
+    $data['syllabus'] = Syllabus::where('class_id', $request->input('class_id'))
+                                ->whereIn('examination_id', $examinations->pluck('id'))
+                                ->get();
+
+        //  return view('Backend.school_management.syllabus.syllabus_pdf_download', $data);
+        $html = view('Backend.school_management.syllabus.syllabus_pdf_download', $data);
+        $mpdf = new Mpdf([
+            'mode' => 'UTF-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+        ]);
+
+        //For Multilanguage Start
+        $mpdf->autoScriptToLang = true;
+        $mpdf->baseScript = 1;
+        $mpdf->autoLangToFont = true;
+        $mpdf->autoVietnamese = true;
+        $mpdf->autoArabic = true;
+
+        //For Multilanguage End
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->writeHTML($html);
+        $name = 'syllabus_pdf_download ' . date('Y-m-d i:h:s');
+        $mpdf->Output($name.'.pdf', 'D');
+    }
+
+
+
     
 
 }

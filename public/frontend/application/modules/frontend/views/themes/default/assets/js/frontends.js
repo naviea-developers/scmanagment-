@@ -2168,7 +2168,27 @@ function course_lesson_wise_information(lesson_id, course_id, enterprise_id) {
     },
   });
 }
+function showhideT(arg) {
+  console.log(arg);
+  // $("#toggle").click(function(){
+      var id=$(arg).attr('data-id');
+      console.log(id);
+  $(".moreText"+id).toggleClass("opened");
 
+  var elem = $("#toggle"+id).text();
+  console.log(elem);
+  if (elem.trim() == "Show more") {
+      //Stuff to do when btn is in the read more state
+      $("#toggle"+id).text("Show less").css("font-weight", "bold");
+      // $("#text").slideDown();
+  } else {
+      //Stuff to do when btn is in the read less state
+      $("#toggle"+id).text("Show more").css("font-weight", "bold");
+      // $("#text").slideUp();
+  }
+  // });
+
+}
 function showhideT(arg) {
   console.log(arg);
   // $("#toggle").click(function(){

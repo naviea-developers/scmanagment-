@@ -143,6 +143,7 @@ class ThemeOptionController extends Controller
 			$data['eiin_number'] = $dataObj->eiin_number ?? '';
 			$data['school_logo'] = $dataObj->school_logo ?? '';
 			$data['principal_signature'] = $dataObj->principal_signature ?? '';
+			$data['mujib_logo'] = $dataObj->mujib_logo ?? '';
         }else{
             $data['school_name'] = "";
             $data['phone1'] = "";
@@ -153,6 +154,7 @@ class ThemeOptionController extends Controller
 			$data['eiin_number'] = "";
 			$data['school_logo'] = "";
 			$data['principal_signature'] = "";
+			$data['mujib_logo'] = "";
         }
         $dat_a['datalist'] = $data;
         return view('Backend.setting.appearance.theme-options-school-info',$dat_a);
@@ -287,6 +289,7 @@ class ThemeOptionController extends Controller
 		$address = $request->input('address');
 		$school_logo = $request->input('school_logo');
 		$principal_signature = $request->input('principal_signature');
+		$mujib_logo = $request->input('mujib_logo');
 		$eiin_number = $request->input('eiin_number');
 
 		$gData = Tp_option::where('option_name','theme_option_school_info')->first();
@@ -318,6 +321,17 @@ class ThemeOptionController extends Controller
 				$principal_signature=$dataObj->principal_signature ?? '';
 			}
 		}
+		$mujib_logo="";
+        if($request->hasFile('mujib_logo')){
+            $fileName = rand().time().'.'.request()->mujib_logo->getClientOriginalExtension();
+            request()->mujib_logo->move(public_path('upload/school_logo/'),$fileName);
+            $mujib_logo= $fileName;
+        }else{
+			if($id){
+				$dataObj = json_decode($gData->option_value);
+				$mujib_logo=$dataObj->mujib_logo ?? '';
+			}
+		}
 
 		$validator_array = array(
 			'school_name' => $request->input('school_name'),
@@ -328,6 +342,7 @@ class ThemeOptionController extends Controller
 			'address' => $request->input('address'),
 			'school_logo' => $request->input('school_logo'),
 			'principal_signature' => $request->input('principal_signature'),
+			'mujib_logo' => $request->input('mujib_logo'),
 			'eiin_number' => $request->input('eiin_number'),
 		);
 
@@ -399,6 +414,7 @@ class ThemeOptionController extends Controller
 			'eiin_number' => $eiin_number,
 			'school_logo' => $school_logo,
 			'principal_signature' => $principal_signature,
+			'mujib_logo' => $mujib_logo,
 
 		);
 

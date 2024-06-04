@@ -19,6 +19,7 @@ use App\Models\Wishlist;
 use App\Models\CourseParticipant;
 use App\Models\ApplicationDocument;
 use App\Models\ClassDuration;
+use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\ClassRoutineItem;
 use App\Models\Continent;
@@ -32,8 +33,12 @@ use App\Models\Notice;
 use App\Models\SubjectTeacherAssent;
 use App\Models\Withdrawal;
 use App\Models\ExamResult;
+use App\Models\Session;
+use App\Models\Student;
+use App\Models\Syllabus;
 use App\Models\Tp_option;
 use Carbon\Carbon;
+use Mpdf\Mpdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -873,11 +878,75 @@ class UserController extends Controller
     }
 
 
-
+    //student ID card
     public function userIdCard()
     {
         return view('user.id_card.create');
     }
+
+
+
+    public function classSyllabus()
+    {   
+        $user = Admission::where('user_id', auth()->user()->id)->first();
+        $studentClassId = $user->class_id;
+        
+        $session = Session::where('is_current', 1)->first();
+        $sessionId = $session->id;
+        
+        $examinations = Examination::where('session_id', $sessionId)->get();
+        
+        $data['syllabus'] = Syllabus::where('class_id', $studentClassId)
+                                    ->whereIn('examination_id', $examinations->pluck('id'))
+                                    ->get();
+
+        return view('user.syllabus.index', $data);
+    }
+
+
+    //syllabus Download user
+    public function syllabusDownload(Request $request)
+    {
+    $class= $request->input('class_id');
+    $data['class']=Classe::find($request->input('class_id'));
+
+    $session = Session::where('is_current', 1)->first();
+    $sessionId = $session->id;
+
+    $examinations = Examination::where('session_id', $sessionId)->get();
+
+    $data['syllabus'] = Syllabus::where('class_id', $class)
+                                ->whereIn('examination_id', $examinations->pluck('id'))
+                                ->get();
+
+        //  return view('user.syllabus.syllabus_pdf_download', $data);
+        $html = view('user.syllabus.syllabus_pdf_download', $data);
+        $mpdf = new Mpdf([
+            'mode' => 'UTF-8',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+        ]);
+
+        //For Multilanguage Start
+        $mpdf->autoScriptToLang = true;
+        $mpdf->baseScript = 1;
+        $mpdf->autoLangToFont = true;
+        $mpdf->autoVietnamese = true;
+        $mpdf->autoArabic = true;
+
+        //For Multilanguage End
+        $mpdf->setAutoTopMargin = 'stretch';
+        $mpdf->setAutoBottomMargin = 'stretch';
+        $mpdf->writeHTML($html);
+        $name = 'syllabus_pdf_download ' . date('Y-m-d i:h:s');
+        $mpdf->Output($name.'.pdf', 'D');
+    }
+
+
 
 }
 

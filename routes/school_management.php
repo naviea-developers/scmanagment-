@@ -102,6 +102,8 @@ Route::prefix('syllabus')->middleware(['auth:admin', 'adminCheck:0'])->group( fu
     Route::post('update/{id}', [SyllabusController::class,"update"])->name('admin.syllabus.update');
     Route::post('delete', [SyllabusController::class,"destroy"])->name('admin.syllabus.delete');
     Route::get('/status/{id}', [SyllabusController::class, 'status'])->name('admin.syllabus.status');
+    
+    Route::get('/syllabus/download', [SyllabusController::class, 'syllabusDownload'])->name('admin.syllabus_download');
 });
 
 //Add group for admin

@@ -64,6 +64,7 @@ use App\Models\Admission;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\Designation;
+use App\Models\Examination;
 use App\Models\ExamSchedule;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
@@ -72,6 +73,7 @@ use App\Models\Notice;
 use App\Models\NoticeType;
 use App\Models\SchoolSection;
 use App\Models\Session;
+use App\Models\Syllabus;
 
 class FrontendController extends Controller
 {
@@ -1322,9 +1324,29 @@ class FrontendController extends Controller
  }
 
 
+//  public function classDetails($id){
+//     // dd($id);
+//     $data['class'] =$classes= Classe::find($id);
+//      return view('Frontend.class.class_details',$data);
+//  }
+
+
  public function classDetails($id){
-    // dd($id);
-    $data['class'] =$classes= Classe::find($id);
+    $data['class'] =$class= Classe::find($id);
+
+    $data['tpOption'] = Tp_option::where('option_name', 'theme_option_header')->first();
+
+    $session = Session::where('is_current', 1)->first();
+    $sessionId = $session->id;
+    // dd($session);
+    // Fetching all examinations for the current session
+    $examinations = Examination::where('session_id', $sessionId)->get();
+
+    // Fetching syllabus for the student's class and for all examinations in the current session
+    $data['syllabus'] =$syllabus= Syllabus::where('class_id', $class->id)
+                                ->whereIn('examination_id', $examinations->pluck('id'))
+                                ->get();
+// dd($syllabus);
      return view('Frontend.class.class_details',$data);
  }
 
@@ -1363,7 +1385,16 @@ class FrontendController extends Controller
     // dd('hi');
     $class_id= $request->input('class_id');
     $section_id= $request->input('section_id');
-    $data['class_routine'] = ClassRoutine::where('class_id',$class_id)->where('section_id',$section_id)->get();
+
+    //current session
+    $session = Session::where('is_current', 1)->first();
+    $sessionId = $session->id;
+
+    $data['class_routine'] = ClassRoutine::where('class_id',$class_id)
+                                        ->where('section_id',$section_id)
+                                        ->where('session_id',$sessionId)
+                                        ->get();
+    // $data['class_routine'] = ClassRoutine::where('class_id',$class_id)->where('section_id',$section_id)->get();
     //  return view('Frontend.class.class_routine_pdf_download', $data);
      $html = view('Frontend.class.class_routine_pdf_download', $data);
      $mpdf = new Mpdf([
@@ -1429,6 +1460,57 @@ class FrontendController extends Controller
      $name = 'exam_routine_pdf_download ' . date('Y-m-d i:h:s');
      $mpdf->Output($name.'.pdf', 'D');
  }
+
+
+//syllabus Download frontend
+ public function syllabusDownload(Request $request)
+ {
+   $class= $request->input('class_id');
+   $data['class']=Classe::find($request->input('class_id'));
+   $session = Session::where('is_current', 1)->first();
+   $sessionId = $session->id;
+   $examinations = Examination::where('session_id', $sessionId)->get();
+   $data['syllabus'] =$syllabus= Syllabus::where('class_id', $class)
+                               ->whereIn('examination_id', $examinations->pluck('id'))
+                               ->get();
+
+    //  return view('Frontend.class.syllabus_pdf_download', $data);
+     $html = view('Frontend.class.syllabus_pdf_download', $data);
+     $mpdf = new Mpdf([
+         'mode' => 'UTF-8',
+         'margin_left' => 5,
+         'margin_right' => 5,
+         'margin_top' => 5,
+         'margin_bottom' => 0,
+         'margin_header' => 0,
+         'margin_footer' => 0,
+     ]);
+
+     //For Multilanguage Start
+     $mpdf->autoScriptToLang = true;
+     $mpdf->baseScript = 1;
+     $mpdf->autoLangToFont = true;
+     $mpdf->autoVietnamese = true;
+     $mpdf->autoArabic = true;
+
+     //For Multilanguage End
+     $mpdf->setAutoTopMargin = 'stretch';
+     $mpdf->setAutoBottomMargin = 'stretch';
+     $mpdf->writeHTML($html);
+     $name = 'syllabus_pdf_download ' . date('Y-m-d i:h:s');
+     $mpdf->Output($name.'.pdf', 'D');
+ }
+
+
+
+
+
+
+
+
+
+
+
 
  public function allClassListShow(){
     // dd($id);

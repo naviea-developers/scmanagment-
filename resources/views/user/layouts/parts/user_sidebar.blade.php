@@ -43,6 +43,11 @@
                 <span> Home work </span>
             </a>
 
+            <a href="{{ route('user.syllabus', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span> Syllabus </span>
+            </a>
+
             <a href="{{ route('class_routine', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Class Routine </span>
