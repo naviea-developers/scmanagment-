@@ -43,11 +43,11 @@
   </div>
 
   <div class="class-routine">
-    <h2>Exam Routine</h2>
+    <h2 style="text-align: center;">Exam Routine</h2>
     
         
     <div class="class-routine">
-        <table>
+        <table style="border: 1px solid #ccc; padding: 8px;text-align: center;">
           <thead>
             <tr style="color: black">
               <th>Date</th>
@@ -60,14 +60,14 @@
           </thead>
           <tbody>
             @foreach ($examSchedules as $routine)
-                  <tr>
-                      <td>{{ @$routine->examClass->date }}</td>
-                      <td>{{ @$routine->examClass->subject->name }}</td>
-                      <td>{{ @$routine->bulding->name }}</td>
-                      <td>{{ @$routine->floor->name }}</td>
-                      <td>{{ @$routine->room->name }}</td>
-                      <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
-                  </tr>
+              <tr style="border: 1px solid #ccc; padding: 8px;text-align: center;">
+                  <td>{{ @$routine->examClass->date }}</td>
+                  <td>{{ @$routine->examClass->subject->name }}</td>
+                  <td>{{ @$routine->bulding->name }}</td>
+                  <td>{{ @$routine->floor->name }}</td>
+                  <td>{{ @$routine->room->name }}</td>
+                  <td>{{ \Carbon\Carbon::parse(@$routine->examClass->start_time)->format('h:iA') }} - {{ \Carbon\Carbon::parse(@$routine->examClass->end_time)->format('h:iA') }}</td>
+              </tr>
             @endforeach
           </tbody>
         </table>
