@@ -12,4 +12,8 @@ class Notice extends Model
     public function getNoticeFileShowAttribute(){
         return $this->notice_file != "" ? asset('public/upload/notice_file/'. $this?->notice_file) : asset('public/frontend/images/No-image.jpg');
     }
+
+    public function noticeType(){
+        return $this->belongsTo(NoticeType::class,"noticetype_id",'id');
+    }
 }

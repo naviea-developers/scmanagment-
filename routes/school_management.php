@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\School_management\Fee\FeeManagementController;
 use App\Http\Controllers\Backend\School_management\Floor\FloorController;
 use App\Http\Controllers\Backend\School_management\Group\GroupController;
 use App\Http\Controllers\Backend\School_management\Notice\NoticeController;
+use App\Http\Controllers\Backend\School_management\Notice\NoticeTypeController;
 use App\Http\Controllers\Backend\School_management\Gallery\GalleryController;
 use App\Http\Controllers\Backend\School_management\Room\RoomController;
 use App\Http\Controllers\Backend\School_management\Section\SchoolSectionController;
@@ -275,6 +276,17 @@ Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group
 // Route::post('/update-exam-routine/{id}', [ExamSchedulesController::class,"update"])->name('updateExam');
 // Route::post('delete-exam-routine', [ExamSchedulesController::class,"destroy"])->name('deleteExam');
 // Route::get('print-exam-routine/{id}', [ExamSchedulesController::class,"print"])->name('admin.exam.print');
+
+//Add notice type for admin
+Route::prefix('notice_type')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [NoticeTypeController::class,"index"])->name('admin.notice_type.index');
+    Route::get('create', [NoticeTypeController::class,"create"])->name('admin.notice_type.create');
+    Route::post('store', [NoticeTypeController::class,"store"])->name('admin.notice_type.store');
+    Route::get('edit/{id}', [NoticeTypeController::class,"edit"])->name('admin.notice_type.edit');
+    Route::post('update/{id}', [NoticeTypeController::class,"update"])->name('admin.notice_type.update');
+    Route::post('delete', [NoticeTypeController::class,"destroy"])->name('admin.notice_type.delete');
+    Route::get('/status/{id}', [NoticeTypeController::class, 'status'])->name('admin.notice_type.status');
+});
 
 //Add Notice for admin
 Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {

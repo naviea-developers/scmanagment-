@@ -37,15 +37,11 @@
                           <div class="col-sm-12">
                               <label class="form-control-label">Notice Type: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
-                                <select name="type" class="form-control">
+                                <select name="noticetype_id" class="form-control">
                                   <option value=""> Select Notice Type</option>
-                                  <option @if ($notice->type == 'daily') Selected @endif value="daily"> Daily Notice</option>
-                                  <option @if ($notice->type == 'monthly') Selected @endif value="monthly"> Monthly Notice</option>
-                                  <option @if ($notice->type == 'yearly') Selected @endif value="yearly"> Yearly Notice</option>
-                                  <option @if ($notice->type == 'instant') Selected @endif value="instant"> Instant Notice</option>
-                                  {{-- @foreach ($teachers as $teacher)
-                                  <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                  @endforeach --}}
+                                  @foreach ($noticeTypes as $noticeType)
+                                    <option @if ($noticeType->id == $notice->id) Selected @endif value="{{ $noticeType->id }}">{{ $noticeType->name }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </div>
@@ -72,21 +68,14 @@
                       </div>
 
 
-                      <div class="row mt-3">
-                        <div class="col-sm-12">
-                            <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <textarea type="text" name="description" rows="5" class="form-control" placeholder="Enter Description">{{ $notice->description }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-
-                        
-
-                        
-
-                        </div>
+                        <div class="row mt-3">
+                          <div class="col-sm-12">
+                              <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <textarea type="text" name="description" rows="5" class="form-control" placeholder="Enter Description">{{ $notice->description }}</textarea>
+                              </div>
+                          </div>
+                      </div>
 
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">

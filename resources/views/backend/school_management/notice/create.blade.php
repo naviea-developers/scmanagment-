@@ -38,15 +38,15 @@
                             <div class="col-sm-12">
                                 <label class="form-control-label">Notice Type: <span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
-                                  <select name="type" class="form-control">
+                                  <select name="noticetype_id" class="form-control">
                                     <option value=""> Select Notice Type</option>
-                                    <option value="daily"> Daily Notice</option>
+                                    {{-- <option value="daily"> Daily Notice</option>
                                     <option value="monthly"> Monthly Notice</option>
                                     <option value="yearly"> Yearly Notice</option>
-                                    <option value="instant"> Instant Notice</option>
-                                    {{-- @foreach ($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                                    @endforeach --}}
+                                    <option value="instant"> Instant Notice</option> --}}
+                                    @foreach ($noticeTypes as $noticeType)
+                                    <option value="{{ $noticeType->id }}">{{ $noticeType->name }}</option>
+                                    @endforeach
                                   </select>
                                 </div>
                               </div>

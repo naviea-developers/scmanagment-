@@ -94,7 +94,6 @@
             }
         }
 
-        // Sort class durations
         sort($classDurations);
     @endphp
 

@@ -70,6 +70,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
 use App\Models\HomeContentClassList;
 use App\Models\Notice;
+use App\Models\NoticeType;
 use App\Models\SchoolSection;
 use App\Models\Session;
 use App\Models\Syllabus;
@@ -955,24 +956,25 @@ class FrontendController extends Controller
      {
         $data['search']=$search = $request->input('search');
         if($search){
-            $data['notices'] = Notice::where('status',1)->where('name', 'like', '%' . $search . '%')->paginate();
+            $data['notices'] = Notice::where('status',1)->where('noticetype_id', 'like', '%' . $search . '%')->paginate();
+            $data['noticeTypes'] = NoticeType::orderBy('id', 'desc')->get();
         }else{
-            $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(8); 
+            $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(15); 
+            $data['noticeTypes'] = NoticeType::orderBy('id', 'desc')->get();
         }
         
          return view('Frontend.notice.notice_list', $data);
      }
 
-     public function noticeDetails(Request $request,$id)
-     {
-         $data['notice'] = Notice::find($id);
-         $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->get();
-         return view('Frontend.notice.notice_details', $data);
-     }
+    //  public function noticeDetails(Request $request,$id)
+    //  {
+    //      $data['notice'] = Notice::find($id);
+    //      $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->get();
+    //      return view('Frontend.notice.notice_details', $data);
+    //  }
 
      public function noticePdfDownload(Request $request,$id)
      {
-        // dd('hi');
         $notice = Notice::findOrFail($id);
         if ($notice->notice_file) {
             $filePath = public_path('upload/notice_file/'.$notice->notice_file);
@@ -984,10 +986,10 @@ class FrontendController extends Controller
      }
 
      //ajax get notice
-     public function getNotice(){
-        $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(4); 
-        return view('Frontend.notice.ajax_see_notice',$data);
-    }
+    //  public function getNotice(){
+    //     $data['notices'] = Notice::where('status',1)->orderBy('id','desc')->paginate(4); 
+    //     return view('Frontend.notice.ajax_see_notice',$data);
+    // }
 
 
      public function courseResourceFilesDownload($id)

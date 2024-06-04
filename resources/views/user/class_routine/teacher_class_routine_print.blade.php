@@ -54,7 +54,7 @@
                 $classDurations[] = $data->classDuration->name;
             }
         }
-        // Sort class durations
+
         sort($classDurations);
     @endphp
 
