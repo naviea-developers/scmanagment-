@@ -59,6 +59,7 @@ Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->gro
     Route::get('/status/{id}', [ClassDurationController::class, 'status'])->name('admin.class_duration.status');
 });
 
+
 //Add subject_teacher_assent
 Route::prefix('subject_teacher_assent')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SubjectTeacherAssentController::class,"index"])->name('admin.subject_teacher_assent.index');

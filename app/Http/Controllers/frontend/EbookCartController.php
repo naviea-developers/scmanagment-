@@ -20,7 +20,6 @@ class EbookCartController extends Controller
         //dd('hi');
         $ebook = Ebook::findOrFail($id);
         $cart = session()->get('cart', []);
-
         if($ebook->discount > 0){
             if($ebook->discounttype == "0"){
                 $new_price = $ebook->fee - ($ebook->fee * $ebook->discount/100);
