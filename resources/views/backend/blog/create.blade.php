@@ -62,7 +62,7 @@
                                 </select>
                             </div>
                         </div><!-- row -->
-                        <div class="row mt-4">
+                        {{-- <div class="row mt-4">
                             <label class="col-sm-3 form-control-label">University: </label>
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
                                 <select  class="form-control" name="university_id">
@@ -72,7 +72,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div><!-- row -->
+                        </div><!-- row --> --}}
                           <div class="row mt-4">
                             <label class="col-sm-3 form-control-label">Headline: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
