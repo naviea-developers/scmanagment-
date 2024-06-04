@@ -170,15 +170,15 @@
                                         @endphp
                                         @foreach ($notices as $notice)            
                                             <tr>
-                                                <td>{{ date('d, F Y', strtotime($notice->created_at)) }}</td>
+                                                <td>{{ date('d, F Y', strtotime(@$notice->created_at)) }}</td>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $notice->name }}</td>
-                                                <td><a href="{{ $notice->notice_file_show }}" target="_blank">View</a></td>
-                                                <td><a href="{{ route('frontend.notice_pdf_download', $notice->id) }}" target="_blank" download="একাদশ শ্রেণিতে ভর্তি বিজ্ঞপ্তি.pdf" class="download">
+                                                <td>{{ @$notice->name }}</td>
+                                                <td><a href="{{ @$notice->notice_file_show }}" target="_blank">View</a></td>
+                                                <td><a href="{{ route('frontend.notice_pdf_download', @$notice->id) }}" target="_blank" download="" class="download">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                     <span style="color:#000; padding:10px">Download</span></a>
                                                 </td>
-                                                <td>{{ $notice->noticeType->name }}</td>
+                                                <td>{{ @$notice->noticeType->name }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -188,12 +188,12 @@
                             @if($notices->lastPage() != 1)
                             <div class="pagei_NationButton">
                               <div class="button_page">
-                                <a class="prev" href="{{ $notices->previousPageUrl() }}">Previous</a>
-                                @for ($i=1;$i <= $notices->lastPage();$i++)
-                                    <a style="margin: 0 5px; border: 1px solid;padding: 6px 10px;" @if($i == $notices->currentPage()) class="active" @endif href="{{ $notices->url($i) }}">{{ $i }}</a>
+                                <a class="prev" href="{{ @$notices->previousPageUrl() }}">Previous</a>
+                                @for ($i=1;$i <= @$notices->lastPage();$i++)
+                                    <a style="margin: 0 5px; border: 1px solid;padding: 6px 10px;" @if($i == @$notices->currentPage()) class="active" @endif href="{{ @$notices->url($i) }}">{{ $i }}</a>
                                 @endfor
             
-                                <a class="next" href="{{ $notices->nextPageUrl() }}">Next</a>
+                                <a class="next" href="{{ @$notices->nextPageUrl() }}">Next</a>
                               </div>
                             </div>
                             @endif

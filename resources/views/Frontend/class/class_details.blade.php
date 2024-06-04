@@ -260,9 +260,6 @@
 @endphp 
 
 
-
-
-
 <input type="hidden" id="ebook_id" name="ebook_id" value="CO13RT58I93">
 <input type="hidden" id="student_id" name="student_id" value="">
 <!--Start ebook Preview Header-->
@@ -307,17 +304,13 @@
                 <div class="align-items-end g-3 justify-content-md-end row mt-3 mt-xl-0">
                     <div class="col-sm-auto">
                         <div class="d-md-flex save-share-wrap">
-                            <span class="text-center">
-
-
-                            </span>
+                            <span class="text-center"></span>
                             {{-- <a href="https://www.facebook.com/sharer.php?u=https://lead.academy/ebook-details/CO13RT58I93"
                                 target="_blank" title="Facebook Share" class="text-center ms-md-3"
                                 data-bs-toggle="modal" data-bs-target="#shareModal">
                                 <i data-feather="share-2" class="share-icon"></i>
                                 <div class="share_txt">Share</div>
                             </a> --}}
-
                         </div>
                     </div>
                     <input type="hidden" name="ebook_id"
@@ -703,7 +696,7 @@
                                 </div>
 
                                 @foreach ($class->groups as $group)
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-6 col-md-4">
                                         <ul>
                                             Group Name :- {{ $group->name }}
                                             <ul>
@@ -733,9 +726,7 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="section-header  position-relative ">
-                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                            Class Teacher
-                                        </h4>
+                                        <h4 class="h5 about_this_ebook" style="color: var(--text_color)">Class Teacher</h4>
                                     </div>
                                     <div class="section-header_divider" style="margin-bottom: 21px;"></div>
                                 </div>
@@ -743,8 +734,8 @@
 
                             <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
                                 <div class="container">
-                                        <div class="row">
-                                            @foreach ( @$class->teacherAssents as $teacherAssent)
+                                    <div class="row">
+                                        @foreach ( @$class->teacherAssents as $teacherAssent)
                                             <div class="col-12 col-sm-6 col-md-4 col-lg-4">
                                                 <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
                                                 <div class="picture">
@@ -763,8 +754,8 @@
                                                 </ul>
                                                 </div>
                                             </div>
-                                            @endforeach                       
-                                        </div>
+                                        @endforeach                       
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -789,7 +780,7 @@
                                 </div>
                                 @endforeach --}}
                                 @php
-                                $printedExams = [];
+                                    $printedExams = [];
                                 @endphp
 
                                 @foreach ($class->examSchedules as $examSchedule)
