@@ -250,12 +250,14 @@
     $session = \App\Models\Session::where('is_current', 1)->first();
     $sessionId = $session->id;
     $classRoutines = \App\Models\ClassRoutine::where('class_id', $class->id)->where('session_id', $sessionId)->get();
-    $examSchedules = \App\Models\ExamSchedule::where('class_id', $class->id)->where('session_id', $sessionId)->get();
+    // dd($classRoutines);
+    $examinations = \App\Models\Examination::where('session_id', $sessionId)->get();
+    // dd($examinations);
+    $examSchedules = \App\Models\ExamSchedule::where('class_id', $class->id)
+                                            ->whereIn('examination_id', $examinations->pluck('id'))
+                                            ->get();
+    // dd($examSchedules);
 @endphp 
-
-
-
-
 
 
 

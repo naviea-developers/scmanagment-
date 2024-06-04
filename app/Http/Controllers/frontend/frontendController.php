@@ -1427,9 +1427,15 @@ class FrontendController extends Controller
     // dd('hi');
    $class_id= $request->input('class_id');
    $data['class']=Classe::find($request->input('class_id'));
+
+    //current session
+    $session = Session::where('is_current', 1)->first();
+    $sessionId = $session->id;
+    $examinations = Examination::where('session_id', $sessionId)->get();
     $data['examSchedules'] = $examSchedule = ExamSchedule::where('class_id', $class_id)
-    ->get()
-    ->filter(function ($routine) {
+                                            ->whereIn('examination_id', $examinations->pluck('id'))
+                                            ->get()
+                                            ->filter(function ($routine) {
     return $routine->examination && $routine->examination->end_date >= Carbon::now();
 
     }); 
