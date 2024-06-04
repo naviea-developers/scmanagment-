@@ -1426,6 +1426,7 @@ class FrontendController extends Controller
  {
     // dd('hi');
    $class_id= $request->input('class_id');
+   
    $data['class']=Classe::find($request->input('class_id'));
 
     //current session
