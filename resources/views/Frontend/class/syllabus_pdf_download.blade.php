@@ -67,7 +67,7 @@
   
   @if (@$syllabus->count() > 0)
   <div style="text-align: right;">
-    <img src="{{ asset('public/upload/school_logo/'.$school_info->mujib_logo) }}" alt="" style="height: 100; width:100"/>
+    <img src="{{ asset('public/upload/school_logo/'.$school_info->national_father) }}" alt="" style="height: 100; width:100"/>
     {{-- <img src="{{ asset('public/img/mujib.png') }}" alt="" style="height: 100; width:100"/> --}}
   </div>
       <div class="school-name" style="color: #000">
