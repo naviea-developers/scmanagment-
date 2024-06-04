@@ -47,20 +47,24 @@
         text-align: left;
     }
 </style>
-
+@php
+    $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+    $school_info = json_decode($results->option_value);
+@endphp
 @if (@$syllabus->count() > 0)
     <div class="float-end">
       {{-- <a href="{{ route('admin.routine.print',$class_routine->id) }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a> --}}
-      <a href="{{ route('admin.routine.print') }}?class_id={{ @$syllabus[0]->class_id }}&session_id={{ @$syllabus[0]->session_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i> Print</a>
+      <a href="{{ route('admin.syllabus_download') }}?class_id={{ @$syllabus[0]->class_id }}&session_id={{ @$syllabus[0]->examination->session_id }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i class="fa fa-solid fa-download"></i> Download PDF</a>
     </div>
-
+    <br>
+    <br>
     <div class="school-name">
-      <h1 style="margin-left: 80px;">{{ @$tpOption->company_name }}</h1>
+      <h1>{{ @$school_info->school_name }}</h1>
       <h5>Class Name: {{ @$syllabus[0]->class->name }}</h5>
       <h5>Session: {{@$syllabus[0]->examination->session->start_year}} - {{@$syllabus[0]->examination->session->end_year}}</h5>
       <h2>Syllabus</h2>
     </div>
-  
+  <hr style="color: #000">
     <div class="class-routine">
       
 
@@ -81,7 +85,7 @@
                 @endphp
     
                 <div class="">
-                    <h2 class="text-center">{{ $syllabus_item->examination->name }}</h2>
+                    <h2 class="text-center">{{ @$syllabus_item->examination->name }}</h2>
     
                     @foreach ($relatedSyllabus as $related_item)
                         @if (!in_array($related_item->subject->id, $displayedSubjects))
@@ -91,7 +95,7 @@
                             @endphp
     
                             <div class="">
-                                <h4 class="text-center">{{ $related_item->subject->name }}</h4>
+                                <h4 class="text-center">Subject: {{ @$related_item->subject->name }}</h4>
     
                                 <table class="table">
                                     <thead>

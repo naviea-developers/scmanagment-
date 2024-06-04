@@ -176,6 +176,9 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::get('print-teacher-exam-routine', [UserController::class,"teacherExamRoutinePrint"])->name('teacher.exam_routine.print');
 
 
+        //syllabus for Teacher and student
+        Route::get('/syllabus', [UserController::class, 'classSyllabus'])->name('user.syllabus');
+        Route::get('/syllabus/download', [UserController::class, 'syllabusDownload'])->name('user.syllabus_download');
         //HomeWork for student
         
         Route::get('/homework', [UserController::class, 'homeWork'])->name('student.homework');
