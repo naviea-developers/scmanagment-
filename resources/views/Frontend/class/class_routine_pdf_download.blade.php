@@ -46,62 +46,11 @@
     </div>
 
   <div class="class-routine">
-    <h2>Class Routine</h2>
-    
-        
+      <h2 style="text-align: center;">Class Routine</h2>
+
     {{-- @php
       $classRoutinesByDay = [];
       $classDurations = [];
-
-      foreach ($class_routine as $data) {
-          $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
-          if (!in_array($data->classDuration->name, $classDurations)) {
-              $classDurations[] = $data->classDuration->name;
-          }
-      }
-    @endphp
-
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Day</th>
-                @foreach ($classDurations as $duration)
-                    <th scope="col">
-                        {{ $duration }} <br>
-                        @php
-                          $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
-                        @endphp
-                        {{ date('h:i A', strtotime($durationData->start_time)) }} - 
-                        {{ date('h:i A', strtotime($durationData->end_time)) }}
-                    </th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($classRoutinesByDay as $day => $routines)
-                <tr>
-                    <td>{{ $day }}</td>
-                    @foreach ($classDurations as $duration)
-                        <td>
-                            @isset($routines[$duration])
-                                {{ $routines[$duration]->subject->name }} <br>
-                                {{ $routines[$duration]->teacher->name }} <br>
-                                Room- {{ $routines[$duration]->room->name }}
-                            @else
-                                
-                            @endisset
-                        </td>
-                    @endforeach
-                </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
-
-    @php
-      $classRoutinesByDay = [];
-      $classDurations = [];
-
-      // Sort class routines by day
       $class_routine_sorted = $class_routine->sortBy('day_id');
 
       foreach ($class_routine_sorted as $data) {
@@ -146,6 +95,55 @@
                 </tr>
             @endforeach
         </tbody>
+    </table> --}}
+
+    @php
+        $classRoutinesByDay = [];
+        $classDurations = [];
+
+        foreach ($class_routine as $data) {
+            $classRoutinesByDay[$data->day][$data->classDuration->name] = $data;
+            if (!in_array($data->classDuration->name, $classDurations)) {
+                $classDurations[] = $data->classDuration->name;
+            }
+        }
+        sort($classDurations);
+    @endphp
+
+    <table style="border: 1px solid #ccc; padding: 8px;text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">Day</th>
+                @foreach ($classDurations as $duration)
+                    <th scope="col">
+                        {{ @$duration }} <br>
+                        @php
+                            $durationData = $class_routine->firstWhere('classDuration.name', $duration)->classDuration;
+                        @endphp
+                        {{ date('h:i A', strtotime(@$durationData->start_time)) }} - 
+                        {{ date('h:i A', strtotime(@$durationData->end_time)) }}
+                    </th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($classRoutinesByDay as $day => $routines)
+                <tr style="border: 1px solid #ccc; padding: 8px;text-align: center;">
+                    <td>{{ $day }}</td>
+                    @foreach ($classDurations as $duration)
+                        <td>
+                            @isset($routines[$duration])
+                                {{ @$routines[$duration]->subject->name }} <br>
+                                {{ @$routines[$duration]->teacher->name }} <br>
+                                {{ @$routines[$duration]->room->name }}
+                            @else
+                                -
+                            @endisset
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
     </table>
  
   </div>
@@ -153,7 +151,7 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-k3A1LmfFiBCL0h9pzyvLWNs/zFwMIGg/2IQXO48JAU0MTrvYV4R8aG3g7AgL73n9" crossorigin="anonymous"></script>
-<script>
+{{-- <script>
     window.print();
     window.onafterprint = back;
 
@@ -161,6 +159,6 @@
         window.close();
         window.history.back();
     }
-</script>
+</script> --}}
 </body>
 </html>

@@ -1393,6 +1393,8 @@ class FrontendController extends Controller
     $data['class_routine'] = ClassRoutine::where('class_id',$class_id)
                                         ->where('section_id',$section_id)
                                         ->where('session_id',$sessionId)
+                                        ->orderBy('day_id','asc')
+                                        ->orderBy('class_duration_id', 'asc')
                                         ->get();
     // $data['class_routine'] = ClassRoutine::where('class_id',$class_id)->where('section_id',$section_id)->get();
     //  return view('Frontend.class.class_routine_pdf_download', $data);
