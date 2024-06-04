@@ -39,15 +39,22 @@
     @endphp
     <div class="school-name">
       <h3>{{ @$school_info->school_name }}</h3>
-      <p>Mobile : {{ @$school_info->phone1 }} <br> Email : {{ @$school_info->email }} <br> Website : {{ @$school_info->website }} </p>
-      <p>Class Name: {{ @$class_routine[0]->class->name }}</p>
+      <p>Mobile : {{ @$school_info->phone1 }} <br> 
+         Email : {{ @$school_info->email }} <br> 
+         Website : {{ @$school_info->website }} <br>
+         Class Name: {{ @$class_routine[0]->class->name }} <br>
+         Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}} <br>
+         Section : {{ @$class_routine[0]->schoolsection->name }}
+      </p>
+    
+
+      {{-- <p>Class Name: {{ @$class_routine[0]->class->name }}</p>
       <p>Session: {{@$class_routine[0]->session->start_year}} - {{@$class_routine[0]->session->end_year}}</p>
-      <p>Section : {{ @$class_routine[0]->schoolsection->name }}</p>
+      <p>Section : {{ @$class_routine[0]->schoolsection->name }}</p> --}}
     </div>
 
   <div class="class-routine">
-      <h2 style="text-align: center;">Class Routine</h2>
-
+    <h2 style="text-align: center;">Class Routine</h2>
     {{-- @php
       $classRoutinesByDay = [];
       $classDurations = [];

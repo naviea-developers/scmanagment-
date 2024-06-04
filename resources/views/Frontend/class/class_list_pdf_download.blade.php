@@ -60,7 +60,7 @@
                 {{-- <h4>subjects list</h4> --}}
                 <div class="row">
                     @foreach ($ungroupedSubjects as $subject)
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-6 col-md-2">
                             <ul>
                                 <li>{{ $subject->name }}</li> 
                             </ul>
@@ -70,7 +70,7 @@
             </div>
 
             @foreach ($class->groups as $group)
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <ul>
                         <li>{{ $group->name }}</li> 
                         <ul>

@@ -40,7 +40,7 @@
                                 <select name="noticetype_id" class="form-control">
                                   <option value=""> Select Notice Type</option>
                                   @foreach ($noticeTypes as $noticeType)
-                                    <option @if ($noticeType->id == $notice->id) Selected @endif value="{{ $noticeType->id }}">{{ $noticeType->name }}</option>
+                                    <option @if($noticeType->id == $notice->noticetype_id)  Selected @endif value="{{ $noticeType->id }}">{{ $noticeType->name }}</option>
                                   @endforeach
                                 </select>
                               </div>
