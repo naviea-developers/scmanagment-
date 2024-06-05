@@ -154,16 +154,16 @@
                             <br>
                             <input type="radio" name="sub_banner" id="radio1" value="1" 
                             @if($daily_class->sub_banner==1) checked @endif>
-                            <label for="radio1">Video Image</label>
+                            <label for="radio1">Video</label>
                           
                             <input type="radio" name="sub_banner" id="radio2" value="2"
                             @if($daily_class->sub_banner==2) checked @endif>
-                            <label for="radio2">Video</label>
+                            <label for="radio2">Video Url</label>
                         </div>
                     </div>
 
                     <div class="row mt-3" id="content1" @if($daily_class->sub_banner != '1') style="display: none;" @endif>
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
                             <label class="form-control-label">Image: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
@@ -171,11 +171,49 @@
                                     <input type="file" name="image" class="form-control upload-img" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                 </div>
                             </div>
+                        </div> --}}
+                            <div class="d-flex mt-2">
+                                <div class="col-sm-8 ">
+                                <label class="form-control-label">Video: </label>
+                                <div class=" mg-t-10 mg-sm-t-0">
+                                    <input type="file" name="video" accept="video/*" class="form-control">
+                                </div>
+                                </div>
+                                
+                                <div class="col-sm-2 ">
+                                <label class="form-control-label"><b>Play:</b></label>
+                                <div class="align-items-center select-add-section">
+                                    <a class="btn btn-primary"  data-toggle="modal" data-target="#audio_content"> &nbsp;<i class="fa fa-solid fa-play" style="color: white"></i></a>
+                                </div>
+                                </div>
+                            </div>
+
+                          <div class="modal fade" id="audio_content" tabindex="-1" role="dialog" aria-labelledby="audioModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="audioModalLabel">{{ $daily_class->name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                <!-- Embed your audio here -->
+                                <video controls style="width: 100%">
+                                    <source src="{{ $daily_class->video_show }}" type="video/mp4">
+                                    Your browser does not support the audio tag.
+                                </video>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div><!-- row -->
 
                     <div class="row mt-3" id="content2" @if($daily_class->sub_banner != '2') style="display: none;" @endif>
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
                             <label class="form-control-label">Video Thumbnail: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10">
                                 <div class="mt-1 mr-2" style="position:relative;box-shadow: 0px 0px 1px 1px;width: 150px;">
@@ -183,11 +221,11 @@
                                     <input type="file" name="video_thumbnail" class="form-control upload-img-thumbnail" placeholder="Enter Activity Image" style="position: absolute;top: 0;opacity: 0;height: 100%;">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <label class="form-control-label">Video Url: <span class="tx-danger">*</span></label>
-                            <div class="col-sm-9 mg-t-10">
+                            <div class="col-sm-8 mg-t-10">
                                 <input type="text" name="video_url" value="{{ @$daily_class->video_url }}" class="form-control" placeholder="Enter Video Link">
                             </div>
                         </div>
@@ -222,6 +260,9 @@
 @endsection
 
 @section('script')
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
  <!--- Start on click image show Script-------->
  <script>
     $(document).on('change','.upload-img-thumbnail',function(){

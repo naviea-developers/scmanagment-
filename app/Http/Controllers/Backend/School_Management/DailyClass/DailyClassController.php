@@ -62,17 +62,17 @@ class DailyClassController extends Controller
             $daily_class->details = $request->details ?? "";
 
 
-            if($request->hasFile('image')){
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/blog/'),$fileName);
-                $daily_class->image = $fileName;
+            if($request->hasFile('video')){
+                $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+                request()->video->move(public_path('upload/daily_class/'),$fileName);
+                $daily_class->video = $fileName;
             }
     
-            if($request->hasFile('video_thumbnail')){
-                $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
-                request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
-                $daily_class->video_thumbnail = $fileName;
-            }
+            // if($request->hasFile('video_thumbnail')){
+            //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+            //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+            //     $daily_class->video_thumbnail = $fileName;
+            // }
 
             $daily_class->save();
 
@@ -138,19 +138,19 @@ class DailyClassController extends Controller
         $daily_class->sub_banner = $request->sub_banner ?? 1;
         $daily_class->details = $request->details ?? "";
 
-        if($request->hasFile('image')){
-            @unlink(public_path("upload/daily_class/".$daily_class->image));
-            $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('upload/daily_class/'),$fileName);
-            $daily_class->image = $fileName;
+        if($request->hasFile('video')){
+            @unlink(public_path("upload/daily_class/".$daily_class->video));
+            $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+            request()->video->move(public_path('upload/daily_class/'),$fileName);
+            $daily_class->video = $fileName;
         }
 
-        if($request->hasFile('video_thumbnail')){
-            @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
-            $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
-            request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
-            $daily_class->video_thumbnail = $fileName;
-        }
+        // if($request->hasFile('video_thumbnail')){
+        //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+        //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+        //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+        //     $daily_class->video_thumbnail = $fileName;
+        // }
 
         $daily_class->save();
 
@@ -170,8 +170,8 @@ class DailyClassController extends Controller
     {
 
         $daily_class =  DailyClass::find($request->daily_class_id);
-        @unlink(public_path("upload/daily_class/".$daily_class->image));
-        @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+        @unlink(public_path("upload/daily_class/".$daily_class->video));
+        // @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
         $daily_class->delete();
         return back()->with('message','Daily Class Deleted Successfully');
     }
