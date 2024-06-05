@@ -41,6 +41,10 @@ class Classe extends Model
         return $this->hasMany(Group::class,"class_id",'id');
     }
 
+    public function dailyClasses(){
+        return $this->hasMany(DailyClass::class,"class_id",'id');
+    }
+
 
 
 

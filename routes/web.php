@@ -259,9 +259,12 @@ Route::get('/e-/e-audio/download/{id}', [FrontendController::class, 'eAudioDownl
 Route::get('/ebook-category-audio-show-ajax/{id}',[FrontendController::class,"getEbookAudioByCat"]);
 
 
-// E-book-video
-Route::get('/e-book-video-list', [FrontendController::class, 'eBookVideo'])->name('frontend.ebook_video_list');
-Route::get('/e-book-details-video/{id}', [FrontendController::class, 'eBookVideoDetails'])->name('frontend.ebook_video_details');
+// Daily Class Video
+Route::get('/daily-class-video-list', [FrontendController::class, 'dailyClassVideo'])->name('frontend.daily_class_video_list');
+Route::get('/daily-class-video-details/{id}', [FrontendController::class, 'dailyClassVideoDetails'])->name('frontend.daily_class_video_details');
+Route::get('/daily_class_video_search', [FrontendController::class, 'getDailyClassVideoSearch'])->name('get.daily_class_video_search');
+Route::get('/get-daily-class-video-show-more',[FrontendController::class,'getDailyClassVideoShowMore']);
+
 Route::get('/e-book/e-video/download/{id}', [FrontendController::class, 'eVideoDownload'])->name('frontend.e_video_download');
 
 Route::get('/ebook-category-video-show-ajax/{id}',[FrontendController::class,"getEbookVideoByCat"]);

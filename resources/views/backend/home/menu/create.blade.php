@@ -73,7 +73,7 @@
                               {{-- <option value="maestro-class">master course page</option> --}}
                               <option value="e-book-list">e-book</option>
                               <option value="e-book-audio-list">e-book-audio</option>
-                              <option value="e-book-video-list">e-book-video</option>
+                              <option value="daily-class-video-list">daily-class-video</option>
                               <option value="gallery-list">gallery</option>
                               <option value="notice-list">Notice</option>
                               {{-- <option value="course_list">admission</option> --}}

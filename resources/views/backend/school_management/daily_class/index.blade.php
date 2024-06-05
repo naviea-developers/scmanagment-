@@ -11,7 +11,7 @@ Admin - all Ebook Video
 
         <div class="br-pagebody">
           <div class="br-section-wrapper">
-            <h6 class="br-section-label text-center">All E-Book Video</h6>
+            <h6 class="br-section-label text-center">All Daily Class Video</h6>
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
@@ -31,6 +31,7 @@ Admin - all Ebook Video
                 <thead>
                   <tr>
                     <th scope="col">SL</th>
+                    <th scope="col">Title</th>
                     <th scope="col">Teacher Name</th>
                     <th scope="col">Class Name</th>
                     <th scope="col">Subject</th>
@@ -48,21 +49,22 @@ Admin - all Ebook Video
                     @foreach ($daily_classes as $daily_class)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $daily_class->teacher->name }}</td>
-                          <td>{{ $daily_class->class->name }}</td>
-                          <td>{{ $daily_class->subject->name }}</td>
-                          <td>{{ $daily_class->lession->name }}</td>
-                          <td>{{ $daily_class->page_number }}</td>
+                          <td>{{ @$daily_class->name }}</td>
+                          <td>{{ @$daily_class->teacher->name }}</td>
+                          <td>{{ @$daily_class->class->name }}</td>
+                          <td>{{ @$daily_class->subject->name }}</td>
+                          <td>{{ @$daily_class->lession->name }}</td>
+                          <td>{{ @$daily_class->page_number }}</td>
                           <td>
-                            @if($daily_class->status == 0)
-                            <a href="{{ route('admin.daily_class.status',$daily_class->id) }}" class="btn btn-sm btn-warning">Inactive</a>
-                            @elseif($daily_class->status == 1)
-                            <a href="{{ route('admin.daily_class.status',$daily_class->id) }}" class="btn btn-sm btn-success">Active</a>
+                            @if(@$daily_class->status == 0)
+                            <a href="{{ route('admin.daily_class.status',@$daily_class->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                            @elseif(@$daily_class->status == 1)
+                            <a href="{{ route('admin.daily_class.status',@$daily_class->id) }}" class="btn btn-sm btn-success">Active</a>
                             @endif
                           </td>
                           <td>
-                            <a class="btn text-info" href="{{ route('admin.daily_class.edit', $daily_class->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                            <button class="btn text-danger bg-white"  value="{{$daily_class->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            <a class="btn text-info" href="{{ route('admin.daily_class.edit', @$daily_class->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                            <button class="btn text-danger bg-white"  value="{{@$daily_class->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
                           </td>
                       </tr>
                     @endforeach

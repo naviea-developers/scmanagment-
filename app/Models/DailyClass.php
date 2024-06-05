@@ -31,8 +31,8 @@ class DailyClass extends Model
         return $this->belongsTo(SchoolSection::class,"section_id",'id');
     }
 
-    public function getImageShowAttribute(){
-        return $this->image != "" ? asset('public/upload/daily_class/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
+    public function getVideoShowAttribute(){
+        return $this->video != "" ? asset('public/upload/daily_class/'. $this?->video) : asset('public/frontend/images/No-image.jpg');
     }
 
     public function getVideoThumbnailShowAttribute(){

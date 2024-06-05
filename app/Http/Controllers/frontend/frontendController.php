@@ -63,6 +63,7 @@ use App\Mail\ContactMailCoustomer;
 use App\Models\Admission;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
+use App\Models\DailyClass;
 use App\Models\Designation;
 use App\Models\Examination;
 use App\Models\ExamSchedule;
@@ -872,27 +873,61 @@ class FrontendController extends Controller
 
 
      //ebook Video start
-     public function eBookVideo(Request $request)
+     public function dailyClassVideo(Request $request)
      {
-
-         $data['title']=$title = $request->input('title');
-         if(isset(request()->title)){
-             $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
-             $data["ebooks"] = Ebook::where('type','ebookvideo')->where('status',1)->where('title','like','%'.request()->title.'%')->paginate(9);
-             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
-         }else{
-             $data["categorys"] = Category::where('parent_id', '=' ,0)->where('type','ebook')->get();
-             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status', 1)->paginate(9);
-             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
-         }
-         return view('Frontend.ebookvideo.ebook_video_list', $data);
+        $data['class_name']=$class_name = $request->input('class_name');
+        if(isset(request()->class_name)){
+            $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
+            $data["classes"] = Classe::where('status',1)->where('name','like','%'.request()->class_name.'%')->paginate(9);
+            $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+        }else{
+            $data['classes']= Classe::where('status',1)->orderBy('id','asc')->get();
+            $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
+            $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+        }
+        return view('Frontend.ebookvideo.daily_class_list', $data);
      }
 
-     public function eBookVideoDetails($id)
+     public function dailyClassVideoDetails($id)
      {
-         //dd('hi');
-         $data['ebook'] = Ebook::find($id);
-         return view('Frontend.ebookvideo.ebook_video_details', $data);
+        //dd('hi');
+        $data['class'] = Classe::find($id);
+        return view('Frontend.ebookvideo.daily_class_video_details', $data);
+     }
+
+     public function getDailyClassVideoSearch(Request $request)
+     {
+        
+        $subjectId = $request->input('subject_id');
+        $classId = $request->input('class_id');
+        $formDate = $request->input('form_date');
+        $toDate = $request->input('to_date');
+    
+        $query = DailyClass::query();
+    
+        if ($subjectId) {
+            $query->where('class_id',$classId)->where('subject_id', $subjectId);
+        }
+    
+        if ($formDate && !$toDate) {
+            $query->where('class_id',$classId)->whereDate('created_at', '=', $formDate);
+        } elseif ($formDate && $toDate) {
+            $query->where('class_id',$classId)->whereBetween('created_at', [$formDate, $toDate]);
+        }
+
+        $data['dailyClasses'] = $query->get();
+    
+        return view('Frontend.ebookvideo.daily_class_video_search', $data);
+     }
+
+     public function getDailyClassVideoShowMore(Request $request){
+        // $data['dailyClasses']= DailyClass::where('status',1)->orderBy('id','asc')->get();
+        //  return view('Frontend.course.ajaxseecourse',$data);
+        $page = $request->input('page', 1);
+        $classId = $request->input('class_id');
+        $class = Classe::findOrFail($classId);
+        $data['dailyClasses']=$dailyClasses = $class->dailyClasses()->paginate(2, ['*'], 'page', $page);
+         return view('Frontend.ebookvideo.daily_class_video_show_more', $data);
      }
 
      public function getEbookVideoByCat(Request $request, $id)
