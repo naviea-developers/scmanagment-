@@ -239,7 +239,7 @@
                                         <div class="col-sm-4 mt-3">
                                             <label class=" form-control-label">City Name:<span class="tx-danger">*</span></label>
                                             <select  class="form-control" name="present_city_id" id="city" >
-                                                <option value="">Select State</option>
+                                                <option value="">Select City</option>
                                             </select>
                                         </div>
 
@@ -284,7 +284,7 @@
                                         <div class="col-sm-4 mt-3">
                                             <label class=" form-control-label">City Name:<span class="tx-danger">*</span></label>
                                             <select  class="form-control" name="permanent_city_id" id="city1" >
-                                                <option value="">Select State</option>
+                                                <option value="">Select City</option>
                                             </select>
                                         </div>
 

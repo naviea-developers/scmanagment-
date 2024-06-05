@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\School_management\Student\StudentController;
+use App\Http\Controllers\Backend\School_management\Student\StudentInfoUpdateController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -13,6 +14,18 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
      Route::post('update/{id}', [StudentController::class,"update"])->name('admin.school_student.update');
      Route::post('delete/', [StudentController::class,"destroy"])->name('admin.school_student.delete');
      Route::get('/status/{id}', [StudentController::class, 'status'])->name('admin.school_student.status');
+
+});
+
+Route::prefix('student-info-update')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //student_info_update update
+     Route::get('index/', [StudentInfoUpdateController::class,"index"])->name('admin.student_info_update.index');
+    //  Route::get('create/', [StudentInfoUpdateController::class,"create"])->name('admin.student_info_update.create');
+    //  Route::post('store/', [StudentInfoUpdateController::class,"store"])->name('admin.student_info_update.store');
+     Route::get('edit/{id}', [StudentInfoUpdateController::class,"edit"])->name('admin.student_info_update.edit');
+     Route::post('update/{id}', [StudentInfoUpdateController::class,"update"])->name('admin.student_info_update.update');
+     Route::post('delete/', [StudentInfoUpdateController::class,"destroy"])->name('admin.student_info_update.delete');
+    //  Route::get('/status/{id}', [StudentInfoUpdateController::class, 'status'])->name('admin.student_info_update.status');
 
 });
 

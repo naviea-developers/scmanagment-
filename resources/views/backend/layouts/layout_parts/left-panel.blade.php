@@ -93,6 +93,7 @@
 
         @php
         $admissions = \App\Models\Admission::where('is_new', 1)->get();
+        $updateStudentInfoRequest = \App\Models\StudentInfoUpdate::where('status', 0)->get();
         @endphp
 
         <li class="br-menu-item">
@@ -285,12 +286,17 @@
                 <span class="menu-item-label">Student</span>
             </a><!-- br-menu-link -->
             @php
-            $r_check = ( Route::is('admin.school_student.create') ||  Route::is('admin.school_student.index') || Route::is('admin.school_student.edit'));
+            $r_check = ( Route::is('admin.school_student.create') ||  Route::is('admin.school_student.index') 
+            || Route::is('admin.school_student.edit') || Route::is('admin.student_info_update.index')
+            || Route::is('admin.student_info_update.edit')
+            );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
                 <li class="sub-item"><a href="{{ route('admin.school_student.create') }}" class="sub-link {{( Route::is('admin.school_student.create') ) ?'active':''}}">Add New Student</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.school_student.index') }}" class="sub-link {{(Route::is('admin.school_student.index') || Route::is('admin.school_student.edit')) ?'active':''}}">Manage Student</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.student_info_update.index') }}" class="sub-link {{(Route::is('admin.student_info_update.index') || Route::is('admin.student_info_update.edit')) ?'active':''}}">Student Update Request ({{ $updateStudentInfoRequest->count() }})</a>
                 </li>
                 {{-- <li class="sub-item"><a href="{{ route('admin.course.order.manage') }}" class="sub-link {{(Route::is('admin.course.order.manage') ) ?'active':''}}">Manage Course & Ebook Order</a>
                 </li> --}}

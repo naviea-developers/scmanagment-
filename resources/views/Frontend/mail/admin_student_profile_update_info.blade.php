@@ -24,8 +24,8 @@
     $school_info = json_decode($results->option_value);
     @endphp
 <div class="div-one">
-    <p style="text-align: justify">{{ $value['message'] }}</p>
-    <br/>
+    <p style="text-align: justify">Dear {{ $value['name'] }},</p> 
+    <p style="text-align: justify">Your request is accepted. Now your profile is Updated, Thank you. </p> 
     <br/>
     <p>Thank you..</p>
     <br>
