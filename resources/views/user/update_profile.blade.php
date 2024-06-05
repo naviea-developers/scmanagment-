@@ -7,19 +7,7 @@
 @section('main_content')
 
 
-        {{-- success message start --}}
-        @if(session()->has('message'))
-        <div class="alert alert-success">
-        {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-        {{session()->get('message')}}
-        </div>
-        <script>
-            setTimeout(function(){
-                $('.alert.alert-success').hide();
-            }, 3000);
-        </script>
-        @endif
-        {{-- success message start --}}
+  
 
     <div class="container py-2" >
         <div class="card card-body shadow" style="background-color: var(--seller_background_color);">

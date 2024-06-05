@@ -783,7 +783,7 @@
             @foreach ($blogs as $blog)
             <div class="col-xl-3 col-md-6" >
                 <!--Start Course Card-->
-                <div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border">
+                <div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border" style="height: 100%">
                     <!--Start Course Image-->
                     <a href="{{ route('frontend.blog_details', $blog->id) }}" class="course-card_img d-block pt-4 px-4">
                         <img  src="{{ $blog->image_show }}" class="img-fluid rounded-2 w-100" alt="">
@@ -801,7 +801,7 @@
                         <!--End Course Title-->
                         <!--Start Course instructor-->
                         <div class="course-card__instructor mb-3">
-                            <div class="course-card__instructor--name text-black-50 text-uppercase fw-medium fs-13 text_ellipse2" style="color: var(--text_color)">{!! $blog->description,0 !!}</div> 
+                            <div class="course-card__instructor--name text-black-50 text-uppercase fw-medium fs-13 text_ellipse2" style="color: var(--text_color)">{!! $blog->description !!}</div> 
                         </div>
                         <!--End Course instructor-->
                         <div class="row">

@@ -20,8 +20,9 @@
 </head>
 <body>
     @php
-    $title = \App\Models\Tp_option::where('option_name', 'theme_option_header')->first();
-    @endphp 
+    $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
+    $school_info = json_decode($results->option_value);
+    @endphp
 <div class="div-one">
     <p>Hi {{ $value['name'] }}, Here is your's username and password</p>
     <p style="text-align: justify">username: {{ $value['email'] }}</p>
@@ -32,7 +33,7 @@
     <br>
     <br>
     <hr/>
-    <p>&copy; 2023 All Rights Reserved | {{ $title->company_name }} </p>
+    <p>&copy; 2023 All Rights Reserved | {{ $school_info->school_name }} </p>
 
 </div>
 </body>

@@ -26,8 +26,11 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
         Route::get('/profile',[UserController::class, 'index'])->name('user.profile');
         Route::post('/profile/pic/{id}',[UserController::class, 'updateUserPic'])->name('update.user.profile.pic');
-        Route::get('/profile/{id}',[UserController::class, 'editUserInfo'])->name('user.edit_profile');
-        Route::post('/update/profile/{id}',[UserController::class, 'updateUserInfo'])->name('user.profile_info_update');
+        Route::get('/student-profile/{id}',[UserController::class, 'editStudentInfo'])->name('student.edit_profile'); //studnet
+        Route::post('/update/student/profile/{id}',[UserController::class, 'updateStudentInfo'])->name('student.profile_info_update');//studnet
+
+        Route::get('/profile/{id}',[UserController::class, 'editUserInfo'])->name('user.edit_profile'); //teacher-staff
+        Route::post('/update/profile/{id}',[UserController::class, 'updateUserInfo'])->name('user.profile_info_update'); //teacher-staff
 
         Route::get('/security/{id}', [UserLoginController::class, 'getUserChangePassword'])->name('user.password');
         Route::post('/security/{id}', [UserLoginController::class, 'setChangePassword'])->name('user.password_change');

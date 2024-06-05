@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\StudentProfileUpdateEmail;
 use App\Models\Admission;
 use App\Models\Cart;
 use App\Models\Certificate;
@@ -18,11 +19,13 @@ use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\CourseParticipant;
 use App\Models\ApplicationDocument;
+use App\Models\City;
 use App\Models\ClassDuration;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\ClassRoutineItem;
 use App\Models\Continent;
+use App\Models\Country;
 use App\Models\StudentApplication;
 use App\Models\Ebook;
 use App\Models\ExamClass;
@@ -34,7 +37,9 @@ use App\Models\SubjectTeacherAssent;
 use App\Models\Withdrawal;
 use App\Models\ExamResult;
 use App\Models\Session;
+use App\Models\State;
 use App\Models\Student;
+use App\Models\StudentInfoUpdate;
 use App\Models\Syllabus;
 use App\Models\Tp_option;
 use Carbon\Carbon;
@@ -236,6 +241,87 @@ class UserController extends Controller
         $user->update();
         return redirect()->back()->with('message', 'Profile Up to date, Thank you.');
     }
+
+    //student profile info change
+    public function editStudentInfo($id)
+    {
+        $data['user'] = User::find($id);
+        $data['continents'] = Continent::where('status', 1)->get();
+        $data['countries'] = Country::where('status', 1)->get();
+        $data['states'] = State::where('status', 1)->get();
+        $data['cities'] = City::where('status', 1)->get();
+        return view('user.student_update_profile', $data);
+    }
+
+    public function updateStudentInfo(Request $request)
+    {
+        $request->validate([
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // dd($request->all());
+        $student = new StudentInfoUpdate();
+        $student->user_id = auth()->user()->id;
+        $student->student_id_number = $request->student_id_number;
+        $student->student_name = $request->student_name;
+        $student->dob = $request->dob;
+        $student->blood_group = $request->blood_group;
+        $student->student_phone = $request->student_phone;
+        $student->student_email = $request->student_email;
+        $student->student_nid = $request->student_nid;
+
+        $student->father_name = $request->father_name;
+        $student->father_occupation = $request->father_occupation;
+        $student->father_phone = $request->father_phone;
+        $student->father_nid = $request->father_nid;
+
+        $student->mother_name = $request->mother_name;
+        $student->mother_occupation = $request->mother_occupation;
+        $student->mother_phone = $request->mother_phone;
+
+        $student->yearly_income = $request->yearly_income;
+
+
+        if($request->hasFile('image')) {
+            $fileName = rand() . time() . 'update_student_image.' . request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('upload/admission/'), $fileName);
+            $student->image = $fileName;
+        }
+
+        $student->present_continent_id = $request->present_continent_id ?? 0;
+        $student->present_country_id = $request->present_country_id ?? 0;
+        $student->present_state_id = $request->present_state_id ?? 0;
+        $student->present_city_id = $request->present_city_id ?? 0;
+        $student->present_address = $request->present_address;
+
+        $student->permanent_continent_id = $request->permanent_continent_id ?? 0;
+        $student->permanent_country_id = $request->permanent_country_id ?? 0;
+        $student->permanent_state_id = $request->permanent_state_id ?? 0;
+        $student->permanent_city_id = $request->permanent_city_id ?? 0;
+        $student->parmanent_address = $request->parmanent_address;
+
+        $student->reason = $request->reason;
+
+        $student->save();
+
+        //user
+        $data['name'] = auth()->user()->name;
+        $details['email'] = auth()->user()->email;
+        $details['send_item']=new StudentProfileUpdateEmail($data);
+        dispatch(new \App\Jobs\SendEmailJob($details));
+        ///email notification end
+
+        return redirect()->route('user.profile')->with('message', 'Your request submitted. Please wait for authority response. Thank you.');
+    }
+
+
+
+
+
+
+
+
+    //teacher-staff profile info change
     public function editUserInfo($id)
     {
         $data['user'] = User::find($id);
