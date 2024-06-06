@@ -18,7 +18,7 @@ class StudentInfoUpdateController extends Controller
     public function index()
     {
         $data['students'] = StudentInfoUpdate::all();
-        return view('Backend.School_management.student.update_student.index', $data);
+        return view('Backend.school_management.student.update_student.index', $data);
     }
     public function edit($id)
     {
@@ -27,7 +27,7 @@ class StudentInfoUpdateController extends Controller
         $data['countries'] = Country::where('status', 1)->get();
         $data['states'] = State::where('status', 1)->get();
         $data['cities'] = City::where('status', 1)->get();
-        return view('Backend.School_management.student.update_student.update', $data);
+        return view('Backend.school_management.student.update_student.update', $data);
     }
 
     public function update(Request $request, $id)

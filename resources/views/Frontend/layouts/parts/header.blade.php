@@ -342,6 +342,13 @@
                 </a>
             </li>
 
+
+            @php
+            $student = App\Models\Admission::where('user_id', auth()->user()->id)->first();
+            @endphp
+
+
+
             @if (Auth::check())
             <li class="nav-item dropdown dmenu dropdown-user">
                 <a class="nav-link dropdown-toggle" href="#" id="user" role="button"
@@ -349,17 +356,34 @@
                                                         {{-- <img class="user-avatar"
                         src="{{ auth()->user()->image_show }}" alt=""> --}}
 
-                        <img style="height:40px;width:40px;border-radius: 50%;border: 1px solid #000;"
+
+                        @if (auth()->user()->type == 1)
+                            <img style="height:40px;width:40px;border-radius: 50%;border: 1px solid #000;"
+                                src="{{   $student->image_show }}"
+                                alt="image" />
+                        @else
+                            <img style="height:40px;width:40px;border-radius: 50%;border: 1px solid #000;"
                                 src="{{  auth()->user()->image_show }}"
                                 alt="image" />
+                        @endif
+
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right sm-menu animate slideIn"
                     aria-labelledby="user" style="background-color:#333;color:#fff;">
                     <div class="user-holder">
                         <div class="user-header">
                             <div class="align-items-center d-flex mb-3">
-                                <img src="{{ auth()->user()->image_show }}"
+
+
+                                @if (auth()->user()->type == 1)
+                                    <img src="{{ $student->image_show }}"
                                     alt="" class="img-user rounded-circle mb-0">
+                                @else
+                                    <img src="{{ auth()->user()->image_show }}"
+                                    alt="" class="img-user rounded-circle mb-0">
+                                @endif
+
+
                                 <div class="p_info ms-3">
                                     <h6 class="mb-2 text-white">{{ auth()->user()->name }}                                                  </h6>
                                     <p class="mb-0">
