@@ -530,13 +530,13 @@
                                                             <div class="w-100">
                                                                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                                                     <button class="accordion-button fs-13 text-muted fw-normal pt-1 pb-0 px-0 collapsed" type="button">
-                                                                        
+
                                                                         <a href="javascript:void(0)">Teacher Name :{{ @$item->teacher->name }},Subject :{{ @$item->subject->name }},Lession :{{ @$item->lession->name }},Page Number :{{ @$item->page_number }}</a>
                                                                         <span class="course-duration ms-auto">
                                                                             @if (@$item->sub_banner=='1')
                                                                                 <a  data-toggle="modal" data-target="#videoModal{{ $k }}"><u> Play</u> &nbsp;</a>
                                                                             @elseif (@$item->sub_banner=='2')
-                                                                                <a class="course-card__hover--content___icon popup-youtube"  href="{{ @$item->video_url }}" autoplay><u style="margin-left: 878px;"> Play</u> &nbsp;</a>
+                                                                                <a class="course-card__hover--content___icon popup-youtube"  href="{{ @$item->video_url }}" autoplay><u style="margin-left: 893px;"> Play</u> &nbsp;</a>
                                                                             @endif                               
                                                                         </span>
                                                                     </button>
@@ -1302,30 +1302,6 @@ $(document).ready(function() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{{-- <script>
-    var curPageNum = {{ $dailyClasses->currentPage() }};
-    var lastPage = {{ $dailyClasses->lastPage() }};
-    var currentCount = {{ $i - 1 }};
-    let pageN = curPageNum;
-
-    $('#showMore').on('click', function() {
-        if (parseInt(lastPage) > parseInt(curPageNum)) {
-            pageN = parseInt(curPageNum) + 1;
-            let url = '{{ url("get-daily-class-video-show-more") }}' + "?page=" + pageN + "&class_id={{ $class->id }}" + "&current_count=" + currentCount;
-            axios.get(url)
-                .then(res => {
-                    curPageNum = res.data.currentPage;
-                    currentCount = res.data.currentCount;
-                    $('.daily-class-video-show-more').append(res.data.html);
-                    if (parseInt(lastPage) == parseInt(curPageNum)) {
-                        $('#loadMoreContainer').hide();
-                    }
-                });
-        } else {
-            $('#loadMoreContainer').hide();
-        }
-    });
-</script> --}}
 <script>
 
     var curPageNum = "{{ $dailyClasses->currentPage() }}";
