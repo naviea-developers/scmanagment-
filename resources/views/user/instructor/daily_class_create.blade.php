@@ -56,38 +56,7 @@
                                 </div>
                             </div>
 
-
                             <div class="col-sm-4">
-                                <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="class"  class="form-control form-select select2" name="class_id">
-                                        <option value="">Select Class</option>
-                                        @foreach ($classes as $class)
-                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="form-control-label"><b>Section Name :</b><span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="section"  class="form-control form-select select2" name="section_id">
-                                        <option value="">Select section</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Group Name :</b><span class="tx-danger">*</span></label>
-                                <div class="mg-t-10 mg-sm-t-0">
-                                    <select id="group"  class="form-control form-select select2" name="group_id">
-                                        <option value="">Select group</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Session Name :</b><span class="tx-danger">*</span></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <select name="session_id" class="form-control form-select select2">
@@ -98,6 +67,39 @@
                                     </select>
                                 </div>
                             </div>
+
+
+                            <div class="col-sm-4">
+                                <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="class_ass"  class="form-control form-select select2" name="class_id">
+                                        <option value="">Select Class</option>
+                                        @foreach ($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Section Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="section"  class="form-control form-select select2" name="section_id">
+                                        <option value="">Select section</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Group Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="group"  class="form-control form-select select2" name="group_id">
+                                        <option value="">Select group</option>
+                                    </select>
+                                </div>
+                            </div> --}}
+
+                          
 
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
@@ -201,6 +203,67 @@
     
 @section('script')
 
+<script>
+    $(document).ready(function() {
+        $('#class_ass').change(function() {
+            var classId = $(this).val();
+            if (classId) {
+                $.ajax({
+                    url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        class_id: classId
+                    },
+                    success: function(data) {
+                        $('#section').empty().append('<option value="">Select section</option>');
+                        $.each(data.sections, function(key, section) {
+                            $('#section').append('<option value="' + section.id + '">' + section.name + '</option>');
+                        });
+    
+                        $('#subject').empty().append('<option value="">Select subject</option>');
+                        $.each(data.subjects, function(key, subject) {
+                            $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                $('#section').empty().append('<option value="">Select section</option>');
+                $('#subject').empty().append('<option value="">Select subject</option>');
+            }
+        });
+    
+        $('#section').change(function() {
+            var sectionId = $(this).val();
+            var classId = $('#class_ass').val();
+            if (sectionId) {
+                $.ajax({
+                    url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        class_id: classId,
+                        section_id: sectionId
+                    },
+                    success: function(data) {
+                        $('#subject').empty().append('<option value="">Select subject</option>');
+                        $.each(data.subjects, function(key, subject) {
+                            $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                $('#subject').empty().append('<option value="">Select subject</option>');
+            }
+        });
+    });
+ </script>
  <!--- Start on click image show Script-------->
  <script>
     $(document).on('change','.upload-img-thumbnail',function(){

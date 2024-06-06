@@ -43,6 +43,7 @@ class DailyClassController extends Controller
         $request->validate([
             'teacher_id' => 'required',
             'class_id' => 'required',
+            'lession_id' => 'required',
 
         ]);
         try{
@@ -120,6 +121,7 @@ class DailyClassController extends Controller
        $request->validate([
         'teacher_id' => 'required',
         'class_id' => 'required',
+        'lession_id' => 'required',
 
     ]);
     try{

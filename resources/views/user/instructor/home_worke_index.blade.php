@@ -30,10 +30,10 @@
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
             <th scope="col">Session</th>
+            <th scope="col">Date</th>
             <th scope="col">Class</th>
             <th scope="col">Subject</th>
-            <th scope="col">Image/PDF</th>
-            <th scope="col">Details</th>
+            <th scope="col">Lession</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -47,21 +47,10 @@
             <tr>
             <td>{{ $i++ }}</td>
             <td>{{  @$home_work->session->start_year }} - {{  @$home_work->session->end_year }}</td>
+            <td>{{date('d,F,Y',strtotime(@$home_work->created_at))}}</td>
             <td>{{  @$home_work->class->name }}</td>
             <td>{{  @$home_work->subject->name }}</td>
-            <td>
-                @php
-                $file = $home_work->image_show; // assuming $details->file contains the file path
-                $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-                @endphp
-                
-                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-                    <img src="{{ asset($file) }}" alt="description" width="60px" height="40px"/>
-                @elseif($fileExtension == 'pdf')
-                <img src="{{ asset('public/frontend/images/pdf.jpg') }}" alt="description" width="60px" height="40px"/>
-                @endif
-            </td>
-            <td>{{ substr($home_work->details, 0, 40) }}</td>
+            <td>{{  @$home_work->lession->name }}</td>
             <td>
                 <a href="{{ route('student.homework.details', $home_work->id ) }}"><i class="fa-duotone fa fa-eye"></i></a>
                 &nbsp;

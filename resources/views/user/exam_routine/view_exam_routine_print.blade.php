@@ -45,7 +45,8 @@
           <h5>Examination: {{ $routine->examination ? $routine->examination->name : 'N/A' }}</h5>
       @endforeach --}}
       <p>Examination: {{ @$examRoutine[0]->examination->name  }}<br>
-      Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }} <br>
+      {{-- Session: {{ $admission->session->start_year ?? '' }} - {{ $admission->session->end_year ?? '' }} <br> --}}
+       {{-- Session: {{ @$session->start_year ?? '' }} - {{ @$session->end_year ?? '' }} <br> --}}
       Class Name: {{ $admission->class->name ?? '' }}</p>
       <h5>Exam Routine</h5>
   </div>

@@ -730,36 +730,14 @@ class UserController extends Controller
 
     ///School Management 
 
-
-    public function classRoutine() //for student user
-    {
-        $user = auth()->user();
-        
-        if ($user) {
-            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
-            // dd($admission->class->name);
-            if ($admission) {
-                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
-                    ->where('section_id', $admission->section_id)
-                    ->orderBy('day_id','asc')
-                    ->orderBy('class_duration_id', 'asc')
-                    ->get();
-            } else {
-                
-            }
-        } else {
-
-        }
-        return view('user.class_routine.routine', $data);
-    }
-
-
     public function teacherClassRoutine()
     {
+
+        $session = Session::where('is_current', 1)->first();
         $user = auth()->user();
         $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
                                 ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->where('session_id',$session->id)
                                 ->orderBy('day_id','asc')
                                 ->orderBy('class_duration_id', 'asc')
                                 ->get();
@@ -769,9 +747,11 @@ class UserController extends Controller
 
     public function teacherClassRoutinePrint()
     {
+        $session = Session::where('is_current', 1)->first();
         $user = auth()->user();
         $data['class_routine'] = ClassRoutine::where('teacher_id', $user->id)
                                 ->with(['class', 'section', 'subject', 'room', 'classDuration'])
+                                ->where('session_id',$session->id)
                                 ->orderBy('day_id','asc')
                                 ->orderBy('class_duration_id', 'asc')
                                 ->get();
@@ -805,15 +785,29 @@ class UserController extends Controller
         $classIds = $teacherAssignments->pluck('class_id')->unique();
         $sectionIds = $teacherAssignments->pluck('section_id')->unique();
         $subjectIds = $teacherAssignments->pluck('subject_id')->unique();
+        $currentSession = Session::where('is_current', 1)->first()->id;
 
         $examSchedules = ExamSchedule::whereIn('class_id', $classIds)
             ->whereIn('section_id', $sectionIds)
             ->whereHas('examClass', function($query) use ($subjectIds) {
                 $query->whereIn('subject_id', $subjectIds);
-            })->get()
+            })
+            ->whereHas('examination', function($query) use ($currentSession) {
+                $query->where('session_id', $currentSession);
+            })
+            ->get()
             ->filter(function ($routine) {
                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
             });
+
+        // $examSchedules = ExamSchedule::whereIn('class_id', $classIds)
+        //     ->whereIn('section_id', $sectionIds)
+        //     ->whereHas('examClass', function($query) use ($subjectIds) {
+        //         $query->whereIn('subject_id', $subjectIds);
+        //     })->get()
+        //     ->filter(function ($routine) {
+        //         return $routine->examination && $routine->examination->end_date >= Carbon::now();
+        //     });
         $data = [
             'teacher' => $teacherAssignments,
             'examSchedules' => $examSchedules,
@@ -848,15 +842,29 @@ class UserController extends Controller
         $classIds = $teacherAssignments->pluck('class_id')->unique();
         $sectionIds = $teacherAssignments->pluck('section_id')->unique();
         $subjectIds = $teacherAssignments->pluck('subject_id')->unique();
+        $currentSession = Session::where('is_current', 1)->first()->id;
 
         $examSchedules = ExamSchedule::whereIn('class_id', $classIds)
             ->whereIn('section_id', $sectionIds)
             ->whereHas('examClass', function($query) use ($subjectIds) {
                 $query->whereIn('subject_id', $subjectIds);
-            })->get()
+            })
+            ->whereHas('examination', function($query) use ($currentSession) {
+                $query->where('session_id', $currentSession);
+            })
+            ->get()
             ->filter(function ($routine) {
                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
             });
+
+        // $examSchedules = ExamSchedule::whereIn('class_id', $classIds)
+        //     ->whereIn('section_id', $sectionIds)
+        //     ->whereHas('examClass', function($query) use ($subjectIds) {
+        //         $query->whereIn('subject_id', $subjectIds);
+        //     })->get()
+        //     ->filter(function ($routine) {
+        //         return $routine->examination && $routine->examination->end_date >= Carbon::now();
+        //     });
         $data = [
             'teacher' => $teacherAssignments,
             'examSchedules' => $examSchedules,
@@ -867,16 +875,42 @@ class UserController extends Controller
         return view('user.exam_routine.teacher_exam_routine_print',$data);
     }
 
+    public function classRoutine() //for student user
+    {
+        $user = auth()->user();
+        if ($user) {
+            $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['session']=$session = Session::where('is_current', 1)->first();
+            // dd($admission->class->name);
+            if ($admission) {
+                $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
+                    // ->where('session_id', $admission->session_id)
+                    ->where('session_id',$session->id)
+                    ->where('section_id', $admission->section_id)
+                    ->orderBy('day_id','asc')
+                    ->orderBy('class_duration_id', 'asc')
+                    ->get();
+            } else {
+                
+            }
+        } else {
+
+        }
+        return view('user.class_routine.routine', $data);
+    }
+
 
     public function classPrint(){
 
         $user = auth()->user();
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['session']=$session = Session::where('is_current', 1)->first();
             // dd($admission);
             if ($admission) {
                 $data['class_routine'] = $routines = ClassRoutine::where('class_id', $admission->class_id)
-                    ->where('session_id', $admission->session_id)
+                    // ->where('session_id', $admission->session_id)
+                    ->where('session_id',$session->id)
                     ->where('section_id', $admission->section_id)
                     ->orderBy('day_id','asc')
                     ->orderBy('class_duration_id', 'asc')
@@ -898,8 +932,13 @@ class UserController extends Controller
         $user = auth()->user();
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['session']=$currentSession = Session::where('is_current', 1)->first()->id;
+
             $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
                                 ->where('section_id', $admission->section_id)
+                                ->whereHas('examination', function($query) use ($currentSession) {
+                                    $query->where('session_id', $currentSession);
+                                })
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
@@ -915,8 +954,12 @@ class UserController extends Controller
         $user = auth()->user();
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['session']=$currentSession = Session::where('is_current', 1)->first()->id;
             $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
                                 ->where('section_id', $admission->section_id)
+                                ->whereHas('examination', function($query) use ($currentSession) {
+                                    $query->where('session_id', $currentSession);
+                                })
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
@@ -929,8 +972,12 @@ class UserController extends Controller
         $user = auth()->user();
         if ($user) {
             $data['admission'] = $admission = Admission::where('user_id', $user->id)->first();
+            $data['session']=$currentSession = Session::where('is_current', 1)->first()->id;
             $data['examRoutine'] = $examSchedule = ExamSchedule::where('class_id', $admission->class_id)
                                 ->where('section_id', $admission->section_id)
+                                ->whereHas('examination', function($query) use ($currentSession) {
+                                    $query->where('session_id', $currentSession);
+                                })
                                 ->get()
                                 ->filter(function ($routine) {
                                 return $routine->examination && $routine->examination->end_date >= Carbon::now();
@@ -939,9 +986,14 @@ class UserController extends Controller
         return view('user.exam_routine.admit_card_print',$data);
     }
 
+    // public function getAssignTeacherSubjectHomeWork($id){
+    //     $subject = SubjectTeacherAssent::where("class_id",$id)->with('subject')->get();
+    //     return $subject;
+    // }
+
     public function getAssignTeacherSubject($id){
-        $classes = SubjectTeacherAssent::where("class_id",$id)->with('class')->get();
-        return $classes;
+        $subject = SubjectTeacherAssent::where("class_id",$id)->with('subject')->get();
+        return $subject;
     }
  
 
@@ -949,10 +1001,13 @@ class UserController extends Controller
     {
         $user = auth()->user()->id;
         $admission = Admission::where('user_id', $user)->first();
+        $data['session']=$currentSession = Session::where('is_current', 1)->first();
         // $data = $admission->session_id;
         // dd($data);
         $data['home_works'] = HomeWork::where('class_id', $admission->class_id)
-                                        ->where('session_id', $admission->session_id)
+                                        // ->where('session_id', $admission->session_id)
+                                        ->where('session_id',$currentSession->id)
+                                        ->orderBy('id','desc')
                                         ->where('status', 1)->get();
         return view('user.student.homework.index', $data);
     }

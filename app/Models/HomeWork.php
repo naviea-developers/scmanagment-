@@ -9,8 +9,8 @@ class HomeWork extends Model
 {
     use HasFactory;
 
-    public function getImageShowAttribute(){
-        return $this->image != "" ? asset('public/upload/home_work/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
+    public function getHomeWorkpdfShowAttribute(){
+        return $this->home_workpdf != "" ? asset('public/upload/home_work/'. $this?->home_workpdf) : asset('public/frontend/images/No-image.jpg');
     }
 
     public function session(){
@@ -22,5 +22,9 @@ class HomeWork extends Model
 
     public function class(){
         return $this->belongsTo(Classe::class,"class_id",'id');
+    }
+
+    public function lession(){
+        return $this->belongsTo(Lession::class,"lession_id",'id');
     }
 }
