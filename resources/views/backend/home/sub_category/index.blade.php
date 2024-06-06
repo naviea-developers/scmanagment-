@@ -50,7 +50,7 @@ Admin - all Sub category
                             <img src="{{ $sub_cat->image_show }}" alt="" width="60px" height="40px" srcset="">
                           </td>
                           {{-- <td>{{ $sub_cat->category->type }}</td> --}}
-                          <td>{{ $sub_cat->category->name }}</td>
+                          <td>{{ @$sub_cat->category->name }}</td>
                           <td>{{ $sub_cat->name }}</td>
                           <td>
                             @if($sub_cat->status == 0)

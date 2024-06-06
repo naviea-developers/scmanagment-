@@ -85,41 +85,7 @@ class UserLoginController extends Controller
 
         return redirect('/sign-in')->with('success', 'You are successfully Registered. Now You can login. Thank You.');
 
-        // if($user->type == 1){
-        //     $patient = New Patient;
-        //     $patient->type = 1;
-        //     $patient->name = ($request->fname ?? '') .' '.($request->lname ?? '');
-        //     // $patient->dob = $request->p_dob;
-        //     // $patient->gender = $request->p_gender;
-        //     // $patient->age = $request->p_age;
-        //     $patient->user_id =  $user->id;
-        //     $patient->save();
-        // }
-
-
-
-        // $token= $this->generateRandomString(16);
-        // // dd($token);
-        // $user->email_verify_token = $token;
-        // $user->update();
-
-        // $data['user'] = $user;
-        // $data['token'] = $token;
-
-        // $details['email'] = $user->email;
-        // $details['send_item']=new EmailVerificationCustom($data);
-
-        // dispatch(new \App\Jobs\SendEmailJob($details));
-
-        // DB::commit();
-
-        // return redirect('/sign-in')->with('error', 'We have sent you email verification link! Please Verify.');
-        // }catch(\Exception $e){
-        //     DB::rollBack();
-        //    // return back()->with ('error', $e->getMessage());
-        //     return back()->with ('error_message', "Something Went Wrong!")->withInput();
-        // }
-
+      
 
     }
 

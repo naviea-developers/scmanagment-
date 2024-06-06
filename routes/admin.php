@@ -391,22 +391,45 @@ Route::post('home-content-register-update', [HomeContentController::class,'setRe
 
 
 
-    //Monthly package Business Route
-    Route::get('/all-package',[PackageController::class, 'all_package'])->name('admin.all_package');
-    Route::post('/add-package',[PackageController::class, 'add_package'])->name('admin.add_package');
-    Route::get('/edit-package/{id}',[PackageController::class, 'edit_package'])->name('admin.edit_package');
-    Route::post('/update-package/{id}',[PackageController::class, 'update_package'])->name('admin.update_package');
-    Route::post('/delete-package',[PackageController::class, 'delete_package'])->name('admin.delete_package');
-    Route::get('/package_status_toggle/{id}', [PackageController::class, 'package_status_toggle'])->name('admin.month_package_toggle');
 
 
-    //Yearly package Business Route
-    Route::get('/all-year-package',[YearPackageController::class, 'all_year_package'])->name('admin.all_year_package');
-    Route::post('/add-year-package',[YearPackageController::class, 'add_year_package'])->name('admin.add_year_package');
-    Route::get('/edit-year-package/{id}',[YearPackageController::class, 'edit_year_package'])->name('admin.edit_year_package');
-    Route::post('/update-year-package/{id}',[YearPackageController::class, 'update_year_package'])->name('admin.update_year_package');
-    Route::post('/delete-year-package',[YearPackageController::class, 'delete_year_package'])->name('admin.delete_year_package');
-    Route::get('/year_status_toggle/{id}', [YearPackageController::class, 'year_status_toggle'])->name('admin.year_package_toggle');
+
+
+
+
+
+
+
+
+
+
+    // //Monthly package Business Route
+    // Route::get('/all-package',[PackageController::class, 'all_package'])->name('admin.all_package');
+    // Route::post('/add-package',[PackageController::class, 'add_package'])->name('admin.add_package');
+    // Route::get('/edit-package/{id}',[PackageController::class, 'edit_package'])->name('admin.edit_package');
+    // Route::post('/update-package/{id}',[PackageController::class, 'update_package'])->name('admin.update_package');
+    // Route::post('/delete-package',[PackageController::class, 'delete_package'])->name('admin.delete_package');
+    // Route::get('/package_status_toggle/{id}', [PackageController::class, 'package_status_toggle'])->name('admin.month_package_toggle');
+
+
+    // //Yearly package Business Route
+    // Route::get('/all-year-package',[YearPackageController::class, 'all_year_package'])->name('admin.all_year_package');
+    // Route::post('/add-year-package',[YearPackageController::class, 'add_year_package'])->name('admin.add_year_package');
+    // Route::get('/edit-year-package/{id}',[YearPackageController::class, 'edit_year_package'])->name('admin.edit_year_package');
+    // Route::post('/update-year-package/{id}',[YearPackageController::class, 'update_year_package'])->name('admin.update_year_package');
+    // Route::post('/delete-year-package',[YearPackageController::class, 'delete_year_package'])->name('admin.delete_year_package');
+    // Route::get('/year_status_toggle/{id}', [YearPackageController::class, 'year_status_toggle'])->name('admin.year_package_toggle');
+
+
+
+
+
+
+
+
+
+
+
 
 
     //Add New Review Testimonial

@@ -343,13 +343,15 @@
             </li>
 
 
-            @php
-            $student = App\Models\Admission::where('user_id', auth()->user()->id)->first();
-            @endphp
+           
 
 
 
             @if (Auth::check())
+            @php
+            $student = App\Models\Admission::where('user_id', auth()->user()->id)->first();
+            @endphp
+            
             <li class="nav-item dropdown dmenu dropdown-user">
                 <a class="nav-link dropdown-toggle" href="#" id="user" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
