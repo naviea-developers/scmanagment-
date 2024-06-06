@@ -70,6 +70,7 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         Route::post('update_home_work/{id}', [InstructorCourseController::class,"updateHomeWork"])->name('instructor.homework.update');
         Route::post('delete_home_work', [InstructorCourseController::class,"destroyHomeWork"])->name('instructor.homework.delete');
         Route::get('/status_home_work/{id}', [InstructorCourseController::class, 'statusHomeWork'])->name('instructor.homework.status');
+        Route::get('home_work_pdf_download/{id}', [InstructorCourseController::class, 'homeWorkPdfDownload'])->name('frontend.home_work_pdf_download');
 
         //Daily Class work
         Route::get('index_daily_class', [InstructorCourseController::class,"indexDailyClass"])->name('instructor.daily_class.index');
@@ -198,6 +199,11 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
 
 
 Route::get('/get-assign-teacher-subject/{id}', [UserController::class, 'getAssignTeacherSubject']);
+// Route::post('/instructor/homework/sections-subjects', [InstructorCourseController::class, 'getSectionsAndSubjects'])->name('instructor.homework.sectionsSubjects');
+Route::post('/instructor/homework/sections-subjects', [InstructorCourseController::class, 'getSectionsAndSubjects'])->name('instructor.homework.sectionsSubjects');
+
+// Route::get('/get-assign-teacher-subject-home-work/{id}', [UserController::class, 'getAssignTeacherSubjectHomeWork']);
+
 Route::get('get/teacher_assent_subject/{classId}/{sectionId}', [InstructorCourseController::class, 'getTeacherAssentSubject']);
 Route::get('get/teacher_assent_school_section/{id}', [InstructorCourseController::class, 'getTeacherAssentSchoolSection']);
 Route::get('/get-teacher_assent_result', [InstructorCourseController::class, 'getTeacherAssentResult'])->name('get.teacher_assent_result');

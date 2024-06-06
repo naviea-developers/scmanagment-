@@ -42,6 +42,7 @@ class ClassController extends Controller
             $class->name = $request->name;
             $class->details = $request->details;
             $class->gargent_policy = $request->gargent_policy;
+            $class->daily_class_details = $request->daily_class_details;
             if($request->hasFile('image')){
                 $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
                 request()->image->move(public_path('upload/class/'),$fileName);
@@ -94,6 +95,7 @@ class ClassController extends Controller
         $class->name = $request->name;
         $class->details = $request->details;
         $class->gargent_policy = $request->gargent_policy;
+        $class->daily_class_details = $request->daily_class_details;
         if($request->hasFile('image')){
             @unlink(public_path("upload/class/".$class->image));
             $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();

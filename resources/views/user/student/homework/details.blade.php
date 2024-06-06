@@ -5,8 +5,6 @@
 @endsection
 @section('main_content')
 
-
-
 <div class="passwodBox mb-3" style="background-color: #07477D; color:white">
     <di class="col-md-12">
         <div class="row">
@@ -18,21 +16,12 @@
             </div>
             <hr>
             <div class="class-routine">
-                <div class="col-md-12 text-center">
-
-                @php
-                $file = $details->image_show; // assuming $details->file contains the file path
-                $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-                @endphp
-                
-                @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-                    <img src="{{ asset($file) }}" alt="description" style="width: 400px; height:100%"/>
-                @elseif($fileExtension == 'pdf')
-                    <embed src="{{ asset($file) }}" type="application/pdf" width="100%" height="600px"/>
-                @endif
-
-                </div>
                 <div class="col-md-12 mt-4">
+                    <p class=""><b>Lession: </b> {{ $details->lession->name }}</p>
+                    <p class=""><b>Page: </b> {{ $details->page_number }}</p>
+                    @if (@$details->home_workpdf)
+                      <p><a href="{{ route('frontend.home_work_pdf_download',$details->id) }}">click here to download the PDF file.</a></p>
+                    @endif
                     <p class=""><b>Description: </b> {{ $details->details }}</p>
                 </div>
             </div>
@@ -40,9 +29,5 @@
         </div>
     </di>
 </div>
-
-
-
-
 
 @endsection

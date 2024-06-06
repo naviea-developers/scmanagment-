@@ -38,6 +38,7 @@ use App\Models\DailyClass;
 use App\Models\User;
 use App\Models\Group;
 use App\Models\Lession;
+use App\Models\Section;
 
 class InstructorCourseController extends Controller
 {
@@ -752,7 +753,7 @@ class InstructorCourseController extends Controller
         return back()->with('message','Course Deleted Successfully');
     }
 
-// home work start
+   // home work start
 
     public function indexHomeWork()
     {
@@ -764,12 +765,52 @@ class InstructorCourseController extends Controller
     public function createHomeWork()
     {
         // dd('hi');
-        $data['sessions']=Session::orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['sessions']=Session::orderBy('id', 'desc')->where('status', 1)->get();
+        // $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+
+        // $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->orderBy('id', 'desc')->where('status', 1)->get(); 
+        // $data['classes']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+
+        $data['teacherAssents'] = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        $classIds = $data['teacherAssents']->pluck('class_id')->unique();
+
+        $data['classs'] = Classe::whereIn('id', $classIds)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+       
         return view('user.instructor.home_worke_create', $data);
     }
+
+    public function getSectionsAndSubjects(Request $request)
+    {
+        $classId = $request->class_id;
+        $sectionId = $request->section_id ?? null;
+        $teacherId = auth()->user()->id;
+    
+        $sectionIds = SubjectTeacherAssent::where('teacher_id', $teacherId)
+            ->where('class_id', $classId)
+            ->pluck('section_id');
+        $sections = SchoolSection::whereIn('id', $sectionIds)->get();
+    
+        $query = SubjectTeacherAssent::where('teacher_id', $teacherId)
+            ->where('class_id', $classId);
+    
+        if ($sectionId) {
+            $query->where('section_id', $sectionId);
+        }
+    
+        $subjectIds = $query->pluck('subject_id');
+        $subjects = Subject::whereIn('id', $subjectIds)->get();
+    
+        return response()->json(['sections' => $sections, 'subjects' => $subjects]);
+    }
+
+
 
     public function storeHomeWork(Request $request)
     {
@@ -782,13 +823,17 @@ class InstructorCourseController extends Controller
             DB::beginTransaction();
             $home_work = New HomeWork();
             $home_work->teacher_id = auth()->user()->id;
+            $home_work->name = $request->name;
             $home_work->session_id = $request->session_id;
             $home_work->class_id = $request->class_id;
             $home_work->subject_id = $request->subject_id;
-            if($request->hasFile('image')){
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/home_work/'),$fileName);
-                $home_work->image = $fileName;
+            $home_work->section_id = $request->section_id;
+            $home_work->lession_id = $request->lession_id;
+            $home_work->page_number = $request->page_number;
+            if($request->hasFile('home_workpdf')){
+                $fileName = rand().time().'.'.request()->home_workpdf->getClientOriginalExtension();
+                request()->home_workpdf->move(public_path('upload/home_work/'),$fileName);
+                $home_work->home_workpdf = $fileName;
             }
             // $home_work->image = $request->image;
             $home_work->details = $request->details;
@@ -805,11 +850,13 @@ class InstructorCourseController extends Controller
     public function editHomeWork(string $id)
     {
         // dd('hi');
-        $data["home_work"]= HomeWork::find($id);
+        $data["home_work"]=$home_work= HomeWork::find($id);
         $data['sessions']=Session::orderBy('id', 'desc')->where('status', 1)->get(); 
         $data['teacherAssents']=SubjectTeacherAssent::where('teacher_id', auth()->user()->id)->orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['classs']=Classe::where('id',$home_work->class_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::where('id',$home_work->subject_id)->orderBy('id', 'desc')->where('status', 1)->get();
+        $data['lessions']=Lession::where('id',$home_work->lession_id)->orderBy('id', 'desc')->where('status', 1)->get();
+        $data['sections']=SchoolSection::where('id',$home_work->section_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
         return view("user.instructor.home_worke_update",$data);
     }
 
@@ -823,15 +870,20 @@ class InstructorCourseController extends Controller
         try{
             DB::beginTransaction();
             $home_work = HomeWork::find($id);
+            $home_work->name = $request->name;
             $home_work->teacher_id = auth()->user()->id;
             $home_work->class_id = $request->class_id;
             $home_work->session_id = $request->session_id;
             $home_work->subject_id = $request->subject_id;
-            if($request->hasFile('image')){
-                @unlink(public_path("upload/home_work/".$home_work->image));
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/home_work/'),$fileName);
-                $home_work->image = $fileName;
+            $home_work->section_id = $request->section_id;
+            $home_work->lession_id = $request->lession_id;
+            $home_work->page_number = $request->page_number;
+
+            if($request->hasFile('home_workpdf')){
+                @unlink(public_path("upload/home_work/".$home_work->home_workpdf));
+                $fileName = rand().time().'.'.request()->home_workpdf->getClientOriginalExtension();
+                request()->home_workpdf->move(public_path('upload/home_work/'),$fileName);
+                $home_work->home_workpdf = $fileName;
             }
             $home_work->details = $request->details;
             $home_work->save();
@@ -851,13 +903,26 @@ class InstructorCourseController extends Controller
     {
         // dd('hi');
         $home_work =  HomeWork::find($request->homework_id);
+        @unlink(public_path("upload/home_work/".$home_work->home_workpdf));
         $home_work->delete();
         return redirect()->route('instructor.homework.index')->with('message','Home Work Deleted Successfully');
     }
-// home work End
+
+    public function homeWorkPdfDownload(Request $request,$id)
+    {
+       $home_work = HomeWork::findOrFail($id);
+       if ($home_work->home_workpdf) {
+           $filePath = public_path('upload/home_work/'.$home_work->home_workpdf);
+           if (file_exists($filePath)) {
+               return response()->download($filePath, $home_work->home_workpdf);
+           }
+       }
+       return redirect()->back();
+    }
+    // home work End
 
 
-// home Class Exam
+    // home Class Exam
 
     public function indexClassExam()
     {
@@ -1240,6 +1305,7 @@ class InstructorCourseController extends Controller
     }
    // Result Exam end
 
+
    // Daily Class Start
     public function indexDailyClass()
     {
@@ -1253,10 +1319,23 @@ class InstructorCourseController extends Controller
     public function createDailyClass()
     {
         // dd('hi');
-        $data['daily_classes'] = DailyClass::where('status','1')->orderBy('id', 'desc')->get();
-        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
-        $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+        // $data['daily_classes'] = DailyClass::where('status','1')->orderBy('id', 'desc')->get();
+        // $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
+        // $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+       
         $data['sessions'] = Session::where('status', 1)->get();
+
+        $data['teacherAssents'] = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        $classIds = $data['teacherAssents']->pluck('class_id')->unique();
+
+        $data['classes'] = Classe::whereIn('id', $classIds)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
         return view("user.instructor.daily_class_create",$data);
     }
 
@@ -1268,6 +1347,7 @@ class InstructorCourseController extends Controller
     //    dd($request->all());
         $request->validate([
             'class_id' => 'required',
+            'lession_id' => 'required',
 
         ]);
         try{
@@ -1327,13 +1407,13 @@ class InstructorCourseController extends Controller
        // dd('hi');
        $data['daily_class'] = $daily_class = DailyClass::find($id);
        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
-       $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
        $data['sessions'] = Session::where('status', 1)->get(); 
 
-       $data['sections'] = SchoolSection::where('class_id',$daily_class->class_id)->where('status', 1)->get();
-       $data['groups'] = Group::where('class_id',$daily_class->class_id)->where('status', 1)->get();
-       $data['subjects']=Subject::where('class_id',$daily_class->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
-       $data['lessions']=Lession::where('subject_id',$daily_class->subject_id)->where('status', 1)->orderBy('id', 'asc')->get();
+       $data['classes'] = Classe::where('id',$daily_class->class_id)->where('status','1')->orderBy('id', 'asc')->get();
+       $data['classs']=Classe::where('id',$daily_class->class_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
+       $data['subjects']=Subject::where('id',$daily_class->subject_id)->orderBy('id', 'desc')->where('status', 1)->get();
+       $data['lessions']=Lession::where('id',$daily_class->lession_id)->orderBy('id', 'desc')->where('status', 1)->get();
+       $data['sections']=SchoolSection::where('id',$daily_class->section_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
  
         return view("user.instructor.daily_class_update",$data);
     }
@@ -1342,52 +1422,53 @@ class InstructorCourseController extends Controller
      * Update the specified resource in storage.
      */
     public function updateDailyClass(Request $request, string $id)
-    {
-        //dd($request->all());
-       $request->validate([
-        'class_id' => 'required',
+        {
+            //dd($request->all());
+        $request->validate([
+            'class_id' => 'required',
+            'lession_id' => 'required',
 
-    ]);
-    try{
-        DB::beginTransaction();
-        $daily_class = DailyClass::find($id);
-        $daily_class->name = $request->name ?? "";
-        // $daily_class->teacher_id = $request->teacher_id ?? 0;
-        $daily_class->teacher_id = auth()->user()->id ?? 0;
-        $daily_class->class_id = $request->class_id ?? 0;
-        $daily_class->subject_id = $request->subject_id ?? 0;
-        $daily_class->session_id = $request->session_id ?? 0;
-        $daily_class->section_id = $request->section_id ?? 0;
-        $daily_class->group_id = $request->group_id ?? 0;
-        $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-        $daily_class->lession_id = $request->lession_id ?? 0;
-        $daily_class->page_number = $request->page_number ?? 0;
-        $daily_class->sub_banner = $request->sub_banner ?? 1;
-        $daily_class->details = $request->details ?? "";
+        ]);
+        try{
+            DB::beginTransaction();
+            $daily_class = DailyClass::find($id);
+            $daily_class->name = $request->name ?? "";
+            // $daily_class->teacher_id = $request->teacher_id ?? 0;
+            $daily_class->teacher_id = auth()->user()->id ?? 0;
+            $daily_class->class_id = $request->class_id ?? 0;
+            $daily_class->subject_id = $request->subject_id ?? 0;
+            $daily_class->session_id = $request->session_id ?? 0;
+            $daily_class->section_id = $request->section_id ?? 0;
+            $daily_class->group_id = $request->group_id ?? 0;
+            $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+            $daily_class->lession_id = $request->lession_id ?? 0;
+            $daily_class->page_number = $request->page_number ?? 0;
+            $daily_class->sub_banner = $request->sub_banner ?? 1;
+            $daily_class->details = $request->details ?? "";
 
-        if($request->hasFile('video')){
-            @unlink(public_path("upload/daily_class/".$daily_class->video));
-            $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
-            request()->video->move(public_path('upload/daily_class/'),$fileName);
-            $daily_class->video = $fileName;
+            if($request->hasFile('video')){
+                @unlink(public_path("upload/daily_class/".$daily_class->video));
+                $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+                request()->video->move(public_path('upload/daily_class/'),$fileName);
+                $daily_class->video = $fileName;
+            }
+
+            // if($request->hasFile('video_thumbnail')){
+            //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+            //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+            //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+            //     $daily_class->video_thumbnail = $fileName;
+            // }
+
+            $daily_class->save();
+
+            DB::commit();
+            return redirect()->route('instructor.daily_class.index')->with('message','Daily Class Update Successfully');
+        }catch(\Exception $e){
+            DB::rollBack();
+            dd($e);
+            return back()->with ('error_message', $e->getMessage());
         }
-
-        // if($request->hasFile('video_thumbnail')){
-        //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
-        //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
-        //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
-        //     $daily_class->video_thumbnail = $fileName;
-        // }
-
-        $daily_class->save();
-
-        DB::commit();
-        return redirect()->route('instructor.daily_class.index')->with('message','Daily Class Update Successfully');
-    }catch(\Exception $e){
-        DB::rollBack();
-        dd($e);
-        return back()->with ('error_message', $e->getMessage());
-    }
     }
 
     /**

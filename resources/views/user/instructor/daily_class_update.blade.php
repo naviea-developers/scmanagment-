@@ -56,12 +56,12 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <label class="form-control-label"><b>Teacher Name :</b><span class="tx-danger">*</span></label>
+                            <label class="form-control-label"><b>Session Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <select id="cat"  class="form-control form-select select2" name="teacher_id">
-                                    <option value="">Select teacher</option>
-                                    @foreach ($teachers as $teacher)
-                                    <option @if($teacher->id == $daily_class->teacher_id)  Selected @endif value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                <select name="session_id" class="form-control form-select select2">
+                                    <option value=""> Select Session</option>
+                                    @foreach ($sessions as $session)
+                                    <option @if($session->id == $daily_class->session_id)  Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -70,7 +70,7 @@
                         <div class="col-sm-4">
                             <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
-                                <select id="class"  class="form-control form-select select2" name="class_id">
+                                <select id="class_ass"  class="form-control form-select select2" name="class_id">
                                     <option value="">Select Class</option>
                                     @foreach ($classes as $class)
                                     <option @if($class->id == $daily_class->class_id)  Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4 mt-3">
+                        {{-- <div class="col-sm-4 mt-3">
                             <label class="form-control-label"><b>Group Name :</b><span class="tx-danger">*</span></label>
                             <div class="mg-t-10 mg-sm-t-0">
                                 <select id="group"  class="form-control form-select select2" name="group_id">
@@ -101,19 +101,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="col-sm-4 mt-3">
-                            <label class="form-control-label"><b>Session Name :</b><span class="tx-danger">*</span></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <select name="session_id" class="form-control form-select select2">
-                                    <option value=""> Select Session</option>
-                                    @foreach ($sessions as $session)
-                                    <option @if($session->id == $daily_class->session_id)  Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        
 
                         <div class="col-sm-4 mt-3">
                             <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
@@ -263,6 +253,68 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<script>
+    $(document).ready(function() {
+        $('#class_ass').change(function() {
+            var classId = $(this).val();
+            if (classId) {
+                $.ajax({
+                    url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        class_id: classId
+                    },
+                    success: function(data) {
+                        $('#section').empty().append('<option value="">Select section</option>');
+                        $.each(data.sections, function(key, section) {
+                            $('#section').append('<option value="' + section.id + '">' + section.name + '</option>');
+                        });
+    
+                        $('#subject').empty().append('<option value="">Select subject</option>');
+                        $.each(data.subjects, function(key, subject) {
+                            $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                $('#section').empty().append('<option value="">Select section</option>');
+                $('#subject').empty().append('<option value="">Select subject</option>');
+            }
+        });
+    
+        $('#section').change(function() {
+            var sectionId = $(this).val();
+            var classId = $('#class_ass').val();
+            if (sectionId) {
+                $.ajax({
+                    url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        class_id: classId,
+                        section_id: sectionId
+                    },
+                    success: function(data) {
+                        $('#subject').empty().append('<option value="">Select subject</option>');
+                        $.each(data.subjects, function(key, subject) {
+                            $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                $('#subject').empty().append('<option value="">Select subject</option>');
+            }
+        });
+    });
+ </script>
  <!--- Start on click image show Script-------->
  <script>
     $(document).on('change','.upload-img-thumbnail',function(){

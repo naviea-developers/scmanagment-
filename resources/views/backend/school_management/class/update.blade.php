@@ -85,6 +85,15 @@
                           </div>
                         </div>
 
+                        <div class="row mt-4">
+                          <div class="col-sm-12">
+                              <label class="form-control-label"><b>Daily Class Video Details </b><span class="tx-danger">*</span></label>
+                              <div class="mg-t-10 mg-sm-t-0">
+                                  <textarea id="summernote_three" name="daily_class_details">{{ @$class->daily_class_details }}</textarea>
+                              </div>
+                          </div>
+                        </div>
+
                         <div class="row mt-3">
                           <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
                             <a href="{{route('admin.class.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Cancel</a>

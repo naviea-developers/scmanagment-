@@ -872,27 +872,33 @@ class FrontendController extends Controller
     //ebook audio end
 
 
-     //ebook Video start
-     public function dailyClassVideo(Request $request)
+     //Daily Class Video start
+     public function dailyClass(Request $request)
      {
         $data['class_name']=$class_name = $request->input('class_name');
         if(isset(request()->class_name)){
             $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
-            $data["classes"] = Classe::where('status',1)->where('name','like','%'.request()->class_name.'%')->paginate(9);
+            $data["classes"] = Classe::withCount('dailyClasses')->where('status',1)->where('name','like','%'.request()->class_name.'%')->paginate();
             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
         }else{
-            $data['classes']= Classe::where('status',1)->orderBy('id','asc')->get();
+            $data['classes']= Classe::withCount('dailyClasses')->where('status',1)->orderBy('id','asc')->paginate(8);
             $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
             $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
         }
-        return view('Frontend.ebookvideo.daily_class_list', $data);
+        return view('Frontend.daily_class_video.daily_class_list', $data);
+     }
+
+     public function getDailyClassShowMore()
+     {
+        $data['classes']= Classe::where('status',1)->orderBy('id','asc')->paginate(8);
+         return view('Frontend.daily_class_video.daily_class_list_show_more',$data);
      }
 
      public function dailyClassVideoDetails($id)
      {
         //dd('hi');
         $data['class'] = Classe::find($id);
-        return view('Frontend.ebookvideo.daily_class_video_details', $data);
+        return view('Frontend.daily_class_video.daily_class_video_details', $data);
      }
 
      public function getDailyClassVideoSearch(Request $request)
@@ -917,7 +923,7 @@ class FrontendController extends Controller
 
         $data['dailyClasses'] = $query->get();
     
-        return view('Frontend.ebookvideo.daily_class_video_search', $data);
+        return view('Frontend.daily_class_video.daily_class_video_search', $data);
      }
 
      public function getDailyClassVideoShowMore(Request $request){
@@ -926,50 +932,39 @@ class FrontendController extends Controller
         $page = $request->input('page', 1);
         $classId = $request->input('class_id');
         $class = Classe::findOrFail($classId);
-        $data['dailyClasses']=$dailyClasses = $class->dailyClasses()->paginate(2, ['*'], 'page', $page);
-         return view('Frontend.ebookvideo.daily_class_video_show_more', $data);
+        $data['dailyClasses']=$dailyClasses = $class->dailyClasses()->paginate(10, ['*'], 'page', $page);
+         return view('Frontend.daily_class_video.daily_class_video_show_more', $data);
      }
 
-     public function getEbookVideoByCat(Request $request, $id)
-     {
-         $data['title']=$name = $request->input('title');
-         if($id == 0){
-             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status',1)->get();
-         }else{
-             $data['ebooks'] = Ebook::where('type','ebookvideo')->where('status',1)->where('category_id',$id)->get();
-         }
+    //  public function eVideoDownload($id)
+    //  {
 
-         return view('Frontend.ebookvideo.ebook_video_catajax',$data);
-     }
+    //      $ebook = Ebook::findOrFail($id);
+    //      $files = EbookAudioContent::where('ebook_id', $ebook->id)->get();
 
-     public function eVideoDownload($id)
-     {
+    //      $zipFileName = $ebook->title . '_eBook_audio.zip';
+    //      $zip = new ZipArchive();
 
-         $ebook = Ebook::findOrFail($id);
-         $files = EbookAudioContent::where('ebook_id', $ebook->id)->get();
+    //      $zip->open(public_path('upload/ebook/audio/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-         $zipFileName = $ebook->title . '_eBook_audio.zip';
-         $zip = new ZipArchive();
+    //      foreach ($files as $file) {
+    //          $audioPath = public_path('upload/ebook/audio/' . $file->audio_file);
+    //          // dd($audioPath);
+    //          if(File::exists($audioPath)){
+    //              $zip->addFile($audioPath, $file->audio_file);
+    //          }else{
+    //              return redirect()->back();
+    //          }
 
-         $zip->open(public_path('upload/ebook/audio/' . $zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    //      }
 
-         foreach ($files as $file) {
-             $audioPath = public_path('upload/ebook/audio/' . $file->audio_file);
-             // dd($audioPath);
-             if(File::exists($audioPath)){
-                 $zip->addFile($audioPath, $file->audio_file);
-             }else{
-                 return redirect()->back();
-             }
+    //      $zip->close();
 
-         }
+    //      return response()->download(public_path('upload/ebook/audio/' . $zipFileName))->deleteFileAfterSend(true);
 
-         $zip->close();
+    //  }
 
-         return response()->download(public_path('upload/ebook/audio/' . $zipFileName))->deleteFileAfterSend(true);
-
-     }
-     //ebook audio end
+    //Daily Class Video end
 
      //gallery start
      public function gallery(Request $request)
@@ -1008,6 +1003,7 @@ class FrontendController extends Controller
     //      return view('Frontend.notice.notice_details', $data);
     //  }
 
+    
      public function noticePdfDownload(Request $request,$id)
      {
         $notice = Notice::findOrFail($id);
