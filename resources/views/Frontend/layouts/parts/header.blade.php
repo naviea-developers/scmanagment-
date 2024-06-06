@@ -351,7 +351,7 @@
             @php
             $student = App\Models\Admission::where('user_id', auth()->user()->id)->first();
             @endphp
-            
+
             <li class="nav-item dropdown dmenu dropdown-user">
                 <a class="nav-link dropdown-toggle" href="#" id="user" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -419,7 +419,7 @@
                             class="dropdown-item"><i class="far fa-user"></i>Profile</a>
                         <a href="{{ route('user.notification', auth()->user()->id) }}"
                             class="dropdown-item"><i class="fas fa-clipboard-list"></i>Notifications</a>
-                            @if (auth()->user()->type == 1)
+                            {{-- @if (auth()->user()->type == 1)
                             <a href="{{ route('user.application_order_list', auth()->user()->id) }}"
                                 class="dropdown-item"><i class="far fa-user"></i>Your Applications</a>
                             @endif
@@ -434,7 +434,7 @@
                                             class="dropdown-item"><i class="far fa-user"></i>All Applications</a> 
                                 @endif
 
-                            @endif
+                            @endif --}}
                         <a href="{{ route('user.logout') }}"
                             class="dropdown-item"><i class="typcn typcn-key-outline"></i> Sign Out</a>
                         <!-- // #8a8a8a -->
