@@ -17,6 +17,7 @@ use App\Models\Ebook;
 use App\Models\Event;
 use App\Models\Floor;
 use App\Models\Group;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use App\Models\Order;
@@ -65,6 +66,7 @@ class BackendController extends Controller
       $today['total_subject'] = Subject::whereDate('created_at', Carbon::today())->count();
       $today['total_daily_class'] = DailyClass::whereDate('created_at', Carbon::today())->count();
       $today['total_library_book'] = Book::whereDate('created_at', Carbon::today())->count();
+      $today['total_notice'] = Notice::whereDate('created_at', Carbon::today())->count();
       $today['total_ebook'] = Ebook::whereDate('created_at', Carbon::today())->count();
       $today['total_subscriber'] = Subscriber::whereDate('created_at', Carbon::today())->count();
       $today['total_testimonial'] = Testimonial::whereDate('created_at', Carbon::today())->count();
@@ -90,6 +92,7 @@ class BackendController extends Controller
       $week['total_subject'] = Subject::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
       $week['total_daily_class'] = DailyClass::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
       $week['total_library_book'] = Book::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+      $week['total_notice'] = Notice::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
       // $week['total_customer'] = User::where('type', 1)->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
       $week['total_event'] = Event::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
       $week['total_blog'] = Blog::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
@@ -114,6 +117,7 @@ class BackendController extends Controller
       $month['total_subject'] = Subject::whereMonth('created_at', now()->month)->count();
       $month['total_daily_class'] = DailyClass::whereMonth('created_at', now()->month)->count();
       $month['total_library_book'] = Book::whereMonth('created_at', now()->month)->count();
+      $month['total_notice'] = Notice::whereMonth('created_at', now()->month)->count();
       // $month['total_customer'] = User::where('type', 1)->whereMonth('created_at', now()->month)->count();
       $month['total_event'] = Event::whereMonth('created_at', now()->month)->count();
       $month['total_blog'] = Blog::whereMonth('created_at', now()->month)->count();
@@ -138,6 +142,7 @@ class BackendController extends Controller
       $year['total_subject'] = Subject::whereYear('created_at', now()->year)->count();
       $year['total_daily_class'] = DailyClass::whereYear('created_at', now()->year)->count();
       $year['total_library_book'] = Book::whereYear('created_at', now()->year)->count();
+      $year['total_notice'] = Notice::whereYear('created_at', now()->year)->count();
       // $year['total_customer'] = User::where('type', 1)->whereYear('created_at', now()->year)->count();
       $year['total_event'] = Event::whereYear('created_at', now()->year)->count();
       $year['total_blog'] = Blog::whereYear('created_at', now()->year)->count();

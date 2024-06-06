@@ -461,11 +461,19 @@
               <div class="row">
                   {{-- @foreach ($founders as $founder) --}}
       
-      
+                    @php
+                    $student = App\Models\Admission::where('user_id', auth()->user()->id)->first();
+                    @endphp
+
                   <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-1">
                   <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
                     <div class="picture">
-                      <img class="img-fluid" src="{{ auth()->user()->image_show }}" alt="{{ auth()->user()->name }}"/>
+                        @if (auth()->user()->type == 1)
+                            <img class="img-fluid" src="{{ $student->image_show }}" alt="{{ $student->name }}"/>
+                        @else
+                            <img class="img-fluid" src="{{ auth()->user()->image_show }}" alt="{{ auth()->user()->name }}"/>
+                        @endif
+
                     </div>
                     <div class="team-content">
                       <h3 class="name" style="color: var(--text_color)"><b>{{ auth()->user()->name }}</b></h3>

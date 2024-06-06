@@ -87,242 +87,289 @@
               </div>
             </div>
 
+          
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                       Total Student
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_student'] }}
-                    </p>
+              <a href="{{ route('admin.school_student.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Student
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_student'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
-           
+          
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_teachers'] }}
-                    </p>
+              <a href="{{ route('admin.teacher.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Teacher
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_teachers'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Staff
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_staff'] }}
-                    </p>
+              <a href="{{ route('admin.staff.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Staff
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_staff'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_class'] }}
-                    </p>
+              <a href="{{ route('admin.class.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Section
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_section'] }}
-                    </p>
+              <a href="{{ route('admin.school_section.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Section
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_section'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
            
             
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Group
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_group'] }}
-                    </p>
+              <a href="{{ route('admin.group.index') }}">
+                <div class="bg-danger rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Group
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_group'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subject
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_subject'] }}
-                    </p>
+              <a href="{{ route('admin.subject.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subject
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_subject'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Daily Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_daily_class'] }}
-                    </p>
+              <a href="{{ route('admin.daily_class.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Daily Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_daily_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Library Book
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_library_book'] }}
-                    </p>
+              <a href="{{ route('admin.book.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Library Book
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_library_book'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total E-Books
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_ebook'] }}
-                    </p>
+              <a href="{{ route('admin.ebook.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total E-Books
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_ebook'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.notice.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Notice
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_notice'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Events
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_event'] }}
-                    </p>
+              <a href="{{ route('admin.event.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Events
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_event'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total News & Blog
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_blog'] }}
-                    </p>
+              <a href="{{ route('blog.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total News & Blog
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_blog'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                   <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_subscriber'] }}
-                    </p>
+              <a href="{{ route('admin.subscriber.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subscriber
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_subscriber'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Testimonial
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_testimonial'] }}
-                    </p>
+              <a href="{{ route('admin.manage_testimonial') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Testimonial
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $today['total_testimonial'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
@@ -383,239 +430,285 @@
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Student
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_student'] }}
-                    </p>
+              <a href="{{ route('admin.school_student.index') }}">
+                <div class="bg-warning rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Student
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_student'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_teachers'] }}
-                    </p>
+              <a href="{{ route('admin.teacher.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Teacher
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_teachers'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Staff
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_staff'] }}
-                    </p>
+              <a href="{{ route('admin.staff.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Staff
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_staff'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
            
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_class'] }}
-                    </p>
+              <a href="{{ route('admin.class.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Section
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_section'] }}
-                    </p>
+              <a href="{{ route('admin.school_section.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Section
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_section'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             
             
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Group
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_group'] }}
-                    </p>
+              <a href="{{ route('admin.group.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Group
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_group'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subject
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_subject'] }}
-                    </p>
+              <a href="{{ route('admin.subject.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subject
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_subject'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Daily Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_daily_class'] }}
-                    </p>
+              <a href="{{ route('admin.daily_class.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Daily Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_daily_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Library Book
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_library_book'] }}
-                    </p>
+              <a href="{{ route('admin.book.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Library Book
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_library_book'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total E-Books
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_ebook'] }}
-                    </p>
+              <a href="{{ route('admin.ebook.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total E-Books
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_ebook'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
-            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Events
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_event'] }}
-                    </p>
+              <a href="{{ route('admin.notice.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Notice
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_notice'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.event.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Events
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_event'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total News & Blog
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_blog'] }}
-                    </p>
+              <a href="{{ route('blog.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total News & Blog
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_blog'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                   <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_subscriber'] }}
-                    </p>
+              <a href="{{ route('admin.subscriber.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subscriber
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_subscriber'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Testimonial
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_testimonial'] }}
-                    </p>
+              <a href="{{ route('admin.manage_testimonial') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Testimonial
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $week['total_testimonial'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
@@ -676,242 +769,288 @@
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Student
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_student'] }}
-                    </p>
+              <a href="{{ route('admin.school_student.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Student
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_student'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_teachers'] }}
-                    </p>
+              <a href="{{ route('admin.teacher.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Teacher
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_teachers'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Staff
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_staff'] }}
-                    </p>
+              <a href="{{ route('admin.staff.index') }}">
+                <div class="bg-danger rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Staff
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_staff'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
 
             
 
               <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Class
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                        {{ $month['total_class'] }}
-                      </p>
+                <a href="{{ route('admin.class.index') }}">
+                  <div class="bg-secondary rounded overflow-hidden">
+                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                      <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                      <div class="mg-l-20">
+                        <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                          Total Class
+                        </p>
+                        <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                          {{ $month['total_class'] }}
+                        </p>
+                      </div>
                     </div>
+                    <div id="ch3" class="ht-50 tr-y-1"></div>
                   </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
+                </a>
               </div>
   
               <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Section
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                        {{ $month['total_section'] }}
-                      </p>
+                <a href="{{ route('admin.school_section.index') }}">
+                  <div class="bg-secondary rounded overflow-hidden">
+                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                      <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                      <div class="mg-l-20">
+                        <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                          Total Section
+                        </p>
+                        <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                          {{ $month['total_section'] }}
+                        </p>
+                      </div>
                     </div>
+                    <div id="ch3" class="ht-50 tr-y-1"></div>
                   </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
+                </a>
               </div>
 
          
            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Group
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_group'] }}
-                    </p>
+              <a href="{{ route('admin.group.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Group
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_group'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subject
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_subject'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Daily Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_daily_class'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Library Book
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_library_book'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total E-Books
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_ebook'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Events
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_event'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total News & Blog
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_blog'] }}
-                    </p>
+              <a href="{{ route('admin.subject.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subject
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_subject'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                   <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_subscriber'] }}
-                    </p>
+              <a href="{{ route('admin.daily_class.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Daily Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_daily_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Testimonial
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_testimonial'] }}
-                    </p>
+              <a href="{{ route('admin.book.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Library Book
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_library_book'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.ebook.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total E-Books
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_ebook'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.notice.index') }}">
+                <div class="bg-danger rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Notice
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_notice'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.event.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Events
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_event'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('blog.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total News & Blog
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_blog'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.subscriber.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subscriber
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_subscriber'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.manage_testimonial') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Testimonial
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_testimonial'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
             </div>
             {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
@@ -972,239 +1111,286 @@
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Student
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_student'] }}
-                    </p>
+              <a href="{{ route('admin.school_student.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Student
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_student'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
            
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_teachers'] }}
-                    </p>
+              <a href="{{ route('admin.teacher.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Teacher
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_teachers'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Staff
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_staff'] }}
-                    </p>
+              <a href="{{ route('admin.staff.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Staff
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_staff'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
            
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_class'] }}
-                    </p>
+              <a href="{{ route('admin.class.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_class'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Section
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_section'] }}
-                    </p>
+              <a href="{{ route('admin.school_section.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Section
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_section'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
            
             
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Group
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_group'] }}
-                    </p>
+              <a href="{{ route('admin.group.index') }}">
+                <div class="bg-danger rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Group
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_group'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subject
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_subject'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Daily Class
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_daily_class'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Library Book
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_library_book'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total E-Books
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_ebook'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
 
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.subject.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subject
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_subject'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.daily_class.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Daily Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_daily_class'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.book.index') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Library Book
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_library_book'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.ebook.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total E-Books
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_ebook'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <a href="{{ route('admin.notice.index') }}">
+                <div class="bg-dark rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Notice
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_notice'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </a>
+            </div>
             
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Events
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_event'] }}
-                    </p>
+              <a href="{{ route('admin.event.index') }}">
+                <div class="bg-info rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-clock tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Events
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_event'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total News & Blog
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_blog'] }}
-                    </p>
+              <a href="{{ route('blog.index') }}">
+                <div class="bg-primary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-earth tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total News & Blog
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_blog'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                   <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_subscriber'] }}
-                    </p>
+              <a href="{{ route('admin.subscriber.index') }}">
+                <div class="bg-success rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Subscriber
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_subscriber'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Testimonial
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_testimonial'] }}
-                    </p>
+              <a href="{{ route('admin.manage_testimonial') }}">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-document tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Testimonial
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $year['total_testimonial'] }}
+                      </p>
+                    </div>
                   </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
                 </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
+              </a>
             </div>
             {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
