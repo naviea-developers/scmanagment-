@@ -37,7 +37,7 @@
 </style>
 @endsection @section('main_contain')
 <div class="br-mainpanel">
-  {{--
+{{--   
   <div class="br-pagetitle">
     <i class="icon ion-ios-home-outline"></i>
     <div>
@@ -93,10 +93,116 @@
                   <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                       Total Orders
+                       Total Student
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_order'] }}
+                      {{ $today['total_student'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+           
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Teacher
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_teachers'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-dark rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Staff
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_staff'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Class
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_class'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Section
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_section'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+           
+            
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-danger rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Group
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_group'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-info rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Subject
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $today['total_subject'] }}
                     </p>
                   </div>
                 </div>
@@ -106,13 +212,13 @@
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-primary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total General Course
+                      Total Daily Class
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_general_course'] }}
+                      {{ $today['total_daily_class'] }}
                     </p>
                   </div>
                 </div>
@@ -122,20 +228,19 @@
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Master Course
+                      Total Library Book
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_master_course'] }}
+                      {{ $today['total_library_book'] }}
                     </p>
                   </div>
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
@@ -152,138 +257,8 @@
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Programs
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_programs'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Universities
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_universities'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Customer
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_customer'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_teacher'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Speakers
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_instructor'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Host
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_host'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Seller
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_seller'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Affiliate
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_affiliate'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
+            
+           
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
@@ -349,7 +324,7 @@
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
+            {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                   <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
@@ -380,242 +355,8 @@
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Diagnostic
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_diagnostic'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
             </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-checkmark-circled tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Patient Appointment
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_appointment'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Service Booking
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['service_booking'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-star tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Review & Ratings
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_review'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $today['total_subscriber'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-dark rounded overflow-hidden">
-                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                        <i class="ion-images tx-60 lh-0 tx-white op-7"></i>
-                        <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Total Blogs</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $today['total_blog'] }}</p>
-                        </div>
-                    </div>
-                    <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-             </div> --}}
-             {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="ion-ios-lightbulb tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Brands
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $today['total_brands'] }}</p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-email tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Message
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Employee
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-
-
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-notifications tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Notices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Services
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Offices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-cash tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Salary Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-walk tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Leave Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-home tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Departments
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-soup-can-outline tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Stock Out
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
+           
           </div>
         </div>
 
@@ -647,10 +388,99 @@
                   <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Orders
+                      Total Student
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_order'] }}
+                      {{ $week['total_student'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+           
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-dark rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Teacher
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_teachers'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-primary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Staff
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_staff'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+           
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Class
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_class'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Section
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_section'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            
+            
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-success rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Group
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_group'] }}
                     </p>
                   </div>
                 </div>
@@ -660,13 +490,13 @@
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total General Course
+                      Total Subject
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_general_course'] }}
+                      {{ $week['total_subject'] }}
                     </p>
                   </div>
                 </div>
@@ -674,22 +504,37 @@
               </div>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
+              <div class="bg-primary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Master Course
+                      Total Daily Class
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_master_course'] }}
+                      {{ $week['total_daily_class'] }}
                     </p>
                   </div>
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Library Book
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $week['total_library_book'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
@@ -707,136 +552,7 @@
               </div>
             </div>
 
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Programs
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_programs'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Universities
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_universities'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Customer
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_customer'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_teacher'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Speakers
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_instructor'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Host
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_host'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Seller
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_seller'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Affiliate
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_affiliate'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
+            
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
@@ -901,7 +617,7 @@
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
+            {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                   <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
@@ -932,241 +648,8 @@
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Diagnostic
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_diagnostic'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-checkmark-circled tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Patient Appointment
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_appointment'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Service Booking
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['service_booking'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-star tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Review & Ratings
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_review'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $week['total_subscriber'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-dark rounded overflow-hidden">
-                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                        <i class="ion-images tx-60 lh-0 tx-white op-7"></i>
-                        <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Total Blogs</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $week['total_blog'] }}</p>
-                        </div>
-                    </div>
-                    <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-             </div> --}}
-             {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="ion-ios-lightbulb tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Brands
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $week['total_brands'] }}</p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-email tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Message
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Employee
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
             </div> --}}
 
-
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-notifications tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Notices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Services
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Offices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-cash tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Salary Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-walk tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Leave Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-home tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Departments
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-soup-can-outline tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Stock Out
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
           </div>
         </div>
 
@@ -1198,10 +681,100 @@
                   <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Orders
+                      Total Student
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_order'] }}
+                      {{ $month['total_student'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+           
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Teacher
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $month['total_teachers'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-danger rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Staff
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $month['total_staff'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+
+            
+
+              <div class="col-sm-6 col-xl-3 mb-3">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Class
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_class'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </div>
+  
+              <div class="col-sm-6 col-xl-3 mb-3">
+                <div class="bg-secondary rounded overflow-hidden">
+                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                        Total Section
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                        {{ $month['total_section'] }}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="ch3" class="ht-50 tr-y-1"></div>
+                </div>
+              </div>
+
+         
+           
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-success rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Group
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $month['total_group'] }}
                     </p>
                   </div>
                 </div>
@@ -1211,13 +784,13 @@
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total General Course
+                      Total Subject
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_general_course'] }}
+                      {{ $month['total_subject'] }}
                     </p>
                   </div>
                 </div>
@@ -1225,15 +798,31 @@
               </div>
             </div>
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
+              <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Master Course
+                      Total Daily Class
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_master_course'] }}
+                      {{ $month['total_daily_class'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-primary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Library Book
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $month['total_library_book'] }}
                     </p>
                   </div>
                 </div>
@@ -1257,138 +846,7 @@
               </div>
             </div>
 
-              <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Programs
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                        {{ $month['total_programs'] }}
-                      </p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-  
-              <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Universities
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                        {{ $month['total_universities'] }}
-                      </p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-
-           
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Customer
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_customer'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_teacher'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Speakers
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_instructor'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Host
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_host'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Seller
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_seller'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Affiliate
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_affiliate'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
+            
 
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
@@ -1455,7 +913,7 @@
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
+            {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                   <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
@@ -1486,241 +944,8 @@
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
-            </div>
-           {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Diagnostic
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_diagnostic'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-checkmark-circled tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Patient Appointment
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_appointment'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Service Booking
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['service_booking'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-star tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Review & Ratings
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_review'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $month['total_subscriber'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-dark rounded overflow-hidden">
-                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                        <i class="ion-images tx-60 lh-0 tx-white op-7"></i>
-                        <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Total Blogs</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $month['total_blog'] }}</p>
-                        </div>
-                    </div>
-                    <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-             </div> --}}
-             {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="ion-ios-lightbulb tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Brands
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $month['total_brands'] }}</p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-email tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Message
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Employee
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
             </div> --}}
 
-
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-notifications tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Notices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Services
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Offices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-cash tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Salary Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-walk tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Leave Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-home tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Departments
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-soup-can-outline tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Stock Out
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
           </div>
         </div>
 
@@ -1752,26 +977,99 @@
                   <i class="ion-android-cart tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Order
+                      Total Student
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_order'] }}
+                      {{ $year['total_student'] }}
                     </p>
                   </div>
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
+           
             <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
+              <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                   <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total General Course
+                      Total Teacher
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_general_course'] }}
+                      {{ $year['total_teachers'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-dark rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Staff
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_staff'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+           
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Class
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_class'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Section
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_section'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+
+           
+            
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-danger rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Group
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_group'] }}
                     </p>
                   </div>
                 </div>
@@ -1781,13 +1079,45 @@
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
+                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Master Course
+                      Total Subject
                     </p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_master_course'] }}
+                      {{ $year['total_subject'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-primary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Daily Class
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_daily_class'] }}
+                    </p>
+                  </div>
+                </div>
+                <div id="ch3" class="ht-50 tr-y-1"></div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xl-3 mb-3">
+              <div class="bg-secondary rounded overflow-hidden">
+                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
+                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
+                      Total Library Book
+                    </p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
+                      {{ $year['total_library_book'] }}
                     </p>
                   </div>
                 </div>
@@ -1811,136 +1141,7 @@
               </div>
             </div>
 
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Programs
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_programs'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="icon ion-grid tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Universities
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_universities'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Customer
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_customer'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Teacher
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_teacher'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Speakers
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_instructor'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-contact tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Host
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_host'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Seller
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_seller'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person-add tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Affiliate
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_affiliate'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
+            
             <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-info rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
@@ -2005,7 +1206,7 @@
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
             </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
+            {{-- <div class="col-sm-6 col-xl-3 mb-3">
               <div class="bg-secondary rounded overflow-hidden">
                 <div class="pd-x-20 pd-t-20 d-flex align-items-center">
                   <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
@@ -2036,241 +1237,8 @@
                 </div>
                 <div id="ch3" class="ht-50 tr-y-1"></div>
               </div>
-            </div>
-           {{--<div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Diagnostic
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_diagnostic'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
             </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-secondary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-checkmark-circled tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Patient Appointment
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_appointment'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Service Booking
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['service_booking'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-star tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Review & Ratings
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_review'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-ios-heart tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Subscriber
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">
-                      {{ $year['total_subscriber'] }}
-                    </p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-dark rounded overflow-hidden">
-                    <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                        <i class="ion-images tx-60 lh-0 tx-white op-7"></i>
-                        <div class="mg-l-20">
-                            <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">Total Blogs</p>
-                            <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $year['total_blog'] }}</p>
-                        </div>
-                    </div>
-                    <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-             </div> --}}
-             {{-- <div class="col-sm-6 col-xl-3 mb-3">
-                <div class="bg-secondary rounded overflow-hidden">
-                  <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                    <i class="ion-ios-lightbulb tx-60 lh-0 tx-white op-7"></i>
-                    <div class="mg-l-20">
-                      <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                        Total Brands
-                      </p>
-                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">{{ $year['total_brands'] }}</p>
-                    </div>
-                  </div>
-                  <div id="ch3" class="ht-50 tr-y-1"></div>
-                </div>
-              </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-primary rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-email tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Message
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-person tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Employee
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-
-
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-info rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-notifications tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Notices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-dark rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-paper-airplane tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Services
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-briefcase tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Offices
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-danger rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-cash tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Salary Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-success rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-android-walk tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Employee Leave Data
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-home tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Departments
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-3 mb-3">
-              <div class="bg-warning rounded overflow-hidden">
-                <div class="pd-x-20 pd-t-20 d-flex align-items-center">
-                  <i class="ion-soup-can-outline tx-60 lh-0 tx-white op-7"></i>
-                  <div class="mg-l-20">
-                    <p class="tx-10 tx-spacing-1 tx-mont tx-semibold tx-uppercase tx-white-8 mg-b-10">
-                      Total Stock Out
-                    </p>
-                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-0 lh-1">0</p>
-                  </div>
-                </div>
-                <div id="ch3" class="ht-50 tr-y-1"></div>
-              </div>
-            </div> --}}
+           
           </div>
         </div>
       </div>
