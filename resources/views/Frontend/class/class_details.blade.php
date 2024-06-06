@@ -359,7 +359,7 @@
 
             @if ($class->count() >0)
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger overview_txt" href="#gargent_policy">Gargent Policy</a>
+                    <a class="nav-link js-scroll-trigger overview_txt" href="#gargent_policy">Guardian Policy</a>
                 </li>
             @endif
 
@@ -464,7 +464,7 @@
                                 <div class="col-md-10">
                                     <div class="section-header  position-relative ">
                                         <h4 class="h5 about_this_ebook" style="color: var(--text_color)">
-                                            Gargent Policy
+                                            Guardian Policy
                                         </h4>
                                     </div>
 

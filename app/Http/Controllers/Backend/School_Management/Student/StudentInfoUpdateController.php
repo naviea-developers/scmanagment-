@@ -18,7 +18,7 @@ class StudentInfoUpdateController extends Controller
     public function index()
     {
         $data['students'] = StudentInfoUpdate::all();
-        return view('Backend.School_management.student.update_student.index', $data);
+        return view('Backend.school_management.student.update_student.index', $data);
     }
     public function edit($id)
     {
@@ -27,7 +27,7 @@ class StudentInfoUpdateController extends Controller
         $data['countries'] = Country::where('status', 1)->get();
         $data['states'] = State::where('status', 1)->get();
         $data['cities'] = City::where('status', 1)->get();
-        return view('Backend.School_management.student.update_student.update', $data);
+        return view('Backend.school_management.student.update_student.update', $data);
     }
 
     public function update(Request $request, $id)
@@ -49,10 +49,6 @@ class StudentInfoUpdateController extends Controller
         $user->nid = $request->student_nid;
         $user->dob = $request->dob;
         $user->address = $request->present_address;
-        if($data->image) {
-            @unlink(public_path('upload/users/'.$user->image));
-            $user->image = $data->image;
-        }
         $user->save();
 
         $student = Admission::find($student_id);
@@ -113,7 +109,7 @@ class StudentInfoUpdateController extends Controller
     public function destroy(Request $request)
     {
         $student =  StudentInfoUpdate::find($request->student_id);
-        @unlink(public_path('upload/admission/'.$student->image));
+        // @unlink(public_path('upload/admission/'.$student->image));
         $student->delete();
         return back()->with('message','Admin Deleted Successfully');
     }

@@ -337,7 +337,7 @@
             </ul>
         </li>
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebookaudio')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">E-Book Audio</span>
@@ -352,9 +352,9 @@
                 </li>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebookvideo')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">E-Book Video</span>
@@ -369,7 +369,7 @@
                 </li>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
         {{-- <li class="br-menu-item">
@@ -858,8 +858,8 @@
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.manage_testimonial') }}" class="sub-link {{(Route::is('admin.manage_testimonial') || Route::is('admin.edit_testimonial')) ?'active':''}}">Manage Testimonials</a>
                 </li>
-                <li class="sub-item"><a href="{{ route('admin.review.index') }}" class="sub-link {{(Route::is('admin.review.index') || Route::is('admin.review.edit')) ?'active':''}}">Manage Review</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.review.index') }}" class="sub-link {{(Route::is('admin.review.index') || Route::is('admin.review.edit')) ?'active':''}}">Manage Review</a>
+                </li> --}}
 
             </ul>
         </li><!-- br-Teacher-item -->

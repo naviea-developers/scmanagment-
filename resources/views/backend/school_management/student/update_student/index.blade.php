@@ -65,8 +65,12 @@ Admin - Student Info Update List
                             @endif
                           </td>
                           <td>
-                            <a class="btn text-info" href="{{ route('admin.student_info_update.edit', $student->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                            <button class="btn text-danger bg-white"  value="{{$student->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            @if ($student->status == 0)
+                              <a class="btn text-info" href="{{ route('admin.student_info_update.edit', $student->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                              <button class="btn text-danger bg-white"  value="{{$student->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            @else
+                              <button class="btn text-danger bg-white"  value="{{$student->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            @endif
                           </td>
                       </tr> 
                     @endforeach

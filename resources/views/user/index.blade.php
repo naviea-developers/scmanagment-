@@ -36,7 +36,7 @@
 
 
                     @if (auth()->user()->type == 1)
-                        <img src="{{ auth()->user()->image_show }}" alt="student-image">
+                        <img src="{{ $student->image_show }}" alt="student-image">
                     @else
                     <form action="{{ route('update.user.profile.pic', auth()->user()->id) }}" method="post" enctype="multipart/form-data" id="userForm" style="margin-top:0%">
                         @csrf
