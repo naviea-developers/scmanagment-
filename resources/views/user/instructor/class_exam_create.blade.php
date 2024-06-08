@@ -1,32 +1,28 @@
 @extends('user.layouts.master-layout')
 
-@section('title','- Add New Course')
+@section('title','- Add Class Exam')
 @section('head')
-<link href="{{asset('public/backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+<link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
+<style>
+</style>
 @endsection
+
 @section('main_content')
 
-  <!-- ########## START: MAIN PANEL ########## -->
-  <div class="br-mainpanel p-4">
-    
-
+<div class="br-mainpanel p-4">
     <div class="br-pagebody card shadow p-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
-      <div class="br-section-wrapper">
-        <h5 class="br-section-label text-center mb-4"> Add Class Exam</h5>
-         <p  class="br-section-label text-center mb-1">Add Class Exam For Students</p>
-        <hr>
-
-        @if(count($errors) > 0)
-        @foreach($errors->all() as $error)
+        <div class="br-section-wrapper">
+            <h5 class="br-section-label text-center mb-4"> Add Class Exam For Students</h5>
+            <hr>
+            @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
-        @endforeach
-        @endif
+            @endforeach
+            @endif
 
-        {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-            {{session()->get('message')}}
+                {{ session()->get('message') }}
             </div>
             <script>
                 setTimeout(function(){
@@ -34,127 +30,220 @@
                 }, 3000);
             </script>
             @endif
-        {{-- success message start --}}
 
+            <div class="col-xl-12 mx-auto">
+                <div class="form-layout form-layout-4">
+                    <form action="{{ route('instructor.class_exam.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
 
-        <!----- Start Add Product Form input ------->
-        <div class="col-xl-12 mx-auto">
-            <div class="form-layout form-layout-4">
+                        <div class="row mt-4">
+                            <div class="col-sm-4">
+                                <label class="form-control-label"><b>Title: </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Enter title" required>
+                                </div>
+                            </div>
 
-                <form action="{{ route('instructor.class_exam.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row mt-4">
-                        <div class="col-sm-4">
-                            <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <select class="form-control" name="class_id">
-                                    <option value="">Select class</option>
-                                    @foreach ($classs as $class)                                   
+                            <div class="col-sm-4">
+                                <label class="form-control-label"><b>Session Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select name="session_id" class="form-control form-select select2">
+                                        <option value=""> Select Session</option>
+                                        @foreach ($sessions as $session)
+                                        <option @if ($session->is_current=='1') Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="form-control-label"><b>Class Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="class_ass" class="form-control form-select select2" name="class_id">
+                                        <option value="">Select Class</option>
+                                        @foreach ($classs as $class)
                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
-                                    @endforeach
-                                </select>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Section Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="section" class="form-control form-select select2" name="section_id">
+                                        <option value="">Select section</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Subject Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="subject" class="form-control form-select select2" name="subject_id">
+                                        <option value="">Select subject</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Lesson Name :</b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <select id="lession" class="form-control form-select select2" name="lession_id">
+                                        <option value="">Select lesson</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Page: </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="text" name="page_number" value="{{ old('page_number') }}" class="form-control" placeholder="Enter Page" required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Pdf File: </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="file" name="class_exampdf" value="{{ old('class_exampdf') }}" class="form-control" accept="application/pdf, application/vnd.ms-excel" placeholder="Enter home_work pdf">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Class Test Date :</b></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="date" name="date" value="{{ old('date') }}" class="form-control" placeholder="enter class test date">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Class Test Duration :</b></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <input type="time" name="class_test_duration" value="{{ old('class_test_duration') }}" class="form-control" placeholder="enter class test duration">
+                                </div>
                             </div>
                         </div>
-                        
-                        {{-- <div class="col-sm-4">
-                            <label class="form-control-label"><b>Examination Name :</b></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <select class="form-control" name="exam_id">
-                                    <option value="">Select Exam</option>
-                                    @foreach ($exams as $exam)                                   
-                                        <option value="{{ $exam->id }}">{{ $exam->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
-                        
 
-                        <div class="col-sm-4">
-                            <label class="form-control-label"><b>Subject :</b></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <select class="form-control" name="subject_id">
-                                    <option value="">Select Subject</option>
-                                    @foreach ($subjects as $subject)                                   
-                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="row mt-4">
+                            <div class="col-sm-12">
+                                <label class="form-control-label"><b>Details </b><span class="tx-danger">*</span></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <textarea class="form-control" id="summernote_two" name="details">{{ old('details') }}</textarea>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
-                            <label class="form-control-label"><b>Class Test Duration :</b></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <input type="time" name="class_test_duration" value="{{ old('class_test_duration') }}" class="form-control" placeholder="enter class test duration">
+                        <div class="row mt-3">
+                            <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
+                                <a href="{{ route('instructor.class_exam.index') }}" type="button" class="btn btn-secondary text-white mr-2">Cancel</a>
+                                <button type="submit" class="btn btn-info">Save</button>
                             </div>
                         </div>
+                    </form>
 
-
-                        <div class="col-sm-4 mt-3">
-                            <label class="form-control-label"><b>Homework Image :</b></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <input type="file" name="image" value="{{ old('image') }}" class="form-control" placeholder="enter image">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- Course Contents End--}}
-                
-                    <div class="row mt-4">
-                        <div class="col-sm-12">
-                            <label class="form-control-label"><b>Details : </b><span class="tx-danger">*</span></label>
-                            <div class="mg-t-10 mg-sm-t-0">
-                                <textarea class="form-control" id="summernote_two" name="details">{{ old('details') }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                      <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
-                        <a href="{{route('instructor.class_exam.index')}}" type="button" class="btn btn-secondary text-white mr-2" >Close</a>
-                        <button type="submit" class="btn btn-info ">Save</button>
-                      </div>
-                    </div>
-                </form>
-
-            </div><!-- form-layout -->
-        </div><!-- col-6 -->
-        <!----- Start Add Category Form input ------->
-      </div><!-- br-section-wrapper -->
-    </div><!-- br-pagebody -->
-
-</div><!-- br-mainpanel -->
-<!-- ########## END: MAIN PANEL ########## -->
-  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @section('script')
-<script src="{{asset('public/backend')}}/lib/summernote/summernote-bs4.min.js"></script>
 
-<!--- Start Summernote Editor Js ---->
 <script>
+   $(document).ready(function() {
+    $('#class_ass').change(function() {
+        var classId = $(this).val();
+        if (classId) {
+            $.ajax({
+                url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    class_id: classId
+                },
+                success: function(data) {
+                    $('#section').empty().append('<option value="">Select section</option>');
+                    $.each(data.sections, function(key, section) {
+                        $('#section').append('<option value="' + section.id + '">' + section.name + '</option>');
+                    });
 
-    $(document).ready(function() {
-        /*** summernote editor one ***/
-        $('#summernote').summernote({
-            height: 150
-        })
-        /*** summernote editor two ***/
-        $('#summernote_two').summernote({
-            height: 150
-        })
-
-        $('#summernote_three').summernote({
-            height: 150
-        })
-        $('#summernote_four').summernote({
-            height: 150
-        })
-
+                    $('#subject').empty().append('<option value="">Select subject</option>');
+                    $.each(data.subjects, function(key, subject) {
+                        $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            $('#section').empty().append('<option value="">Select section</option>');
+            $('#subject').empty().append('<option value="">Select subject</option>');
+        }
     });
 
-    </script>
-<!--- End Summernote Editor Js ---->
+    $('#section').change(function() {
+        var sectionId = $(this).val();
+        var classId = $('#class_ass').val();
+        if (sectionId) {
+            $.ajax({
+                url: '{{ route('instructor.homework.sectionsSubjects') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    class_id: classId,
+                    section_id: sectionId
+                },
+                success: function(data) {
+                    $('#subject').empty().append('<option value="">Select subject</option>');
+                    $.each(data.subjects, function(key, subject) {
+                        $('#subject').append('<option value="' + subject.id + '">' + subject.name + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            $('#subject').empty().append('<option value="">Select subject</option>');
+        }
+    });
+});
+</script>
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -10,7 +10,7 @@
             <div class="row">
 
                 <div class="col-md-9">
-                    <h3 id="gallery-title">Gallery</h3>
+                    <h3 id="gallery-title" style="color: var(--text_color)">Gallery</h3>
                     <hr>
                     <div class="row g-3 show-gallery-data" id="gallery-content">
                         @foreach ($gallerys as $key=>$gallery)
@@ -63,8 +63,8 @@
                     </div>
                     @endif
                 </div>
-                <div class="col-md-3">
-                    <h3>Related Topics</h3>
+                <div class="col-md-3" style="color: var(--text_color)">
+                    <h3 style="color: var(--text_color)">Related Topics</h3>
                     <hr>
                     <div class="page-sidebar-list">
                         <ul class="list-group">                                                                                                                                                                                                                                                                                                                                                                                                   

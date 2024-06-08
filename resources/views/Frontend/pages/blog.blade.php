@@ -24,7 +24,7 @@
 						{{ @$banner->title }}						
 						</h2>
                         <h6 class="position-relative" style="z-index:2; color: var(--header_text_color)">
-						{!! @$banner->details !!}						</h6>
+						{!! @$banner->details !!}</h6>
 					    </div>
 					</div>
 					<!--End Category Banner-->

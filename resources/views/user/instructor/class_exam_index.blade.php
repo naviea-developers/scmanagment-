@@ -30,10 +30,14 @@
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
             <th scope="col">Class Name</th>
+            <th scope="col">Section</th>
             <th scope="col">Subject Name</th>
-            <th scope="col">Class Test IMAGE</th>
+            {{-- <th scope="col">Class Test IMAGE</th> --}}
+            <th scope="col">Class Test Date</th>
             <th scope="col">Class Test Duration</th>
-            <th scope="col">DETAILS</th>
+
+            {{-- <th scope="col">DETAILS</th> --}}
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -46,14 +50,20 @@
 
             <tr>
             <td>{{ $i++ }}</td>
-            <td>{{  $class_test->class->name }}</td>
-            <td>{{  $class_test->subject->name }}</td>
-            
-            <td>
-                <img src="{{$class_test->image_show}}" alt="" width="60px" height="40px" srcset="">
-            </td>
+            <td>{{  @$class_test->class->name }}</td>
+            <td>{{  @$class_test->schoolsection->name }}</td>
+            <td>{{  @$class_test->subject->name }}</td>
+            <td>{{date('d,F,Y',strtotime(@$class_test->date))}}</td>
+            {{-- <td><img src="{{$class_test->image_show}}" alt="" width="60px" height="40px" srcset=""></td> --}}
             <td>{{date('h:i:A',strtotime(@$class_test->class_test_duration))}}</td>
-            <td>{{  $class_test->details }}</td>
+            <td>
+                @if(@$class_test->status == 0)
+                <a href="{{ route('instructor.class_exam.status',$class_test->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                @elseif(@$class_test->status == 1)
+                <a href="{{ route('instructor.class_exam.status',@$class_test->id) }}" class="btn btn-sm btn-success">Active</a>
+                @endif
+            </td>
+            {{-- <td>{{  @$class_test->details }}</td> --}}
             <td>
                 <a href="{{ route('instructor.class_exam.edit', $class_test->id ) }}"><i class="fa-duotone fa fa-edit"></i></a>
                 &nbsp;
@@ -62,8 +72,6 @@
                 <button class="btn text-danger delete-button" courseId="{{ $class_test->id }}"><i class="icon fa fa-trash tx-28"></i></button>
             </td>
             </tr>
-
-
             <!--_-- ########### Start Delete Category MODAL ############---->
 
             <div id="delete-modal"  class="modal">

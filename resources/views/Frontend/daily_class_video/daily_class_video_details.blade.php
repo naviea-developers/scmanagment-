@@ -247,9 +247,9 @@
                    @if (@$dailyClasses->count() >0)
                         <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="video">
                             <div class="card-body p-4 p-xl-5">
-                                <div class="text-center"><h4 class=""> <b>Class Video List!</b></h4></div>
+                                <div class="text-center" style="color:var(--text_color)"><h4 class=""> <b>Class Video List!</b></h4></div>
 
-                                <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+                                <div class="col-md-12 mt-5 mb-5" style="color:var(--text_color); border: 1px solid; padding: 10px">
                                     <div class="row">
                                     <div class="col-md-4">
                                         <label class=" form-control-label"><b>Subject Video Search:</b></label>
@@ -281,7 +281,7 @@
 
                                                 <div class="accordion course-content_accordion--sub get-daily-class-search-video_show daily-class-video-show-more" id="accordionPanelsStayOpenExample">
                                                     @foreach ($dailyClasses as $k=> $item)
-                                                        <div class="accordion-item border-0">
+                                                        <div class="accordion-item border-0" >
                                                             <div class="d-flex mb-3 mb-md-2 mb-lg-3">
                                                                 <span> &nbsp;</span>
                                                                 <div class="flex-shrink-1 me-3 me-md-2 me-lg-3">
@@ -291,17 +291,17 @@
                                                                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                                                         <button class="accordion-button fs-13 text-muted fw-normal pt-1 pb-0 px-0 collapsed" type="button">
 
-                                                                            <a href="javascript:void(0)">
+                                                                            <a href="javascript:void(0)" style="color:var(--text_color)">
                                                                                 Teacher Name :{{ @$item->teacher->name }},
                                                                                 Subject :{{ @$item->subject->name }},
                                                                                 Lession :{{ @$item->lession->name }},
                                                                                 Page Number :{{ @$item->page_number }}
                                                                             </a>
-                                                                            <span class="course-duration ms-auto">
+                                                                            <span class="course-duration ms-auto" style="color:var(--text_color)">
                                                                                 @if (@$item->sub_banner=='1')
                                                                                     <a  data-toggle="modal" data-target="#videoModal{{ $k }}"><u> Play</u> &nbsp;</a>
                                                                                 @elseif (@$item->sub_banner=='2')
-                                                                                    <a class="course-card__hover--content___icon popup-youtube"  href="{{ @$item->video_url }}" autoplay><u style="margin-left: 893px;"> Play</u> &nbsp;</a>
+                                                                                    <a class="course-card__hover--content___icon popup-youtube"  href="{{ @$item->video_url }}" autoplay><u style="color:var(--text_color); margin-left: 893px;"> Play</u> &nbsp;</a>
                                                                                 @endif                               
                                                                             </span>
                                                                         </button>

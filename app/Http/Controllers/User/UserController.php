@@ -24,6 +24,7 @@ use App\Models\ClassDuration;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\ClassRoutineItem;
+use App\Models\ClassTestExam;
 use App\Models\Continent;
 use App\Models\Country;
 use App\Models\StudentApplication;
@@ -1016,6 +1017,40 @@ class UserController extends Controller
     {
         $data['details'] = HomeWork::find($id);
         return view('user.student.homework.details', $data);
+    }
+
+    public function studentClassExam()
+    {
+        $user = auth()->user()->id;
+        $admission = Admission::where('user_id', $user)->first();
+        $data['session']=$currentSession = Session::where('is_current', 1)->first();
+        // $data = $admission->session_id;
+        // dd($data);
+        $data['class_tests'] = ClassTestExam::where('class_id', $admission->class_id)
+                                        // ->where('session_id', $admission->session_id)
+                                        ->where('session_id',$currentSession->id)
+                                        ->orderBy('id','desc')
+                                        ->where('status', 1)->get();
+        return view('user.student.class_test.index', $data);
+    }
+
+    public function studentClassExamDetails($id)
+    {
+        $data['details'] = ClassTestExam::find($id);
+        return view('user.student.class_test.details', $data);
+    }
+
+    public function studentClassExamPdfDownload(Request $request,$id)
+    {
+        // dd('hi');
+       $class_test = ClassTestExam::findOrFail($id);
+       if ($class_test->class_exampdf) {
+           $filePath = public_path('upload/class_test_exam/'.$class_test->class_exampdf);
+           if (file_exists($filePath)) {
+               return response()->download($filePath, $class_test->class_exampdf);
+           }
+       }
+       return redirect()->back();
     }
 
 

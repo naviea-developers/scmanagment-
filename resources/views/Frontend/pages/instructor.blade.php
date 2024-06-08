@@ -172,14 +172,14 @@
 			</div>
 			<div class="row">
 				@foreach (@$designation->user_designations as $teacher)
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3" >
 						<div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
 						<div class="picture">
 							<img style="height: 131px;" class="img-fluid" src="{{ @$teacher->image_show }}">
 						</div>
 						<div class="team-content">
-							<h3 class="name">{{ @$teacher->name }}</h3>
-							<h4 class="title">{{ @$designation->name }}</h4>
+							<h3 class="name" style="color: var(--text_color)">{{ @$teacher->name }}</h3>
+							<h4 class="title" style="color: var(--text_color)">{{ @$designation->name }}</h4>
 						</div>
 						<ul class="social">
 							<li><a href="{{ @$teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
