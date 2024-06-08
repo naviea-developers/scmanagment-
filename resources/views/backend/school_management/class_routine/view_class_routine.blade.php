@@ -189,8 +189,8 @@
 
     </div>
     
-    @else
+@else
     <div class="text-center">
       <h2>Data Not Found !</h2>
   </div>
-  @endif
+@endif
