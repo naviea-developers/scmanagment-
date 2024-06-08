@@ -685,6 +685,12 @@ class FrontendController extends Controller
         $data['home_content'] = HomeContentSetup::first();
         return view('Frontend.pages.subscribe_details', $data);
     }
+    public function topperStudent()
+    {
+        $data['toppers'] = TopperStudent::where('status', 1)->get();
+        return view('Frontend.pages.topper_student', $data);
+    }
+
 
 
     // -------------------------------==============

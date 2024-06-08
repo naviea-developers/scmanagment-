@@ -719,6 +719,44 @@
                 @endif
 
                 @if (@$class->teacherAssents->count() >0)
+
+
+
+                <style>
+                    .teacher-details img {
+                        border-radius: 50%;
+                        max-width: 150px;
+                        margin-bottom: 20px;
+                    }
+                    .teacher-details h3 {
+                        margin-top: 10px;
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                    .teacher-details h4 {
+                        font-size: 20px;
+                        color: rgb(14, 13, 13);
+                        margin-bottom: 20px;
+                    }
+                    .teacher-details .social {
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    .teacher-details .social li {
+                        margin: 0 10px;
+                    }
+                    .teacher-details .social a {
+                        color: var(--text_color);
+                        font-size: 24px;
+                    }
+                    .teacher-details .social a:hover {
+                        color: var(--hover_color);
+                    }
+                </style>
+
+
                     <!--Start card-->
                     <div class="card border-0 rounded-0 shadow-sm mb-3 page-section" id="teacher">
                         <div class="card-body p-4 p-xl-5">
@@ -735,17 +773,19 @@
                             <div style="text-align: justify; color:var(--text_color)" class="text_ellipse2 mb-2 moreText">
                                 <div class="container">
                                     <div class="row">
-                                        @foreach ( @$class->teacherAssents as $teacherAssent)
+                                        @foreach ( @$class->teacherAssents as $k=> $teacherAssent)
                                             <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-                                                <div class="our-team" data-toggle="modal" data-id="6" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(6)">
-                                                <div class="picture">
-                                                    <img style="height: 131px;" class="img-fluid" src="{{ @$teacherAssent->teacher->image_show }}">
-                                                </div>
-                                                <div class="team-content">
-                                                    <h3 class="name">{{ @$teacherAssent->teacher->name }}</h3>
-                                                    <h4 class="title">{{ @$teacherAssent->teacher->user_designation->name }}</h4>
-                                                    <h4 class="title">Subject:- {{ @$teacherAssent->subject->name }}</h4>
-                                                </div>
+                                                <div class="our-team">
+                                                    <div data-toggle="modal" data-target="#teacherModal{{ $k }}">
+                                                        <div class="picture">
+                                                            <img style="height: 131px;" class="img-fluid" src="{{ @$teacherAssent->teacher->image_show }}">
+                                                        </div>
+                                                        <div class="team-content">
+                                                            <h3 class="name">{{ @$teacherAssent->teacher->name }}</h3>
+                                                            <h4 class="title">{{ @$teacherAssent->teacher->user_designation->name }}</h4>
+                                                            <h4 class="title">Subject:- {{ @$teacherAssent->subject->name }}</h4>
+                                                        </div>
+                                                    </div>
                                                 <ul class="social">
                                                     <li><a href="{{ @$teacherAssent->teacher->facebook_id }}" class="fab fa-facebook" aria-hidden="true"></a></li>
                                                     <li><a href="{{ @$teacherAssent->teacher->twitter_id }}" class="fab fa-twitter" aria-hidden="true"></a></li>
@@ -754,6 +794,43 @@
                                                 </ul>
                                                 </div>
                                             </div>
+
+
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="teacherModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="teacherModalLabel{{ $k }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="background: var(--menu_color)">
+                                                                <h5 class="modal-title" id="teacherModalLabel{{ $k }}" style="color: white">Teacher Details</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="card">
+                                                                    <div class="card-body text-center">
+                                                                        <div class="teacher-details">
+                                                                            <img class="img-fluid" src="{{  @$teacherAssent->teacher->image_show }}" alt="Teacher Image">
+                                                                            <h3>{{  @$teacherAssent->teacher->name }}</h3>
+                                                                            <h4><b>{{  @$teacherAssent->teacher->user_designation->name }}</b></h4>
+                                                                            <h4>{!!  @$teacherAssent->teacher->description !!}</h4>
+                                                                            <ul class="social">
+                                                                                <li><a href="{{ @$teacherAssent->teacher->facebook_id }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
+                                                                                <li><a href="{{ @$teacherAssent->teacher->twitter_id }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
+                                                                                <li><a href="{{ @$teacherAssent->teacher->google_id }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                                                                                <li><a href="{{ @$teacherAssent->teacher->instagram_id }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                         @endforeach                       
                                     </div>
                                 </div>
