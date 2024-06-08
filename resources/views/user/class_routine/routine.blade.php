@@ -66,7 +66,6 @@
                                 $classDurations[] = $data->classDuration->name;
                             }
                         }
-                
                         sort($classDurations);
                     @endphp
                 
@@ -111,8 +110,8 @@
     </div>
 
 @else
-<div class="passwodBox" style="background-color: #07477D; padding:20px; border:1px; color:white">
-  <h5 class="text-center">Class routine not available right now.</h5>
-</div>
+  <div class="passwodBox" style="background-color: var(--seller_frontend_color); padding:20px; border:1px; color:var(--seller_text_color)">
+    <h5 class="text-center">Class routine not available right now.</h5>
+  </div>
 @endif
 @endsection
