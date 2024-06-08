@@ -110,6 +110,7 @@ Route::get('/learner', [FrontendController::class, 'learner'])->name('frontend.l
 //Instructor Page Route
 Route::get('/instructor', [FrontendController::class, 'instructor'])->name('frontend.instructor');
 Route::get('/topper-student-list', [FrontendController::class, 'topperStudent'])->name('frontend.topper_student');
+Route::get('/topper-details', [FrontendController::class, 'topperStudentDetails'])->name('topper.details');
 
 //Enterprise or Contact Page Route
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');

@@ -15,7 +15,7 @@ Admin - All Founder & Co-founder
                {{-- success message start --}}
             @if(session()->has('message'))
             <div class="alert alert-success">
-            <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button>
+            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
             {{session()->get('message')}}
             </div>
             <script>
