@@ -335,7 +335,7 @@
     <!-- Founder and CEO -->
     <div class="container">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Founder</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->founder_title }}</h3>
         </div>
         <div class="row">
             @foreach ($founders as $k=> $founder)
@@ -424,7 +424,7 @@
 <!--Start  Blog Content-->
 <div class="py-0 mt-3 pt-lg-220" style="padding-top: 0px !important;">
     <div class="container-lg">
-        <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Blog</h3>
+        <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->blog_title }}</h3>
         <div class="row g-3 blog_cat_ajax-show blog_topic_ajax-show blog_sort_by_ajax-show" id="alldata">
             @foreach ($blogs as $blog)
             <div class="col-xl-3 col-md-6" >
@@ -544,7 +544,7 @@
 <section class="ourteam-section">
     <div class="container mt-5">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Our Teachers</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->teacher_title }}</h3>
         </div>
         <div class="row">
             @foreach ($teachers as $k => $teacher)
@@ -700,7 +700,7 @@
     <!-- Toppers -->
     <div class="container">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Topper Student</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->topper_title }}</h3>
         </div>
         <div class="row">
             @foreach ($toppers as $topper)

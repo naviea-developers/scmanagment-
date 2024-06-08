@@ -191,6 +191,11 @@ Route::post('home-content-package-update', [HomeContentController::class,'setPac
 Route::post('home-content-question-update', [HomeContentController::class,'setQuestionSection'])->name('backend.home_question_section.update');
 Route::post('home-content-register-update', [HomeContentController::class,'setRegisterSection'])->name('backend.home_register_section.update');
 
+Route::post('home-content-founder-update', [HomeContentController::class,'setFounderSection'])->name('backend.home_founder_section.update');
+Route::post('home-content-blog-update', [HomeContentController::class,'setBlogSection'])->name('backend.home_blog_section.update');
+Route::post('home-content-teacher-update', [HomeContentController::class,'setTeacherSection'])->name('backend.home_teacher_section.update');
+Route::post('home-content-topper-update', [HomeContentController::class,'setTopperSection'])->name('backend.home_topper_section.update');
+
 
 
 

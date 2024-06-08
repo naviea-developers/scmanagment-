@@ -4375,7 +4375,7 @@ padding: 2px 4px;
 .our-team .picture::before {
 	content: "";
 	width: 100%;
-	height: 0;
+	height: 100%;
 	border-radius: 50%;
 	/* background-color: #1369ce; */
 	background-color: var(--header_color);

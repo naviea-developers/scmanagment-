@@ -306,6 +306,46 @@ class HomeContentController extends Controller
         $home_content->save();
         return redirect()->back()->with('message', 'Media Partner Section Update successfully, Thank You.');
     }
+    public function setFounderSection(Request $request)
+    {
+        $home_content = HomeContentSetup::first();
+        if($home_content == null){
+            $home_content = New HomeContentSetup;
+        }
+        $home_content->founder_title=$request->founder_title;
+        $home_content->save();
+        return redirect()->back()->with('message', 'Founder Section Update successfully, Thank You.');
+    }
+    public function setBlogSection(Request $request)
+    {
+        $home_content = HomeContentSetup::first();
+        if($home_content == null){
+            $home_content = New HomeContentSetup;
+        }
+        $home_content->blog_title=$request->blog_title;
+        $home_content->save();
+        return redirect()->back()->with('message', 'Blog Section Update successfully, Thank You.');
+    }
+    public function setTeacherSection(Request $request)
+    {
+        $home_content = HomeContentSetup::first();
+        if($home_content == null){
+            $home_content = New HomeContentSetup;
+        }
+        $home_content->teacher_title=$request->teacher_title;
+        $home_content->save();
+        return redirect()->back()->with('message', 'Teacher Section Update successfully, Thank You.');
+    }
+    public function setTopperSection(Request $request)
+    {
+        $home_content = HomeContentSetup::first();
+        if($home_content == null){
+            $home_content = New HomeContentSetup;
+        }
+        $home_content->topper_title=$request->topper_title;
+        $home_content->save();
+        return redirect()->back()->with('message', 'Topper Section Update successfully, Thank You.');
+    }
 
     public function setCountingSection(Request $request)
     {

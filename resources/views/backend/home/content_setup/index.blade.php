@@ -384,7 +384,7 @@ form label{
                          
 
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                             <div class="card-header" data-toggle="collapse" data-target="#collapseContent_university">
                               <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> University Section</h5>
                             </div>
@@ -424,10 +424,10 @@ form label{
                                   </div>
                               </form>
                               </div>
-                        </div>
+                        </div> --}}
 
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_2">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Sub Banner Section</h5>
                           </div>
@@ -479,10 +479,11 @@ form label{
                                 </div>
                             </form>
                             </div>
-                          </div>
+                        </div> --}}
                       
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_3">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Course Section</h5>
                           </div>
@@ -508,9 +509,9 @@ form label{
                                 </form>
                             </div>
                           </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_4">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Partner Section</h5>
                           </div>
@@ -535,9 +536,9 @@ form label{
                                 </form>
                             </div>
                           </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_5">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Learn Anything Section</h5>
                           </div>
@@ -637,9 +638,161 @@ form label{
                             </div>
                         </form>
                           </div>
-                        </div>
+                        </div> --}}
+
+
+
 
                         <div class="card card-body bg-light col-md-12 mt-3">
+                            <div class="card-header" data-toggle="collapse" data-target="#collapseContent_founder">
+                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Founder Section</h5>
+                            </div>
+                            <div class="collapse" id="collapseContent_founder">
+                              <div class="card-body">
+                                  <form action="{{ route('backend.home_founder_section.update') }}" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 ">
+                                              <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
+                                              <div class="mg-t-10 mg-sm-t-0">
+                                              <input type="text" value="{{ $home_content->founder_title }}" name="founder_title" class="form-control" placeholder="Enter Title 1">
+                                              </div>
+                                          </div>
+                                      </div><!-- row -->
+  
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
+                                          <button type="submit" class="btn btn-info ">Save</button>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+
+
+                          <div class="card card-body bg-light col-md-12 mt-3">
+                            <div class="card-header" data-toggle="collapse" data-target="#collapseContent_blog">
+                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Blog Section</h5>
+                            </div>
+                            <div class="collapse" id="collapseContent_blog">
+                              <div class="card-body">
+                                  <form action="{{ route('backend.home_blog_section.update') }}" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 ">
+                                              <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
+                                              <div class="mg-t-10 mg-sm-t-0">
+                                              <input type="text" value="{{ $home_content->blog_title }}" name="blog_title" class="form-control" placeholder="Enter Title 1">
+                                              </div>
+                                          </div>
+                                      </div><!-- row -->
+  
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
+                                          <button type="submit" class="btn btn-info ">Save</button>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+                          <div class="card card-body bg-light col-md-12 mt-3">
+                            <div class="card-header" data-toggle="collapse" data-target="#collapseContent_teacher">
+                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Teacher Section</h5>
+                            </div>
+                            <div class="collapse" id="collapseContent_teacher">
+                              <div class="card-body">
+                                  <form action="{{ route('backend.home_teacher_section.update') }}" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 ">
+                                              <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
+                                              <div class="mg-t-10 mg-sm-t-0">
+                                              <input type="text" value="{{ $home_content->teacher_title }}" name="teacher_title" class="form-control" placeholder="Enter Title 1">
+                                              </div>
+                                          </div>
+                                      </div><!-- row -->
+  
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
+                                          <button type="submit" class="btn btn-info ">Save</button>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+
+
+                          <div class="card card-body bg-light col-md-12 mt-3">
+                            <div class="card-header" data-toggle="collapse" data-target="#collapseContent_topper">
+                              <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Topper Student Section</h5>
+                            </div>
+                            <div class="collapse" id="collapseContent_topper">
+                              <div class="card-body">
+                                  <form action="{{ route('backend.home_topper_section.update') }}" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 ">
+                                              <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
+                                              <div class="mg-t-10 mg-sm-t-0">
+                                              <input type="text" value="{{ $home_content->topper_title }}" name="topper_title" class="form-control" placeholder="Enter Title 1">
+                                              </div>
+                                          </div>
+                                      </div><!-- row -->
+  
+                                      <div class="row mt-4">
+                                          <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
+                                          <button type="submit" class="btn btn-info ">Save</button>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_6">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Media Partner Section</h5>
                           </div>
@@ -664,7 +817,7 @@ form label{
                                 </form>
                             </div>
                           </div>
-                        </div>
+                        </div> --}}
 
                         <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_7">
@@ -778,7 +931,7 @@ form label{
                           </div>
                         </div>
 
-                        <div class="card card-body bg-light col-md-12 mt-3">
+                        {{-- <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_9">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Package Section</h5>
                           </div>
@@ -821,9 +974,10 @@ form label{
                                 </div>
                             </form>
                             </div>
-                          </div>
+                        </div> --}}
                         
 
+                        
                         <div class="card card-body bg-light col-md-12 mt-3">
                           <div class="card-header" data-toggle="collapse" data-target="#collapseContent_10">
                             <h5 class="card-title"><i class="fa fa-solid fa-plus"></i> Question Section</h5>
@@ -879,7 +1033,7 @@ form label{
                                 </div>
                             </form>
                             </div>
-                          </div>
+                        </div>
                        
 
                         <div class="card card-body bg-light col-md-12 mt-3">
