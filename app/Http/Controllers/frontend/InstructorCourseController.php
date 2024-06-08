@@ -1302,6 +1302,29 @@ class InstructorCourseController extends Controller
 	}  
 
 
+    // public function getTeacherAssentResult(Request $request)
+    // {
+    //     $examinationId = $request->input('examination_id');
+    //     $classId = $request->input('class_id');
+    //     $sectionId = $request->input('section_id');
+    //     $sessionId = $request->input('session_id');
+    //     $subjectId = $request->input('subject_id');
+    //     // return response()->json(['examination_id' => $examinationId,'classId' => $classId,'sectionId' => $sectionId,'subject_id' => $subjectId,'sessionId' => $sessionId]);
+    //     if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
+    //         $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
+    //         $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+    //         $data['examResult']= ExamResult::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+    //     }
+    //     // elseif( $classId && $sessionId && $examinationId && $subjectId){
+    //     //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
+    //     //     $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
+    //     // }
+        
+    //     return view('user.instructor.student_show',$data);
+    // }
+
+
+
     public function getTeacherAssentResult(Request $request)
     {
         $examinationId = $request->input('examination_id');
@@ -1309,67 +1332,74 @@ class InstructorCourseController extends Controller
         $sectionId = $request->input('section_id');
         $sessionId = $request->input('session_id');
         $subjectId = $request->input('subject_id');
-        // return response()->json(['examination_id' => $examinationId,'classId' => $classId,'sectionId' => $sectionId,'subject_id' => $subjectId,'sessionId' => $sessionId]);
-        if( $classId && $sectionId && $sessionId && $examinationId && $subjectId){
-            $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
-            $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-            $data['examResult']= ExamResult::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-        }
-        // elseif( $classId && $sessionId && $examinationId && $subjectId){
-        //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
-        //     $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-        // }
 
-        // if( $classId && $sectionId && $sessionId){
-        //     $data['students']=$students = Admission::where('class_id',$classId)->where('section_id', $sectionId)->where('session_id', $sessionId)->get();
-        // }elseif( $classId && $sessionId ){
-        //     $data['students']=$students = Admission::where('class_id',$classId)->where('session_id', $sessionId)->get();
-        //     $data['Examclass']= ExamClass::where('examination_id',$examinationId)->where("class_id",$classId)->where('subject_id',$subjectId)->first();
-        // }
-        
-        return view('user.instructor.student_show',$data);
+        if ($classId && $sectionId && $sessionId && $examinationId && $subjectId) {
+            $data['students'] = $students = Admission::where('class_id', $classId)
+                ->where('section_id', $sectionId)
+                ->where('session_id', $sessionId)
+                ->get();
+            
+            $data['Examclass'] = $examClass = ExamClass::where('examination_id', $examinationId)
+                ->where('class_id', $classId)
+                ->where('subject_id', $subjectId)
+                ->first();
+
+            $studentIds = $students->pluck('id');
+            $data['examResults'] = ExamResult::where('examination_id', $examinationId)
+                ->whereIn('student_id', $studentIds)
+                ->where('subject_id', $subjectId)
+                ->get()
+                ->keyBy('student_id');
+        }
+
+        return view('user.instructor.student_show', $data);
     }
 
 
     public function storeStudentResult(Request $request)
     {
-        // $marks = $request->input('marks');
-        //  dd($request->all());
         $request->validate([
-            'obtained_marke' => 'required',
+            'obtained_marke' => 'required|array',
+            'obtained_marke.*' => 'required|numeric|min:0', 
         ]);
 
-        try{
+        try {
             DB::beginTransaction();
 
-        // Loop through each student's data
-        foreach ($request->obtained_marke as $studentId => $marks) {
-            $examResult = new ExamResult();
-            $examResult->student_id = $studentId;
-            $examResult->obtained_marke = $marks;
-           
-            $examResult->roll_number =  $request->roll_number[$studentId] ?? 0;
-            // $examResult->student_name = $request->student_name[$studentId];
-            // $examResult->father_name = $request->father_name[$studentId];
-            $examResult->class_id = $request->class_id[$studentId] ?? 0;
-            $examResult->session_id = $request->session_id[$studentId] ?? 0;
-            $examResult->section_id =$request->section_id[$studentId] ?? 0;
-            $examResult->subject_id =$request->subject_id[$studentId] ?? 0;
-            $examResult->academic_year_id = $request->academic_year_id[$studentId] ?? 0;
-            $examResult->marke = $request->marke[$studentId] ?? 0;
-            $examResult->pass_marke = $request->pass_marke[$studentId] ?? 0;
-            $examResult->examination_id = $request->examination_id[$studentId] ?? 0;
-            $examResult->exam_class_id = $request->exam_class_id[$studentId] ?? 0;
-            $examResult->teacher_id = auth()->user()->id;
-            $examResult->is_publis = '0';
-            $examResult->save();
-        }
+            foreach ($request->obtained_marke as $studentId => $marks) {
+                $examResult = ExamResult::where('student_id', $studentId)
+                    ->where('examination_id', $request->examination_id[$studentId])
+                    ->where('subject_id', $request->subject_id[$studentId])
+                    ->first();
+
+                if ($examResult) {
+                    $examResult->obtained_marke = $marks;
+                } else {
+                    $examResult = new ExamResult();
+                    $examResult->student_id = $studentId;
+                    $examResult->obtained_marke = $marks;
+                    $examResult->roll_number = $request->roll_number[$studentId] ?? 0;
+                    $examResult->class_id = $request->class_id[$studentId] ?? 0;
+                    $examResult->session_id = $request->session_id[$studentId] ?? 0;
+                    $examResult->section_id = $request->section_id[$studentId] ?? 0;
+                    $examResult->subject_id = $request->subject_id[$studentId] ?? 0;
+                    $examResult->academic_year_id = $request->academic_year_id[$studentId] ?? 0;
+                    $examResult->marke = $request->marke[$studentId] ?? 0;
+                    $examResult->pass_marke = $request->pass_marke[$studentId] ?? 0;
+                    $examResult->examination_id = $request->examination_id[$studentId] ?? 0;
+                    $examResult->exam_class_id = $request->exam_class_id[$studentId] ?? 0;
+                    $examResult->teacher_id = auth()->user()->id;
+                    $examResult->is_publis = '0';
+                }
+
+                $examResult->save();
+            }
+
             DB::commit();
-            return redirect()->route('instructor.exam_result.index')->with('message','Exam Result Add Successfully');
-        }catch(\Exception $e){
+            return redirect()->route('instructor.exam_result.index')->with('message', 'Exam Result Add/Updated Successfully');
+        } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+            return back()->with('error_message', $e->getMessage());
         }
     }
    // Result Exam end
@@ -1401,16 +1431,16 @@ class InstructorCourseController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
 
         $data['teacherAssents'] = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
-        ->where('status', 1)
-        ->orderBy('id', 'desc')
-        ->get();
+                                                        ->where('status', 1)
+                                                        ->orderBy('id', 'desc')
+                                                        ->get();
 
         $classIds = $data['teacherAssents']->pluck('class_id')->unique();
 
         $data['classes'] = Classe::whereIn('id', $classIds)
-        ->where('status', 1)
-        ->orderBy('id', 'desc')
-        ->get();
+                                    ->where('status', 1)
+                                    ->orderBy('id', 'desc')
+                                    ->get();
         return view("user.instructor.daily_class_create",$data);
     }
 

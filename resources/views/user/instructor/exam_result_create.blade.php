@@ -11,8 +11,8 @@
     </div>
 </div>
 
-<form action="{{ route('instructor.student_result_store') }}" method="post" enctype="multipart/form-data">
-    @csrf    
+{{-- <form action="{{ route('instructor.student_result_store') }}" method="post" enctype="multipart/form-data">
+    @csrf     --}}
     <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
         <div class="row">
 
@@ -95,8 +95,8 @@
         </div>
     </div>
     <button type="submit" class="btn btn-success btn-sm p:2px">Result Generate</button> --}}
-    <button type="submit" class="btn btn-success btn-sm p:2px">Result Submit</button> 
-</form>
+    {{-- <button type="submit" class="btn btn-success btn-sm p:2px">Result Submit</button> 
+</form> --}}
 
 @endsection
 

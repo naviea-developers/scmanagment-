@@ -194,12 +194,12 @@ class UserController extends Controller
                                                 ->where('session_id', $student->session_id)
                                                 ->where('is_publis', '1')
                                                 ->orderBy('id', 'desc')
-                                                ->with('examination') // Eager load the examination relationship
+                                                ->with('examination') 
                                                 ->get(); 
-            // Group the exam results by examination name
+
             $groupedResults = $examResults->groupBy('examination.name');
 
-            // Filter the groups to include only the first result for each examination name
+
             $data['uniqueResults']= $uniqueResults = $groupedResults->map(function ($group) {
                 return $group->first();
             });                                                               
