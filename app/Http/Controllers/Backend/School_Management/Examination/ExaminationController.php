@@ -115,7 +115,6 @@ class ExaminationController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $exam =  Examination::find($request->examination_id);
         $exam->delete();
         return back()->with('message','Examination Deleted Successfully');
@@ -146,7 +145,6 @@ class ExaminationController extends Controller
         return redirect()->back()->with('message','Exam Results Publish Successfully');
 
     }
-
 
     // public function publish()
     // {
