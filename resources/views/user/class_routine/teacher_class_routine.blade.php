@@ -32,7 +32,7 @@
 
 @if ($class_routine->isNotEmpty())
 
-    <div class="passwodBox mb-3" style="background-color: #07477D; color:white">
+    <div class="passwodBox mb-3" style="background-color:var(--seller_frontend_color); color:var(--seller_text_color)">
         <di class="col-md-12">
             <div class="row">
 

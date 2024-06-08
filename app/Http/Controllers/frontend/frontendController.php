@@ -884,11 +884,11 @@ class FrontendController extends Controller
         if(isset(request()->class_name)){
             $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
             $data["classes"] = Classe::withCount('dailyClasses')->where('status',1)->where('name','like','%'.request()->class_name.'%')->paginate();
-            $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+            $data['banner']= Banner::where('type','daily_class')->where('status',1)->orderBy('id','desc')->first();
         }else{
             $data['classes']= Classe::withCount('dailyClasses')->where('status',1)->orderBy('id','asc')->paginate(8);
             $data['classLists']= Classe::where('status',1)->orderBy('id','asc')->get();
-            $data['banner']= Banner::where('type','e-video')->where('status',1)->orderBy('id','desc')->first();
+            $data['banner']= Banner::where('type','daily_class')->where('status',1)->orderBy('id','desc')->first();
         }
         return view('Frontend.daily_class_video.daily_class_list', $data);
      }

@@ -74,7 +74,7 @@
                             {{-- <option @if ($menu->url == 'maestro-class') Selected @endif value="maestro-class">master course page</option> --}}
                             <option @if ($menu->url == 'e-book-list') Selected @endif value="e-book-list">e-book</option>
                             <option @if ($menu->url == 'e-book-audio-list') Selected @endif value="e-book-audio-list">e-book-audio</option>
-                            <option @if ($menu->url == 'daily-class-video-list') Selected @endif value="daily-class-video-list">daily-class-video-list</option>
+                            <option @if ($menu->url == 'daily-class-video-page') Selected @endif value="daily-class-video-page">daily-class-video-page</option>
                             <option @if ($menu->url == 'gallery-list') Selected @endif value="gallery-list">gallery</option>
                             <option @if ($menu->url == 'notice-list') Selected @endif value="notice-list">Notice</option>
                             {{-- <option @if ($menu->url == 'course_list') Selected @endif value="course_list">admission</option> --}}

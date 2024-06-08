@@ -261,7 +261,7 @@ Route::get('/ebook-category-audio-show-ajax/{id}',[FrontendController::class,"ge
 
 
 // Daily Class Video start
-Route::get('/daily-class-video-list', [FrontendController::class, 'dailyClass'])->name('frontend.daily_class_video_list');
+Route::get('/daily-class-video-page', [FrontendController::class, 'dailyClass'])->name('frontend.daily_class_video_list');
 Route::get('/get-daily-class-list',[FrontendController::class,"getDailyClassShowMore"]);
 Route::get('/daily-class-video-details/{id}', [FrontendController::class, 'dailyClassVideoDetails'])->name('frontend.daily_class_video_details');
 Route::get('/daily_class_video_search', [FrontendController::class, 'getDailyClassVideoSearch'])->name('get.daily_class_video_search');
