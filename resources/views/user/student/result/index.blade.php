@@ -8,42 +8,45 @@
     </div>
 </div>
 
-<div style="overflow-x:auto;">
-    <table  class="table table-striped mt-3" style="min-width: 800px;">
-        <thead >
-        <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
-            <th scope="col">SL</th>
-            <th scope="col">Exam</th>
-            <th scope="col">Print</th>
-        </tr>
-        </thead>
-        <tbody>
-            @php
-                $i = 1;
-            @endphp
-            @if (count($uniqueResults) > 0)
-            @foreach ($uniqueResults as $examResult)
-                <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ @$examResult->examination->name }}</td>
-                    <td> 
-                        <a href="{{ route('student.exam_result_marksheet_print',@$examResult->examination->id) }}" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                            <i class="fas fa-print text-primary"></i> 
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-            @endif
+@if ($uniqueResults->isNotEmpty())
+    <div style="overflow-x:auto;">
+        <table  class="table table-striped mt-3" style="min-width: 800px;">
+            <thead >
+            <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
+                <th scope="col">SL</th>
+                <th scope="col">Exam</th>
+                <th scope="col">Print</th>
+            </tr>
+            </thead>
+            <tbody>
+                @php
+                    $i = 1;
+                @endphp
+                @if (count($uniqueResults) > 0)
+                @foreach ($uniqueResults as $examResult)
+                    <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ @$examResult->examination->name }}</td>
+                        <td> 
+                            <a href="{{ route('student.exam_result_marksheet_print',@$examResult->examination->id) }}" target="_blank" class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
+                                <i class="fas fa-print text-primary"></i> 
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                @endif
 
-            {{-- @foreach($uniqueResults as $result)
-            <p>Examination Name: {{ $result->examination->name }}</p>
-            <!-- Display other exam result details as needed -->
-            @endforeach --}}
+                {{-- @foreach($uniqueResults as $result)
+                <p>Examination Name: {{ $result->examination->name }}</p>
+                <!-- Display other exam result details as needed -->
+                @endforeach --}}
 
-        </tbody>
-  </table>
-</div>
-
+            </tbody>
+    </table>
+    </div>
+ @else
+    <h5 class="text-center" style="color:var(--seller_text_color)">Exam Result not available right now.</h5>
+@endif
 
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 {{-- <script src="script.js"></script> --}}

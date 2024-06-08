@@ -25,12 +25,12 @@
             {{-- <span style="color: white">Confirm Code.</span> --}}
         </div>
     </div>
-    <div class="passwodBox mb-3" style="background-color:var(--seller_frontend_color); color:var(--seller_text_color)">
+    <div class="passwodBox mb-3" style="background-color:var(--seller_background_color); color:var(--seller_text_color)">
         <di class="col-md-12">
             <div class="row">
                 @foreach ($notices as $notice)
                     <div class="col-md-4 mt-3">
-                        <div class="card card-body" style="height: 100%">
+                        <div class="card card-body" style="background-color:var(--seller_frontend_color);height: 100%">
                             <a href="{{ route('frontend.notice_list') }}" style="color:var(--seller_text_color)">
                                 <p class="text-center"><b>{{ $notice->noticeType->name }}</b></p>
                                 <h5 class="mb-3">Title: {{ $notice->name }}</h5>
