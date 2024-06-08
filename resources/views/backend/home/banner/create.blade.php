@@ -79,7 +79,7 @@
                                     <option value="contact">Contact</option>
                                     <option value="ebook">Ebook</option>
                                     <option value="e-audio">E_Audio</option>
-                                    <option value="e-video">E_Video</option>
+                                    <option value="daily_class">Daily_Class</option>
 
                                 </select>
                             </div>

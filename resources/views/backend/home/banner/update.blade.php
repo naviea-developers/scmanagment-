@@ -85,7 +85,7 @@
                                     <option @if($banner->type == 'contact')  Selected @endif value="contact">Contact</option>
                                     <option @if($banner->type == 'ebook')  Selected @endif value="ebook">Ebook</option>
                                     <option @if($banner->type == 'e-audio')  Selected @endif value="e-audio">E_Audio</option>
-                                    <option @if($banner->type == 'e-video')  Selected @endif value="e-video">E_Video</option>
+                                    <option @if($banner->type == 'daily_class')  Selected @endif value="daily_class">Daily_Class</option>
                                 </select>
                             </div>
                         </div><!-- row -->
