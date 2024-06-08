@@ -94,6 +94,10 @@ class StaffController extends Controller
 
             $user->save();
 
+            // Generate a unique ID in the format TYYYYMMDD(user_id)
+            $uniqueId = 'S' . date('Y') . $user->id;
+            $user->unique_id = $uniqueId;
+            $user->save();
 
             //add certificate file
         if($request->certificates_file){
@@ -205,7 +209,10 @@ class StaffController extends Controller
         }
         $user->save();
 
-
+        // Generate a unique ID in the format TYYYYMMDD(user_id)
+        $uniqueId = 'S' . date('Y') . $user->id;
+        $user->unique_id = $uniqueId;
+        $user->save();
         
         //add certificate file
         if($request->certificates_file){

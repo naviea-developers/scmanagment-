@@ -63,6 +63,7 @@ class AdmissionController extends Controller
                 $user->name = $request->student_name;
                 $user->email = $request->student_email;
                 $user->mobile = $request->student_phone;
+                $user->gender = $request->gender;
                 $user->type = 1;
                 $user->is_admission = 1;
                 $user->password = $request->password;
@@ -112,6 +113,7 @@ class AdmissionController extends Controller
             $admission->student_phone = $request->student_phone;
             $admission->student_email = $request->student_email;
             $admission->student_nid = $request->student_nid;
+            $admission->gender = $request->gender;
 
             $admission->father_name = $request->father_name;
             $admission->father_occupation = $request->father_occupation;
@@ -152,6 +154,18 @@ class AdmissionController extends Controller
             $admission->pre_school_address = $request->pre_school_address;
 
             $admission->save();
+
+            // Generate a unique ID in the format TYYYYMMDD(user_id)
+
+            $user->unique_id = $admission->student_id_number;
+            $user->save();
+
+
+
+
+
+
+
 
 
 
@@ -252,6 +266,7 @@ class AdmissionController extends Controller
                 $user->name = $request->student_name;
                 $user->email = $request->student_email;
                 $user->mobile = $request->student_phone;
+                $user->gender = $request->gender;
                 $user->type = 1;
                 $user->is_admission = 1;
                 $user->password = $request->password;
@@ -273,6 +288,7 @@ class AdmissionController extends Controller
             $admission->student_phone = $request->student_phone;
             $admission->student_email = $request->student_email;
             $admission->student_nid = $request->student_nid;
+            $admission->gender = $request->gender;
 
             $admission->father_name = $request->father_name;
             $admission->father_occupation = $request->father_occupation;
@@ -316,6 +332,7 @@ class AdmissionController extends Controller
             $user->email = $request->student_email;
             $user->mobile = $request->student_phone;
             $user->dob = $request->dob;
+            $user->gender = $request->gender;
             $user->nid = $request->student_nid;
             $user->save();
 

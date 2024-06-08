@@ -129,7 +129,15 @@
                               <div class="mg-t-10 mg-sm-t-0">
                               <input type="date" name="dob" class="form-control" placeholder="Enter Student Age" value="{{ old('dob') }}" required>
                               </div>
-                          </div>
+                          </div> 
+                          <div class="col-sm-4 mt-3">
+                            <label class=" form-control-label">Gender:</label>
+                            <select  class="form-control" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option  value="0">Male</option>
+                                <option  value="1">Female</option>
+                            </select>
+                        </div>
                           <div class="col-sm-4 mt-3">
                               <label class="form-control-label">Student Phone: <span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">

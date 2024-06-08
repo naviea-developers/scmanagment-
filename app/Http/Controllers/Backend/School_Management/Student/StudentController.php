@@ -221,6 +221,7 @@ class StudentController extends Controller
             $student->student_phone = $request->student_phone;
             $student->student_email = $request->student_email;
             $student->student_nid = $request->student_nid;
+            $student->gender = $request->gender;
 
             $student->father_name = $request->father_name;
             $student->father_occupation = $request->father_occupation;
@@ -261,6 +262,10 @@ class StudentController extends Controller
             $student->pre_school_address = $request->pre_school_address;
 
             $student->save();
+
+            //user unique id
+            $user->unique_id = $student->student_id_number;
+            $user->save();
 
     
         //add certificate file
@@ -372,51 +377,51 @@ class StudentController extends Controller
             $student->fee_id = $request->fee_id ?? 0;
             $student->student_name = $request->student_name;
             $student->dob = $request->dob;
+            $student->gender = $request->gender;
             $student->blood_group = $request->blood_group;
             $student->student_phone = $request->student_phone;
             $student->student_email = $request->student_email;
             $student->student_nid = $request->student_nid;
-
             $student->father_name = $request->father_name;
             $student->father_occupation = $request->father_occupation;
-           $student->father_phone = $request->father_phone;
-           $student->father_nid = $request->father_nid;
+            $student->father_phone = $request->father_phone;
+            $student->father_nid = $request->father_nid;
 
-           $student->mother_name = $request->mother_name;
-           $student->mother_occupation = $request->mother_occupation;
-           $student->mother_phone = $request->mother_phone;
+            $student->mother_name = $request->mother_name;
+            $student->mother_occupation = $request->mother_occupation;
+            $student->mother_phone = $request->mother_phone;
 
-           $student->yearly_income = $request->yearly_income;
+            $student->yearly_income = $request->yearly_income;
 
-            if ($request->hasFile('image')) {
-                $fileName = rand() . time() . '_student_image.' . request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/admission/'), $fileName);
-               $student->image = $fileName;
-            }
+                if ($request->hasFile('image')) {
+                    $fileName = rand() . time() . '_student_image.' . request()->image->getClientOriginalExtension();
+                    request()->image->move(public_path('upload/admission/'), $fileName);
+                $student->image = $fileName;
+                }
 
-           $student->present_continent_id = $request->present_continent_id ?? 0;
-           $student->present_country_id = $request->present_country_id ?? 0;
-           $student->present_state_id = $request->present_state_id ?? 0;
-           $student->present_city_id = $request->present_city_id ?? 0;
-           $student->present_address = $request->present_address;
+            $student->present_continent_id = $request->present_continent_id ?? 0;
+            $student->present_country_id = $request->present_country_id ?? 0;
+            $student->present_state_id = $request->present_state_id ?? 0;
+            $student->present_city_id = $request->present_city_id ?? 0;
+            $student->present_address = $request->present_address;
 
-           $student->permanent_continent_id = $request->permanent_continent_id ?? 0;
-           $student->permanent_country_id = $request->permanent_country_id ?? 0;
-           $student->permanent_state_id = $request->permanent_state_id ?? 0;
-           $student->permanent_city_id = $request->permanent_city_id ?? 0;
-           $student->parmanent_address = $request->parmanent_address;
+            $student->permanent_continent_id = $request->permanent_continent_id ?? 0;
+            $student->permanent_country_id = $request->permanent_country_id ?? 0;
+            $student->permanent_state_id = $request->permanent_state_id ?? 0;
+            $student->permanent_city_id = $request->permanent_city_id ?? 0;
+            $student->parmanent_address = $request->parmanent_address;
 
-           
-           $student->is_new = $request->is_new ?? 0;
+            
+            $student->is_new = $request->is_new ?? 0;
 
-           $student->pre_school = $request->pre_school ?? 0;
+            $student->pre_school = $request->pre_school ?? 0;
 
-           $student->pre_school_name = $request->pre_school_name;
-           $student->pre_class_id = $request->pre_class_id ?? 0;
-           $student->pre_roll_number = $request->pre_roll_number;
-           $student->pre_school_address = $request->pre_school_address;
+            $student->pre_school_name = $request->pre_school_name;
+            $student->pre_class_id = $request->pre_class_id ?? 0;
+            $student->pre_roll_number = $request->pre_roll_number;
+            $student->pre_school_address = $request->pre_school_address;
 
-           $student->save();
+            $student->save();
 
         //    $user = User::find($student->user_id);
         //    $user->name = $request->student_name;
@@ -426,6 +431,8 @@ class StudentController extends Controller
         //    $user->nid = $request->student_nid;
         //    $user->save();
 
+
+     
 
 
              //add certificate file

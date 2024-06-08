@@ -93,6 +93,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
+                                <label class="form-control-label"><b>Gender: </b></label>
+                                <div class="mg-t-10 mg-sm-t-0">
+                                    <p >@if ($details->gender=='0') Male
+                                        @elseif ($details->gender=='1') Female  @endif</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 mt-3">
                                 <label class="form-control-label"><b>Student Phone: </b></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <p >{{ @$details->student_phone }}</p>

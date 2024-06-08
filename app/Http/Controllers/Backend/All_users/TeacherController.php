@@ -96,6 +96,12 @@ class TeacherController extends Controller
             $user->save();
 
 
+            // Generate a unique ID in the format TYYYYMMDD(user_id)
+            $uniqueId = 'T' . date('Y') . $user->id;
+            $user->unique_id = $uniqueId;
+            $user->save();
+
+
             //add certificate file
         if($request->certificates_file){
             foreach( $request->certificates_file as $k=>$value){
@@ -206,6 +212,10 @@ class TeacherController extends Controller
         }
         $user->save();
 
+        // Generate a unique ID in the format TYYYYMMDD(user_id)
+        $uniqueId = 'T' . date('Y') . $user->id;
+        $user->unique_id = $uniqueId;
+        $user->save();
 
         
         //add certificate file
