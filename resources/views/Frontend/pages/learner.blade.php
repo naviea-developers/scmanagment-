@@ -51,7 +51,7 @@
 </style>
 <br><br><br>
 
-<section class="container">
+<section class="container" style="color:var(--text_color)">
     <h4 class="text-center mb-3 mt-3"><b>ALL STUDENTS</b></h4>
 
     <div class="col-md-12" style="border: 1px solid; padding: 10px">
@@ -112,7 +112,7 @@
     </div>
 </section>
 
-<section class="container py-5">
+<section class="container py-5" style="color:var(--text_color)">
     <div class="col-md-12">
         <div class="row" id="fetchAllStudents-container">
            @foreach ($students as $student)

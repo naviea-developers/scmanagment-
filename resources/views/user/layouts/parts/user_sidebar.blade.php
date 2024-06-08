@@ -42,6 +42,10 @@
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> Home work </span>
             </a>
+            <a href="{{ route('student.class_exam', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span> Class Test </span>
+            </a>
 
             <a href="{{ route('user.syllabus', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
@@ -63,36 +67,36 @@
                 <span> Exam Result </span> 
             </a>
 
-            <a href="{{ route('user.application_order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            {{-- <a href="{{ route('user.application_order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span> My Application List </span>
-            </a>
+            </a> --}}
 
-            <a href="{{ route('user.my_order', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            {{-- <a href="{{ route('user.my_order', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-book"></i>
                 <span> My Course List </span>
-            </a>
-            <a href="{{ route('user.order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            </a> --}}
+            {{-- <a href="{{ route('user.order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span> My Order List </span>
-            </a>
+            </a> --}}
             {{-- <a href="{{ route('user.my_course', auth()->user()->id) }}" class="contentElementItem">
                 <i class="fa-solid fa-heart-circle-plus"></i>
                 <span> My Courses </span>
             </a> --}}
-            <a href="{{ route('user.my_event', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            {{-- <a href="{{ route('user.my_event', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span> My Events </span>
-            </a>
+            </a> --}}
 
             {{-- <a href="{{ route('user.my_package', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-cube"></i>
                 <span> My Package </span>
             </a> --}}
-            <a href="{{ route('user.wishlist', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+            {{-- <a href="{{ route('user.wishlist', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-heart-circle-plus"></i>
                 <span> Saved </span>
-            </a>
+            </a> --}}
             {{-- <a href="{{ route('user.logout') }}" class="contentElementItem" style="color: var(--button2_text_color)">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span> Logout </span>
@@ -129,19 +133,19 @@
                     <span> Notification </span>
                 </a> --}}
 
-                <a href="{{ route('instructor.add_course', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                {{-- <a href="{{ route('instructor.add_course', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-upload"></i>
                     <span> Add New Course </span>
-                </a>
-                <a href="{{ route('instructor.manage_course', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                </a> --}}
+                {{-- <a href="{{ route('instructor.manage_course', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-bars-progress"></i>
                     <span> Manage Courses </span>
-                </a>
+                </a> --}}
 
-                <a href="{{ route('user.my_order', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                {{-- <a href="{{ route('user.my_order', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-book"></i>
                     <span> My Course List </span>
-                </a>
+                </a> --}}
 
 
                 @if (auth()->user()->is_librarian == 1)
@@ -211,19 +215,19 @@
                     <span> Manage Exam Result </span>
                 </a>
 
-                <a href="{{ route('user.order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                {{-- <a href="{{ route('user.order_list', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span> My Order List </span>
-                </a>
+                </a> --}}
 
-                <a href="{{ route('user.wishlist', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                {{-- <a href="{{ route('user.wishlist', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     <span> Saved </span>
-                </a>
-                <a href="{{ route('frontend.manage_withdrawal', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
+                </a> --}}
+                {{-- <a href="{{ route('frontend.manage_withdrawal', auth()->user()->id) }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                      <span> Withdrawal </span>
-                 </a>
+                 </a> --}}
                 {{-- <a href="{{ route('user.logout') }}" class="contentElementItem" style="color: var(--button2_text_color)">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span> Logout </span>

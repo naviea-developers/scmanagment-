@@ -62,7 +62,7 @@
                                     <select name="session_id" class="form-control form-select select2">
                                         <option value=""> Select Session</option>
                                         @foreach ($sessions as $session)
-                                        <option value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
+                                        <option @if ($session->is_current=='1') Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
                                         @endforeach
                                     </select>
                                 </div>

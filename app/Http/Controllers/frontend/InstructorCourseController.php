@@ -758,7 +758,13 @@ class InstructorCourseController extends Controller
     public function indexHomeWork()
     {
          //dd('hi');
-        $data['home_works'] = HomeWork::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+         $data['session']=$currentSession = Session::where('is_current', 1)->first();
+         $data['home_works'] = HomeWork::where('teacher_id', auth()->user()->id)
+                                         ->where('session_id',$currentSession->id)
+                                         ->orderBy('id','desc')
+                                         ->get();
+        // $data['home_works'] = HomeWork::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+
         return view('user.instructor.home_worke_index', $data);
     }
 
@@ -919,6 +925,20 @@ class InstructorCourseController extends Controller
        }
        return redirect()->back();
     }
+
+    public function statusHomeWork($id)
+    {
+        $home_work = HomeWork::find($id);
+        if($home_work->status == 0)
+        {
+            $home_work->status = 1;
+        }elseif($home_work->status == 1)
+        {
+            $home_work->status = 0;
+        }
+        $home_work->update();
+        return redirect()->route('instructor.homework.index');
+    }
     // home work End
 
 
@@ -927,16 +947,33 @@ class InstructorCourseController extends Controller
     public function indexClassExam()
     {
         //dd('hi');
-        $data['class_tests'] = ClassTestExam::where('teacher_id', auth()->user()->id)->orderBy('id','desc')->get();
+        $data['session']=$currentSession = Session::where('is_current', 1)->first();
+        $data['class_tests'] = ClassTestExam::where('teacher_id', auth()->user()->id)
+                                        ->where('session_id',$currentSession->id)
+                                        ->orderBy('id','desc')
+                                        ->get();
+
         return view('user.instructor.class_exam_index', $data);
     }
 
     public function createClassExam()
     {
         //  dd('hi');
-        $data['classs']=Classe::orderBy('id', 'asc')->where('status', 1)->get(); 
-        $data['subjects']=Subject::orderBy('id', 'asc')->where('status', 1)->get();
-        $data['exams'] = Examination::orderBy('id', 'desc')->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+
+        $data['teacherAssents'] = SubjectTeacherAssent::where('teacher_id', auth()->user()->id)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        $classIds = $data['teacherAssents']->pluck('class_id')->unique();
+
+        $data['classs'] = Classe::whereIn('id', $classIds)
+        ->where('status', 1)
+        ->orderBy('id', 'desc')
+        ->get();
+
+
         return view('user.instructor.class_exam_create', $data);
     }
 
@@ -951,12 +988,18 @@ class InstructorCourseController extends Controller
             DB::beginTransaction();
             $class_test_exam = New ClassTestExam();
             $class_test_exam->teacher_id = auth()->user()->id;
+            $class_test_exam->name = $request->name;
             $class_test_exam->class_id = $request->class_id;
             $class_test_exam->subject_id = $request->subject_id;
-            if($request->hasFile('image')){
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/class_test_exam/'),$fileName);
-                $class_test_exam->image = $fileName;
+            $class_test_exam->section_id = $request->section_id;
+            $class_test_exam->session_id = $request->session_id;
+            $class_test_exam->lession_id = $request->lession_id;
+            $class_test_exam->page_number = $request->page_number;
+            $class_test_exam->date = $request->date;
+            if($request->hasFile('class_exampdf')){
+                $fileName = rand().time().'.'.request()->class_exampdf->getClientOriginalExtension();
+                request()->class_exampdf->move(public_path('upload/class_test_exam/'),$fileName);
+                $class_test_exam->class_exampdf = $fileName;
             }
             // $home_work->image = $request->image;
             $class_test_exam->class_test_duration = $request->class_test_duration;
@@ -974,9 +1017,14 @@ class InstructorCourseController extends Controller
     public function editClassExam(string $id)
     {
         // dd('hi');
-        $data["class_test"]= ClassTestExam::find($id);
-        $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
-        $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        $data["class_test"]=$class_test= ClassTestExam::find($id);
+        // $data['classs']=Classe::orderBy('id', 'desc')->where('status', 1)->get(); 
+        // $data['subjects']=Subject::orderBy('id', 'desc')->where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        $data['classs']=Classe::where('id',$class_test->class_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
+        $data['subjects']=Subject::where('id',$class_test->subject_id)->orderBy('id', 'desc')->where('status', 1)->get();
+        $data['lessions']=Lession::where('id',$class_test->lession_id)->orderBy('id', 'desc')->where('status', 1)->get();
+        $data['sections']=SchoolSection::where('id',$class_test->section_id)->orderBy('id', 'desc')->where('status', 1)->get(); 
         return view("user.instructor.class_exam_update",$data);
     }
 
@@ -991,13 +1039,19 @@ class InstructorCourseController extends Controller
             DB::beginTransaction();
             $class_test_exam = ClassTestExam::find($id);
             $class_test_exam->teacher_id = auth()->user()->id;
+            $class_test_exam->name = $request->name;
             $class_test_exam->class_id = $request->class_id;
             $class_test_exam->subject_id = $request->subject_id;
-            if($request->hasFile('image')){
-                @unlink(public_path("upload/class_test_exam/".$class_test_exam->image));
-                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-                request()->image->move(public_path('upload/class_test_exam/'),$fileName);
-                $class_test_exam->image = $fileName;
+            $class_test_exam->section_id = $request->section_id;
+            $class_test_exam->session_id = $request->session_id;
+            $class_test_exam->lession_id = $request->lession_id;
+            $class_test_exam->page_number = $request->page_number;
+            $class_test_exam->date = $request->date;
+            if($request->hasFile('class_exampdf')){
+                @unlink(public_path("upload/class_test_exam/".$class_test_exam->class_exampdf));
+                $fileName = rand().time().'.'.request()->class_exampdf->getClientOriginalExtension();
+                request()->class_exampdf->move(public_path('upload/class_test_exam/'),$fileName);
+                $class_test_exam->class_exampdf = $fileName;
             }
             $class_test_exam->details = $request->details;
             $class_test_exam->class_test_duration = $request->class_test_duration;
@@ -1017,9 +1071,24 @@ class InstructorCourseController extends Controller
     public function destroyClassExam(Request $request)
     {
         // dd('hi');
-        $home_work =  HomeWork::find($request->homework_id);
-        $home_work->delete();
+        $class_test_exam =  ClassTestExam::find($request->class_test_id);
+        @unlink(public_path("upload/class_test_exam/".$class_test_exam->class_exampdf));
+        $class_test_exam->delete();
         return redirect()->route('instructor.class_exam.index')->with('message','Class Exam Deleted Successfully');
+    }
+
+    public function statusClassExam($id)
+    {
+        $class_test_exam = ClassTestExam::find($id);
+        if($class_test_exam->status == 0)
+        {
+            $class_test_exam->status = 1;
+        }elseif($class_test_exam->status == 1)
+        {
+            $class_test_exam->status = 0;
+        }
+        $class_test_exam->update();
+        return redirect()->route('instructor.class_exam.index');
     }
     // home Class Exam
 
@@ -1309,7 +1378,13 @@ class InstructorCourseController extends Controller
    // Daily Class Start
     public function indexDailyClass()
     {
-        $data['daily_classes'] = DailyClass::where('teacher_id',auth()->user()->id)->orderBy('id', 'desc')->get();
+        $data['session']=$currentSession = Session::where('is_current', 1)->first();
+        $data['daily_classes'] = DailyClass::where('teacher_id', auth()->user()->id)
+                                        ->where('session_id',$currentSession->id)
+                                        ->orderBy('id','desc')
+                                        // ->where('status', 1)
+                                        ->get();
+        // $data['daily_classes'] = DailyClass::where('teacher_id',auth()->user()->id)->orderBy('id', 'desc')->get();
         return view('user.instructor.daily_class_index', $data);
     }
 

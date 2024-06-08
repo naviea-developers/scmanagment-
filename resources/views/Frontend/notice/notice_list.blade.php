@@ -125,7 +125,7 @@
                 <!-- Right Side Start-->
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="col-sm-12 box margin-bottom10">
-                        <div class="col-sm-12 title-box margin-bottom10"> <h5>NOTICE BOARD</h5></div>
+                        <div class="col-sm-12 title-box margin-bottom10" style="color: var(--text_color)"> <h5>NOTICE BOARD</h5></div>
 
                         <div class="col-sm-12 margin-bottom10">
                             <form method="GET" action="" accept-charset="UTF-8" enctype="multipart/form-data">
@@ -133,7 +133,7 @@
                                     
                                     <div class="col-xs-10 col-sm-10">
                                         <div class="row">
-                                            <select class="form-control form-select"  name="search">
+                                            <select class="form-control form-select" name="search" style="color: var(--text_color)">
                                                 <option value=""> All Notice</option>
                                                 @foreach (@$noticeTypes as $noticeType)
                                                 <option @if (@$noticeType->id == @$search) Selected @endif value="{{ @$noticeType->id }}">{{ @$noticeType->name }}</option>
@@ -144,7 +144,7 @@
 
                                     <div class="col-xs-2 col-sm-2">
                                         <div class="row">
-                                            <button type="submit" class="form-control btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                            <button type="submit" class="form-control btn btn-info" style="background-color: var(--button2_color);"><i class="fa fa-search" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -152,9 +152,9 @@
                         </div>
 
                         @if ($notices->count() > 0)   
-                            <div class="row">   
+                            <div class="row" >   
                                 <table id="dtBasicExample" class="table responsive" width="100%">
-                                    <thead>
+                                    <thead style="color: var(--text_color)">
                                         <tr>
                                             <th class="th-sm">Publish Date</th>
                                             <th class="th-sm">Srl</th>
@@ -164,7 +164,7 @@
                                             <th class="th-sm">Department</th>
                                         </tr>
                                     </thead>
-                                    <tbody>   
+                                    <tbody style="color: var(--text_color)">   
                                         @php
                                             $i = 1;
                                         @endphp
@@ -173,10 +173,10 @@
                                                 <td>{{ date('d, F Y', strtotime(@$notice->created_at)) }}</td>
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ @$notice->name }}</td>
-                                                <td><a href="{{ @$notice->notice_file_show }}" target="_blank">View</a></td>
+                                                <td><a href="{{ @$notice->notice_file_show }}" target="_blank" style="color:var(--text_color)">View</a></td>
                                                 <td><a href="{{ route('frontend.notice_pdf_download', @$notice->id) }}" target="_blank" download="" class="download">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
-                                                    <span style="color:#000; padding:10px">Download</span></a>
+                                                    <span style="color:var(--text_color); padding:10px">Download</span></a>
                                                 </td>
                                                 <td>{{ @$notice->noticeType->name }}</td>
                                             </tr>
@@ -198,7 +198,7 @@
                             </div>
                             @endif
                         @else
-                        <div class="text-center">
+                        <div class="text-center" style="color: var(--text_color)">
                             <h2 class="">Notice Not Found!</h2>
                         </div> 
                         @endif

@@ -183,10 +183,14 @@ Route::prefix('user')->middleware(['userCheck'])->group(function () {
         //syllabus for Teacher and student
         Route::get('/syllabus', [UserController::class, 'classSyllabus'])->name('user.syllabus');
         Route::get('/syllabus/download', [UserController::class, 'syllabusDownload'])->name('user.syllabus_download');
+       
         //HomeWork for student
-        
         Route::get('/homework', [UserController::class, 'homeWork'])->name('student.homework');
         Route::get('/homework-details/{id}', [UserController::class, 'homeWorkDetails'])->name('student.homework.details');
+
+        Route::get('/student-class-exam', [UserController::class, 'studentClassExam'])->name('student.class_exam');
+        Route::get('/student-class-exam-details/{id}', [UserController::class, 'studentClassExamDetails'])->name('student.class_exam.details');
+        Route::get('student-class-exam-pdf-download/{id}', [UserController::class, 'studentClassExamPdfDownload'])->name('student.class_test_pdf_download');
 
 
          //exam marksheet for student
