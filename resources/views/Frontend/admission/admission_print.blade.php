@@ -87,89 +87,88 @@
                 <p>{{ @$details->dob }}</p>
             </div>
             <div class="column">
-                <label for="gender">Student Phone :</label>
-                <p>{{ @$details->student_phone }}</p>
+                <label for="dob">Gender :</label>
+                <p >@if ($details->gender=='0') Male
+                    @elseif ($details->gender=='1') Female  @endif</p>
             </div>
         </div>
 
         <div class="row">
-          <div class="column">
-              <label for="phone">Student Email :</label>
-              <p>{{ @$details->student_email }}</p>
-          </div>
-          <div class="column">
-              <label for="dob">Student NID/Birth Certificate :</label>
-              <p>{{ @$details->student_nid }}</p>
-          </div>
-
-
-
-
-          <div class="column">
-              <label for="blood_group">Blood Group :</label>
-              <p >
-                @if (@$details->blood_group == 'o+')
-                    O Positive (O+)
-                    @elseif (@$details->blood_group == 'o-')
-                    O Negative (O-)
-                    @elseif (@$details->blood_group == 'a+')
-                    A Positive (A+)
-                    @elseif (@$details->blood_group == 'a-')
-                    A Negative (A-)
-                    @elseif (@$details->blood_group == 'b+')
-                    B Positive (B+)
-                    @elseif (@$details->blood_group == 'b-')
-                    B Negative (B-)
-                    @elseif (@$details->blood_group == 'ab+')
-                    AB Positive (AB+)
-                    @elseif (@$details->blood_group == 'ab-')
-                    AB Negative (AB-)
-                @endif
-            </p>
-          </div>
-
-
-          <div class="column">
-              <label for="gender">Father Name :</label>
-              <p>{{ @$details->father_name }}</p>
-          </div>
+            <div class="column">
+                <label for="gender">Student Phone :</label>
+                <p>{{ @$details->student_phone }}</p>
+            </div>
+            <div class="column">
+                <label for="phone">Student Email :</label>
+                <p>{{ @$details->student_email }}</p>
+            </div>
+            <div class="column">
+                <label for="dob">Student NID/Birth Certificate :</label>
+                <p>{{ @$details->student_nid }}</p>
+            </div>
         </div>
 
         <div class="row">
-          <div class="column">
-              <label for="phone">Father Occupation :</label>
-              <p>{{ @$details->father_occupation }}</p>
-          </div>
-          <div class="column">
-              <label for="dob">Father Phone :</label>
-              <p>{{ @$details->father_phone }}</p>
-          </div>
-          <div class="column">
-              <label for="gender">Father NID :</label>
-              <p>{{ @$details->father_nid }}</p>
-          </div>
+            <div class="column">
+                <label for="blood_group">Blood Group :</label>
+                <p >
+                  @if (@$details->blood_group == 'o+')
+                      O Positive (O+)
+                      @elseif (@$details->blood_group == 'o-')
+                      O Negative (O-)
+                      @elseif (@$details->blood_group == 'a+')
+                      A Positive (A+)
+                      @elseif (@$details->blood_group == 'a-')
+                      A Negative (A-)
+                      @elseif (@$details->blood_group == 'b+')
+                      B Positive (B+)
+                      @elseif (@$details->blood_group == 'b-')
+                      B Negative (B-)
+                      @elseif (@$details->blood_group == 'ab+')
+                      AB Positive (AB+)
+                      @elseif (@$details->blood_group == 'ab-')
+                      AB Negative (AB-)
+                  @endif
+              </p>
+            </div>
+            <div class="column">
+                <label for="gender">Father Name :</label>
+                <p>{{ @$details->father_name }}</p>
+            </div>
+            <div class="column">
+                <label for="phone">Father Occupation :</label>
+                <p>{{ @$details->father_occupation }}</p>
+            </div>
         </div>
 
         <div class="row">
-          <div class="column">
-              <label for="phone">Father Mother Name :</label>
-              <p>{{ @$details->mother_name }}</p>
-          </div>
-          <div class="column">
-              <label for="dob">Mother Occupation :</label>
-              <p>{{ @$details->mother_occupation }}</p>
-          </div>
-          <div class="column">
-              <label for="gender">Mother Phone :</label>
-              <p>{{ @$details->mother_phone }}</p>
-          </div>
+            <div class="column">
+                <label for="dob">Father Phone :</label>
+                <p>{{ @$details->father_phone }}</p>
+            </div>
+            <div class="column">
+                <label for="gender">Father NID :</label>
+                <p>{{ @$details->father_nid }}</p>
+            </div>
+            <div class="column">
+                <label for="phone">Father Mother Name :</label>
+                <p>{{ @$details->mother_name }}</p>
+            </div>
         </div>
 
         <div class="row">
-          <div class="column">
-              <label for="phone">Yearly Income :</label>
-              <p>{{ @$details->yearly_income }}</p>
-          </div>
+            <div class="column">
+                <label for="dob">Mother Occupation :</label>
+                <p>{{ @$details->mother_occupation }}</p>
+            </div>
+            <div class="column">
+                <label for="gender">Mother Phone :</label>
+                <p>{{ @$details->mother_phone }}</p>
+            </div>
+            <div class="column">
+                <label for="phone">Yearly Income :</label>
+                <p>{{ @$details->yearly_income }}</p>
+            </div>
         </div>
 
 
