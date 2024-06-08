@@ -75,6 +75,7 @@ use App\Models\NoticeType;
 use App\Models\SchoolSection;
 use App\Models\Session;
 use App\Models\Syllabus;
+use App\Models\TopperStudent;
 
 class FrontendController extends Controller
 {
@@ -102,6 +103,10 @@ class FrontendController extends Controller
         $data['classLists'] = HomeContentClassList::where('status',1)->orderBy('id','desc')->take(7)->get();
         $data['classes'] = Classe::where('status',1)->orderBy('id','asc')->get();
         $data['blogs'] = Blog::latest()->take(4)->get();
+        
+        $data['founders'] = FounderCoFundere::where('status', '1')->get();
+        $data['teachers'] = User::where('status', 1)->where('type', '2')->take(8)->get();
+        $data['toppers'] = TopperStudent::where('status', 1)->take(8)->get();
 
         $data['search']=$name = $request->input('search');
         if(isset(request()->search)){

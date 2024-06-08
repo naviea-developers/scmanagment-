@@ -235,6 +235,26 @@
 
 
         <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'school_student')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Topper Student</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('admin.topper_student.create') ||  Route::is('admin.topper_student.index') 
+            || Route::is('admin.topper_student.edit') 
+            );
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.topper_student.index') }}" class="sub-link {{(Route::is('admin.topper_student.index') || Route::is('admin.topper_student.edit')) ?'active':''}}">Manage Topper</a>
+                </li>
+            </ul>
+        </li><!-- br-Speakers-item -->
+
+
+
+        <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebook')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Staff</span>
