@@ -1,7 +1,7 @@
 @extends('Frontend.layouts.master-layout')
 @section('title','- Instructor')
 @section('head')
-<style>
+{{-- <style>
 		
 	/* founder and co-funder section */
 	.ourteam-section {
@@ -159,7 +159,7 @@
 		align-items: center;
 	}
 
-</style>
+</style> --}}
 @endsection
 @section('main_contend')
 @include('Frontend.layouts.parts.header-menu')

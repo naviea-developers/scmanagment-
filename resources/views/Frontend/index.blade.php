@@ -295,6 +295,59 @@
 
 
 
+
+
+
+
+  <section class="ourteam-section">
+    <!-- Founder and CEO -->
+    <div class="container">
+        <div class="">
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Founder</h3>
+        </div>
+        <div class="row">
+            @foreach ($founders as $founder)
+
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
+              <div class="picture">
+                <img class="img-fluid" src="{{ @$founder->image_show }}">
+              </div>
+              <div class="team-content">
+                <h3 class="name" style="color: var(--text_color)">{{ @$founder->name }}</h3>
+                <h4 class="title" style="color: var(--text_color)">{{ @$founder->designation }}</h4>
+              </div>
+              <ul class="social">
+                <li><a href="{{ @$founder->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+                <li><a href="{{ @$founder->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+                <li><a href="{{ @$founder->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                <li><a href="{{ @$founder->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+              </ul>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
+        {{-- <div class="text-center mt-0 mb-4 firstbutton">
+            <a href=""
+            class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
+                Class List
+                <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="28.56" height="15.666"
+                    viewBox="0 0 28.56 15.666">
+                    <path id="right-arrow_3_" data-name="right-arrow (3)"
+                        d="M20.727,107.5l-1.272,1.272,5.661,5.661H0v1.8H25.116l-5.661,5.661,1.272,1.272,7.833-7.833Z"
+                        transform="translate(0 -107.5)" fill="#fff"></path>
+                </svg>
+            </a>
+        </div> --}}
+
+      </div>
+</section>
+
+
+
+
 <!--Start  Blog Content-->
 <div class="py-0 mt-3 pt-lg-220" style="padding-top: 0px !important;">
     <div class="container-lg">
@@ -303,14 +356,14 @@
             @foreach ($blogs as $blog)
             <div class="col-xl-3 col-md-6" >
                 <!--Start Course Card-->
-                <div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border" style="height: 100%">
+                <div class="course-card rounded bg-light position-relative overflow-hidden border" style="height: 100%">
                     <!--Start Course Image-->
                     <a href="{{ route('frontend.blog_details', $blog->id) }}" class="course-card_img d-block pt-4 px-4">
                         <img  src="{{ $blog->image_show }}" class="img-fluid rounded-2 w-100" alt="">
                     </a>
                     <!--End Course Image-->
                     <!--Start Course Card Body-->
-                    <div class="course-card_body bg-prussian-blue p-4 position-relative m-0 rounded-0 bg-white">
+                    <div class="course-card_body bg-light  p-4 position-relative m-0 rounded-0">
                         <!--Start Course Title-->
                         <div class="badge px-0 mb-2">
                             <a href="" class="fs-14 text-dark-cerulean" style="color: var(--header_color)">{{ $blog->b_category->name ?? '' }}|</a> <a href="blog-topic/index.html" class="fs-14 text-dark-cerulean"></a>
@@ -401,6 +454,72 @@
 
 
 
+
+
+
+
+
+
+<section class="ourteam-section">
+    <!-- Founder and CEO -->
+    <div class="container mt-5">
+        <div class="">
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Our Teachers</h3>
+        </div>
+        <div class="row">
+            @foreach ($teachers as $teacher)
+
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
+              <div class="picture">
+                <img class="img-fluid" src="{{ @$teacher->image_show }}">
+              </div>
+              <div class="team-content">
+                <h3 class="name" style="color: var(--text_color)">{{ @$teacher->name }}</h3>
+                <h4 class="title" style="color: var(--text_color)">{{ @$teacher->user_designation->name }}</h4>
+              </div>
+              <ul class="social">
+                <li><a href="{{ @$teacher->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+                <li><a href="{{ @$teacher->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+                <li><a href="{{ @$teacher->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                <li><a href="{{ @$teacher->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+              </ul>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
+        <div class="text-center mt-0 mb-4 firstbutton">
+            <a href="{{ route('frontend.instructor') }}"
+            class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
+                More Teacher
+                <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="28.56" height="15.666"
+                    viewBox="0 0 28.56 15.666">
+                    <path id="right-arrow_3_" data-name="right-arrow (3)"
+                        d="M20.727,107.5l-1.272,1.272,5.661,5.661H0v1.8H25.116l-5.661,5.661,1.272,1.272,7.833-7.833Z"
+                        transform="translate(0 -107.5)" fill="#fff"></path>
+                </svg>
+            </a>
+        </div>
+
+      </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--Start Counter-->
 <div class="counter-content pt-5 pb-4">
     <div class="container-lg">
@@ -444,6 +563,65 @@
     </div>
 </div>
 <!--End Counter-->
+
+
+
+
+
+
+
+
+
+
+<section class="ourteam-section">
+    <!-- Founder and CEO -->
+    <div class="container">
+        <div class="">
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">Topper Student</h3>
+        </div>
+        <div class="row">
+            @foreach ($toppers as $topper)
+
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
+              <div class="picture">
+                <img class="img-fluid" src="{{ @$topper->student->image_show }}">
+              </div>
+              <div class="team-content">
+                <h3 class="name" style="color: var(--text_color)">{{ @$topper->student->student_name }}</h3>
+                <h4 class="title" style="color: var(--text_color)">{{ @$topper->examination->name }}-{{ @$topper->academic_year->year }}</h4>
+                <h4 class="title" style="color: var(--text_color)">GPA: {{ @$topper->result }}</h4>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
+        <div class="text-center mt-0 mb-4 firstbutton">
+            <a href="{{ route('frontend.topper_student') }}"
+            class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
+                More Topper
+                <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="28.56" height="15.666"
+                    viewBox="0 0 28.56 15.666">
+                    <path id="right-arrow_3_" data-name="right-arrow (3)"
+                        d="M20.727,107.5l-1.272,1.272,5.661,5.661H0v1.8H25.116l-5.661,5.661,1.272,1.272,7.833-7.833Z"
+                        transform="translate(0 -107.5)" fill="#fff"></path>
+                </svg>
+            </a>
+        </div>
+
+      </div>
+</section>
+
+
+
+
+
+
+
+
+
 
 <!--Start Testimonial-->
 <div class="testimonial-content py-5">

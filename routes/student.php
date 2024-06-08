@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\School_management\Student\StudentController;
 use App\Http\Controllers\Backend\School_management\Student\StudentInfoUpdateController;
+use App\Http\Controllers\Backend\School_management\TopperStudent\TopperStudentController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -16,6 +17,21 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
      Route::get('/status/{id}', [StudentController::class, 'status'])->name('admin.school_student.status');
 
 });
+
+Route::prefix('topper-student')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    //Course Create
+     Route::get('index/', [TopperStudentController::class,"index"])->name('admin.topper_student.index');
+     Route::get('create/', [TopperStudentController::class,"create"])->name('admin.topper_student.create');
+     Route::post('store/', [TopperStudentController::class,"store"])->name('admin.topper_student.store');
+     Route::get('edit/{id}', [TopperStudentController::class,"edit"])->name('admin.topper_student.edit');
+     Route::post('update/{id}', [TopperStudentController::class,"update"])->name('admin.topper_student.update');
+     Route::post('delete/', [TopperStudentController::class,"destroy"])->name('admin.topper_student.delete');
+     Route::get('/status/{id}', [TopperStudentController::class, 'status'])->name('admin.topper_student.status');
+
+});
+
+
+
 
 Route::prefix('student-info-update')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //student_info_update update
