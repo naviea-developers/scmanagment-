@@ -48,7 +48,7 @@
                         <div class="col-sm-12">
                           <label class="form-control-label">Bulding Name: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
-                            <select name="bulding_id" class="form-control">
+                            <select name="bulding_id" class="form-control" id="bulding">
                               <option value=""> Select Bulding</option>
                               @foreach ($buldings as $bulding)
                               <option value="{{ $bulding->id }}">{{ $bulding->name }}</option>
@@ -60,11 +60,11 @@
                         <div class="col-sm-12 mt-3">
                           <label class="form-control-label">Floor Name: <span class="tx-danger">*</span></label>
                           <div class="mg-t-10 mg-sm-t-0">
-                            <select name="floor_id" class="form-control">
+                            <select name="floor_id" class="form-control" id="floor">
                               <option value=""> Select Floor</option>
-                              @foreach ($floors as $floor)
+                              {{-- @foreach ($floors as $floor)
                               <option value="{{ $floor->id }}">{{ $floor->name }}</option>
-                              @endforeach
+                              @endforeach --}}
                             </select>
                           </div>
                         </div>
