@@ -227,7 +227,13 @@ class AdmissionController extends Controller
         // $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('class_id',$admission->class_id)->where('status', 1)->get();
         $data['groups'] = Group::where('class_id',$admission->class_id)->where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('class_id',$admission->class_id)->where('status', 1)->get();
+        // $data['fees'] = FeeManagement::where('class_id',$admission->class_id)->where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('class_id', $admission->class_id)
+                                    ->where('status', 1)
+                                    ->whereHas('fee', function($query) {
+                                        $query->where('is_constant', 2);
+                                    })
+                                    ->get();
         $data['continents'] = Continent::all();
         $data['countries'] = Country::where('continent_id',$admission->present_continent_id)->get();
         $data['states'] = State::where('country_id',$admission->present_country_id)->get();

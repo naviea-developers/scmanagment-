@@ -32,7 +32,7 @@ class AdmissionController extends Controller
         $data['sessions'] = Session::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('status', 1)->get();
+        // $data['fees'] = FeeManagement::where('status', 1)->get();
         $data['continents'] = Continent::all();
         $data['countries'] = Country::all();
         $data['states'] = State::all();
@@ -227,13 +227,19 @@ class AdmissionController extends Controller
 
     public function edit($id)
     {
-        $data['admission'] = Admission::find($id);
+        $data['admission'] = $class = Admission::find($id);
         $data['classes'] = Classe::where('status', 1)->get();
         $data['academic_years'] = AcademicYear::where('status', 1)->get();
         $data['sessions'] = Session::where('status', 1)->get();
         $data['sections'] = SchoolSection::where('status', 1)->get();
         $data['groups'] = Group::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('status', 1)->get();
+        // $data['fees'] = FeeManagement::where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('class_id', $class->class_id)
+                                        ->where('status', 1)
+                                        ->whereHas('fee', function($query) {
+                                            $query->where('is_constant', 2);
+                                        })
+                                        ->get();
         $data['continents'] = Continent::all();
         $data['countries'] = Country::all();
         $data['states'] = State::all();
@@ -259,23 +265,8 @@ class AdmissionController extends Controller
         try{
             DB::beginTransaction();
 
-            if (Auth::check()) {
-                $user = Auth::user();
-            } else {
-                $user = new User();
-                $user->name = $request->student_name;
-                $user->email = $request->student_email;
-                $user->mobile = $request->student_phone;
-                $user->gender = $request->gender;
-                $user->type = 1;
-                $user->is_admission = 1;
-                $user->password = $request->password;
-            
-                $user->save();
-            }
-
-            $admission = Admission::find($id);
-            $admission->user_id = $user->id;
+            $admission =$user = Admission::find($id);
+            $admission->user_id = $user->user_id;
             $admission->class_id = $request->class_id ?? 0;
             $admission->academic_year_id = $request->academic_year_id ?? 0;
             $admission->session_id = $request->session_id ?? 0;

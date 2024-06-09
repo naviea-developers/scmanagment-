@@ -43,7 +43,7 @@
                                         <select class="form-control" name="academic_year_id" >
                                             <option value="">Select Academic Year</option>
                                             @foreach ($academic_years as $year)
-                                            <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                            <option @if ($year->is_current == 1) Selected @endif value="{{ $year->id }}">{{ $year->year }}</option>
                                             @endforeach
                                         </select>
                                         </div>
@@ -53,7 +53,7 @@
                                         <select class="form-control" name="session_id" >
                                             <option value="">Select Session</option>
                                             @foreach ($sessions as $session)
-                                            <option value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
+                                            <option @if ($session->is_current == 1) Selected @endif value="{{ $session->id }}">{{ @$session->start_year }} - {{ @$session->end_year }}</option>
                                             @endforeach
                                         </select>
                                         </div>
@@ -521,8 +521,10 @@ $('body').on("change",'.class_fee',function(){
               let html = '';
               html += '<option value="">Select Fee</option>'
               res.data.forEach(element => {
+                if (element.fee.is_constant == 2) {
                   html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
-              });
+                }
+                });
 
 
               $('#'+outid).append(html);
