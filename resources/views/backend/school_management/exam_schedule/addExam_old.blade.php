@@ -9,12 +9,8 @@
 
 <div class="br-mainpanel">
 
-
-
         <div class="p-2">
-
             <div class="br-section-wrapper">
-
                 <div class="br-pagetitle">
                     <i class="fa-duotone fa-screen-users"></i>
                     <div>

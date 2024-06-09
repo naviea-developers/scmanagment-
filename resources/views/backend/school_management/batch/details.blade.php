@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Class Details')
+@section('title', 'batch Details')
 
 {{-- <link rel="stylesheet" href="{{ URL::asset('css/custom/class.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('public') }}/css/custom/class.css">

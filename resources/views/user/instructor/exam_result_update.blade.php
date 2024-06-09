@@ -1,6 +1,6 @@
 @extends('user.layouts.master-layout')
 
-@section('title','- update home_work')
+@section('title','- edit exam result')
 @section('head')
 <link href="{{asset('public/backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
 @endsection

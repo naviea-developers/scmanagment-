@@ -1,5 +1,5 @@
 @extends('user.layouts.master-layout')
-@section('title','- Update Class Test')
+@section('title','- edit Class exam')
 @section('head')
 <link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
 <style>

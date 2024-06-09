@@ -1,5 +1,5 @@
 @extends('Frontend.layouts.master-layout')
-@section('title','- E-video')
+@section('title','- daily class video list')
 @section('head')
 <link href="{{ asset('public/frontend') }}/application/modules/frontend/views/themes/default/assets/css/blog.css" rel="stylesheet">
 <style>

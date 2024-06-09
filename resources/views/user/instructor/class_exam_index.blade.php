@@ -1,6 +1,6 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Manage Courses')
+@section('title','- Manage Exam')
 
 @endsection
 @section('main_content')

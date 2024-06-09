@@ -1,5 +1,5 @@
 @extends('user.layouts.master-layout')
-@section('title','- Manage Courses')
+@section('title','- Exam Result')
 @section('main_content')
 
 <div class="right_section">

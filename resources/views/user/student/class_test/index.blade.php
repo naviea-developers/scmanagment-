@@ -1,13 +1,13 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Homework')
+@section('title','- class teat')
 
 @endsection
 @section('main_content')
 
 <div class="right_section">
     <div>
-        <h3>Home Work</h3>
+        <h3>Class Teat</h3>
     </div>
 </div>
 

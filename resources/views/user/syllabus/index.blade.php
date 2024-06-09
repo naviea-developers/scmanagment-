@@ -1,9 +1,6 @@
 @extends('user.layouts.master-layout')
 @section('head')
-@section('title','- Syllabus')
-
-
-@endsection
+@section('title','- Syllabus')@endsection
 @section('main_content')
 
     <style>
@@ -56,7 +53,7 @@
         }
     </style>
 
-    <div class="passwodBox mb-3" style="background-color: var(  --seller_frontend_color); color:white">
+    <div class="passwodBox mb-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
         
             @php
             $results = \App\Models\Tp_option::where('option_name', 'theme_option_school_info')->first();
@@ -80,10 +77,7 @@
             <hr style="color: black; height:2px">
               <div class="class-routine">
                 
-          
-          
-          
-                  @php
+              @php
                   $displayedExaminations = [];
               @endphp
               
@@ -134,18 +128,6 @@
                   @endforeach
               </div>
               
-          
-              
-              
-          
-          
-          
-          
-          
-          
-          
-          
-          
               {{-- @php
                   $displayedExaminations = [];
               @endphp
@@ -199,7 +181,6 @@
                       @endforeach
                   </tbody>
               </table> --}}
-              
               
               </div>
               
