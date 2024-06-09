@@ -144,7 +144,7 @@
                                 {{ @$routines[$duration]->teacher->name }} <br>
                                 {{ @$routines[$duration]->room->name }}
                             @else
-                                -
+                                - - - - 
                             @endisset
                         </td>
                     @endforeach

@@ -965,7 +965,7 @@
                                         $section = $sectionData['section'];
                                         $classRoutinesByDay = $sectionData['routines'];
                                     @endphp
-                                    <h2>Section : {{ $section->name }}</h2> 
+                                    <h2>Section : {{ @$section->name }}</h2> 
                                     <table>
                                         <thead>
                                             <tr style="color: black">
@@ -996,7 +996,7 @@
                                                                 {{ @$routines[$duration]->teacher->name }} <br>
                                                                 {{ @$routines[$duration]->room->name }}
                                                             @else
-                                                              -
+                                                              - - - -
                                                             @endisset
                                                         </td>
                                                     @endforeach

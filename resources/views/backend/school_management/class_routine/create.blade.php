@@ -64,7 +64,7 @@
                         <div class="col-sm-3">
                             <label >Sections Name :</label>
                             <select name="section_id"  id="section" class="form-control form-select select2">
-                            <option value="0"> Select Class</option>
+                            <option value="0"> Select section</option>
                             {{-- @foreach ($sections as $section)
                             <option value="{{ $section->id }}">{{ $section->name }}</option>
                             @endforeach --}}
