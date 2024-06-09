@@ -60,17 +60,40 @@
                           </div>
                         </div>
 
+
+
+
+                        @if ($fee_management->fee->is_constant == 1 || $fee_management->fee->is_constant == 2)
                         <div class="col-sm-12 mt-3">
-                          <label class="form-control-label">Fee Name: <span class="tx-danger">*</span></label>
-                          <div class="mg-t-10 mg-sm-t-0">
-                            <select name="fee_id" class="form-control">
-                              <option value=""> Select Fee</option>
-                              @foreach ($fee_names as $fee_name)
-                              <option @if ($fee_name->id == $fee_management->fee_id) Selected @endif  value="{{ $fee_name->id }}">{{ $fee_name->particular_name }}</option>
-                              @endforeach
-                            </select>
-                          </div>
+                            <label class="form-control-label">Fee Name: <span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <select name="fee_id_disabled" class="form-control" disabled>
+                                    <option value="">Select Fee</option>
+                                    @foreach ($fee_names as $fee_name)
+                                        <option @if ($fee_name->id == $fee_management->fee_id) selected @endif value="{{ $fee_name->id }}">{{ $fee_name->particular_name }}</option>
+                                    @endforeach
+                                </select>
+                                <!-- Hidden input to hold the value -->
+                                <input type="hidden" name="fee_id" value="{{ $fee_management->fee_id }}">
+                            </div>
                         </div>
+                    @else
+                        <div class="col-sm-12 mt-3">
+                            <label class="form-control-label">Fee Name: <span class="tx-danger">*</span></label>
+                            <div class="mg-t-10 mg-sm-t-0">
+                                <select name="fee_id" class="form-control">
+                                    <option value="">Select Fee</option>
+                                    @foreach ($fee_names as $fee_name)
+                                        @if ($fee_name->is_constant == 0)
+                                            <option @if ($fee_name->id == $fee_management->fee_id) selected @endif value="{{ $fee_name->id }}">{{ $fee_name->particular_name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                    
+                    
 
 
                             <div class="col-sm-12 mt-3">

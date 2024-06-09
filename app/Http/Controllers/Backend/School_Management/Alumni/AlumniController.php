@@ -74,15 +74,33 @@ class AlumniController extends Controller
 
         return redirect()->route('admin.alumni.index')->with('message', 'Alumni Added Successfully');
     }
+    // public function edit($id)
+    // {
+    //     $data['alumni'] = $class = User::find($id);
+    //     // $data['alumni'] = $class = Alumni::find($id);
+    //     $data['classes'] = Classe::where('status', 1)->get();
+    //     $data['sessions'] = Session::where('status', 1)->get();
+    //     $data['fees'] = FeeManagement::where('class_id', $class->class_id)->where('status', 1)->get();
+    //     return view('Backend.school_management.alumni.update', $data);
+    // }
+
+
     public function edit($id)
-    {
-        $data['alumni'] = $class = User::find($id);
-        // $data['alumni'] = $class = Alumni::find($id);
-        $data['classes'] = Classe::where('status', 1)->get();
-        $data['sessions'] = Session::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('class_id', $class->class_id)->where('status', 1)->get();
-        return view('Backend.school_management.alumni.update', $data);
-    }
+{
+    $data['alumni'] = $class = User::find($id);
+    // $data['alumni'] = $class = Alumni::find($id);
+    $data['classes'] = Classe::where('status', 1)->get();
+    $data['sessions'] = Session::where('status', 1)->get();
+    $data['fees'] = FeeManagement::where('class_id', $class->class_id)
+                                  ->where('status', 1)
+                                  ->whereHas('fee', function($query) {
+                                      $query->where('is_constant', 1);
+                                  })
+                                  ->get();
+    return view('Backend.school_management.alumni.update', $data);
+}
+
+
     public function update(Request $request, $id)
     {
         $alumni = User::find($id);

@@ -559,30 +559,32 @@ function mailcheck(type) {
 
 
 <script>
+$('body').on("change",'.class_fee',function(){
+    let id = $(this).val();
+    console.log(id);
+    getFees(id, "fee");
+});
 
-    $('body').on("change",'.class_fee',function(){
-        let id = $(this).val();
-         console.log(id);
-         getFees(id,"fee");
-    });
-    
-    function getFees(id,outid){
-        let url = '{{ url("get/fee_management/") }}/' + id;
-        axios.get(url)
-            .then(res => {
-                console.log(res);
-            $('#'+outid).empty();
-                let html = '';
-                html += '<option value="">Select Fee</option>'
-                res.data.forEach(element => {
-                    html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
-                });
-    
-    
-                $('#'+outid).append(html);
-                $('#'+outid).val("").change();
+function getFees(id, outid){
+    let url = '{{ url("get/fee_management/") }}/' + id;
+    axios.get(url)
+        .then(res => {
+            console.log(res);
+            $('#' + outid).empty();
+            let html = '<option value="">Select Fee</option>';
+            res.data.forEach(element => {
+                if (element.fee.is_constant == 1) {
+                    html += "<option value=" + element.id + ">" + element.fee.particular_name + " (" + element.fee_amount + ")</option>";
+                }
             });
-    }
+            $('#' + outid).append(html);
+            $('#' + outid).val("").change();
+        })
+        .catch(error => {
+            console.error("There was an error fetching the fees!", error);
+        });
+}
+
     
     </script>
 

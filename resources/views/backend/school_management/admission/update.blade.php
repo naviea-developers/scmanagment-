@@ -599,8 +599,10 @@ $('body').on("change",'#class',function(){
               let html = '';
               html += '<option value="">Select Fee</option>'
               res.data.forEach(element => {
+                if (element.fee.is_constant == 2) {
                   html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
-              });
+                }
+                });
               $('#'+outid).append(html);
               $('#'+outid).val("").change();
           });

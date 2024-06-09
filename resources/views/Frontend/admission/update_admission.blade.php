@@ -43,7 +43,7 @@
                             <select class="form-control" name="academic_year_id" >
                                 <option value="">Select Academic Year</option>
                                 @foreach ($academic_years as $year)
-                                <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                <option @if($year->id == $admission->academic_year_id) Selected @endif value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -335,7 +335,7 @@
 
 
 
-                        @if (Auth::check())
+                        {{-- @if (Auth::check())
                             @else
                             <div class="col-sm-4 mt-3">
                                 <label class="form-control-label">Login Password: <span class="tx-danger">*</span></label>
@@ -343,7 +343,7 @@
                                 <input type="password" name="password" class="form-control" placeholder="Enter Login Password" required>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                             
 
 
@@ -617,8 +617,10 @@ $('body').on("change",'.class_fee',function(){
               let html = '';
               html += '<option value="">Select Fee</option>'
               res.data.forEach(element => {
+                if (element.fee.is_constant == 2) {
                   html += "<option value=" + element.id + ">" + element.fee.particular_name +" "+"("+ element.fee_amount+ ")" + "</option>"
-              });
+                }
+                });
 
 
               $('#'+outid).append(html);

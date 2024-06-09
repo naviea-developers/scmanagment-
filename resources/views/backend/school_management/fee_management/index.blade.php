@@ -68,8 +68,12 @@ Admin - All fees
                             @endif
                           </td>
                           <td>
+                            @if ($fee_management->fee->is_constant == 1 || $fee_management->fee->is_constant == 2)
+                            <a class="btn text-info" href="{{ route('admin.fee_management.edit', $fee_management->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                            @elseif ($fee_management->fee->is_constant == 0)
                             <a class="btn text-info" href="{{ route('admin.fee_management.edit', $fee_management->id) }}"><i class="icon ion-compose tx-28"></i></a>
                             <button class="btn text-danger bg-white"  value="{{$fee_management->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            @endif
                           </td>
                       </tr> 
                     @endforeach

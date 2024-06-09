@@ -62,8 +62,12 @@ Admin - All Fees Name
                             @endif
                           </td>
                           <td>
+                            @if ($fee->is_constant == 1 || $fee->is_constant == 2)
+
+                            @elseif ($fee->is_constant == 0)
                             <a class="btn text-info" href="{{ route('admin.fee.edit', $fee->id) }}"><i class="icon ion-compose tx-28"></i></a>
                             <button class="btn text-danger bg-white"  value="{{$fee->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            @endif
                           </td>
                       </tr> 
                     @endforeach
