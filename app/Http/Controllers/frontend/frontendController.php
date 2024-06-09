@@ -61,12 +61,14 @@ use App\Models\Degree;
 use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
 use App\Models\Admission;
+use App\Models\Alumni;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\DailyClass;
 use App\Models\Designation;
 use App\Models\Examination;
 use App\Models\ExamSchedule;
+use App\Models\FeeManagement;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Gallery;
 use App\Models\HomeContentClassList;
@@ -284,10 +286,21 @@ class FrontendController extends Controller
         return view('Frontend.auth.login');
     }
 
+    // public function register()
+    // {
+    //     $data['continents'] = Continent::where('status', 1)->get();
+    //     return view('Frontend.auth.register', $data);
+    // }
     public function register()
     {
-        $data['continents'] = Continent::where('status', 1)->get();
-        return view('Frontend.auth.register', $data);
+        return view('Frontend.auth.register');
+    }
+    public function alumniRegister()
+    {
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['sessions'] = Session::where('status', 1)->get();
+        $data['fees'] = FeeManagement::where('status', 1)->get();
+        return view('Frontend.auth.reg_alumni', $data);
     }
     // public function instructorRegister()
     // {
@@ -689,6 +702,11 @@ class FrontendController extends Controller
     {
         $data['toppers'] = TopperStudent::where('status', 1)->get();
         return view('Frontend.pages.topper_student', $data);
+    }
+    public function alumni()
+    {
+        $data['alumnis'] = User::where('is_alumni', 1)->where('type', 9)->where('status', 1)->get();
+        return view('Frontend.alumni.index', $data);
     }
 
 

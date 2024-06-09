@@ -1,5 +1,5 @@
 @extends('Frontend.layouts.master-layout')
-@section('title','- Instructor')
+@section('title','- Topper Student')
 @section('head')
 @endsection
 @section('main_contend')

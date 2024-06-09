@@ -81,6 +81,7 @@
         @php
         $admissions = \App\Models\Admission::where('is_new', 1)->get();
         $updateStudentInfoRequest = \App\Models\StudentInfoUpdate::where('status', 0)->get();
+        $requestedAlumni = \App\Models\User::where('is_alumni', 0)->where('type', 9)->get();
         @endphp
 
         <li class="br-menu-item">
@@ -235,7 +236,7 @@
 
 
         <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{($prefix == 'school_student')?'active':''}} ">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'topper-student')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Topper Student</span>
             </a><!-- br-menu-link -->
@@ -255,7 +256,7 @@
 
 
         <li class="br-menu-item">
-            <a href="#" class="br-menu-link with-sub {{($prefix == 'ebook')?'active':''}} ">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Staff</span>
             </a>
@@ -266,6 +267,25 @@
                 <li class="sub-item"><a href="{{ route('admin.staff.create') }}" class="sub-link {{( Route::is('admin.staff.create') ) ?'active':''}}">Add New Staff</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.staff.index') }}" class="sub-link {{(Route::is('admin.staff.index') || Route::is('admin.staff.edit')) ?'active':''}}">Manage Staff</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Alumni</span>
+            </a>
+            @php
+            $r_check = ( Route::is('admin.alumni.create') ||  Route::is('admin.alumni.index') || Route::is('admin.alumni.edit') || Route::is('admin.requested_alumni.index'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('admin.alumni.create') }}" class="sub-link {{( Route::is('admin.alumni.create') ) ?'active':''}}">Add New Alumni</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.alumni.index') }}" class="sub-link {{(Route::is('admin.alumni.index') || Route::is('admin.alumni.edit')) ?'active':''}}">Manage Alumni</a>
+                </li>
+                <li class="sub-item"><a href="{{ route('admin.requested_alumni.index') }}" class="sub-link {{(Route::is('admin.requested_alumni.index') || Route::is('admin.alumni.edit')) ?'active':''}}">Requested Alumni ({{ $requestedAlumni->count() }})</a>
                 </li>
             </ul>
         </li>

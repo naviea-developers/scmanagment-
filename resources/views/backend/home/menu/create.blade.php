@@ -75,7 +75,8 @@
                               <option value="e-book-audio-list">e-book-audio</option>
                               <option value="daily-class-video-page">daily-class-video</option>
                               <option value="gallery-list">gallery</option>
-                              <option value="notice-list">Notice</option>
+                              <option value="notice-list">notice</option>
+                              <option value="alumni">alumni</option>
                               {{-- <option value="course_list">admission</option> --}}
 
                               <option value="faqs">faq</option>

@@ -62,4 +62,12 @@ class User extends Authenticatable
     public function user_designation(){
         return $this->belongsTo(Designation::class,"designation_id","id");
     }
+    public function session()
+    {
+        return $this->belongsTo(Session::class, 'session_id', 'id');
+    }
+    public function class()
+    {
+        return $this->belongsTo(Classe::class, 'class_id', 'id');
+    }
 }

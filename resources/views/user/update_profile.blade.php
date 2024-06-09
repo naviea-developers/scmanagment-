@@ -60,7 +60,7 @@
                                 <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->nid }}" name="nid"  placeholder="NID"/>
                             </div>
 
-
+                            @if (auth()->user()->type == 1 || auth()->user()->type == 7)
                             <div class="col-md-6">
                                 <label class="mb-2">Qualification</label>
                                 <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->qualification }}" name="qualification"  placeholder="qualification"/>
@@ -69,7 +69,8 @@
                                 <label class="mb-2">Experience</label>
                                 <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->experience }}" name="experience"  placeholder="experience"/>
                             </div>
-                            <div class="col-md-6">
+
+                            {{-- <div class="col-md-6">
                                 <label class="mb-2">Language</label>
                                 <select class="form-select form-control" name="language">
                                     <option value="">select one language</option>
@@ -78,11 +79,11 @@
                                     <option @if(auth()->user()->language == '3')  Selected @endif value="3" >Hindi </option>
                                     <option @if(auth()->user()->language == '4')  Selected @endif value="4" >Arabic </option>
                                 </select>
-                                {{-- <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->language }}" name="language"  placeholder="language"/> --}}
-                            </div>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->language }}" name="language"  placeholder="language"/>
+                            </div> --}}
 
 
-                            @if (auth()->user()->type == 1 || auth()->user()->type == 7)
+                           
                                 <div class="col-sm-6">
                                     <label class="mb-2">Continent</label>
                                     <select  class="form-control" name="continent_id" required>
@@ -92,7 +93,7 @@
                                     @endforeach
                                     </select>
                                 </div>
-                            @endif
+                            
 
                             <div class="col-md-6">
                                 <label class="mb-2">Country</label>
@@ -352,10 +353,24 @@
 
                                 {{-- <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->country }}" name="country"  placeholder="country"/> --}}
                             </div>
-                            {{-- <div class="col-md-6">
-                                <label class="mb-2">Country</label>
-                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->country }}" name="country"  placeholder="country"/>
-                            </div> --}}
+                           
+                            @endif
+
+
+
+
+
+                            @if (auth()->user()->type == 9)
+                            <div class="col-md-6">
+                                <label class="mb-2">Designation</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->designation }}" name="designation"  placeholder="Enter Your Designation"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="mb-2">Company Name</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->company_name }}" name="company_name"  placeholder="Enter Your Company Name"/>
+                            </div>
+                                
+                            @endif
 
                             <div class="col-md-12 mt-3 mb-3">
                                 <label class="mb-2">Address</label>
@@ -363,7 +378,7 @@
                             </div>
 
 
-                            @if (auth()->user()->type == 2 || auth()->user()->type == 8)
+                            @if (auth()->user()->type == 2 || auth()->user()->type == 8 || auth()->user()->type == 9)
                             <hr>
                             <div class="right_section">
                                 <div>
@@ -383,8 +398,8 @@
                                 <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->google_id }}" name="google_id"  placeholder="Google Plus URL"/>
                             </div>
                             <div class="col-md-6">
-                                <label class="mb-2">Instagram</label>
-                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->instagram_id }}" name="instagram_id"  placeholder="Instagram URL"/>
+                                <label class="mb-2">Linkedin</label>
+                                <input type="text" class="form-control  mb-2 " value="{{ auth()->user()->linkedin_id }}" name="linkedin_id"  placeholder="Linkedin URL"/>
                             </div>
                         @endif
 
@@ -469,7 +484,7 @@
                         
                         <div class="col-md-12 ">
                             <label class="mb-2">About</label>
-                            <textarea type="text"  id="summernote_three" class="form-control  mb-2"  name="description" placeholder="Details">{!! auth()->user()->description !!}</textarea>
+                            <textarea type="text"  id="summernote_three" rows="5" class="form-control  mb-2"  name="description" placeholder="Details">{!! auth()->user()->description !!}</textarea>
                         </div>
 
                         <div class="row mt-3">

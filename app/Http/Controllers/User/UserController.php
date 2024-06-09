@@ -352,12 +352,14 @@ class UserController extends Controller
         $user->institution = $request->institution ?? '';
         $user->designation = $request->designation ?? '';
         $user->description = $request->description;
+        $user->company_name = $request->company_name;
 
         // Social URL
         $user->facebook_id = $request->facebook_id;
         $user->twitter_id = $request->twitter_id;
         $user->google_id = $request->google_id;
-        $user->instagram_id = $request->instagram_id;
+        $user->instagram_id = $request->instagram_id ?? '';
+        $user->linkedin_id = $request->linkedin_id;
 
         // Bank Information
         $user->bank_name = $request->bank_name;

@@ -21,9 +21,9 @@
                         <h4 class="mb-0" style="font-size:20px ;text-align:center">
                            {{ $home_content->register_des }}                        </h4>
                         <br>
-                        <center class="text-center">
+                        {{-- <center class="text-center">
                             <a href="{{ route('frontend.teacher_register') }}"><strong> Become an Teacher</strong></a>                        
-                        </center>
+                        </center> --}}
                         {{-- <center class="text-center">
                             <a href="{{ route('frontend.seller_register') }}"><strong> Become an Seller</strong></a>                        </center>
                         <center class="text-center">
@@ -50,7 +50,7 @@
 
                         <!--  -->
 
-                        <h4>Student Sign up</h4>
+                        <h4>Alumni Sign up</h4>
                         <form action="{{ route('frontend.set_register') }}" class="myform" id="student" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                         @csrf
 

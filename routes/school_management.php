@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\School_management\Routine\ClassRoutineControlle
 use App\Http\Controllers\Backend\School_management\Session\SessionController;
 use App\Http\Controllers\Backend\School_management\SubjectTeacherAssent\SubjectTeacherAssentController;
 use App\Http\Controllers\Backend\School_management\Admit\AdmitController;
+use App\Http\Controllers\Backend\School_management\Alumni\AlumniController;
 use App\Http\Controllers\Backend\School_management\Id_card\IdCardController;
 use App\Http\Controllers\Backend\School_management\Marksheet\MarksheetController;
 use App\Http\Controllers\Backend\School_management\DailyClass\DailyClassController;
@@ -345,6 +346,33 @@ Route::prefix('daily_class')->middleware(['auth:admin', 'adminCheck:0'])->group(
 
 });
 
+
+//Add Alumni for admin
+Route::prefix('alumni')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
+    Route::get('index', [AlumniController::class,"index"])->name('admin.alumni.index');
+    Route::get('create', [AlumniController::class,"create"])->name('admin.alumni.create');
+    Route::post('store', [AlumniController::class,"store"])->name('admin.alumni.store');
+    Route::get('edit/{id}', [AlumniController::class,"edit"])->name('admin.alumni.edit');
+    Route::post('update/{id}', [AlumniController::class,"update"])->name('admin.alumni.update');
+    Route::post('delete', [AlumniController::class,"destroy"])->name('admin.alumni.delete');
+    Route::get('/status/{id}', [AlumniController::class, 'status'])->name('admin.alumni.status');
+
+    Route::post('alumni-change-password', [AlumniController::class,"changePassword"])->name('admin.alumni_change_password');
+
+    Route::get('requested-alumni', [AlumniController::class,"requestedAlumni"])->name('admin.requested_alumni.index');
+    Route::get('/alumni-status/{id}', [AlumniController::class, 'alumniStatus'])->name('admin.requested_alumni.status');
+});
+
+
+
+
+
+
+
+
+
+
+
 //Add Batch for admin
 Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [BatchController::class,"index"])->name('admin.batch.index');
@@ -356,6 +384,14 @@ Route::prefix('batch')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
     Route::get('delete/{id}', [BatchController::class,"destroy"])->name('admin.batch.delete');
     Route::get('/status/{id}', [BatchController::class, 'status'])->name('admin.batch.status');
 });
+
+
+
+
+
+
+
+
 
 //Admin Admit Card Make
 Route::prefix('admit')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
@@ -469,9 +505,6 @@ Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutin
 Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');
 //Syllabus
 Route::get('/get-syllabus', [SyllabusController::class, 'getSyllabus'])->name('get.syllabus');
-
-
-
 
 
 Route::get('get/current_session', [FrontendController::class, 'getCurrentSession']);
