@@ -1,5 +1,4 @@
 @extends('Frontend.layouts.master-layout')
-
 @section('head')
 <style>
     /* .gray-background{
@@ -201,9 +200,8 @@
 <!--============ its for header file call close =============-->
 <!-- Main content -->
 <!--Start Main Background Video Header -->
-<header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
 
-    <!--<div class="overlay"></div>-->
+<header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
     <!--Start Header Background video-->
     <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
         <source src="{{ $home_content->banner_video_show }}"type="video/mp4">
@@ -211,29 +209,108 @@
     <!--End Header Background video-->
     <div class="container-lg position-relative text-white py-5">
         <div class="text-center pt-5 py-md-5">
-                <div class="header-logo mb-5 pt-5">
-                    <img src="{{ $home_content->banner_image_show }}" style="height: 120px; width:250px"
-                        class="img-fluid" alt="">
-                </div>
-
-                <h2 class="fw-medium h3 text-uppercase" style="color: var(--header_text_color)">{!!  $home_content->banner_text  !!}</h2>
-                <div class="header-btn l mt-5 text-uppercase" style="letter-spacing: 2px;">
-                    {{-- @foreach ($buttons as $button)
-                    <a href="{{ $button->answer }}" class="btn btn-dark-cerulean btn-lg mb-2" style="color: var(--button2_text_color)">{{ $button->question }}</a>
-                    @endforeach --}}
-
-                    @foreach ($classes as $class)
+            <div class="header-logo mb-5 pt-5">
+                <img src="{{ $home_content->banner_image_show }}" style="height: 120px; width:250px"
+                    class="img-fluid" alt="">
+            </div>
+            <h2 class="fw-medium h3 text-uppercase" style="color: var(--header_text_color)">{!!  $home_content->banner_text  !!}</h2>
+            <div class="header-btn l mt-5 text-uppercase" style="letter-spacing: 2px;">
+                @foreach ($classes as $class)
                     <a href="{{ route('frontend.class_details',@$class->id) }}" class="btn btn-dark-cerulean btn-lg mb-2" style="color: var(--button2_text_color)">{{ $class->name }}</a>
-                    @endforeach
-                </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </header>
 
+
+{{-- <link rel="stylesheet" href="path/to/bootstrap.min.css">
+<style>
+    .class-slider-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 50px; /* Adjust as needed */
+        display: flex;
+        align-items: center;
+    }
+
+    .class-slider-wrapper {
+        display: flex;
+        animation: slide-left 20s linear infinite;
+    }
+
+    .class-card {
+        flex: 0 0 auto;
+        margin: 0 10px; /* Adjust space between cards */
+        padding: 20px;
+        /* background-color: #fff; */
+        background-color: var(--button2_color);
+        border-color: var(--button2_border_color) !important;
+        color: var(--button2_text_color);
+        /* color: #333; */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 150px; /* Adjust width as needed */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    .class-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+
+    @keyframes slide-left {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+
+</style>
+
+<header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
+    <!-- Start Header Background Video -->
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="{{ $home_content->banner_video_show }}" type="video/mp4">
+    </video>
+    <!-- End Header Background Video -->
+
+    <div class="container-lg position-relative text-white py-5">
+        <div class="text-center pt-5 py-md-5">
+            <!-- Logo Section -->
+            <div class="header-logo mb-5 pt-5">
+                <img src="{{ $home_content->banner_image_show }}" style="height: 120px; width: 250px;" class="img-fluid" alt="">
+            </div>
+
+            <!-- Header Text -->
+            <h2 class="fw-medium h3 text-uppercase" style="color: var(--header_text_color)">
+                {!! $home_content->banner_text !!}
+            </h2>
+
+            <!-- Card Section -->
+            <div class="header-btn mt-5 text-uppercase" style="letter-spacing: 2px;">
+                <div class="class-slider-container">
+                    <div id="class-slider" class="class-slider-wrapper">
+                        <!-- Class cards will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> --}}
+
+
+
+
 <!-- End  class List -->
 @isset($classLists)
 <div class="pb-1 pt-4 d-none mt-1 d-lg-block">
-    <h3 class="fw-bold mb-0 text-dark-cerulean text-center text-uppercase">{{ $home_content->university_location_title }}</h3>
+    <h3 class="fw-bold mb-0 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->class_list_title }}</h3>
     <div class="container flex-column p-0 d-flex mt-4">
         
         <section class="mdc-card__supporting-text p-0">
@@ -330,12 +407,11 @@
 
 
 
-
   <section class="ourteam-section">
     <!-- Founder and CEO -->
     <div class="container">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->founder_title }}</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->founder_title }}</h3>
         </div>
         <div class="row">
             @foreach ($founders as $k=> $founder)
@@ -364,37 +440,37 @@
 
 
    
-<!-- Modal -->
-<div class="modal fade" id="founderModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="founderrModalLabel{{ $k }}" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header"  style="background: var(--menu_color)">
-                <h5 class="modal-title" id="founderrModalLabel{{ $k }}" style="color: white">Founder Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body " style="background: var(--menu_color)">
-                <div class="card" >
-                    <div class="card-body text-center">
-                        <div class="teacher-details">
-                            <img class="img-fluid" src="{{ $founder->image_show }}" alt="Teacher Image">
-                            <h3>{{ $founder->name }}</h3>
-                            <h4>{{ @$founder->designation }}</h4>
-                            <h4>{!! @$founder->about !!}</h4>
-                            <ul class="social">
-                                <li><a href="{{ @$founder->facebook }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$founder->twitter }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$founder->google_plus }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$founder->linkedin }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
-                            </ul>
+        <!-- Modal -->
+        <div class="modal fade" id="founderModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="founderrModalLabel{{ $k }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"  style="background: var(--menu_color)">
+                        <h5 class="modal-title" id="founderrModalLabel{{ $k }}" style="color: var(--text_color)">Founder Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body text-center" style="color:var(--text_color)">
+                                <div class="teacher-details">
+                                    <img class="img-fluid" src="{{ $founder->image_show }}" alt="Teacher Image">
+                                    <h3>{{ $founder->name }}</h3>
+                                    <h4 style="color:var(--text_color)">{{ @$founder->designation }}</h4>
+                                    <h4>{!! @$founder->about !!}</h4>
+                                    <ul class="social">
+                                        <li><a href="{{ @$founder->facebook }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
+                                        <li><a href="{{ @$founder->twitter }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
+                                        <li><a href="{{ @$founder->google_plus }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                                        <li><a href="{{ @$founder->linkedin }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 
@@ -420,11 +496,10 @@
 
 
 
-
 <!--Start  Blog Content-->
 <div class="py-0 mt-3 pt-lg-220" style="padding-top: 0px !important;">
     <div class="container-lg">
-        <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->blog_title }}</h3>
+        <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->blog_title }}</h3>
         <div class="row g-3 blog_cat_ajax-show blog_topic_ajax-show blog_sort_by_ajax-show" id="alldata">
             @foreach ($blogs as $blog)
             <div class="col-xl-3 col-md-6" >
@@ -525,26 +600,10 @@
 <script src="{{ asset('public/frontend') }}/application/modules/frontend/views/themes/default/assets/js/main.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section class="ourteam-section">
     <div class="container mt-5">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->teacher_title }}</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->teacher_title }}</h3>
         </div>
         <div class="row">
             @foreach ($teachers as $k => $teacher)
@@ -567,46 +626,37 @@
                     </ul>
                 </div>
             </div>
-
-           
-<!-- Modal -->
-<div class="modal fade" id="teacherModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="teacherModalLabel{{ $k }}" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header"  style="background: var(--menu_color)">
-                <h5 class="modal-title" id="teacherModalLabel{{ $k }}" style="color: white">Teacher Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="background: var(--menu_color)">
-                <div class="card" >
-                    <div class="card-body text-center">
-                        <div class="teacher-details">
-                            <img class="img-fluid" src="{{ $teacher->image_show }}" alt="Teacher Image">
-                            <h3>{{ $teacher->name }}</h3>
-                            <h4>{{ @$teacher->user_designation->name }}</h4>
-                            <h4>{!! @$teacher->description !!}</h4>
-                            <ul class="social">
-                                <li><a href="{{ @$teacher->facebook_id }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$teacher->twitter_id }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$teacher->google_id }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                                <li><a href="{{ @$teacher->instagram_id }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
-                            </ul>
+            <!-- Modal -->
+            <div class="modal fade" id="teacherModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="teacherModalLabel{{ $k }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header"  style="background: var(--menu_color)">
+                            <h5 class="modal-title" id="teacherModalLabel{{ $k }}" style="color: var(--text_color)">Teacher Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="background: var(--menu_color)">
+                            <div class="card">
+                                <div class="card-body text-center" style="color:var(--text_color)">
+                                    <div class="teacher-details">
+                                        <img class="img-fluid" src="{{ $teacher->image_show }}" alt="Teacher Image">
+                                        <h3>{{ $teacher->name }}</h3>
+                                        <h4 style="color:var(--text_color)">{{ @$teacher->user_designation->name }}</h4>
+                                        <h4>{!! @$teacher->description !!}</h4>
+                                        <ul class="social">
+                                            <li><a href="{{ @$teacher->facebook_id }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
+                                            <li><a href="{{ @$teacher->twitter_id }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
+                                            <li><a href="{{ @$teacher->google_id }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                                            <li><a href="{{ @$teacher->instagram_id }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
             @endforeach
         </div>
 
@@ -624,23 +674,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--Start Counter-->
@@ -688,19 +721,11 @@
 <!--End Counter-->
 
 
-
-
-
-
-
-
-
-
 <section class="ourteam-section">
     <!-- Toppers -->
     <div class="container">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase">{{ $home_content->topper_title }}</h3>
+            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->topper_title }}</h3>
         </div>
         <div class="row">
             @foreach ($toppers as $topper)
@@ -736,14 +761,6 @@
 
       </div>
 </section>
-
-
-
-
-
-
-
-
 
 
 <!--Start Testimonial-->
@@ -949,7 +966,7 @@
     
     
     // showhide(sl);
-    </script>
+</script>
 </div>
 <!--======== main content close ==========-->
 
@@ -960,6 +977,37 @@
 
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+
+{{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const classSlider = document.getElementById('class-slider');
+        const classes = @json($classes);
+
+        function createClassCard(className, classId) {
+            const link = document.createElement('a');
+            link.href = `{{ url('class_details') }}/${classId}`;
+            link.className = 'class-card btn-dark-cerulean';
+            link.textContent = className;
+            return link;
+        }
+
+        function populateClassCards() {
+            classSlider.innerHTML = '';
+            classes.forEach(classItem => {
+                classSlider.appendChild(createClassCard(classItem.name, classItem.id));
+            });
+        }
+
+        function duplicateClassCardsForLoop() {
+            const originalContent = classSlider.innerHTML;
+            classSlider.innerHTML += originalContent;
+        }
+
+        populateClassCards();
+        duplicateClassCardsForLoop();
+    });
+</script> --}}
+
 <script>
 
  $(".course_price_cart").change(function(e){

@@ -43,7 +43,8 @@ class HomeContentController extends Controller
         if($home_content == null){
             $home_content = New HomeContentSetup;
         }
-        $home_content->university_location_title=$request->university_location_title;
+        // $home_content->university_location_title=$request->university_location_title;
+        $home_content->class_list_title=$request->class_list_title;
         $home_content->save();
 
         if($request->class_id){
