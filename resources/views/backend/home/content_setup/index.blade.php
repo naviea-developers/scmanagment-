@@ -230,11 +230,20 @@ form label{
                                   
                                     {{-- university Location start --}}
 
-                                    <div class="row mt-4">
+                                    {{-- <div class="row mt-4">
                                         <div class="col-sm-12 ">
                                             <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
                                             <div class="mg-t-10 mg-sm-t-0">
                                             <input type="text" value="{{ $home_content->university_location_title ?? '' }}" name="university_location_title" class="form-control" placeholder="Enter Location Title">
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12 ">
+                                            <label class=" form-control-label">Title:<span class="tx-danger"></span></label>
+                                            <div class="mg-t-10 mg-sm-t-0">
+                                            <input type="text" value="{{ $home_content->class_list_title ?? '' }}" name="class_list_title" class="form-control" placeholder="Enter Class Title">
                                             </div>
                                         </div>
                                     </div>

@@ -1,5 +1,5 @@
 @extends('user.layouts.master-layout')
-@section('title','- Update Class Test')
+@section('title','- edit Class exam')
 @section('head')
 <link href="{{ asset('public/backend/lib/summernote/summernote-bs4.css') }}" rel="stylesheet">
 <style>
@@ -118,7 +118,7 @@
                             </div> --}}
 
                                 <div class="col-sm-4 mt-3">
-                                    <label class="form-control-label">Pdf File: </label>
+                                    <label class="form-control-label"><b>Pdf File: </b></label>
                                     <div class=" mg-t-10 mg-sm-t-0">
                                         <input type="file" name="class_exampdf" value="{{ old('class_exampdf') }}" class="form-control" accept="application/pdf, application/vnd.ms-excel" placeholder="Enter home_work pdf">
                                     </div>
@@ -132,14 +132,14 @@
                                 </div>
 
                                 <div class="col-sm-4 mt-3">
-                                    <label class="form-control-label"><b>Class Test Date :</b></label>
+                                    <label class="form-control-label"><b>Date :</b></label>
                                     <div class="mg-t-10 mg-sm-t-0">
                                         <input type="date" name="date" value="{{ @$class_test->date }}" class="form-control" placeholder="enter class test date">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-4 mt-3">
-                                    <label class="form-control-label"><b>Class Test Duration :</b></label>
+                                    <label class="form-control-label"><b>Duration :</b></label>
                                     <div class="mg-t-10 mg-sm-t-0">
                                         <input type="time" name="class_test_duration" value="{{ @$class_test->class_test_duration }}" class="form-control" placeholder="enter class test duration">
                                     </div>

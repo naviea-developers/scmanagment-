@@ -5,7 +5,7 @@
 @endsection
 @section('main_content')
 
-    <div class="right_section">
+    <div class="right_section" style="color:var(--seller_text_color)">
         <div>
             <h4>My Notification</h4>
         </div>
@@ -49,15 +49,9 @@
                   </div>
                 </div><!-- media -->
               </a>
-              
               @else
-              
+
               @endif
-
-
-
-
-
 
                 
             @endforeach

@@ -5,7 +5,7 @@
 @endsection
 @section('main_content')
 
-<div class="passwodBox mb-3" style="background-color: #07477D; color:white">
+<div class="passwodBox mb-3" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
     <di class="col-md-12">
         <div class="row">
             <div class="school-name text-center">
@@ -17,7 +17,8 @@
             </div>
             <hr>
             <div class="class-routine">
-                <div class="col-md-12 mt-4">                
+                <div class="col-md-12 mt-4">  
+                    <p class=""><b>Title: </b> {{  @$details->name }}</p>              
                     <p class=""><b>Lession: </b> {{ $details->lession->name }}</p>
                     <p class=""><b>Page: </b> {{ $details->page_number }}</p>
                     @if (@$details->class_exampdf)

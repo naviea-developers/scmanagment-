@@ -18,6 +18,7 @@
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
             {{-- <th scope="col">Session</th> --}}
+            <th scope="col">Title</th>
             <th scope="col">Date</th>
             <th scope="col">Class</th>
             <th scope="col">Subject</th>
@@ -35,6 +36,7 @@
 
             <tr>
             <td>{{ $i++ }}</td>
+            <td>{{  @$home_work->name }}</td>
             {{-- <td>{{  @$home_work->session->start_year }} - {{  @$home_work->session->end_year }}</td> --}}
             <td>{{date('d,F,Y',strtotime(@$home_work->created_at))}}</td>
             <td>{{  @$home_work->class->name }}</td>
@@ -49,9 +51,7 @@
             </td>
             </tr>
 
-
-            <!--_-- ########### Start Delete Category MODAL ############---->
-
+            {{-- <!--_-- ########### Start Delete Category MODAL ############---->
             <div id="delete-modal"  class="modal">
                 <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content tx-size-sm">
@@ -72,10 +72,7 @@
                 </div><!-- modal-content -->
                 </div><!-- modal-dialog -->
             </div><!-- modal -->
-
-            <!--_-- ########### Start Delete Category MODAL ############---->
-
-
+            <!--_-- ########### Start Delete Category MODAL ############----> --}}
 
             @endforeach
             @endif

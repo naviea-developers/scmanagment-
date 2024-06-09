@@ -109,13 +109,13 @@
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Class Test Date :</b></label>
+                                <label class="form-control-label"><b>Date :</b></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input type="date" name="date" value="{{ old('date') }}" class="form-control" placeholder="enter class test date">
                                 </div>
                             </div>
                             <div class="col-sm-4 mt-3">
-                                <label class="form-control-label"><b>Class Test Duration :</b></label>
+                                <label class="form-control-label"><b>Duration :</b></label>
                                 <div class="mg-t-10 mg-sm-t-0">
                                     <input type="time" name="class_test_duration" value="{{ old('class_test_duration') }}" class="form-control" placeholder="enter class test duration">
                                 </div>

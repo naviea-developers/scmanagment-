@@ -1,5 +1,5 @@
 @section('title')
-Admin - all Ebook Video
+Admin - all daily class
 @endsection
 
 @extends('Backend.layouts.layouts')

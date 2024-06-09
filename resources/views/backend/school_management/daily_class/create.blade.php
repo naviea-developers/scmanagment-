@@ -1,5 +1,5 @@
 @section('title')
-    Admin - Add New Ebook Video
+    Admin - Add New daily class
 @endsection
 @extends('Backend.layouts.layouts')
 @section('style')

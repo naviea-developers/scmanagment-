@@ -1,5 +1,5 @@
 @section('title')
-    Admin - Add New Admission
+    Admin - Admission Details
 @endsection
 
 @extends('Backend.layouts.layouts')

@@ -1,5 +1,5 @@
 @extends('Frontend.layouts.master-layout')
-@section('title','- E-video Details')
+@section('title','- daily class video list Details')
 @section('head')
 <style>
     .preview-accordion .accordion-button::after {

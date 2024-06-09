@@ -388,10 +388,7 @@
         </li><!-- medical-torism-menu-item -->
 
 
-
-  
-
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'coupon')?'show-sub':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Coupon</span>
@@ -405,9 +402,7 @@
                 <li class="sub-item"><a href="{{ route('admin.coupon.index') }}" class="sub-link {{(Route::is('admin.coupon.index') || Route::is('admin.coupon.edit')) ?'active':''}}">Manage Coupon</a>
                 </li>
             </ul>
-        </li><!-- br-Coupon-item -->
-
-
+        </li><!-- br-Coupon-item --> --}}
 
 
         <li class="br-menu-item">
@@ -494,7 +489,7 @@
         </li><!-- br-blog-item -->
 
 
-        <li class="br-menu-item">
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'show-sub':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Currency</span>
@@ -509,7 +504,7 @@
                 </li>
             </ul>
 
-        </li><!-- package-menu-item -->
+        </li><!-- package-menu-item --> --}}
 
 
 

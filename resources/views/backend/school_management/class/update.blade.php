@@ -78,7 +78,7 @@
 
                         <div class="row mt-4">
                           <div class="col-sm-12">
-                              <label class="form-control-label"><b>School Gargent Policy </b><span class="tx-danger">*</span></label>
+                              <label class="form-control-label"><b>School Guardian Policy </b><span class="tx-danger">*</span></label>
                               <div class="mg-t-10 mg-sm-t-0">
                                   <textarea id="summernote_two" name="gargent_policy">{{ @$class->gargent_policy }}</textarea>
                               </div>

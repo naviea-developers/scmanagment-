@@ -1,5 +1,5 @@
 @section('title')
-    Admin - Update Item
+    Admin - edit gallery
 @endsection
 
 @extends('Backend.layouts.layouts')

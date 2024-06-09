@@ -1,6 +1,6 @@
 @extends('Backend.layouts.layouts')
 
-@section('title', 'Edit Schedule')
+@section('title', 'Edit exam Schedule')
 @section('style')
 <style>
     .select2-container--default .select2-selection--single {

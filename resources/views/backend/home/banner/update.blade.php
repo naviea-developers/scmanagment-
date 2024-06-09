@@ -79,7 +79,7 @@
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
                                 <select id="cat"  class="form-control" name="type">
                                     <option value="">select page</option>
-                                    <option @if($banner->type == 'course')  Selected @endif value="course">Course</option>
+                                    {{-- <option @if($banner->type == 'course')  Selected @endif value="course">Course</option> --}}
                                     <option @if($banner->type == 'event')  Selected @endif value="event">Event</option>
                                     <option @if($banner->type == 'blog')  Selected @endif value="event">Blog</option>
                                     <option @if($banner->type == 'contact')  Selected @endif value="contact">Contact</option>
