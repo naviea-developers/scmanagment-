@@ -51,9 +51,7 @@
             </td>
             </tr>
 
-
-            <!--_-- ########### Start Delete Category MODAL ############---->
-
+            {{-- <!--_-- ########### Start Delete Category MODAL ############---->
             <div id="delete-modal"  class="modal">
                 <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content tx-size-sm">
@@ -74,10 +72,7 @@
                 </div><!-- modal-content -->
                 </div><!-- modal-dialog -->
             </div><!-- modal -->
-
-            <!--_-- ########### Start Delete Category MODAL ############---->
-
-
+            <!--_-- ########### Start Delete Category MODAL ############----> --}}
 
             @endforeach
             @endif

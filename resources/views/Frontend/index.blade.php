@@ -166,8 +166,6 @@
     text-emphasis-color: transparent;
     font-weight: 600;
     }
-
-
     /* Collabration Text */
 </style>
 @endsection
@@ -223,7 +221,6 @@
     </div>
 </header>
 
-
 {{-- <link rel="stylesheet" href="path/to/bootstrap.min.css">
 <style>
     .class-slider-container {
@@ -270,7 +267,6 @@
         }
     }
 
-
 </style>
 
 <header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
@@ -293,7 +289,7 @@
             </h2>
 
             <!-- Card Section -->
-            <div class="header-btn mt-5 text-uppercase" style="letter-spacing: 2px;">
+            <div class="header-btn mt-4 text-uppercase" style="letter-spacing: 2px;">
                 <div class="class-slider-container">
                     <div id="class-slider" class="class-slider-wrapper">
                         <!-- Class cards will be populated here by JavaScript -->
@@ -303,6 +299,7 @@
         </div>
     </div>
 </header> --}}
+
 
 
 
@@ -370,7 +367,6 @@
 </div>
   <!-- End class List -->
 
-
   <style>
     .teacher-details img {
         border-radius: 50%;
@@ -404,7 +400,6 @@
         color: var(--hover_color);
     }
 </style>
-
 
 
   <section class="ourteam-section">
@@ -493,7 +488,6 @@
 
       </div>
 </section>
-
 
 
 <!--Start  Blog Content-->
@@ -720,7 +714,6 @@
 </div>
 <!--End Counter-->
 
-
 <section class="ourteam-section">
     <!-- Toppers -->
     <div class="container">
@@ -831,7 +824,6 @@
 <!--End Testimonial-->
 
 
-
 <!--End Pricing Table-->
 <div class="mb-5 overflow-hidden position-relative">
     <div class="container-lg">
@@ -848,9 +840,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
@@ -1015,41 +1004,32 @@
     e.preventDefault();
     let id = $(this).val();
     console.log(id);
-
   });
 
+
 $.ajaxSetup({
-
 headers: {
-
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
 }
-
 });
+
 
 //Home Sub Category
 $(".home_on_click_subcategory").click(function(e){
   e.preventDefault();
   var id = $(this).attr('home_subcat_id');
   $.ajax({
-
     type:'GET',
-
      url:"{{ url('home_course-subcategory-show-ajax') }}/"+id,
-
     // data:{id:id},
-
     success:function(data){
     //  document.getElementById("home-proud-hide").style.visibility = "hidden";
       $(".home_course_subcat_ajax-show").html(data);
     }
-
   });
-
-
-
 });
+
+
 $('.change_cart_val').on('change',function(){
     console.log(this.id);
     if(this.id == "course_subcribe"+$(this).attr('course_id')){
@@ -1059,21 +1039,8 @@ $('.change_cart_val').on('change',function(){
         $('.course_subcribe'+$(this).attr('course_id')).hide();
         $('.course_cart_price'+$(this).attr('course_id')).show();
     }
-    //if($(th)
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection
 
