@@ -1,9 +1,7 @@
 @section('title')
     Admin - Add New Designation
 @endsection
-
 @extends('Backend.layouts.layouts')
-
 @section('main_contain')
 
     <!-- ########## START: MAIN PANEL ########## -->
@@ -49,7 +47,6 @@
                               </div>
                           </div>
                       </div>
-
 
                         {{-- <div class="row">
                             <div class="col-sm-12 mt-3">

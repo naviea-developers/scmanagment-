@@ -17,7 +17,8 @@
             </div>
             <hr>
             <div class="class-routine">
-                <div class="col-md-12 mt-4">                
+                <div class="col-md-12 mt-4">  
+                    <p class=""><b>Title: </b> {{  @$details->name }}</p>              
                     <p class=""><b>Lession: </b> {{ $details->lession->name }}</p>
                     <p class=""><b>Page: </b> {{ $details->page_number }}</p>
                     @if (@$details->class_exampdf)

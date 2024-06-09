@@ -17,6 +17,7 @@
         <thead >
         <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
+            <th scope="col">Title</th>
             <th scope="col">Subject Name</th>
             <th scope="col">Class Test Date</th>
             <th scope="col">Class Test Duration</th>
@@ -33,6 +34,7 @@
 
             <tr>
             <td>{{ $i++ }}</td>
+            <td>{{  @$class_test->name }}</td>
             {{-- <td>{{  @$home_work->session->start_year }} - {{  @$home_work->session->end_year }}</td> --}}
             <td>{{  @$class_test->subject->name }}</td>
             <td>{{date('d,F,Y',strtotime(@$class_test->date))}}</td>

@@ -29,6 +29,7 @@
         <thead >
           <tr class="" style="background-color: var(--seller_frontend_color);color:var(--seller_text_color)">
             <th scope="col">SL</th>
+            <th scope="col">Title</th>
             <th scope="col">Class Name</th>
             <th scope="col">Subject</th>
             <th scope="col">Lesson</th>
@@ -45,6 +46,7 @@
             @foreach ($daily_classes as $daily_class)
               <tr>
                   <td>{{ $i++ }}</td>
+                  <td>{{ @$daily_class->name }}</td>
                   <td>{{ @$daily_class->class->name }}</td>
                   <td>{{ @$daily_class->subject->name }}</td>
                   <td>{{ @$daily_class->lession->name }}</td>

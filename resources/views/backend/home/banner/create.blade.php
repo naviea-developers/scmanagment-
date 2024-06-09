@@ -73,7 +73,7 @@
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
                                 <select id="cat"  class="form-control" name="type">
                                     <option value="">select page</option>
-                                    <option value="course">Course</option>
+                                    {{-- <option value="course">Course</option> --}}
                                     <option value="event">Event</option>
                                     <option value="blog">Blog</option>
                                     <option value="contact">Contact</option>
