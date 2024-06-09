@@ -1,39 +1,7 @@
 @extends('Frontend.layouts.master-layout')
 @section('title','- Teachers')
 @section('head')
-<style>
-    .teacher-details img {
-        border-radius: 50%;
-        max-width: 150px;
-        margin-bottom: 20px;
-    }
-    .teacher-details h3 {
-        margin-top: 10px;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .teacher-details h4 {
-        font-size: 20px;
-        color: rgb(16, 15, 15);
-        margin-bottom: 20px;
-    }
-    .teacher-details .social {
-        padding: 0;
-        list-style: none;
-        display: flex;
-        justify-content: center;
-    }
-    .teacher-details .social li {
-        margin: 0 5px;
-    }
-    .teacher-details .social a {
-        color: var(--text_color);
-        font-size: 24px;
-    }
-    .teacher-details .social a:hover {
-        color: var(--hover_color);
-    }
-</style>
+
 @endsection
 @section('main_contend')
 @include('Frontend.layouts.parts.header-menu')

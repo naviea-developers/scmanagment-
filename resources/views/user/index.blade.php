@@ -98,7 +98,7 @@
                         </div>
 
                     {{-- instructor --}}
-                    @elseif (auth()->user()->type == 2)
+                    @elseif (auth()->user()->type == 2 || auth()->user()->type == 8 || auth()->user()->type == 9)
                         <div class="col-md-4 mt-3">
                         <label><b>Gender:</b></label>
                         <p>@if ( auth()->user()->gender == '0')
@@ -122,11 +122,18 @@
                             <label><b>Designation:</b></label>
                             <p>{{ auth()->user()->designation }}</p>
                         </div>
+
+                        @if (auth()->user()->type == 9)
+                        <div class="col-md-4 mt-3">
+                            <label><b>Company Name:</b></label>
+                            <p>{{ auth()->user()->company_name }}</p>
+                        </div>
+                        @elseif (auth()->user()->type == 2 || auth()->user()->type == 8)
                         <div class="col-md-4 mt-3">
                             <label><b>Institution:</b></label>
                             <p>{{ auth()->user()->institution }}</p>
                         </div>
-
+                        @endif
 
                     @else
 
@@ -134,7 +141,7 @@
 
                     @if (auth()->user()->type == 1)
                         
-                    @else
+                    @elseif (auth()->user()->type == 2 || auth()->user()->type == 8)
                     <div class="col-md-4 mt-3">
                         <label><b>Qualification:</b></label>
                         <p>{{ auth()->user()->qualification }}</p>
@@ -179,6 +186,8 @@
                         </div>
                    
                         @else
+
+                        @if (auth()->user()->type == 2 || auth()->user()->type == 8)
                         <div class="col-md-4 mt-3">
                             <label><b>Country:</b></label>
                             @if (auth()->user()->country == '1')
@@ -684,6 +693,7 @@
                             @endif
                             </select>
                         </div>
+                        @endif
                     @endif
 
                     <div class="col-md-4 mt-3">

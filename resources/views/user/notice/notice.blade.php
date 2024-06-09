@@ -21,7 +21,7 @@
     {{-- success message start --}}
     <div class="right_section">
         <div>
-            <h4 style="color: var(--seller_text_color)">Notice</h4>
+            <h4 style="color: black">Notice</h4>
             {{-- <span style="color: white">Confirm Code.</span> --}}
         </div>
     </div>
@@ -32,7 +32,7 @@
                     <div class="col-md-4 mt-3">
                         <div class="card card-body" style="background-color:var(--seller_frontend_color);height: 100%">
                             <a href="{{ route('frontend.notice_list') }}" style="color:var(--seller_text_color)">
-                                <p class="text-center"><b>{{ $notice->noticeType->name }}</b></p>
+                                <p class="text-center"><b>{{ @$notice->noticeType->name }}</b></p>
                                 <h5 class="mb-3">Title: {{ $notice->name }}</h5>
                                 {{-- <p class="" style="color: black; text-align: justify;"><b>Description:</b> {{ $notice->description }}</p> --}}
                                 <p><a href="{{ route('frontend.notice_pdf_download',$notice->id) }}">click here to download the PDF file.</a></p>

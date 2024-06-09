@@ -69,18 +69,30 @@ class UserLoginController extends Controller
         $user->password =$request->password;
 
         $user->gender = $request->gender;
-        $user->qualification = $request->qualification;
-        $user->experience = $request->experience;
-        $user->language = $request->language;
-        $user->country = $request->country;
 
-        $user->continent_id = $request->continent_id;
+        $user->session_id = $request->session_id ?? 0;
+        $user->class_id = $request->class_id ?? 0;
+        $user->reg_fee_id = $request->reg_fee_id ?? 0;
+        $user->roll_number = $request->roll_number;
+
+        $user->qualification = $request->qualification ?? '';
+        $user->experience = $request->experience ?? '';
+        $user->language = $request->language ?? '';
+        $user->country = $request->country ?? '';
+
+        $user->continent_id = $request->continent_id ?? 0;
         if($request->consultant_status=='0'){
             $user->status = $request->consultant_status;
         }
 
-        $user->address = $request->address;
+        $user->address = $request->address ?? '';
         $user->type = $request->type;
+        $user->is_alumni = 0;
+        $user->save();
+
+        // Generate a unique ID in the format TYYYYMMDD(user_id)
+        $uniqueId = 'A' . date('Y') . $user->id;
+        $user->unique_id = $uniqueId;
         $user->save();
 
         return redirect('/sign-in')->with('success', 'You are successfully Registered. Now You can login. Thank You.');
@@ -120,7 +132,7 @@ class UserLoginController extends Controller
         if($user)
         {
             $remember_me = $request->has('remember_me') ? true : false;
-            if($user->type == 1 || $user->type == 2 || $user->type == 3 || $user->type == 4 || $user->type == 5 || $user->type == 6 || $user->type == 7 || $user->type == 8){
+            if($user->type == 1 || $user->type == 2 || $user->type == 3 || $user->type == 4 || $user->type == 5 || $user->type == 6 || $user->type == 7 || $user->type == 8 || $user->type == 9){
                 if(auth()->attempt(['email'=>$request->email,'password'=>$request->password],$remember_me)){
                     $UserIP=$_SERVER['REMOTE_ADDR'];
                     $browser_address=$_SERVER['HTTP_USER_AGENT'];

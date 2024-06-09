@@ -81,7 +81,7 @@ Route::group(['middleware' => 'redirectIfAuthenticated'], function () {
     Route::get('/seller-register', [FrontendController::class, 'sellerRegister'])->name('frontend.seller_register');
     Route::get('/affiliate-register', [FrontendController::class, 'affiliateRegister'])->name('frontend.affiliate_register');
     Route::get('/consultant-register', [FrontendController::class, 'consultantRegister'])->name('frontend.consultant_register');
-
+    Route::get('/alumni-register', [FrontendController::class, 'alumniRegister'])->name('frontend.alumni_register');
 });
 
 Route::post('/sign-in', [UserLoginController::class, 'userSignin'])->name('frontend.sign_in');
@@ -109,9 +109,12 @@ Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about
 Route::get('/learner', [FrontendController::class, 'learner'])->name('frontend.learner');
 //Instructor Page Route
 Route::get('/instructor', [FrontendController::class, 'instructor'])->name('frontend.instructor');
+//topper student
 Route::get('/topper-student-list', [FrontendController::class, 'topperStudent'])->name('frontend.topper_student');
 Route::get('/topper-details', [FrontendController::class, 'topperStudentDetails'])->name('topper.details');
-
+//alumni student
+Route::get('/alumni', [FrontendController::class, 'alumni'])->name('frontend.alumni');
+Route::get('/reg-alumni', [FrontendController::class, 'alumniRegister'])->name('frontend.alumni_reg');
 //Enterprise or Contact Page Route
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 Route::middleware(['userCheck:1'])->group(function () {

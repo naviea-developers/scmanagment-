@@ -335,9 +335,13 @@
             </li>
             <!-- student notification end -->
 
+            {{-- <li class="nav-item m-1 signin-li">
+                <a href="{{ route('frontend.alumni_reg') }}" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: red ; color:var(--button2_text_color)">
+                    Alumni
+                </a>
+            </li> --}}
             <li class="nav-item m-1 signin-li">
                 <a href="{{ route('frontend.student_admission') }}" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: red ; color:var(--button2_text_color)">
-                {{-- <a href="" class="btn me-2 text-uppercase fw-bold py-1 px-2 d-flex align-items-center" style="background-color: var(--button2_color)!important ; color:var(--button2_text_color)"> --}}
                     Admission
                 </a>
             </li>
@@ -407,6 +411,8 @@
                                         Consultant
                                     @elseif (auth()->user()->type=='8')
                                         Staff
+                                    @elseif (auth()->user()->type=='9')
+                                        Alumni
                                     @endif
                                         {{-- Student Account --}}
                                     </p>
@@ -432,11 +438,11 @@
                     </a>
                 </li>
 
-                {{-- <li class="nav-item ml-md-3 signup-li">
-                    <a href="{{ route('frontend.register') }}" class="btn-join btn-join-alabin btn fw-bold text-dark-cerulean text-uppercase d-flex align-items-center" style="background-color:var(--button2_color)!important ; color:var(--button2_text_color)">
-                        SIGN UP
+                <li class="nav-item ml-md-3 signup-li">
+                    <a href="{{ route('frontend.alumni_register') }}" class="btn-join btn-join-alabin btn fw-bold text-dark-cerulean text-uppercase d-flex align-items-center" style="background-color:var(--button2_color)!important ; color:var(--button2_text_color)">
+                        ALUMNI SIGN UP
                     </a>
-                </li> --}}
+                </li>
             @endif
 
         </ul>
