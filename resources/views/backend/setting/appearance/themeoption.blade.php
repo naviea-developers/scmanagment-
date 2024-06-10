@@ -100,7 +100,6 @@ li {
 										{{-- success message start --}}
 
 										<!--Data Entry Form-->
-										{{-- <form novalidate="" data-validate="parsley" id="DataEntry_formId"> --}}
 										<form novalidate="" method="post" action="{{ route('backend.theme-options-color-save') }}"  data-validate="parsley" id="DataEntry_formId" enctype="multipart/form-data">
 											@csrf
 											<div class="row">

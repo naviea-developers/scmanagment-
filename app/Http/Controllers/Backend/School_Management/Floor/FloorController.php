@@ -16,6 +16,74 @@ class FloorController extends Controller
         return view("Backend.school_management.floor.index",$data);
     }
 
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'name',
+            2 => 'status',
+        );
+        $totalData = Floor::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = Bulding::query();
+        if(!empty($search)){
+ 
+            $datalist =$datalist->where("name","LIKE","%{$search}%");
+           
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = $data_v->id;
+                $nestedData['name'] = $data_v->name;
+              
+ 
+                $nestedData['status'] = '';
+                // if ($data_v->status == 0) {
+                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-warning">Inactive</a>';
+                // } elseif ($data_v->status == 1) {
+                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-success">Active</a>';
+                // }
+
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-warning change-status">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-success change-status">Active</a>';
+                }
+                
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.bulding.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+ 
+        return json_encode($json_data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

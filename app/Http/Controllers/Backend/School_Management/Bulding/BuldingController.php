@@ -15,6 +15,7 @@ class BuldingController extends Controller
         
         return view("Backend.school_management.bulding.manage");
     }
+    
     function ajaxData(Request $request){
         $columns = array(
             0 => 'id',
