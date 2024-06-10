@@ -23,7 +23,7 @@
             <div class="table-wrapper">
                 <table id="data_table_list" class="table display responsive nowrap">
                     <thead>
-                        <tr class="text-center">
+                        <tr class="">
                             <th class="wd-10p">Id</th>
                             <th class="wd-15p">Current Session</th>
                             <th class="wd-15p">Session</th>
