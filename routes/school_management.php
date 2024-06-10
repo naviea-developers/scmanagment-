@@ -148,12 +148,13 @@ Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //Add Bulding for admin
 Route::prefix('bulding')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [BuldingController::class,"index"])->name('admin.bulding.index');
+    Route::post('ajax-bulding', [BuldingController::class,"ajaxData"])->name('admin.bulding.ajax');
     Route::get('create', [BuldingController::class,"create"])->name('admin.bulding.create');
     Route::post('store', [BuldingController::class,"store"])->name('admin.bulding.store');
     Route::get('edit/{id}', [BuldingController::class,"edit"])->name('admin.bulding.edit');
     Route::post('update/{id}', [BuldingController::class,"update"])->name('admin.bulding.update');
     Route::post('delete', [BuldingController::class,"destroy"])->name('admin.bulding.delete');
-    Route::get('/status/{id}', [BuldingController::class, 'status'])->name('admin.bulding.status');
+    Route::post('/status/{id}', [BuldingController::class, 'status'])->name('admin.bulding.status');
 });
 
 //Add floor for admin
