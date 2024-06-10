@@ -306,12 +306,12 @@
 
 <!-- End  class List -->
 @isset($classLists)
-<div class="pb-1 pt-4 d-none mt-1 d-lg-block">
+<div class="pb-1 pt-1 d-none mt-1 d-lg-block">
     <h3 class="fw-bold mb-0 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->class_list_title }}</h3>
     <div class="container flex-column p-0 d-flex mt-4">
         
         <section class="mdc-card__supporting-text p-0">
-        <section class="d-lg-flex cities-card-top py-3 justify-content-between">
+        <section class="d-lg-flex cities-card-top py-0 justify-content-between">
             @foreach (@$classLists as $k=>$classList)
                 @if ($k< 3)
                     <div class="card w-sm-auto mr-4 mt-1 ml-auto mr-auto mr-md-2 ml-md-0" style="margin-right: 7px;">
@@ -329,7 +329,7 @@
         </section>
         </section>
     </div>
-    <div class="container d-flex flex-column mb-5 p-0">
+    <div class="container d-flex flex-column mb-1 p-0">
         <section class="mdc-card__supporting-text p-0 ">
         <section class="d-lg-flex cities-card-bottom">
             @foreach ($classLists as $k=>$classList)
@@ -368,76 +368,68 @@
   <!-- End class List -->
 
 
-
   <section class="ourteam-section">
     <!-- Founder and CEO -->
     <div class="container">
         <div class="">
-            <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->founder_title }}</h3>
+            <h3 class="fw-bold mb-1 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->founder_title }}</h3>
         </div>
         <div class="row">
             @foreach ($founders as $k=> $founder)
 
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="our-team">
-                <div  data-toggle="modal" data-target="#founderModal{{ $k }}">
-                    <div class="picture">
-                        <img class="img-fluid" src="{{ @$founder->image_show }}">
-                    </div>
-                    <div class="team-content">
-                        <h3 class="name" style="color: var(--text_color)">{{ @$founder->name }}</h3>
-                        <h4 class="title" style="color: var(--text_color)">{{ @$founder->designation }}</h4>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="our-team">
+                        <div  data-toggle="modal" data-target="#founderModal{{ $k }}">
+                            <div class="picture">
+                                <img class="img-fluid" src="{{ @$founder->image_show }}">
+                            </div>
+                            <div class="team-content">
+                                <h3 class="name" style="color: var(--text_color)">{{ @$founder->name }}</h3>
+                                <h4 class="title" style="color: var(--text_color)">{{ @$founder->designation }}</h4>
+                            </div>
+                        </div>
+                    <ul class="social">
+                        <li><a href="{{ @$founder->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
+                        <li><a href="{{ @$founder->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
+                        <li><a href="{{ @$founder->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                        <li><a href="{{ @$founder->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                    </ul>
                     </div>
                 </div>
-              <ul class="social">
-                <li><a href="{{ @$founder->facebook }}" class="fab fa-facebook" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->twitter }}" class="fab fa-twitter" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->google_plus }}" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                <li><a href="{{ @$founder->linkedin }}" class="fab fa-linkedin" aria-hidden="true"></a></li>
-              </ul>
-            </div>
-          </div>
 
-
-
-   
-        <!-- Modal -->
-        <div class="modal fade" id="founderModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="founderrModalLabel{{ $k }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header"  style="background: var(--menu_color)">
-                        <h5 class="modal-title" id="founderrModalLabel{{ $k }}" style="color: var(--text_color)">Founder Details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="background: var(--menu_color)">
-                        <div class="card">
-                            <div class="card-body text-center" style="color:var(--text_color)">
-                                <div class="teacher-details">
-                                    <img class="img-fluid" src="{{ $founder->image_show }}" alt="Teacher Image">
-                                    <h3>{{ $founder->name }}</h3>
-                                    <h4 style="color:var(--text_color)">{{ @$founder->designation }}</h4>
-                                    <h4>{!! @$founder->about !!}</h4>
-                                    <ul class="social">
-                                        <li><a href="{{ @$founder->facebook }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
-                                        <li><a href="{{ @$founder->twitter }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
-                                        <li><a href="{{ @$founder->google_plus }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
-                                        <li><a href="{{ @$founder->linkedin }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
-                                    </ul>
+                <!-- Modal -->
+                <div class="modal fade" id="founderModal{{ $k }}" tabindex="-1" role="dialog" aria-labelledby="founderrModalLabel{{ $k }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header"  style="background: var(--menu_color)">
+                                <h5 class="modal-title" id="founderrModalLabel{{ $k }}" style="color: var(--text_color)">Founder Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <div class="card-body text-center" style="color:var(--text_color)">
+                                        <div class="teacher-details">
+                                            <img class="img-fluid" src="{{ $founder->image_show }}" alt="Teacher Image">
+                                            <h3>{{ $founder->name }}</h3>
+                                            <h4 style="color:var(--text_color)">{{ @$founder->designation }}</h4>
+                                            <h4>{!! @$founder->about !!}</h4>
+                                            <ul class="social">
+                                                <li><a href="{{ @$founder->facebook }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
+                                                <li><a href="{{ @$founder->twitter }}" target="_blank" class="fab fa-twitter" aria-hidden="true"></a></li>
+                                                <li><a href="{{ @$founder->google_plus }}" target="_blank" class="fab fa-google-plus" aria-hidden="true"></a></li>
+                                                <li><a href="{{ @$founder->linkedin }}" target="_blank" class="fab fa-linkedin" aria-hidden="true"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-
-
-
-          @endforeach
+            @endforeach
         </div>
 
         {{-- <div class="text-center mt-0 mb-4 firstbutton">
@@ -453,7 +445,7 @@
             </a>
         </div> --}}
 
-      </div>
+    </div>
 </section>
 
 
@@ -465,17 +457,17 @@
             @foreach ($blogs as $blog)
             <div class="col-xl-3 col-md-6" >
                 <!--Start Course Card-->
-                <div class="course-card rounded bg-light position-relative overflow-hidden border" style="height: 100%">
+                <div class="course-card rounded position-relative overflow-hidden border" style="background-color: var(--package1_color)!important; height: 100%">
                     <!--Start Course Image-->
                     <a href="{{ route('frontend.blog_details', $blog->id) }}" class="course-card_img d-block pt-4 px-4">
                         <img  src="{{ $blog->image_show }}" class="img-fluid rounded-2 w-100" alt="">
                     </a>
                     <!--End Course Image-->
                     <!--Start Course Card Body-->
-                    <div class="course-card_body bg-light  p-4 position-relative m-0 rounded-0">
+                    <div class="course-card_body p-4 position-relative m-0 rounded-0" style="color: var(--package1_color)!important">
                         <!--Start Course Title-->
                         <div class="badge px-0 mb-2">
-                            <a href="" class="fs-14 text-dark-cerulean" style="color: var(--header_color)">{{ $blog->b_category->name ?? '' }}|</a> <a href="blog-topic/index.html" class="fs-14 text-dark-cerulean"></a>
+                            <a href="" class="fs-14 text-dark-cerulean" style="color: var(--text_color)">{{ $blog->b_category->name ?? '' }}|</a> <a href="blog-topic/index.html" class="fs-14 text-dark-cerulean"></a>
                         </div>
                         <h3 class="course-card__course--title text-capitalize fs-6">
                             <a href="{{ route('frontend.blog_details', $blog->id) }}" class=" text-decoration-none text_ellipse blog_title" style="color: var(--text_color)"> {{ $blog->title }}</a>
@@ -492,7 +484,7 @@
                                     <div class="avatar-img blog me-2" style="color: var(--text_color)">
                                         By
                                     </div>
-                                    <div class="fs-15 fw-semi-bold text-dark-cerulean" style="color: var(--header_color)">
+                                    <div class="fs-15 fw-semi-bold text-dark-cerulean" style="color: var(--text_color)">
                                         {{ $blog->author }}
                                     <!--  -->
                                     </div>
@@ -518,7 +510,7 @@
     </div>
 </div>
 
-<div class="text-center mt-5 firstbutton">
+<div class="text-center mt-3 firstbutton">
     <a href="{{ route('frontend.blog') }}"
     class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
         More Blog
@@ -562,7 +554,7 @@
 
 
 <section class="ourteam-section">
-    <div class="container mt-5">
+    <div class="container mt-3">
         <div class="">
             <h3 class="fw-bold mb-3 text-dark-cerulean text-center text-uppercase" style="color:var(--text_color)">{{ $home_content->teacher_title }}</h3>
         </div>
@@ -621,7 +613,7 @@
             @endforeach
         </div>
 
-        <div class="text-center mt-0 mb-4 firstbutton">
+        <div class="text-center mt-0 mb-2 firstbutton">
             <a href="{{ route('frontend.instructor') }}"
                class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
                 More Teachers
@@ -638,9 +630,9 @@
 
 
 <!--Start Counter-->
-<div class="counter-content pt-5 pb-4">
+<div class="counter-content pt-1 pb-4">
     <div class="container-lg">
-    <div class="text-center mb-5">
+    <div class="text-center mb-2">
     <h3 class="fw-bold mb-0 text-uppercase" style="color:var( --text_color)">{{ $home_content->counting_title }}</h3>
     </div>
         <div class="row justify-content-center">
@@ -650,29 +642,25 @@
                         <h3 class="fw-bold h1 mb-1"><span class="counter d-inline-block">
                             {{ $home_content->count_num_1 }}</span>
                         </h3>
-                        <div>
-                            {{ $home_content->count_text_1 }}</div>
+                        <div>{{ $home_content->count_text_1 }}</div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 mb-4 text-center border-end" style="color: var(--text_color)">
                         <h3 class="fw-bold h1 mb-1"><span class="counter d-inline-block">
                             {{ $home_content->count_num_2 }}</span>
                         </h3>
-                        <div>
-                            {{ $home_content->count_text_2 }}</div>
+                        <div>{{ $home_content->count_text_2 }}</div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 mb-4 text-center border-end" style="color: var(--text_color)">
                         <h3 class="fw-bold h1 mb-1"><span class="counter d-inline-block">
                             {{ $home_content->count_num_3 }}</span>
                         </h3>
-                        <div>
-                            {{ $home_content->count_text_3 }}</div>
+                        <div>{{ $home_content->count_text_3 }}</div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 mb-4 text-center" style="color: var(--text_color)">
                         <h3 class="fw-bold h1 mb-1"><span class="counter d-inline-block">
                             {{ $home_content->count_num_4 }}</span>
                         </h3>
-                        <div>
-                            {{ $home_content->count_text_4 }}</div>
+                        <div>{{ $home_content->count_text_4 }}</div>
                     </div>
                 </div>
             </div>
@@ -689,24 +677,22 @@
         </div>
         <div class="row">
             @foreach ($toppers as $topper)
-
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
-              <div class="picture">
-                <img class="img-fluid" src="{{ @$topper->student->image_show }}">
-              </div>
-              <div class="team-content">
-                <h3 class="name" style="color: var(--text_color)">{{ @$topper->student->student_name }}</h3>
-                <h4 class="title" style="color: var(--text_color)">{{ @$topper->examination->name }}-{{ @$topper->academic_year->year }}</h4>
-				<h4 class="title" style="color: var(--text_color)">{{ @$topper->class->name }}, GPA: {{ @$topper->result }}</h4>
-              </div>
-            </div>
-          </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="our-team" data-toggle="modal" data-id="1" data-target=".bd-example-modal-lg" onclick="ViewDetailsModel(1)">
+                        <div class="picture">
+                            <img class="img-fluid" src="{{ @$topper->student->image_show }}">
+                        </div>
+                        <div class="team-content">
+                            <h3 class="name" style="color: var(--text_color)">{{ @$topper->student->student_name }}</h3>
+                            <h4 class="title" style="color: var(--text_color)">{{ @$topper->examination->name }}-{{ @$topper->academic_year->year }}</h4>
+                            <h4 class="title" style="color: var(--text_color)">{{ @$topper->class->name }}, GPA: {{ @$topper->result }}</h4>
+                        </div>
+                    </div>
+                </div>
           @endforeach
         </div>
 
-        <div class="text-center mt-0 mb-4 firstbutton">
+        <div class="text-center mt-0 mb-2 firstbutton">
             <a href="{{ route('frontend.topper_student') }}"
             class="btn btn-lg btn-dark-cerulean" style="color: var(--button2_text_color)">
                 More Topper
@@ -724,9 +710,9 @@
 
 
 <!--Start Testimonial-->
-<div class="testimonial-content py-5">
+<div class="testimonial-content py-3">
     <div class="text-center mb-5">
-    <div style="color: var(--text_color)"><h3>{{ $home_content->review_title1 }}</h3></div>
+    <div style="color: var(--text_color)"><h2><b>{{ $home_content->review_title1 }}</b></h2></div>
     <h3 class="fw-bold mb-0 learner_saying" style="color: var(--text_color)">{{ $home_content->review_title2 }}</h3>
     </div>
     <div class="container-lg">
@@ -794,7 +780,7 @@
 <!--End Pricing Table-->
 <div class="mb-5 overflow-hidden position-relative">
     <div class="container-lg">
-        <div class="align-items-center bg-alice-blue mx-0 row p-lg-5 p-4 rounded position-relative">
+        <div class="align-items-center mx-0 row p-lg-5 p-4 rounded position-relative" style="background-color: var(--package1_color)!important;">
             <div class="col-md-6">
                 <h2 class="fs-1 fw-semi-bold mb-4 text-dark-cerulean any_question" style="color: var(--text_color)">{{ $home_content->question_title }}</h2>
                 <p class="fs-5" style="color: var(--text_color)">{{ $home_content->ques_short_des }}</p>

@@ -15,7 +15,7 @@
         <div class="row">
 
             <div class="col-6 col-sm-6 col-md-3 mt-5 mt-md-0">
-                <ul class="nav-list list-unstyled mb-0">
+                <ul class="nav-list list-unstyled mb-0" style="color: var(--footer_text_color)">
                     <li>
                         @if (@$school_info->eiin_number > 0 )
                             <a href="" class="text-decoration-none mb-3 d-inline-block" style="color: var(--footer_text_color)">Address</a>
