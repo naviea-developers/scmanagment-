@@ -122,6 +122,7 @@ Route::prefix('group')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
 //Add year for admin
 Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [AcademicYearController::class,"index"])->name('admin.academic_year.index');
+    Route::post('ajax-academic-year', [AcademicYearController::class,"ajaxData"])->name('admin.academic_year.ajax');
     Route::get('create', [AcademicYearController::class,"create"])->name('admin.academic_year.create');
     Route::post('store', [AcademicYearController::class,"store"])->name('admin.academic_year.store');
     Route::get('edit/{id}', [AcademicYearController::class,"edit"])->name('admin.academic_year.edit');
