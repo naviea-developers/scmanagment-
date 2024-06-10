@@ -13,8 +13,6 @@ class SessionController extends Controller
 {
     public function index()
     {
-        // $data['sessions'] = Session::orderBy('id', 'desc')->get();
-        // return view("Backend.school_management.session.index",$data);
         return view("Backend.school_management.session.manage");
     }
 
@@ -56,7 +54,6 @@ class SessionController extends Controller
     
         $query = Session::query();
     
-        // Apply search filter
         if (!empty($search)) {
             $query->where('start_year', 'LIKE', "%$search%");
         }
@@ -77,8 +74,8 @@ class SessionController extends Controller
             $nestedData['end_session'] = date('F', mktime(0, 0, 0, $session->end_month, 10)) . ' ' . $session->end_year;
             
             $nestedData['status'] = $session->status == 0 ?
-                '<a href="' . route('admin.session.status', $session->id) . '" class="btn btn-sm btn-warning">Inactive</a>' :
-                '<a href="' . route('admin.session.status', $session->id) . '" class="btn btn-sm btn-success">Active</a>';
+                '<a href="' . route('admin.session.status', $session->id) . '" class="data_status btn btn-sm btn-warning">Inactive</a>' :
+                '<a href="' . route('admin.session.status', $session->id) . '" class="data_status btn btn-sm btn-success">Active</a>';
             
             $nestedData['options'] = '<a class="btn btn-primary data_edit" href="' . route('admin.session.edit', $session->id) . '"><i class="fa fa-edit"></i></a>';
             $nestedData['options'] .= '<button class="btn text-danger bg-white" value="' . $session->id . '" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
@@ -102,11 +99,11 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $data['years'] = AcademicYear::all();
-        return view("Backend.school_management.session.create", $data);
-    }
+    // public function create()
+    // {
+    //     $data['years'] = AcademicYear::all();
+    //     return view("Backend.school_management.session.create", $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -165,13 +162,13 @@ class SessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-       // dd('hi');
-        $data["session"]= session::find($id);
-        $data['years'] = AcademicYear::all();
-        return view("Backend.school_management.session.update",$data);
-    }
+    // public function edit(string $id)
+    // {
+    //    // dd('hi');
+    //     $data["session"]= session::find($id);
+    //     $data['years'] = AcademicYear::all();
+    //     return view("Backend.school_management.session.update",$data);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -275,20 +272,4 @@ class SessionController extends Controller
 
 
 
-
-
-
-    // public function status($id)
-    // {
-    //     $session = session::find($id);
-    //     if($session->status == 0)
-    //     {
-    //         $session->status = 1;
-    //     }elseif($session->status == 1)
-    //     {
-    //         $session->status = 0;
-    //     }
-    //     $session->update();
-    //     return redirect()->route('admin.session.index');
-    // }
 }

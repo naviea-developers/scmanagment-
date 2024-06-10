@@ -66,14 +66,14 @@ class BuldingController extends Controller
  
             }
         }
-        $json_data = array(
-            "draw"            => intval($request->input('draw')),
-            "recordsTotal"    => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data"            => $data
-        );
- 
-        return json_encode($json_data);
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data
+        ];
+    
+        return response()->json($json_data);
     }
 
     /**
