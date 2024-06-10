@@ -135,6 +135,7 @@ Route::prefix('academic-year')->middleware(['auth:admin', 'adminCheck:0'])->grou
 //Add Session for admin
 Route::prefix('session')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SessionController::class,"index"])->name('admin.session.index');
+    Route::post('ajax-session', [SessionController::class,"ajaxData"])->name('admin.session.ajax');
     Route::get('create', [SessionController::class,"create"])->name('admin.session.create');
     Route::post('store', [SessionController::class,"store"])->name('admin.session.store');
     Route::get('edit/{id}', [SessionController::class,"edit"])->name('admin.session.edit');
@@ -172,6 +173,7 @@ Route::prefix('floor')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
 //Add room for admin
 Route::prefix('room')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [RoomController::class,"index"])->name('admin.room.index');
+    Route::post('ajax-room', [RoomController::class,"ajaxData"])->name('admin.room.ajax');
     Route::get('create', [RoomController::class,"create"])->name('admin.room.create');
     Route::post('store', [RoomController::class,"store"])->name('admin.room.store');
     Route::get('edit/{id}', [RoomController::class,"edit"])->name('admin.room.edit');

@@ -12,7 +12,6 @@ class BuldingController extends Controller
 {
     public function index()
     {
-        
         return view("Backend.school_management.bulding.manage");
     }
     

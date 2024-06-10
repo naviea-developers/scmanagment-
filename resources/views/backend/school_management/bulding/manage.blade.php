@@ -56,10 +56,7 @@ Admin - All Buldings
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
 
-    <!--_-- ########### Start Add Category MODAL ############---->
 
-
-    <!--_-- ########### End Add Category MODAL ############---->
 
 
     <!--_-- ########### Start Delete Category MODAL ############---->
