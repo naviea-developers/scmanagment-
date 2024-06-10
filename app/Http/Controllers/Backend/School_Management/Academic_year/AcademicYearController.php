@@ -61,8 +61,6 @@ class AcademicYearController extends Controller
                     $nestedData['is_current'] .= '<input type="radio" name="is_current">';
                 } elseif ($data_v->is_current == 1) {
                     $nestedData['is_current'] = '<input type="radio" value="' . $data_v->id . '" name="is_current" data-id="' . $data_v->id . '"' . ($data_v->is_current == 1 ? ' checked' : '') . '>';
-                    // $nestedData['is_current'] .= '<input type="radio" value="{{ $year->id }}" name="is_current"' . ($data_v->is_current == 1 ? ' checked' : '') . '>';
-                    // $nestedData['is_current'] .= '<input type="radio" value="{{ $year->id }}" name="is_current" checked>';
                 }
 
 

@@ -114,31 +114,4 @@ Admin - All Academic Years
 </script>
 
 
-<script>
-  document.querySelectorAll('input[name="is_current"]').forEach((radio) => {
-      radio.addEventListener('change', function() {
-          let yearId = this.value;
-          let csrfToken = document.querySelector('input[name="_token"]').value;
-
-          fetch("{{ route('admin.academic_year.updateCurrent') }}", {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRF-TOKEN': csrfToken
-              },
-              body: JSON.stringify({ year_id: yearId })
-          })
-          .then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  alert('Current session updated successfully.');
-              } else {
-                  alert('Failed to update current session.');
-              }
-          })
-          .catch(error => console.error('Error:', error));
-      });
-  });
-</script>
-
 @endsection
