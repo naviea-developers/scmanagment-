@@ -117,40 +117,4 @@ Admin - All Buldings
     });
 </script>
 
-
-
-<script>
-    $(document).ready(function() {
-        // Event listener for status change buttons
-        $(document).on('click', '.change-status', function() {
-            var buildingId = $(this).data('id');
-            var button = $(this);
-            var url = '{{ route("admin.bulding.status", ":id") }}';
-            url = url.replace(':id', buildingId);
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    if (response.success) {
-                        if (response.status == 1) {
-                            button.removeClass('btn-warning').addClass('btn-success').text('Active');
-                        } else {
-                            button.removeClass('btn-success').addClass('btn-warning').text('Inactive');
-                        }
-                    }
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
-
-
-
 @endsection

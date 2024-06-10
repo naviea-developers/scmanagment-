@@ -52,18 +52,11 @@ class BuldingController extends Controller
               
  
                 $nestedData['status'] = '';
-                // if ($data_v->status == 0) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-warning">Inactive</a>';
-                // } elseif ($data_v->status == 1) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-success">Active</a>';
-                // }
-
                 if ($data_v->status == 0) {
-                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-warning change-status">Inactive</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
                 } elseif ($data_v->status == 1) {
-                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-success change-status">Active</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
                 }
-                
  
                 $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.bulding.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
              
@@ -225,6 +218,9 @@ class BuldingController extends Controller
     //     return redirect()->route('admin.bulding.index');
     // }
 
+  
+
+
     public function status($id)
     {
         $bulding = Bulding::find($id);
@@ -236,9 +232,19 @@ class BuldingController extends Controller
             }
             $bulding->update();
 
-            return response()->json(['success' => true, 'status' => $bulding->status]);
+            $statusMessage = $bulding->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
         }
 
-        return response()->json(['success' => false], 400);
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Building not found'
+        ]);
     }
+
 }

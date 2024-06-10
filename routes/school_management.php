@@ -154,7 +154,7 @@ Route::prefix('bulding')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
     Route::get('edit/{id}', [BuldingController::class,"edit"])->name('admin.bulding.edit');
     Route::post('update/{id}', [BuldingController::class,"update"])->name('admin.bulding.update');
     Route::post('delete', [BuldingController::class,"destroy"])->name('admin.bulding.delete');
-    Route::post('/status/{id}', [BuldingController::class, 'status'])->name('admin.bulding.status');
+    Route::get('/status/{id}', [BuldingController::class, 'status'])->name('admin.bulding.status');
 });
 
 //Add floor for admin
