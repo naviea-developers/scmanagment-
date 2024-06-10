@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Floor
+Admin - All Academic Years
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -10,14 +10,14 @@ Admin - All Floor
     <div class="br-mainpanel">
 
         <div class="br-pagebody">
-            @include('Backend.school_management.floor.create')
+            @include('Backend.school_management.academic_year.create')
 
             <div class="br-section-wrapper data-list pt-3">
 
-                <h6 class="br-section-label text-center">All Floor</h6>
+                <h6 class="br-section-label text-center">All Academic Years</h6>
                 <div style="text-align: right;">
                     <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
-                        <i class="fa fa-plus"></i> Add Floor
+                        <i class="fa fa-plus"></i> Add Academic Years
                     </a>
                 </div>
 
@@ -26,8 +26,8 @@ Admin - All Floor
                         <thead>
                             <tr>
                                 <th class="wd-10p">Id</th>
-                                <th class="wd-15p">Bulding Name</th>
-                                <th class="wd-15p">Floor Name</th>
+                                <th class="wd-15p">Current Year</th>
+                                <th class="wd-15p">Academic Year</th>
                                 <th class="wd-15p">Status</th>
                                 <th class="wd-10p">Action</th>
                             </tr>
@@ -63,14 +63,14 @@ Admin - All Floor
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-body tx-center pd-y-20 pd-x-20">
-                    <form id="data-form-delete" action="{{ route('admin.floor.delete') }}" method="post">
+                    <form id="data-form-delete" action="{{ route('admin.academic_year.delete') }}" method="post">
                         @csrf
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                         <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-                        <input type="hidden" name="floor_id" id="modal_data_id">
+                        <input type="hidden" name="academic_year_id" id="modal_data_id">
                         <button type="submit" class="btn-delete btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20"> yes</button>
                         <button type="button" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-bs-dismiss="modal" aria-label="Close"> No</button>
                     </form>
@@ -91,7 +91,7 @@ Admin - All Floor
         "processing": true,
         "serverSide": true,
         "ajax":{
-            "url": "{{ route('admin.floor.ajax') }}",
+            "url": "{{ route('admin.academic_year.ajax') }}",
             "dataType": "json",
             "type": "POST",
             data: function(data){
@@ -100,8 +100,8 @@ Admin - All Floor
         },
         "columns": [
             { "data": "id"},
-            { "data": "bulding_name"},
-            { "data": "name"},
+            { "data": "is_current"},
+            { "data": "year"},
             { "data": "status"},
             { "data": "options"},
         ],
@@ -111,6 +111,34 @@ Admin - All Floor
           } ]
 
     });
+</script>
+
+
+<script>
+  document.querySelectorAll('input[name="is_current"]').forEach((radio) => {
+      radio.addEventListener('change', function() {
+          let yearId = this.value;
+          let csrfToken = document.querySelector('input[name="_token"]').value;
+
+          fetch("{{ route('admin.academic_year.updateCurrent') }}", {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': csrfToken
+              },
+              body: JSON.stringify({ year_id: yearId })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Current session updated successfully.');
+              } else {
+                  alert('Failed to update current session.');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  });
 </script>
 
 @endsection

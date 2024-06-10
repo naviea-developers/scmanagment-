@@ -7,20 +7,24 @@ use App\Models\Bulding;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class FloorController extends Controller
 {
     public function index()
     {
-        $data['floors'] = Floor::orderBy('id', 'desc')->get();
-        return view("Backend.school_management.floor.index",$data);
+        // $data['floors'] = Floor::orderBy('id', 'desc')->get();
+        $data['buldings'] = Bulding::where('status', 1)->get();
+        return view("Backend.school_management.floor.manage",$data);
+        // return view("Backend.school_management.floor.manage");
     }
 
     function ajaxData(Request $request){
         $columns = array(
             0 => 'id',
-            1 => 'name',
-            2 => 'status',
+            1 => 'bulding_name',
+            2 => 'name',
+            3 => 'status',
         );
         $totalData = Floor::count();
         $totalFiltered = $totalData;
@@ -31,7 +35,7 @@ class FloorController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
         $search = $request->input('search.value');
-        $datalist = Bulding::query();
+        $datalist = Floor::query();
         if(!empty($search)){
  
             $datalist =$datalist->where("name","LIKE","%{$search}%");
@@ -49,24 +53,22 @@ class FloorController extends Controller
             foreach($datalist as $data_v)
             {
                 $nestedData['id'] = $data_v->id;
+                $nestedData['bulding_name'] = $data_v->bulding->name;
                 $nestedData['name'] = $data_v->name;
+             
               
  
                 $nestedData['status'] = '';
-                // if ($data_v->status == 0) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-warning">Inactive</a>';
-                // } elseif ($data_v->status == 1) {
-                //     $nestedData['status'] .= '<a href="'.route('admin.bulding.status', $data_v->id).'" class="btn btn-sm btn-success">Active</a>';
-                // }
-
                 if ($data_v->status == 0) {
-                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-warning change-status">Inactive</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.floor.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
                 } elseif ($data_v->status == 1) {
-                    $nestedData['status'] .= '<a href="javascript:void(0)" data-id="'.$data_v->id.'" class="btn btn-sm btn-success change-status">Active</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.floor.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
                 }
+
+              
                 
  
-                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.bulding.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.floor.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
              
                 $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
  
@@ -89,20 +91,51 @@ class FloorController extends Controller
      */
     public function create()
     {
-        $data['buldings'] = Bulding::where('status', 1)->get();
-        return view("Backend.school_management.floor.create", $data);
+        // $data['buldings'] = Bulding::where('status', 1)->get();
+        return view("Backend.school_management.floor.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //   // dd($request->all());
+    //     $request->validate([
+    //         'name' => 'required',
+
+    //     ]);
+    //     try{
+    //         DB::beginTransaction();
+    //         $class = New Floor();
+    //         $class->bulding_id = $request->bulding_id;
+    //         $class->name = $request->name;
+    //         $class->save();
+
+    //         DB::commit();
+    //         return redirect()->route('admin.floor.index')->with('message','Floor Add Successfully');
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         dd($e);
+    //         return back()->with ('error_message', $e->getMessage());
+    //     }
+    // }
+
+
     public function store(Request $request)
     {
       // dd($request->all());
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'bulding_id' => 'required',
             'name' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $class = New Floor();
@@ -111,11 +144,19 @@ class FloorController extends Controller
             $class->save();
 
             DB::commit();
-            return redirect()->route('admin.floor.index')->with('message','Floor Add Successfully');
+           
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Floor Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+           // dd($e);
+           
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -144,49 +185,142 @@ class FloorController extends Controller
     public function update(Request $request, string $id)
     {
         //dd($request->all());
-       $request->validate([
-        'name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'bulding_id' => 'required',
+            'name' => 'required',
 
-    ]);
-    try{
-        DB::beginTransaction();
-        $floor = Floor::find($id);
-        $floor->bulding_id = $request->bulding_id;
-        $floor->name = $request->name;
-        $floor->save();
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
+        try{
+            DB::beginTransaction();
+            $floor = Floor::find($id);
+            $floor->bulding_id = $request->bulding_id;
+            $floor->name = $request->name;
+            $floor->save();
 
-        DB::commit();
-        return redirect()->route('admin.floor.index')->with('message','Floor Update Successfully');
-    }catch(\Exception $e){
-        DB::rollBack();
-       // dd($e);
-        return back()->with ('error_message', $e->getMessage());
+            DB::commit();
+            // return redirect()->route('admin.floor.index')->with('message','Floor Update Successfully');
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Bulding Update Successfully'
+            ]);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
-    }
+
+    // public function update(Request $request, string $id)
+    // {
+    //     //dd($request->all());
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required',
+
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'status'=>'error',
+    //             'errors'=>$validator->errors()->all()
+    //         ]);
+    //     }
+    //     try{
+    //         DB::beginTransaction();
+    //         $bulding = Bulding::find($id);
+    //         $bulding->name = $request->name;
+    //         $bulding->save();
+
+    //         DB::commit();
+    //         return response()->json([
+    //             'status'=>'yes',
+    //             'msg'=>'Bulding Update Successfully'
+    //         ]);
+            
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         return response()->json([
+    //             'status'=>'no',
+    //             'msg'=>$e->getMessage()
+    //         ]);
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy(Request $request)
+    // {
+
+    //     $floor =  Floor::find($request->floor_id);
+    //     $floor->delete();
+    //     return back()->with('message','Floor Deleted Successfully');
+    // }
+
+
     public function destroy(Request $request)
     {
-
-        $floor =  Floor::find($request->floor_id);
-        $floor->delete();
-        return back()->with('message','Floor Deleted Successfully');
+        //dd($request);
+        try{
+            $floor =  Floor::find($request->floor_id);
+            $floor->delete();
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Floor Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
 
 
     public function status($id)
     {
         $floor = Floor::find($id);
-        if($floor->status == 0)
-        {
-            $floor->status = 1;
-        }elseif($floor->status == 1)
-        {
-            $floor->status = 0;
+        if ($floor) {
+            if ($floor->status == 0) {
+                $floor->status = 1;
+            } elseif ($floor->status == 1) {
+                $floor->status = 0;
+            }
+            $floor->update();
+            $statusMessage = $floor->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
         }
-        $floor->update();
-        return redirect()->route('admin.floor.index');
+
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Floor not found'
+        ]);
     }
+
+
+    // public function status($id)
+    // {
+    //     $floor = Floor::find($id);
+    //     if($floor->status == 0)
+    //     {
+    //         $floor->status = 1;
+    //     }elseif($floor->status == 1)
+    //     {
+    //         $floor->status = 0;
+    //     }
+    //     $floor->update();
+    //     return redirect()->route('admin.floor.index');
+    // }
 }
