@@ -85,7 +85,7 @@
 						@foreach ($blogs as $blog)
 						<div class="col-xl-4 col-md-6" >
 							<!--Start Course Card-->
-							<div class="course-card rounded bg-white position-relative overflow-hidden shadow-none border">
+							<div class="course-card rounded position-relative overflow-hidden shadow-none border" style="background-color: var(--package1_color)!important">
 								<!--Start Course Image-->
 								<a href="{{ route('frontend.blog_details', $blog->id) }}" class="course-card_img d-block pt-4 px-4">
 									<img src="{{ $blog->image_show }}" class="img-fluid rounded-2 w-100" alt="">
@@ -95,7 +95,7 @@
 								<div class="course-card_body bg-prussian-blue p-4 position-relative m-0 rounded-0 bg-white">
 									<!--Start Course Title-->
 									<div class="badge px-0 mb-2">
-										<a href="" class="fs-14 text-dark-cerulean" style="color: var(--header_color)">{{ $blog->b_category->name ?? '' }}|</a> <a href="blog-topic/index.html" class="fs-14 text-dark-cerulean"></a>
+										<a href="" class="fs-14 text-dark-cerulean" style="color: var(--text_color)">{{ $blog->b_category->name ?? '' }}|</a> <a href="blog-topic/index.html" class="fs-14 text-dark-cerulean"></a>
 									</div>
 									<h3 class="course-card__course--title text-capitalize fs-6">
 										<a href="{{ route('frontend.blog_details', $blog->id) }}" class=" text-decoration-none text_ellipse blog_title" style="color: var(--text_color)"> {{ $blog->title }}</a>
@@ -112,7 +112,7 @@
 												<div class="avatar-img blog me-2" style="color: var(--text_color)">
 													By
 												</div>
-												<div class="fs-15 fw-semi-bold text-dark-cerulean" style="color: var(--header_color)">
+												<div class="fs-15 fw-semi-bold text-dark-cerulean" style="color: var(--text_color)">
 													{{ $blog->author }}
 												<!--  -->
 												</div>

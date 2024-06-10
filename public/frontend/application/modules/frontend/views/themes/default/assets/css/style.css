@@ -747,7 +747,8 @@
 
 	  .main-nav-wrap > ul > li > ul {
 		  top: 100%;
-		  background-color: #fff;
+		  /* background-color: #fff; */
+		  background-color: var(--header_color);
 		  border: none;
 		  border-radius: 0;
 		  border-bottom-left-radius: 2px;
@@ -782,7 +783,8 @@
 		  padding: 5px 15px;
 		  font-size: 14px;
 		  font-weight: 400;
-		  color: #29303b;
+		  /* color: #29303b; */
+		  color: var(--header_text_color);
 	  }
 
 	  .main-nav-wrap > ul > li > ul > li a:hover {
@@ -1061,7 +1063,8 @@
   *** Testimonial ***
   ---------------------------------------------------------------*/
   .testimonial-box {
-	  background-color: #EDF6FF;
+	  /* background-color: #EDF6FF; */
+	  background-color: var(--package1_color);
 	  box-shadow: 0px 0px 6px #00000029;
   }
 
@@ -4050,6 +4053,7 @@ padding: 2px 4px;
 
   .text-dark-cerulean {
     color: var(--category_color);
+	
 	  /* color: #07477D; */
   }
 
@@ -4060,6 +4064,7 @@ padding: 2px 4px;
 
   .bg-alice-blue {
 	  background-color: #F5F9FF;
+	  
   }
 
   .bg-seagull {
@@ -4351,7 +4356,8 @@ padding: 2px 4px;
 .our-team {
 	padding: 30px 0 40px;
 	margin-bottom: 30px;
-	background-color: #f7f5ec;
+	/* background-color: #f7f5ec; */
+	background-color: var(--package1_color);
 	text-align: center;
 	overflow: hidden;
 	position: relative;
@@ -4362,7 +4368,8 @@ padding: 2px 4px;
 	cursor: pointer;
 }
 .our-team:hover {
-	background: white;
+	/* background: white; */
+	background: var(--package2_color);
 }
 .our-team .picture {
 	display: inline-block;
