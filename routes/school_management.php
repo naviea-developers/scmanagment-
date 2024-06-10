@@ -160,6 +160,7 @@ Route::prefix('bulding')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //Add floor for admin
 Route::prefix('floor')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [FloorController::class,"index"])->name('admin.floor.index');
+    Route::post('ajax-floor', [FloorController::class,"ajaxData"])->name('admin.floor.ajax');
     Route::get('create', [FloorController::class,"create"])->name('admin.floor.create');
     Route::post('store', [FloorController::class,"store"])->name('admin.floor.store');
     Route::get('edit/{id}', [FloorController::class,"edit"])->name('admin.floor.edit');
