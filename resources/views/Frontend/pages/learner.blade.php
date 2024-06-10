@@ -106,12 +106,12 @@
                 <input type="number" name="roll_number" class="form-control" id="roll_number" placeholder="Student Roll"/>
             </div>
             
-              
-
         </div>
     </div>
 </section>
 
+
+{{-- 
 <section class="container py-5" style="color:var(--text_color)">
     <div class="col-md-12">
         <div class="row" id="fetchAllStudents-container">
@@ -139,7 +139,62 @@
             <h6 class="text-center">No More Data...</h6>
         </div>
     </div>
+</section> --}}
+
+
+
+
+
+
+
+<section class="ourteam-section mt-5">
+    <!-- All student -->
+    <div class="container">
+        <div class="row" id="fetchAllStudents-container">
+            @foreach ($students as $student)
+
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+              <div class="picture">
+                <img class="img-fluid" src="{{ @$student->image_show }}">
+              </div>
+              <div class="team-content">
+                <h3 class="name" style="color: var(--text_color)">{{ @$student->student_name }}</h3>
+				<h4 class="title" style="color: var(--text_color)">{{ @$student->class->name }}</h4>
+				<h4 class="title" style="color: var(--text_color)">Section: {{ @$student->section->name }}</h4>
+				<h4 class="title" style="color: var(--text_color)">Group: {{ @$student->group->name }}</h4>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
+        </div>
+        <div class="col-md-12 py-5" id="loading" style="display:none;">
+            <h6 class="text-center">Loading...</h6>
+        </div>
+        <div class="col-md-12 py-5" id="noMoreData" style="display:none;">
+            <h6 class="text-center">No More Data...</h6>
+        </div>
+
+      </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

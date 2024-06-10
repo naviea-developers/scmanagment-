@@ -51,6 +51,7 @@
 <!--- end bracket Main Js ---->
 <script src="{{asset('public/backend')}}/js/suneditor.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
     $(document).ready(function() {
@@ -438,4 +439,225 @@
     }
 
         
+</script>
+
+
+{{-- form js --}}
+<script>
+    function listView(){
+        datatable.draw();
+        $('.data-update').hide();
+        $('.data-create').hide();
+        $('.data-list').show();
+
+    }
+    function createView(){
+        $('.data-update').hide();
+        $('.data-list').hide();
+        $('.data-create').show();
+    }
+    function editView(){
+        $('.data-create').hide();
+        $('.data-list').hide();
+        $('.data-update').show();
+    }
+    $('.btn-new').on('click',function(){
+        createView();
+        //datatable.destroy();
+    });
+    $(document).on('click','.btn-cancel',function(){
+        listView();
+    });
+    $('.btn-create').on('click',function(e){
+       e.preventDefault();
+        var form_data = new FormData($('#data-form-create')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : $('#data-form-create').attr('action'),
+            data : form_data,
+            type : 'POST',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success : function(res){
+                if(res.status == "error"){
+                    console.log(res);
+                    var e_option = "";
+                    res.errors.forEach(function(v){
+                        e_option += '<div class="alert alert-danger">'+v+'</div>';
+                    });
+                    $('#create_errors').html(e_option);
+                }
+                else if(res.status == "yes"){
+                    $('#data-form-create')[0].reset();
+                    $('#create_errors').html('');
+                    listView();
+                    
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                   
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error:function(e){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+    $(document).on('click','.btn-update',function(e){
+        e.preventDefault();
+        var form_data = new FormData($('#data-form-update')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : $('#data-form-update').attr('action'),
+            data : form_data,
+            type : 'POST',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success : function(res){
+                if(res.status == "error"){
+                    console.log(res);
+                    var e_option = "";
+                    res.errors.forEach(function(v){
+                        e_option += '<div class="alert alert-danger">'+v+'</div>';
+                    });
+                    $('#update_errors').html(e_option);
+                }
+                else if(res.status == "yes"){
+                    $('#data-form-update')[0].reset();
+                    listView();
+                    
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                   
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error:function(e){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+
+    $(document).on('click','.data_edit',function(e){
+        e.preventDefault();
+        console.log($(this));
+        console.log($(this).attr('href'));
+        var url  = $(this).attr('href');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type : 'GET',
+            url : url,
+            success : function(res){
+               // console.log(res);
+                $('.data-edit-res').html(res);
+                editView();
+            },
+            error:function(e){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+    $(document).on('click','.btn-delete',function(e){
+        e.preventDefault();
+        var form_data = new FormData($('#data-form-delete')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : $('#data-form-delete').attr('action'),
+            data : form_data,
+            type : 'POST',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success : function(res){
+                console.log(res);
+                if(res.status == "yes"){
+                    $('#data-form-delete')[0].reset();
+                    listView();
+                     $('#datamodalshow').modal('hide');
+                    //console.log($('#datamodalshow'));
+                    //$('#datamodalshow').modal('toggle');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                   
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error:function(e){
+               // console.log(e.responseJSON.message);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+
 </script>

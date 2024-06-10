@@ -412,7 +412,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="background: var(--menu_color)">
                         <div class="card">
                             <div class="card-body text-center" style="color:var(--text_color)">
                                 <div class="teacher-details">

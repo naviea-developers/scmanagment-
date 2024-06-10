@@ -59,7 +59,7 @@
                       <div class="teacher-details">
                           <img class="img-fluid" src="{{ $alumni->image_show }}" alt="Teacher Image">
                           <h3>{{ $alumni->name }}</h3>
-                          <h4>{{ @$alumni->designation }}</h4>
+                          <h4>{{ @$alumni->designation }}, {{ @$alumni->company_name }}</h4>
                           <h4>{!! @$alumni->description !!}</h4>
                           <ul class="social">
                               <li><a href="{{ @$alumni->facebook_id }}" target="_blank" class="fab fa-facebook" aria-hidden="true"></a></li>
