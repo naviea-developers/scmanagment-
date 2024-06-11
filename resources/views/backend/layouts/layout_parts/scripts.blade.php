@@ -298,6 +298,12 @@
         getStudent(id,"student-edit");
     });
 
+    $('body').on("change",'#routine_class',function(){
+        let id = $(this).val();
+        getSection(id,"routine_class_section");
+
+    });
+
     function getSection(id,outid){
         let url = '{{ url("get/school_section/") }}/' + id;
         axios.get(url)

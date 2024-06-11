@@ -22,35 +22,68 @@ Admin - All Class Routine
             <div class="br-section-wrapper data-list pt-3">
 
                 <h6 class="br-section-label text-center">All Class Routine</h6>
-                <div style="text-align: right;">
-                    <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
-                        <i class="fa fa-plus"></i> Add Class Routine
-                    </a>
-                </div>
+                <div class="col-md-12 mt-5 mb-5" style="border: 1px solid; padding: 10px">
+                    <div class="row">
+
+                    <div class="col-md-4">
+                        <label class="form-control-label"><b>Class:</b></label>
+                        <select class="form-control form-select " id="routine_class">
+                            <option value="">Select Class</option>
+                            @foreach ($classes as $class)
+                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="form-control-label"><b>Section:</b></label>
+                        <select  class="form-control form-select  section_id" id="routine_class_section">
+                            <option value="">Select Section</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="form-control-label"><b>Session:</b></label>
+                        <select class="form-control form-select" name="session_id" id="session_id">
+                            <option  value="">Select Session</option>
+                            @foreach ($sessions as $session)
+                            <option value="{{ $session->id }}">{{ $session->start_year }} - {{ $session->end_year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 
+                    </div>
+                </div>
+                <div class="get-search-student-class-routine">
+                    <div style="text-align: right;">
+                        <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
+                            <i class="fa fa-plus"></i> Add Class Routine
+                        </a>
+                    </div>
 
-                <div class="table-wrapper">
-                    <table id="data_table_list" class="table display responsive nowrap">
-                        <thead>
-                            <tr>
-                                <th class="wd-10p">Id</th>
-                                <th scope="col">Session</th>
-                                <th scope="col">Class Name</th>
-                                <th scope="col">Sections</th>
-                                <th scope="col">Subject</th>
-                                <th scope="col">Teacher</th>
-                                <th scope="col">Day</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            {{-- <a class="btn text-info" href="{{ route('admin.bulding.edit', $bulding->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                                        <button class="btn text-danger bg-white"  value="{{$bulding->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button> --}}
-                        </tbody>
-                    </table>
-                </div><!-- table-wrapper -->
-
+                    <div class="table-wrapper">
+                        <table id="data_table_list" class="table display responsive nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="wd-10p">Id</th>
+                                    <th scope="wd-10p">Session</th>
+                                    <th scope="wd-10p">Class Name</th>
+                                    <th scope="wd-10p">Sections</th>
+                                    <th scope="wd-10p">Subject</th>
+                                    <th scope="wd-10p">Teacher</th>
+                                    <th scope="wd-10p">Day</th>
+                                    <th class="wd-15p">Status</th>
+                                    <th class="wd-10p">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {{-- <a class="btn text-info" href="{{ route('admin.bulding.edit', $bulding->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                                            <button class="btn text-danger bg-white"  value="{{$bulding->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button> --}}
+                            </tbody>
+                        </table>
+                    </div><!-- table-wrapper -->
+                </div>
 
             </div><!-- br-section-wrapper -->
             
@@ -121,11 +154,56 @@ Admin - All Class Routine
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 7,
+          "targets": 8,
           "orderable": false
           } ]
 
     });
 </script>
 
+
+<script>
+    $(document).ready(function() {
+       
+        $('#routine_class,#routine_class_section, #session_id').change(function() {
+            fetchClassRoutine();
+        });
+
+        function fetchClassRoutine() {
+            var classId = $('#routine_class').val();
+            var sectionId = $('#routine_class_section').val();
+            var sessionId = $('#session_id').val();
+
+            // if (classId && sectionId && sessionId) {
+                $.ajax({
+                    url: "{{ route('get.class.routine') }}",
+                    type: 'GET',
+                    data: { class_id: classId, section_id: sectionId, session_id: sessionId },
+                    success: function(response) {
+                        console.log(response);
+                        $(".get-search-student-class-routine").html(response);
+                    }
+                });
+            // }
+        }
+    });
+</script>
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
