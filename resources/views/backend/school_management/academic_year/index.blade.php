@@ -17,20 +17,6 @@ Admin - All Academic Year
               <i class="fa fa-plus"></i> Add Academic Year
             </a>
 
-               {{-- success message start --}}
-            @if(session()->has('message'))
-            <div class="alert alert-success">
-            {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true"></button> --}}
-            {{session()->get('message')}}
-            </div>
-            <script>
-                setTimeout(function(){
-                    $('.alert.alert-success').hide();
-                }, 3000);
-            </script>
-            @endif
-            {{-- success message End --}}
-
             <div class="table-wrapper">
               <table id="datatable1" class="table display responsive nowrap">
                 <thead>
@@ -43,9 +29,9 @@ Admin - All Academic Year
                   </tr>
                 </thead>
                 <tbody>
-                    @php
+                  @php
                         $i = 1;
-                    @endphp
+                  @endphp
                   @if (count($years) > 0)
                     @foreach ($years as $year)
                       <tr class="text-center">
@@ -84,11 +70,6 @@ Admin - All Academic Year
         </footer>
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
-
-    <!--_-- ########### Start Add Category MODAL ############---->
-
-
-    <!--_-- ########### End Add Category MODAL ############---->
 
 
     <!--_-- ########### Start Delete Category MODAL ############---->
