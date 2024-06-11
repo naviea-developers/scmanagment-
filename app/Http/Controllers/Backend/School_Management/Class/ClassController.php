@@ -7,15 +7,14 @@ use App\Models\Classe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ClassController extends Controller
 {
     public function index()
     {
-        // $data['classes'] = Classe::all();
         $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
         return view("Backend.school_management.class.manage",$data);
-        // return view("Backend.school_management.class.index",$data);
     }
 
     function ajaxData(Request $request){
@@ -94,10 +93,17 @@ class ClassController extends Controller
     public function store(Request $request)
     {
       // dd($request->all());
-        $request->validate([
+        
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $class = New Classe;
@@ -114,11 +120,18 @@ class ClassController extends Controller
             $class->save();
 
             DB::commit();
-            return redirect()->route('admin.class.index')->with('message','Class Add Successfully');
+           
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+           // dd($e);
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -144,63 +157,100 @@ class ClassController extends Controller
     /**
      * Update the specified resource in storage.
      */
+ 
     public function update(Request $request, string $id)
     {
         //dd($request->all());
-       $request->validate([
-        'name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
 
-    ]);
-    try{
-        DB::beginTransaction();
-        $class = Classe::find($id);
-        $class->class_teacher_id = $request->class_teacher_id;
-        $class->name = $request->name;
-        $class->details = $request->details;
-        $class->gargent_policy = $request->gargent_policy;
-        $class->daily_class_details = $request->daily_class_details;
-        if($request->hasFile('image')){
-            @unlink(public_path("upload/class/".$class->image));
-            $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('upload/class/'),$fileName);
-            $class->image = $fileName;
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
         }
-        $class->save();
+        try{
+            DB::beginTransaction();
+            $class = Classe::find($id);
+            $class->class_teacher_id = $request->class_teacher_id;
+            $class->name = $request->name;
+            $class->details = $request->details;
+            $class->gargent_policy = $request->gargent_policy;
+            $class->daily_class_details = $request->daily_class_details;
+            if($request->hasFile('image')){
+                @unlink(public_path("upload/class/".$class->image));
+                $fileName = rand().time().'.'.request()->image->getClientOriginalExtension();
+                request()->image->move(public_path('upload/class/'),$fileName);
+                $class->image = $fileName;
+            }
+            $class->save();
 
-        DB::commit();
-        return redirect()->route('admin.class.index')->with('message','Class Update Successfully');
-    }catch(\Exception $e){
-        DB::rollBack();
-       // dd($e);
-        return back()->with ('error_message', $e->getMessage());
+            DB::commit();
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Update Successfully'
+            ]);
+            
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
-    }
+
 
     /**
      * Remove the specified resource from storage.
      */
+ 
     public function destroy(Request $request)
     {
-
-        $class =  Classe::find($request->class_id);
-        @unlink(public_path("upload/class/".$class->image));
-        $class->delete();
-        return back()->with('message','Class Deleted Successfully');
+        //dd($request);
+        try{
+            $class =  Classe::find($request->class_id);
+            @unlink(public_path("upload/class/".$class->image));
+            $class->delete();
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
-
 
     public function status($id)
     {
         $class = Classe::find($id);
-        if($class->status == 0)
-        {
-            $class->status = 1;
-        }elseif($class->status == 1)
-        {
-            $class->status = 0;
+        if ($class) {
+            if ($class->status == 0) {
+                $class->status = 1;
+            } elseif ($class->status == 1) {
+                $class->status = 0;
+            }
+            $class->update();
+
+            $statusMessage = $class->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
         }
-        $class->update();
-        return redirect()->route('admin.class.index')->with('message','Class Status Update Successfully');
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Class not found'
+        ]);
     }
 
 

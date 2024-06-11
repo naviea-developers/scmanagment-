@@ -65,6 +65,7 @@ Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->gro
 //Add subject_teacher_assent
 Route::prefix('subject_teacher_assent')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SubjectTeacherAssentController::class,"index"])->name('admin.subject_teacher_assent.index');
+    Route::post('ajax-subject-teacher-assent', [SubjectTeacherAssentController::class,"ajaxData"])->name('admin.subject_teacher_assent.ajax');
     Route::get('create', [SubjectTeacherAssentController::class,"create"])->name('admin.subject_teacher_assent.create');
     Route::post('store', [SubjectTeacherAssentController::class,"store"])->name('admin.subject_teacher_assent.store');
     Route::get('edit/{id}', [SubjectTeacherAssentController::class,"edit"])->name('admin.subject_teacher_assent.edit');
