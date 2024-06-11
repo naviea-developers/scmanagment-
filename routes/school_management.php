@@ -213,6 +213,7 @@ Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group(
 Route::prefix('examtype')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add examtype for admin
     Route::get('index', [ExamTypeController::class,"index"])->name('admin.examtype.index');
+    Route::post('ajax-exam-type', [ExamTypeController::class,"ajaxData"])->name('admin.examtype.ajax');
     Route::get('create', [ExamTypeController::class,"create"])->name('admin.examtype.create');
     Route::post('store', [ExamTypeController::class,"store"])->name('admin.examtype.store');
     Route::get('edit/{id}', [ExamTypeController::class,"edit"])->name('admin.examtype.edit');
@@ -225,6 +226,7 @@ Route::prefix('examtype')->middleware(['auth:admin', 'adminCheck:0'])->group( fu
 //-----------------------------Exam class Route Start---------------------------//
 Route::prefix('examclass')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ExamClassController::class,"index"])->name('admin.examclass.index');
+    Route::post('ajax-exam-class', [ExamClassController::class,"ajaxData"])->name('admin.examclass.ajax');
     Route::get('create', [ExamClassController::class,"create"])->name('admin.examclass.create');
     Route::post('store', [ExamClassController::class,"store"])->name('admin.examclass.store');
     Route::get('edit/{id}', [ExamClassController::class,"edit"])->name('admin.examclass.edit');
@@ -238,6 +240,7 @@ Route::prefix('examclass')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 //-----------------------------Exam  Schedules class Route Start---------------------------//
 Route::prefix('examschedule')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ExamSchedulesController::class,"index"])->name('admin.examschedule.index');
+    Route::post('ajax-exam-schedule', [ExamSchedulesController::class,"ajaxData"])->name('admin.examschedule.ajax');
     Route::get('create', [ExamSchedulesController::class,"create"])->name('admin.examschedule.create');
     Route::post('store', [ExamSchedulesController::class,"store"])->name('admin.examschedule.store');
     Route::get('edit/{id}', [ExamSchedulesController::class,"edit"])->name('admin.examschedule.edit');
