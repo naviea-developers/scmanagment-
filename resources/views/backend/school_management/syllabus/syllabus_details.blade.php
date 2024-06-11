@@ -107,7 +107,7 @@
                                     <tbody>
                                         @foreach ($relatedLessons as $lesson_item)
                                             <tr>
-                                                <td>{{ $lesson_item->lession->name }}</td>
+                                                <td>{{ @$lesson_item->lession->name }}</td>
                                                 <td>{!! $lesson_item->lession_item !!}</td>
                                             </tr>
                                         @endforeach

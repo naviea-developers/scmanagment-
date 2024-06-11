@@ -103,6 +103,7 @@ Route::prefix('lession')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //Add syllabus for admin
 Route::prefix('syllabus')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SyllabusController::class,"index"])->name('admin.syllabus.index');
+    Route::post('ajax-syllabus', [SyllabusController::class,"ajaxData"])->name('admin.syllabus.ajax');
     Route::get('create', [SyllabusController::class,"create"])->name('admin.syllabus.create');
     Route::post('store', [SyllabusController::class,"store"])->name('admin.syllabus.store');
     Route::get('edit/{id}', [SyllabusController::class,"edit"])->name('admin.syllabus.edit');
@@ -299,6 +300,7 @@ Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group
 //Add notice type for admin
 Route::prefix('notice_type')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [NoticeTypeController::class,"index"])->name('admin.notice_type.index');
+    Route::post('ajax-notice_type', [NoticeTypeController::class,"ajaxData"])->name('admin.notice_type.ajax');
     Route::get('create', [NoticeTypeController::class,"create"])->name('admin.notice_type.create');
     Route::post('store', [NoticeTypeController::class,"store"])->name('admin.notice_type.store');
     Route::get('edit/{id}', [NoticeTypeController::class,"edit"])->name('admin.notice_type.edit');
