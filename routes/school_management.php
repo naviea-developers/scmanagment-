@@ -272,7 +272,7 @@ Route::prefix('examroutine')->middleware(['auth:admin', 'adminCheck:0'])->group(
 Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add classroutine for admin
     Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
-    Route::post('ajax-class-routine', [ClassRoutineController::class,"ajaxData"])->name('admin.routine.ajax');
+    Route::post('ajax-classroutine', [ClassRoutineController::class,"ajaxData"])->name('admin.gallery.ajax');
     Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
     Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
     Route::get('edit/{id}', [ClassRoutineController::class,"edit"])->name('admin.routine.edit');
@@ -320,6 +320,7 @@ Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( func
 //Add Gallery for admin 
 Route::prefix('gallery')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [GalleryController::class,"index"])->name('admin.gallery.index');
+    Route::post('ajax-gallery', [GalleryController::class,"ajaxData"])->name('admin.gallery.ajax');
     Route::get('create', [GalleryController::class,"create"])->name('admin.gallery.create');
     Route::post('store', [GalleryController::class,"store"])->name('admin.gallery.store');
     Route::get('edit/{id}', [GalleryController::class,"edit"])->name('admin.gallery.edit');

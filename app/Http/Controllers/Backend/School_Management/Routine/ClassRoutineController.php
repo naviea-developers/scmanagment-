@@ -20,6 +20,7 @@ use App\Models\ClassDuration;
 use App\Models\Session;
 use App\Models\SchoolSection;
 use App\Models\Tp_option;
+use Illuminate\Support\Facades\Validator;
 
 class ClassRoutineController extends Controller
 {
@@ -66,7 +67,7 @@ class ClassRoutineController extends Controller
         $datalist = ClassRoutine::query();
         if(!empty($search)){
  
-            $datalist =$datalist->where("class_id","LIKE","%{$search}%");
+            $datalist =$datalist->where("id","LIKE","%{$search}%");
            
         }
         
@@ -81,15 +82,13 @@ class ClassRoutineController extends Controller
             foreach($datalist as $data_v)
             {
                 $nestedData['id'] = @$data_v->id;
-                $nestedData['session_id'] = @$data_v->session->start_year ." - ". $data_v->session->end_year;
+                $nestedData['session_id'] = @$data_v->session->start_year ." - ". $data_v->session->end_year ?? null;
                 $nestedData['class_id'] = @$data_v->class->name;
-                $nestedData['sections_id'] = @$data_v->schoolsection->name;
-                $nestedData['subject_id'] = @$data_v->subject->name;
-                // $nestedData['section_id'] = $data_v->schoolsection->name;
-                $nestedData['teacher_id'] = @$data_v->teacher->name;
-                $nestedData['day_id'] = @$data_v->day ?? "";
+                $nestedData['sections_id'] = @$data_v->schoolsection->name ?? null;
+                $nestedData['subject_id'] = @$data_v->subject->name ?? null;
+                $nestedData['teacher_id'] = @$data_v->teacher->name ?? null;
+                $nestedData['day_id'] = @$data_v->day ?? null;
                
- 
                 $nestedData['status'] = '';
                 if ($data_v->status == 0) {
                     $nestedData['status'] .= '<a href="'.route('admin.routine.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
@@ -136,15 +135,53 @@ class ClassRoutineController extends Controller
 
  
 
+    // public function store(Request $request)
+    // {
+    // //    dd($request->all());
+    //     $request->validate([
+    //         'class_id' => 'required',
+    //         'session_id' => 'required',
+    //         'day_id' => 'required',
+
+    //     ]);
+    //     try{
+    //         DB::beginTransaction();
+    //         $class_routine = new ClassRoutine();
+    //         $class_routine->session_id = $request->session_id ?? 0;
+    //         $class_routine->class_id = $request->class_id ?? 0;
+    //         $class_routine->section_id = $request->section_id ?? 0;
+    //         $class_routine->subject_id = $request->subject_id ?? 0;
+    //         $class_routine->teacher_id = $request->teacher_id ?? 0;
+    //         $class_routine->room_id = $request->room_id ?? 0;
+    //         $class_routine->class_duration_id = $request->class_duration_id ?? 0;
+    //         $class_routine->day_id = $request->day_id ?? 0;
+    //         // $class_routine->class_type = $request->class_type;
+    //         $class_routine->save();
+    //         DB::commit();
+    //         return redirect()->route('admin.routine.index')->with('message','Class Routine Add Successfully');
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         dd($e);
+    //         return back()->with ('error_message', $e->getMessage());
+    //     }
+    // }
+
     public function store(Request $request)
     {
-    //    dd($request->all());
-        $request->validate([
+      // dd($request->all());
+        
+        $validator = Validator::make($request->all(), [
             'class_id' => 'required',
             'session_id' => 'required',
             'day_id' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $class_routine = new ClassRoutine();
@@ -158,12 +195,21 @@ class ClassRoutineController extends Controller
             $class_routine->day_id = $request->day_id ?? 0;
             // $class_routine->class_type = $request->class_type;
             $class_routine->save();
+
             DB::commit();
-            return redirect()->route('admin.routine.index')->with('message','Class Routine Add Successfully');
+           
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Routine Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+           // dd($e);
+           
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -189,15 +235,111 @@ class ClassRoutineController extends Controller
        return view('Backend.school_management.class_routine.update',$data);
     }
 
-    public function update(Request $request,$id)
+    // public function update(Request $request,$id)
+    // {
+    // // dd($request->all());
+    //     $request->validate([
+    //         'class_id' => 'required',
+    //         'session_id' => 'required',
+    //         // 'day_id' => 'required',
+
+    //     ]);
+    //     try{
+    //         DB::beginTransaction();
+    //         $class_routine = ClassRoutine::find($id);
+    //         $class_routine->session_id = $request->session_id ?? 0;
+    //         $class_routine->class_id = $request->class_id ?? 0;
+    //         $class_routine->section_id = $request->section_id ?? 0;
+    //         $class_routine->subject_id = $request->subject_id ?? 0;
+    //         $class_routine->teacher_id = $request->teacher_id ?? 0;
+    //         $class_routine->room_id = $request->room_id ?? 0;
+    //         $class_routine->class_duration_id = $request->class_duration_id ?? 0;
+    //         $class_routine->day_id = $request->day_id ?? 0;
+    //         $class_routine->save();
+
+    //         // if($request->subject_id){
+    //         //     foreach( $request->subject_id as $k=>$value){
+    //         //         $class_routine_item = new ClassRoutineItem();
+    //         //         $class_routine_item->class_routine_id = $class_routine->id;
+    //         //         $class_routine_item->subject_id = $value;
+    //         //         $class_routine_item->day_id = $request->day_id[$k];
+    //         //         $class_routine_item->room_id = $request->room_id[$k];
+    //         //         $class_routine_item->teacher_id = $request->teacher_id[$k];
+    //         //         // $class_routine_item->bulding_id = $request->bulding_id[$k];
+    //         //         // $class_routine_item->floor_id = $request->floor_id[$k];    
+    //         //         $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
+    //         //         // $class_routine_item->start_time = $request->start_time[$k];
+    //         //         // $class_routine_item->end_time = $request->end_time[$k];
+    //         //         $class_routine_item->save();
+    //         //     }
+    //         // }
+
+    //         // if($request->old_subject_id){
+    //         //     foreach($request->old_subject_id as $k => $value){
+    //         //         $class_routine_item = ClassRoutineItem::find($k);
+    //         //         $class_routine_item->class_routine_id = $class_routine->id;
+    //         //         $class_routine_item->subject_id = $value;
+    //         //         $class_routine_item->day_id = $request->old_day_id[$k];
+    //         //         $class_routine_item->teacher_id = $request->old_teacher_id[$k];
+    //         //         $class_routine_item->room_id = $request->old_room_id[$k];
+    //         //         // $class_routine_item->bulding_id = $request->old_bulding_id[$k];
+    //         //         // $class_routine_item->floor_id = $request->old_floor_id[$k]; 
+    //         //         $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
+    //         //         // $class_routine_item->start_time = $request->old_start_time[$k];
+    //         //         // $class_routine_item->end_time = $request->old_end_time[$k];
+    //         //         $class_routine_item->save();
+    //         //     }
+    //         // }
+    
+    //         // if($request->delete_class_routine_item){
+    //         //     foreach($request->delete_class_routine_item as $key => $value){
+    //         //         $class_routine_item = ClassRoutineItem::find($value);
+    //         //         $class_routine_item->delete();
+    
+    //         //     }
+    //         // }
+    
+    //          //CourseConten  End
+
+
+
+    //         DB::commit();
+    //         return redirect()->route('admin.routine.index')->with('message','Exam Schedule Add Successfully');
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         dd($e);
+    //         return back()->with ('error_message', $e->getMessage());
+    //     }
+    // }
+
+    // public function destroy(Request $request)
+    // {
+    //     // dd('hi');
+    //     $class_routine =  ClassRoutine::find($request->class_routine_id);
+    //     // dd($examschedule);
+    //     // foreach($class_routine->class_routine_items as $class_routine_item){
+    //     //     $class_routine_item->delete();
+    //     // }
+
+    //     $class_routine->delete();
+    //     return back()->with('message','Class Routine Deleted Successfully');
+    // }
+
+
+    public function update(Request $request, string $id)
     {
-    // dd($request->all());
-        $request->validate([
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
             'class_id' => 'required',
             'session_id' => 'required',
-            // 'day_id' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $class_routine = ClassRoutine::find($id);
@@ -210,73 +352,68 @@ class ClassRoutineController extends Controller
             $class_routine->class_duration_id = $request->class_duration_id ?? 0;
             $class_routine->day_id = $request->day_id ?? 0;
             $class_routine->save();
-
-            // if($request->subject_id){
-            //     foreach( $request->subject_id as $k=>$value){
-            //         $class_routine_item = new ClassRoutineItem();
-            //         $class_routine_item->class_routine_id = $class_routine->id;
-            //         $class_routine_item->subject_id = $value;
-            //         $class_routine_item->day_id = $request->day_id[$k];
-            //         $class_routine_item->room_id = $request->room_id[$k];
-            //         $class_routine_item->teacher_id = $request->teacher_id[$k];
-            //         // $class_routine_item->bulding_id = $request->bulding_id[$k];
-            //         // $class_routine_item->floor_id = $request->floor_id[$k];    
-            //         $class_routine_item->class_duration_id = $request->class_duration_id[$k];      
-            //         // $class_routine_item->start_time = $request->start_time[$k];
-            //         // $class_routine_item->end_time = $request->end_time[$k];
-            //         $class_routine_item->save();
-            //     }
-            // }
-
-            // if($request->old_subject_id){
-            //     foreach($request->old_subject_id as $k => $value){
-            //         $class_routine_item = ClassRoutineItem::find($k);
-            //         $class_routine_item->class_routine_id = $class_routine->id;
-            //         $class_routine_item->subject_id = $value;
-            //         $class_routine_item->day_id = $request->old_day_id[$k];
-            //         $class_routine_item->teacher_id = $request->old_teacher_id[$k];
-            //         $class_routine_item->room_id = $request->old_room_id[$k];
-            //         // $class_routine_item->bulding_id = $request->old_bulding_id[$k];
-            //         // $class_routine_item->floor_id = $request->old_floor_id[$k]; 
-            //         $class_routine_item->class_duration_id = $request->old_class_duration_id[$k];              
-            //         // $class_routine_item->start_time = $request->old_start_time[$k];
-            //         // $class_routine_item->end_time = $request->old_end_time[$k];
-            //         $class_routine_item->save();
-            //     }
-            // }
-    
-            // if($request->delete_class_routine_item){
-            //     foreach($request->delete_class_routine_item as $key => $value){
-            //         $class_routine_item = ClassRoutineItem::find($value);
-            //         $class_routine_item->delete();
-    
-            //     }
-            // }
-    
-             //CourseConten  End
-
-
-
             DB::commit();
-            return redirect()->route('admin.routine.index')->with('message','Exam Schedule Add Successfully');
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Routine Update Successfully'
+            ]);
+            
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Request $request)
     {
-        // dd('hi');
-        $class_routine =  ClassRoutine::find($request->class_routine_id);
-        // dd($examschedule);
-        // foreach($class_routine->class_routine_items as $class_routine_item){
-        //     $class_routine_item->delete();
-        // }
+        //dd($request);
+        try{
+            $class_routine =  ClassRoutine::find($request->class_routine_id);
+            $class_routine->delete();
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Class Routine Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
+    }
 
-        $class_routine->delete();
-        return back()->with('message','Class Routine Deleted Successfully');
+    public function status($id)
+    {
+        $class_routine = ClassRoutine::find($id);
+        if ($class_routine) {
+            if ($class_routine->status == 0) {
+                $class_routine->status = 1;
+            } elseif ($class_routine->status == 1) {
+                $class_routine->status = 0;
+            }
+            $class_routine->update();
+
+            $statusMessage = $class_routine->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
+        }
+
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Building not found'
+        ]);
     }
 
     public function details(Request $request,$id){
