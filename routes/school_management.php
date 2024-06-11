@@ -205,6 +205,7 @@ Route::prefix('school-section')->middleware(['auth:admin', 'adminCheck:0'])->gro
 //Add Examination for admin
 Route::prefix('examination')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ExaminationController::class,"index"])->name('admin.examination.index');
+    Route::post('ajax-examination', [ExaminationController::class,"ajaxData"])->name('admin.examination.ajax');
     Route::get('create', [ExaminationController::class,"create"])->name('admin.examination.create');
     Route::post('store', [ExaminationController::class,"store"])->name('admin.examination.store');
     Route::get('edit/{id}', [ExaminationController::class,"edit"])->name('admin.examination.edit');
@@ -332,6 +333,7 @@ Route::prefix('gallery')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //Add Fee for admin
 Route::prefix('fee')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [FeeController::class,"index"])->name('admin.fee.index');
+    Route::post('ajax-fee', [FeeController::class,"ajaxData"])->name('admin.fee.ajax');
     Route::get('create', [FeeController::class,"create"])->name('admin.fee.create');
     Route::post('store', [FeeController::class,"store"])->name('admin.fee.store');
     Route::get('edit/{id}', [FeeController::class,"edit"])->name('admin.fee.edit');
@@ -343,6 +345,7 @@ Route::prefix('fee')->middleware(['auth:admin', 'adminCheck:0'])->group( functio
 //Add Fee Management for admin
 Route::prefix('fee-management')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [FeeManagementController::class,"index"])->name('admin.fee_management.index');
+    Route::post('ajax-fee-management', [FeeManagementController::class,"ajaxData"])->name('admin.fee_management.ajax');
     Route::get('create', [FeeManagementController::class,"create"])->name('admin.fee_management.create');
     Route::post('store', [FeeManagementController::class,"store"])->name('admin.fee_management.store');
     Route::get('edit/{id}', [FeeManagementController::class,"edit"])->name('admin.fee_management.edit');
