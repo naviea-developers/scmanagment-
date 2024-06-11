@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-3">
                     <label>Select Class : </label>
-                    <select name="class_id" id=""class="form-control form-select select2">
+                    <select name="class_id" id="class-edit" class="form-control form-select select2">
                         <option value="0">Select Class</option>
                         @foreach ($className as $class)
                             <option @if($class->id == $editData->class_id)  Selected @endif value="{{ $class->id}}">{{ $class->name }}</option>
@@ -45,7 +45,7 @@
 
                 <div class="col-md-3">
                     <label>Select Subject : </label>
-                    <select name="subject_id" id="subject" class="form-control form-select select2">
+                    <select name="subject_id" id="subject-edit" class="form-control form-select select2">
                         <option value="0">Select Subject</option>
                         @foreach ($subjectName as $subject)
                             <option @if($subject->id == $editData->subject_id)  Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>

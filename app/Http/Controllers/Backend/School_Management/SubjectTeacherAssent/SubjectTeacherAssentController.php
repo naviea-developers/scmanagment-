@@ -170,7 +170,7 @@ class SubjectTeacherAssentController extends Controller
         // $data['sections'] = SchoolSection::orderBy('id', 'desc')->where('status', 1)->get();
         $data['subjectName']=Subject::where('class_id',$subject_teacher_assent->class_id)->orderBy('id', 'asc')->get();
         $data['sections']=SchoolSection::where('class_id',$subject_teacher_assent->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
-        $data['classes'] = Classe::where('id',$subject_teacher_assent->class_id)->orderBy('id', 'desc')->where('status', 1)->get();
+        $data['classes'] = Classe::orderBy('id', 'desc')->where('status', 1)->get();
         return view("Backend.school_management.subject_teacher_assent.update",$data);
     }
 

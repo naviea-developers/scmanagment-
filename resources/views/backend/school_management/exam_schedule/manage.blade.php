@@ -137,8 +137,14 @@ Admin - All Exam Schedule
 
     $(document).on('change','#examination',function(e){
         let id = $(this).val();
-            console.log(id);
+            // console.log(id);
         getClassExam(id,"class_exam");
+    });
+
+    $(document).on('change','#examination-edit',function(e){
+        let id = $(this).val();
+            // console.log(id);
+        getClassExam(id,"class_exam-edit");
     });
 
     function getClassExam(id,outid){
@@ -159,6 +165,15 @@ Admin - All Exam Schedule
 </script>
 
 <script>
+    $(document).on('change','#class_exam-edit,#examination-edit',function(e){
+    var examinationId = $('#examination-edit').val();
+    var classExamId = $('#class_exam-edit').val();
+    // console.log({ examinationId, classExamId }); 
+    getSection(classExamId,"section");
+    getExamClassSub(examinationId, classExamId, "examclassSub-edit");
+   
+    });
+
     $(document).on('change','#class_exam,#examination',function(e){
     var examinationId = $('#examination').val();
     var classExamId = $('#class_exam').val();

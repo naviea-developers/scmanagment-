@@ -29,7 +29,90 @@ class ClassRoutineController extends Controller
         $data['sessions']=Session::orderBy('id', 'desc')->get(); 
         // $data['sections']=SchoolSection::where('class_id',$allData->class_id)->where('status', 1)->orderBy('id', 'asc')->get();
         $data['sections']=SchoolSection::where('status', 1)->orderBy('id', 'asc')->get();
-        return view('Backend.school_management.class_routine.index',$data);
+
+        $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+        $data['sessions']=Session::where('status', 1)->orderBy('id', 'desc')->get(); 
+        $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['teachers'] = User::where('status', 1)->where('type','2')->orderBy('id', 'asc')->get();
+        $data['examinations']=Examination::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['rooms'] = Room::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['floors'] = Floor::where('status', 1)->orderBy('id', 'asc')->get();
+        $data['class_durations'] = ClassDuration::where('status', 1)->orderBy('id', 'asc')->get();
+        return view('Backend.school_management.class_routine.manage',$data);
+    }
+
+
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'session_id',
+            2 => 'class_id',
+            3 => 'sections_id',
+            4 => 'subject_id',
+            5 => 'teacher_id',
+            6 => 'day_id',
+            7 => 'status',
+        );
+        $totalData = ClassRoutine::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = ClassRoutine::query();
+        if(!empty($search)){
+ 
+            $datalist =$datalist->where("class_id","LIKE","%{$search}%");
+           
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = @$data_v->id;
+                $nestedData['session_id'] = @$data_v->session->start_year ." - ". $data_v->session->end_year;
+                $nestedData['class_id'] = @$data_v->class->name;
+                $nestedData['sections_id'] = @$data_v->schoolsection->name;
+                $nestedData['subject_id'] = @$data_v->subject->name;
+                // $nestedData['section_id'] = $data_v->schoolsection->name;
+                $nestedData['teacher_id'] = @$data_v->teacher->name;
+                $nestedData['day_id'] = @$data_v->day ?? "";
+               
+ 
+                $nestedData['status'] = '';
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.routine.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.routine.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.routine.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data
+        ];
+    
+        return response()->json($json_data);
     }
 
     // public function examDetails(){

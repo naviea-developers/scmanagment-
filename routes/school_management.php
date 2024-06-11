@@ -272,6 +272,7 @@ Route::prefix('examroutine')->middleware(['auth:admin', 'adminCheck:0'])->group(
 Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add classroutine for admin
     Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
+    Route::post('ajax-class-routine', [ClassRoutineController::class,"ajaxData"])->name('admin.routine.ajax');
     Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
     Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
     Route::get('edit/{id}', [ClassRoutineController::class,"edit"])->name('admin.routine.edit');

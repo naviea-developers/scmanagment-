@@ -181,10 +181,11 @@ class ExamSchedulesController extends Controller
     public function edit($id){
         // dd('hi');
        $data['editData']=$editData =  ExamSchedule::find($id);
-       $data['className']=Classe::where('status', 1)->orderBy('id', 'asc')->get(); 
+       $data['className']=Classe::where('id',$editData->class_id)->where('status', 1)->orderBy('id', 'asc')->get(); 
        $data['examClasss']=ExamClass::where("class_id",$editData->class_id)->where('examination_id',$editData->examination_id)->where('status', 1)->orderBy('id', 'desc')->get();
        $data['subjectName']=Subject::where('status', 1)->orderBy('id', 'desc')->get();
-       $data['examinations']=Examination::where("id",$editData->examination_id)->where('status', 1)->orderBy('id', 'desc')->get();
+    //    $data['examinations']=Examination::where("id",$editData->examination_id)->where('status', 1)->orderBy('id', 'desc')->get();
+       $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
        $data['buldings'] = Bulding::where('status', 1)->orderBy('id', 'desc')->get();
        $data['rooms'] = Room::where('status', 1)->orderBy('id', 'desc')->get();
        $data['floors'] = Floor::where('status', 1)->orderBy('id', 'desc')->get();

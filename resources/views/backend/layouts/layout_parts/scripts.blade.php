@@ -369,12 +369,16 @@
     }
 
 
-  
-
     $('body').on("change",'#bulding',function(){
         let id = $(this).val();
         //    console.log(id);
         getFloor(id,"floor");
+    });
+
+    $('body').on("change",'#bulding-edit',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getFloor(id,"floor-edit");
     });
 
     function getFloor(id,outid){
@@ -399,6 +403,12 @@
         let id = $(this).val();
         //    console.log(id);
         getRoom(id,"room");
+    });
+
+    $('body').on("change",'#floor-edit',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getRoom(id,"room-edit");
     });
 
     function getRoom(id,outid){
