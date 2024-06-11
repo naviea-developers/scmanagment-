@@ -203,24 +203,6 @@ class BuldingController extends Controller
         }
     }
 
-
-    // public function status($id)
-    // {
-    //     $bulding = Bulding::find($id);
-    //     if($bulding->status == 0)
-    //     {
-    //         $bulding->status = 1;
-    //     }elseif($bulding->status == 1)
-    //     {
-    //         $bulding->status = 0;
-    //     }
-    //     $bulding->update();
-    //     return redirect()->route('admin.bulding.index');
-    // }
-
-  
-
-
     public function status($id)
     {
         $bulding = Bulding::find($id);
