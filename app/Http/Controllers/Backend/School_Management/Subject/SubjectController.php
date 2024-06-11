@@ -225,6 +225,7 @@ class SubjectController extends Controller
         //dd($request);
         try{
             $subject =  Subject::find($request->subject_id);
+            @unlink(public_path('upload/subject/'.$subject->image));
             $subject->delete();
             
             return response()->json([

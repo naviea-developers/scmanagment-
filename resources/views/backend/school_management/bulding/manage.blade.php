@@ -36,8 +36,6 @@ Admin - All Buldings
                         </thead>
                         <tbody>
                             
-                            {{-- <a class="btn text-info" href="{{ route('admin.bulding.edit', $bulding->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                                        <button class="btn text-danger bg-white"  value="{{$bulding->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button> --}}
                         </tbody>
                     </table>
                 </div><!-- table-wrapper -->
