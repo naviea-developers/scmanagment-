@@ -53,6 +53,7 @@ Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( funct
 //Add Class for admin
 Route::prefix('class_duration')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ClassDurationController::class,"index"])->name('admin.class_duration.index');
+    Route::post('ajax-class-duration', [ClassDurationController::class,"ajaxData"])->name('admin.class_duration.ajax');
     Route::get('create', [ClassDurationController::class,"create"])->name('admin.class_duration.create');
     Route::post('store', [ClassDurationController::class,"store"])->name('admin.class_duration.store');
     Route::get('edit/{id}', [ClassDurationController::class,"edit"])->name('admin.class_duration.edit');
@@ -77,6 +78,7 @@ Route::prefix('subject_teacher_assent')->middleware(['auth:admin', 'adminCheck:0
 //Add Subject for admin
 Route::prefix('subject')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SubjectController::class,"index"])->name('admin.subject.index');
+    Route::post('ajax-subject', [SubjectController::class,"ajaxData"])->name('admin.subject.ajax');
     Route::get('create', [SubjectController::class,"create"])->name('admin.subject.create');
     Route::post('store', [SubjectController::class,"store"])->name('admin.subject.store');
     Route::get('edit/{id}', [SubjectController::class,"edit"])->name('admin.subject.edit');
@@ -88,6 +90,7 @@ Route::prefix('subject')->middleware(['auth:admin', 'adminCheck:0'])->group( fun
 //Add lession for admin
 Route::prefix('lession')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [LessionController::class,"index"])->name('admin.lession.index');
+    Route::post('ajax-lession', [LessionController::class,"ajaxData"])->name('admin.lession.ajax');
     Route::get('create', [LessionController::class,"create"])->name('admin.lession.create');
     Route::post('store', [LessionController::class,"store"])->name('admin.lession.store');
     Route::get('edit/{id}', [LessionController::class,"edit"])->name('admin.lession.edit');
@@ -112,6 +115,7 @@ Route::prefix('syllabus')->middleware(['auth:admin', 'adminCheck:0'])->group( fu
 //Add group for admin
 Route::prefix('group')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [GroupController::class,"index"])->name('admin.group.index');
+    Route::post('ajax-group', [GroupController::class,"ajaxData"])->name('admin.group.ajax');
     Route::get('create', [GroupController::class,"create"])->name('admin.group.create');
     Route::post('store', [GroupController::class,"store"])->name('admin.group.store');
     Route::get('edit/{id}', [GroupController::class,"edit"])->name('admin.group.edit');
@@ -187,6 +191,7 @@ Route::prefix('room')->middleware(['auth:admin', 'adminCheck:0'])->group( functi
 //Add school-section for admin
 Route::prefix('school-section')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [SchoolSectionController::class,"index"])->name('admin.school_section.index');
+    Route::post('ajax-school-section', [SchoolSectionController::class,"ajaxData"])->name('admin.school_section.ajax');
     Route::get('create', [SchoolSectionController::class,"create"])->name('admin.school_section.create');
     Route::post('store', [SchoolSectionController::class,"store"])->name('admin.school_section.store');
     Route::get('edit/{id}', [SchoolSectionController::class,"edit"])->name('admin.school_section.edit');
