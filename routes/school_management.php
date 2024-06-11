@@ -41,6 +41,7 @@ use App\Http\Controllers\Frontend\School_management\Admission\AdmissionControlle
 //Add Class for admin
 Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ClassController::class,"index"])->name('admin.class.index');
+    Route::post('ajax-class', [ClassController::class,"ajaxData"])->name('admin.class.ajax');
     Route::get('create', [ClassController::class,"create"])->name('admin.class.create');
     Route::post('store', [ClassController::class,"store"])->name('admin.class.store');
     Route::get('edit/{id}', [ClassController::class,"edit"])->name('admin.class.edit');

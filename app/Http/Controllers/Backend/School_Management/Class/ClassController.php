@@ -12,8 +12,71 @@ class ClassController extends Controller
 {
     public function index()
     {
-        $data['classes'] = Classe::all();
-        return view("Backend.school_management.class.index",$data);
+        // $data['classes'] = Classe::all();
+        $data['teachers'] = User::where('type', 2)->where('status', 1)->get();
+        return view("Backend.school_management.class.manage",$data);
+        // return view("Backend.school_management.class.index",$data);
+    }
+
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'image',
+            2 => 'name',
+            3 => 'teacher_name',
+            4 => 'status',
+        );
+        $totalData = Classe::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = Classe::query();
+        if(!empty($search)){
+            $datalist =$datalist->where("name","LIKE","%{$search}%");
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = $data_v->id;
+                $nestedData['image'] = '<img src="' . $data_v->image_show . '" alt="" width="60px" height="40px">';
+                $nestedData['name'] = $data_v->name;
+                $nestedData['teacher_name'] = $data_v->teacher->name;
+ 
+                $nestedData['status'] = '';
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.class.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.class.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.class.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+ 
+        return json_encode($json_data);
     }
 
     /**
