@@ -289,6 +289,14 @@
         getGroup(id,"group");
         getStudent(id,"student");
     });
+    $('body').on("change",'#class-edit',function(){
+        let id = $(this).val();
+            // console.log(id);
+        getSection(id,"section-edit");
+        getSubject(id,"subject-edit");
+        getGroup(id,"group-edit");
+        getStudent(id,"student-edit");
+    });
 
     function getSection(id,outid){
         let url = '{{ url("get/school_section/") }}/' + id;

@@ -25,8 +25,6 @@
 
              
 
-              
-
               <div class="row mt-3">
                 <div class="col-sm-12 mg-t-10 mg-sm-t-0 text-right">
                   <a href="javascript:void(0);" type="button" class="btn-cancel btn btn-secondary text-white mr-2" >Cancel</a>
