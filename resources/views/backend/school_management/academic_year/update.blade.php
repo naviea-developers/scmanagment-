@@ -17,7 +17,7 @@
                 <div class="col-sm-12 ">
                     <label class="form-control-label">Academic Year: <span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                    <input type="number" name="year" class="form-control" placeholder="Enter Year only" value="{{ $year->year }}" required>
+                    <input type="number" name="year" class="form-control" placeholder="Enter Year only" value="{{ $year->year }}">
                 </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 
 <div class="br-section-wrapper data-create" style="display: none;">
-  <h6 class="br-section-label text-center mb-4">Add New Academic Year</h6>
+  <h6 class="br-section-label text-center mb-4"> Add New Bulding</h6>
   {{-- validate start  --}}
   <div id="create_errors"></div>
   {{-- validate End  --}}

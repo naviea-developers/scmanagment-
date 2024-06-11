@@ -126,12 +126,11 @@
         }]
     });
 
-    // Add event listener for radio buttons
+
     $('#data_table_list').on('change', 'input[name="is_current"]', function() {
         var sessionId = $(this).val();
         var csrfToken = "{{ csrf_token() }}";
 
-        // Send AJAX request to update current session
         $.ajax({
             url: "{{ route('admin.session.updateCurrent') }}",
             type: "POST",
@@ -142,7 +141,7 @@
             success: function(response) {
                 if (response.success) {
                     alert('Current session updated successfully.');
-                    // Reload the DataTable
+          
                     datatable.ajax.reload();
                 } else {
                     alert('Failed to update current session.');

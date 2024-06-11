@@ -91,7 +91,9 @@ class SessionController extends Controller
         ];
     
         return response()->json($json_data);
-    }
+    } 
+
+
 
 
 
@@ -162,13 +164,13 @@ class SessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(string $id)
-    // {
-    //    // dd('hi');
-    //     $data["session"]= session::find($id);
-    //     $data['years'] = AcademicYear::all();
-    //     return view("Backend.school_management.session.update",$data);
-    // }
+    public function edit(string $id)
+    {
+       // dd('hi');
+        $data["session"]= session::find($id);
+        $data['years'] = AcademicYear::all();
+        return view("Backend.school_management.session.update",$data);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -201,7 +203,7 @@ class SessionController extends Controller
         DB::commit();
         return response()->json([
             'status'=>'yes',
-            'msg'=>'Bulding Update Successfully'
+            'msg'=>'Session Update Successfully'
         ]);
     }catch(\Exception $e){
         DB::rollBack();
