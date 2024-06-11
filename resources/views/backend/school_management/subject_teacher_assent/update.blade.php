@@ -31,7 +31,7 @@
                 <div class="col-sm-12 mt-3">
                     <label class="form-control-label">Class Name: <span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                      <select name="class_id" class="form-control form-select select2" id="class">
+                      <select name="class_id" class="form-control form-select select2" id="class-edit">
                         <option value="0"> Select Class</option>
                         @foreach ($classes as $class)
                         <option @if ($class->id == $subject_teacher_assent->class_id) Selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
@@ -45,7 +45,7 @@
               <div class="col-sm-12 mt-3">
                   <label class="form-control-label">Select Subject : <span class="tx-danger">*</span></label>
                   <div class="mg-t-10 mg-sm-t-0">
-                    <select name="subject_id" id="subject" class="form-control form-select select2">
+                    <select name="subject_id" id="subject-edit" class="form-control form-select select2">
                       <option value="">Select Subject</option>
                       @foreach ($subjectName as $subject)
                           <option @if ($subject->id == $subject_teacher_assent->subject_id) Selected @endif value="{{ $subject->id }}">{{ $subject->name }}</option>
@@ -59,7 +59,7 @@
                 <div class="col-sm-12 mt-3">
                     <label class="form-control-label">Sections Name: <span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                      <select name="section_id" class="form-control form-select select2" id="section">
+                      <select name="section_id" class="form-control form-select select2" id="section-edit">
                         <option value="0"> Select Class</option>
                         @foreach ($sections as $section)
                         <option @if ($section->id == $subject_teacher_assent->section_id) Selected @endif value="{{ $section->id }}">{{ $section->name }}</option>

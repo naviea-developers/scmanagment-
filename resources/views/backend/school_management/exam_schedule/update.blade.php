@@ -17,7 +17,7 @@
 
                 <div class="col-md-3">
                     <label for="">Examination title :</label>
-                    <select name="examination_id" id="examination" class="form-control form-select select2">
+                    <select name="examination_id" id="examination-edit" class="form-control form-select select2">
                         <option value="">Select Exam title</option>
                         @foreach (@$examinations as $examination)
                             <option @if($examination->id == $editData->examination_id)  Selected @endif value="{{ $examination->id }}">{{ $examination->name }}</option>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-3">
                     <label>Select Class : </label>
-                    <select name="class_id" id="class_exam" class="form-control form-select select2">
+                    <select name="class_id" id="class_exam-edit" class="form-control form-select select2">
                         <option value="">Select Class</option>
                         @foreach ($className as $class)
                             <option @if($class->id == $editData->class_id)  Selected @endif value="{{ $class->id}}">{{ $class->name }}</option>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-3">
                     <label for="">Exam Subject :</label>
-                    <select name="exam_class_id" id="examclassSub" class="form-control form-select select2">
+                    <select name="exam_class_id" id="examclassSub-edit" class="form-control form-select select2">
                         <option value="">Select Exam subject</option>
                         @foreach (@$examClasss as $examClass)
                             <option @if($examClass->id == $editData->exam_class_id)  Selected @endif value="{{ $examClass->id }}">{{ @$examClass->subject->name }}</option>
@@ -55,7 +55,7 @@
 
                 <div class="col-md-3">
                     <label>Select Buldings : </label>
-                    <select name="bulding_id" id="bulding"class="form-control form-select select2">
+                    <select name="bulding_id" id="bulding-edit"class="form-control form-select select2">
                         <option value="">Select Buldings</option>
                         @foreach ($buldings as $bulding)
                             <option @if($bulding->id == $editData->bulding_id)  Selected @endif value="{{ $bulding->id }}">{{ $bulding->name }}</option>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-md-3 mt-3">
                     <label>Select Floors : </label>
-                    <select name="floor_id" id="floor" class="form-control form-select select2">
+                    <select name="floor_id" id="floor-edit" class="form-control form-select select2">
                         <option value="">Select Floors</option>
                         @foreach ($floors as $floor)
                             <option @if($floor->id == $editData->floor_id)  Selected @endif value="{{ $floor->id }}">{{ $floor->name }}</option>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-md-3 mt-3">
                     <label>Select Rooms : </label>
-                    <select name="room_id" id="room"class="form-control form-select select2">
+                    <select name="room_id" id="room-edit"class="form-control form-select select2">
                         <option value="">Select Rooms</option>
                         @foreach ($rooms as $room)
                             <option @if($room->id == $editData->room_id)  Selected @endif value="{{ $room->id }}">{{ $room->name }}</option>

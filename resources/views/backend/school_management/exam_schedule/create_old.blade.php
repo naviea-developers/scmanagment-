@@ -155,6 +155,7 @@
             console.log(id);
         getClassExam(id,"class_exam");
     });
+    
 
     function getClassExam(id,outid){
         let url = '{{ url("get/examination_class/") }}/' + id;

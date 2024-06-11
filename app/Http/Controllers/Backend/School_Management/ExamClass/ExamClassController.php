@@ -207,7 +207,7 @@ class ExamClassController extends Controller
     public function edit($id){
         // dd('hi');
        $data['editData']=$editData =  ExamClass::find($id);
-       $data['className']=Classe::where('id',$editData->class_id)->where('status', 1)->orderBy('id', 'desc')->get(); 
+       $data['className']=Classe::where('status', 1)->orderBy('id', 'desc')->get(); 
        $data['subjectName']=Subject::where('class_id',$editData->class_id)->where('status', 1)->orderBy('id', 'desc')->get();
        $data['examTypes'] = ExamType::where('status', 1)->orderBy('id','desc')->get();
        $data['examinations']=Examination::where('status', 1)->orderBy('id', 'desc')->get();
