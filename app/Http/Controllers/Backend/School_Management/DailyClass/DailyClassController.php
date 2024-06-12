@@ -19,6 +19,7 @@ class DailyClassController extends Controller
 {
     public function index()
     {
+        // shohag
         $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
         $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
         $data['sessions'] = Session::where('status', 1)->get();
