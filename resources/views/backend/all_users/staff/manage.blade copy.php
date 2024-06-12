@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Cities
+Admin - All Buldings
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -14,7 +14,7 @@ Admin - All Cities
 
             <div class="br-section-wrapper data-list pt-3">
 
-                <h6 class="br-section-label text-center">All Cities</h6>
+                <h6 class="br-section-label text-center">All Buldings</h6>
                 <div style="text-align: right;">
                     <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
                         <i class="fa fa-plus"></i> Add Bulding
@@ -70,7 +70,7 @@ Admin - All Cities
                         </button>
                         <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                         <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-                        <input type="hidden" name="city_id" id="modal_data_id">
+                        <input type="hidden" name="bulding_id" id="modal_data_id">
                         <button type="submit" class="btn-delete btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20"> yes</button>
                         <button type="button" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-bs-dismiss="modal" aria-label="Close"> No</button>
                     </form>
