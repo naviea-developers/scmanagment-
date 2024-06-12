@@ -78,7 +78,9 @@ class AlumniController extends Controller
                 $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.alumni.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
              
                 $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
- 
+                
+                $nestedData['options'] .= '<button class="btn text-white bg-info changePass"  value="'.$data_v->id.'">Change Password</button>';
+
                 $data[] = $nestedData;
  
             }
@@ -93,63 +95,6 @@ class AlumniController extends Controller
         return response()->json($json_data);
     }
 
-
-
-    public function create()
-    {
-        $data['classes'] = Classe::where('status', 1)->get();
-        $data['sessions'] = Session::where('status', 1)->get();
-        $data['fees'] = FeeManagement::where('status', 1)->get();
-        return view('Backend.school_management.alumni.create', $data);
-    }
-    // public function store(Request $request)
-    // {
-    //     $alumni = new User();
-    //     $alumni->session_id = $request->session_id ?? 0;
-    //     $alumni->class_id = $request->class_id ?? 0;
-    //     $alumni->reg_fee_id = $request->reg_fee_id ?? 0;
-    //     $alumni->roll_number = $request->roll_number;
-    //     $alumni->name = $request->name;
-    //     $alumni->mobile = $request->mobile;
-    //     $alumni->email = $request->email;
-    //     $alumni->designation = $request->designation;
-    //     $alumni->company_name = $request->company_name;
-    //     $alumni->address = $request->address;
-    //     $alumni->description = $request->description;
-    //     $alumni->type = 9;
-    //     $alumni->is_alumni = 1;
-    //     $alumni->password = 12345678;
-    //     //social links
-    //     $alumni->facebook_id = $request->facebook_id;
-    //     $alumni->twitter_id = $request->twitter_id;
-    //     $alumni->google_id = $request->google_id;
-    //     $alumni->linkedin_id = $request->linkedin_id;
-
-    //     if($request->hasFile('image')){
-    //         $fileName = rand().time().'_image.'.request()->image->getClientOriginalExtension();
-    //         request()->image->move(public_path('upload/users/'),$fileName);
-    //         $alumni->image = $fileName;
-    //     }
-    //     $alumni->save();
-
-    //      // Generate a unique ID in the format TYYYYMMDD(user_id)
-    //      $uniqueId = 'A' . date('Y') . $alumni->id;
-    //      $alumni->unique_id = $uniqueId;
-    //      $alumni->save();
-
-
-    //      //user
-    //      $data['name'] = $alumni->name;
-    //      $data['email'] = $alumni->email;
-    //      $data['password'] = 12345678;
-    //      $details['email'] = $alumni->email;
-    //      $details['send_item']= new UserEmail($data);
-    //      dispatch(new \App\Jobs\SendEmailJob($details));
-    //      ///email notification end
-
-
-    //     return redirect()->route('admin.alumni.index')->with('message', 'Alumni Added Successfully');
-    // }
 
 
     public function store(Request $request)
@@ -254,36 +199,6 @@ class AlumniController extends Controller
 }
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $alumni = User::find($id);
-    //     $alumni->session_id = $request->session_id ?? 0;
-    //     $alumni->class_id = $request->class_id ?? 0;
-    //     $alumni->reg_fee_id = $request->reg_fee_id ?? 0;
-    //     $alumni->roll_number = $request->roll_number;
-    //     $alumni->name = $request->name;
-    //     $alumni->mobile = $request->mobile;
-    //     $alumni->email = $request->email;
-    //     $alumni->designation = $request->designation;
-    //     $alumni->company_name = $request->company_name;
-    //     $alumni->address = $request->address;
-    //     $alumni->description = $request->description;
-    //     $alumni->is_alumni = $request->is_alumni;
-    //     //social links
-    //     $alumni->facebook_id = $request->facebook_id;
-    //     $alumni->twitter_id = $request->twitter_id;
-    //     $alumni->google_id = $request->google_id;
-    //     $alumni->linkedin_id = $request->linkedin_id;
-
-    //     if($request->hasFile('image')){
-    //         @unlink(public_path("upload/users/".$alumni->image));
-    //         $fileName = rand().time().'_image.'.request()->image->getClientOriginalExtension();
-    //         request()->image->move(public_path('upload/users/'),$fileName);
-    //         $alumni->image = $fileName;
-    //     }
-    //     $alumni->save();
-    //     return redirect()->route('admin.alumni.index')->with('message', 'Alumni Info Update Successfully');
-    // }
 
     public function update(Request $request, string $id)
     {
@@ -434,20 +349,32 @@ class AlumniController extends Controller
     }
 
     function changePassword(Request $request){
-        $alumni =  User::find($request->user_id);
-        $alumni->password = $request->password;
-        $alumni->save();
+        try{
+            $user =  User::find($request->user_id);
+            $user->password = $request->password;
+            $user->save();
 
-        //user
-        $data['name'] = $alumni->name;
-        $data['email'] = $alumni->email;
-        $data['password'] = $request->password;
-        $details['email'] = $alumni->email;
-        $details['send_item']= new UserEmail($data);
-        dispatch(new \App\Jobs\SendEmailJob($details));
-        ///email notification end
+             //user
+            $data['name'] = $user->name;
+            $data['email'] = $user->email;
+            $data['password'] = $request->password;
+            $details['email'] = $user->email;
+            $details['send_item']= new UserEmail($data);
+            dispatch(new \App\Jobs\SendEmailJob($details));
+            ///email notification end
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Password Change Successfully.'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
 
-        return redirect()->back()->with('message','Alumni Profile Password Changed Successfully');
     }
    
 }
