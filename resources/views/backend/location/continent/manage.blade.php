@@ -10,7 +10,7 @@ Admin - All Continents
     <div class="br-mainpanel">
 
         <div class="br-pagebody">
-            @include('Backend.school_management.bulding.create')
+            @include('Backend.location.continent.create')
 
             <div class="br-section-wrapper data-list pt-3">
 
@@ -20,10 +20,8 @@ Admin - All Continents
                         <i class="fa fa-plus"></i> Add Continents
                     </a>
                 </div>
-                
-
-               
-
+            
+        
                 <div class="table-wrapper">
                     <table id="data_table_list" class="table display responsive nowrap">
                         <thead>
