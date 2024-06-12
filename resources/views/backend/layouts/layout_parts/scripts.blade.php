@@ -746,4 +746,59 @@
         })
     });
 
+
+
+
+    $(document).on('click','.btn-change-pass',function(e){
+        e.preventDefault();
+        var form_data = new FormData($('#data-form-change-pass')[0]);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : $('#data-form-change-pass').attr('action'),
+            data : form_data,
+            type : 'POST',
+            contentType: false,
+            cache: false,
+            processData:false,
+            success : function(res){
+                console.log(res);
+                if(res.status == "yes"){
+                    $('#data-form-change-pass')[0].reset();
+                    listView();
+                     $('#changePassword').modal('hide');
+                    //console.log($('#datamodalshow'));
+                    //$('#datamodalshow').modal('toggle');
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                   
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error:function(e){
+               // console.log(e.responseJSON.message);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+
 </script>
