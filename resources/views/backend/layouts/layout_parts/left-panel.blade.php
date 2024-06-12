@@ -267,7 +267,21 @@
         </li><!-- br-Speakers-item -->
 
 
+
+
+
         <li class="br-menu-item">
+            <a href="{{ route('admin.daily_class.index') }}" class="br-menu-link {{ Route::is('admin.daily_class.index') ? "active" :""}}">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Daily CLass</span>
+            </a><!-- br-menu-link -->
+        </li><!-- br-Review-item -->
+
+
+
+
+
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'daily_class')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Daily CLass</span>
@@ -276,12 +290,12 @@
             $r_check = ( Route::is('admin.daily_class.create') ||  Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                {{-- <li class="sub-item"><a href="{{ route('admin.daily_class.create') }}" class="sub-link {{( Route::is('admin.daily_class.create') ) ?'active':''}}">Add Daily Class</a>
-                </li> --}}
+                <li class="sub-item"><a href="{{ route('admin.daily_class.create') }}" class="sub-link {{( Route::is('admin.daily_class.create') ) ?'active':''}}">Add Daily Class</a>
+                </li>
                 <li class="sub-item"><a href="{{ route('admin.daily_class.index') }}" class="sub-link {{(Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit')) ?'active':''}}">Manage Daily Class</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
 
@@ -294,8 +308,8 @@
             $r_check = ( Route::is('Manage Designation') || Route::is('admin.teacher.index') || Route::is('admin.teacher.edit') || Route::is('admin.designation.edit'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.teacher.create') }}" class="sub-link {{( Route::is('admin.teacher.create') ) ?'active':''}}">Add New Teacher</a>
+                </li> --}}
                 <li class="sub-item"><a href="{{ route('admin.teacher.index') }}" class="sub-link {{(Route::is('admin.teacher.index') || Route::is('admin.teacher.edit')) ?'active':''}}">Manage Teacher</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.designation.index') }}" class="sub-link {{(Route::is('admin.designation.index') ) ?'active':''}}">Manage Designation</a>
@@ -326,6 +340,16 @@
 
 
 
+
+        <li class="br-menu-item">
+            <a href="{{ route('admin.topper_student.index') }}" class="br-menu-link {{ Route::is('admin.topper_student.index') ? "active" :""}}">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Topper Student</span>
+            </a><!-- br-menu-link -->
+        </li><!-- br-Review-item -->
+
+
+{{-- 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'topper-student')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
@@ -337,16 +361,25 @@
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                {{-- <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
-                </li> --}}
+                <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
+                </li>
                 <li class="sub-item"><a href="{{ route('admin.topper_student.index') }}" class="sub-link {{(Route::is('admin.topper_student.index') || Route::is('admin.topper_student.edit')) ?'active':''}}">Manage Topper</a>
                 </li>
             </ul>
-        </li><!-- br-Speakers-item -->
+        </li><!-- br-Speakers-item --> --}}
 
 
 
         <li class="br-menu-item">
+            <a href="{{ route('admin.staff.index') }}" class="br-menu-link {{ Route::is('admin.staff.index') ? "active" :""}}">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Staff</span>
+            </a><!-- br-menu-link -->
+        </li><!-- br-Review-item -->
+
+
+
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Staff</span>
@@ -360,7 +393,7 @@
                 <li class="sub-item"><a href="{{ route('admin.staff.index') }}" class="sub-link {{(Route::is('admin.staff.index') || Route::is('admin.staff.edit')) ?'active':''}}">Manage Staff</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
         <li class="br-menu-item">
@@ -372,8 +405,8 @@
             $r_check = ( Route::is('admin.alumni.create') ||  Route::is('admin.alumni.index') || Route::is('admin.alumni.edit') || Route::is('admin.requested_alumni.index'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.alumni.create') }}" class="sub-link {{( Route::is('admin.alumni.create') ) ?'active':''}}">Add New Alumni</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.alumni.create') }}" class="sub-link {{( Route::is('admin.alumni.create') ) ?'active':''}}">Add New Alumni</a>
+                </li> --}}
                 <li class="sub-item"><a href="{{ route('admin.alumni.index') }}" class="sub-link {{(Route::is('admin.alumni.index') || Route::is('admin.alumni.edit')) ?'active':''}}">Manage Alumni</a>
                 </li>
                 <li class="sub-item"><a href="{{ route('admin.requested_alumni.index') }}" class="sub-link {{(Route::is('admin.requested_alumni.index') || Route::is('admin.alumni.edit')) ?'active':''}}">Requested Alumni ({{ $requestedAlumni->count() }})</a>
@@ -382,6 +415,24 @@
         </li>
 
 
+
+
+
+
+
+        <li class="br-menu-item">
+            <a href="{{ route('admin.ebook.index') }}" class="br-menu-link {{ Route::is('admin.ebook.index') ? "active" :""}}">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">E-Book</span>
+            </a><!-- br-menu-link -->
+        </li><!-- br-Review-item -->
+
+
+
+
+
+
+{{-- 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'ebook')?'active':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
@@ -397,7 +448,7 @@
                 </li>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
 
         <li class="br-menu-item">
@@ -528,7 +579,20 @@
 
 
 
+
+
+
         <li class="br-menu-item">
+            <a href="{{ route('admin.manage_testimonial') }}" class="br-menu-link {{ Route::is('admin.manage_testimonial') ? "active" :""}}">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Testimonials & Review</span>
+            </a><!-- br-menu-link -->
+        </li><!-- br-Review-item -->
+
+
+
+
+        {{-- <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'show-sub':''}} ">
                 <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
                 <span class="menu-item-label">Testimonials & Review</span>
@@ -542,7 +606,7 @@
                 <li class="sub-item"><a href="{{ route('admin.manage_testimonial') }}" class="sub-link {{(Route::is('admin.manage_testimonial') || Route::is('admin.edit_testimonial')) ?'active':''}}">Manage Testimonials</a>
                 </li>
             </ul>
-        </li><!-- br-Teacher-item -->
+        </li><!-- br-Teacher-item --> --}}
 
 
 

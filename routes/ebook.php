@@ -10,7 +10,8 @@ use App\Http\Controllers\Backend\Ebook\EbookVideoController;
 
 Route::prefix('ebook')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Course Create
-     Route::get('index/ebook', [EbookController::class,"index"])->name('admin.ebook.index');
+     Route::get('index/ebook', [EbookController::class,"index"])->name('admin.ebook.index');        
+     Route::post('ajax-e-book', [EbookController::class,"ajaxData"])->name('admin.ebook.ajax');
      Route::get('create/ebook', [EbookController::class,"create"])->name('admin.ebook.create');
      Route::post('store/ebook', [EbookController::class,"store"])->name('admin.ebook.store');
      Route::get('edit/ebook/{id}', [EbookController::class,"edit"])->name('admin.ebook.edit');
