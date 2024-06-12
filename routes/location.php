@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Backend\Madical_Tourism\CityController;
-use App\Http\Controllers\Backend\Madical_Tourism\ContinentController;
-use App\Http\Controllers\Backend\Madical_Tourism\CountryController;
-use App\Http\Controllers\Backend\Madical_Tourism\HotelPackageController;
-use App\Http\Controllers\Backend\Madical_Tourism\MedicalTourismPackageController;
-use App\Http\Controllers\Backend\Madical_Tourism\StateController;
-use App\Http\Controllers\Backend\Madical_Tourism\ThanaController;
-use App\Http\Controllers\Backend\Madical_Tourism\UnionController;
-use App\Http\Controllers\Backend\Madical_Tourism\WordController;
-use App\Http\Controllers\Backend\medical_tourism\PopularLocationController;
+use App\Http\Controllers\Backend\Location\CityController;
+use App\Http\Controllers\Backend\Location\ContinentController;
+use App\Http\Controllers\Backend\Location\CountryController;
+use App\Http\Controllers\Backend\Location\HotelPackageController;
+use App\Http\Controllers\Backend\Location\MedicalTourismPackageController;
+use App\Http\Controllers\Backend\Location\StateController;
+use App\Http\Controllers\Backend\Location\ThanaController;
+use App\Http\Controllers\Backend\Location\UnionController;
+use App\Http\Controllers\Backend\Location\WordController;
+use App\Http\Controllers\Backend\Location\PopularLocationController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\MedicalTourismController;
 use Illuminate\Support\Facades\Route;
@@ -29,20 +29,25 @@ use Illuminate\Support\Facades\Artisan;
 
 //continent
 Route::resource('/continent', ContinentController::class);
-Route::post('/delete-continent', [ContinentController::class, 'delete'])->name('admin.continent.delete');
-Route::post('ajax-group', [ContinentController::class,"ajaxData"])->name('admin.continent.ajax');
-// Route::get('/status/{id}', [ContinentController::class, 'status'])->name('admin.group.status');
-// Route::post('delete', [GroupController::class,"destroy"])->name('admin.group.delete');
+Route::post('ajax-continent', [ContinentController::class,"ajaxData"])->name('admin.continent.ajax');
+Route::post('delete-continent', [ContinentController::class,"destroy"])->name('admin.continent.delete');
 Route::get('/status/{id}', [ContinentController::class, 'status'])->name('admin.continent.status');
-// Route::get('/continent/status_toggle/{id}', [ContinentController::class, 'status_toggle'])->name('admin.medical_tourism.continent.status');
+
 //country
 Route::resource('/country', CountryController::class);
-Route::post('/delete-country', [CountryController::class, 'delete'])->name('admin.medical_tourism.country.delete');
-Route::get('/country/status_toggle/{id}', [CountryController::class, 'status_toggle'])->name('admin.medical_tourism.country.status');
+Route::post('ajax-country', [CountryController::class,"ajaxData"])->name('admin.country.ajax');
+Route::post('delete', [CountryController::class,"destroy"])->name('admin.country.delete');
+Route::get('/status/{id}', [CountryController::class, 'status'])->name('admin.country.status');
+
+// Route::post('/delete-country', [CountryController::class, 'delete'])->name('admin.medical_tourism.country.delete');
+// Route::get('/country/status_toggle/{id}', [CountryController::class, 'status_toggle'])->name('admin.medical_tourism.country.status');
 //State
 Route::resource('/state', StateController::class);
-Route::post('/delete-state', [StateController::class, 'delete'])->name('admin.medical_tourism.state.delete');
-Route::get('/state/status_toggle/{id}', [StateController::class, 'status_toggle'])->name('admin.medical_tourism.state.status');
+Route::post('ajax-state', [StateController::class,"ajaxData"])->name('admin.state.ajax');
+Route::post('delete', [StateController::class,"destroy"])->name('admin.state.delete');
+Route::get('/status/{id}', [StateController::class, 'status'])->name('admin.state.status');
+// Route::post('/delete-state', [state::class, 'delete'])->name('admin.medical_tourism.state.delete');
+// Route::get('/state/status_toggle/{id}', [StateController::class, 'status_toggle'])->name('admin.medical_tourism.state.status');
 //city
 Route::resource('/city', CityController::class);
 Route::post('/delete-city', [CityController::class, 'delete'])->name('admin.medical_tourism.city.delete');

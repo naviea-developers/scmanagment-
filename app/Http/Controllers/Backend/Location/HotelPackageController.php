@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Madical_Tourism;
+namespace App\Http\Controllers\Backend\Location;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;

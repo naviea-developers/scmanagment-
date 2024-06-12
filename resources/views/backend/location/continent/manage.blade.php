@@ -105,7 +105,7 @@ Admin - All Continents
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 3,
+          "targets": 4,
           "orderable": false
           } ]
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Madical_Tourism;
+namespace App\Http\Controllers\Backend\Location;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
@@ -12,6 +12,8 @@ use App\Models\Thana;
 use App\Models\Union;
 use App\Models\Word;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class StateController extends Controller
 {
@@ -21,7 +23,78 @@ class StateController extends Controller
     public function index()
     {
         $data['states'] = State::all();
-        return view('Backend.medical_tourism.state.index', $data);
+        $data['continents'] = Continent::all();
+        $data['countries'] = Country::all();
+        return view('Backend.location.state.manage', $data);
+    }
+
+
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'image',
+            2 => 'continent_name',
+            3 => 'country_name',
+            4 => 'name',
+            5 => 'status',
+        );
+        $totalData = State::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = State::query();
+        if(!empty($search)){
+ 
+            $datalist =$datalist->where("name","LIKE","%{$search}%");
+           
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = $data_v->id;
+                $nestedData['image'] = '<img src="' . $data_v->image_show . '" alt="Image" width="50" height="50">';
+                $nestedData['continent_name'] = $data_v->continent->name;
+                $nestedData['country_name'] = $data_v->country->name;
+                $nestedData['name'] = $data_v->name;
+                // $nestedData['code'] = $data_v->code;
+              
+ 
+                $nestedData['status'] = '';
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.state.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.state.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('state.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data
+        ];
+    
+        return response()->json($json_data);
     }
 
     /**
@@ -31,7 +104,7 @@ class StateController extends Controller
     {
         $data['continents'] = Continent::all();
         $data['countries'] = Country::all();
-        return view('Backend.medical_tourism.state.create', $data);
+        return view('Backend.location.state.create', $data);
     }
 
     /**
@@ -68,7 +141,7 @@ class StateController extends Controller
         $data['state'] = $state= State::find($id);
         $data['continents'] = Continent::all();
         $data['countries'] = Country::where('continent_id', $state->continent->id)->get();
-        return view('Backend.medical_tourism.state.update', $data);
+        return view('Backend.location.state.update', $data);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Madical_Tourism;
+namespace App\Http\Controllers\Backend\Location;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
@@ -17,7 +17,7 @@ class CityController extends Controller
     public function index()
     {
         $data['cities'] = City::all();
-        return view('Backend.medical_tourism.city.index', $data);
+        return view('Backend.location.city.index', $data);
     }
 
     /**
@@ -28,7 +28,7 @@ class CityController extends Controller
         $data['continents'] = Continent::all();
         $data['countries'] = Country::all();
         $data['states'] = State::all();
-        return view('Backend.medical_tourism.city.create', $data);
+        return view('Backend.location.city.create', $data);
     }
 
     /**
@@ -73,7 +73,7 @@ class CityController extends Controller
         $data['countries'] = Country::where('continent_id', $city->continent->id)->get();
 
 
-        return view('Backend.medical_tourism.city.update', $data);
+        return view('Backend.location.city.update', $data);
     }
 
     /**

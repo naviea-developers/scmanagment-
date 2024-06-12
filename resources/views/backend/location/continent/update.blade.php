@@ -7,13 +7,13 @@
     {{-- validate End  --}}
 
   <!----- Start Add Category Form input ------->
-  <div class="col-xl-7 mx-auto">
+  <div class="col-xl-10 mx-auto">
       <div class="form-layout form-layout-4 py-5">
 
           <form id="data-form-update" action="{{ route('continent.update', $continent->id) }}" method="post" enctype="multipart/form-data">
-              @csrf
+              {{-- @csrf --}}
 
-              {{-- {{ method_field('PATCH') }} --}}
+              {{ method_field('PATCH') }}
                         
               <div class="row mt-3" id="menuimage">
                   <label class="col-sm-3 form-control-label">Continent Image: <span class="tx-danger">*</span></label>

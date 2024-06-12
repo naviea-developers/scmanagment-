@@ -6,7 +6,7 @@
   {{-- validate End  --}}
 
 
-  <div class="col-xl-7 mx-auto">
+  <div class="col-xl-10 mx-auto">
     <div class="form-layout form-layout-4 py-5">
 
       <form id="data-form-create" action="{{ route('continent.store') }}" method="post" enctype="multipart/form-data">
