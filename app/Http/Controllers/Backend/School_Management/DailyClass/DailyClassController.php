@@ -13,6 +13,7 @@ use App\Models\Lession;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Validator;
 
 class DailyClassController extends Controller
 {
@@ -110,15 +111,72 @@ class DailyClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //   // dd($request->all());
+    //     $request->validate([
+    //         'teacher_id' => 'required',
+    //         'class_id' => 'required',
+    //         'lession_id' => 'required',
+
+    //     ]);
+    //     try{
+    //         DB::beginTransaction();
+    //         $daily_class = new DailyClass();
+    //         $daily_class->name = $request->name ?? "";
+    //         $daily_class->teacher_id = $request->teacher_id ?? 0;
+    //         $daily_class->class_id = $request->class_id ?? 0;
+    //         $daily_class->subject_id = $request->subject_id ?? 0;
+    //         $daily_class->session_id = $request->session_id ?? 0;
+    //         $daily_class->section_id = $request->section_id ?? 0;
+    //         $daily_class->group_id = $request->group_id ?? 0;
+    //         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+    //         $daily_class->lession_id = $request->lession_id ?? 0;
+    //         $daily_class->page_number = $request->page_number ?? 0;
+    //         $daily_class->sub_banner = $request->sub_banner ?? 1;
+    //         $daily_class->details = $request->details ?? "";
+
+
+    //         if($request->hasFile('video')){
+    //             $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+    //             request()->video->move(public_path('upload/daily_class/'),$fileName);
+    //             $daily_class->video = $fileName;
+    //         }
+    
+    //         // if($request->hasFile('video_thumbnail')){
+    //         //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+    //         //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+    //         //     $daily_class->video_thumbnail = $fileName;
+    //         // }
+
+    //         $daily_class->save();
+
+    //         DB::commit();
+    //         return redirect()->route('admin.daily_class.index')->with('message','Daily Class Add Successfully');
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         dd($e);
+    //         return back()->with ('error_message', $e->getMessage());
+    //     }
+    // }
+
+
     public function store(Request $request)
     {
       // dd($request->all());
-        $request->validate([
+        
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required',
             'class_id' => 'required',
             'lession_id' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $daily_class = new DailyClass();
@@ -151,11 +209,19 @@ class DailyClassController extends Controller
             $daily_class->save();
 
             DB::commit();
-            return redirect()->route('admin.daily_class.index')->with('message','Daily Class Add Successfully');
+           
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Daily Class Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+           // dd($e);
+           
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -237,6 +303,8 @@ class DailyClassController extends Controller
         return back()->with ('error_message', $e->getMessage());
     }
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
