@@ -9,6 +9,7 @@ use App\Models\Group;
 use App\Models\Shelf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -95,16 +96,15 @@ class BookController extends Controller
  
                 $nestedData['status'] = '';
                 if ($book->status == 0) {
-                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="btn btn-sm btn-warning">Inactive</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
                 } elseif ($book->status == 1) {
-                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="btn btn-sm btn-success">Active</a>';
+                    $nestedData['status'] .= '<a href="'.route('admin.book.status', $book->id).'" class="data_status btn btn-sm btn-success">Active</a>';
                 }
                 $nestedData['options'] = '';
                 // Edit button
                 $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.book.edit', $book->id).'"><i class="fa fa-edit"></i></a>';
                 // Delete button
-                $nestedData['options'] .= ' <a href="#"  value="'.$book->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
-                
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$book->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
                 $data[] = $nestedData;
  
             }
@@ -137,10 +137,20 @@ class BookController extends Controller
     public function store(Request $request)
     {
       // dd($request->all());
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'class_id' => 'required',
+            // 'group_id' => 'required',
+            'shelf_id' => 'required',
+            'total_set' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $book = New Book();
@@ -153,11 +163,17 @@ class BookController extends Controller
             $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT); 
             $book->save();
             DB::commit();
-            return redirect()->route('admin.book.index')->with('message','Book Add Successfully');
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Book Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+            // dd($e);
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -174,10 +190,10 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        $data['book'] = Book::find($id);
+        $data['book'] = $class = Book::find($id);
         $data['shelves'] = Shelf::where('status', 1)->get();
         $data['classes'] = Classe::where('status', 1)->get();
-        $data['groups'] = Group::where('status', 1)->get();
+        $data['groups'] = Group::where('class_id', $class->class_id)->where('status', 1)->get();
         return view("Backend.library_management.book.update",$data);
     }
 
@@ -187,54 +203,96 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         //dd($request->all());
-       $request->validate([
-        'name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'class_id' => 'required',
+            // 'group_id' => 'required',
+            'shelf_id' => 'required',
+            'total_set' => 'required',
 
-    ]);
-    try{
-        DB::beginTransaction();
-        $book = Book::find($id);
-        $book->shelf_id = $request->shelf_id ?? 0;
-        $book->class_id = $request->class_id ?? 0;
-        $book->group_id = $request->group_id ?? 0;
-        $book->name = $request->name;
-        $book->total_set = $request->total_set;
-        $book->save();
-        // $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
-        // $book->save();
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
+        try{
+            DB::beginTransaction();
+            $book = Book::find($id);
+            $book->shelf_id = $request->shelf_id ?? 0;
+            $book->class_id = $request->class_id ?? 0;
+            $book->group_id = $request->group_id ?? 0;
+            $book->name = $request->name;
+            $book->total_set = $request->total_set;
+            $book->save();
+            // $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
+            // $book->save();
 
-        DB::commit();
-        return redirect()->route('admin.book.index')->with('message','Book Update Successfully');
-    }catch(\Exception $e){
-        DB::rollBack();
-       // dd($e);
-        return back()->with ('error_message', $e->getMessage());
-    }
+            DB::commit();
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Book Update Successfully'
+            ]);
+        }catch(\Exception $e){
+            DB::rollBack();
+        // dd($e);
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
+
+
     public function destroy(Request $request)
     {
-
-        $book =  Book::find($request->book_id);
-        $book->delete();
-        return back()->with('message','Book Deleted Successfully');
+        //dd($request);
+        try{
+            $book =  Book::find($request->book_id);
+            $book->delete();
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Book Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
 
 
     public function status($id)
     {
         $book = Book::find($id);
-        if($book->status == 0)
-        {
-            $book->status = 1;
-        }elseif($book->status == 1)
-        {
-            $book->status = 0;
+        if ($book) {
+            if ($book->status == 0) {
+                $book->status = 1;
+            } elseif ($book->status == 1) {
+                $book->status = 0;
+            }
+            $book->update();
+
+            $statusMessage = $book->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
         }
-        $book->update();
-        return redirect()->route('admin.book.index')->with('message', 'Status Change Successfully.');
+
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Book not found'
+        ]);
     }
 }

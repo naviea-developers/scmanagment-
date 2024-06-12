@@ -304,6 +304,14 @@
         getGroup(id,"group-edit");
         getStudent(id,"student-edit");
     });
+    $('body').on("change",'#class-filter',function(){
+        let id = $(this).val();
+            // console.log(id);
+        getSection(id,"section-filter");
+        getSubject(id,"subject-filter");
+        getGroup(id,"group-filter");
+        getStudent(id,"student-filter");
+    });
 
     $('body').on("change",'#routine_class',function(){
         let id = $(this).val();
