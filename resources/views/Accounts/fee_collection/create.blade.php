@@ -1,92 +1,83 @@
- <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#01303f;max-height: 50px;">
-            <h5 class="modal-title" id="exampleModalLabel" style="color:white;line-height:18px;">Expense</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row row-card-one">
-                        <div class="col-sm-12">
-                            <!-- form here -->
-                            <form method="POST" action="{{route('expense.store')}}" enctype="multipart/form-data" class="add_data_form">
-                                @csrf
-                                <div class="row mt-2">
-                                    <div class="col-md-4">
-                                        <label for="">Session *</label>
-                                        <select name="session" class="form-control">
-                                            <option value=""> select session</option>
-                                            @foreach ($sessions as  $session)
-                                            <option @if(old('category') == $session->id) selected @endif value="{{ $session->id }}">{{ $session->start_year.' - '.$session->end_year }}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="">Class *</label>
-                                        <select name="session" class="form-control">
-                                            <option value=""> select class</option>
-                                            @foreach ($classes as  $class)
-                                            <option @if(old('category') == $class->id) selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="">Date*</label>
-                                        <input onclick="this.showPicker();" type="text" class="form-control datepicker" name="date"  placeholder="Reason For Expense" value="{{ old('date') ?? date('Y-m-d') }}" />
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="">Amount*</label>
-                                        <input type="text" class="form-control" name="amount" value="{{ old('amount') ?? 0 }}" />
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-sm-3">
-                                        <label for="">Payment Method</label>
-                                        <select name="payment_method" class="form-control" id="add_payment_method">
-                                            <option value=""> select Method</option>
-                                            @foreach ($methods as $method)
-                                            <option @if(old('payment_method') == $method->id) selected @endif value="{{ $method->id }}">{{ $method->name }}</option>
-                                            @endforeach
 
-                                        </select>
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-                                    <div class="col-sm-6 bank_show" style="display: none;">
-                                        <label for="">Account *</label>
-                                        <select id="add_account" name="account" class="form-control">
-                                            <option value="">Select Account</option>
-
-
-                                        </select>
-                                        <span class="invalid-feedback mb-0"> </span>
-                                    </div>
-
-
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-sm btn-primary mt-4 " type="submit">
-                                            <i class="fa fa-save pr-2"></i>Save
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
+<section class="content-head data-create" style="display:none;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div id="create_errors"></div>
+                    <div class="card-header  p-1">
+                        <h3 class="card-title m-0">Add Fee Collection</h3>
                     </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" id="data-form-create" action="{{route('account_head.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">Session </label>
+                                    <select name="session" class="form-control">
+                                        <option value=""> select session</option>
+                                        @foreach ($sessions as  $session)
+                                        <option @if(old('category') == $session->id) selected @endif value="{{ $session->id }}">{{ $session->start_year.' - '.$session->end_year }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="invalid-feedback mb-0"> </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="">Class </label>
+                                    <select name="sc_class" id="sc_class" class="form-control">
+                                        <option value=""> select class</option>
+                                        @foreach ($classes as  $class)
+                                        <option @if(old('category') == $class->id) selected @endif value="{{ $class->id }}">{{ $class->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="invalid-feedback mb-0"> </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="">Section</label>
+                                    <select name="section" id="section" class="form-control">
+                                        <option value=""> select section</option>
+                                        
+                                    </select>
+                                    <span class="invalid-feedback mb-0"> </span>
+                                </div>
+                            </div>
+                            <div id="fee_res_s">
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control custom-select" name="status">
+                                            <option @if(old('status')  == '1') selected @endif value="1">Active</option>
+                                            <option @if(old('status')  == '0') selected @endif value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-danger btn-cancel">Back</button>
+                            <button type="submit" class="btn btn-primary btn-create">Submit</button>
+                        </div>
+                    </form>
                 </div>
+                <!-- /.card -->
+
             </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
+            <!--/.col (left) -->
+
         </div>
-    </div>
-</div>
-<!-- end modal -->
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+

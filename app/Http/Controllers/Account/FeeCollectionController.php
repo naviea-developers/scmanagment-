@@ -17,6 +17,7 @@ class FeeCollectionController extends Controller
         $data['classes'] = Classe::where('status', 1)->get();
         $data['fee_names'] = Fee::where('status', 1)->get();
         $data['sessions'] = Session::where('status', 1)->get();
+        //dd("sss");
         return view ('Accounts.fee_collection.index',$data); 
     }
 }
