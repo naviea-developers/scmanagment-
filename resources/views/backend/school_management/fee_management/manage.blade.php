@@ -17,7 +17,7 @@ Admin - All fees
               <h6 class="br-section-label text-center">Fees Management</h6>
               <div style="text-align: right;">
                   <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
-                      <i class="fa fa-plus"></i> Add Bulding
+                      <i class="fa fa-plus"></i> Add Fee
                   </a>
               </div>
               

@@ -337,8 +337,8 @@
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
+                </li> --}}
                 <li class="sub-item"><a href="{{ route('admin.topper_student.index') }}" class="sub-link {{(Route::is('admin.topper_student.index') || Route::is('admin.topper_student.edit')) ?'active':''}}">Manage Topper</a>
                 </li>
             </ul>
