@@ -14,14 +14,15 @@ class BookController extends Controller
 {
     public function index()
     {
-        $data['books'] = Book::orderBy('id', 'desc')->get();
-        $data['classes'] = Classe::orderBy('id', 'desc')->get();
-        $data['shelves'] = Shelf::orderBy('id', 'desc')->get();
-        return view("Backend.library_management.book.index",$data);
+        // $data['books'] = Book::orderBy('id', 'desc')->get();
+        $data['shelves'] = Shelf::where('status', 1)->get();
+        $data['classes'] = Classe::where('status', 1)->get();
+        $data['groups'] = Group::where('status', 1)->get();
+        return view("Backend.library_management.book.manage",$data);
     }
 
 
-    function libraryBookByAjax(Request $request){
+    function ajaxData(Request $request){
         // dd($request->all());
          $columns = array(
             0 => 'id',
@@ -122,13 +123,13 @@ class BookController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $data['shelves'] = Shelf::where('status', 1)->get();
-        $data['classes'] = Classe::where('status', 1)->get();
-        $data['groups'] = Group::where('status', 1)->get();
-        return view("Backend.library_management.book.create", $data);
-    }
+    // public function create()
+    // {
+    //     $data['shelves'] = Shelf::where('status', 1)->get();
+    //     $data['classes'] = Classe::where('status', 1)->get();
+    //     $data['groups'] = Group::where('status', 1)->get();
+    //     return view("Backend.library_management.book.create", $data);
+    // }
 
     /**
      * Store a newly created resource in storage.
