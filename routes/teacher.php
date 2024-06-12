@@ -16,6 +16,7 @@ Route::middleware(['auth:admin', 'adminCheck:0'])->group( function () {
 Route::prefix('teacher')->group(function () {
        //Teacher
         Route::get('index', [TeacherController::class,"index"])->name('admin.teacher.index');
+        Route::post('ajax-teacher', [TeacherController::class,"ajaxData"])->name('admin.teacher.ajax');
         Route::get('create', [TeacherController::class,"create"])->name('admin.teacher.create');
         Route::post('store', [TeacherController::class,"store"])->name('admin.teacher.store');
         Route::get('edit/{id}', [TeacherController::class,"edit"])->name('admin.teacher.edit');
