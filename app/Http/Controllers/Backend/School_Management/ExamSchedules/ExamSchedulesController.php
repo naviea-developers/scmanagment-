@@ -284,7 +284,7 @@ class ExamSchedulesController extends Controller
        
         return response()->json([
             'status'=>'no',
-            'msg'=>'Building not found'
+            'msg'=>'Exam Schedule not found'
         ]);
     }
 

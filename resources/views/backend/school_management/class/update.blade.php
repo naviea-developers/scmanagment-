@@ -51,7 +51,7 @@
                 <div class="col-sm-12">
                     <label class="form-control-label"><b>Class Details </b><span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                        <textarea id="summernote" name="details">{{ @$class->details }}</textarea>
+                        <textarea id="summernotefour" name="details">{{ @$class->details }}</textarea>
                     </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@
                 <div class="col-sm-12">
                     <label class="form-control-label"><b>School Guardian Policy </b><span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                        <textarea id="summernote_two" name="gargent_policy">{{ @$class->gargent_policy }}</textarea>
+                        <textarea id="summernotesix" name="gargent_policy">{{ @$class->gargent_policy }}</textarea>
                     </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@
                 <div class="col-sm-12">
                     <label class="form-control-label"><b>Daily Class Video Details </b><span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                        <textarea id="summernote_three" name="daily_class_details">{{ @$class->daily_class_details }}</textarea>
+                        <textarea id="summernote_seven" name="daily_class_details">{{ @$class->daily_class_details }}</textarea>
                     </div>
                 </div>
               </div>

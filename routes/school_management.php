@@ -312,6 +312,7 @@ Route::prefix('notice_type')->middleware(['auth:admin', 'adminCheck:0'])->group(
 //Add Notice for admin
 Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [NoticeController::class,"index"])->name('admin.notice.index');
+    Route::post('ajax-notice', [NoticeController::class,"ajaxData"])->name('admin.notice.ajax');
     Route::get('create', [NoticeController::class,"create"])->name('admin.notice.create');
     Route::post('store', [NoticeController::class,"store"])->name('admin.notice.store');
     Route::get('edit/{id}', [NoticeController::class,"edit"])->name('admin.notice.edit');
@@ -359,6 +360,7 @@ Route::prefix('fee-management')->middleware(['auth:admin', 'adminCheck:0'])->gro
 Route::prefix('daily_class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Course Create
      Route::get('index', [DailyClassController::class,"index"])->name('admin.daily_class.index');
+     Route::post('ajax-daily-class', [DailyClassController::class,"ajaxData"])->name('admin.daily_class.ajax');
      Route::get('create', [DailyClassController::class,"create"])->name('admin.daily_class.create');
      Route::post('store', [DailyClassController::class,"store"])->name('admin.daily_class.store');
      Route::get('edit/{id}', [DailyClassController::class,"edit"])->name('admin.daily_class.edit');

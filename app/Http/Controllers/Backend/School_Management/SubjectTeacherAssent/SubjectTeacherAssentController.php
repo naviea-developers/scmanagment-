@@ -264,7 +264,7 @@ class SubjectTeacherAssentController extends Controller
        
         return response()->json([
             'status'=>'no',
-            'msg'=>'Building not found'
+            'msg'=>'Teacher Assent not found'
         ]);
     }
 

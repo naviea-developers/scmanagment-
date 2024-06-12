@@ -13,13 +13,87 @@ use App\Models\Lession;
 use App\Models\Group;
 use App\Models\SchoolSection;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Validator;
 
 class DailyClassController extends Controller
 {
     public function index()
     {
+        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
+        $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+        $data['sessions'] = Session::where('status', 1)->get();
         $data['daily_classes'] = DailyClass::orderBy('id', 'desc')->get();
-        return view("Backend.school_management.daily_class.index",$data);
+        return view("Backend.school_management.daily_class.manage",$data);
+    }
+
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'title',
+            2 => 'teacher',
+            3 => 'class',
+            4 => 'subject',
+            5 => 'lession',
+            6 => 'page_number',
+            7 => 'status',
+        );
+        $totalData = DailyClass::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = DailyClass::query();
+        if(!empty($search)){
+ 
+            $datalist =$datalist->where("name","LIKE","%{$search}%");
+           
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = @$data_v->id;
+                $nestedData['title'] = @$data_v->name;
+                $nestedData['teacher'] = @$data_v->teacher->name;
+                $nestedData['class'] = @$data_v->class->name;
+                $nestedData['subject'] = @$data_v->subject->name;
+                $nestedData['lession'] = @$data_v->lession->name;
+                $nestedData['page_number'] = @$data_v->page_number;
+
+                $nestedData['status'] = '';
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.daily_class.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.daily_class.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.daily_class.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data
+        ];
+    
+        return response()->json($json_data);
     }
 
     /**
@@ -37,15 +111,72 @@ class DailyClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //   // dd($request->all());
+    //     $request->validate([
+    //         'teacher_id' => 'required',
+    //         'class_id' => 'required',
+    //         'lession_id' => 'required',
+
+    //     ]);
+    //     try{
+    //         DB::beginTransaction();
+    //         $daily_class = new DailyClass();
+    //         $daily_class->name = $request->name ?? "";
+    //         $daily_class->teacher_id = $request->teacher_id ?? 0;
+    //         $daily_class->class_id = $request->class_id ?? 0;
+    //         $daily_class->subject_id = $request->subject_id ?? 0;
+    //         $daily_class->session_id = $request->session_id ?? 0;
+    //         $daily_class->section_id = $request->section_id ?? 0;
+    //         $daily_class->group_id = $request->group_id ?? 0;
+    //         $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+    //         $daily_class->lession_id = $request->lession_id ?? 0;
+    //         $daily_class->page_number = $request->page_number ?? 0;
+    //         $daily_class->sub_banner = $request->sub_banner ?? 1;
+    //         $daily_class->details = $request->details ?? "";
+
+
+    //         if($request->hasFile('video')){
+    //             $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+    //             request()->video->move(public_path('upload/daily_class/'),$fileName);
+    //             $daily_class->video = $fileName;
+    //         }
+    
+    //         // if($request->hasFile('video_thumbnail')){
+    //         //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+    //         //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+    //         //     $daily_class->video_thumbnail = $fileName;
+    //         // }
+
+    //         $daily_class->save();
+
+    //         DB::commit();
+    //         return redirect()->route('admin.daily_class.index')->with('message','Daily Class Add Successfully');
+    //     }catch(\Exception $e){
+    //         DB::rollBack();
+    //         dd($e);
+    //         return back()->with ('error_message', $e->getMessage());
+    //     }
+    // }
+
+
     public function store(Request $request)
     {
       // dd($request->all());
-        $request->validate([
+        
+        $validator = Validator::make($request->all(), [
             'teacher_id' => 'required',
             'class_id' => 'required',
             'lession_id' => 'required',
 
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
+        }
         try{
             DB::beginTransaction();
             $daily_class = new DailyClass();
@@ -78,11 +209,19 @@ class DailyClassController extends Controller
             $daily_class->save();
 
             DB::commit();
-            return redirect()->route('admin.daily_class.index')->with('message','Daily Class Add Successfully');
+           
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Daily Class Add Successfully'
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
-            dd($e);
-            return back()->with ('error_message', $e->getMessage());
+           // dd($e);
+           
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
         }
     }
 
@@ -164,6 +303,8 @@ class DailyClassController extends Controller
         return back()->with ('error_message', $e->getMessage());
     }
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

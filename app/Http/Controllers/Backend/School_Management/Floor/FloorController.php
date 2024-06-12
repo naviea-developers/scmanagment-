@@ -98,29 +98,6 @@ class FloorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //   // dd($request->all());
-    //     $request->validate([
-    //         'name' => 'required',
-
-    //     ]);
-    //     try{
-    //         DB::beginTransaction();
-    //         $class = New Floor();
-    //         $class->bulding_id = $request->bulding_id;
-    //         $class->name = $request->name;
-    //         $class->save();
-
-    //         DB::commit();
-    //         return redirect()->route('admin.floor.index')->with('message','Floor Add Successfully');
-    //     }catch(\Exception $e){
-    //         DB::rollBack();
-    //         dd($e);
-    //         return back()->with ('error_message', $e->getMessage());
-    //     }
-    // }
-
 
     public function store(Request $request)
     {
@@ -218,51 +195,9 @@ class FloorController extends Controller
         }
     }
 
-    // public function update(Request $request, string $id)
-    // {
-    //     //dd($request->all());
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required',
-
-    //     ]);
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status'=>'error',
-    //             'errors'=>$validator->errors()->all()
-    //         ]);
-    //     }
-    //     try{
-    //         DB::beginTransaction();
-    //         $bulding = Bulding::find($id);
-    //         $bulding->name = $request->name;
-    //         $bulding->save();
-
-    //         DB::commit();
-    //         return response()->json([
-    //             'status'=>'yes',
-    //             'msg'=>'Bulding Update Successfully'
-    //         ]);
-            
-    //     }catch(\Exception $e){
-    //         DB::rollBack();
-    //         return response()->json([
-    //             'status'=>'no',
-    //             'msg'=>$e->getMessage()
-    //         ]);
-    //     }
-    // }
-
     /**
      * Remove the specified resource from storage.
      */
-    // public function destroy(Request $request)
-    // {
-
-    //     $floor =  Floor::find($request->floor_id);
-    //     $floor->delete();
-    //     return back()->with('message','Floor Deleted Successfully');
-    // }
-
 
     public function destroy(Request $request)
     {
@@ -309,18 +244,4 @@ class FloorController extends Controller
         ]);
     }
 
-
-    // public function status($id)
-    // {
-    //     $floor = Floor::find($id);
-    //     if($floor->status == 0)
-    //     {
-    //         $floor->status = 1;
-    //     }elseif($floor->status == 1)
-    //     {
-    //         $floor->status = 0;
-    //     }
-    //     $floor->update();
-    //     return redirect()->route('admin.floor.index');
-    // }
 }

@@ -310,7 +310,7 @@ class ExamClassController extends Controller
        
         return response()->json([
             'status'=>'no',
-            'msg'=>'Building not found'
+            'msg'=>'Exam Subjext not found'
         ]);
     }
 
