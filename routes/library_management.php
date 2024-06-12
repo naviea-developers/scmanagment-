@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('direction')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //direction Create
-     Route::get('index/', [DirectionController::class,"index"])->name('admin.direction.index');
+     Route::get('index/', [DirectionController::class,"index"])->name('admin.direction.index');    
+     Route::post('ajax-direction', [DirectionController::class,"ajaxData"])->name('admin.direction.ajax');
      Route::get('create/', [DirectionController::class,"create"])->name('admin.direction.create');
      Route::post('store/', [DirectionController::class,"store"])->name('admin.direction.store');
      Route::get('edit/{id}', [DirectionController::class,"edit"])->name('admin.direction.edit');
@@ -24,6 +25,7 @@ Route::prefix('direction')->middleware(['auth:admin', 'adminCheck:0'])->group( f
 Route::prefix('library-shelf')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //shelf Create
      Route::get('index/', [ShelfController::class,"index"])->name('admin.shelf.index');
+     Route::post('ajax-shelf', [ShelfController::class,"ajaxData"])->name('admin.shelf.ajax');
      Route::get('create/', [ShelfController::class,"create"])->name('admin.shelf.create');
      Route::post('store/', [ShelfController::class,"store"])->name('admin.shelf.store');
      Route::get('edit/{id}', [ShelfController::class,"edit"])->name('admin.shelf.edit');
@@ -35,6 +37,7 @@ Route::prefix('library-shelf')->middleware(['auth:admin', 'adminCheck:0'])->grou
 Route::prefix('library-book')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //book Create
      Route::get('index/', [BookController::class,"index"])->name('admin.book.index');
+     Route::post('book-ajax', [BookController::class,"ajaxData"])->name('admin.book.ajax');
      Route::get('create/', [BookController::class,"create"])->name('admin.book.create');
      Route::post('store/', [BookController::class,"store"])->name('admin.book.store');
      Route::get('edit/{id}', [BookController::class,"edit"])->name('admin.book.edit');
@@ -56,7 +59,6 @@ Route::prefix('book_delivery')->middleware(['auth:admin', 'adminCheck:0'])->grou
 
 
 
-Route::post('get-library-book-by-ajax', [BookController::class,"libraryBookByAjax"])->name('admin.libraryBookByAjax');
 Route::post('get-library-delivery-book-by-ajax', [DeliveryController::class,"libraryDeliveryBookByAjax"])->name('admin.libraryDeliveryBookByAjax');
 
 
