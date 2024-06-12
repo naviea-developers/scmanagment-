@@ -126,6 +126,7 @@ Admin - All Alumni
         getFees(id, "fee_edit");
     });
     
+    
     function getFees(id, outid){
         let url = '{{ url("get/fee_management/") }}/' + id;
         axios.get(url)
