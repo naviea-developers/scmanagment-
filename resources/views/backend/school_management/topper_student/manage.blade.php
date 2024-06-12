@@ -122,30 +122,17 @@ Admin - All Topper Student
     });
 </script>
 
+
+
+
+
+
+
+{{-- Common script for add and edit --}}
 <script>
     $(document).ready(function() {
-        $('#class-select').on('change', function() {
-            var classId = $(this).val();
-            filterSectionsByClass(classId);
-            filterGroupsByClass(classId);
-            filterStudents();
-        });
-
-        $('#group-select').on('change', function() {
-            filterStudents();
-        });
-
-        $('#section-select').on('change', function() {
-            filterStudents();
-        });
-
-        $('#student-id-input').on('input', function() {
-            var studentIdNumber = $(this).val();
-            updateSelectionsByStudentIdNumber(studentIdNumber);
-        });
-
-        function filterGroupsByClass(classId) {
-            $('#group-select option').each(function() {
+        function filterGroupsByClass(classId, groupSelectId) {
+            $(`#${groupSelectId} option`).each(function() {
                 var groupClassId = $(this).data('class-id');
                 if (groupClassId == classId || $(this).val() == "") {
                     $(this).show();
@@ -153,11 +140,11 @@ Admin - All Topper Student
                     $(this).hide();
                 }
             });
-            $('#group-select').val('');
+            $(`#${groupSelectId}`).val('');
         }
 
-        function filterSectionsByClass(classId) {
-            $('#section-select option').each(function() {
+        function filterSectionsByClass(classId, sectionSelectId) {
+            $(`#${sectionSelectId} option`).each(function() {
                 var sectionClassId = $(this).data('class-id');
                 if (sectionClassId == classId || $(this).val() == "") {
                     $(this).show();
@@ -165,14 +152,14 @@ Admin - All Topper Student
                     $(this).hide();
                 }
             });
-            $('#section-select').val('');
+            $(`#${sectionSelectId}`).val('');
         }
 
-        function filterStudents() {
-            var classId = $('#class-select').val();
-            var groupId = $('#group-select').val();
-            var sectionId = $('#section-select').val();
-            $('#student-select option').each(function() {
+        function filterStudents(classSelectId, groupSelectId, sectionSelectId, studentSelectId) {
+            var classId = $(`#${classSelectId}`).val();
+            var groupId = $(`#${groupSelectId}`).val();
+            var sectionId = $(`#${sectionSelectId}`).val();
+            $(`#${studentSelectId} option`).each(function() {
                 var studentClassId = $(this).data('class-id');
                 var studentGroupId = $(this).data('group-id');
                 var studentSectionId = $(this).data('section-id');
@@ -182,106 +169,53 @@ Admin - All Topper Student
                     $(this).hide();
                 }
             });
-            $('#student-select').val('');
+            $(`#${studentSelectId}`).val('');
         }
 
-        function updateSelectionsByStudentIdNumber(studentIdNumber) {
-            $('#student-select option').each(function() {
+        function updateSelectionsByStudentIdNumber(studentIdNumber, studentSelectId, classSelectId, groupSelectId, sectionSelectId) {
+            $(`#${studentSelectId} option`).each(function() {
                 if ($(this).data('student-id-number') == studentIdNumber) {
                     var classId = $(this).data('class-id');
                     var groupId = $(this).data('group-id');
                     var sectionId = $(this).data('section-id');
-                    $('#class-select').val(classId).trigger('change');
-                    $('#group-select').val(groupId).trigger('change');
-                    $('#section-select').val(sectionId).trigger('change');
-                    $('#student-select').val($(this).val());
-                    return false; // Break the loop once the student is found
+                    $(`#${classSelectId}`).val(classId).trigger('change');
+                    $(`#${groupSelectId}`).val(groupId).trigger('change');
+                    $(`#${sectionSelectId}`).val(sectionId).trigger('change');
+                    $(`#${studentSelectId}`).val($(this).val());
+                    return false; 
                 }
             });
         }
+
+        function setupEventHandlers(classSelectId, groupSelectId, sectionSelectId, studentSelectId) {
+            $(`#${classSelectId}`).on('change', function() {
+                var classId = $(this).val();
+                filterSectionsByClass(classId, sectionSelectId);
+                filterGroupsByClass(classId, groupSelectId);
+                filterStudents(classSelectId, groupSelectId, sectionSelectId, studentSelectId);
+            });
+
+            $(`#${groupSelectId}`).on('change', function() {
+                filterStudents(classSelectId, groupSelectId, sectionSelectId, studentSelectId);
+            });
+
+            $(`#${sectionSelectId}`).on('change', function() {
+                filterStudents(classSelectId, groupSelectId, sectionSelectId, studentSelectId);
+            });
+
+            $('#student-id-input').on('input', function() {
+                var studentIdNumber = $(this).val();
+                updateSelectionsByStudentIdNumber(studentIdNumber, studentSelectId, classSelectId, groupSelectId, sectionSelectId);
+            });
+        }
+
+        // for add form
+        setupEventHandlers('class-select', 'group-select', 'section-select', 'student-select');
+
+        // for edit form
+        setupEventHandlers('class-select-edit', 'group-select-edit', 'section-select-edit', 'student-select-edit');
     });
 </script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#class-select-edit').on('change', function() {
-            var classId = $(this).val();
-            filterSectionsByClass(classId);
-            filterGroupsByClass(classId);
-            filterStudents();
-        });
-  
-        $('#group-select-edit').on('change', function() {
-            filterStudents();
-        });
-  
-        $('#section-select-edit').on('change', function() {
-            filterStudents();
-        });
-  
-        $('#student-id-input').on('input', function() {
-            var studentIdNumber = $(this).val();
-            updateSelectionsByStudentIdNumber(studentIdNumber);
-        });
-  
-        function filterGroupsByClass(classId) {
-            $('#group-select-edit option').each(function() {
-                var groupClassId = $(this).data('class-id');
-                if (groupClassId == classId || $(this).val() == "") {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            $('#group-select-edit').val('');
-        }
-  
-        function filterSectionsByClass(classId) {
-            $('#section-select-edit option').each(function() {
-                var sectionClassId = $(this).data('class-id');
-                if (sectionClassId == classId || $(this).val() == "") {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            $('#section-select-edit').val('');
-        }
-  
-        function filterStudents() {
-            var classId = $('#class-select-edit').val();
-            var groupId = $('#group-select-edit').val();
-            var sectionId = $('#section-select-edit').val();
-            $('#student-select-edit option').each(function() {
-                var studentClassId = $(this).data('class-id');
-                var studentGroupId = $(this).data('group-id');
-                var studentSectionId = $(this).data('section-id');
-                if ((classId == "" || studentClassId == classId) && (groupId == "" || studentGroupId == groupId) && (sectionId == "" || studentSectionId == sectionId)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            $('#student-select-edit').val('');
-        }
-  
-        function updateSelectionsByStudentIdNumber(studentIdNumber) {
-            $('#student-select-edit option').each(function() {
-                if ($(this).data('student-id-number') == studentIdNumber) {
-                    var classId = $(this).data('class-id');
-                    var groupId = $(this).data('group-id');
-                    var sectionId = $(this).data('section-id');
-                    $('#class-select-edit').val(classId).trigger('change');
-                    $('#group-select-edit').val(groupId).trigger('change');
-                    $('#section-select-edit').val(sectionId).trigger('change');
-                    $('#student-select-edit').val($(this).val());
-                    return false; // Break the loop once the student is found
-                }
-            });
-        }
-    });
-  </script>
 
 
 @endsection

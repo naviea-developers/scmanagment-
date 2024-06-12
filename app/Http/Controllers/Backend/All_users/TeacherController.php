@@ -491,7 +491,7 @@ class TeacherController extends Controller
        
         return response()->json([
             'status'=>'no',
-            'msg'=>'Direction not found'
+            'msg'=>'Teacher not found'
         ]);
     }
 }

@@ -102,17 +102,17 @@ class TopperStudentController extends Controller
         return response()->json($json_data);
     }
 
-    public function create()
-    {
-        $data['students'] = Admission::where('is_new', 0)->where('status', 1)->get();
-        $data['classes'] = Classe::where('status', 1)->get();
-        $data['academic_years'] = AcademicYear::where('status', 1)->get();
-        $data['sessions'] = Session::where('status', 1)->get();
-        $data['sections'] = SchoolSection::where('status', 1)->get();
-        $data['groups'] = Group::where('status', 1)->get();
-        $data['examinations'] = Examination::where('exam_priority', 'main')->where('status', 1)->get();
-        return view('Backend.school_management.topper_student.create', $data);
-    }
+    // public function create()
+    // {
+    //     $data['students'] = Admission::where('is_new', 0)->where('status', 1)->get();
+    //     $data['classes'] = Classe::where('status', 1)->get();
+    //     $data['academic_years'] = AcademicYear::where('status', 1)->get();
+    //     $data['sessions'] = Session::where('status', 1)->get();
+    //     $data['sections'] = SchoolSection::where('status', 1)->get();
+    //     $data['groups'] = Group::where('status', 1)->get();
+    //     $data['examinations'] = Examination::where('exam_priority', 'main')->where('status', 1)->get();
+    //     return view('Backend.school_management.topper_student.create', $data);
+    // }
 
     // public function store(Request $request)
     // {
@@ -137,6 +137,8 @@ class TopperStudentController extends Controller
         $validator = Validator::make($request->all(), [
             'academic_year_id' => 'required',
             'student_id' => 'required',
+            'examination_id' => 'required',
+            'result' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -178,13 +180,13 @@ class TopperStudentController extends Controller
 
     public function edit($id)
     { 
-        $data['topper'] = TopperStudent::find($id);
-        $data['students'] = Admission::where('is_new', 0)->where('status', 1)->get();
+        $data['topper'] = $class = TopperStudent::find($id);
+        $data['students'] = Admission::where('class_id', $class->class_id)->where('is_new', 0)->where('status', 1)->get();
         $data['classes'] = Classe::where('status', 1)->get();
         $data['academic_years'] = AcademicYear::where('status', 1)->get();
         $data['sessions'] = Session::where('status', 1)->get();
-        $data['sections'] = SchoolSection::where('status', 1)->get();
-        $data['groups'] = Group::where('status', 1)->get();
+        $data['sections'] = SchoolSection::where('class_id', $class->class_id)->where('status', 1)->get();
+        $data['groups'] = Group::where('class_id', $class->class_id)->where('status', 1)->get();
         $data['examinations'] = Examination::where('exam_priority', 'main')->where('status', 1)->get();
         return view('Backend.school_management.topper_student.update', $data);
     }
@@ -209,8 +211,10 @@ class TopperStudentController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
+            'examination_id' => 'required',
             'academic_year_id' => 'required',
             'student_id' => 'required',
+            'result' => 'required',
 
         ]);
         if ($validator->fails()) {
