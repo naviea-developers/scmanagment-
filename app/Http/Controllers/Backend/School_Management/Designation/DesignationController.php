@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class DesignationController extends Controller
 {
+    // niaz
     public function index()
     {
         $data['designations'] = Designation::all();
