@@ -203,7 +203,7 @@
                 <div class="col-sm-12">
                     <label class="form-control-label"><b>Details </b><span class="tx-danger">*</span></label>
                     <div class="mg-t-10 mg-sm-t-0">
-                        <textarea id="summernote" name="details">{{ @$daily_class->details }}</textarea>
+                        <textarea id="summernote_two" name="details">{{ @$daily_class->details }}</textarea>
                     </div>
                 </div>
             </div>

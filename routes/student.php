@@ -21,6 +21,7 @@ Route::prefix('school_student')->middleware(['auth:admin', 'adminCheck:0'])->gro
 Route::prefix('topper-student')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Course Create
      Route::get('index/', [TopperStudentController::class,"index"])->name('admin.topper_student.index');
+     Route::post('ajax-topper-student', [TopperStudentController::class,"ajaxData"])->name('admin.topper_student.ajax');
      Route::get('create/', [TopperStudentController::class,"create"])->name('admin.topper_student.create');
      Route::post('store/', [TopperStudentController::class,"store"])->name('admin.topper_student.store');
      Route::get('edit/{id}', [TopperStudentController::class,"edit"])->name('admin.topper_student.edit');

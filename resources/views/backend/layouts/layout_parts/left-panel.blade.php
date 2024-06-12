@@ -184,10 +184,9 @@
             $r_check = ( Route::is('admin.daily_class.create') ||  Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit'));
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.daily_class.create') }}" class="sub-link {{( Route::is('admin.daily_class.create') ) ?'active':''}}">Add Daily Class</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.daily_class.create') }}" class="sub-link {{( Route::is('admin.daily_class.create') ) ?'active':''}}">Add Daily Class</a>
+                </li> --}}
                 <li class="sub-item"><a href="{{ route('admin.daily_class.index') }}" class="sub-link {{(Route::is('admin.daily_class.index') || Route::is('admin.daily_class.edit')) ?'active':''}}">Manage Daily Class</a>
-                </li>
                 </li>
             </ul>
         </li>
