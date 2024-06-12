@@ -18,8 +18,81 @@ class DailyClassController extends Controller
 {
     public function index()
     {
+        $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
+        $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
+        $data['sessions'] = Session::where('status', 1)->get();
         $data['daily_classes'] = DailyClass::orderBy('id', 'desc')->get();
-        return view("Backend.school_management.daily_class.index",$data);
+        return view("Backend.school_management.daily_class.manage",$data);
+    }
+
+    function ajaxData(Request $request){
+        $columns = array(
+            0 => 'id',
+            1 => 'title',
+            2 => 'teacher',
+            3 => 'class',
+            4 => 'subject',
+            5 => 'lession',
+            6 => 'page_number',
+            7 => 'status',
+        );
+        $totalData = DailyClass::count();
+        $totalFiltered = $totalData;
+ 
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        //dd($request->input('order.0.column'));
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        $search = $request->input('search.value');
+        $datalist = DailyClass::query();
+        if(!empty($search)){
+ 
+            $datalist =$datalist->where("name","LIKE","%{$search}%");
+           
+        }
+        
+        $totalFiltered = $datalist->count();
+         $datalist = $datalist->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        
+ 
+        $data = array();
+        if(!empty($datalist))
+        {
+             $i = $start == 0 ? 1 : $start+1;
+            foreach($datalist as $data_v)
+            {
+                $nestedData['id'] = @$data_v->id;
+                $nestedData['title'] = @$data_v->name;
+                $nestedData['teacher'] = @$data_v->teacher->name;
+                $nestedData['class'] = @$data_v->class->name;
+                $nestedData['subject'] = @$data_v->subject->name;
+                $nestedData['lession'] = @$data_v->lession->name;
+                $nestedData['page_number'] = @$data_v->page_number;
+
+                $nestedData['status'] = '';
+                if ($data_v->status == 0) {
+                    $nestedData['status'] .= '<a href="'.route('admin.daily_class.status', $data_v->id).'" class="data_status btn btn-sm btn-warning">Inactive</a>';
+                } elseif ($data_v->status == 1) {
+                    $nestedData['status'] .= '<a href="'.route('admin.daily_class.status', $data_v->id).'" class="data_status btn btn-sm btn-success">Active</a>';
+                }
+ 
+                $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.daily_class.edit', $data_v->id).'"><i class="fa fa-edit"></i></a>';
+             
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
+ 
+                $data[] = $nestedData;
+ 
+            }
+        }
+        $json_data = [
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => intval($totalData),
+            'recordsFiltered' => intval($totalFiltered),
+            'data' => $data
+        ];
+    
+        return response()->json($json_data);
     }
 
     /**

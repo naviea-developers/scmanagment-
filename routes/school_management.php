@@ -360,6 +360,7 @@ Route::prefix('fee-management')->middleware(['auth:admin', 'adminCheck:0'])->gro
 Route::prefix('daily_class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Course Create
      Route::get('index', [DailyClassController::class,"index"])->name('admin.daily_class.index');
+     Route::post('ajax-daily-class', [DailyClassController::class,"ajaxData"])->name('admin.daily_class.ajax');
      Route::get('create', [DailyClassController::class,"create"])->name('admin.daily_class.create');
      Route::post('store', [DailyClassController::class,"store"])->name('admin.daily_class.store');
      Route::get('edit/{id}', [DailyClassController::class,"edit"])->name('admin.daily_class.edit');

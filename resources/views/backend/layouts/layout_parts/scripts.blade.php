@@ -151,6 +151,13 @@
             $('#summernotefour').summernote({
                 height: 150
             })
+            $('#summernotesix').summernote({
+                height: 150
+            })
+            $('#summernote_seven').summernote({
+                height: 150
+            })
+
 
         });
 
