@@ -28,6 +28,7 @@ Route::prefix('teacher')->group(function () {
 Route::prefix('designation')->group(function () {
        //designation
         Route::get('index', [DesignationController::class,"index"])->name('admin.designation.index');
+        Route::post('ajax-designation', [DesignationController::class,"ajaxData"])->name('admin.designation.ajax');
         Route::get('create', [DesignationController::class,"create"])->name('admin.designation.create');
         Route::post('store', [DesignationController::class,"store"])->name('admin.designation.store');
         Route::get('edit/{id}', [DesignationController::class,"edit"])->name('admin.designation.edit');

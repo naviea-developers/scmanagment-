@@ -104,8 +104,7 @@ class BookController extends Controller
                 // Edit button
                 $nestedData['options'] .= ' <a class="btn btn-primary data_edit" href="'.route('admin.book.edit', $book->id).'"><i class="fa fa-edit"></i></a>';
                 // Delete button
-                $nestedData['options'] .= ' <a href="#"  value="'.$book->id.'" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
-                
+                $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$book->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
                 $data[] = $nestedData;
  
             }
@@ -141,7 +140,7 @@ class BookController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'class_id' => 'required',
-            'group_id' => 'required',
+            // 'group_id' => 'required',
             'shelf_id' => 'required',
             'total_set' => 'required',
 
@@ -207,7 +206,7 @@ class BookController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'class_id' => 'required',
-            'group_id' => 'required',
+            // 'group_id' => 'required',
             'shelf_id' => 'required',
             'total_set' => 'required',
 

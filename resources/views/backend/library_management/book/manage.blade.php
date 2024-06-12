@@ -15,11 +15,7 @@ Admin - All Books
           <div class="br-section-wrapper data-list pt-3">
 
               <h6 class="br-section-label text-center">All Book</h6>
-              <div style="text-align: right;">
-                  <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
-                      <i class="fa fa-plus"></i> Add Direction
-                  </a>
-              </div>
+            
 
 
 
@@ -29,7 +25,7 @@ Admin - All Books
                 
                 <div class="col-md-4">
                   <label class=" form-control-label"><b>Class:</b></label>
-                  <select class="form-control class_id" name="class_id" id="class">
+                  <select class="form-control" name="class_id" id="class-filter">
                       <option value="">Select Class</option>
                       @foreach ($classes as $class)
                       <option value="{{ $class->id }}">{{ $class->name }}</option>
@@ -38,7 +34,7 @@ Admin - All Books
                 </div>
                 <div class="col-md-4">
                   <label class=" form-control-label"><b>Group:</b></label>
-                  <select class="form-control group_id" name="group_id" id="group">
+                  <select class="form-control" name="group_id" id="group-filter">
                       <option value="">Select Group</option>
                      
                   </select>
@@ -56,7 +52,11 @@ Admin - All Books
               </div>
             </div>
 
-
+            <div style="text-align: right;">
+              <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
+                  <i class="fa fa-plus"></i> Add Direction
+              </a>
+          </div>
 
 
 
@@ -134,8 +134,8 @@ Admin - All Books
             "dataType": "json",
             "type": "POST",
             data: function(data){
-              data.class_id= $('.class_id').val(),
-              data.group_id= $('.group_id').val(),
+              data.class_id= $('#class-filter').val(),
+              data.group_id= $('#group-filter').val(),
               data.shelf_id= $('#shelf').val(),
               data._token = "{{ csrf_token() }}";
 
@@ -160,7 +160,7 @@ Admin - All Books
           } ]
 
     });
-    $('.class_id, .group_id, #shelf').change(function(){
+    $('#class-filter, #group-filter, #shelf').change(function(){
       console.log(this);
       console.log(datatable);
       datatable.draw();

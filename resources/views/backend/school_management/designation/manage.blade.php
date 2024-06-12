@@ -1,5 +1,5 @@
 @section('title')
-Admin - All Directions
+Admin - All Designation
 @endsection
 
 @extends('Backend.layouts.layouts')
@@ -10,14 +10,14 @@ Admin - All Directions
     <div class="br-mainpanel">
 
         <div class="br-pagebody">
-          @include('Backend.library_management.direction.create')
+          @include('Backend.school_management.designation.create')
 
           <div class="br-section-wrapper data-list pt-3">
 
-              <h6 class="br-section-label text-center">All Direction</h6>
+              <h6 class="br-section-label text-center">All Designation</h6>
               <div style="text-align: right;">
                   <a style="margin-bottom: 20px" href="javascript:void(0);" class="btn btn-primary btn-sm btn-new">
-                      <i class="fa fa-plus"></i> Add Direction
+                      <i class="fa fa-plus"></i> Add Designation
                   </a>
               </div>
 
@@ -26,7 +26,8 @@ Admin - All Directions
                 <thead>
                   <tr>
                     <th class="wd-10p">Id</th>
-                    <th class="wd-15p">Direction Name</th>
+                    <th class="wd-15p">Designation Name</th>
+                    <th class="wd-15p">Position</th>
                     <th class="wd-15p">Status</th>
                     <th class="wd-10p">Action</th>
                   </tr>
@@ -35,21 +36,22 @@ Admin - All Directions
                     {{-- @php
                         $i = 1;
                     @endphp
-                  @if (count($directions) > 0)
-                    @foreach ($directions as $direction)
+                  @if (count($designations) > 0)
+                    @foreach ($designations as $designation)
                       <tr>
                           <td>{{ $i++ }}</td>
-                          <td>{{ $direction->name }}</td>
+                          <td>{{ $designation->name }}</td>
+                          <td>{{ $designation->position }}</td>
                           <td>
-                            @if(@$direction->status == 0)
-                            <a href="{{ route('admin.direction.status',$direction->id) }}" class="btn btn-sm btn-warning">Inactive</a>
-                            @elseif(@$direction->status == 1)
-                            <a href="{{ route('admin.direction.status',$direction->id) }}" class="btn btn-sm btn-success">Active</a>
+                            @if(@$designation->status == 0)
+                            <a href="{{ route('admin.designation.status',$designation->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                            @elseif(@$designation->status == 1)
+                            <a href="{{ route('admin.designation.status',$designation->id) }}" class="btn btn-sm btn-success">Active</a>
                             @endif
                           </td>
                           <td>
-                            <a class="btn text-info" href="{{ route('admin.direction.edit', $direction->id) }}"><i class="icon ion-compose tx-28"></i></a>
-                            <button class="btn text-danger bg-white"  value="{{$direction->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
+                            <a class="btn text-info" href="{{ route('admin.designation.edit', $designation->id) }}"><i class="icon ion-compose tx-28"></i></a>
+                            <button class="btn text-danger bg-white"  value="{{$designation->id}}" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>
                           </td>
                       </tr> 
                     @endforeach
@@ -72,22 +74,19 @@ Admin - All Directions
     </div><!-- br-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
 
-
-
     <!--_-- ########### Start Delete Category MODAL ############---->
-
     <div id="datamodalshow" class="modal fade">
       <div class="modal-dialog modal-dialog-top" role="document">
           <div class="modal-content tx-size-sm">
               <div class="modal-body tx-center pd-y-20 pd-x-20">
-                  <form id="data-form-delete" action="{{ route('admin.direction.delete') }}" method="post">
+                  <form id="data-form-delete" action="{{ route('admin.designation.delete') }}" method="post">
                       @csrf
                       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                       </button>
                       <i class="icon icon ion-ios-close-outline tx-60 tx-danger lh-1 mg-t-20 d-inline-block"></i>
                       <h4 class="tx-danger  tx-semibold mg-b-20 mt-2">Are you sure! you want to delete this?</h4>
-                      <input type="hidden" name="direction_id" id="modal_data_id">
+                      <input type="hidden" name="designation_id" id="modal_data_id">
                       <button type="submit" class="btn-delete btn btn-danger mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20"> yes</button>
                       <button type="button" class="btn btn-success tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-bs-dismiss="modal" aria-label="Close"> No</button>
                   </form>
@@ -97,8 +96,9 @@ Admin - All Directions
   </div><!-- modal -->
 
 
-
 @endsection
+
+
 
 @section('script')
 <script>
@@ -109,7 +109,7 @@ Admin - All Directions
         "processing": true,
         "serverSide": true,
         "ajax":{
-            "url": "{{ route('admin.direction.ajax') }}",
+            "url": "{{ route('admin.designation.ajax') }}",
             "dataType": "json",
             "type": "POST",
             data: function(data){
@@ -119,11 +119,12 @@ Admin - All Directions
         "columns": [
             { "data": "id"},
             { "data": "name"},
+            { "data": "position"},
             { "data": "status"},
             { "data": "options"},
         ],
         "columnDefs": [ {
-          "targets": 3,
+          "targets": 4,
           "orderable": false
           } ]
 
