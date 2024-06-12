@@ -2,6 +2,15 @@
 Admin - All Daily Class Video
 @endsection
 
+@section('style')
+<style>
+    .select2-container--default .select2-selection--single {
+      height: 41px;
+      width: 185px;
+  }
+  </style>
+@endsection
+
 @extends('Backend.layouts.layouts')
 
 @section('main_contain')
@@ -10,7 +19,7 @@ Admin - All Daily Class Video
     <div class="br-mainpanel">
 
         <div class="br-pagebody">
-            @include('Backend.school_management.bulding.create')
+            @include('Backend.school_management.daily_class.create')
 
             <div class="br-section-wrapper data-list pt-3">
 
@@ -121,5 +130,19 @@ Admin - All Daily Class Video
 
     });
 </script>
+<script>
+    $('document').ready(function () {
+      $("input[name=sub_banner]:radio").change(function () {
+      var data = $(this).val();
+      if (data == 1) {
+        $('#menuimage').show();
+        $('#menuvideo').hide();
 
+      } else {
+        $('#menuvideo').show();
+        $('#menuimage').hide();
+      }
+    });
+    });
+</script>
 @endsection

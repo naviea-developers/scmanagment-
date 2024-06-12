@@ -451,6 +451,12 @@
         getLession(id,"lession");
     });
 
+    $('body').on("change",'#subject-edit',function(){
+        let id = $(this).val();
+        //    console.log(id);
+        getLession(id,"lession-edit");
+    });
+
     function getLession(id,outid){
         let url = '{{ url("/get/lession/") }}/' + id;
         axios.get(url)

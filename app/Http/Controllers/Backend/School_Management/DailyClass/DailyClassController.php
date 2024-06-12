@@ -19,7 +19,6 @@ class DailyClassController extends Controller
 {
     public function index()
     {
-        // shohag
         $data['teachers'] = User::where('type','2')->where('status','1')->orderBy('id', 'desc')->get();
         $data['classes'] = Classe::where('status','1')->orderBy('id', 'asc')->get();
         $data['sessions'] = Session::where('status', 1)->get();
@@ -255,54 +254,117 @@ class DailyClassController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, string $id)
+    // {
+    //     //dd($request->all());
+    //    $request->validate([
+    //     'teacher_id' => 'required',
+    //     'class_id' => 'required',
+    //     'lession_id' => 'required',
+
+    // ]);
+    // try{
+    //     DB::beginTransaction();
+    //     $daily_class = DailyClass::find($id);
+    //     $daily_class->name = $request->name ?? "";
+    //     $daily_class->teacher_id = $request->teacher_id ?? 0;
+    //     $daily_class->class_id = $request->class_id ?? 0;
+    //     $daily_class->subject_id = $request->subject_id ?? 0;
+    //     $daily_class->session_id = $request->session_id ?? 0;
+    //     $daily_class->section_id = $request->section_id ?? 0;
+    //     $daily_class->group_id = $request->group_id ?? 0;
+    //     $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+    //     $daily_class->lession_id = $request->lession_id ?? 0;
+    //     $daily_class->page_number = $request->page_number ?? 0;
+    //     $daily_class->sub_banner = $request->sub_banner ?? 1;
+    //     $daily_class->details = $request->details ?? "";
+
+    //     if($request->hasFile('video')){
+    //         @unlink(public_path("upload/daily_class/".$daily_class->video));
+    //         $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+    //         request()->video->move(public_path('upload/daily_class/'),$fileName);
+    //         $daily_class->video = $fileName;
+    //     }
+
+    //     // if($request->hasFile('video_thumbnail')){
+    //     //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+    //     //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+    //     //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+    //     //     $daily_class->video_thumbnail = $fileName;
+    //     // }
+
+    //     $daily_class->save();
+
+    //     DB::commit();
+    //     return redirect()->route('admin.daily_class.index')->with('message','Daily Class Update Successfully');
+    // }catch(\Exception $e){
+    //     DB::rollBack();
+    //     dd($e);
+    //     return back()->with ('error_message', $e->getMessage());
+    // }
+    // }
+
+
     public function update(Request $request, string $id)
     {
         //dd($request->all());
-       $request->validate([
-        'teacher_id' => 'required',
-        'class_id' => 'required',
-        'lession_id' => 'required',
+        $validator = Validator::make($request->all(), [
+            'teacher_id' => 'required',
+            'class_id' => 'required',
+            'lession_id' => 'required',
 
-    ]);
-    try{
-        DB::beginTransaction();
-        $daily_class = DailyClass::find($id);
-        $daily_class->name = $request->name ?? "";
-        $daily_class->teacher_id = $request->teacher_id ?? 0;
-        $daily_class->class_id = $request->class_id ?? 0;
-        $daily_class->subject_id = $request->subject_id ?? 0;
-        $daily_class->session_id = $request->session_id ?? 0;
-        $daily_class->section_id = $request->section_id ?? 0;
-        $daily_class->group_id = $request->group_id ?? 0;
-        $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
-        $daily_class->lession_id = $request->lession_id ?? 0;
-        $daily_class->page_number = $request->page_number ?? 0;
-        $daily_class->sub_banner = $request->sub_banner ?? 1;
-        $daily_class->details = $request->details ?? "";
-
-        if($request->hasFile('video')){
-            @unlink(public_path("upload/daily_class/".$daily_class->video));
-            $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
-            request()->video->move(public_path('upload/daily_class/'),$fileName);
-            $daily_class->video = $fileName;
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'=>'error',
+                'errors'=>$validator->errors()->all()
+            ]);
         }
+        try{
+            DB::beginTransaction();
+            $daily_class = DailyClass::find($id);
+            $daily_class->name = $request->name ?? "";
+            $daily_class->teacher_id = $request->teacher_id ?? 0;
+            $daily_class->class_id = $request->class_id ?? 0;
+            $daily_class->subject_id = $request->subject_id ?? 0;
+            $daily_class->session_id = $request->session_id ?? 0;
+            $daily_class->section_id = $request->section_id ?? 0;
+            $daily_class->group_id = $request->group_id ?? 0;
+            $daily_class->video_url = "https://" . preg_replace('#^https?://#', '',$request->video_url);
+            $daily_class->lession_id = $request->lession_id ?? 0;
+            $daily_class->page_number = $request->page_number ?? 0;
+            $daily_class->sub_banner = $request->sub_banner ?? 1;
+            $daily_class->details = $request->details ?? "";
+    
+            if($request->hasFile('video')){
+                @unlink(public_path("upload/daily_class/".$daily_class->video));
+                $fileName = rand().time().'.'.request()->video->getClientOriginalExtension();
+                request()->video->move(public_path('upload/daily_class/'),$fileName);
+                $daily_class->video = $fileName;
+            }
+    
+            // if($request->hasFile('video_thumbnail')){
+            //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+            //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
+            //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
+            //     $daily_class->video_thumbnail = $fileName;
+            // }
+    
+            $daily_class->save();
 
-        // if($request->hasFile('video_thumbnail')){
-        //     @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
-        //     $fileName = rand().time().'.'.request()->video_thumbnail->getClientOriginalExtension();
-        //     request()->video_thumbnail->move(public_path('upload/daily_class/'),$fileName);
-        //     $daily_class->video_thumbnail = $fileName;
-        // }
-
-        $daily_class->save();
-
-        DB::commit();
-        return redirect()->route('admin.daily_class.index')->with('message','Daily Class Update Successfully');
-    }catch(\Exception $e){
-        DB::rollBack();
-        dd($e);
-        return back()->with ('error_message', $e->getMessage());
-    }
+            DB::commit();
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Daily Class Update Successfully'
+            ]);
+            
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
 
     
@@ -310,28 +372,80 @@ class DailyClassController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy(Request $request)
+    // {
+
+    //     $daily_class =  DailyClass::find($request->daily_class_id);
+    //     @unlink(public_path("upload/daily_class/".$daily_class->video));
+    //     // @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+    //     $daily_class->delete();
+    //     return back()->with('message','Daily Class Deleted Successfully');
+    // }
+
     public function destroy(Request $request)
     {
-
-        $daily_class =  DailyClass::find($request->daily_class_id);
-        @unlink(public_path("upload/daily_class/".$daily_class->video));
-        // @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
-        $daily_class->delete();
-        return back()->with('message','Daily Class Deleted Successfully');
+        //dd($request);
+        try{
+            $daily_class =  DailyClass::find($request->daily_class_id);
+            @unlink(public_path("upload/daily_class/".$daily_class->video));
+            // @unlink(public_path("upload/daily_class/".$daily_class->video_thumbnail));
+            $daily_class->delete();
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Daily Class Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
     }
 
+
+    // public function status($id)
+    // {
+    //     $daily_class = DailyClass::find($id);
+    //     if($daily_class->status == 0)
+    //     {
+    //         $daily_class->status = 1;
+    //     }elseif($daily_class->status == 1)
+    //     {
+    //         $daily_class->status = 0;
+    //     }
+    //     $daily_class->update();
+    //     return redirect()->route('admin.daily_class.index');
+    // }
 
     public function status($id)
     {
         $daily_class = DailyClass::find($id);
-        if($daily_class->status == 0)
-        {
-            $daily_class->status = 1;
-        }elseif($daily_class->status == 1)
-        {
-            $daily_class->status = 0;
+        if ($daily_class) {
+            if ($daily_class->status == 0) {
+                $daily_class->status = 1;
+            } elseif ($daily_class->status == 1) {
+                $daily_class->status = 0;
+            }
+            $daily_class->update();
+
+            $statusMessage = $daily_class->status == 1 ? 'Activated Successfully' : 'Deactivated Successfully';
+
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>$statusMessage
+            ]);
         }
-        $daily_class->update();
-        return redirect()->route('admin.daily_class.index');
+
+       
+        return response()->json([
+            'status'=>'no',
+            'msg'=>'Daily Class not found'
+        ]);
     }
+
+
+
+
 }
