@@ -312,6 +312,7 @@ Route::prefix('notice_type')->middleware(['auth:admin', 'adminCheck:0'])->group(
 //Add Notice for admin
 Route::prefix('notice')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [NoticeController::class,"index"])->name('admin.notice.index');
+    Route::post('ajax-notice', [NoticeController::class,"ajaxData"])->name('admin.notice.ajax');
     Route::get('create', [NoticeController::class,"create"])->name('admin.notice.create');
     Route::post('store', [NoticeController::class,"store"])->name('admin.notice.store');
     Route::get('edit/{id}', [NoticeController::class,"edit"])->name('admin.notice.edit');
