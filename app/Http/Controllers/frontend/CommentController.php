@@ -10,6 +10,7 @@ class CommentController extends Controller
 {
     public function blogComment(Request $request)
     {
+        
         $request->validate([
             'content' => 'required',
             'blog_id' => 'required|exists:blogs,id',
