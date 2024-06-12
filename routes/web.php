@@ -344,7 +344,8 @@ Route::get('all/class_list',[FrontendController::class,'allClassListShow'])->nam
 
 });
 
-
+Route::get('library-book-list',[FrontendController::class,'libraryBook'])->name('frontend.library_book_list');
+Route::get('books/filter', [FrontendController::class, 'filterBooks'])->name('books.filter');
 // Route::get('index_exam_result', [InstructorCourseController::class,"indexResultExam"])->name('instructor.exam_result.index');
 // Route::get('create_exam_result', [InstructorCourseController::class,"createResultExam"])->name('instructor.exam_result.create');
 // Route::get('edit_exam_result/{id}', [InstructorCourseController::class,"editResultExam"])->name('instructor.exam_result.edit');

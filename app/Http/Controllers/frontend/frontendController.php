@@ -62,6 +62,7 @@ use App\Models\Section;
 use App\Mail\ContactMailCoustomer;
 use App\Models\Admission;
 use App\Models\Alumni;
+use App\Models\Book;
 use App\Models\Classe;
 use App\Models\ClassRoutine;
 use App\Models\DailyClass;
@@ -344,6 +345,54 @@ class FrontendController extends Controller
         return view('Frontend.auth.register_consultant', $data);
     }
 
+
+    //pages
+    public function libraryBook()
+    {
+        $data['classes'] = Classe::where('status', '1')->get();
+        $data['books'] = Book::where('status', '1')->paginate(4);
+        return view('Frontend.library.book', $data);
+    }
+    
+    public function filterBooks(Request $request)
+    {
+        $query = Book::query();
+    
+        if ($request->has('class_id') && $request->class_id != '') {
+            $query->where('class_id', $request->class_id);
+        }
+    
+        if ($request->has('group_id') && $request->group_id != '') {
+            $query->where('group_id', $request->group_id);
+        }
+    
+        if ($request->has('book_name') && $request->book_name != '') {
+            $query->where('name', 'like', '%' . $request->book_name . '%');
+        }
+    
+        $books = $query->where('status', '1')->paginate(4);
+    
+        $html = '';
+        foreach ($books as $book) {
+            $html .= '<div class="col-md-3">';
+            $html .= '<div class="mb-3 card card-body shadow">';
+            $html .= '<div class="picture"><img style="height:200px; width:100%;object-fit: fill" class="img-fluid" src="' . $book->image_show . '"></div>';
+            $html .= '<div><h6 class="title mt-2" style="text-align: center;">' . $book->name . '</h6>';
+            $html .= '<h6 class="title" style="text-align: center;">' . $book->class->name . '</h6>';
+            $html .= '<h6 class="title" style="text-align: center;">Stock In: ' . ($book->total_set - $book->stock_out) . '</h6></div>';
+            $html .= '</div></div>';
+        }
+    
+        return response()->json(['html' => $html, 'lastPage' => $books->lastPage()]);
+    }
+    
+    
+    
+
+
+    
+
+
     //pages
     public function about()
     {
@@ -367,6 +416,7 @@ class FrontendController extends Controller
         $data['sections'] = SchoolSection::where('status', 1)->get();
         return view('Frontend.pages.learner', $data);
     }
+
 
    
 

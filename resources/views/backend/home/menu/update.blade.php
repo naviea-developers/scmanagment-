@@ -68,7 +68,8 @@
                             <option @if ($menu->url == 'learner') Selected @endif value="learner">student page</option>
                             <option @if ($menu->url == 'instructor') Selected @endif value="instructor">teacher page</option>
                             <option @if ($menu->url == 'contact') Selected @endif value="contact">contact page</option>
-                            <option @if ($menu->url == 'library') Selected @endif value="library">library page</option>
+                            <option @if ($menu->url == 'library') Selected @endif value="library">upcoming news</option>
+                            <option @if ($menu->url == 'library-book-list') Selected @endif value="library-book-list">library book list page</option>
                             <option @if ($menu->url == 'event-list') Selected @endif value="event-list">event page</option>
                             <option @if ($menu->url == 'blogs') Selected @endif value="blogs">blogs page</option>
                             {{-- <option @if ($menu->url == 'maestro-class') Selected @endif value="maestro-class">master course page</option> --}}

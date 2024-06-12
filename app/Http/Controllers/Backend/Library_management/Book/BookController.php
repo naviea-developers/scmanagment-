@@ -159,6 +159,13 @@ class BookController extends Controller
             $book->group_id = $request->group_id ?? 0;
             $book->name = $request->name;
             $book->total_set = $request->total_set;
+
+            if($request->hasFile('image')){
+                $fileName = time().'_book_image.'.$request->image->getClientOriginalExtension();
+                $request->image->move(public_path('upload/book'), $fileName);
+                $book->image =$fileName;
+            }
+
             $book->save();
             $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT); 
             $book->save();
@@ -225,6 +232,12 @@ class BookController extends Controller
             $book->group_id = $request->group_id ?? 0;
             $book->name = $request->name;
             $book->total_set = $request->total_set;
+            if($request->hasFile('image')){
+                @unlink(public_path('upload/book/'.$book->image));
+                $fileName = time().'_book_image.'.$request->image->getClientOriginalExtension();
+                $request->image->move(public_path('upload/book'), $fileName);
+                $book->image =$fileName;
+            }
             $book->save();
             // $book->book_code = $book->class_id.str_pad($book->id, 5, '0', STR_PAD_LEFT);
             // $book->save();
