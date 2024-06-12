@@ -38,6 +38,9 @@
 <script src="{{asset('public/backend')}}/lib/highlightjs/highlight.pack.min.js"></script>
 <script src="{{asset('public/backend')}}/lib/medium-editor/js/medium-editor.min.js"></script>
 <!--- Form Editor Js---->
+<script src="{{ asset('public/backend/js') }}/flatpickr.js"></script>
+<script src="{{ asset('public/backend/js') }}/flatpickr-monthSelect.js"></script>
+<script src="{{ asset('public/backend/js') }}/toastr.min.js"></script>
  <!--- Start ajax link-------->
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
@@ -746,7 +749,50 @@
         })
     });
 
-
+    function dataDelete(url,t_datatble= 0){
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type : 'GET',
+            url :url,
+            success : function(res){
+                if(res.status == "yes"){
+                    if(t_datatble == 0){
+                        s_data.draw();
+                    }else{
+                        datatable.draw();
+                    }
+                    
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                
+                }else{
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: res.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            },
+            error:function(e){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
 
 
     $(document).on('click','.btn-change-pass',function(e){

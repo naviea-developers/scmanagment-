@@ -79,12 +79,12 @@
                             <td rowspan="{{ $rowspan }}">{{ $date }}</td>
                         @endif
                         <td>
-                            Class :{{ @$routine->examClass->class->name }},
-                            Subject : {{ @$routine->examClass->subject->name }},
-                            Bulding :{{ @$routine->bulding->name }},
-                            Floor :{{ @$routine->floor->name }},
-                            Room :{{ @$routine->room->name }},
-                            Time :{{ date('h:i A', strtotime(@$routine->examClass->start_time)) }} - {{ date('h:i A', strtotime(@$routine->examClass->end_time)) }}
+                           <p>Class :{{ @$routine->examClass->class->name }}, 
+                            Subject : {{ @$routine->examClass->subject->name }}, <br>
+                            Bulding :{{ @$routine->bulding->name }}, 
+                            Floor :{{ @$routine->floor->name }}, 
+                            Room :{{ @$routine->room->name }}, <br>
+                            Time :{{ date('h:i A', strtotime(@$routine->examClass->start_time)) }} - {{ date('h:i A', strtotime(@$routine->examClass->end_time)) }}</p> 
                         </td>
                     </tr>
                 @endforeach

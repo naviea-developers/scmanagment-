@@ -28,7 +28,8 @@
     <link href="{{asset('public/backend')}}/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
 
     <!-- End Vendor css -->
-
+        <link href="{{ asset('public/backend/css') }}/flatpickr.min.css" rel="stylesheet"/>
+    <link href="{{ asset('public/backend/css') }}/flatpickr-monthSelect.css" rel="stylesheet"/>
     <!-- Start Bracket CSS -->
     <link rel="stylesheet" href="{{asset('public/backend')}}/css/bracket.css">
     <!-- End Bracket CSS -->

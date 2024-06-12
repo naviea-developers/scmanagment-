@@ -29,8 +29,12 @@ use Illuminate\Support\Facades\Artisan;
 
 //continent
 Route::resource('/continent', ContinentController::class);
-Route::post('/delete-continent', [ContinentController::class, 'delete'])->name('admin.medical_tourism.continent.delete');
-Route::get('/continent/status_toggle/{id}', [ContinentController::class, 'status_toggle'])->name('admin.medical_tourism.continent.status');
+Route::post('/delete-continent', [ContinentController::class, 'delete'])->name('admin.continent.delete');
+Route::post('ajax-group', [ContinentController::class,"ajaxData"])->name('admin.continent.ajax');
+// Route::get('/status/{id}', [ContinentController::class, 'status'])->name('admin.group.status');
+// Route::post('delete', [GroupController::class,"destroy"])->name('admin.group.delete');
+Route::get('/status/{id}', [ContinentController::class, 'status'])->name('admin.continent.status');
+// Route::get('/continent/status_toggle/{id}', [ContinentController::class, 'status_toggle'])->name('admin.medical_tourism.continent.status');
 //country
 Route::resource('/country', CountryController::class);
 Route::post('/delete-country', [CountryController::class, 'delete'])->name('admin.medical_tourism.country.delete');

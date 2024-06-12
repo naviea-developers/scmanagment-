@@ -524,7 +524,9 @@ Route::get('/get/exam-class-subject/{examinationId}/{classExamId}', [ExamSchedul
 Route::get('/get/examination_class/{id}', [ExamSchedulesController::class, 'getExaminationClass']);
 
 
-Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutine"]);
+// Route::get('/get-exam-routine/{id}',[ExamRoutineController::class,"getExamRoutine"]);
+Route::get('get-exam-routine/{examination_id}/{session_id}',[ExamRoutineController::class,"getExamRoutine"]);
+
 // Route::get('/get-search-student-routine', [ClassRoutineController::class, 'getSearchStudentRoutine']);
 
 Route::get('/get-class-routine', [ClassRoutineController::class, 'getClassRoutine'])->name('get.class.routine');
