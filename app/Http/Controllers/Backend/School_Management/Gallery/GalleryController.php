@@ -51,7 +51,7 @@ class GalleryController extends Controller
             {
                 $nestedData['id'] = $data_v->id;
                 $nestedData['name'] = $data_v->name;
-                $nestedData['image'] = '<img src="' . $data_v->image_show . '" alt="subject Image" width="50" height="50">';
+                $nestedData['image'] = '<img src="' . $data_v->image_show . '" alt="Image" width="50" height="50">';
  
                 $nestedData['status'] = '';
                 if ($data_v->status == 0) {

@@ -71,7 +71,8 @@ class TopperStudentController extends Controller
                 $nestedData['id'] = @$data_v->id;
                 $nestedData['academic_year'] = @$data_v->academic_year->year;
                 $nestedData['examination'] = @$data_v->examination->name;
-                $nestedData['image'] = @$data_v->class->name;
+                // $nestedData['image'] = @$data_v->class->name;
+                $nestedData['image'] = '<img src="' . @$data_v->student->image_show . '" alt="subject Image" width="50" height="50">';
                 $nestedData['student_name'] = @$data_v->student->student_name;
                 $nestedData['class'] = @$data_v->class->name;
                 $nestedData['section'] = @$data_v->section->name;

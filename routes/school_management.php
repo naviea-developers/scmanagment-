@@ -274,7 +274,7 @@ Route::prefix('examroutine')->middleware(['auth:admin', 'adminCheck:0'])->group(
 Route::prefix('classroutine')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     //Add classroutine for admin
     Route::get('index', [ClassRoutineController::class,"index"])->name('admin.routine.index');
-    Route::post('ajax-classroutine', [ClassRoutineController::class,"ajaxData"])->name('admin.gallery.ajax');
+    Route::post('ajax-classroutine', [ClassRoutineController::class,"ajaxData"])->name('admin.routine.ajax');
     Route::get('create', [ClassRoutineController::class,"create"])->name('admin.routine.create');
     Route::post('store', [ClassRoutineController::class,"store"])->name('admin.routine.store');
     Route::get('edit/{id}', [ClassRoutineController::class,"edit"])->name('admin.routine.edit');
@@ -374,6 +374,7 @@ Route::prefix('daily_class')->middleware(['auth:admin', 'adminCheck:0'])->group(
 //Add Alumni for admin
 Route::prefix('alumni')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [AlumniController::class,"index"])->name('admin.alumni.index');
+    Route::post('ajax-alumni', [AlumniController::class,"ajaxData"])->name('admin.alumni.ajax');
     Route::get('create', [AlumniController::class,"create"])->name('admin.alumni.create');
     Route::post('store', [AlumniController::class,"store"])->name('admin.alumni.store');
     Route::get('edit/{id}', [AlumniController::class,"edit"])->name('admin.alumni.edit');

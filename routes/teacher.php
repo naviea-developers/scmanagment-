@@ -111,6 +111,7 @@ Route::prefix('instrutor')->group(function () {
     Route::prefix('staff')->group(function () {
         // staff
         Route::get('index', [StaffController::class,"index"])->name('admin.staff.index');
+        Route::post('ajax-staff', [StaffController::class,"ajaxData"])->name('admin.staff.ajax');
         Route::get('create', [StaffController::class,"create"])->name('admin.staff.create');
         Route::post('store', [StaffController::class,"store"])->name('admin.staff.store');
         Route::get('edit/{id}', [StaffController::class,"edit"])->name('admin.staff.edit');
