@@ -152,7 +152,99 @@
                
             </ul>
         </li><!-- br-Speakers-item -->
+         <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">HR & PAYROLL</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = (Route::is('report.attendance') || Route::is('report.salary_sheet') || Route::is('report.emp_leave') || Route::is('report.emp_bonus') || Route::is('manageAttendance') || Route::is('allEmployee') || Route::is('monthManage.view') || Route::is('holiday.view') || Route::is('manageSalary') || Route::is('addSalary') || Route::is('editSalary') || Route::is('bonuspay.view') || Route::is('bonuspay.search') || Route::is('emploan.view') || Route::is('shiftManage.view') || Route::is('leaveApplication.view') || Route::is('leaveType.view') || Route::is('leavePart.view') || Route::is('leaveTagline.view') || Route::is('managePayroll') || Route::is('addPayroll') || Route::is('editPayroll') || Route::is('manageAbsent') || Route::is('addAbsent') || Route::is('editAbsent') || Route::is('manageLateRoll') || Route::is('addLateRoll') || Route::is('editLateRoll') || Route::is('manageOvertime') || Route::is('addOvertime') || Route::is('editOvertime') || Route::is('managePaymentRange') );
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('manageAttendance') }}" class="sub-link {{(Route::is('manageAttendance') ) ?'active':''}}">Manage Attendance</a></li>
+                <li class="sub-item"><a href="{{ route('manageSalary') }}" class="sub-link {{(Route::is('manageSalary') || Route::is('addSalary') || Route::is('editSalary')) ?'active':''}}">Manage Salary</a></li>
 
+
+                <li class="sub-item"><a href="{{ route('bonuspay.view') }}" class="sub-link {{(Route::is('bonuspay.view') || Route::is('bonuspay.search') ) ?'active':''}}">Manage Bounus</a></li>
+
+                {{-- <li class="sub-item"><a href="{{ route('emploan.view') }}" class="sub-link {{(Route::is('emploan.view')) ?'active':''}}">Manage Loan</a></li> --}}
+
+                <li class="sub-item"><a href="{{ route('shiftManage.view') }}" class="sub-link {{(Route::is('shiftManage.view')) ?'active':''}}">Manage Shift</a></li>
+                
+                <li class="sub-item"><a href="{{ route('leaveApplication.view') }}" class="sub-link {{(Route::is('leaveApplication.view')) ?'active':''}}">Manage Leave</a></li>
+                
+                <li class="sub-item"><a href="{{ route('leaveType.view') }}" class="sub-link {{(Route::is('leaveType.view')) ?'active':''}}">Manage Leave Type</a></li>
+                
+                <li class="sub-item"><a href="{{ route('leavePart.view') }}" class="sub-link {{(Route::is('leavePart.view')) ?'active':''}}">Manage Leave Part</a></li>
+                
+                <li class="sub-item"><a href="{{ route('leaveTagline.view') }}" class="sub-link {{(Route::is('leaveTagline.view')) ?'active':''}}">Manage Leave Tagline</a></li>
+                
+                <li class="sub-item"><a href="{{ route('managePayroll') }}" class="sub-link {{(Route::is('managePayroll') || Route::is('addPayroll') || Route::is('editPayroll')) ?'active':''}}">Payroll Settings</a></li>
+                
+                <li class="sub-item"><a href="{{ route('manageAbsent') }}" class="sub-link {{(Route::is('manageAbsent') || Route::is('addAbsent') || Route::is('editAbsent')) ?'active':''}}">Absent Settings</a></li>
+                
+                <li class="sub-item"><a href="{{ route('manageLateRoll') }}" class="sub-link {{(Route::is('manageLateRoll') || Route::is('addLateRoll') || Route::is('editLateRoll')) ?'active':''}}">Late Roll Settings</a></li>
+
+                <li class="sub-item"><a href="{{ route('manageOvertime') }}" class="sub-link {{(Route::is('manageOvertime') || Route::is('addOvertime') || Route::is('editOvertime')) ?'active':''}}">Overtime Settings</a></li>
+
+                <li class="sub-item"><a href="{{ route('managePaymentRange') }}" class="sub-link {{(Route::is('managePaymentRange')) ?'active':''}}">Manage Payment Range</a></li>
+
+                <li class="sub-item"><a href="{{ route('monthManage.view') }}" class="sub-link {{(Route::is('monthManage.view') ) ?'active':''}}">Manage Month</a></li>
+
+                <li class="sub-item"><a href="{{ route('holiday.view') }}" class="sub-link {{(Route::is('holiday.view') ) ?'active':''}}">Manage Holiday</a></li>
+                
+                <li class="sub-item">
+                    @php
+                        $r_check = ( Route::is('report.attendance') || Route::is('report.salary_sheet') || Route::is('report.emp_leave') || Route::is('report.emp_bonus') ) ?'active':'';
+                    @endphp
+                    <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
+                        <span class="menu-item-label">Reports</span>
+                    </a>
+                    <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
+                        <li class="sub-item"><a href="{{ Route('report.attendance') }}" class="sub-link {{ (Route::is('report.attendance'))? 'active':'' }}">Attendance Report</a></li>
+                        <li class="sub-item"><a href="{{ Route('report.salary_sheet') }}" class="sub-link {{ (Route::is('report.salary_sheet'))? 'active':'' }}">Sallary Report</a></li>
+                        <li class="sub-item"><a href="{{ Route('report.emp_leave') }}" class="sub-link {{ (Route::is('report.emp_leave'))? 'active':'' }}">Leave Report</a></li>
+                        <li class="sub-item"><a href="{{ Route('report.emp_bonus') }}" class="sub-link {{ (Route::is('report.emp_bonus'))? 'active':'' }}">Bonus Report</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li><!-- br-hr-payroll -->
+        <li class="br-menu-item">
+            <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
+                <i class="menu-item-icon icon ion-ios-filing-outline tx-26"></i>
+                <span class="menu-item-label">Accounts</span>
+            </a><!-- br-menu-link -->
+            @php
+            $r_check = ( Route::is('fee_collection.index') || Route::is('balance_sheet') || Route::is('trail_balance') || Route::is('ledger_summary') || Route::is('profit_loss') || Route::is('account_head.index') || Route::is('balance_account.index') || Route::is('payment_method.index') || Route::is('expense.index') || Route::is('expense_category.index'));
+            @endphp
+            <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
+                <li class="sub-item"><a href="{{ route('account_head.index') }}" class="sub-link {{(Route::is('account_head.index')) ?'active':''}}">Account Head</a></li>
+
+                <li class="sub-item"><a href="{{ route('balance_account.index') }}" class="sub-link {{(Route::is('balance_account.index')) ?'active':''}}">Bank Account</a></li>
+
+                <li class="sub-item"><a href="{{ route('payment_method.index') }}" class="sub-link {{(Route::is('payment_method.index')) ?'active':''}}">Payment Method</a></li>
+
+                <li class="sub-item"><a href="{{ route('fee_collection.index') }}" class="sub-link {{(Route::is('fee_collection.index')) ?'active':''}}">Manage Fee Collection</a></li>
+                <li class="sub-item"><a href="{{ route('expense.index') }}" class="sub-link {{(Route::is('expense.index')) ?'active':''}}">Manage Expense</a></li>
+
+                <li class="sub-item"><a href="{{ route('expense_category.index') }}" class="sub-link {{(Route::is('expense_category.index')) ?'active':''}}">Expense Category</a></li>
+                <li class="sub-item">
+                    @php
+                        $r_check = ( Route::is('balance_sheet') || Route::is('trail_balance') || Route::is('ledger_summary') || Route::is('profit_loss') ) ?'active':'';
+                    @endphp
+                    <a href="#" class="br-menu-sub-link with-sub {{ $r_check ?'show-sub':''}}">
+                        <span class="menu-item-label">Reports</span>
+                    </a>
+                    <ul class="br-menu-sub br-menu-sub-sub" @if($r_check) style="display: block"@endif>
+                        <li class="sub-item"><a href="{{ Route('balance_sheet') }}" class="sub-link {{ (Route::is('balance_sheet'))? 'active':'' }}">Balance Sheet</a></li>
+                        <li class="sub-item"><a href="{{ Route('trail_balance') }}" class="sub-link {{ (Route::is('trail_balance'))? 'active':'' }}">Trail Balance</a></li>
+                        <li class="sub-item"><a href="{{ Route('ledger_summary') }}" class="sub-link {{ (Route::is('ledger_summary'))? 'active':'' }}">Ledger Summary</a></li>
+                        <li class="sub-item"><a href="{{ Route('profit_loss') }}" class="sub-link {{ (Route::is('profit_loss'))? 'active':'' }}">Profit & Loss</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li><!-- br-account -->
 
         <li class="br-menu-item">
             <a href="#" class="br-menu-link with-sub {{($prefix == 'admin')?'active':''}} ">
@@ -245,8 +337,8 @@
             );
             @endphp
             <ul class="br-menu-sub" @if($r_check) style="display: block"@endif>
-                <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
-                </li>
+                {{-- <li class="sub-item"><a href="{{ route('admin.topper_student.create') }}" class="sub-link {{( Route::is('admin.topper_student.create') ) ?'active':''}}">Add New Topper</a>
+                </li> --}}
                 <li class="sub-item"><a href="{{ route('admin.topper_student.index') }}" class="sub-link {{(Route::is('admin.topper_student.index') || Route::is('admin.topper_student.edit')) ?'active':''}}">Manage Topper</a>
                 </li>
             </ul>
