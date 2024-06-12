@@ -301,7 +301,7 @@ class GalleryController extends Controller
        
         return response()->json([
             'status'=>'no',
-            'msg'=>'Building not found'
+            'msg'=>'Item not found'
         ]);
     }
 
