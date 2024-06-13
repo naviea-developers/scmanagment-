@@ -221,88 +221,6 @@
     </div>
 </header>
 
-{{-- <link rel="stylesheet" href="path/to/bootstrap.min.css">
-<style>
-    .class-slider-container {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 50px; /* Adjust as needed */
-        display: flex;
-        align-items: center;
-    }
-
-    .class-slider-wrapper {
-        display: flex;
-        animation: slide-left 20s linear infinite;
-    }
-
-    .class-card {
-        flex: 0 0 auto;
-        margin: 0 10px; /* Adjust space between cards */
-        padding: 20px;
-        /* background-color: #fff; */
-        background-color: var(--button2_color);
-        border-color: var(--button2_border_color) !important;
-        color: var(--button2_text_color);
-        /* color: #333; */
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 150px; /* Adjust width as needed */
-        text-decoration: none; /* Remove underline from links */
-    }
-
-    .class-card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-
-    @keyframes slide-left {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-</style>
-
-<header class="main-header header-video_bg position-relative overflow-hidden w-100 py-md-5">
-    <!-- Start Header Background Video -->
-    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="{{ $home_content->banner_video_show }}" type="video/mp4">
-    </video>
-    <!-- End Header Background Video -->
-
-    <div class="container-lg position-relative text-white py-5">
-        <div class="text-center pt-5 py-md-5">
-            <!-- Logo Section -->
-            <div class="header-logo mb-5 pt-5">
-                <img src="{{ $home_content->banner_image_show }}" style="height: 120px; width: 250px;" class="img-fluid" alt="">
-            </div>
-
-            <!-- Header Text -->
-            <h2 class="fw-medium h3 text-uppercase" style="color: var(--header_text_color)">
-                {!! $home_content->banner_text !!}
-            </h2>
-
-            <!-- Card Section -->
-            <div class="header-btn mt-4 text-uppercase" style="letter-spacing: 2px;">
-                <div class="class-slider-container">
-                    <div id="class-slider" class="class-slider-wrapper">
-                        <!-- Class cards will be populated here by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header> --}}
-
-
-
-
 
 <!-- End  class List -->
 @isset($classLists)
@@ -920,35 +838,7 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
 
-{{-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const classSlider = document.getElementById('class-slider');
-        const classes = @json($classes);
 
-        function createClassCard(className, classId) {
-            const link = document.createElement('a');
-            link.href = `{{ url('class_details') }}/${classId}`;
-            link.className = 'class-card btn-dark-cerulean';
-            link.textContent = className;
-            return link;
-        }
-
-        function populateClassCards() {
-            classSlider.innerHTML = '';
-            classes.forEach(classItem => {
-                classSlider.appendChild(createClassCard(classItem.name, classItem.id));
-            });
-        }
-
-        function duplicateClassCardsForLoop() {
-            const originalContent = classSlider.innerHTML;
-            classSlider.innerHTML += originalContent;
-        }
-
-        populateClassCards();
-        duplicateClassCardsForLoop();
-    });
-</script> --}}
 
 <script>
 
