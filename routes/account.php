@@ -52,4 +52,9 @@ Route::get('select2/payment_methods',[App\Http\Controllers\Account\PaymentMethod
 
 //fee collection
 Route::get('fee-collections',[App\Http\Controllers\Account\FeeCollectionController::class,'index'])->name('fee_collection.index');
+Route::post('fee-collection-ajax',[App\Http\Controllers\Account\FeeCollectionController::class,'ajaxFeeCollection'])->name('fee_collection.ajax');
+Route::post('fee-collection/store',[App\Http\Controllers\Account\FeeCollectionController::class,'store'])->name('fee_collection.store');
+Route::post('get_fees_by_filter',[App\Http\Controllers\Account\FeeCollectionController::class,'getFees'])->name('get_fees_by_filter');
+Route::post('get_student_by_filter',[App\Http\Controllers\Account\FeeCollectionController::class,'getStudent'])->name('get_student_by_filter');
+Route::get('select2/student',[App\Http\Controllers\Account\FeeCollectionController::class,'select2Student'])->name('select2.student');
 

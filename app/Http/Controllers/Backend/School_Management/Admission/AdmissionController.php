@@ -246,6 +246,7 @@ class AdmissionController extends Controller
 
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         $request->validate([
             'class_id' => 'required',
 
@@ -306,14 +307,29 @@ class AdmissionController extends Controller
 
             $admission->save();
 
-
+            //dd($request->student_name);
             $user = User::find($admission->user_id);
-            $user->name = $request->student_name;
-            $user->email = $request->student_email;
-            $user->mobile = $request->student_phone;
-            $user->dob = $request->dob;
-            $user->nid = $request->student_nid;
-            $user->save();
+            //dd($user);
+            if($user == null){
+                $user = new User;
+                $user->name = $request->student_name;
+                $user->password = $request->student_name;
+                $user->email = $request->student_email;
+                $user->mobile = $request->student_phone;
+                $user->dob = $request->dob;
+                $user->nid = $request->student_nid;
+                $user->save();
+                $admission->user_id = $user->id;
+                $admission->save();
+            }else{
+                $user->name = $request->student_name;
+                $user->email = $request->student_email;
+                $user->mobile = $request->student_phone;
+                $user->dob = $request->dob;
+                $user->nid = $request->student_nid;
+                $user->save();
+            }
+            
 
 
 

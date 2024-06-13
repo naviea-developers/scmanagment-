@@ -9,6 +9,10 @@ class Book extends Model
 {
     use HasFactory;
 
+    public function getImageShowAttribute(){
+        return $this->image != "" ? asset('public/upload/book/'. $this?->image) : asset('public/frontend/images/No-image.jpg');
+    }
+
     public function class(){
         return $this->belongsTo(Classe::class,"class_id",'id');
     }
