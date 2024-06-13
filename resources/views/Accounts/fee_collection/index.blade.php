@@ -71,6 +71,7 @@ Fee Collection
     <div class="br-section-wrapper pt-1">
 
     @include('Accounts.fee_collection.create')
+    @include('Accounts.fee_collection.edit')
 
     <!-- Main content -->
     <section class="content-header p-0 data-list">
@@ -95,16 +96,16 @@ Fee Collection
                                     <thead>
                                     <tr>
                                         <th>SL.</th>
+                                        <th>Slip No.</th>
                                         <th>Date</th>
                                         <th>Session</th>
                                         <th>Class</th>
                                         <th>Section</th>
                                         <th>Student</th>
                                         <th>Roll Number</th>
-                                        <th>Fee Name</th>
                                         <th>Payment Method</th>
                                         <th>Account Name</th>
-                                        <th>Fee Amount</th>
+                                        <th>Total Amount</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -147,17 +148,17 @@ Fee Collection
         },
         "columns": [
             { "data": "id"},
+             { "data": "slip_no"},
              { "data": "date"},
             { "data": "session"},
             { "data": "class_name"},
             { "data": "section_name"},
             { "data": "student_name"},
             { "data": "roll_number"},
-            { "data": "particular_name"},
             { "data": "p_name"},
             { "data": "ac_name"},
            
-            { "data": "fee_amount"},
+            { "data": "total_amount"},
             { "data": "options"},
         ],
         "columnDefs": [ {
@@ -353,7 +354,7 @@ Fee Collection
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type : 'GET',
-                    url :"{{ url('account-head-delete') }}/"+id,
+                    url :"{{ url('fee-collection/delete') }}/"+id,
                     success : function(res){
                         if(res.status == "yes"){
                             listView();
