@@ -56,6 +56,8 @@ use App\Http\Controllers\Backend\Student_Appliction\StudentApplictionController;
 use App\Http\Controllers\Backend\Role\RoleController;
 use App\Http\Controllers\Backend\WithdrawalController;
 
+
+
 Route::get('/login', [LoginController::class, 'adminLoginShow']);
 Route::post('/login', [LoginController::class, 'adminLogin'])->name('login');
 

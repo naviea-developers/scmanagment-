@@ -38,6 +38,9 @@ use App\Http\Controllers\Backend\School_management\Syllabus\SyllabusController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\School_management\Admission\AdmissionController as AdmissionAdmissionController;
 
+
+
+
 //Add Class for admin
 Route::prefix('class')->middleware(['auth:admin', 'adminCheck:0'])->group( function () {
     Route::get('index', [ClassController::class,"index"])->name('admin.class.index');
@@ -496,17 +499,6 @@ Route::prefix('manage-result')->middleware(['auth:admin', 'adminCheck:0'])->grou
     // Route::post('delete', [AdmissionAdmissionController::class,"destroy"])->name('admin.admission.delete');
     // Route::get('/status/{id}', [AdmissionAdmissionController::class, 'status'])->name('admin.admission.status');
 // });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
