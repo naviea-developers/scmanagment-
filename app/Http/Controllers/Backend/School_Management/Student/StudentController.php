@@ -123,7 +123,7 @@ class StudentController extends Controller
                    $nestedData['status'] .= '<a href="'.route('admin.school_student.status', $student->id).'" class="btn btn-sm btn-success">Active</a>';
                }
 
-               $nestedData['options'] = '<a class="btn btn-primary data_edit" href="'.route('admin.school_student.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
+               $nestedData['options'] = '<a class="btn btn-primary" href="'.route('admin.school_student.edit',$student->id).'"><i class="fa fa-edit"></i></a>';
             
                $nestedData['options'] .= '<a href="#" style="margin-left: 10px" value="{{$student->id}}" id="dataDeleteModal" class="del_data btn btn-danger"><i class="fa fa-trash"></i></a>';
 
