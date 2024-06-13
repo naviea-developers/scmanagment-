@@ -84,6 +84,36 @@ Admin - All Staffes
     </div><!-- modal -->
 
 
+    <div id="changePassword" class="modal fade">
+        <div class="modal-dialog modal-dialog-top" role="document">
+        <div class="modal-content tx-size-sm">
+            <div class="modal-bodypd-y-20 pd-x-20 p-4">
+                <form id="data-form-change-pass" action="{{ route('admin.staff_change_password') }}" method="post">
+                    @csrf
+                    <h3>Change Password</h3>
+                    <input type="hidden" name="user_id" id="user_id_pass">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Password</label>
+                            <input type="text" name="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                         <button type="submit" class="btn-change-pass btn btn-success mr-2 text-white tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20">
+                        Submit
+                        </button>
+                        <button type="button" class="btn btn-danger tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-b-20" data-bs-dismiss="modal" aria-label="Close">
+                            Close
+                        </button>
+                    </div>
+  
+                </form>
+            </div><!-- modal-body -->
+        </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+  
+
 @endsection
 
 @section('script')

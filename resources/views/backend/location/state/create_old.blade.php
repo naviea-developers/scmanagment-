@@ -68,8 +68,8 @@
                               @foreach ($continents as $continent)
                               <option value="{{ $continent->id }}">{{ $continent->name }}</option>
                               @endforeach
-                          </select>
-                      </div>
+                            </select>
+                         </div>
                       </div><!-- row -->
 
                       <div class="row mt-4">
@@ -88,7 +88,7 @@
                             <label class="col-sm-3 form-control-label">State Name: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
                             <input type="text" name="name" class="form-control" placeholder="Enter state Name" required>
-                        </div>
+                            </div>
                         </div><!-- row -->
                         
 

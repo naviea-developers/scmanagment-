@@ -78,6 +78,7 @@ class StaffController extends Controller
              
                 $nestedData['options'] .= '<button class="btn text-danger bg-white"  value="'.$data_v->id.'" id="dataDeleteModal"><i class="icon ion-trash-a tx-28"></i></button>';
  
+                $nestedData['options'] .= '<button class="btn text-white bg-info changePass"  value="'.$data_v->id.'">Change Password</button>';
                 $data[] = $nestedData;
  
             }
@@ -402,19 +403,32 @@ class StaffController extends Controller
     }
 
     function changePassword(Request $request){
-        $user =  User::find($request->user_id);
-        $user->password = $request->password;
-        $user->save();
+        try{
+            $user =  User::find($request->user_id);
+            $user->password = $request->password;
+            $user->save();
 
-        //user
-        $data['name'] = $user->name;
-        $data['email'] = $user->email;
-        $data['password'] = $request->password;
-        $details['email'] = $user->email;
-        $details['send_item']= new UserEmail($data);
-        dispatch(new \App\Jobs\SendEmailJob($details));
+             //user
+            $data['name'] = $user->name;
+            $data['email'] = $user->email;
+            $data['password'] = $request->password;
+            $details['email'] = $user->email;
+            $details['send_item']= new UserEmail($data);
+            dispatch(new \App\Jobs\SendEmailJob($details));
+            ///email notification end
+            
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Password Change Successfully.'
+            ]);
+        }catch(\Exception $e){
+            //DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
 
-        return redirect()->back()->with('message','Staff Profile Password Changed Successfully');
     }
 
      public function status($id)

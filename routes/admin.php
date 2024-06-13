@@ -439,6 +439,7 @@ Route::post('home-content-topper-update', [HomeContentController::class,'setTopp
 
     //Add New Review Testimonial
     Route::get('/manage-testimonial', [TestimonialController::class, 'manageTestimonial'])->name('admin.manage_testimonial');
+    Route::post('ajax-testimonial', [TestimonialController::class,"ajaxData"])->name('admin.manage_testimonial.ajax');
     Route::get('/add-new-testimonial', [TestimonialController::class, 'addTestimonial'])->name('admin.add_new_testimonial');
     Route::post('/add-new-testimonial', [TestimonialController::class, 'addTestimonialStor'])->name('admin.add_new_testimonial_stor');
     Route::get('/edit-testimonial/{id}', [TestimonialController::class, 'editTestimonial'])->name('admin.edit_testimonial');

@@ -67,7 +67,8 @@
                               <option value="learner">student page</option>
                               <option value="instructor">teacher page</option>
                               <option value="contact">contact page</option>
-                              <option value="library">library page</option>
+                              <option value="library">upcoming news</option>
+                              <option value="library-book-list">library book list page</option>
                               <option value="event-list">event page</option>
                               <option value="blogs">blogs page</option>
                               {{-- <option value="maestro-class">master course page</option> --}}

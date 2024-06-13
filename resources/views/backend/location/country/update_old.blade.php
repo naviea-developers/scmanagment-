@@ -63,12 +63,12 @@
                             <input type="text" name="name" value="{{ $country->name }}" class="form-control" placeholder="Enter Package Name" required>
                         </div>
                         </div><!-- row -->
-                        {{-- <div class="row mt-4">
+                        <div class="row mt-4">
                             <label class="col-sm-3 form-control-label">Country Code: <span class="tx-danger">*</span></label>
                             <div class="col-sm-9 mg-t-10 mg-sm-t-0">
                                 <input value="{{ $country->code }}" type="text" name="code" class="form-control" placeholder="Enter Country Code" required>
                             </div>
-                        </div><!-- row --> --}}
+                        </div><!-- row -->
 
 
 
