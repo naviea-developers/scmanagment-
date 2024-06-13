@@ -14,7 +14,7 @@
         <tr>
             <td>
                 <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="f_students[]" value="{{$student->id}}" id="fee_list{{$student->id}}">
+                <input type="checkbox" class="form-check-input" name="f_students[{{$student->id}}]" value="{{$student->id}}" id="fee_list{{$student->id}}">
                 </div>
             </td>
             <td>{{$student->class?->name}}</td>

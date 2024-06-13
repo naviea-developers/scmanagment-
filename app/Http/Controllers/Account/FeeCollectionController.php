@@ -87,26 +87,24 @@ class FeeCollectionController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
         $search = $request->input('search.value');
-        $datalist = FeeCollectionItem::leftJoin('fee_collections','fee_collections.id','fee_collection_items.collection_id')
-        ->leftJoin('payment_methods','payment_methods.id','fee_collections.method_id')
+        $datalist = FeeCollection::leftJoin('payment_methods','payment_methods.id','fee_collections.method_id')
         ->leftJoin('balance_accounts','balance_accounts.id','fee_collections.account_id')
         ->leftJoin('admissions','admissions.id','fee_collections.student_id')
         ->leftJoin('classes','classes.id','fee_collections.class_id')
         ->leftJoin('school_sections','school_sections.id','fee_collections.section_id')
-        ->leftJoin('sessions','sessions.id','fee_collections.session_id')
-        ->leftJoin('fees','fees.id','fee_collection_items.fee_id');
+        ->leftJoin('sessions','sessions.id','fee_collections.session_id');
         if(!empty($search)){
             $datalist =$datalist->where("admissions.student_name","LIKE","%{$search}%")
             ->orwhere("payment_methods.name","LIKE","%{$search}%")  
             ->orwhere("balance_accounts.account_name","LIKE","%{$search}%") 
-            ->orwhere("fee_collection_items.fee_amount","LIKE","%{$search}%")  
-            ->orwhere("fee_collection_items.pay_date","LIKE","%{$search}%") 
+            ->orwhere("fee_collections.total_amount","LIKE","%{$search}%")  
+            ->orwhere("fee_collections.pay_date","LIKE","%{$search}%") 
             ->orwhere("classes.name","LIKE","%{$search}%")
             ->orwhere("school_sections.name","LIKE","%{$search}%")
             ->orwhere("fees.particular_name","LIKE","%{$search}%");  
         }
         $totalFiltered = $datalist->count();
-        $datalist = $datalist->select('fee_collection_items.*','admissions.student_name','admissions.roll_number','classes.name as class_name','school_sections.name as section_name','payment_methods.name as p_name','balance_accounts.account_name as ac_name','sessions.start_year','sessions.end_year','fees.particular_name')->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        $datalist = $datalist->select('fee_collections.*','admissions.student_name','admissions.roll_number','classes.name as class_name','school_sections.name as section_name','payment_methods.name as p_name','balance_accounts.account_name as ac_name','sessions.start_year','sessions.end_year')->offset($start)->limit($limit)->orderBy($order,$dir)->get();
         
  
         $data = array();
@@ -117,20 +115,19 @@ class FeeCollectionController extends Controller
             {
                 $nestedData['id'] = $i++;
                 $nestedData['session'] = $data_v->start_year.'-'.$data_v->end_year;
+                $nestedData['slip_no'] = $data_v->slip_no;
                 $nestedData['class_name'] = $data_v->class_name;
                 $nestedData['section_name'] = $data_v->section_name;
                 $nestedData['student_name'] = $data_v->student_name;
                 $nestedData['roll_number'] = $data_v->roll_number;
-                $nestedData['particular_name'] = $data_v->particular_name;
                 $nestedData['p_name'] = $data_v->p_name;
                 $nestedData['ac_name'] = $data_v->ac_name;
                 $nestedData['date'] = date('Y-m-d',strtotime($data_v->pay_date));
-                $nestedData['fee_amount'] = round($data_v->fee_amount,2);
-               
-               
+                $nestedData['total_amount'] = round($data_v->total_amount,2);
+
                 $nestedData['options']='';
                 
-                $nestedData['options'] .= '<a class="btn btn-primary data_edit_e" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="'.$data_v->id.'"><i class="fa fa-edit"></i></a>';
+                $nestedData['options'] .= '<a class="btn btn-primary data_edit" href="'.route('fee_collection.view',$data_v->id).'" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="'.$data_v->id.'">view</a>';
             
                 $nestedData['options'] .= '<a title="Delete"  style="margin-left: 10px" class="del_hr_data btn btn-danger" data-id="'.$data_v->id.'"><i class="fa fa-trash"></i></a>';
                
@@ -148,7 +145,7 @@ class FeeCollectionController extends Controller
         return json_encode($json_data);
     }
     function store(Request $request){
-        //dd($request->all());
+       // dd($request->all());
         if($request->student > 0){
             $validator = Validator::make($request->all(),[
                 'class'=>'required',
@@ -173,9 +170,9 @@ class FeeCollectionController extends Controller
                 'f_students'=>'required',
     
             ]);
-            $students[]=$f_students;
+            $students=$request->f_students;
         }
-       
+       //dd();
 
         if($validator->fails()){
             return response([
@@ -183,6 +180,7 @@ class FeeCollectionController extends Controller
                 'errors' => $validator->errors()->all()
             ]);
         }
+       
         try{
             DB::beginTransaction();
             foreach($students as $student_id){
@@ -275,5 +273,45 @@ class FeeCollectionController extends Controller
                 'msg' => $e->getMessage(),
             ]);
         }
+    }
+    function view(Request $request,$id){
+        $fee_collection=FeeCollection::find($id);
+        return view('Accounts.fee_collection.view',compact('fee_collection'));
+    }
+    public function delete(Request $request,$id)
+    {
+        try{
+            DB::beginTransaction();
+
+            $data=FeeCollection::find($id);
+           
+            $account_transactions = AccountTransaction::where('relation_id',$data->id)->get();
+          
+            foreach($account_transactions as $account_transaction){
+                $account_transaction->delete();
+            }
+            $items = FeeCollectionItem::where('collection_id',$data->id)->get();
+            foreach($items as $item){
+                $item->delete();
+            }
+            $payment = Payment::where('relation_id',$data->id)->first();
+            if($payment){
+                $payment->delete();
+            }
+            $data->delete();
+            
+            DB::commit();
+            return response()->json([
+                'status'=>'yes',
+                'msg'=>'Deleted Successfully'
+            ]);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return response()->json([
+                'status'=>'no',
+                'msg'=>$e->getMessage()
+            ]);
+        }
+        
     }
 }
